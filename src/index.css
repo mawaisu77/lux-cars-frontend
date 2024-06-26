@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.text-outline {
+    color: transparent;
+    -webkit-text-stroke: 0.09vw black;
+  }
+  .bgImage {
+    background-image: url('../src/assets/BG-Img/kk\ 1.png') , url( '../src/assets/BG-Img/tree_7072\ 1.png'); /* Adjust the path if necessary */
+    background-size: 75vw; /* Adjust the percentage to control the size of the background image */
+    background-repeat: no-repeat; /* Ensure the background image does not repeat */
+    background-position:  center;
+    
+    
+ 
+ 
+  }
+ 
+  @media (max-width: 753px) {
+    .bgImage {
+      background-size: 753px; /* Adjust background size to 753px */
+      background-position: center;
+  
+    }
+  }
+ 
+  
+  @media (min-width: 1024px) {
+    .back-image {
+      background-image: url('../src/assets/IMG\ \(26).png');
+      background-size: 100vw;
+      background-repeat: no-repeat;
+      height: 44.5vh;
+    }
+  }
+  
+  .Backgroundimage-LogIN{
+    background-image: url('../src/assets/BG-Img/IMG\ \(28\).png');
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+
+
+  }
+  .Backgroundimage-How{
+
+    background-image: url('../src/assets/BG-Img/IMG\ \(29\).png');
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+  }
+  .back-image-Help{
+    background-image: url('../src/assets/BG-Img/IMG\ \(30\).png');
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+  }
+  .Backgroundimage-About{
+    background-image: url('../src/assets/BG-Img/IMG\ \(34\).png');
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+  }
+  .bg-img {
+    background-image: url('../src/assets/About/IMG (36).png');
+    background-size: 72vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 47vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
