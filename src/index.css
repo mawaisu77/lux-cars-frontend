@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
+html, body {
+  @apply m-0 p-0 overflow-x-hidden w-full;
+}
 .text-outline {
-    color: transparent;
+    color: transparent; 
     -webkit-text-stroke: 0.09vw black;
   }
   .bgImage {
@@ -13,9 +15,6 @@
     background-repeat: no-repeat; /* Ensure the background image does not repeat */
     background-position:  center;
     
-    
- 
- 
   }
  
   @media (max-width: 753px) {
@@ -35,34 +34,56 @@
       height: 44.5vh;
     }
   }
+  @media (min-width:1024px) {
+    .Backgroundimage-LogIN{
+      background-image: url('../src/assets/BG-Img/IMG\ \(41).png');
+      background-size: 100vw;
+      background-repeat: no-repeat;
+      height: 32.5vh;
   
-  .Backgroundimage-LogIN{
-    background-image: url('../src/assets/BG-Img/IMG\ \(28\).png');
+  
+    }
+  }
+
+  @media (min-width:1024px){  
+  .Backgroundimage-Signup{
+    background-image: url('../src/assets/BG-Img/IMG\ \(42).png');
     background-size: 100vw;
     background-repeat: no-repeat;
     height: 32.5vh;
 
-
   }
-  .Backgroundimage-How{
+}
+ 
+@media (min-width: 1025px){.Backgroundimage-How{
 
     background-image: url('../src/assets/BG-Img/IMG\ \(29\).png');
     background-size: 100vw;
     background-repeat: no-repeat;
     height: 32.5vh;
-  }
+  }}
+  
   .back-image-Help{
     background-image: url('../src/assets/BG-Img/IMG\ \(30\).png');
     background-size: 100vw;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
-  .Backgroundimage-About{
-    background-image: url('../src/assets/BG-Img/IMG\ \(34\).png');
+  @media (min-width: 1025px){.Account-image{
+    background-image: url('../src/assets/BG-Img/IMG\ \(43\).png');
     background-size: 100vw;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
+}
+
+
+  @media (min-width: 1024px){.Backgroundimage-About{
+    background-image: url('../src/assets/BG-Img/IMG\ \(34\).png');
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+  }}
   .bg-img {
     background-image: url('../src/assets/About/IMG (36).png');
     background-size: 72vw;
@@ -73,4 +94,28 @@
     justify-content: center;
     align-items: center;
     
+}
+.form-checkbox{
+  appearance: none;
+  background-color: #f00; /* Red background */
+  border: none;
+  width: 1.5em;
+  height: 1.5em;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  border-radius: 0.25em;
+}
+
+.form-checkbox::before {
+  content: "";
+  width: 0.75em;
+  height: 0.75em;
+  transform: scale(0);
+  transition: transform 120ms ease-in-out;
+  box-shadow: inset 1em 1em white; /* White tick */
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 0, 80% 0, 38% 70%);
+}
+.form-checkbox:checked::before {
+  transform: scale(1);
 }

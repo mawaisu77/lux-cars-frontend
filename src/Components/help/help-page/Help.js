@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
+import Header from "../../header/Header/Header";
 import { GoSearch } from "react-icons/go";
 import { GrSend } from "react-icons/gr";
 import { BiSolidFolderPlus } from "react-icons/bi";

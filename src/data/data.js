@@ -376,4 +376,27 @@ export const testi = [
         designation: "Project Manager",
         image: client2
     },
+    {
+      para: "Augue Sed viverra nulla Interdum mia bibendum velit sapien scelerisqu ictum quam tincidunt nec feugiat augue tincidunt. Etiam pretium diam rhoncus. gida turpis cursus. Nuncsed fringilla tortor iaculis eget",
+      name: "Jody Andrew",
+      designation: "Project Manager",
+      image: client1
+  },
+  {
+      para: "Augue Sed viverra nulla Interdum mia bibendum velit sapien scelerisqu ictum quam tincidunt nec feugiat augue tincidunt. Etiam pretium diam rhoncus. gida turpis cursus. Nuncsed fringilla tortor iaculis eget",
+      name: "Jody Andrew",
+      designation: "Project Manager",
+      image: client2
+  }, {
+    para: "Augue Sed viverra nulla Interdum mia bibendum velit sapien scelerisqu ictum quam tincidunt nec feugiat augue tincidunt. Etiam pretium diam rhoncus. gida turpis cursus. Nuncsed fringilla tortor iaculis eget",
+    name: "Jody Andrew",
+    designation: "Project Manager",
+    image: client1
+},
+{
+    para: "Augue Sed viverra nulla Interdum mia bibendum velit sapien scelerisqu ictum quam tincidunt nec feugiat augue tincidunt. Etiam pretium diam rhoncus. gida turpis cursus. Nuncsed fringilla tortor iaculis eget",
+    name: "Jody Andrew",
+    designation: "Project Manager",
+    image: client2
+},
 ];

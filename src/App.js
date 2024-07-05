@@ -2,21 +2,25 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Components/home/index.js';
-import Footer from './Components/Footer';
-import Login from './Components/Login';
-import Signup from './Components/Signup';
- import ContactUs from './Components/ContactUs';
- import HowWorks from './Components/HowWorks';
- import Help from './Components/Help';
- import About from './Components/About';
- import Header from './Components/Header.js';
+import Footer from './Components/Footer/index.js';
+import Login from './Components/Login/login-page/Login.js';
+import Signup from './Components/sign-up/index.js';
+ import ContactUs from './Components/Contact/Cantact-page/ContactUs.js';
+ import HowWorks from './Components/howWork/howWork-page/HowWorks.js';
+ import Help from './Components/help/help-page/Help.js';
+ import About from './Components/about/index.js';
+ import Header from './Components/header/Header/Header.js';
+import UserAccount from './Components/user-page/index.js';
+import UserLayout from './Components/layouts/UserLayout.jsx';
+import AllBids from './Components/user-page/index.js';
+
 
 function App() {
   return (
      <>
     <Router>
       <div className="App">
-        <Header/>
+       
         {/* Define your routes here */}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,6 +30,10 @@ function App() {
           <Route path="/HowWorks" element={<HowWorks/>}/>
           <Route path="/Help" element={<Help/>}/>
           <Route path="/About" element={<About/>}/>
+
+          <Route path="/UserAccount" element={<UserAccount/>}/>
+          <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
+          <Route path="/UserAccount/funds" element={<UserLayout> <div>hello 2nd page</div></UserLayout>}/>
 
 
         </Routes>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import img1 from '../assets/Logo/Horizontal0 1.png';
+import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { HiUsers } from 'react-icons/hi2';
@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <div className='border-b'>
+    <div className='border-b w-full '>
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>
         <div className='flex items-center gap-4'>
           <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />

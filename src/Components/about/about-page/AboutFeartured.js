@@ -1,5 +1,5 @@
 import React from 'react'
-import {logos} from "../data/data"
+import {logos} from "../../../data/data"
  
 const AboutFeartured = () => {
  

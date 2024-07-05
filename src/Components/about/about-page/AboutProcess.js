@@ -1,9 +1,9 @@
 import React from 'react'
 import { HiPlus } from "react-icons/hi2";
 import { AiFillMinusCircle } from "react-icons/ai";
-import image55 from "../assets/About/Placeholder.png"
+import image55 from "../../../assets/About/Placeholder.png"
 
-import { process } from '../data/data';
+import { process } from '../../../data/data';
 
 const AboutProcess = () => {
     

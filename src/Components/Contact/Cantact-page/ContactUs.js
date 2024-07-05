@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from './Header'
+import Header from '../../header/Header/Header'
 import { Link } from 'react-router-dom'
-import image from "../assets/IMG (27).png"
+import image from "../../../assets/IMG (27).png"
 
 const ContactUs = () => {
   return (
@@ -9,7 +9,7 @@ const ContactUs = () => {
    <div className='   back-image '>
 
    <Header className="text-white"/>
-  <div className='hidden lg:block'>
+  <div className='hidden   lg:block'>
   <div className='  w-[15.5] flex flex-col  mt-[5.5vh]'>
     <div className='text-[2.6vw] font-semibold text-white'>
     Contact Us
@@ -32,7 +32,7 @@ const ContactUs = () => {
   </div>
    </div>
    <div className= 'h-[980px] lg:h-[82vh]'>
-    <div className='w-[77.5vw] flex flex-col lg:flex-row justify-between items-center mx-auto lg:gap-[7vw]'>
+    <div className='w-[77.5vw] flex flex-col md:flex-col lg:flex-row justify-between items-center mx-auto lg:gap-[7vw]'>
         <div>
             <img className='w-[355px] lg:w-[27.14vw] h-[229px] lg:h-[56.5vh] mt-[50px] lg:mt-[13.14vh]' src={image}/>
         </div>

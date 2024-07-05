@@ -16,7 +16,7 @@ const Bid = () => {
   return (
     <>
       <div className="hidden sm:block">
-        <div className="flex w-[74vw] flex-row justify-between mx-auto bgImage tree">
+        <div className="flex w-[74vw]  flex-row justify-between mx-auto bgImage tree">
           <div className="mx-auto w-[30vw] h-[73vh] mt-[7vh]">
             <h2 className="text-left font-urbanist lg:text-[3.125vw] font-bold leading-tight my-[2vh]">
               <span className="text-outline">Bid, Buy, Drive</span> Online Car

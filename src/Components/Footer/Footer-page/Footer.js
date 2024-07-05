@@ -1,5 +1,5 @@
 import React from "react";
-import img1 from "../assets/Logo/Horizontal0 1.png";
+import img1 from "../../../assets/Logo/Horizontal0 1.png";
 import { PiFacebookLogoFill } from "react-icons/pi";
 import { FaTwitter } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";

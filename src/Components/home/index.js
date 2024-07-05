@@ -8,12 +8,13 @@ import React from 'react'
  import Archieved from './home-page/Archieved.js'
  import Partners from './home-page/Partners.js'
  import Makes from './home-page/Makes.js'
+ import Header from '../header/Header/Header.js'
 
 
 const Home = () => {
   return (
     <>
-   
+   <Header/>
     <Bid/>
     <Top/>
     <Featured/>
