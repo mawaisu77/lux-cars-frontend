@@ -1,7 +1,7 @@
 import React from "react";
-import image10 from "../../../assets/IMG (14).png"; // This image import is not used in your component
  
-import { live } from "../../../data/data"; // Assuming 'live' is an array of objects containing auction details
+ 
+import { live } from "../../data/data"; // Assuming 'live' is an array of objects containing auction details
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io"; // These icon imports are not used in your component
 import { Navigation, Pagination } from "swiper/modules";

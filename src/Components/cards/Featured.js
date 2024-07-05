@@ -1,7 +1,7 @@
 import React from 'react';
-import image10 from  "../../../assets/IMG (14).png"; // Make sure to import images correctly
+ // Make sure to import images correctly
  
-import { Featured } from '../../../data/data';
+import { Featured } from '../../data/data';
 import { useRef } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";

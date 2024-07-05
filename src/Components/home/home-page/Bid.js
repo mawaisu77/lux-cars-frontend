@@ -39,7 +39,7 @@ const Bid = () => {
           </div>
           
 
-          <div className="relative w-[80%] h-[75vh]">
+          <div className="relative w-[90%] h-[75vh]">
             <div className="absolute bg-white opacity-80 rounded-xl shadow-xl w-[9.2vw] right-[5vw] top-[7vh] h-[20vh]">
                      <div className="flex flex-col p-2  items-center ">
                          <p className="font-bold text-[26px] md:text-[32px] lg:text-[48px]">
@@ -52,7 +52,23 @@ const Bid = () => {
             </div>
             <div className=" flex flex-row justify-between text-left px-[1vw] items-center bottom-[5vh] w-[56vw] h-[12vh] bg-[#ffffffcc] rounded-xl absolute">
               <div className="flex">
-                <div className="flex lg:flex-col justify-center items-center border-r w-[10vw] text-left">
+                 
+              <div className="flex flex-col justify-center items-center border-r w-[8vw] text-left">
+                  <p className="text-[1.17vw] font-urbanist font-semibold">
+                     VIN/lot
+                  </p>
+                  <div className="flex justify-center items-center text-[0.9vw] font-urbanist text-left text-[#8a8aa0]">
+                  <input
+      type="text"
+      placeholder="Type Here..."
+      className="bg-[#ffffffcc] border-none w-[8vw] font-urbanist flex"
+    />
+                  
+                  </div>
+                </div>
+
+
+                <div className="flex flex-col justify-center items-center border-r w-[8vw] text-left">
                   <p className="text-[1.17vw] font-urbanist font-semibold">
                     Car types
                   </p>
@@ -63,15 +79,15 @@ const Bid = () => {
                 </div>
               </div>
 
-              <div>
-                <p className="text-[1.17vw] font-urbanist font-semibold">Models</p>
+              <div className="flex flex-col justify-center items-center border-r w-[8vw] text-left">
+                <p className="text-[1.17vw]  font-urbanist font-semibold">Models</p>
                 <div className="flex justify-center items-center text-[0.9vw] font-urbanist text-[#8a8aa0]">
                   <p>All Models</p>
                   <RiArrowDropDownLine className="cursor-pointer" />
                 </div>
               </div>
 
-              <div>
+              <div className="flex flex-col justify-center items-center border-r w-[8vw] text-left">
                 <p className="text-[1.17vw] font-urbanist font-semibold">Partners</p>
                 <div className="flex justify-center items-center text-[0.9vw] font-urbanist text-[#8a8aa0]">
                   <p>Carport</p>
@@ -194,8 +210,22 @@ const Bid = () => {
               </div>
             </div>
 
-            <div className="text-left w-[140px] h-[450px] border bg-[#ffffffcc] rounded-xl -mt-[380px]">
+            <div className="text-left w-[140px] h-[550px] border bg-[#ffffffcc] rounded-xl -mt-[380px]">
               <div className="w-[108px] py-2 mx-auto flex flex-col justify-center items-center font-urbanist">
+
+              <div className="h-[110px]">
+                  <p className="text-[14px] font-urbanist font-semibold">  VIN/lot</p>
+                  <p className="flex justify-between text-[13px] gap-1">
+                  
+                  <input
+      type="text"
+      placeholder="Type Here..."
+      className="bg-[#ffffffcc] border-none w-[64px]  font-urbanist flex "
+    />
+                  </p>
+                </div>
+
+
                 <div className="h-[110px]">
                   <p className="text-[14px] font-urbanist font-semibold">Car Types</p>
                   <p className="flex justify-between text-[13px] gap-1">
@@ -208,7 +238,7 @@ const Bid = () => {
                   <p className="text-[14px] font-urbanist font-semibold">Models</p>
                   <p className="flex justify-between items-center text-[13px] gap-1">
                     All Models
-                    <RiArrowDropDownLine size={25} className="cursor-pointer" />
+                    <RiArrowDropDownLine size={25} className="cursor-pointer  hover:bg-red-300" />
                   </p>
                 </div>
 

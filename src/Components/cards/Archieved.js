@@ -2,7 +2,7 @@ import React from 'react'
 import { TfiReload } from "react-icons/tfi";
 // import image10 from  "../assets/IMG (14).pn";
 import AwesomeSlider from 'react-awesome-slider';
-import {archieved} from "../../../data/data"
+import {archieved} from "../../data/data"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { Navigation, Pagination } from 'swiper/modules';

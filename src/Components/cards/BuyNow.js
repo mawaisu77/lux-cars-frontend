@@ -3,20 +3,20 @@ import AwesomeSlider from 'react-awesome-slider';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io"; // These icon imports are not used in your component
 import { Navigation, Pagination } from "swiper/modules";
-import { live } from "../../../data/data"; // Assuming 'live' is an array of objects containing auction details
+import { BUY } from "../../data/data"; // Assuming 'live' is an array of objects containing auction details
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-const LocalOfferz = () => {
+ 
+ const BuyNow = () => {
   return (
     <>
-      <div className="h-[784px] lg:h-[90vh] w-full lg:w-[98.9vw]   ">
+      <div className="h-[784px] lg:h-[90vh] w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
         <div className="">
           <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[9.5vh]">
-            LocalOfferz
+            Buy Now
           </div>
           <hr className="h-1 bg-red-500 mt-[30px] w-20 mx-auto" />
 
@@ -38,9 +38,9 @@ const LocalOfferz = () => {
               className="w-full lg:w-[72vw] h-[550px] lg:h-[66vh] mt-[40px]    flex justify-center items-center"
             >
               <div className="w-[74vw]  flex justify-center mx-auto gap-[1.3vw] items-center mt-[9vh]">
-                {live.map((card, index) => (
+                {BUY.map((card, index) => (
                   <SwiperSlide key={index} className="relative w-[370px]">
-                    <div className="w-[327px] bg-white mx-auto lg:w-[17.3vw] h-[442px] lg:h-[54.5vh]  rounded-xl shadow-lg">
+                    <div className="w-[327px] bg-white mx-auto lg:w-[17.3vw] h-[500px] lg:h-[60.5vh]  rounded-xl shadow-lg">
                       <div className="p-5 lg:p-[1vw]">
                         <img
                           className="w-[290px]  lg:w-[15.8vw] h-[290px] lg:h-[31.2vh]"
@@ -59,7 +59,7 @@ const LocalOfferz = () => {
                           <div className="flex   px-5 pb-[1vh]  ">
                             {/* The following image element is commented out since it's not needed */}
                             {/* <img className="h-[4.7vh] w-[2.5vw]" src={image10} alt="Lot" /> */}
-                            <div className="flex justify-between items-center   px-5  w-full">
+                            <div className="flex justify-between items-center     w-full">
                               <div className="flex flex-col">
                                 <div className="font-urbanist text-[13px] lg:text-[0.75vw] leading-[2vh] text-left">
                                   {card.heading}
@@ -75,9 +75,15 @@ const LocalOfferz = () => {
                                 <div className="font-urbanist text-[18px] lg:text-[1vw] font-bold leading-[2.5vh]">
                                   {card.Price}
                                 </div>
+
                               </div>
+                              
                             </div>
+                            
                           </div>
+                          <button className=' w-[270px] lg:w-[15vw]  rounded-xl h-[40px] lg: h-[6vh] text-[16px] lg:text-[1.2vw] bg-[#7a798a] text-white font-urbanist mt-3' >
+                            {card.button}
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -92,5 +98,6 @@ const LocalOfferz = () => {
   );
 };
   
-
-export default LocalOfferz
+ 
+ 
+ export default BuyNow

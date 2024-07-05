@@ -189,6 +189,82 @@ export const archieved =[
       },
     // Add more items as needed
   ];
+
+
+  export const BUY = [
+    {
+      img1: image111,
+      Car: "Hondai Sonata",
+      img: image10,
+      heading: "Creater",
+      Name: "Salvadar dali",
+      Bid: "Current Bid",
+      Price: "$750",
+      button:"Buy Now In 6,000$",
+    },
+
+    {
+      img1: image112,
+      Car: "Hondai Sonata",
+      img: image10,
+      heading: "Creater",
+      Name: "Salvadar dali",
+      Bid: "Current Bid",
+      Price: "$750",
+      button:"Buy Now In 6,000$",
+    },
+    {
+      img1: image113,
+      Car: "Hondai Sonata",
+      img: image10,
+      heading: "Creater",
+      Name: "Salvadar dali",
+      Bid: "Current Bid",
+      Price: "$750",
+      button:"Buy Now In 6,000$",
+    },
+    {
+      img1: image114,
+      Car: "Hondai Sonata",
+      img: image10,
+      heading: "Creater",
+      Name: "Salvadar dali",
+      Bid: "Current Bid",
+      Price: "$750",
+      button:"Buy Now In 6,000$",
+    },
+    {
+      img1: image111,
+      Car: "Hondai Sonata",
+      img: image10,
+      heading: "Creater",
+      Name: "Salvadar dali",
+      Bid: "Current Bid",
+      Price: "$750",
+      button:"Buy Now In 6,000$",
+    },
+
+    {
+      img1: image112,
+      Car: "Hondai Sonata",
+      img: image10,
+      heading: "Creater",
+      Name: "Salvadar dali",
+      Bid: "Current Bid",
+      Price: "$750",
+      button:"Buy Now In 6,000$",
+    },
+    {
+      img1: image113,
+      Car: "Hondai Sonata",
+      img: image10,
+      heading: "Creater",
+      Name: "Salvadar dali",
+      Bid: "Current Bid",
+      Price: "$750",
+      button:"Buy Now In 6,000$",
+    },
+  ]
  
   
  

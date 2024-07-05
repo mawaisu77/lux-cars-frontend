@@ -13,7 +13,7 @@ import 'swiper/css/pagination';
 const Abouttest = () => {
     return (
         <>
-            <div className='h-[822px] lg:h-[77vh] bg-[#f8f8f8]'>
+            <div className='h-[822px] lg:h-[77vh]   bg-[#f8f8f8]'>
                 <div className='text-[36px] lg:text-[2.3vw] font-urbanist font-semibold mb-[5vh] pt-[9.3vh]'>
                     Testimonials
                     <hr className='h-1 bg-red-500 w-20 mx-auto' />
