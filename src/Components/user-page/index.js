@@ -2,11 +2,11 @@ import React from 'react'
 import Navbar from './user-pages/Navbar';
 import Header from '../header/Header/Header';
 
-const AllBids = () => {
+const UserAccount = () => {
   return (
     <>
      
-      HELLO ALL BIDS
+     <Navbar/>
     
     </>
   )
@@ -14,4 +14,4 @@ const AllBids = () => {
 
 }
 
-export default AllBids;
+export default UserAccount;
