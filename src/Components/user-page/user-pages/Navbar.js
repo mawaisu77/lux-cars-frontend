@@ -37,7 +37,7 @@ const Navbar = () => {
 </div>
 </div>
 
-<div className=' h-[48vh] w-[89vw] mt-[11vh] mx-auto bg-[#f8f8f8] rounded-2xl'>
+<div className=' h-[48vh] w-[74vw] mt-[11vh] mx-auto bg-[#f8f8f8] rounded-2xl'>
    <div className='flex justify-between h-[36vh] w-full    bg-[#0000004d]'>
     <div className='flex mt-[4.6vh] ml-[2.2vw] w-[48vw]'>
         <img src={image1}  className='w-[18vw] h-[38vh] left-[36px] top-[36px] rounded-xl '/>
@@ -88,7 +88,7 @@ const Navbar = () => {
     </div>
    </div>
    
-<div className='flex justify-between items-center w-[58vw] ml-[370px] mt-[30px] text-[1.25vw] font-urbanist font-semibold  mx-auto'>
+<div className='flex justify-between items-center w-[47vw] ml-[23vw]   mt-[30px] text-[1.25vw] font-urbanist font-semibold  mx-auto'>
     <Link to="/UserAccount/AllBIds"> <p className='cursor-pointer hover:text-red-600'>
         All Bids
      </p></Link>
