@@ -36,3 +36,121 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+/* toggle button styling start  */
+.switch {
+  position: relative;
+  display: inline-block;
+  width:1.4vw;
+  height:1.5vh;
+  border-radius: 12px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.2vh;
+  width: 0.5vw;
+  left: 2px;
+  bottom: 1px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(8px);
+  -ms-transform: translateX(8px);
+  transform: translateX(8px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 25px;
+}
+
+.slider.round:before {
+  border-radius: 100%;
+}
+/* toggle button styling end  */
+
+
+/* set phone number  start*/
+/* Remove dummy space and style the input, button, and dropdown */
+.phone-input-wrapper .phone-input-container {
+  display: flex;
+  align-items: center;
+  width: 17vw; 
+  /* border: 1px solid red; */
+  /* background-color: yellow; */
+ 
+}
+
+/* .phone-input-wrapper .phone-input {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.phone-input-wrapper, .phone-input-button{background-color: white;} */
+.phone-input-wrapper .phone-input-button {
+  background-color: #4CAF50; /* Change button color */
+  border: none;
+  background-color: white !important;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  border-right: none !important;
+}
+
+/* .phone-input-wrapper .phone-input-button:hover {
+  background-color: #45a049;
+} */
+
+.phone-input-wrapper .phone-input-dropdown {
+  background-color: white; /* Change dropdown color */
+}
+
+.phone-input-wrapper .phone-input-dropdown .country-list {
+  border-radius: 8px;
+}
+
+/* Remove padding and margin that may cause dummy space */
+.phone-input-wrapper .react-tel-input {
+  padding: 0;
+  margin: 0;
+}
+
+/* .phone-input-wrapper .react-tel-input .form-control {
+  padding-left: 38px;  */
+  /* Adjust this as necessary */
+/* } */
+/* set phone number  end*/
