@@ -13,6 +13,7 @@ import Signup from './Components/sign-up/index.js';
 import UserAccount from './Components/user-page/index.js';
 import UserLayout from './Components/layouts/UserLayout.jsx';
 import AllBids from './Components/user-page/index.js';
+import VerifyEmail from './Components/verifyEmail/index.js';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
           <Route path="/UserAccount/funds" element={<UserLayout> <div>hello 2nd page</div></UserLayout>}/>
 
+          <Route path="/verify-email/:token" element={<VerifyEmail/>}/>
 
         </Routes>
         {/* Include the Footer component so it appears on all pages */}

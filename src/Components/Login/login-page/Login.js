@@ -1,25 +1,46 @@
 import React, { useState } from "react";
 import Header from "../../header/Header/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from '../../../hooks/useLogin';
 import { ClipLoader } from 'react-spinners'; // Optional spinner library
-
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 
 const Login = () => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const loginValidationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  const navigate = useNavigate()
   const { login, isLoading, error } = useLogin();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await login(email, password);
-  };
+
+  const loginFormik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginValidationSchema,
+    onSubmit: async (values, { setSubmitting }) => {
+      const {success, message} = await login(values.email, values.password);
+      if (success) {
+        toast.success(message);
+        navigate('/')
+      } else {
+        toast.error(message);
+      }
+      setSubmitting(false);
+    },
+    validateOnChange: true,
+    validateOnBlur: true,
+  });
 
   return (
     <>
-      {" "}
       <div className="Backgroundimage-LogIN">
         <Header className="text-white" />
         <div className="hidden  lg:block">
@@ -40,24 +61,41 @@ const Login = () => {
         <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">
           Login To LUX CARS
         </div>
-        <form className=" flex flex-col items-center gap-[3vh] mt-[6vh] mx-auto justify-center"  onSubmit={handleSubmit}>
+        <form
+          className=" flex flex-col items-center gap-[3vh] mt-[6vh] mx-auto justify-center"
+          onSubmit={loginFormik.handleSubmit}
+        >
           <input
             type=""
             id="email"
             name="email"
-            className="w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw]"
-            placeholder="Your email adress"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
+              loginFormik.touched.email && loginFormik.errors.email ? 'border-red-600 placeholder-red-500' : 'border-gray-300'
+            }`}
+            placeholder={
+              loginFormik.touched.email && loginFormik.errors.email
+                ? loginFormik.errors.email
+                : 'Your Email Address*'
+            }
+            onChange={loginFormik.handleChange}
+            onBlur={loginFormik.handleBlur}
+            value={loginFormik.values.email}
           />
           <input
             type=""
             id="password"
             name="password"
-            className="w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw]"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
+              loginFormik.touched.password && loginFormik.errors.password ? 'border-red-600 placeholder-red-500' : 'border-gray-300'
+            }`}
+            placeholder={
+              loginFormik.touched.password && loginFormik.errors.password
+                ? loginFormik.errors.password
+                : 'Your Password*'
+            }
+            onChange={loginFormik.handleChange}
+            onBlur={loginFormik.handleBlur}
+            value={loginFormik.values.password}
           />
           <div className="w-[342px] lg:w-[34vw]  flex justify-between">
             <div className="flex justify-between  gap-[0.5vw] text-[14px] lg:text-[0.8vw]">
@@ -72,10 +110,8 @@ const Login = () => {
             </div>
           </div>
           <button className="w-[342px] lg:w-[36vw] h-[48px] lg:h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
-          {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : 'Login'}
+            {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Login"}
           </button>
-          {error && <div className="text-red-500 mt-2">{error}</div>}
-
         </form>
 
         <div className=" text-[14px] lg:text-[0.7vw] font-urbanist mt-[5vh]">

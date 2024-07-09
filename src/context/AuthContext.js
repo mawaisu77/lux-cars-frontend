@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const AuthContext = createContext();
 
@@ -10,7 +10,7 @@ export const authReducer = (state, action) => {
         };
     case "LOGIN":
       return {
-        user: action.payload,
+        user: { ...state, user: action.payload },
       };
 
     case "LOGOUT":

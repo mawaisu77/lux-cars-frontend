@@ -1,29 +1,35 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext.js'
-import ApiService from '../services/ApiService';
+import { signup as signupService } from '../services/authService';
 
 export const useSignup = () => {
 
-  const apiService = new ApiService(process.env.REACT_APP_API_BASE_URL);
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
-  const { dispatch } = useAuthContext()
+  // const { dispatch } = useAuthContext()
 
   const signup = async (formData) => {
-    setIsLoading(true);
-    setError(null);
+     setIsLoading(true);
+     setError(null);
 
-    try {
-      const response = await apiService.register(formData);
+     try {
+      const response = await signupService(formData);
+      // dispatch({type: 'REGISTER', payload: null});
       setIsLoading(false);
-      dispatch({ type: 'Register', payload: response.payload });
-      return response.message
-    } catch (err) {
+      return {success:response.success, message:response.message}
+  } catch (error) {
       setIsLoading(false);
-      setError(err);
-      throw err; 
-
-    }
+      if (error.response) {
+          setError(error.response.data.message || 'An error occurred. Please try again.');
+          return { success: false, message: error.response.data.message || 'An error occurred. Please try again.' };
+        } else if (error.request) {
+          setError('No response from the server. Please check your network connection.');
+          return { success: false, message: 'No response from the server. Please check your network connection.' };
+        } else {
+          setError('An unexpected error occurred. Please try again.');
+          return { success: false, message: 'An unexpected error occurred. Please try again.' };
+        }
+  }
   };
 
   return { signup, isLoading, error }
