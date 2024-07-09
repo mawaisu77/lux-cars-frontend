@@ -16,6 +16,9 @@ import UserLayout from './Components/layouts/UserLayout.jsx';
 import Privacy from './Components/privacy/index.js';
 import Term from './Components/term/index.js'; 
 import Loan from './Components/loanapplication/index.js';
+import Profile from './Components/user-page/user-pages/Profile.js'
+import Offers from './Components/user-page/user-pages/Offers.js';
+import Order from './Components/user-page/user-pages/Order.js';
 
 function App() {
   return (
@@ -38,7 +41,9 @@ function App() {
 
           <Route path="/UserAccount" element={<UserAccount/>}/>
           <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
-          <Route path="/UserAccount/funds" element={<UserLayout> <div>hello 2nd page</div></UserLayout>}/>
+          <Route path="/UserAccount/Profile" element={<UserLayout> <Profile/> </UserLayout>}/>
+          <Route path="/UserAccount/Offers" element={<UserLayout> <Offers/> </UserLayout>}/>
+          <Route path="/UserAccount/Order" element={<UserLayout> <Order/> </UserLayout>}/>
 
 
         </Routes>
