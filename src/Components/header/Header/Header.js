@@ -38,7 +38,8 @@ const Header = () => {
           </div>
         </div>
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
-          <HiUsers />
+          <Link to="/UserAccount/AllBIds" ><HiUsers /></Link>
+          
           <Link to="/Login">
             <button className='focus:outline-none'>login</button>
           </Link>
