@@ -19,6 +19,7 @@ import Loan from './Components/loanapplication/index.js';
 import Profile from './Components/user-page/user-pages/Profile.js'
 import Offers from './Components/user-page/user-pages/Offers.js';
 import Order from './Components/user-page/user-pages/Order.js';
+import Verification from './Components/sign-up/sign-page/Verification.js';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login/>}/>
           <Route path="/Signup" element={<Signup/>}/>
+          <Route path="/Signup/Verification" element={<Verification/>}/>
           <Route path="/ContactUs" element={<ContactUs/>}/>
           <Route path="/HowWorks" element={<HowWorks/>}/>
           <Route path="/Help" element={<Help/>}/>
