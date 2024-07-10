@@ -3,7 +3,8 @@ import Header from '../../header/Header/Header'
 import { Link } from 'react-router-dom'
 const Login = () => {
   return (
-    <> <div className='Backgroundimage-LogIN'>
+    <> 
+    <div className='Backgroundimage-LogIN'>
     <Header className="text-white"/>
     <div className='hidden  lg:block'>
   <div className='  w-[15.5] flex flex-col  mt-[5.5vh]'>

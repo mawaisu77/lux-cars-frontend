@@ -8,6 +8,12 @@ import { RxPadding } from "react-icons/rx";
 import { MdPadding } from "react-icons/md";
 
 function LoanApplication() {
+  const phoneInputStyle = {
+    width: "100%",
+    padding: "10px",
+    fontSize: "1rem",
+  };
+
   const SeclectContainer = {
     padding: -"20px",
     margin: "0px",
@@ -68,26 +74,27 @@ function LoanApplication() {
 
   return (
     <>
-      <div className="Backgroundimage-LogIN ">
-        <Header textColor="text-white" />
-        {/* Pass textColor as a prop */}
-        <div className="w-[15.5] flex flex-col mt-[5.5vh]">
-          <div className="text-[2.6vw] font-semibold text-white">
-            Loan Application
-          </div>
-          <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
-            <Link to="/">
-              {" "}
-              {/* Assuming '/' is your home route */}
-              <button className="hover:text-white">Home</button>
-            </Link>
-            /<button className="hover:text-white">Loan</button>
+      <div className="Backgroundimage-LogIN">
+        <Header className="text-white" />
+        <div className="hidden  lg:block">
+          <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
+            <div className="text-[2.6vw] font-semibold text-white">
+              Loan Application
+            </div>
+
+            <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist ">
+              <Link to="/">
+                {" "}
+                <button className="hover:text-white  ">Home</button>
+              </Link>
+              /<button className="hover:text-white">LogIn</button>
+            </div>
           </div>
         </div>
       </div>
       {/*  */}
-      <div className="w-[42.708vw] mx-auto  rounded-[2.083vw] my-[4.167vh] boxShadow shadow">
-        <div className="px-[4.167vw] py-[4.167vh]  text-left ">
+      <div className="w-[90vw] md:w-[55vw] lg:w-[42.708vw] mx-auto  rounded-[2.083vw] my-[4.167vh] boxShadow shadow">
+        <div className=" px-[14px] py-[12px] md:px-[3vw] md:py-[1.4vh] lg:px-[3.8vw] py-[4.167vh]  text-left ">
           <div className=" ">
             <h1 className="text-[1.354vw] font-semibold text-[#1F1F2C] mb-[1.875vh]  ">
               Personal Information
@@ -98,199 +105,140 @@ function LoanApplication() {
                   <h1 className="text-[1.042vw]  font-semibold text-[#1F1F2C] mb-[1.042vh]  ">
                     Title
                   </h1>
-
-                  <div className=" mb-[3.12vh] bg-[#F8F8F8] h-[4.68vh]  w-[5.12vw] flex items-center  rounded-[0.313vw]">
-                    <select className="text-[15px] md:text-[1.09vw] text-[#1F1F2C]  mx-[15px] outline-none font-[400] bg-transparent my-[10px] ">
+                  {/* lg:w-[5.12vw] */}
+                  <div className=" mb-[3.12vh] bg-[#F8F8F8] h-[4.68vh] md:w-[8vw] lg:w-[5.12vw] flex items-center  rounded-[0.313vw]">
+                    <select className="text-[15px] md:text-[1vw] lg:text-[1.09vw] text-[#1F1F2C]  mx-[5px] outline-none font-[400] bg-transparent my-[10px] ">
                       <option>Mr</option>
                       <option>Mr.s</option>
                     </select>
                   </div>
-                  <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row items-end mb-[3.12vh]">
+                  <div className=" md:flex lg:flex  md:gap-x-[1.042vw] flex-col md:flex-row  items-end mb-[3.12vh]">
                     <div className="flex-1  flex flex-col ">
                       <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
                         {" "}
                         Name*
                       </p>
-                      <input className=" border border-[#EBEBEB] h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+                      <input className=" border border-[#EBEBEB] md:h-[4.68vh] md:w-[23.5vw] lg:w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
                       <label className="text-[#667085] font-[400] text-[0.729vw]">
                         First Name
                       </label>
                     </div>
                     <div className="flex-1 flex flex-col ">
-                      <input className=" border border-[#EBEBEB]  h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+                      <input className=" border border-[#EBEBEB]  md:h-[4.68vh] md:w-[23.5vw]  lg:w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
                       <label className="text-[#667085] font-[400] text-[0.729vw]">
                         Last Name
                       </label>
                     </div>
                   </div>
 
-                  <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row items-start mb-[3.12vh]">
-                    <div className="flex-1  flex flex-col ">
+                  <div className="md:flex gap-x-[1.042vw] flex-col md:flex-row items-start mb-[3.12vh]">
+                    <div className="flex-1  flex flex-col w-[100%] md:w-[40%]">
                       <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
                         Email*
                       </p>
-                      <input className=" border border-[#EBEBEB]  h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+                      <input className=" border border-[#EBEBEB]  md:h-[4.68vh] w-[100vw]  md:w-[24vw] lg:w-[17vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
                     </div>
-                    <div className="flex-1 flex flex-col   pb-[5px]">
-                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                        Work Phone Number
+                    <div className="flex-1 flex flex-col w-[100%]  md:w-[50%]  pb-[5px]">
+                      <p className="text-[15px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
+                      Home Phone Number
                       </p>
-                      {/* <PhoneInput
-                        inputStyle={{
-                          width: "16vw",
-                          height: "4.68vh",
-                          borderRadius: "8px",
-                        }}
-                        isValid={(value, country) => {
-                          if (value.match(/12345/)) {
-                            return (
-                              "Invalid value: " + value + ", " + country.name
-                            );
-                          } else if (value.match(/1234/)) {
-                            return false;
-                          } else {
-                            return true;
-                          }
-                        }}
-                      /> */}
+                     
+<div className="bg-red-400 rounded-[12px] w-[100%]  md:w-[23.5vw] lg:w-[17vw]">
+              <PhoneInput
+              // className="phone-input-wrapper  phone-input-container"
+                country={"us"}
+                buttonStyle={{background:'white',borderRight:'0px'}}
+                containerClass="  mx-auto border-none  outline-none  p-0 m-0 "
+                // containerStyle={{height:"20px"}}
+                inputStyle={{ width: '100%', height: "4.68vh",}}
+                
+                inputClass="bg-blue-400 text-black p-0 m-0   border-none rounded outline-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+ </div>
 
-                      <div className="phone-input-wrapper  ">
-                        <PhoneInput
-                          className=""
-                          country={"us"}
-                          // value={phone}
-                          // onChange={phone => setPhone(phone)}
-                          inputStyle={{
-                            width: "17vw",
-                            height: "4.68vh",
-                            borderRadius: "8px",
-                          }}
-                          containerClass="phone-input-container"
-                          inputClass="phone-input"
-                          buttonClass="phone-input-button"
-                          dropdownClass="phone-input-dropdown"
-                        />
-                      </div>
                     </div>
-                  </div>
-
-                  <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row items-start mb-[3.12vh]">
-                    <div className="flex-1  flex flex-col ">
-                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                        Address*
+                  </div> 
+                  <div className="md:flex gap-x-[1.042vw] flex-col md:flex-row items-start mb-[3.12vh]">
+                    <div className="flex-1  flex flex-col w-[100%] md:w-[40%]">
+                      <p className= "text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
+                      Address*
                       </p>
-                      <input className=" border border-[#EBEBEB]  h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+                      <input className=" border border-[#EBEBEB]  md:h-[4.68vh] w-[100%]  md:w-[24vw] lg:w-[17vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
                     </div>
-                    <div className="flex-1 flex flex-col   pb-[5px]">
-                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                        Work Phone Number
+                    <div className="flex-1 flex flex-col w-[100%] md:w-[50%]  pb-[5px]">
+                      <p className="text-[15px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
+                      Cell Phone Number
                       </p>
-                      {/* <PhoneInput
-                        inputStyle={{
-                          width: "16vw",
-                          height: "4.68vh",
-                          borderRadius: "8px",
-                        }}
-                        isValid={(value, country) => {
-                          if (value.match(/12345/)) {
-                            return (
-                              "Invalid value: " + value + ", " + country.name
-                            );
-                          } else if (value.match(/1234/)) {
-                            return false;
-                          } else {
-                            return true;
-                          }
-                        }}
-                      /> */}
+                     
+<div className="bg-red-400 rounded-[12px] w-[100%]  md:w-[23.5vw] lg:w-[17vw]">
+              <PhoneInput
+              // className="phone-input-wrapper  phone-input-container"
+                country={"us"}
+                buttonStyle={{background:'white',borderRight:'0px'}}
+                containerClass="  mx-auto border-none  outline-none  p-0 m-0 "
+                // containerStyle={{height:"20px"}}
+                inputStyle={{ width: '100%', height: "4.68vh",}}
+                
+                inputClass="bg-blue-400 text-black p-0 m-0   border-none rounded outline-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+ </div>
 
-                      <div className="phone-input-wrapper  ">
-                        <PhoneInput
-                          className=""
-                          country={"us"}
-                          // value={phone}
-                          // onChange={phone => setPhone(phone)}
-                          inputStyle={{
-                            width: "17vw",
-                            height: "4.68vh",
-                            borderRadius: "8px",
-                          }}
-                          containerClass="phone-input-container"
-                          inputClass="phone-input"
-                          buttonClass="phone-input-button"
-                          dropdownClass="phone-input-dropdown"
-                        />
-                      </div>
                     </div>
                   </div>
 
-                  <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row items-start mb-[3.12vh]">
-                    <div className="flex-1  flex flex-col ">
+                  <div className="md:flex gap-x-[1.042vw] flex-col md:flex-row items-start mb-[3.12vh]">
+                    <div className="flex-1  flex flex-col w-[100%] md:w-[40%]">
                       <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                        City*
+                      Years At Address*
                       </p>
-                      <input className=" border border-[#EBEBEB]  h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
-                    </div>
-                    <div className="flex-1 flex flex-col   pb-[5px]">
-                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                        Work Phone Number
-                      </p>
-                      {/* <PhoneInput
-                        inputStyle={{
-                          width: "16vw",
-                          height: "4.68vh",
-                          borderRadius: "8px",
-                        }}
-                        isValid={(value, country) => {
-                          if (value.match(/12345/)) {
-                            return (
-                              "Invalid value: " + value + ", " + country.name
-                            );
-                          } else if (value.match(/1234/)) {
-                            return false;
-                          } else {
-                            return true;
-                          }
-                        }}
-                      /> */}
-
-                      <div className="phone-input-wrapper  ">
-                        <PhoneInput
-                          className=""
-                          country={"us"}
-                          // value={phone}
-                          // onChange={phone => setPhone(phone)}
-                          inputStyle={{
-                            width: "17vw",
-                            height: "4.68vh",
-                            borderRadius: "8px",
-                          }}
-                          containerClass="phone-input-container"
-                          inputClass="phone-input"
-                          buttonClass="phone-input-button"
-                          dropdownClass="phone-input-dropdown"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row items-end mb-[3.12vh]">
-                    <div className="flex-1  flex flex-col ">
-                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                        {" "}
-                        Years At Address*
-                      </p>
-                      <input className=" border border-[#EBEBEB]  h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+                      <input className=" border border-[#EBEBEB]  md:h-[4.68vh] w-[100vw]  md:w-[24vw] lg:w-[17vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
                     </div>
                     <div className="flex-1 flex flex-col ">
                       <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
                         {" "}
-                        Months At Address*
+                        Months At Address1*
                       </p>
-                      <input className=" border border-[#EBEBEB]  h-[4.68vh] w-[16.8vw]   py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+
+                      <div className=" text-[.5vw] flex h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
+
+                        <CurrencyInput
+                          prefix={selectedCurrency}
+                          className=" w-[75%] text-[1vw] border-none outline-none"
+                        />
+
+                        <select
+                          containerClass={SeclectContainer}
+                          buttonClass={{ background: "white" }}
+                          searchStyle={{ background: "white" }}
+                          className="w-[25%] text-[1vw]  border-none outline-none"
+                          id="currency-select"
+                          value={selectedCurrency}
+                          onChange={handleChange}
+                        >
+                          <option value="" disabled>
+                            Select a currency
+                          </option>
+                          {currencies.map((currency) => (
+                            <option key={currency.code} value={currency.symbol}>
+                              {currency.code}
+                            </option>
+                          ))}
+                        </select>
+                        {/* {selectedCurrency && (
+                          <CurrencyInput
+                            prefix={selectedCurrency}
+                            className=" w-[75%] text-[1vw] border-none outline-none"
+                          />
+                        )} */}
+                      </div>
+
+                     
+                     
                     </div>
                   </div>
 
+                 
+                 
                   <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row  mb-[1.25vh]">
                     <div className="flex-1  flex flex-col mb-[1.56vh] ">
                       <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[1.56vh]">
@@ -308,7 +256,7 @@ function LoanApplication() {
                           Own
                         </label>
                       </div>
-                      <div className="flex items-center mb-[3.12vh]">
+                      <div className="flex  items-center mb-[3.12vh]">
                         <input
                           type="radio"
                           value="option1"
@@ -326,13 +274,7 @@ function LoanApplication() {
                         Months At Address*
                       </p>
 
-                      <div className=" text-[.5vw] flex h-[4.68vh] w-[16.8vw] border rounded-[8px] p-1">
-                        {/* {selectedCurrency && (
-                          <CurrencyInput
-                            prefix={selectedCurrency}
-                            className=" w-[75%] text-[1vw] border-none outline-none"
-                          />
-                        )} */}
+                      <div className=" text-[.5vw] flex h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
 
                         <CurrencyInput
                           prefix={selectedCurrency}
@@ -414,96 +356,93 @@ function LoanApplication() {
                     <h1 className="text-[1.354vw] font-semibold text-[#1F1F2C] mb-[1.875vh]  ">
                       Employment Information
                     </h1>
-                    <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row items-start mb-[1.25vh]">
-                      <div className="flex-1  flex flex-col ">
-                        <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                          Employer Name*
-                        </p>
-                        <input className=" border border-[#EBEBEB] h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
-                      </div>
-                      <div className="flex-1 flex flex-col   pb-[5px]">
-                        <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                          Work Phone Number
-                        </p>
-                        {/* <PhoneInput
-                        inputStyle={{
-                          width: "16vw",
-                          height: "4.68vh",
-                          borderRadius: "8px",
-                        }}
-                        isValid={(value, country) => {
-                          if (value.match(/12345/)) {
-                            return (
-                              "Invalid value: " + value + ", " + country.name
-                            );
-                          } else if (value.match(/1234/)) {
-                            return false;
-                          } else {
-                            return true;
-                          }
-                        }}
-                      /> */}
+                   
+                    <div className="md:flex gap-x-[1.042vw] flex-col md:flex-row items-start mb-[3.12vh]">
+                    <div className="flex-1  flex flex-col w-[100%] md:w-[40%]">
+                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
+                      Employer Name*
+                      </p>
+                      <input className=" border border-[#EBEBEB]  md:h-[4.68vh] w-[100vw]  md:w-[24vw] lg:w-[17vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+                    </div>
+                    <div className="flex-1 flex flex-col mb-[1.25vh]">
+                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
+                        {" "}
+                        Estimated Financing Amount Needed
+                      </p>
 
-                        <div className="phone-input-wrapper  ">
-                          <PhoneInput
-                            className=""
-                            country={"us"}
-                            // value={phone}
-                            // onChange={phone => setPhone(phone)}
-                            inputStyle={{
-                              width: "17vw",
-                              height: "4.68vh",
-                              borderRadius: "8px",
-                            }}
-                            containerClass="phone-input-container"
-                            inputClass="phone-input"
-                            buttonClass="phone-input-button"
-                            dropdownClass="phone-input-dropdown"
-                          />
-                        </div>
+                      <div className=" md:w-[24vw] lg:w-[16.8vw] text-[.5vw] flex h-[4.68vh] border rounded-[8px] p-1">
+                        <CurrencyInput
+                          prefix={selectedCurrency}
+                          className=" w-[70%]  text-[1vw] border-none outline-none"
+                        />
+                        <select
+                          className="w-[25%] text-[1vw] border-none outline-none"
+                          id="currency-select"
+                          value={selectedCurrency}
+                          onChange={handleChange}
+                        >
+                          <option value="" disabled>
+                            Select a currency
+                          </option>
+                          {currencies.map((currency) => (
+                            <option key={currency.code} value={currency.symbol}>
+                              {currency.code}
+                            </option>
+                          ))}
+
+                          {console.log(selectedCurrency)}
+                        </select>
+                       
+                       
                       </div>
                     </div>
-                    <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row items-end mb-[1.25vh]">
-                      <div className="flex-1  flex flex-col ">
-                        <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                          {" "}
-                          Occupation*
-                        </p>
-                        <input className=" border border-[#EBEBEB]  h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
-                      </div>
-                      <div className="flex-1 flex flex-col ">
-                        <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                          {" "}
-                          Years At Employer*
-                        </p>
-                        <input className=" border border-[#EBEBEB]  h-[4.68vh] w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
-                        {/* <label className='text-[#667085] font-[400] text-[0.729vw]'>Years At Employer*</label> */}
-                      </div>
+                  </div>
+                  <div className=" md:flex lg:flex  md:gap-x-[1.042vw] flex-col md:flex-row  items-end mb-[3.12vh]">
+                    <div className="flex-1  flex flex-col ">
+                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
+                        {" "}
+                        Occupation*
+                      </p>
+                      <input className=" border border-[#EBEBEB] md:h-[4.68vh] md:w-[23.5vw] lg:w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+                      
                     </div>
+                    <div className="flex-1 flex flex-col ">
+                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">Years At Employer*</p>
+                      <input className=" border border-[#EBEBEB]  md:h-[4.68vh] md:w-[23.5vw]  lg:w-[16.8vw] py-[10] px-[12px] rounded-[8px]  outline-none mb-[6px]" />
+                     
+                     
+                    </div>
+                  </div>
+                  <div className="flex-1 flex flex-col mb-[1.25vh]">
+                      <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
+                        {" "}
+                        Estimated Financing Amount Needed
+                      </p>
 
-                    <div className="xl:flex relative gap-x-[1.042vw] flex-col xl:flex-row items-start mb-[1.25vh]">
-                      <div className="flex-1 flex flex-col   pb-[5px]">
-                        <p className="text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
-                          Work Phone Number
-                        </p>
+                      <div className=" md:w-[24vw] lg:w-[16.8vw] text-[.5vw] flex h-[4.68vh] border rounded-[8px] p-1">
+                        <CurrencyInput
+                          prefix={selectedCurrency}
+                          className=" w-[70%]  text-[1vw] border-none outline-none"
+                        />
+                        <select
+                          className="w-[25%] text-[1vw] border-none outline-none"
+                          id="currency-select"
+                          value={selectedCurrency}
+                          onChange={handleChange}
+                        >
+                          <option value="" disabled>
+                            Select a currency
+                          </option>
+                          {currencies.map((currency) => (
+                            <option key={currency.code} value={currency.symbol}>
+                              {currency.code}
+                            </option>
+                          ))}
 
-                        <div className="phone-input-wrapper  ">
-                          <PhoneInput
-                            className=""
-                            country={"us"}
-                            // value={phone}
-                            // onChange={phone => setPhone(phone)}
-                            inputStyle={{
-                              width: "17vw",
-                              height: "4.68vh",
-                              borderRadius: "8px",
-                            }}
-                            containerClass="phone-input-container"
-                            inputClass="phone-input"
-                            buttonClass="phone-input-button"
-                            dropdownClass="phone-input-dropdown"
-                          />
-                        </div>
+                          {console.log(selectedCurrency)}
+                        </select>
+                       
+                       
                       </div>
                     </div>
                   </div>
@@ -577,19 +516,11 @@ function LoanApplication() {
                         Estimated Financing Amount Needed
                       </p>
 
-                      <div className=" text-[.5vw] flex h-[4.68vh] w-[16.8vw] border rounded-[8px] p-1">
-                        {/* {selectedCurrency && (
-                          <CurrencyInput
-                            prefix={selectedCurrency}
-                            className=" w-[75%] text-[1vw] border-none outline-none"
-                          />
-                        )} */}
-
+                      <div className=" md:w-[24vw] lg:w-[16.8vw] text-[.5vw] flex h-[4.68vh] border rounded-[8px] p-1">
                         <CurrencyInput
                           prefix={selectedCurrency}
-                          className=" w-[75%] text-[1vw] border-none outline-none"
+                          className=" w-[70%]  text-[1vw] border-none outline-none"
                         />
-
                         <select
                           className="w-[25%] text-[1vw] border-none outline-none"
                           id="currency-select"
@@ -607,12 +538,8 @@ function LoanApplication() {
 
                           {console.log(selectedCurrency)}
                         </select>
-                        {/* {selectedCurrency && (
-                          <CurrencyInput
-                            prefix={selectedCurrency}
-                            className=" w-[75%] text-[1vw] border-none outline-none"
-                          />
-                        )} */}
+                       
+                       
                       </div>
                     </div>
 
@@ -622,13 +549,8 @@ function LoanApplication() {
                         Down Payment Amount
                       </p>
 
-                      <div className=" text-[.5vw] flex h-[4.68vh] w-[16.8vw] border rounded-[8px] p-1">
-                        {/* {selectedCurrency && (
-                          <CurrencyInput
-                            prefix={selectedCurrency}
-                            className=" w-[75%] text-[1vw] border-none outline-none"
-                          />
-                        )} */}
+                      <div className=" text-[.5vw] flex h-[4.68vh] md:w-[24vw] lg:w-[16.8vw] border rounded-[8px] p-1">
+    
 
                         <CurrencyInput
                           prefix={selectedCurrency}
@@ -814,7 +736,7 @@ function LoanApplication() {
                       </div>
                     </div>
                     <div>
-                      <button className="h-[6.24vh] w-[33.6vw] text-[#CA0000] rounded-[56px] md:rounded-[4.09vw] bg-[#F3F3F6]">
+                      <button className="h-[6.24vh] w-[100%]  font-[700] w-auto md:w-[49vw] lg:w-[33.6vw] text-[#CA0000] rounded-[56px] md:rounded-[4.09vw] bg-[#F3F3F6]">
                         Send
                       </button>
                     </div>
@@ -826,90 +748,13 @@ function LoanApplication() {
         </div>
       </div>
 
-      {/* <div className='w-[73.281vw] h-[10vh] border mx-auto bg-red-200'></div> */}
-      <div>
-        {/* <h2>Select Object Example</h2> */}
-        {/* <select onChange={handleSelectChange}>
-        <option value="">Select an option</option>
-        {options && options.map(option => (
-           <> <option className='mb-[9rem]' key={option.id} value={option.name}>
-           {option.name}
-         </option></>
-        ))}
-      </select> */}
+      
+       
+       
+      
 
-        {/* <div className='relative bg-red-400'>
-    <select onChange={handleSelectChange}> */}
-        {/* <option value="">Select an option</option> */}
-        {/* {options && options.map(option => (
-           <> <input type='text' placeholder='Enter your text' className='absolute top-0 left-0 z-1 border w-[700px] bg-pink-400'/>
-           <option className='mb-[9rem] absolute z-10' key={option.id} value={option.name}>
-           <div>{option.code}</div>
-         </option>
-         </>
-        ))}
-      </select>   
-    </div> */}
-      </div>
-
-      {/* <div className='relative bg-red-400'>
-  <div className='absolute top-10 left-0 z-10'>
-    <input type='text' placeholder={changeState} value={changeState} className=' w-64 border bg-pink-400' />
-  </div>
-  <div className='absolute top-0 left-64 z-0'>
-    <select onChange={handleSelectChange} className='border w-64 bg-pink-400'>
-      {options && options.map(option => (
-        <option key={option.id} value={option.name}>
-          {option.code}
-          {changeState=option.code}
-        </option>
-      ))}
-    </select>
-  </div>
-</div> */}
-
-      {/* <label htmlFor="currency-select">Choose a currency:</label>
-                <select id="currency-select" value={currency} onChange={handleCurrencyChange}>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                </select>
-                <CurrencyInput
-                          prefix={getPrefix()}
-                          className="border"
-                        /> */}
-      {/* <CurrencyInput
-                id="currency-input"
-                name="currency-input"
-                placeholder="Enter amount"
-                prefix={getPrefix()}
-                decimalsLimit={2}
-                onValueChange={(value, name) => console.log(value, name)}
-            /> */}
-
-      {/* <div>
-      <label htmlFor="currency-select">Choose a currency:</label>
-      <select id="currency-select" value={selectedCurrency} onChange={handleChange}>
-        <option value="" disabled>Select a currency</option>
-        {currencies.map((currency) => (
-          <option key={currency.code} value={currency.symbol}>
-            {currency.symbol} - {currency.name}
-          </option>
-        ))}
-
-        {console.log(selectedCurrency)}
-      </select>
-      {selectedCurrency && (
-        <div>
-          Selected Currency: {selectedCurrency}
-
-          <CurrencyInput
-                          prefix={selectedCurrency}
-                          className="border"
-                        />
-        </div>
-      )}
-    </div> */}
+      
+      
     </>
   );
 }

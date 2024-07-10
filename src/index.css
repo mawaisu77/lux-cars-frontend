@@ -119,3 +119,10 @@ html, body {
 .form-checkbox:checked::before {
   transform: scale(1);
 }
+
+
+
+/* 
+.react-tel-input .form-control {
+  height: 30px;
+} */

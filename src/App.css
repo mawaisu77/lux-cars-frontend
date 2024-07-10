@@ -110,6 +110,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   width: 17vw; 
+  
   /* border: 1px solid red; */
   /* background-color: yellow; */
  
@@ -129,6 +130,7 @@ input:checked + .slider:before {
   border-radius: 4px;
   cursor: pointer;
   border-right: none !important;
+  width: 3vw;
 }
 
 /* .phone-input-wrapper .phone-input-button:hover {
@@ -149,8 +151,102 @@ input:checked + .slider:before {
   margin: 0;
 }
 
+.phone-input-wrapper{
+  height: 1vh;
+}
+
+.phone-input-container{
+  width: 17vw;
+  /* background-color: red; */
+}
 /* .phone-input-wrapper .react-tel-input .form-control {
   padding-left: 38px;  */
   /* Adjust this as necessary */
 /* } */
 /* set phone number  end*/
+
+
+@media screen and (max-width: 1024px)  {
+ 
+  .phone-input-container{
+    width: 17vw !important;
+    background-color: red;
+  }
+
+  .phone-input-wrapper .phone-input-container {
+    width: 17vw !important; 
+  }
+}
+
+@media screen and (min-width: 1024px)  {
+  body {
+    /* background-color: red; */
+  }
+
+
+ 
+}/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  /* toggle button styling start  */
+.switch {
+  position: relative;
+  display: inline-block;
+  width:2vw;
+  height:1.5vh;
+  border-radius: 12px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.2vh;
+  width: 0.5vw;
+  left: 2px;
+  bottom: 1px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(8px);
+  -ms-transform: translateX(8px);
+  transform: translateX(8px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 25px;
+}
+
+.slider.round:before {
+  border-radius: 100%;
+}
+/* toggle button styling end  */
+} 
