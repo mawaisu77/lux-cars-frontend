@@ -17,3 +17,12 @@ export const signup = async (formData) => {
         throw error;
       }
 };
+
+export const forgotPassword = async (email) => {
+  try {
+      const response = await baseService.post('auth/forgot-password', {email});
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+};
