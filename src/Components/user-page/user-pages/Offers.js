@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { GoSearch } from "react-icons/go";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import User from '../../cards/User';
+import UsersOffers from '../../cards/UsersOffers';
+ 
 
-const AllBids = () => {
+const Offers = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -14,7 +15,7 @@ const AllBids = () => {
 
   return (
     <>
-      <div className='w-[74vw] h-[172vh]  mx-auto mt-[50px]'>
+      <div className='w-[74vw]  mb-[10vh]  mx-auto mt-[50px]'>
         <div className='flex justify-between'>
           <div className='flex'>
             <input
@@ -30,7 +31,7 @@ const AllBids = () => {
           <div className="relative inline-block text-left text-[0.8vw]">
             <button
               onClick={toggleDropdown}
-              className="w-[6.2vw] h-[6vh] flex items-center justify-center border bg-white"
+              className="w-[6.2vw] h-[6vh] flex items-center justify-center border bg-white rounded-lg"
             >
               Sort By
               <RiArrowDropDownLine className="cursor-pointer" />
@@ -57,10 +58,10 @@ const AllBids = () => {
             )}
           </div>
         </div>
-        <User/>
+        <UsersOffers/>
       </div>
     </>
   );
 };
 
-export default AllBids;
+export default Offers;

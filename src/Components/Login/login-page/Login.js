@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../../header/Header/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from '../../../hooks/useLogin';
-import { ClipLoader } from 'react-spinners'; // Optional spinner library
+import { ClipLoader } from 'react-spinners'; 
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";

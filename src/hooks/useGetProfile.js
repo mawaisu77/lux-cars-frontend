@@ -1,24 +1,22 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
-import { login as loginService } from '../services/authService';
-import { saveToken, saveUser } from '../utils/storageUtils';
+import { profile as profileService } from '../services/authService';
 
 export const useLogin = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
-  const { dispatch } = useAuthContext()
+  const [userProfile, setUserProfile] = useState(null)
 
-  const login = async (email, password) => {
+  const profile = async () => {
         setIsLoading(true)
         setError(null)
 
     try {
-        const response = await loginService( email, password );
-        saveUser(response.data.user);
-        saveToken(response.data.token);
-        dispatch({type: 'LOGIN', payload: response.data});
+        const response = await profileService();
         setIsLoading(false);
+        setUserProfile(response.data)
         return {success:response.success, message:response.message}
+
     } catch (error) {
         setIsLoading(false);
         if (error.response) {
@@ -35,5 +33,5 @@ export const useLogin = () => {
   
   }
 
-  return { login, isLoading, error }
+  return { profile, isLoading, error, userProfile }
 }

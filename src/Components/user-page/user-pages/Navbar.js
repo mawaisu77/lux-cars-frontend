@@ -37,10 +37,10 @@ const Navbar = () => {
 </div>
 </div>
 
-<div className=' h-[48vh] w-[74vw] mt-[11vh] mx-auto bg-[#f8f8f8] rounded-2xl'>
-   <div className='flex justify-between h-[36vh] w-full    bg-[#0000004d]'>
+<div className=' h-[38vh] w-[74vw] mt-[7vh] mx-auto bg-[#f8f8f8] rounded-2xl'>
+   <div className='flex justify-between h-[30vh] w-full    bg-[#0000004d] rounded-t-2xl'>
     <div className='flex mt-[4.6vh] ml-[2.2vw] w-[48vw]'>
-        <img src={image1}  className='w-[18vw] h-[38vh] left-[36px] top-[36px] rounded-xl '/>
+        <img src={image1}  className='w-[15vw] h-[30vh] left-[36px] top-[36px] rounded-xl '/>
         <div className='text-left text-[white] font-urbanist ml-[2.2vw]'>
         <h1 className='font-bold font-urbanist text-[2.3vw] text-white '>
             Joshua Paul
@@ -88,7 +88,7 @@ const Navbar = () => {
     </div>
    </div>
    
-<div className='flex justify-between items-center w-[47vw] ml-[23vw]   mt-[30px] text-[1.25vw] font-urbanist font-semibold  mx-auto'>
+<div className='flex justify-between items-center w-[47vw] ml-[23vw]   mt-[17px] text-[1.25vw] font-urbanist font-semibold  mx-auto'>
     <Link to="/UserAccount/AllBIds"> <p className='cursor-pointer hover:text-red-600'>
         All Bids
      </p></Link>
@@ -100,13 +100,13 @@ const Navbar = () => {
     </Link>
 
 
-    <Link to="/UserAccount/ORDERS">
+    <Link to="/UserAccount/Order">
     <p className='cursor-pointer hover:text-red-600'>
         ORDERS
      </p>
     </Link>
     
-    <Link to="/UserAccount/OFFERS">
+    <Link to="/UserAccount/Offers">
     
     <p className='cursor-pointer hover:text-red-600'>
         OFFERS
@@ -119,7 +119,7 @@ const Navbar = () => {
      </p>
     </Link>
     
-   <Link to="/UserAccount/MYPROFILE"> 
+   <Link to="/UserAccount/Profile"> 
    <p className='cursor-pointer hover:text-red-600'>
         MY PROFILE
      </p>
