@@ -104,66 +104,7 @@ input:checked + .slider:before {
 /* toggle button styling end  */
 
 
-/* set phone number  start*/
-/* Remove dummy space and style the input, button, and dropdown */
-.phone-input-wrapper .phone-input-container {
-  display: flex;
-  align-items: center;
-  width: 17vw; 
-  
-  /* border: 1px solid red; */
-  /* background-color: yellow; */
- 
-}
 
-/* .phone-input-wrapper .phone-input {
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 4px;
-}
-.phone-input-wrapper, .phone-input-button{background-color: white;} */
-.phone-input-wrapper .phone-input-button {
-  background-color: #4CAF50; /* Change button color */
-  border: none;
-  background-color: white !important;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  border-right: none !important;
-  width: 3vw;
-}
-
-/* .phone-input-wrapper .phone-input-button:hover {
-  background-color: #45a049;
-} */
-
-.phone-input-wrapper .phone-input-dropdown {
-  background-color: white; /* Change dropdown color */
-}
-
-.phone-input-wrapper .phone-input-dropdown .country-list {
-  border-radius: 8px;
-}
-
-/* Remove padding and margin that may cause dummy space */
-.phone-input-wrapper .react-tel-input {
-  padding: 0;
-  margin: 0;
-}
-
-.phone-input-wrapper{
-  height: 1vh;
-}
-
-.phone-input-container{
-  width: 17vw;
-  /* background-color: red; */
-}
-/* .phone-input-wrapper .react-tel-input .form-control {
-  padding-left: 38px;  */
-  /* Adjust this as necessary */
-/* } */
-/* set phone number  end*/
 
 
 @media screen and (max-width: 1024px)  {
