@@ -105,10 +105,12 @@ const Login = () => {
               />{" "}
               Remenber me
             </div>
-            <div className="font-urbanist text-[14px] lg:text-[0.8vw] font-semibold">
+           <Link to="/Forget-Password">
+   <div className="font-urbanist text-[14px] lg:text-[0.8vw] font-semibold">
               Forget password?
             </div>
-          </div>
+           </Link>
+  </div>
           <button className="w-[342px] lg:w-[36vw] h-[48px] lg:h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
             {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Login"}
           </button>

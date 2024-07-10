@@ -21,6 +21,7 @@ import Offers from './Components/user-page/user-pages/Offers.js';
 import Order from './Components/user-page/user-pages/Order.js';
 import Verification from './Components/sign-up/sign-page/Verification.js';
 import VerifyEmail from './Components/verifyEmail/index.js';
+import Reset from './Components/Login/login-page/Reset.js';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login/>}/>
+          <Route path="/Forget-Password" element={<Reset/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/Signup/Verification" element={<Verification/>}/>
           <Route path="/ContactUs" element={<ContactUs/>}/>
