@@ -27,6 +27,7 @@ const navigate = useNavigate()
   };
 
   return (
+<<<<<<< HEAD
     <>
       {" "}
       <div className="Backgroundimage-LogIN">
@@ -36,6 +37,17 @@ const navigate = useNavigate()
             <div className="text-[2.6vw] font-semibold text-white">
               Password Reset
             </div>
+=======
+    <> <div className='Backgroundimage-LogIN'>
+    <Header className="text-white"/>
+    <div className='hidden  lg:block'>
+  <div className='  w-[15.5] flex flex-col  mt-[5.5vh]'>
+    <div className='text-[2.6vw] font-semibold text-white'>
+    LogIN
+    </div>
+  
+ 
+>>>>>>> origin/feat/ui-hashir
 
             <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist ">
               <Link to="/">
@@ -72,6 +84,7 @@ const navigate = useNavigate()
             required
           />
 
+<<<<<<< HEAD
           <button className="w-[342px] lg:w-[36vw] h-[48px] lg:h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
           {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Submit"}
           </button>
@@ -88,5 +101,20 @@ const navigate = useNavigate()
     </>
   );
 };
+=======
+</div>
+<div className=' h-[480px] lg:h-[62vh] w-full  lg:w-[36.1] mx-auto'>
+  <div className='mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist'>
+    Reset New Password
+  </div>
+  <form className=' flex flex-col items-center gap-[3vh] mt-[6vh]   mx-auto justify-center'>
+  <input type="" id="email" name="email" className="w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw]" placeholder="New Password" />
+  <input type="" id="email" name="email" className="w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw]" placeholder="Confirm Your New Password" />
+ 
+  <button className="w-[342px] lg:w-[36vw] h-[48px] lg:h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
+                    Save
+                </button>
+  </form>
+>>>>>>> origin/feat/ui-hashir
 
 export default Reset;
