@@ -26,3 +26,15 @@ export const forgotPassword = async (email) => {
       throw error;
     }
 };
+
+export const resetPassword = async (newPassword, confirmPassword, token) => {
+  try {
+    const response = await baseService.put(`auth/reset-password/${token}`, {
+      newPassword,
+      confirmPassword,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

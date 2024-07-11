@@ -105,7 +105,7 @@ const Login = () => {
               />{" "}
               Remenber me
             </div>
-           <Link to="/Forget-Password">
+           <Link to="/forgot-password">
    <div className="font-urbanist text-[14px] lg:text-[0.8vw] font-semibold">
               Forget password?
             </div>

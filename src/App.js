@@ -21,10 +21,8 @@ import Offers from './Components/user-page/user-pages/Offers.js';
 import Order from './Components/user-page/user-pages/Order.js';
 import Verification from './Components/sign-up/sign-page/Verification.js';
 import VerifyEmail from './Components/verifyEmail/index.js';
- 
-import ForgetPassword from './Components/Login/login-page/ForgetPassword.js';
-import Reset from './Components/Login/login-page/Reset.js';
-
+import ResetPassword from './Components/Login/login-page/ResetPassword.js';
+import ForgotPassword from './Components/Login/login-page/ForgotPassword.js';
 function App() {
   return (
      <>
@@ -35,8 +33,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login/>}/>
-          <Route path="/reset" element={<Reset/>}/>
-          <Route path="/Forget-Password" element={<ForgetPassword/>}/>
+          <Route path="/reset-password/:token" element={<ResetPassword/>}/>
+          <Route path="/forgot-password" element={<ForgotPassword/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/Signup/Verification" element={<Verification/>}/>
           <Route path="/ContactUs" element={<ContactUs/>}/>
