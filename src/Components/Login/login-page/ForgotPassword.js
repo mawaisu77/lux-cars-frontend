@@ -79,7 +79,7 @@ const navigate = useNavigate()
 
         <div className=" text-[14px] lg:text-[0.7vw] font-urbanist mt-[5vh]">
           Don't have an account?{" "}
-          <Link to="/Signup">
+          <Link to="/signup">
             {" "}
             <span className="text-[#ca0000] cursor-pointer">Sign Up</span>
           </Link>

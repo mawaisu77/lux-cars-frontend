@@ -363,7 +363,7 @@ export const archieved =[
     {
         icon: <BsEyeFill size={25} color='white'/>,
         heading: "Reliability",
-        para: "We pride ourselves on our excellent communication and service. From the moment you contact us to the delivery of your vehicle, we are committed to keeping you informed and satisfied."
+        para: "We pride ourselves on our excellent communication and service. From the moment you  us to the delivery of your vehicle, we are committed to keeping you informed and satisfied."
     },
     {
         icon: <FaPeopleLine size={25} color='white'/>,

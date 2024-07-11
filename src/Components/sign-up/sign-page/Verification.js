@@ -124,7 +124,7 @@ const Verification = () => {
 
         {/* <div className="text-[14px] lg:text-[0.7vw] font-urbanist mt-[5vh]">
           Already have an account?{" "}
-          <Link to="/Login">
+          <Link to="/login">
             <span className="text-[#ca0000] cursor-pointer">Login</span>
           </Link>
         </div> */}

@@ -10,6 +10,7 @@ export const getProfile = async () => {
   };
   
   export const updateProfile = async (profileData) => {
+    console.log("===>", profileData)
     try {
       const response = await baseService.put('user/edit-profile', profileData);
       return response.data;

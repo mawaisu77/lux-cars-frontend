@@ -21,7 +21,7 @@ const ResetPassword = () => {
       );
       if (success) {
         toast.success(message);
-        navigate("/Login");
+        navigate("/login");
       } else {
         toast.error(message);
       }
@@ -77,7 +77,7 @@ const ResetPassword = () => {
         </form>
         <div className=" text-[14px] lg:text-[0.7vw] font-urbanist mt-[5vh]">
           Don't have an account?{" "}
-          <Link to="/Signup">
+          <Link to="/signup">
             {" "}
             <span className="text-[#CA0000] cursor-pointer">Sign Up</span>
           </Link>

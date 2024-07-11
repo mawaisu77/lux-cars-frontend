@@ -18,7 +18,7 @@ const Footer = () => {
     },
     {
       heading: "Companies",
-      items: ["About us", "Contact us", "Our blogs", "Discover"],
+      items: ["About us", "contact-us", "Our blogs", "Discover"],
     },
   ];
 

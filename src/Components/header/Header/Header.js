@@ -31,7 +31,7 @@ const Header = () => {
               <Link to="/Help">
                 <li>Help</li>
               </Link>
-              <Link to="/ContactUs">
+              <Link to="/contact-us">
                 <li>Contact</li>
               </Link>
             </ul>
@@ -40,11 +40,11 @@ const Header = () => {
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
           <Link to="/UserAccount/AllBIds" ><HiUsers /></Link>
           
-          <Link to="/Login">
+          <Link to="/login">
             <button className='focus:outline-none'>login</button>
           </Link>
           /
-          <Link to="/Signup">
+          <Link to="/signup">
             <button className='focus:outline-none'>sign-up</button>
           </Link>
           <button className='w-[7.333333333333334vw] h-[5.23vh] bg-[#ca0000] text-white rounded-full text-[0.8vw] focus:outline-none'>
@@ -72,14 +72,14 @@ const Header = () => {
             <Link to="/Help" onClick={toggleMenu}>
               <li>Help</li>
             </Link>
-            <Link to="/ContactUs" onClick={toggleMenu}>
+            <Link to="/contact-us" onClick={toggleMenu}>
               <li>Contact</li>
             </Link>
             <div className='flex flex-col items-center gap-4'>
-              <Link to="/Login" onClick={toggleMenu}>
+              <Link to="/login" onClick={toggleMenu}>
                 <button className='focus:outline-none'>login</button>
               </Link>
-              <Link to="/Signup" onClick={toggleMenu}>
+              <Link to="/signup" onClick={toggleMenu}>
                 <button className='focus:outline-none'>sign-up</button>
               </Link>
               <button className='w-[132px] lg:w-[7.333333333333334vw]  h-[32px] lg:h-[5.23vh] bg-[#ca0000] text-white rounded-full lg:text-[0.8vw] focus:outline-none'>

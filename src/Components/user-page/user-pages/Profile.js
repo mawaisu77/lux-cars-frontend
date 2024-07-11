@@ -6,17 +6,20 @@ import bar from "../../../assets/User-pics/bar.png";
 import bars from "../../../assets/User-pics/bars.png";
 import icon7 from "../../../assets/User-pics/icon (7).png";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import axios from "axios";
-import baseService from "../../../services/baseService";
 import { getProfile, updateProfile } from "../../../services/userService";
 import { saveUser } from "../../../utils/storageUtils";
 import { toast } from "react-toastify";
 import { ClipLoader } from 'react-spinners'; // Optional spinner library
+import PhoneInput from "react-phone-input-2";
+
 
 const Profile = () => {
   const { token } = useAuthContext();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState(""); 
+
   const [loading, setLoading] = useState(false)
 
   const fetchProfile = async () => {
@@ -26,10 +29,12 @@ const Profile = () => {
       //   headers: { Authorization: `Bearer ${token}` }
       // });
       saveUser(response.data);
-      console.log("get profile response == >", response);
-      const { username, email } = response.data;
+      const { username, email, address, phone } = response.data;
       setUsername(username);
       setEmail(email);
+      setAddress(address);
+      setPhone(phone || ""); 
+
     } catch (error) {
       console.error(error);
       toast.error("Error fetching profile data");
@@ -44,7 +49,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       setLoading(true)
-      const profileData = { username, email };
+      const profileData = { username, email, address, phone:`+${phone}` };
       const response = await updateProfile(profileData);
       //  await axios.put('http://localhost:8000/api/v1/user/edit-profile', profileData, {
       //   headers: { Authorization: `Bearer ${token}` }
@@ -86,13 +91,30 @@ const Profile = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-[26vw] h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
                   />
+
+                  <div className="w-[26vw] h-[4.7vh]">
+                       <PhoneInput
+                        country={"us"}
+                        countryCodeEditable={false}
+                        disableDropdown={true}
+                          buttonStyle={{
+                            background: "white",
+                            borderRight: "0px",
+                          }}
+                          containerClass="  mx-auto border-none  outline-none  p-0 m-0 "
+                          inputStyle={{ width: "100%", height: "4.68vh" }}
+                          inputClass="bg-blue-400 text-black p-0 m-0 border-none rounded outline-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          value={phone}
+                          onChange={(phone) => setPhone(phone)}
+                        />
+                  </div>
+               
                   <input
-                    placeholder="Number"
-                    className="w-[26vw] h-[4.7vh]  rounded-lg p-2 border"
-                  />
-                  <input
+                    name="address"
                     placeholder="Address"
                     className="w-[26vw] h-[4.7vh]  rounded-lg p-2 border"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
                 <div className=" w-[30vw]  border rounded-lg p-5 ">

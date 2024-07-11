@@ -32,12 +32,14 @@ function App() {
         {/* Define your routes here */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>
           <Route path="/reset-password/:token" element={<ResetPassword/>}/>
           <Route path="/forgot-password" element={<ForgotPassword/>}/>
-          <Route path="/Signup" element={<Signup/>}/>
-          <Route path="/Signup/Verification" element={<Verification/>}/>
-          <Route path="/ContactUs" element={<ContactUs/>}/>
+          <Route path="/verify-email/:token" element={<VerifyEmail/>}/>
+          <Route path="/user/documents-upload" element={<Verification/>}/>
+
+          <Route path="/contact-us" element={<ContactUs/>}/>
           <Route path="/HowWorks" element={<HowWorks/>}/>
           <Route path="/Help" element={<Help/>}/>
           <Route path="/About" element={<About/>}/>
@@ -51,7 +53,6 @@ function App() {
           <Route path="/UserAccount/Offers" element={<UserLayout> <Offers/> </UserLayout>}/>
           <Route path="/UserAccount/Order" element={<UserLayout> <Order/> </UserLayout>}/>
 
-          <Route path="/verify-email/:token" element={<VerifyEmail/>}/>
 
         </Routes>
         {/* Include the Footer component so it appears on all pages */}
