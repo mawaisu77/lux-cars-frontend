@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
+import { IoGlobeSharp } from "react-icons/io5";
+
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { HiUsers } from 'react-icons/hi2';
+import { useTranslation } from 'react-i18next';
+import { changeLanguage } from 'i18next';
 
 const Header = () => {
+  const { t } = useTranslation();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -26,18 +33,42 @@ const Header = () => {
                 Delivery Time <TiArrowSortedDown />
               </li>
               <Link to="/About">
-                <li>About</li>
+                <li>{t('navbar.about')}</li>
               </Link>
               <Link to="/Help">
-                <li>Help</li>
+                <li>{t('navbar.help')}</li>
               </Link>
               <Link to="/contact-us">
-                <li>Contact</li>
+                <li>{t('navbar.contact')}</li>
               </Link>
             </ul>
           </div>
         </div>
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
+        <div className="relative inline-block text-left">
+      <div>
+
+          <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className='cursor-pointer ' />
+      </div>
+      {dropdownOpen && (
+        <div className="origin-top-right absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            <button
+              onClick={() => changeLanguage('en')}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
+              English
+            </button>
+            <button
+              onClick={() => changeLanguage('fr')}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
+              French
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
           <Link to="/UserAccount/AllBIds" ><HiUsers /></Link>
           
           <Link to="/login">

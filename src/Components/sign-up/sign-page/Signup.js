@@ -165,7 +165,7 @@ const Signup = () => {
             </div>
           </div>
           <button className="w-[343px] lg:w-[36vw] h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
-          {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Login"}
+          {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Register"}
           </button>
         </form>
         <div className="text-[14px] lg:text-[0.7vw] font-urbanist mt-[5vh]">

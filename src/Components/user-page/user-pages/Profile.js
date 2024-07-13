@@ -19,6 +19,8 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState(""); 
+  const [documents, setDcuments] = useState([]); 
+
 
   const [loading, setLoading] = useState(false)
 
@@ -29,11 +31,14 @@ const Profile = () => {
       //   headers: { Authorization: `Bearer ${token}` }
       // });
       saveUser(response.data);
-      const { username, email, address, phone } = response.data;
+      const { username, email, address, phone, documents } = response.data;
+      setDcuments(documents)
       setUsername(username);
       setEmail(email);
       setAddress(address);
       setPhone(phone || ""); 
+      console.log(documents)
+      console.log(documents[0] || [])
 
     } catch (error) {
       console.error(error);
@@ -145,7 +150,7 @@ const Profile = () => {
               </div>
               <div className="flex w-[28vw] h-[12vh]    ">
                 <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
-                  <FaImage />
+                  <img src={documents[0]} />
                 </div>
                 <div className="">
                   <div className="flex gap-3 ml-5">
