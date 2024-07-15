@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForgotPassword } from "../../../hooks/useForgotPassword";
 import { toast } from "react-toastify";
 import { ClipLoader } from 'react-spinners'; 
+import { showToast } from "../../../utils/Toast";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -12,14 +13,15 @@ const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("first")
     try {
       const {success, message} = await forgotPassword(email);
       if (success) {
-        toast.success(message);
+        showToast(message, 'success')
+        // toast.success(message);
         navigate('/')
       } else {
-        toast.error(message);
+        showToast(message, 'error')
+        // toast.error(message);
       }
     } catch (error) {
       console.error(error);

@@ -7,13 +7,13 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './i18n'; // Import the i18n configuration
+import { CustomToast } from './utils/Toast';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-       <ToastContainer
-       />
+    <CustomToast />
        <App />
     </AuthContextProvider>
   </React.StrictMode>

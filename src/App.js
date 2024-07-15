@@ -49,7 +49,7 @@ function App() {
 
           <Route path="/UserAccount" element={<UserAccount/>}/>
           <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
-          <Route path="/UserAccount/Profile" element={<UserLayout> <Profile/> </UserLayout>}/>
+          <Route path="/user/profile" element={<UserLayout> <Profile/> </UserLayout>}/>
           <Route path="/UserAccount/Offers" element={<UserLayout> <Offers/> </UserLayout>}/>
           <Route path="/UserAccount/Order" element={<UserLayout> <Order/> </UserLayout>}/>
 

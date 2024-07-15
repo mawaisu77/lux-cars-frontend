@@ -6,6 +6,7 @@ import { ClipLoader } from 'react-spinners';
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { showToast } from "../../../utils/Toast";
 
 
 const Login = () => {
@@ -28,10 +29,12 @@ const Login = () => {
     onSubmit: async (values, { setSubmitting }) => {
       const {success, message} = await login(values.email, values.password);
       if (success) {
-        toast.success(message);
+        showToast(message,'success')
+        // toast.success(message);
         navigate('/')
       } else {
-        toast.error(message);
+        showToast(message,'error')
+        // toast.error(message);
       }
       setSubmitting(false);
     },

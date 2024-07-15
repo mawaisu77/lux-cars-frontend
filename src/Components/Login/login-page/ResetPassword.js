@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useResetPassword } from "../../../hooks/useResetPassword";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
+import { showToast } from "../../../utils/Toast";
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,10 +21,10 @@ const ResetPassword = () => {
         token
       );
       if (success) {
-        toast.success(message);
+        showToast(message, 'success')
         navigate("/login");
       } else {
-        toast.error(message);
+        showToast(message, 'error')
       }
     } catch (error) {
       console.error(error);

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ClipLoader } from 'react-spinners'; // Optional spinner library
+import { showToast } from "../../../utils/Toast";
 
 const Signup = () => {
   const countries = [
@@ -45,10 +46,13 @@ const Signup = () => {
       console.log("===>", values)
       const { success, message } = await signup(values);
       if (success) {
-        toast.success(message);
+        showToast(message, 'success');
+        // toast.success(message);
         // navigate("/");
       } else {
-        toast.error(message);
+        // toast.error(message);
+        showToast(message, 'error');
+
       }
     },
     validateOnChange: true,

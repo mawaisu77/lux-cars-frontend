@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaImage } from "react-icons/fa6";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import image1 from "../../../assets/User-pics/Subtract.png";
@@ -9,40 +9,51 @@ import { useAuthContext } from "../../../hooks/useAuthContext";
 import { getProfile, updateProfile } from "../../../services/userService";
 import { saveUser } from "../../../utils/storageUtils";
 import { toast } from "react-toastify";
-import { ClipLoader } from 'react-spinners'; // Optional spinner library
+import { ClipLoader } from "react-spinners"; // Optional spinner library
 import PhoneInput from "react-phone-input-2";
-
+import { showToast } from "../../../utils/Toast";
+import { Link } from "react-router-dom";
+import ImageViewer from "react-simple-image-viewer";
 
 const Profile = () => {
   const { token } = useAuthContext();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState(""); 
-  const [documents, setDcuments] = useState([]); 
+  const [phone, setPhone] = useState("");
+  const [documents, setDcuments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const images = documents;
 
+  const openImageViewer = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
 
-  const [loading, setLoading] = useState(false)
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
 
   const fetchProfile = async () => {
     try {
       const response = await getProfile();
-      // const response = await axios.get('http://localhost:8000/api/v1/user/profile', {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
+
       saveUser(response.data);
       const { username, email, address, phone, documents } = response.data;
-      setDcuments(documents)
+      setDcuments(documents);
       setUsername(username);
       setEmail(email);
       setAddress(address);
-      setPhone(phone || ""); 
-      console.log(documents)
-      console.log(documents[0] || [])
-
+      setPhone(phone || "");
+      console.log(documents);
+      console.log(documents[0] || []);
     } catch (error) {
       console.error(error);
-      toast.error("Error fetching profile data");
+      showToast("Error fetching profile data", error);
+      // toast.error("Error fetching profile data");
     }
   };
 
@@ -53,19 +64,17 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true)
-      const profileData = { username, email, address, phone:`+${phone}` };
+      setLoading(true);
+      const profileData = { username, email, address, phone: `+${phone}` };
       const response = await updateProfile(profileData);
-      //  await axios.put('http://localhost:8000/api/v1/user/edit-profile', profileData, {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-      setLoading(false)
+      setLoading(false);
       fetchProfile();
-      toast.success(response.message)
+      showToast(response.message, "success");
     } catch (error) {
-      setLoading(false)
-      console.error(error);
-      toast.error("Error updating profile");
+      setLoading(false);
+      console.log(error);
+      showToast("Error updating profile", "error");
+      // toast.error("Error updating profile");
     }
   };
 
@@ -98,22 +107,22 @@ const Profile = () => {
                   />
 
                   <div className="w-[26vw] h-[4.7vh]">
-                       <PhoneInput
-                        country={"us"}
-                        countryCodeEditable={false}
-                        disableDropdown={true}
-                          buttonStyle={{
-                            background: "white",
-                            borderRight: "0px",
-                          }}
-                          containerClass="  mx-auto border-none  outline-none  p-0 m-0 "
-                          inputStyle={{ width: "100%", height: "4.68vh" }}
-                          inputClass="bg-blue-400 text-black p-0 m-0 border-none rounded outline-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          value={phone}
-                          onChange={(phone) => setPhone(phone)}
-                        />
+                    <PhoneInput
+                      country={"us"}
+                      countryCodeEditable={false}
+                      disableDropdown={true}
+                      buttonStyle={{
+                        background: "white",
+                        borderRight: "0px",
+                      }}
+                      containerClass="  mx-auto border-none  outline-none  p-0 m-0 "
+                      inputStyle={{ width: "100%", height: "4.68vh" }}
+                      inputClass="bg-blue-400 text-black p-0 m-0 border-none rounded outline-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      value={phone}
+                      onChange={(phone) => setPhone(phone)}
+                    />
                   </div>
-               
+
                   <input
                     name="address"
                     placeholder="Address"
@@ -148,15 +157,38 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex w-[28vw] h-[12vh]    ">
-                <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
+
+              <div className="flex w-[3vw] h-[5vh] ">
+                {images.map((src, index) => (
+                  <img
+                    className="w-full h-full cursor-pointer hover:scale-105 duration-200"
+                    src={src}
+                    onClick={() => openImageViewer(index)}
+                    key={index}
+                    style={{ margin: "2px" }}
+                    alt=""
+                  />
+                ))}
+
+                {isViewerOpen && (
+                  <ImageViewer
+                    src={images}
+                    currentIndex={currentImage}
+                    disableScroll={false}
+                    closeOnClickOutside={true}
+                    onClose={closeImageViewer}
+                  />
+                )}
+                {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
                   <img src={documents[0]} />
-                </div>
-                <div className="">
+                </div> */}
+    <div className="ml-10">
                   <div className="flex gap-3 ml-5">
-                    <button className="text-[1vw] w-[6vw] font-urbanist h-[4.25vh] text-black hover:text-white hover:bg-[#343444] rounded-full">
-                      Upload
-                    </button>
+                    <Link to={"/user/documents-upload"}>
+                      <button className="text-[1vw] w-[6vw] font-urbanist h-[4.25vh] text-black hover:text-white hover:bg-[#343444] rounded-full">
+                        Upload
+                      </button>
+                    </Link>
                     <button className="flex text-[1vw] font-urbanist justify-center items-center w-[6vw] h-[4.25vh] text-black hover:text-white hover:bg-[#343444] rounded-full">
                       <RiDeleteBin5Line color="red" />
                       Delete
@@ -168,9 +200,14 @@ const Profile = () => {
                   </p>
                 </div>
               </div>
+           
             </div>
             <button className="flex justify-center items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[12px] lg:text-[0.8vw] text-[#ca0000] rounded-full mt-[3vh]">
-              {loading ? <ClipLoader size={20} color={"#ca0000"} /> : "Update Profile"}    
+              {loading ? (
+                <ClipLoader size={20} color={"#ca0000"} />
+              ) : (
+                "Update Profile"
+              )}
             </button>
           </form>
         </div>

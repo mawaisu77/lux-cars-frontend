@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Header from "../../header/Header/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FileUpload } from 'primereact/fileupload';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -8,10 +8,13 @@ import { FiUploadCloud } from "react-icons/fi";
 import './verification.css';
 import axios from "axios";
 import { getToken } from "../../../utils/storageUtils";
+import { API_BASE_URL } from "../../../services/baseService";
+import { showToast } from "../../../utils/Toast";
 
 const Verification = () => {
   const fileUploadRef = useRef(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const navigate = useNavigate()
 
   const uploadDocuments = async (documentFiles) => {
     documentFiles.forEach(async (file) => {
@@ -19,12 +22,12 @@ const Verification = () => {
       formData.append('documents', file);
 
       try {
-        const response = await axios.post('http://localhost:8000/api/v1/user/upload-documents', formData, {
+        const response = await axios.post(`${API_BASE_URL}user/upload-documents`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${getToken()}`
           },
-          withCredentials: true, // Send credentials (cookies, tokens) with the request
+          withCredentials: true, 
           onUploadProgress: (progressEvent) => {
             const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
             setUploadedFiles((prevFiles) => {
@@ -38,8 +41,6 @@ const Verification = () => {
           }
         });
 
-        // Handle successful upload
-        console.log('Upload successful:', response.data);
 
         setUploadedFiles((prevFiles) => {
           return prevFiles.map(uploadedFile => {
@@ -49,6 +50,11 @@ const Verification = () => {
             return uploadedFile;
           });
         });
+
+        navigate('/user/profile')
+    // Handle successful upload
+    console.log('Upload successful:', response.data);
+
       } catch (error) {
         // Handle error
         console.error('Error uploading documents:', error);
@@ -60,6 +66,8 @@ const Verification = () => {
             return uploadedFile;
           });
         });
+        showToast('error uploading documents', 'error')
+        navigate('/user/profile')
       }
     });
 
