@@ -54,6 +54,7 @@ import logo9 from "../assets/Logo/Frame (8).png"
 
 import client1 from "../assets/About/image (3).png"
 import client2 from "../assets/About/image (4).png"
+import car1 from '../assets/User-pics/IMG (48).png'
 
 
 export const archieved =[
@@ -362,7 +363,7 @@ export const archieved =[
     {
         icon: <BsEyeFill size={25} color='white'/>,
         heading: "Reliability",
-        para: "We pride ourselves on our excellent communication and service. From the moment you contact us to the delivery of your vehicle, we are committed to keeping you informed and satisfied."
+        para: "We pride ourselves on our excellent communication and service. From the moment you  us to the delivery of your vehicle, we are committed to keeping you informed and satisfied."
     },
     {
         icon: <FaPeopleLine size={25} color='white'/>,
@@ -475,4 +476,47 @@ export const testi = [
     designation: "Project Manager",
     image: client2
 },
+];
+
+  export const UserOrder = [
+  {
+    image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Completed",
+  },
+  {
+    image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Cancelled",
+  },
+  {
+    image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Completed",
+  },
+  {
+    image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Shipping",
+  },
+  {
+    image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Completed",
+  },
 ];

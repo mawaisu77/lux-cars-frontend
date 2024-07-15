@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
+import { IoGlobeSharp } from "react-icons/io5";
+
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { HiUsers } from 'react-icons/hi2';
+import { useTranslation } from 'react-i18next';
+import { changeLanguage } from 'i18next';
 
 const Header = () => {
+  const { t } = useTranslation();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -26,24 +33,49 @@ const Header = () => {
                 Delivery Time <TiArrowSortedDown />
               </li>
               <Link to="/About">
-                <li>About</li>
+                <li>{t('navbar.about')}</li>
               </Link>
               <Link to="/Help">
-                <li>Help</li>
+                <li>{t('navbar.help')}</li>
               </Link>
-              <Link to="/ContactUs">
-                <li>Contact</li>
+              <Link to="/contact-us">
+                <li>{t('navbar.contact')}</li>
               </Link>
             </ul>
           </div>
         </div>
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
-          <HiUsers />
-          <Link to="/Login">
+        <div className="relative inline-block text-left">
+      <div>
+
+          <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className='cursor-pointer ' />
+      </div>
+      {dropdownOpen && (
+        <div className="origin-top-right absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            <button
+              onClick={() => changeLanguage('en')}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
+              English
+            </button>
+            <button
+              onClick={() => changeLanguage('fr')}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
+              French
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+          <Link to="/UserAccount/AllBIds" ><HiUsers /></Link>
+          
+          <Link to="/login">
             <button className='focus:outline-none'>login</button>
           </Link>
           /
-          <Link to="/Signup">
+          <Link to="/signup">
             <button className='focus:outline-none'>sign-up</button>
           </Link>
           <button className='w-[7.333333333333334vw] h-[5.23vh] bg-[#ca0000] text-white rounded-full text-[0.8vw] focus:outline-none'>
@@ -71,14 +103,14 @@ const Header = () => {
             <Link to="/Help" onClick={toggleMenu}>
               <li>Help</li>
             </Link>
-            <Link to="/ContactUs" onClick={toggleMenu}>
+            <Link to="/contact-us" onClick={toggleMenu}>
               <li>Contact</li>
             </Link>
             <div className='flex flex-col items-center gap-4'>
-              <Link to="/Login" onClick={toggleMenu}>
+              <Link to="/login" onClick={toggleMenu}>
                 <button className='focus:outline-none'>login</button>
               </Link>
-              <Link to="/Signup" onClick={toggleMenu}>
+              <Link to="/signup" onClick={toggleMenu}>
                 <button className='focus:outline-none'>sign-up</button>
               </Link>
               <button className='w-[132px] lg:w-[7.333333333333334vw]  h-[32px] lg:h-[5.23vh] bg-[#ca0000] text-white rounded-full lg:text-[0.8vw] focus:outline-none'>

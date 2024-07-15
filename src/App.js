@@ -12,9 +12,17 @@ import Signup from './Components/sign-up/index.js';
  import Header from './Components/header/Header/Header.js';
 import UserAccount from './Components/user-page/index.js';
 import UserLayout from './Components/layouts/UserLayout.jsx';
-import AllBids from './Components/user-page/index.js';
-
-
+ import AllBids from './Components/user-page/user-pages/AllBids.js';
+import Privacy from './Components/privacy/index.js';
+import Term from './Components/term/index.js'; 
+import Loan from './Components/loanapplication/index.js';
+import Profile from './Components/user-page/user-pages/Profile.js'
+import Offers from './Components/user-page/user-pages/Offers.js';
+import Order from './Components/user-page/user-pages/Order.js';
+import Verification from './Components/sign-up/sign-page/Verification.js';
+import VerifyEmail from './Components/verifyEmail/index.js';
+import ResetPassword from './Components/Login/login-page/ResetPassword.js';
+import ForgotPassword from './Components/Login/login-page/ForgotPassword.js';
 function App() {
   return (
      <>
@@ -24,16 +32,26 @@ function App() {
         {/* Define your routes here */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login/>}/>
-          <Route path="/Signup" element={<Signup/>}/>
-          <Route path="/ContactUs" element={<ContactUs/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/reset-password/:token" element={<ResetPassword/>}/>
+          <Route path="/forgot-password" element={<ForgotPassword/>}/>
+          <Route path="/verify-email/:token" element={<VerifyEmail/>}/>
+          <Route path="/user/documents-upload" element={<Verification/>}/>
+
+          <Route path="/contact-us" element={<ContactUs/>}/>
           <Route path="/HowWorks" element={<HowWorks/>}/>
           <Route path="/Help" element={<Help/>}/>
           <Route path="/About" element={<About/>}/>
+          <Route path="/PrivacyPolicies" element={<Privacy/>} />
+          <Route path="/Terms&Conditions" element={<Term/>} />
+          <Route path="/LoanApplication" element={<Loan />} />
 
           <Route path="/UserAccount" element={<UserAccount/>}/>
           <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
-          <Route path="/UserAccount/funds" element={<UserLayout> <div>hello 2nd page</div></UserLayout>}/>
+          <Route path="/user/profile" element={<UserLayout> <Profile/> </UserLayout>}/>
+          <Route path="/UserAccount/Offers" element={<UserLayout> <Offers/> </UserLayout>}/>
+          <Route path="/UserAccount/Order" element={<UserLayout> <Order/> </UserLayout>}/>
 
 
         </Routes>
