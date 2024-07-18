@@ -89,27 +89,27 @@ const Verification = () => {
   };
 
   const customChooseButton = () => (
-    <div className="mx-auto leading-8">
-      <p className="text-left text-[1.16vw] font-urbanist font-semibold">Verify and Start Bidding!</p>
-      <p className="text-left text-[#7a798a] text-[0.9vw]">Submit the photo of your official ID (Passport/License)</p>
-      <div className="w-full h-[15.5vh] my-6 border rounded-xl flex flex-col justify-center items-center">
+    <div className="mx-auto leading-[6vh]   lg:w-[32vw] ">
+      <p className="text-left text-[18px] lg:text-[1.16vw] font-urbanist font-semibold text-black">Verify and Start Bidding!</p>
+      <p className="text-left text-[#7a798a] text-[14px] lg:text-[0.9vw]">Submit the photo of your official ID (Passport/License)</p>
+      <div className="w-full bg-slate-100 h-[15.5vh] my-6 border rounded-xl flex flex-col justify-center items-center">
         <div className="flex justify-center items-center w-[2.6vw] h-[5.4vh] bg-[#f9fafb] rounded-full">
-          <FiUploadCloud color="red" size={25} />
+          <FiUploadCloud color="red" size={30} />
         </div>
-        <p className="text-[#7a798a] text-[0.9vw]"><span className="text-red-600">Click to upload</span> or drag and drop</p>
-        <p className="text-[#7a798a] text-[0.9vw]">SVG, PNG, JPG or GIF (max. 800x400px)</p>
+        <p className="text-[#7a798a] text-[12px] lg:text-[0.9vw]"><span className="text-red-600">Click to upload</span> or drag and drop</p>
+        <p className="text-[#7a798a] text-[12px] lg:text-[0.9vw]">SVG, PNG, JPG or GIF (max. 800x400px)</p>
       </div>
     </div>
   );
 
   const customUploadButton = () => (
-    <button className="flex justify-center items-center text-[1vw] font-urbanist hover:bg-red-600 text-black w-[14vw] h-[6vh] border-2 rounded-lg">
+    <button className="flex justify-center items-center text-[16px] lg:text-[1vw] font-urbanist hover:bg-red-600 text-black w-[140px] lg:w-[14vw] h-[44px] lg:h-[6vh] border-2 rounded-lg">
       Upload
     </button>
   );
 
   const customCancelButton = () => (
-    <button className="flex justify-center items-center text-[1vw] font-urbanist bg-red-600 text-white w-[14vw] h-[6vh] border-2 rounded-lg">
+    <button className="flex justify-center lg:ml-[4.7vw] items-center text-[16px] lg:text-[1vw] font-urbanist bg-red-600 text-white w-[140px] lg:w-[14vw] h-[44px] lg:h-[6vh] border-2 rounded-lg">
       Cancel
     </button>
   );
@@ -131,26 +131,26 @@ const Verification = () => {
           </div>
         </div>
       </div>
-      <div className="h-[730px] lg:h-[700px] w-full lg:w-[36.1] mx-auto">
-        <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">Documents</div>
-        <div className="max-w-[500px] mx-auto ">
+      <div className=" h-[600px] lg:h-[85vh]  w-[36.1] mx-auto">
+        <div className="mt-[8.6vh]  text-[36px] lg:text-[2vw] font-bold font-urbanist">Documents</div>
+        <div className="w-[342px] lg:w-[37vw] h-[43vh]   mx-auto leading-10 ">
           <FileUpload 
-          className="bg-blue-400  "
+          className="  "
             ref={fileUploadRef}
-            headerClassName=" "
-            contentClassName="overflow-y-scroll "
+            headerClassName=" w-[370px] lg:w-[37vw] lg:h-[50vh]  mt-[30px] bg-white mx-auto "
+            contentClassName="overflow-y-scroll  "
             customUpload={true}
             multiple
             uploadHandler={documentUploadHandler}
-            emptyTemplate={<p className="m-0">Drag and drop files to here to upload.</p>}
+            // emptyTemplate={<p className="m-0 text-[1vw]">Drag and drop files to here to upload.</p>}
             chooseLabel={customChooseButton()}
-            chooseOptions={{ icon: '.', className: 'custom-choose-btn w-full' }}
-            uploadLabel={customUploadButton()}
+            chooseOptions={{ icon: '.', className: 'custom-choose-btn ' }}
+            uploadLabel={customUploadButton() }
             uploadOptions={{ icon: '.', className: 'custom-upload-btn' }}
             cancelLabel={customCancelButton()}
             cancelOptions={{ icon: '.', className: 'custom-cancel-btn' }}
           />
-          <div className="h-[200px] overflow-y-scroll">
+          <div className="  overflow-y-scroll">
 
           {uploadedFiles.map(({ name, size, progress, preview }) => (
             <div key={name} className="mt-4 ">
@@ -163,7 +163,7 @@ const Verification = () => {
                     <span className="text-base font-medium text-red-700 dark:text-white">{name}</span>
                     <span className="text-sm font-medium text-red-700 dark:text-white">{progress === 'error' ? 'Error' : `${progress}%`}</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                  <div className="w-full bg-gray-200 rounded-full h-2.5  ">
                     <div className="bg-red-600 h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
                   </div>
                    </div>

@@ -48,7 +48,7 @@ html, body {
   @media (min-width:1024px){  
   .Backgroundimage-Signup{
     background-image: url('../src/assets/BG-Img/IMG\ \(42).png');
-    background-size: 100vw;
+    background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
 
@@ -63,12 +63,12 @@ html, body {
     height: 32.5vh;
   }}
   
-  .back-image-Help{
+  @media (min-width: 1025px){.back-image-Help{
     background-image: url('../src/assets/BG-Img/IMG\ \(30\).png');
-    background-size: 100vw;
+    background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
-  }
+  }}
   @media (min-width: 1025px){.Account-image{
     background-image: url('../src/assets/BG-Img/IMG\ \(43\).png');
     background-size: 100vw;
