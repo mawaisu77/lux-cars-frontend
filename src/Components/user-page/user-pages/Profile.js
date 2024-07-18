@@ -178,7 +178,8 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="flex w-[3vw] h-[5vh] ">
+          <div className="flex ">
+          <div className="flex w-[3vw] h-[5vh]">
                 {images.map((src, index) => (
                   <img
                     className="w-full h-full cursor-pointer hover:scale-105 duration-200"
@@ -202,25 +203,31 @@ const Profile = () => {
                 {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
                   <img src={documents[0]} />
                 </div> */}
-                <div className="ml-20 ">
+              </div>
+
+              <div>
+                <div className="ml-20 bg-red-400">
                   <div className="flex gap-3 ml-5">
-                    <Link to={"/user/documents-upload"}>
-                      <button className="text-[1vw] w-[6vw] font-urbanist h-[4.25vh] text-black hover:text-white hover:bg-[#343444] rounded-full">
-                        Upload
-                      </button>
-                    </Link>
-                    <button className="flex text-[1vw] font-urbanist justify-center items-center w-[6vw] h-[4.25vh] text-black hover:text-white hover:bg-[#343444] rounded-full">
+                    {documents.length === 2 && (
+                      <Link to={"/user/documents-upload"}>
+                        <button className="text-[1vw] w-[6vw] font-urbanist h-[4.25vh] text-black hover:text-white hover:bg-[#343444] rounded-full">
+                          Upload
+                        </button>
+                      </Link>
+                    )}
+
+                    {/* <button className="flex text-[1vw] font-urbanist justify-center items-center w-[6vw] h-[4.25vh] text-black hover:text-white hover:bg-[#343444] rounded-full">
                       <RiDeleteBin5Line color="red" />
                       Delete
-                    </button>
+                    </button> */}
                   </div>
-                  <p className="text-[0.9vw] text-[#737a99] font-urbanist ml-5">
+                  <p className="text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
                     Images must be .png or .jpg format. Min size 120x120px
                     (avatar)
                   </p>
                 </div>
               </div>
-
+          </div>
             </div>
             <button className="flex justify-center items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[12px] lg:text-[0.8vw] text-[#ca0000] rounded-full mt-[3vh]">
               {loading ? (
