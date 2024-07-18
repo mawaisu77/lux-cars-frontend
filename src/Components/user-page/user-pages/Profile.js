@@ -215,7 +215,7 @@ const Profile = () => {
                             </button>
                           </Link>
                           <p className="text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
-                            Images must be .png or .jpg format. Min size
+                            Images must be .png or .jpg format Min size
                             120x120px (avatar)
                           </p>
                         </div>
