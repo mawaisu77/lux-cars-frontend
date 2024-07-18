@@ -58,7 +58,7 @@ html, body {
 @media (min-width: 1025px){.Backgroundimage-How{
 
     background-image: url('../src/assets/BG-Img/IMG\ \(29\).png');
-    background-size: 100vw;
+    background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
   }}

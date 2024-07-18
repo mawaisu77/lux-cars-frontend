@@ -82,9 +82,9 @@ const Navbar = () => {
           <Link to="/UserAccount/Offers">
             <p className={`cursor-pointer ${getLinkStyle('/UserAccount/Offers')}`}>OFFERS</p>
           </Link>
-          <Link to="/UserAccount/PARTS">
+          {/* <Link to="/UserAccount/PARTS">
             <p className={`cursor-pointer ${getLinkStyle('/UserAccount/PARTS')}`}>PARTS</p>
-          </Link>
+          </Link> */}
           <Link to="/user/profile">
             <p className={`cursor-pointer ${getLinkStyle('/UserAccount/Profile')}`}>MY PROFILE</p>
           </Link>

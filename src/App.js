@@ -23,6 +23,8 @@ import Verification from './Components/sign-up/sign-page/Verification.js';
 import VerifyEmail from './Components/verifyEmail/index.js';
 import ResetPassword from './Components/Login/login-page/ResetPassword.js';
 import ForgotPassword from './Components/Login/login-page/ForgotPassword.js';
+import UploadVehiclePage from './Components/upload-vehicle/index.js';
+import Funds from './Components/user-page/user-pages/Funds.js';
 function App() {
   return (
      <>
@@ -46,13 +48,14 @@ function App() {
           <Route path="/PrivacyPolicies" element={<Privacy/>} />
           <Route path="/Terms&Conditions" element={<Term/>} />
           <Route path="/LoanApplication" element={<Loan />} />
+          <Route path="/hi" element={<UploadVehiclePage />} />
 
           <Route path="/UserAccount" element={<UserAccount/>}/>
           <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
           <Route path="/user/profile" element={<UserLayout> <Profile/> </UserLayout>}/>
           <Route path="/UserAccount/Offers" element={<UserLayout> <Offers/> </UserLayout>}/>
           <Route path="/UserAccount/Order" element={<UserLayout> <Order/> </UserLayout>}/>
-
+          <Route path="/UserAccount/Funds" element={<UserLayout> <Funds/> </UserLayout>}/>
 
         </Routes>
         {/* Include the Footer component so it appears on all pages */}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
 import { IoGlobeSharp } from "react-icons/io5";
@@ -14,19 +14,20 @@ const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <div className='border-b w-full '>
+    <div className='border-b w-full z-50 '>
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>
         <div className='flex items-center gap-4'>
           <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
           <div className='hidden lg:flex'>
-            <ul className='flex gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 text-[#7a798a]'>
-              <Link to="/HowWorks">
+          <ul className={`flex gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>              <Link to="/HowWorks">
                 <li>How it works</li>
               </Link>
               <li className='flex items-center'>

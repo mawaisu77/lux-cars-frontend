@@ -7,7 +7,7 @@ import 'primereact/resources/primereact.min.css';
 import { FiUploadCloud } from "react-icons/fi";
 import './verification.css';
 import axios from "axios";
-import { getToken } from "../../../utils/storageUtils";
+import { getToken, getUser } from "../../../utils/storageUtils";
 import { API_BASE_URL } from "../../../services/baseService";
 import { showToast } from "../../../utils/Toast";
 
@@ -51,7 +51,7 @@ const Verification = () => {
           });
         });
 
-        navigate('/user/profile')
+
     // Handle successful upload
     console.log('Upload successful:', response.data);
 

@@ -141,15 +141,35 @@ const Profile = () => {
                         Documentation
                       </p>
                       <p className="text-[1vw] font-urbanist font-semibold">
-                        lorem Ipsum
+                        {username}
                       </p>
                     </div>
                   </div>
-                  <img src={bar} className="w-[15vw] my-2" />
-                  <div className="flex justify-between ">
-                    <div className="flex">
+
+                  <div className="">
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
+                      <div
+                        className={`bg-red-600 h-2.5 rounded-full dark:bg-red-500 ${
+                          documents.length === 0 || null
+                            ? "w-0"
+                            : documents.length === 1
+                            ? "w-[50%]"
+                            : "w-[100%]"
+                        }`}
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-end">
+                    <div className="flex gap-x-2">
                       <img src={bars} />
-                      <p className="text-red-500">+15%</p>
+                      <p className="text-red-500 ">
+                        {documents.length === 0 || null
+                          ? "0%"
+                          : documents.length === 1
+                          ? "50%"
+                          : "completed"}
+                      </p>
                     </div>
                     <div>
                       <img src={icon7} />
@@ -182,7 +202,7 @@ const Profile = () => {
                 {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
                   <img src={documents[0]} />
                 </div> */}
-    <div className="ml-10">
+                <div className="ml-20 ">
                   <div className="flex gap-3 ml-5">
                     <Link to={"/user/documents-upload"}>
                       <button className="text-[1vw] w-[6vw] font-urbanist h-[4.25vh] text-black hover:text-white hover:bg-[#343444] rounded-full">
@@ -200,7 +220,7 @@ const Profile = () => {
                   </p>
                 </div>
               </div>
-           
+
             </div>
             <button className="flex justify-center items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[12px] lg:text-[0.8vw] text-[#ca0000] rounded-full mt-[3vh]">
               {loading ? (
