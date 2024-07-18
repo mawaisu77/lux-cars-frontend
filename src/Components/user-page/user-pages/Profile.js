@@ -207,7 +207,7 @@ const Profile = () => {
                 <div>
                   <div className="ml-20">
                     <div className="flex gap-3 ml-5">
-                      {documents.length === 2 && (
+                      {documents.length < 2 && (
                         <div className="flex flex-col gap-y-2">
                           <Link to={"/user/documents-upload"}>
                             <button className="text-[1vw] w-[6vw] font-urbanist h-[4.25vh] text-white hover:text-white bg-[#343444] rounded-full">
