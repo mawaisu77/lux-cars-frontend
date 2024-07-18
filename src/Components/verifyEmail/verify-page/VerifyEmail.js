@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../../../services/baseService';
 
 const Verify = () => {
   const { token } = useParams();
@@ -10,7 +11,7 @@ const Verify = () => {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/v1/auth/verify-email/${token}`);
+        const response = await axios.get(`${API_BASE_URL}/auth/verify-email/${token}`);
         setMessage(response.data.message);
        navigate('/login');
       } catch (error) {
