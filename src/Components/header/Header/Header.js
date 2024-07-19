@@ -70,14 +70,14 @@ const Header = () => {
         </div>
       )}
     </div>
-          <Link to="/UserAccount/AllBIds" ><HiUsers /></Link>
+          <Link to="/UserAccount/AllBIds" className={` ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} ><HiUsers/></Link>
           
           <Link to="/login">
-            <button className='focus:outline-none'>login</button>
+            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>login</button>
           </Link>
           /
           <Link to="/signup">
-            <button className='focus:outline-none'>sign-up</button>
+            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>sign-up</button>
           </Link>
           <button className='w-[7.333333333333334vw] h-[5.23vh] bg-[#ca0000] text-white rounded-full text-[0.8vw] focus:outline-none'>
             Try Demo

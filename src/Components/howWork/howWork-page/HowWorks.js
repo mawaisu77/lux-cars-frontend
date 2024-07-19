@@ -11,7 +11,7 @@ const HowWorks = () => {
   return (
     <>
       <div className="Backgroundimage-How relative">
-        <div className="absolute w-[100%] h-[100%] bg-black opacity-50 z-20" />
+        {/* <div className="absolute w-[100%] h-[100%] bg-black opacity-50 z-20" /> */}
         <Header className="" />
 
         <div className="hidden lg:block">
