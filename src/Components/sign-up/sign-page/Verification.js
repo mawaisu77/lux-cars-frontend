@@ -8,8 +8,8 @@ import { FiUploadCloud } from "react-icons/fi";
 import './verification.css';
 import axios from "axios";
 import { getToken, getUser } from "../../../utils/storageUtils";
-import { API_BASE_URL } from "../../../services/baseService";
 import { showToast } from "../../../utils/Toast";
+import { API_BASE_URL } from "../../../services/baseService";
 
 const Verification = () => {
   const fileUploadRef = useRef(null);
@@ -27,7 +27,6 @@ const Verification = () => {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${getToken()}`
           },
-          withCredentials: true, 
           onUploadProgress: (progressEvent) => {
             const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
             setUploadedFiles((prevFiles) => {
@@ -66,6 +65,7 @@ const Verification = () => {
             return uploadedFile;
           });
         });
+        console.log(error)
         showToast('error uploading documents', 'error')
         navigate('/user/profile')
       }
