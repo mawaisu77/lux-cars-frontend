@@ -17,64 +17,59 @@ const Verification = () => {
   const navigate = useNavigate()
 
   const uploadDocuments = async (documentFiles) => {
-    documentFiles.forEach(async (file) => {
-      let formData = new FormData();
+    let formData = new FormData();
+    documentFiles.forEach(file => {
       formData.append('documents', file);
-
-      try {
-        const response = await axios.post(`${API_BASE_URL}user/upload-documents`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${getToken()}`
-          },
-          onUploadProgress: (progressEvent) => {
-            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            setUploadedFiles((prevFiles) => {
-              return prevFiles.map(uploadedFile => {
-                if (uploadedFile.name === file.name) {
-                  return { ...uploadedFile, progress };
-                }
-                return uploadedFile;
-              });
-            });
-          }
-        });
-
-
-        setUploadedFiles((prevFiles) => {
-          return prevFiles.map(uploadedFile => {
-            if (uploadedFile.name === file.name) {
-              return { ...uploadedFile, progress: 100 };
-            }
-            return uploadedFile;
-          });
-        });
-
-
-    // Handle successful upload
-    console.log('Upload successful:', response.data);
-
-      } catch (error) {
-        // Handle error
-        console.error('Error uploading documents:', error);
-        setUploadedFiles((prevFiles) => {
-          return prevFiles.map(uploadedFile => {
-            if (uploadedFile.name === file.name) {
-              return { ...uploadedFile, progress: 'error' };
-            }
-            return uploadedFile;
-          });
-        });
-        console.log(error)
-        showToast('error uploading documents', 'error')
-        navigate('/user/profile')
-      }
     });
-
+  
+    try {
+      const response = await axios.post(`${API_BASE_URL}user/upload-documents`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${getToken()}`
+        },
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setUploadedFiles(prevFiles => {
+            return prevFiles.map(uploadedFile => ({
+              ...uploadedFile,
+              progress
+            }));
+          });
+        }
+      });
+  
+      setUploadedFiles(prevFiles => {
+        return prevFiles.map(uploadedFile => ({
+          ...uploadedFile,
+          progress: 100
+        }));
+      });
+  
+      // Handle successful upload
+      console.log('Upload successful:', response.data);
+      navigate('/user/profile');
+      showToast('Document uploaded successfully', 'success');
+    } catch (error) {
+      // Handle error
+      console.error('Error uploading documents:', error);
+      setUploadedFiles(prevFiles => {
+        return prevFiles.map(uploadedFile => ({
+          ...uploadedFile,
+          progress: 'error'
+        }));
+      });
+      showToast('Error uploading documents', 'error');
+      navigate('/user/profile');
+    }
+  
     if (fileUploadRef.current) {
       fileUploadRef.current.clear();
     }
   };
+  
+
+  
   const documentUploadHandler = ({ files }) => {
     const newFiles = Array.from(files).map(file => ({
       file,
@@ -83,13 +78,13 @@ const Verification = () => {
       progress: 0,
       preview: URL.createObjectURL(file) // Create a preview URL for the image
     }));
-
+  
     setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-    uploadDocuments(files);
+    uploadDocuments(Array.from(files));
   };
 
   const customChooseButton = () => (
-    <div className="mx-auto leading-[6vh]   lg:w-[32vw] ">
+    <div className="mx-auto leading-[6vh] lg:w-[32vw] ">
       <p className="text-left text-[18px] lg:text-[1.16vw] font-urbanist font-semibold text-black">Verify and Start Bidding!</p>
       <p className="text-left text-[#7a798a] text-[14px] lg:text-[0.9vw]">Submit the photo of your official ID (Passport/License)</p>
       <div className="w-full bg-slate-100 h-[15.5vh] my-6 border rounded-xl flex flex-col justify-center items-center">
@@ -115,7 +110,7 @@ const Verification = () => {
   );
 
   return (
-    <>
+    <div className="">
       <div className="Backgroundimage-Signup">
         <Header textColor="text-white" />
         <div className="hidden lg:block">
@@ -131,7 +126,7 @@ const Verification = () => {
           </div>
         </div>
       </div>
-      <div className=" h-[600px] lg:h-[85vh]  w-[36.1] mx-auto">
+      <div className=" lg:h-[85vh] bg-red-400 mb-52 w-[36.1vw] mx-auto ">
         <div className="mt-[8.6vh]  text-[36px] lg:text-[2vw] font-bold font-urbanist">Documents</div>
         <div className="w-[342px] lg:w-[37vw] h-[43vh]   mx-auto leading-10 ">
           <FileUpload 
@@ -172,11 +167,11 @@ const Verification = () => {
               </div>
             </div>
           ))}
-                    </div>
+      </div>
 
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

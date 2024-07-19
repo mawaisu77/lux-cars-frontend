@@ -80,7 +80,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="w-[74vw] h-[53vh] mx-auto  mt-[50px]">
+      <div className="w-[74vw] h-[53vh] mx-auto mt-[50px] dark:bg-slate-800">
         <div className="text-left text-[2.3vw] font-urbanist font-bold">
           Profile Info
         </div>
@@ -149,7 +149,7 @@ const Profile = () => {
                   <div className="">
                     <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
                       <div
-                        className={`bg-red-600 h-2.5 rounded-full dark:bg-red-500 ${
+                        className={`bg-red-600 h-2.5 rounded-full ${
                           documents.length === 0 || null
                             ? "w-0"
                             : documents.length === 1
@@ -179,7 +179,7 @@ const Profile = () => {
               </div>
 
               <div className="flex">
-                <div className={`bg-red-400 w-[3vw] h-[5vh] ${images.length > 0 ? 'flex':'hidden'}`}>
+                <div className={`w-[3vw] h-[5vh] ${images.length > 0 ? 'flex':'hidden'}`}>
                   {images.map((src, index) => (
                     <img
                       className="w-full h-full cursor-pointer hover:scale-105 duration-200"
@@ -208,7 +208,7 @@ const Profile = () => {
 
                   {
                     images.length === 0 && (<>
-                        <div className="bg-red-500 h-20 w-20">
+                        <div className="h-20 w-20">
                                       <img src={avatar} className="wifull h-full object-cover" alt="avatar-img"/>
                           </div>
 
