@@ -8,19 +8,28 @@ import { TiArrowSortedDown } from 'react-icons/ti';
 import { HiUsers } from 'react-icons/hi2';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
+import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useLogout } from '../../../hooks/useLogout';
 
 const Header = () => {
   const { t } = useTranslation();
 
+  const {user} = useAuthContext()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
+  const {logout} = useLogout()
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLogout = () => {
+    logout()
+  };
+  
   return (
     <div className='border-b w-full z-50 '>
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>
@@ -72,6 +81,9 @@ const Header = () => {
     </div>
           <Link to="/UserAccount/AllBIds" ><HiUsers /></Link>
           
+          {
+            !user ? (
+            <>
           <Link to="/login">
             <button className='focus:outline-none'>login</button>
           </Link>
@@ -79,6 +91,13 @@ const Header = () => {
           <Link to="/signup">
             <button className='focus:outline-none'>sign-up</button>
           </Link>
+            </>) : (
+              <>
+            <button className='focus:outline-none' onClick={handleLogout}>logout</button>
+              </>
+            )
+          }
+    
           <button className='w-[7.333333333333334vw] h-[5.23vh] bg-[#ca0000] text-white rounded-full text-[0.8vw] focus:outline-none'>
             Try Demo
           </button>
