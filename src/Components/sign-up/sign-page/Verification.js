@@ -59,7 +59,8 @@ const Verification = () => {
           progress: 'error'
         }));
       });
-      showToast('Error uploading documents', 'error');
+      // console.log("backend error", error.response.data.message)
+      showToast( error.response.data.message, 'error');
       navigate('/user/profile');
     }
   
@@ -126,7 +127,7 @@ const Verification = () => {
           </div>
         </div>
       </div>
-      <div className=" lg:h-[85vh] bg-red-400 mb-52 w-[36.1vw] mx-auto ">
+      <div className=" lg:h-[85vh] mb-52 w-[36.1vw] mx-auto ">
         <div className="mt-[8.6vh]  text-[36px] lg:text-[2vw] font-bold font-urbanist">Documents</div>
         <div className="w-[342px] lg:w-[37vw] h-[43vh]   mx-auto leading-10 ">
           <FileUpload 

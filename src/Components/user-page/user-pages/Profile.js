@@ -52,7 +52,7 @@ const Profile = () => {
       console.log(documents[0] || []);
     } catch (error) {
       console.error(error);
-      showToast("Error fetching profile data", error);
+      showToast("Error fetching profile data", "error");
       // toast.error("Error fetching profile data");
     }
   };
@@ -73,6 +73,7 @@ const Profile = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
+      
       showToast("Error updating profile", "error");
       // toast.error("Error updating profile");
     }
@@ -226,8 +227,7 @@ const Profile = () => {
                             </button>
                           </Link>
                           <p className="text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
-                            Images must be .png or .jpg format Min size
-                            120x120px (avatar)
+                            Images must be of your official ID (Passport/License)
                           </p>
                         </div>
                       )}
