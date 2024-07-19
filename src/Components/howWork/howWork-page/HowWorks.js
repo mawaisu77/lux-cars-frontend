@@ -10,26 +10,22 @@ import icon5 from "../../../assets/Order_history.svg";
 const HowWorks = () => {
   return (
     <>
-      <div className="Backgroundimage-How relative">
-        {/* <div className="absolute w-[100%] h-[100%] bg-black opacity-50 z-20" /> */}
-        <Header className="" />
-
-        <div className="hidden lg:block">
-          <div className="w-[15.5] flex flex-col  mt-[5.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">
-              How It Works
-            </div>
-
-            <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist ">
-              <Link to="/">
-                {" "}
-                <button className="hover:text-white  ">Home</button>
-              </Link>
-              /<button className="hover:text-white">How it Works</button>
-            </div>
+     <div className="Backgroundimage-How relative">
+      <Header className="" />
+      <div className="hidden lg:block">
+        <div className="w-[15.5] flex flex-col mt-[5.5vh]">
+          <div className="text-[2.6vw] font-semibold text-white">
+            How It Works
+          </div>
+          <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
+              <button className="hover:text-white">Home</button>
+            </Link>
+            /<button className="hover:text-white">How it Works</button>
           </div>
         </div>
       </div>
+    </div>
 
       <div className=" h-[2510px] lg:h-[150vh] w-full lg:w-[91vw] mx-auto">
         <div className="flex flex-col mx-auto mt-[8.6vh] w-[344px]  lg:w-[33vw]">

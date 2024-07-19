@@ -75,16 +75,16 @@ const Navbar = () => {
         </div>
         <div className='relative w-full lg:w-[47vw] ml-[10px] lg:ml-[23vw] mt-[5px] lg:mt-[17px] text-[20px] lg:text-[1.25vw] font-urbanist font-semibold mx-auto overflow-x-auto no-scrollbar'>
       <div className='flex justify-between items-center w-[530px] lg:w-full'>
-        <Link to="/UserAccount/AllBIds">
+        <Link to="/user/account/all-bids">
           <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/AllBIds')}`}>All Bids</p>
         </Link>
-        <Link to="/UserAccount/FUNDS">
+        <Link to="/user/account/funds">
           <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/FUNDS')}`}>FUNDS</p>
         </Link>
-        <Link to="/UserAccount/Order">
+        <Link to="/user/account/order">
           <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/Order')}`}>ORDERS</p>
         </Link>
-        <Link to="/UserAccount/Offers">
+        <Link to="/user/account/offers">
           <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/Offers')}`}>OFFERS</p>
         </Link>
         <Link to="/user/profile">

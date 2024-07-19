@@ -44,22 +44,22 @@ const Login = () => {
 
   return (
     <>
-      <div className="Backgroundimage-LogIN">
-        <Header className="text-white" />
-        <div className="hidden  lg:block">
-          <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">LogIN</div>
-
-            <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist ">
-              <Link to="/">
-                {" "}
-                <button className="hover:text-white  ">Home</button>
-              </Link>
-              /<button className="hover:text-white">LogIn</button>
-            </div>
+     <div className="Backgroundimage-LogIN ">
+      
+      <Header   className="text-white" />
+      <div   className="hidden lg:block">
+        <div className="w-[15.5] flex flex-col mt-[5.5vh]">
+          <div className="text-[2.6vw] font-semibold text-white">LogIN</div>
+          <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
+              <button className="hover:text-white">Home</button>
+            </Link>
+            /
+            <button className="hover:text-white">LogIn</button>
           </div>
         </div>
       </div>
+    </div>
       <div className=" h-[480px] lg:h-[62vh] w-full  lg:w-[36.1] mx-auto">
         <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">
           Login To LUX CARS

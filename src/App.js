@@ -30,7 +30,7 @@ function App() {
      <>
     <Router>
       <div className="App">
-       
+       {/* <Header/> */}
         {/* Define your routes here */}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -42,20 +42,20 @@ function App() {
           <Route path="/user/documents-upload" element={<Verification/>}/>
 
           <Route path="/contact-us" element={<ContactUs/>}/>
-          <Route path="/HowWorks" element={<HowWorks/>}/>
-          <Route path="/Help" element={<Help/>}/>
-          <Route path="/About" element={<About/>}/>
-          <Route path="/PrivacyPolicies" element={<Privacy/>} />
-          <Route path="/Terms&Conditions" element={<Term/>} />
-          <Route path="/LoanApplication" element={<Loan />} />
+          <Route path="/how-works" element={<HowWorks/>}/>
+          <Route path="/help" element={<Help/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/privacy-policies" element={<Privacy/>} />
+          <Route path="/terms&conditions" element={<Term/>} />
+          <Route path="/loan-application" element={<Loan />} />
           <Route path="/hi" element={<UploadVehiclePage />} />
 
-          <Route path="/UserAccount" element={<UserAccount/>}/>
-          <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
+          <Route path="/user/account" element={<UserAccount/>}/>
+          <Route path="/user/account/all-bids" element={<UserLayout> <AllBids/> </UserLayout>}/>
           <Route path="/user/profile" element={<UserLayout> <Profile/> </UserLayout>}/>
-          <Route path="/UserAccount/Offers" element={<UserLayout> <Offers/> </UserLayout>}/>
-          <Route path="/UserAccount/Order" element={<UserLayout> <Order/> </UserLayout>}/>
-          <Route path="/UserAccount/Funds" element={<UserLayout> <Funds/> </UserLayout>}/>
+          <Route path="/user/account/offers" element={<UserLayout> <Offers/> </UserLayout>}/>
+          <Route path="/user/account/order" element={<UserLayout> <Order/> </UserLayout>}/>
+          <Route path="/user/account/funds" element={<UserLayout> <Funds/> </UserLayout>}/>
 
         </Routes>
         {/* Include the Footer component so it appears on all pages */}

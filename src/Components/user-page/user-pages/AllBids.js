@@ -14,15 +14,15 @@ const AllBids = () => {
 
   return (
     <>
-      <div className='w-[74vw] h-[172vh]  mx-auto mt-[50px]'>
-        <div className='flex justify-between'>
+      <div className='w-full lg:w-[74vw] h-[172vh]  mx-auto mt-[50px]'>
+        <div className='flex flex-col lg:flex-row  bg-slate-100 justify-between'>
           <div className='flex'>
             <input
               type="text"
               placeholder="Search here..."
-              className="w-[15vw] h-[6vh] rounded-l-xl border p-2"
+              className="w-[283px]   lg:w-[15vw] h-[46px] lg:h-[6vh] rounded-l-xl border p-2"
             />
-            <div className="flex w-[3.5vw] h-[6vh] justify-center items-center bg-red-700 rounded-r-xl">
+            <div className="flex w-[60px] lg:w-[3.5vw] h-[46px] lg:h-[6vh] justify-center items-center bg-red-700 rounded-r-xl">
               <GoSearch size={27} color="white" className="cursor-pointer" />
             </div>
           </div>
@@ -30,7 +30,7 @@ const AllBids = () => {
           <div className="relative inline-block text-left text-[0.8vw]">
             <button
               onClick={toggleDropdown}
-              className="w-[6.2vw] h-[6vh] flex items-center justify-center border bg-white"
+              className="w-[100px] lg:w-[6.2vw] h-[46px] text-[15px] lg:h-[6vh] flex items-center justify-center border bg-white"
             >
               Sort By
               <RiArrowDropDownLine className="cursor-pointer" />
