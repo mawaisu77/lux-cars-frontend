@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 import ImageViewer from "react-simple-image-viewer";
 
 const Profile = () => {
-  console.log(process.env.API_BASE_URL)
   const { token } = useAuthContext();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

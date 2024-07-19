@@ -9,6 +9,7 @@ import './verification.css';
 import axios from "axios";
 import { getToken, getUser } from "../../../utils/storageUtils";
 import { showToast } from "../../../utils/Toast";
+import { API_BASE_URL } from "../../../services/baseService";
 
 const Verification = () => {
   const fileUploadRef = useRef(null);
@@ -21,7 +22,7 @@ const Verification = () => {
       formData.append('documents', file);
 
       try {
-        const response = await axios.post(`${process.env.API_BASE_URL}user/upload-documents`, formData, {
+        const response = await axios.post(`${API_BASE_URL}user/upload-documents`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${getToken()}`
