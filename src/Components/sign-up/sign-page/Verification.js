@@ -27,7 +27,6 @@ const Verification = () => {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${getToken()}`
           },
-          withCredentials: true, 
           onUploadProgress: (progressEvent) => {
             const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
             setUploadedFiles((prevFiles) => {
