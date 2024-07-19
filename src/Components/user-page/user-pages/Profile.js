@@ -5,6 +5,7 @@ import image1 from "../../../assets/User-pics/Subtract.png";
 import bar from "../../../assets/User-pics/bar.png";
 import bars from "../../../assets/User-pics/bars.png";
 import icon7 from "../../../assets/User-pics/icon (7).png";
+import avatar from "../../../assets/docs.jpg";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { getProfile, updateProfile } from "../../../services/userService";
 import { saveUser } from "../../../utils/storageUtils";
@@ -177,8 +178,8 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="flex ">
-                <div className="flex w-[3vw] h-[5vh]">
+              <div className="flex">
+                <div className={`bg-red-400 w-[3vw] h-[5vh] ${images.length > 0 ? 'flex':'hidden'}`}>
                   {images.map((src, index) => (
                     <img
                       className="w-full h-full cursor-pointer hover:scale-105 duration-200"
@@ -199,13 +200,23 @@ const Profile = () => {
                       onClose={closeImageViewer}
                     />
                   )}
+      
                   {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
                   <img src={documents[0]} />
                 </div> */}
                 </div>
 
+                  {
+                    images.length === 0 && (<>
+                        <div className="bg-red-500 h-20 w-20">
+                                      <img src={avatar} className="wifull h-full object-cover" alt="avatar-img"/>
+                          </div>
+
+                    </>)
+                  }
+            
                 <div>
-                  <div className="ml-20">
+                  <div className="">
                     <div className="flex gap-3 ml-5">
                       {documents.length < 2 && (
                         <div className="flex flex-col gap-y-2">
