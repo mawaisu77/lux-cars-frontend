@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
 import { IoGlobeSharp } from "react-icons/io5";
@@ -13,7 +13,7 @@ import { useLogout } from '../../../hooks/useLogout';
 
 const Header = () => {
   const { t } = useTranslation();
-
+  const navigate = useNavigate()
   const {user} = useAuthContext()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -28,6 +28,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout()
+    navigate('/')
   };
   
   return (
@@ -98,7 +99,7 @@ const Header = () => {
           </Link>
             </>) : (
               <>
-            <button className='focus:outline-none' onClick={handleLogout}>logout</button>
+            <button className={`focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} onClick={handleLogout}>logout</button>
               </>
             )
           }
