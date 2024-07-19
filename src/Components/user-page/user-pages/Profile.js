@@ -5,6 +5,7 @@ import image1 from "../../../assets/User-pics/Subtract.png";
 import bar from "../../../assets/User-pics/bar.png";
 import bars from "../../../assets/User-pics/bars.png";
 import icon7 from "../../../assets/User-pics/icon (7).png";
+import avatar from "../../../assets/docs.jpg";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { getProfile, updateProfile } from "../../../services/userService";
 import { saveUser } from "../../../utils/storageUtils";
@@ -51,7 +52,7 @@ const Profile = () => {
       console.log(documents[0] || []);
     } catch (error) {
       console.error(error);
-      showToast("Error fetching profile data", error);
+      showToast("Error fetching profile data", "error");
       // toast.error("Error fetching profile data");
     }
   };
@@ -72,6 +73,7 @@ const Profile = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
+      
       showToast("Error updating profile", "error");
       // toast.error("Error updating profile");
     }
@@ -79,7 +81,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="w-[74vw] h-[53vh] mx-auto  mt-[50px]">
+      <div className="w-[74vw] h-[53vh] mx-auto mt-[50px] dark:bg-slate-800">
         <div className="text-left text-[2.3vw] font-urbanist font-bold">
           Profile Info
         </div>
@@ -148,7 +150,7 @@ const Profile = () => {
                   <div className="">
                     <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
                       <div
-                        className={`bg-red-600 h-2.5 rounded-full dark:bg-red-500 ${
+                        className={`bg-red-600 h-2.5 rounded-full ${
                           documents.length === 0 || null
                             ? "w-0"
                             : documents.length === 1
@@ -177,8 +179,8 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="flex ">
-                <div className="flex w-[3vw] h-[5vh]">
+              <div className="flex">
+                <div className={`w-[3vw] h-[5vh] ${images.length > 0 ? 'flex':'hidden'}`}>
                   {images.map((src, index) => (
                     <img
                       className="w-full h-full cursor-pointer hover:scale-105 duration-200"
@@ -199,13 +201,23 @@ const Profile = () => {
                       onClose={closeImageViewer}
                     />
                   )}
+      
                   {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
                   <img src={documents[0]} />
                 </div> */}
                 </div>
 
+                  {
+                    images.length === 0 && (<>
+                        <div className="h-20 w-20">
+                                      <img src={avatar} className="wifull h-full object-cover" alt="avatar-img"/>
+                          </div>
+
+                    </>)
+                  }
+            
                 <div>
-                  <div className="ml-20">
+                  <div className="">
                     <div className="flex gap-3 ml-5">
                       {documents.length < 2 && (
                         <div className="flex flex-col gap-y-2">
@@ -215,8 +227,7 @@ const Profile = () => {
                             </button>
                           </Link>
                           <p className="text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
-                            Images must be .png or .jpg format Min size
-                            120x120px (avatar)
+                            Images must be of your official ID (Passport/License)
                           </p>
                         </div>
                       )}

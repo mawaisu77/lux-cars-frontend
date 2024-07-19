@@ -10,6 +10,7 @@ const Footer = () => {
   const footerSections = [
     {
       heading: "Shipping destinations",
+      link: "ahipping-destination",
       items: ["Bremerhaven, DE", "Gdynia, PL", "Rotterdam, NL", "Klaipeda, LT"],
     },
     {
@@ -45,6 +46,7 @@ const Footer = () => {
 
         <div className="flex flex-wrap w-full md:w-[70%] lg:w-auto gap-6 lg:gap-[4.6vw]">
           {footerSections.map((section, index) => (
+            
             <div
               key={index}
               className="font-urbanist flex flex-col gap-4 lg:gap-[0.8vw] text-center md:text-left w-full md:w-[30%] lg:w-auto"

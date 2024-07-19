@@ -61,20 +61,21 @@ const Signup = () => {
 
   return (
     <>
-      <div className="Backgroundimage-Signup">
-        <Header textColor="text-white" />
-        <div className="hidden lg:block">
-          <div className="w-[15.5] flex flex-col mt-[5.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">SignUp</div>
-            <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
-              <Link to="/">
-                <button className="hover:text-white">Home</button>
-              </Link>
-              /<button className="hover:text-white">SignUp</button>
-            </div>
+     <div className="Backgroundimage-Signup">
+      <Header textColor="text-white" />
+      <div className="hidden lg:block">
+        <div className="w-[15.5] flex flex-col mt-[5.5vh]">
+          <div className="text-[2.6vw] font-semibold text-white">SignUp</div>
+          <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
+              <button className="hover:text-white">Home</button>
+            </Link>
+            /
+            <button className="hover:text-white">SignUp</button>
           </div>
         </div>
       </div>
+    </div>
       <div className="h-[730px] lg:h-[85vh] w-full lg:w-[36.1] mx-auto">
         <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">
           Register To LUX CARS

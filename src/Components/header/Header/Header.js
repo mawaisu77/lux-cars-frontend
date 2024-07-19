@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
 import { IoGlobeSharp } from "react-icons/io5";
@@ -8,35 +8,48 @@ import { TiArrowSortedDown } from 'react-icons/ti';
 import { HiUsers } from 'react-icons/hi2';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
+import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useLogout } from '../../../hooks/useLogout';
 
 const Header = () => {
   const { t } = useTranslation();
-
+  const navigate = useNavigate()
+  const {user} = useAuthContext()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
+  const {logout} = useLogout()
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  };
+  
   return (
-    <div className='border-b w-full z-50 '>
+    <div className='border-b border-[#7A798A] w-full z-50 '>
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>
         <div className='flex items-center gap-4'>
+          <Link to="/">
           <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
+          </Link>
           <div className='hidden lg:flex'>
-          <ul className={`flex gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>              <Link to="/HowWorks">
+          <ul className={`flex gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>              
+            <Link to="/how-works">
                 <li>How it works</li>
               </Link>
               <li className='flex items-center'>
                 Delivery Time <TiArrowSortedDown />
               </li>
-              <Link to="/About">
+              <Link to="/about">
                 <li>{t('navbar.about')}</li>
               </Link>
-              <Link to="/Help">
+              <Link to="/help">
                 <li>{t('navbar.help')}</li>
               </Link>
               <Link to="/contact-us">
@@ -49,7 +62,7 @@ const Header = () => {
         <div className="relative inline-block text-left">
       <div>
 
-          <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className='cursor-pointer ' />
+          <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} />
       </div>
       {dropdownOpen && (
         <div className="origin-top-right absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
@@ -70,15 +83,27 @@ const Header = () => {
         </div>
       )}
     </div>
-          <Link to="/UserAccount/AllBIds" ><HiUsers /></Link>
+          <Link to="/user/account/all-bids" className={` ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} ><HiUsers/></Link>
           
+          {
+            !user ? (
+            <>
           <Link to="/login">
-            <button className='focus:outline-none'>login</button>
+            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>login</button>
           </Link>
-          /
+          <div className={`  ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>
+            /
+          </div>
           <Link to="/signup">
-            <button className='focus:outline-none'>sign-up</button>
+            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>sign-up</button>
           </Link>
+            </>) : (
+              <>
+            <button className={`focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} onClick={handleLogout}>logout</button>
+              </>
+            )
+          }
+    
           <button className='w-[7.333333333333334vw] h-[5.23vh] bg-[#ca0000] text-white rounded-full text-[0.8vw] focus:outline-none'>
             Try Demo
           </button>
