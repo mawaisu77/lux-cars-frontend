@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../../header/Header/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLogin } from '../../../hooks/useLogin';
 import { ClipLoader } from 'react-spinners'; 
 import { toast } from "react-toastify";
@@ -10,7 +10,8 @@ import { showToast } from "../../../utils/Toast";
 
 
 const Login = () => {
-
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
@@ -31,7 +32,7 @@ const Login = () => {
       if (success) {
         showToast(message,'success')
         // toast.success(message);
-        navigate('/')
+        navigate(from, { replace: true });
       } else {
         showToast(message,'error')
         // toast.error(message);
