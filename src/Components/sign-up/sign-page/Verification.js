@@ -134,7 +134,8 @@ const Verification = () => {
           className="  "
             ref={fileUploadRef}
             headerClassName=" w-[370px] lg:w-[37vw] lg:h-[50vh]  mt-[30px] bg-white mx-auto "
-            contentClassName="overflow-y-scroll  "
+            contentClassName="overflow-y-scroll"
+            contentStyle={{height:'300px'}}
             customUpload={true}
             multiple
             uploadHandler={documentUploadHandler}
