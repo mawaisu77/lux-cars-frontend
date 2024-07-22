@@ -75,9 +75,7 @@ function App() {
             <Route
               path="/verify-email/:token"
               element={
-                <ProtectedRoute>
                   <VerifyEmail />
-                </ProtectedRoute>
               }
             />
             <Route

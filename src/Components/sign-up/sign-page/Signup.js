@@ -10,16 +10,6 @@ import { ClipLoader } from 'react-spinners'; // Optional spinner library
 import { showToast } from "../../../utils/Toast";
 
 const Signup = () => {
-  const countries = [
-    "USA",
-    "Canada",
-    "UK",
-    "Germany",
-    "France",
-    "Australia",
-    "India",
-  ]; // Add more countries as needed
-  const navigate = useNavigate();
 
   const signupValidationSchema = Yup.object().shape({
     username: Yup.string().required("Full name is required"),

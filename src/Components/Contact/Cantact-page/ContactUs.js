@@ -6,7 +6,7 @@ import image from "../../../assets/IMG (27).png"
 const ContactUs = () => {
   return (
    <>
-   <div className='   back-image '>
+   <div className='back-image '>
 
    <Header className="text-white"/>
   <div className='hidden   lg:block'>
