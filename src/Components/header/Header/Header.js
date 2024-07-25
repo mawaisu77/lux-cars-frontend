@@ -56,6 +56,9 @@ const Header = () => {
               <Link to="/contact-us">
                 <li>{t('navbar.contact')}</li>
               </Link>
+              <Link to={'/upload-car'}>
+          <li>Upload Vehicle</li>
+        </Link>
             </ul>
           </div>
         </div>
@@ -63,9 +66,7 @@ const Header = () => {
         <div className="relative inline-block text-left">
        
       <div className='flex gap-x-4 items-center '>
-       <Link to={'/upload-car'}>
-         <IoCloudUploadOutline />
-        </Link> 
+ 
         
           <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} />
       </div>
@@ -88,7 +89,7 @@ const Header = () => {
         </div>
       )}
     </div>
-          <Link to="/user/account/all-bids" className={` ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} ><HiUsers/></Link>
+          <Link to="/user/account/all-bids" className={` ${isHomePage ? 'text-[#7A798A] block' : 'text-white'}`} ><HiUsers/></Link>
           
           {
             !user ? (
@@ -119,6 +120,7 @@ const Header = () => {
           </button>
         </div>
       </div>
+      
       {isMenuOpen && (
         <div className='lg:hidden'>
           <ul className='flex flex-col items-center gap-4 mt-4 font-urbanist font-bold text-[1rem] text-[#7a798a]'>
@@ -137,6 +139,9 @@ const Header = () => {
             <Link to="/contact-us" onClick={toggleMenu}>
               <li>Contact</li>
             </Link>
+            <Link to='/upload-car' onClick={toggleMenu}>
+          <li>Upload Vehicle</li>
+        </Link>
             <div className='flex flex-col items-center gap-4'>
               <Link to="/login" onClick={toggleMenu}>
                 <button className='focus:outline-none'>login</button>
