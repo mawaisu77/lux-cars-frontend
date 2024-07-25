@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
+import { IoCloudUploadOutline } from "react-icons/io5";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -43,9 +44,9 @@ const Header = () => {
             <Link to="/how-works">
                 <li>How it works</li>
               </Link>
-              <li className='flex items-center'>
+              {/* <li className='flex items-center'>
                 Delivery Time <TiArrowSortedDown />
-              </li>
+              </li> */}
               <Link to="/about">
                 <li>{t('navbar.about')}</li>
               </Link>
@@ -60,8 +61,12 @@ const Header = () => {
         </div>
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
         <div className="relative inline-block text-left">
-      <div>
-
+       
+      <div className='flex gap-x-4 items-center '>
+       <Link to={'/upload-car'}>
+         <IoCloudUploadOutline />
+        </Link> 
+        
           <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} />
       </div>
       {dropdownOpen && (
@@ -120,9 +125,9 @@ const Header = () => {
             <Link to="/how-works" onClick={toggleMenu}>
               <li>How it works</li>
             </Link>
-            <li className='flex items-center'>
+            {/* <li className='flex items-center'>
               Fees
-            </li>
+            </li> */}
             <Link to="/about" onClick={toggleMenu}>
               <li>About</li>
             </Link>
