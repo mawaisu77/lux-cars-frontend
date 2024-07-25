@@ -86,7 +86,7 @@ const Login = () => {
             value={loginFormik.values.email}
           />
           <input
-            type=""
+            type="password"
             id="password"
             name="password"
             className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
