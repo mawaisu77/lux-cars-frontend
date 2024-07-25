@@ -63,7 +63,7 @@ const HowWorks = () => {
           <div className=" w-[370px] flex flex-row-reverse  md:w-[40vw] lg:w-[74vw]  mx-auto mt-[5vh] ">
             <div className=" flex flex-col  lg:flex-row lg:justify-between items-center gap-[2.5vw] w-[186px]  lg:w-[34vw]  h-[380px] lg:h-[20.3vh]  ">
               <div className="flex justify-center  items-center w-[112px] lg:w-[9vw] h-[112px] lg:h-[16.5vh] hover:bg-[#df4949] hover:text-white rounded-3xl shadow-lg">
-                <img src={icon2} className="w-[47px] h-[47px]" />
+                <img src={icon1} className="w-[47px] h-[47px]" />
               </div>
               <div className="text-left w-[127px] lg:w-[30vw] h-[193px] lg:h-[18vh] ">
                 <p className="font-urbanist text-[16px]  lg:text-[1.2vw] font-bold mb-[1.5vh]">
@@ -102,7 +102,7 @@ const HowWorks = () => {
           <div className=" w-[370px] flex flex-row-reverse  md:w-[40vw] lg:w-[74vw]  mx-auto mt-[5vh] ">
             <div className=" flex flex-col  lg:flex-row lg:justify-between items-center gap-[2.5vw] w-[186px]  lg:w-[34vw]  h-[380px] lg:h-[20.3vh]  ">
               <div className="flex justify-center  items-center w-[112px] lg:w-[9vw] h-[112px] lg:h-[16.5vh] hover:bg-[#df4949] hover:text-white rounded-3xl shadow-lg">
-                <img src={icon4} alt="hello" className="w-[47px] h-[47px]" />
+                <img src={icon5} alt="hello" className="w-[47px] h-[47px]" />
               </div>
               <div className="text-left w-[127px] lg:w-[30vw] h-[193px] lg:h-[18vh] ">
                 <p className="font-urbanist text-[16px]  lg:text-[1.2vw] font-bold mb-[1.5vh]">
