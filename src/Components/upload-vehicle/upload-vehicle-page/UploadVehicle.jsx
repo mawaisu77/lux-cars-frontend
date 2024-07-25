@@ -9,8 +9,10 @@ import { getToken } from "../../../utils/storageUtils";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import useGetCarDealer from "../../../hooks/useGetCarDealer";
 import CurrencyInput from "react-currency-input-field";
-import { toast } from "react-toastify";
+import { ClipLoader } from 'react-spinners'; // Optional spinner library
 import { showToast } from "../../../utils/Toast";
+import uploadCarValidation from "../../../utils/validations/upload-car-validation";
+import { API_BASE_URL } from "../../../services/baseService";
 
 const UploadVehicle = () => {
   const { dealerData, dealerLoading, dealerError } = useGetCarDealer(
@@ -18,7 +20,12 @@ const UploadVehicle = () => {
   );
 
   const { user } = useAuthContext();
+
   const option = useMemo(() => countryList().getData(), []);
+
+  const [carErrors, setCarErrors] = useState({});
+
+  const [submitLoading, setDealerLoading] = useState(true);
 
   const [userType, setUserType] = useState("dealer");
   const [selectedOption, setSelectedOption] = useState("Select sales range");
@@ -176,107 +183,110 @@ const UploadVehicle = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("formdtaa", formData);
-      const DealerDetails = new FormData();
-      DealerDetails.append("buyerFeeDetails", formData.buyerFeeDetails);
-      DealerDetails.append("dealershipName", formData.dealershipName);
-      DealerDetails.append("dealershipWebsite", formData.dealershipWebsite);
-      DealerDetails.append(
-        "vehicleSalesEachMonth",
-        formData.vehicleSalesEachMonth
-      );
-      DealerDetails.append("dealershipLicense", formData.dealershipLicense);
+    const newErrors = uploadCarValidation(formData);
+    if (Object.keys(newErrors).length === 0) {
+      // Proceed with form submission
+      console.log("Form submitted successfully", formData);
+    } else {
+      setCarErrors(newErrors);
+      console.log("Form has errors", newErrors);
+    }
 
-      //============================== 2nd data ================================
-      const CarDetails = new FormData();
-      CarDetails.append("vin", formData.carDetails.vin);
-      CarDetails.append("year", formData.carDetails.year);
-      CarDetails.append("make", formData.carDetails.make);
-      CarDetails.append("model", formData.carDetails.model);
-      CarDetails.append("transmission", formData.carDetails.transmission);
-      CarDetails.append("mileage", formData.carDetails.mileage);
-      CarDetails.append("description", formData.carDetails.description);
-      CarDetails.append("modification", formData.carDetails.modification);
-      CarDetails.append(
-        "significantFlaws",
-        formData.carDetails.significantFlaws
-      );
-      CarDetails.append("carLocation", formData.carDetails.carLocation);
-      CarDetails.append("zip", formData.carDetails.zip);
-      CarDetails.append("carTitledAt", formData.carDetails.carTitledAt);
-      CarDetails.append("carTitledInfo", formData.carDetails.carTitledInfo);
-      CarDetails.append("titlesStatus", formData.carDetails.titlesStatus);
-      CarDetails.append("minPrice", formData.carDetails.minPrice);
-      CarDetails.append("referral", formData.carDetails.referral);
+    const DealerDetails = new FormData();
+    DealerDetails.append("buyerFeeDetails", formData.buyerFeeDetails);
+    DealerDetails.append("dealershipName", formData.dealershipName);
+    DealerDetails.append("dealershipWebsite", formData.dealershipWebsite);
+    DealerDetails.append(
+      "vehicleSalesEachMonth",
+      formData.vehicleSalesEachMonth
+    );
+    DealerDetails.append("dealershipLicense", formData.dealershipLicense);
 
+    //============================== 2nd data ================================
+    const CarDetails = new FormData();
+    CarDetails.append("vin", formData.carDetails.vin);
+    CarDetails.append("year", formData.carDetails.year);
+    CarDetails.append("make", formData.carDetails.make);
+    CarDetails.append("model", formData.carDetails.model);
+    CarDetails.append("transmission", formData.carDetails.transmission);
+    CarDetails.append("mileage", formData.carDetails.mileage);
+    CarDetails.append("description", formData.carDetails.description);
+    CarDetails.append("modification", formData.carDetails.modification);
+    CarDetails.append("significantFlaws", formData.carDetails.significantFlaws);
+    CarDetails.append("carLocation", formData.carDetails.carLocation);
+    CarDetails.append("zip", formData.carDetails.zip);
+    CarDetails.append("carTitledAt", formData.carDetails.carTitledAt);
+    CarDetails.append("carTitledInfo", formData.carDetails.carTitledInfo);
+    CarDetails.append("titlesStatus", formData.carDetails.titlesStatus);
+    CarDetails.append("minPrice", formData.carDetails.minPrice);
+    CarDetails.append("referral", formData.carDetails.referral);
 
-      // array fields
-      formData.carDetails.isCarForSale.forEach((item, index) => {
-        CarDetails.append(`isCarForSale[${index}]`, item);
-      });
-      formData.carImages.forEach((image, index) => {
-        CarDetails.append(`carImages`, image);
-      });
+    // array fields
+    formData.carDetails.isCarForSale.forEach((item, index) => {
+      CarDetails.append(`isCarForSale[${index}]`, item);
+    });
+    formData.carImages.forEach((image, index) => {
+      CarDetails.append(`carImages`, image);
+    });
 
-      // =====================================================================================
+    // =====================================================================================
 
-      try {
-        if (!dealerData) {
-          console.log("please...")
-          // If dealer data is available, call both APIs
-          await Promise.all([
-            axios.post(
-              "http://localhost:8000/api/v1/car-dealer/register-car-dealer",
-              DealerDetails,
-              {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                  'Authorization': `Bearer ${getToken()}`
-                },
-              }
-            ),
-            axios.post(
-              "http://localhost:8000/api/v1/local-cars/upload-car",
-              CarDetails,
-              {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                  'Authorization': `Bearer ${getToken()}`
-                },
-              }
-            ),
-          ]);
-        } else {
-          console.log(" =============  else  ==================")
-          // Call the second API
-          await axios.post(
-            "http://localhost:8000/api/v1/local-cars/upload-car",
+    try {
+      if (!dealerData) {
+        console.log("please...");
+        // If dealer data is available, call both APIs
+        await Promise.all([
+          axios.post(
+            `${API_BASE_URL}car-dealer/register-car-dealer`,
+            DealerDetails,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${getToken()}`,
+              },
+            }
+          ),
+          axios.post(
+            `${API_BASE_URL}local-cars/upload-car`,
             CarDetails,
             {
               headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${getToken()}`
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${getToken()}`,
               },
             }
-          );
-        }
-      } catch (error) {
-        console.log(error)
-        showToast("submission failed....")
+          ),
+        ]);
+      } else {
+        console.log(" =============  else  ==================");
+        // Call the second API
+        await axios.post(
+          `${API_BASE_URL}local-cars/upload-car`,
+          CarDetails,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${getToken()}`,
+            },
+          }
+        );
       }
-
-      // const response = await axios.post(
-      //   "http://localhost:8000/api/v1/car-dealer/register-car-dealer",
-      //   DealerDetails,
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${getToken()}`,
-      //     },
-      //   }
-      // );
-      // console.log("success response", response);
-    
-    // Perform form submission (e.g., send data to an API)
+    } catch (error) {
+      if (error.response) {
+        showToast(
+          `Submission failed: ${
+            error.response.data.message || "An error occurred"
+          }`,
+          "error"
+        );
+      } else if (error.request) {
+        // Request was made but no response received
+        console.log("Error request:", error.request);
+        showToast("Submission failed: No response from server", "error");
+      } else {
+        showToast(`Submission failed: ${error.message}`, "error");
+      }
+    }
   };
 
   const handleUploadClick = () => {
@@ -654,8 +664,12 @@ const UploadVehicle = () => {
                 <input
                   type="text"
                   name="vin"
-                  placeholder="Write here..."
-                  className="border py-2 px-4 rounded-lg w-full"
+                  placeholder={`${
+                    carErrors.vin ? carErrors.vin : "Write here.."
+                  } `}
+                  className={`border py-2 px-4 rounded-lg w-full ${
+                    carErrors.vin ? "placeholder-red-600 border-red-600" : ""
+                  }`}
                   value={formData.carDetails.vin}
                   onChange={handleCarDetailsChange}
                 />
@@ -669,8 +683,12 @@ const UploadVehicle = () => {
                 <input
                   type="text"
                   name="year"
-                  placeholder="Write here..."
-                  className="border py-2 px-4 rounded-lg w-full"
+                  placeholder={`${
+                    carErrors.year ? carErrors.year : "Write here.."
+                  } `}
+                  className={`border py-2 px-4 rounded-lg w-full ${
+                    carErrors.year ? "placeholder-red-600 border-red-600" : ""
+                  }`}
                   value={formData.carDetails.year}
                   onChange={handleCarDetailsChange}
                 />
@@ -680,8 +698,12 @@ const UploadVehicle = () => {
                 <input
                   type="text"
                   name="make"
-                  placeholder="Write here..."
-                  className="border py-2 px-4 rounded-lg w-full"
+                  placeholder={`${
+                    carErrors.make ? carErrors.make : "Write here.."
+                  } `}
+                  className={`border py-2 px-4 rounded-lg w-full ${
+                    carErrors.make ? "placeholder-red-600 border-red-600" : ""
+                  }`}
                   value={formData.carDetails.make}
                   onChange={handleCarDetailsChange}
                 />
@@ -691,8 +713,12 @@ const UploadVehicle = () => {
                 <input
                   type="text"
                   name="model"
-                  placeholder="Write here..."
-                  className="border py-2 px-4 rounded-lg w-full"
+                  placeholder={`${
+                    carErrors.model ? carErrors.model : "Write here.."
+                  } `}
+                  className={`border py-2 px-4 rounded-lg w-full ${
+                    carErrors.model ? "placeholder-red-600 border-red-600" : ""
+                  }`}
                   value={formData.carDetails.model}
                   onChange={handleCarDetailsChange}
                 />
@@ -706,7 +732,11 @@ const UploadVehicle = () => {
                 <div className="relative w-full ">
                   <button
                     type="button"
-                    className="border py-2 px-4 rounded-lg w-full text-left"
+                    className={`${
+                      carErrors.transmission
+                        ? "placeholder-red-600 border-red-600 text-red-600"
+                        : "text-black"
+                    }  border py-2 px-4 rounded-lg w-full  text-left`}
                     onClick={() => setTransmissionIsOpen(!transmissionIsOpen)}
                   >
                     {transmission}
@@ -731,8 +761,14 @@ const UploadVehicle = () => {
                 <input
                   type="text"
                   name="mileage"
-                  placeholder="Write here..."
-                  className="border py-2 px-4 rounded-lg w-full"
+                  placeholder={`${
+                    carErrors.mileage ? carErrors.mileage : "Write here.."
+                  } `}
+                  className={`border py-2 px-4 rounded-lg w-full ${
+                    carErrors.mileage
+                      ? "placeholder-red-600 border-red-600"
+                      : ""
+                  }`}
                   value={formData.carDetails.mileage}
                   onChange={handleCarDetailsChange}
                 />
@@ -746,8 +782,16 @@ const UploadVehicle = () => {
                 <input
                   type="text"
                   name="description"
-                  placeholder="For example: sport package, lon range battery, FSD or other important factory installed features."
-                  className="border py-8 px-4 rounded-lg w-full"
+                  placeholder={`${
+                    carErrors.description
+                      ? carErrors.description
+                      : "For example: sport package, lon range battery, FSD or other important factory installed features"
+                  } `}
+                  className={`border py-8 px-4 rounded-lg w-full ${
+                    carErrors.description
+                      ? "placeholder-red-600 border-red-600"
+                      : ""
+                  }`}
                   value={formData.carDetails.description}
                   onChange={handleCarDetailsChange}
                 />
@@ -828,8 +872,12 @@ const UploadVehicle = () => {
                 <input
                   type="text"
                   name="significantFlaws"
-                  placeholder="Please give details..."
-                  className="border py-6 px-4 rounded-lg w-full"
+                  placeholder={`Please give details... `}
+                  className={`border py-6 px-4 rounded-lg w-full ${
+                    carErrors.significantFlaws
+                      ? "placeholder-red-600 border-red-600"
+                      : ""
+                  }`}
                   value={formData.carDetails.significantFlaws}
                   onChange={handleCarDetailsChange}
                   disabled={!selectedOptions.significantFlaws}
@@ -849,7 +897,11 @@ const UploadVehicle = () => {
                 options={option}
                 styles={customStyles}
                 onChange={changeHandler}
-                className="w-full"
+                className={`w-full border ${
+                  carErrors.carLocation
+                    ? "placeholder-red-600 border-red-600 "
+                    : "text-black"
+                }`}
                 placeholder="Select country"
               />
             </div>
@@ -862,8 +914,12 @@ const UploadVehicle = () => {
               <input
                 type="text"
                 name="zip"
-                placeholder="Write here..."
-                className="border py-2 px-4 rounded-lg w-full"
+                placeholder={`${
+                  carErrors.zip ? carErrors.zip : "Write here.."
+                } `}
+                className={`border py-2 px-4 rounded-lg w-full ${
+                  carErrors.zip ? "placeholder-red-600 border-red-600" : ""
+                }`}
                 value={formData.carDetails.zip}
                 onChange={handleCarDetailsChange}
               />
@@ -1000,8 +1056,12 @@ const UploadVehicle = () => {
                 options={titleStatusOptions}
                 styles={customStyles}
                 onChange={titlesStatusHandler}
-                className="w-full"
-                placeholder="Select country"
+                className={`w-full border ${
+                  carErrors.titlesStatus
+                    ? "placeholder-red-600 border-red-600 "
+                    : "text-black"
+                }`}
+                placeholder="Select status"
               />
             </div>
           </div>
@@ -1039,7 +1099,11 @@ const UploadVehicle = () => {
                   name="minPrice"
                   // placeholder="Price in USD"
                   prefix="$"
-                  className="w-full py-2 px-4 border rounded-lg"
+                  className={`border py-6 px-4 rounded-lg w-full ${
+                    carErrors.minPrice
+                      ? "placeholder-red-600 border-red-600"
+                      : ""
+                  }`}
                   defaultValue={0}
                   decimalsLimit={2}
                   value={formData.carDetails.minPrice}
@@ -1120,8 +1184,12 @@ const UploadVehicle = () => {
               <input
                 type="text"
                 name="referral"
-                placeholder="Write here..."
-                className="border py-2 px-4 rounded-lg w-full"
+                placeholder={`${
+                  carErrors.referral ? carErrors.referral : "Write here.."
+                } `}
+                className={`border py-2 px-4 rounded-lg w-full ${
+                  carErrors.referral ? "placeholder-red-600 border-red-600" : ""
+                }`}
                 value={formData.carDetails.referral}
                 onChange={handleCarDetailsChange}
               />

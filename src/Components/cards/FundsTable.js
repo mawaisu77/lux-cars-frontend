@@ -40,12 +40,15 @@ const FundsTable = () => {
                     <p className='text-[#b5b5b5]'>12/26</p>
                   </div>
                 </td>
-                <td className={`px-6 py-4 font-semibold w-[100px] rounded-full ${
+                <td>
+                  <span className={`px-6 py-4 font-semibold w-[100px] rounded-full ${
                   item.status === 'Success' ? 'bg-green-100 text-green-600' :
                   item.status === 'Pending' ? 'bg-yellow-100 text-yellow-600' :
                   'bg-red-100 text-red-600'
                 }`}>
                   {item.status}
+
+                  </span>
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-gray-700'>
                   {item.amount}
