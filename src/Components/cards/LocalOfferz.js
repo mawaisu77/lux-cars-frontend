@@ -13,15 +13,15 @@ import "swiper/css/pagination";
 const LocalOfferz = () => {
   return (
     <>
-      <div className="h-[784px] lg:h-[90vh] w-full lg:w-[98.9vw]   ">
+      <div className="h-[784px] lg:h-[90vh] w-full lg:w-[98.9vw]      ">
         <div className="">
-          <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[9.5vh]">
+          <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[5vh]">
             LocalOfferz
           </div>
-          <hr className="h-1 bg-red-500 mt-[30px] w-20 mx-auto" />
+          <hr className="h-1 bg-red-500 mt-[15px] w-20 mx-auto" />
 
           <div className="relative">
-            <Swiper
+          <Swiper
               slidesPerView={1}
               spaceBetween={80}
               breakpoints={{
@@ -35,9 +35,9 @@ const LocalOfferz = () => {
               navigation={true}
               pagination={{ clickable: true }}
               modules={[Navigation, Pagination]}
-              className="w-full lg:w-[72vw] h-[550px] lg:h-[66vh] mt-[40px]    flex justify-center items-center"
+        className="w-full lg:w-[72vw] h-[550px] lg:h-[66vh] mt-[40px]    flex justify-center items-center"
             >
-              <div className="w-[74vw]  flex justify-center mx-auto gap-[1.3vw] items-center mt-[9vh]">
+              <div className="w-[74vw]  flex justify-center mx-auto gap-[1.3vw] items-center mt-[5vh]">
                 {live.map((card, index) => (
                   <SwiperSlide key={index} className="relative w-[370px]">
                     <div className="w-[327px] bg-white mx-auto lg:w-[17.3vw] h-[442px] lg:h-[54.5vh]  rounded-xl shadow-lg">
@@ -59,7 +59,7 @@ const LocalOfferz = () => {
                           <div className="flex   px-5 pb-[1vh]  ">
                             {/* The following image element is commented out since it's not needed */}
                             {/* <img className="h-[4.7vh] w-[2.5vw]" src={image10} alt="Lot" /> */}
-                            <div className="flex justify-between items-center   px-5  w-full">
+                            <div className="flex justify-between items-center    w-full">
                               <div className="flex flex-col">
                                 <div className="font-urbanist text-[13px] lg:text-[0.75vw] leading-[2vh] text-left">
                                   {card.heading}

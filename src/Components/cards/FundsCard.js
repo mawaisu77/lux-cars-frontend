@@ -25,7 +25,7 @@ const FundsCard = () => {
     },
     {
       icon: <BiSolidWallet color='#ed5f5f' size={20} />,
-      States: "Bit Amount Availble",
+      States: "Bit Amount Available",
       Amount: "$230",
       Lorem: "Lorem Ipsum",
       image: chart3,
@@ -42,25 +42,25 @@ const FundsCard = () => {
   ];
 
   return (
-    <div className='w-[74vw] mx-auto flex justify-between gap-4 mt-[30px]'>
+    <div className='w-full max-w-[1370px] lg:max-w-[74vw] mx-auto flex justify-between gap-4 mt-[30px] overflow-x-auto no-scrollbar px-4'>
       {FundsC.map((fund, index) => (
-        <div key={index} className='relative w-[17vw] h-[27vh] shadow-xl rounded-xl'>
-          <div className='flex  items-center gap-[1vw] p-[1vw]'>
+        <div key={index} className='relative w-[343px]  lg:w-[17vw] h-[270px] lg:h-[27vh] border shadow-xl rounded-xl flex-shrink-0'>
+          <div className='flex items-center gap-4 p-4'>
             <div
-              className='flex justify-center items-center w-[2.8vw] h-[5.9vh] rounded-full'
+              className='flex justify-center items-center w-[55px] lg:w-[2.8vw] h-[55px] lg:h-[5.9vh] rounded-full'
               style={{ backgroundColor: fund.bgColor }}
             >
               {fund.icon}
             </div>
-            <p className='text-[1.3vw] font-urbanist font-semibold'>
+            <p className='text-[21px] lg:text-[1.3vw] font-urbanist font-semibold'>
               {fund.States}
             </p>
           </div>
-          <div className='text-left px-[1vw]'>
-            <p className='text-[1.2vw] font-urbanist font-semibold'>
+          <div className='text-left px-4'>
+            <p className='text-[21px] lg:text-[1.2vw] font-urbanist font-semibold'>
               {fund.Amount}
             </p>
-            <p className='text-[0.78vw] font-urbanist'>
+            <p className='text-[12px] lg:text-[0.78vw] font-urbanist'>
               {fund.Lorem}
             </p>
           </div>
@@ -72,3 +72,4 @@ const FundsCard = () => {
 };
 
 export default FundsCard;
+

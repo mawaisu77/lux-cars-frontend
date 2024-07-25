@@ -31,12 +31,12 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className='h-[800px] lg:h-[38vh] w-[343px] lg:w-[74vw] mt-[7vh] mx-auto bg-[#f8f8f8] rounded-2xl'>
-        <div className='flex flex-col lg:flex-row justify-center lg:justify-between h-[750px] lg:h-[30vh]  bg-[#0000004d] rounded-t-2xl'>
-          <div className='flex flex-col font-urbanist lg:flex-row mt-[4.6vh]   lg:ml-[2.2vw] h-[550px] lg:h-[33vh]   w-full lg:w-[48vw]'>
-            <img src={image1} className='w-[274px] mx-auto lg:w-[15vw] h-[274px] lg:h-[30vh] left-[36px] top-[36px] rounded-xl' />
+      <div className='  w-[343px] md:w-[650px] lg:w-[74vw] mt-[7vh] mx-auto bg-[#f8f8f8] rounded-2xl'>
+        <div className='flex flex-col lg:flex-row justify-center lg:justify-between    bg-[#0000004d] rounded-t-2xl'>
+          <div className='flex flex-col font-urbanist lg:flex-row mt-[4.6vh]   lg:ml-[2.2vw]     w-full lg:w-[48vw]'>
+            <img src={image1} className='w-[274px] md:w-[400px] mx-auto lg:w-[15vw] h-[274px] md:h-[400px] lg:h-[30vh] left-[36px] top-[36px] rounded-xl' />
             <div className='text-left text-[white]  w-[274px] lg:w-[35vw]   mx-auto font-urbanist lg:ml-[2.2vw]'>
-              <h1 className='font-bold font-urbanist text-[36px] lg:text-[2.3vw] leading- text-white'>Joshua Paul</h1>
+              <h1 className='font-bold font-urbanist text-[36px]  lg:text-[2.3vw] leading- text-white'>Joshua Paul</h1>
               <p className='text-[18px] lg:text-[1.3vw] leading-10'>@loremipsum</p>
               <p className='text-[14px] lg:text-[0.82vw] text-[#f8f8f8] py-5 lg:py-0'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati
@@ -49,7 +49,7 @@ const Navbar = () => {
             </div>
           </div>
           <div>
-           <div className='flex flex-col gap-6 lg:gap-0 lg:flex-row justify-center  lg:w-[20vw] ml-9 lg:ml-0  mx-auto lg:items-center'>
+           <div className='flex flex-col gap-6 lg:gap-0 lg:flex-row justify-center py-5  lg:w-[20vw] ml-9 lg:ml-0  mx-auto lg:items-center'>
            <div className='flex flex-row gap-3 lg:mr-[2.5vw] lg:mt-[6vh]'>
               <div className='flex justify-center items-center w-[40px] lg:w-[2.5vw] h-[40px] lg:h-[5.1vh] bg-white rounded-lg'>
                 <FaFacebook size={25} />
@@ -65,7 +65,7 @@ const Navbar = () => {
               </div>
              
             </div>
-            <div className='text-left'>
+            <div className='text-left  '>
             <button className='text-[14px] lg:text-[0.82vw] text-white w-[100px] lg:w-[6.3vw] h-[40px]  lg:h-[5.1vh] lg:mt-[5vh] lg:mr-[1.7vw] border border-white rounded-full'>
                 Create Bid
               </button>
@@ -73,8 +73,8 @@ const Navbar = () => {
             </div>        
            </div>
         </div>
-        <div className='relative w-full lg:w-[47vw] ml-[10px] lg:ml-[23vw] mt-[5px] lg:mt-[17px] text-[20px] lg:text-[1.25vw] font-urbanist font-semibold mx-auto overflow-x-auto no-scrollbar'>
-      <div className='flex justify-between items-center w-[530px] lg:w-full'>
+        <div className='relative w-full lg:w-[47vw] ml-[10px] lg:ml-[23vw] mt-[5px] lg:mt-[17px] text-black text-[20px] lg:text-[1.25vw] font-urbanist font-semibold mx-auto overflow-x-auto no-scrollbar'>
+      <div className='flex justify-between items-center w-[530px] lg:w-full mx-auto'>
         <Link to="/user/account/all-bids">
           <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/AllBIds')}`}>All Bids</p>
         </Link>

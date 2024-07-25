@@ -15,8 +15,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 const Bid = () => {
   return (
     <>
-      <div className="hidden sm:block">
-        <div className="flex w-[74vw] flex-row justify-between mx-auto bgImage tree">
+      <div className="hidden sm:block text-black">
+        <div className="flex w-[74vw]  flex-row justify-between mx-auto bgImage tree">
           <div className="mx-auto w-[30vw] h-[73vh] mt-[7vh]">
             <h2 className="text-left font-urbanist lg:text-[3.125vw] font-bold leading-tight my-[2vh]">
               <span className="text-outline">Bid, Buy, Drive</span> Online Car
@@ -39,7 +39,7 @@ const Bid = () => {
           </div>
           
 
-          <div className="relative w-[90%] h-[75vh]">
+          <div className="relative w-[90%] h-[75vh] text-black">
             <div className="absolute bg-white opacity-80 rounded-xl shadow-xl w-[9.2vw] right-[5vw] top-[7vh] h-[20vh]">
                      <div className="flex flex-col p-2  items-center ">
                          <p className="font-bold text-[26px] md:text-[32px] lg:text-[48px]">

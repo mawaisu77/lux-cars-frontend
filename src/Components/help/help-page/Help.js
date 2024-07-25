@@ -72,9 +72,8 @@ const Help = () => {
                     <form className="space-y-4">
                         <div className="flex justify-between items-center border rounded-xl my-[5vh]">
                             <input
-                                type="email"
-                                id="email"
-                                name="email"
+                                type="text"
+                                 
                                 className="sm:w-[342px] md:w-[500px] lg:w-[36vw] h-[6.23vh] rounded-l-xl pl-2 text-[18px] lg:text-[1vw]"
                                 placeholder="Type your question here"
                             />
