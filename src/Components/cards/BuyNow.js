@@ -15,10 +15,10 @@ import "swiper/css/pagination";
     <>
       <div className="h-[784px] lg:h-[90vh] w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
         <div className="">
-          <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[9.5vh]">
+          <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[5vh]">
             Buy Now
           </div>
-          <hr className="h-1 bg-red-500 mt-[30px] w-20 mx-auto" />
+          <hr className="h-1 bg-red-500 mt-[15px] w-20 mx-auto" />
 
           <div className="relative">
             <Swiper
@@ -51,7 +51,7 @@ import "swiper/css/pagination";
                       <div>
                         <div className="flex justify-between px-5 lg:px-[1vw] font-urbanist text-[18px] lg:text-[1.17vw] font-bold py-3 leading-[3vh] text-left">
                           "{card.Car}"
-                          <button className="flex justify-center text-center mr-5 lg:mr-[0.5vw] mt-[0.75vw] text-[12px] lg:text-[0.78vw] h-[24px] lg:h-[3vh]  w-[43px] lg:w-[2.7vw] border text-white bg-[#ca0000] rounded-lg">
+                          <button className="flex justify-center text-center mr-5 lg:mr-[0.5vw]  text-[12px] lg:text-[0.78vw] h-[24px] lg:h-[3vh]  w-[43px] lg:w-[2.7vw] border text-white bg-[#ca0000] rounded-lg">
                             BID
                           </button>
                         </div>
@@ -81,7 +81,7 @@ import "swiper/css/pagination";
                             </div>
                             
                           </div>
-                          <button className=' w-[270px] lg:w-[15vw]  rounded-xl h-[40px] lg: h-[6vh] text-[16px] lg:text-[1.2vw] bg-[#7a798a] text-white font-urbanist mt-3' >
+                          <button className=' w-[270px] lg:w-[15vw]  rounded-xl h-[40px] lg:h-[5.5vh] text-[16px] lg:text-[1.04vw] bg-[#7a798a] text-white font-urbanist mt-3' >
                             {card.button}
                           </button>
                         </div>

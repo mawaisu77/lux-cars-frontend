@@ -117,16 +117,16 @@ const Header = () => {
       {isMenuOpen && (
         <div className='lg:hidden'>
           <ul className='flex flex-col items-center gap-4 mt-4 font-urbanist font-bold text-[1rem] text-[#7a798a]'>
-            <Link to="/HowWorks" onClick={toggleMenu}>
+            <Link to="/how-works" onClick={toggleMenu}>
               <li>How it works</li>
             </Link>
             <li className='flex items-center'>
-              Delivery Time <TiArrowSortedDown />
+              Fees
             </li>
-            <Link to="/About" onClick={toggleMenu}>
+            <Link to="/about" onClick={toggleMenu}>
               <li>About</li>
             </Link>
-            <Link to="/Help" onClick={toggleMenu}>
+            <Link to="/help" onClick={toggleMenu}>
               <li>Help</li>
             </Link>
             <Link to="/contact-us" onClick={toggleMenu}>

@@ -81,21 +81,21 @@ const Profile = () => {
 
   return (
     <>
-      <div className="w-[74vw] h-[53vh] mx-auto mt-[50px] dark:bg-slate-800">
-        <div className="text-left text-[2.3vw] font-urbanist font-bold">
+      <div className="w-[344px] md:w-[650px]  lg:w-[74vw] mx-auto    mt-[50px]  text-black ">
+        <div className="text-left text-[36px] lg:text-[2.3vw] font-urbanist font-bold">
           Profile Info
         </div>
-        <div className="flex">
+        <div className="flex flex-col">
           <form className="" onSubmit={handleSubmit}>
             <div className="text-left  w-full ">
-              <div className="flex">
-                <div className="flex flex-wrap h-[13vh] gap-5 ">
+              <div className="flex flex-col lg:flex-row">
+                <div className="flex flex-col lg:flex-row lg:flex-wrap h-[13vh] gap-5 ">
                   <input
                     name="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Full Name"
-                    className="w-[26vw] h-[4.7vh] rounded-lg p-2 border"
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh] rounded-lg p-2 border"
                   />
 
                   <input
@@ -104,10 +104,10 @@ const Profile = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-[26vw] h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
                   />
 
-                  <div className="w-[26vw] h-[4.7vh]">
+                  <div className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]">
                     <PhoneInput
                       country={"us"}
                       countryCodeEditable={false}
@@ -127,21 +127,21 @@ const Profile = () => {
                   <input
                     name="address"
                     placeholder="Address"
-                    className="w-[26vw] h-[4.7vh]  rounded-lg p-2 border"
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
-                <div className=" w-[30vw]  border rounded-lg p-5 ">
+                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[120px] lg:mt-0  border rounded-lg p-5 ">
                   <div className="flex gap-3 my-2">
-                    <div className="flex justify-center items-center bg-red-600 w-[3vw] h-[6vh] rounded-full">
+                    <div className="flex justify-center items-center bg-red-600 w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] rounded-full">
                       <img src={image1} />
                     </div>
                     <div>
-                      <p className="text-[0.9vw]  text-[#9698ab] font-urbanist">
+                      <p className="text-[15px] lg:text-[0.9vw]  text-[#9698ab] font-urbanist">
                         Documentation
                       </p>
-                      <p className="text-[1vw] font-urbanist font-semibold">
+                      <p className="text-[20px] lg:text-[1vw] font-urbanist font-semibold">
                         {username}
                       </p>
                     </div>
@@ -209,7 +209,7 @@ const Profile = () => {
 
                   {
                     images.length === 0 && (<>
-                        <div className="h-20 w-20">
+                        <div className="h-[88px] w-[88px] mt-[60px] lg:mt-0 ">
                                       <img src={avatar} className="wifull h-full object-cover" alt="avatar-img"/>
                           </div>
 
@@ -217,16 +217,16 @@ const Profile = () => {
                   }
             
                 <div>
-                  <div className="">
+                  <div className=" mt-[60px] lg:mt-0">
                     <div className="flex gap-3 ml-5">
                       {documents.length < 2 && (
                         <div className="flex flex-col gap-y-2">
                           <Link to={"/user/documents-upload"}>
-                            <button className="text-[1vw] w-[6vw] font-urbanist h-[4.25vh] text-white hover:text-white bg-[#343444] rounded-full">
+                            <button className="text-[16px] lg:text-[1vw] w-[96px] lg:w-[6vw] font-urbanist h-[46px] lg:h-[4.25vh] text-white hover:text-white bg-[#343444] rounded-full">
                               Upload
                             </button>
                           </Link>
-                          <p className="text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
+                          <p className="text-[14px] lg:text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
                             Images must be of your official ID (Passport/License)
                           </p>
                         </div>
@@ -236,7 +236,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <button className="flex justify-center items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[12px] lg:text-[0.8vw] text-[#ca0000] rounded-full mt-[3vh]">
+            <button className="flex justify-center mb-10 items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[16px] lg:text-[0.8vw] text-[#ca0000] rounded-full mt-[3vh]">
               {loading ? (
                 <ClipLoader size={20} color={"#ca0000"} />
               ) : (

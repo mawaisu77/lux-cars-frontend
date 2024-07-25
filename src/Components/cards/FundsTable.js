@@ -2,63 +2,52 @@ import React from 'react';
 
 const FundsTable = () => {
   const data = [
-    { name: 'Lorem Ipsum', date: '2024-07-10', card: 'Visa', status: 'Completed', amount: '$100' },
+    { name: 'Lorem Ipsum', date: '2024-07-10', card: 'Visa', status: 'Success', amount: '$100' },
     { name: 'Jane Smith', date: '2024-07-09', card: 'MasterCard', status: 'Pending', amount: '$200' },
-    { name: 'Bob Johnson', date: '2024-07-08', card: 'American Express', status: 'Failed', amount: '$300' },
-    { name: 'Alice Brown', date: '2024-07-07', card: 'Visa', status: 'Completed', amount: '$400' },
-    { name: 'Alice Brown', date: '2024-07-07', card: 'Visa', status: 'Completed', amount: '$400' }
+    { name: 'Bob Johnson', date: '2024-07-08', card: 'American Express', status: 'Success', amount: '$300' },
+    { name: 'Alice Brown', date: '2024-07-07', card: 'Visa', status: 'Success', amount: '$400' },
+    { name: 'Alice Brown', date: '2024-07-07', card: 'Visa', status: 'Success', amount: '$400' }
   ];
-
 
   return (
     <div className='w-[80vw] mx-auto mt-8'>
       <div className='overflow-x-auto'>
-        <table className='w-[74vw] text-[1.3vw] '>
-          <thead className=' w-full'>
-            <tr className='text-[1.2vw] font-urbanist font-bold border-b   '>
-              <th className='py-6  '>
-                Name
-              </th>
-              <th className='   '>
-                Date
-              </th>
-              <th className=' '>
-                Card
-              </th>
-              <th className=' '>
-                Status
-              </th>
-              <th className='  '>
-                Amount
-              </th>
+        <table className='w-[1006px] lg:w-[74vw] text-[1.3vw]'>
+          <thead className='w-full text-[20px]'>
+            <tr className='text-[20px] lg:text-[1.2vw] font-urbanist font-bold border-b'>
+              <th className='py-6'>Name</th>
+              <th>Date</th>
+              <th>Card</th>
+              <th>Status</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item, index) => (
-              <tr key={index} className=''>
-                <td className=' py-4   text-gray-700'>
-                  <div>
-                    <p className='text-[1vw]'>lorem ipsum</p>
-                    <p className='text-[1vw] text-[#1f1f2c]'> Subscription</p>
+              <tr key={index} className='text-[20px] h-[46px] lg:text-[1vw]'>
+                <td className='py-4 w-[260px]  text-gray-700'>
+                  <div className='flex flex-col gap-3'>
+                    <p>Lorem Ipsum</p>
+                    <p className='text-[#b5b5b5]'>Subscription</p>
                   </div>
                 </td>
-                <td className='py-4  text-[1vw]  text-gray-700'>
+                <td className='py-4 text-gray-700'>
                   {item.date}
                 </td>
-                <td className=' py-4  text-[1vw] text-gray-700'>
-                   <div>
+                <td className='py-4 text-gray-700'>
+                  <div className='flex flex-col gap-3'>
                     <p>A.Nelson</p>
-                    <p>12/26</p>
-                   </div>
+                    <p className='text-[#b5b5b5]'>12/26</p>
+                  </div>
                 </td>
-                <td className={`px-6 py-4 text-[1vw] font-semibold ${
-                  item.status === 'Completed' ? 'text-green-600' : 
-                  item.status === 'Pending' ? 'text-yellow-600' : 
-                  'text-red-600'
+                <td className={`px-6 py-4 font-semibold w-[100px] rounded-full ${
+                  item.status === 'Success' ? 'bg-green-100 text-green-600' :
+                  item.status === 'Pending' ? 'bg-yellow-100 text-yellow-600' :
+                  'bg-red-100 text-red-600'
                 }`}>
                   {item.status}
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap text-[1vw] text-gray-700'>
+                <td className='px-6 py-4 whitespace-nowrap text-gray-700'>
                   {item.amount}
                 </td>
               </tr>
