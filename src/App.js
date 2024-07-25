@@ -129,51 +129,51 @@ function App() {
             <Route
               path="/user/account/all-bids"
               element={
-                <ProtectedRoute>
+                 <ProtectedRoute>
                   <UserLayout>
                     <AllBids />
                   </UserLayout>
-                </ProtectedRoute>
+                 </ProtectedRoute>
               }
             />
             <Route
               path="/user/profile"
               element={
-                <ProtectedRoute>
+                 <ProtectedRoute>
                 <UserLayout>
                   <Profile />
                 </UserLayout>
-                </ProtectedRoute>
+                 </ProtectedRoute>
               }
             />
             <Route
               path="/user/account/offers"
               element={
-                <ProtectedRoute>
+                 <ProtectedRoute>
                 <UserLayout> 
                   <Offers />
                 </UserLayout>
-                </ProtectedRoute>
+                 </ProtectedRoute>
               }
             />
             <Route
               path="/user/account/order"
               element={
-                <ProtectedRoute>
+                 <ProtectedRoute>
                 <UserLayout>
                   <Order />
                 </UserLayout>
-                </ProtectedRoute>
+                 </ProtectedRoute>
               }
             />
             <Route
               path="/user/account/funds"
               element={
-                <ProtectedRoute>
+                 <ProtectedRoute>
                 <UserLayout>    
                   <Funds />
                 </UserLayout>
-                </ProtectedRoute>
+                 </ProtectedRoute>
               }
             />
           </Routes>

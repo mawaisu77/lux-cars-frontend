@@ -23,37 +23,27 @@ const FeaturedListings = () => {
     <div className='h-[784px] lg:h-[90vh] w-full lg:w-[98.9vw] mt-[5vh] bg-[#f8f8f8]'>
          <div className='flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[9.5vh]'>
            Featured Listings
+           
         
       </div>
+      <hr className="h-1 bg-red-500 mt-[15px] w-20 mx-auto" />
     
     <div className='relative'>
     <Swiper
-         slidesPerView={1}
-          spaceBetween={80}
-          breakpoints={{
-            // when window width is below medium (md) breakpoint
-            640: {
-              slidesPerView: 1,
-            },
-            740: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
-            1440: {
-              slidesPerView: 4,
-            },
-          }}
-          // onSwiper={(swiper) => (swiperRef.current = swiper)}
-          scrollbar={{ draggable: true }}
-          loop={true}
-          navigation={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Navigation, Pagination]}
-          className=" w-full  lg:w-[72vw]   h-[550px] lg:h-[66vh]  mt-[40px] flex justify-center items-center"
+              slidesPerView={1}
+              spaceBetween={80}
+              breakpoints={{
+                640: { slidesPerView: 1 },
+                740: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+                1440: { slidesPerView: 4 },
+              }}
+              scrollbar={{ draggable: true }}
+              loop={true}
+              navigation={true}
+              pagination={{ clickable: true }}
+              modules={[Navigation, Pagination]}
+          className="w-full lg:w-[72vw] h-[550px] lg:h-[66vh] mt-[40px]    flex justify-center items-center"
         >
               {Featured.map((card, index) => (
            <SwiperSlide  className=" relative w-[370px]">
@@ -92,7 +82,7 @@ const FeaturedListings = () => {
                 </div>
                 <div className='text-right'>
                   <p className='text-[#7a798a] text-[13px] lg:text-[0.84vw]'>Potential Savings</p>
-                  <p className='text-[#7a798a] text-[16px] lg:text-[1.5vw] font-semibold'>{card.potentialSavings}</p>
+                  <p className='text-[#7a798a] text-[18px] lg:text-[1.17vw] font-semibold'>{card.potentialSavings}</p>
                 </div>
               </div>
             </div>

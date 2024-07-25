@@ -1,30 +1,43 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import img1 from "../../../assets/Logo/Horizontal0 1.png";
 import { PiFacebookLogoFill } from "react-icons/pi";
-import { FaTwitter } from "react-icons/fa6";
-import { FaGoogle } from "react-icons/fa";
-import { FaTwitch } from "react-icons/fa6";
+import { FaTwitter, FaGoogle, FaTwitch } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 
 const Footer = () => {
   const footerSections = [
     {
       heading: "Shipping destinations",
-      link: "ahipping-destination",
-      items: ["Bremerhaven, DE", "Gdynia, PL", "Rotterdam, NL", "Klaipeda, LT"],
+     items:[
+        { text: "Bremerhaven, DE", link: "/shipping/bremerhaven-de" },
+        { text: "Gdynia, PL", link: "/shipping/gdynia-pl" },
+        { text: "Rotterdam, NL", link: "/shipping/rotterdam-nl" },
+        { text: "Klaipeda, LT", link: "/shipping/klaipeda-lt" },
+      ],
     },
     {
       heading: "Useful Links",
-      items: ["FAQs", "Privacy Policies", "Terms & Conditions", "Reviews"],
+      items: [
+        { text: "FAQs" },
+        { text: "Privacy Policies", link: "/privacy-policies" },
+        { text: "Terms & Conditions", link: "/terms&conditions" },
+        { text: "Reviews", link: "/" },
+      ],
     },
     {
       heading: "Companies",
-      items: ["About us", "contact-us", "Our blogs", "Discover"],
+      items: [
+        { text: "About us", link: "/about" },
+        { text: "Contact us", link: "/contact-us" },
+        { text: "Our blogs", link:"/" },
+        { text: "Discover", link: "/" },
+      ],
     },
   ];
 
   return (
-    <div className="h-full lg:h-[48.5vh] w-full bg-[#f8f8f8]">
+    <div className="h-full lg:h-[48.5vh] w-full bg-[#f8f8f8] text-black">
       <div className="flex flex-wrap gap-6 lg:gap-[4.6vw] w-[90%] lg:w-[79vw] mx-auto pt-[5vh] lg:pt-[8.5vh]">
         <div className="w-full md:w-[30%] lg:w-[15vw]">
           <img
@@ -46,7 +59,6 @@ const Footer = () => {
 
         <div className="flex flex-wrap w-full md:w-[70%] lg:w-auto gap-6 lg:gap-[4.6vw]">
           {footerSections.map((section, index) => (
-            
             <div
               key={index}
               className="font-urbanist flex flex-col gap-4 lg:gap-[0.8vw] text-center md:text-left w-full md:w-[30%] lg:w-auto"
@@ -54,17 +66,32 @@ const Footer = () => {
               <p className="text-[5vw] md:text-[2vw] lg:text-[1.1vw] font-bold">
                 {section.heading}
               </p>
-              {section.items.map((item, idx) => (
-                <p key={idx} className="text-[4vw] md:text-[1.5vw] lg:text-[0.78vw]">
-                  {item}
-                </p>
-              ))}
+              {section.items.map((item, idx) =>
+                typeof item === "string" ? (
+                  <p
+                    key={idx}
+                    className="text-[4vw] md:text-[1.5vw] lg:text-[0.78vw]"
+                  >
+                    {item}
+                  </p>
+                ) : (
+                  <Link
+                    key={idx}
+                    to={item.link}
+                    className="text-[4vw] md:text-[1.5vw] lg:text-[0.78vw] "
+                  >
+                    {item.text}
+                  </Link>
+                )
+              )}
             </div>
           ))}
         </div>
 
         <div className="font-urbanist w-full lg:w-[20vw] flex flex-col gap-4 lg:gap-[0.8vw]">
-          <p className="text-[5vw] md:text-[2vw] lg:text-[1.17vw] font-bold">Subscribe</p>
+          <p className="text-[5vw] md:text-[2vw] lg:text-[1.17vw] font-bold">
+            Subscribe
+          </p>
           <p className="text-[4vw] md:text-[1.5vw] lg:text-[0.9vw] w-full lg:w-[12.5vw] text-center md:text-left">
             Wilczak 20B/40 61-623 Poznań Tax no.: 499-06-50-123
           </p>
