@@ -12,6 +12,12 @@ const Sidebar = () => {
     model: false,
     trim: false,
     year: false,
+    tranmission: false,
+    condition: false,
+    fuelType: false,
+    documentType: false,
+    damage: false,
+    distance: false,
   });
 
   const toggleDropdown = (dropdown) => {
@@ -25,12 +31,13 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const [date, setDate] = useState(null);
+  const [fromDate, setFromDate] = useState(null);
+  const [tillDate, setTillDate] = useState(null);
 
   return (
     <div className="flex">
       <div
-        className={`fixed lg:relative z-30 lg:z-0 lg:w-64 shadow-lg lg:shadow-none transform lg:transform-none transition-all duration-300 ${
+        className={`fixed lg:relative z-30 lg:z-0 lg:w-[20.667vw] shadow-lg lg:shadow-none transform lg:transform-none transition-all duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -82,7 +89,6 @@ const Sidebar = () => {
             </div>
           )}
         </div>
-
         <div className="ml-[5vw] mt-[3vw] border-b-[2px] border-grey-200">
           <div
             className="flex items-center justify-between cursor-pointer"
@@ -304,8 +310,8 @@ const Sidebar = () => {
                 From:
               </label>
               <Calendar
-                value={date}
-                onChange={(e) => setDate(e.value)}
+                value={fromDate}
+                onChange={(e) => setFromDate(e.value)}
                 id="from"
                 view="year"
                 dateFormat="yy"
@@ -318,8 +324,8 @@ const Sidebar = () => {
                 Till:
               </label>
               <Calendar
-                value={date}
-                onChange={(e) => setDate(e.value)}
+                value={tillDate}
+                onChange={(e) => setTillDate(e.value)}
                 view="year"
                 id="till"
                 dateFormat="yy"
@@ -327,6 +333,168 @@ const Sidebar = () => {
               />
             </div>
           )}
+        </div>
+        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleDropdown("transmission")}
+          >
+            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
+              Tranmission
+            </h1>
+            <svg
+              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
+                dropdownStates.transmission ? "transform rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+          {dropdownStates.transmission && <div></div>}
+        </div>
+        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleDropdown("condition")}
+          >
+            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
+              Condition
+            </h1>
+            <svg
+              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
+                dropdownStates.condition ? "transform rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+          {dropdownStates.condition && <div></div>}
+        </div>
+        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleDropdown("fuelType")}
+          >
+            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
+              Fuel Type
+            </h1>
+            <svg
+              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
+                dropdownStates.fuelType ? "transform rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+          {dropdownStates.fuelType && <div></div>}
+        </div>
+        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleDropdown("documentType")}
+          >
+            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
+              Document Type
+            </h1>
+            <svg
+              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
+                dropdownStates.documentType ? "transform rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+          {dropdownStates.documentType && <div></div>}
+        </div>
+        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleDropdown("damage")}
+          >
+            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
+              Damage
+            </h1>
+            <svg
+              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
+                dropdownStates.damage ? "transform rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+          {dropdownStates.damage && <div></div>}
+        </div>
+        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => toggleDropdown("distance")}
+          >
+            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
+              Distance
+            </h1>
+            <svg
+              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
+                dropdownStates.distance ? "transform rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+          {dropdownStates.distance && <div></div>}
         </div>
       </div>
 
@@ -353,7 +521,7 @@ const Sidebar = () => {
           </button>
         </div>
 
-        <div className="overflow-auto p-6">
+        <div>
           <SearchMainPage />
         </div>
       </div>

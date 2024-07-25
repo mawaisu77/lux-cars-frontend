@@ -1,9 +1,7 @@
 import React from "react";
-import image1 from "../../../assets/HCards/IMG (12).png"
+import image1 from "../../../assets/HCards/IMG (22).png";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { TfiReload } from "react-icons/tfi";
-
-
 
 function SearchCard() {
   const UserCard = [
@@ -97,49 +95,55 @@ function SearchCard() {
     },
   ];
   return (
-    <div>
-      <div className="flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh]">
+    <div className="container mx-auto mt-10">
+      <div className="grid grid-cols-1 gap-y-5 gap-x-4 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {UserCard.map((card, index) => (
-          <div
-            key={index}
-            className="w-[17.5vw] h-[60vh]  rounded-xl shadow-xl py-3"
-          >
-            <div className="relative">
+          <div className="w-full max-w-xs bg-white mx-auto lg:max-w-xs h-auto rounded-xl shadow-lg">
+            <div className="relative p-5 lg:p-4">
               <img
                 src={card.carPic}
-                className="w-[15.5vw] h-[30vh] rounded-xl mx-auto"
+                className="w-full h-60 lg:h-48 rounded-xl mx-auto object-cover"
+                alt={card.model}
               />
-              <div className="flex justify-center items-center absolute w-[4vw] h-[3.8vh] bg-black text-[white] rounded-lg top-3 right-6">
-                <IoMdHeartEmpty />
+              <div className="flex justify-center items-center absolute w-12 lg:w-16 h-8 lg:h-10 bg-black text-white rounded-lg top-3 right-6">
+                <IoMdHeartEmpty className="mr-1" />
                 100
               </div>
             </div>
             <div>
-              <div className="text-left px-3 border-b font-urbanist">
-                <p className="font-semibold text-[1.12vw] py-2">{card.model}</p>
-                <p className="text-[0.9vw] font-semibold">{card.vin}</p>
-                <div className="text-[0.8vw] text-[#7A798A] py-2">
+              <div className="text-left px-3 lg:px-2 border-b font-urbanist">
+                <p className="font-semibold text-base lg:text-lg py-1 lg:py-2">
+                  {card.model}
+                </p>
+                <p className="text-sm lg:text-base font-semibold">{card.vin}</p>
+                <div className="text-xs lg:text-sm text-gray-500 py-1 lg:py-2">
                   <p>{card.lot}</p>
                   <p>{card.Damage}</p>
                   <p>{card.Destination}</p>
                 </div>
               </div>
-              <div className="flex px-3 justify-between border-t py-2">
+              <div className="flex px-3 lg:px-2 justify-between border-t py-1 lg:py-2">
                 <div>
-                  <p className="text-[0.8vw] text-[#7A798A]">{card.Price}</p>
-                  <p className="text-[1.1vw] font-semibold">{card.amount}</p>
+                  <p className="text-xs lg:text-sm text-gray-500">
+                    {card.Price}
+                  </p>
+                  <p className="text-base lg:text-lg font-semibold">
+                    {card.amount}
+                  </p>
                 </div>
-                <div className="flex justify-center items-center text-right lg:gap-[0.3vw]">
-                  <TfiReload />
-                  <p className="text-[#7A798A]">{card.view}</p>
+                <div className="flex justify-center items-center text-right gap-1 lg:gap-2">
+                  <TfiReload className="mr-1" />
+                  <p className="text-xs lg:text-sm text-gray-500">
+                    {card.view}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         ))}
-        <div className="flex justify-center mx-auto items-center w-[150px] lg:w-[9vw] h-[54px] lg:h-[7vh] bg-[#F3F3F6] text-[15px] lg:text-[1vw] text-[#CA0000] rounded-full my-[2vh]">
-          load more
-        </div>
+      </div>
+      <div className="flex justify-center mx-auto items-center w-36 lg:w-32 h-12 lg:h-16 bg-gray-200 text-sm lg:text-base text-red-600 rounded-full mt-20 mb-20">
+        load more
       </div>
     </div>
   );
