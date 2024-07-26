@@ -23,6 +23,7 @@ const AboutHero = () => {
         </div>
       </div>
     </div>
+    
       <div className="h-[1246px] lg:h-[94vh] mb-[5.5vh] lg:mb-0">
         <div className="w-[74vw] mx-auto flex  flex-col-reverse lg:flex-row justify-between mt-[8.8vh]">
           <div className="text-left w-full lg:w-[38vw] p-[1.5vw]">

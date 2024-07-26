@@ -1,18 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import image1 from '../../../assets/User-pics/Joshua.png';
+import image1 from '../../../assets/avatar1.png';
 import { ImFilesEmpty } from "react-icons/im";
 import { FaFacebook, FaGoogle, FaLinkedinIn } from "react-icons/fa";
-import { RiTwitterXLine } from "react-icons/ri";
+import { RiImageAddLine, RiTwitterXLine } from "react-icons/ri";
 import Header from '../../header/Header/Header';
+import axios from 'axios';
+import { getToken } from '../../../utils/storageUtils';
+import { API_BASE_URL } from '../../../services/baseService';
+import { showToast } from '../../../utils/Toast';
+import { ClipLoader } from 'react-spinners';
 
 const Navbar = () => {
   const location = useLocation();
+  const [profilePicture, setProfilePicture] = useState(image1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState(false);
+
+  useEffect(() => {
+    const userProfile = JSON.parse(localStorage.getItem('user'));
+    if (userProfile && userProfile.profilePicture) {
+      setProfilePicture(userProfile.profilePicture);
+    }
+    if (userProfile && userProfile.username) {
+      setUser(userProfile.username);
+    }
+  }, []);
 
   const getLinkStyle = (path) => {
     return location.pathname === path ? 'text-red-600' : 'hover:text-red-600';
   };
 
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('profilePicture', file);
+
+      setIsLoading(true); 
+      try {
+        const response = await axios.put(`${API_BASE_URL}user/upload-profile-picture`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${getToken()}`, 
+          },
+        });
+        const imageUrl = response?.data?.data?.profilePicture;
+        // console.log("response.data ===> ", response.data.data.profilePicture)
+        setProfilePicture(imageUrl);
+
+        // Update local storage
+        const userProfile = JSON.parse(localStorage.getItem('user')) || {};
+        userProfile.profilePicture = imageUrl;
+        localStorage.setItem('user', JSON.stringify(userProfile));
+
+        showToast("Image uploaded successfully", "success");
+      } catch (error) {
+        showToast("Image upload failed", "error");
+        console.error('Error uploading image:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
   return (
     <>
       <div className='Account-image'>
@@ -34,9 +84,21 @@ const Navbar = () => {
       <div className='  w-[343px] md:w-[650px] lg:w-[74vw] h-auto mt-[7vh] mx-auto lg:h-[38vh] bg-[#f8f8f8] rounded-2xl'>
         <div className='flex flex-col lg:flex-row justify-center lg:justify-between lg:h-[30vh]    bg-[#000000]/70 rounded-t-2xl'>
           <div className='flex flex-col font-urbanist lg:flex-row mt-[4.6vh]   lg:ml-[2.2vw]     w-full lg:w-[48vw]'>
-            <img src={image1} className='w-[274px] md:w-[400px] mx-auto lg:w-[15vw] h-[274px] md:h-[400px] lg:h-[30vh] left-[36px] top-[36px] rounded-xl' />
-            <div className='text-left text-[white]  w-[274px] lg:w-[35vw]   mx-auto font-urbanist lg:ml-[2.2vw]'>
-              <h1 className='font-bold font-urbanist text-[36px]  lg:text-[2.3vw] leading- text-white'>Joshua Paul</h1>
+          <div className='relative'>
+              <img src={profilePicture} className='object-cover w-[274px] md:w-[400px] mx-auto lg:w-[15vw] h-[274px] md:h-[400px] lg:h-[30vh] left-[36px] top-[36px] rounded-xl' />
+              <label htmlFor="imageUpload" className='absolute top-2 right-2 cursor-pointer bg-white p-2 rounded-full'>
+                <RiImageAddLine size={25} />
+              </label>
+              <input
+                type="file"
+                id="imageUpload"
+                accept="image/*"
+                style={{ display: 'none' }}
+                onChange={handleImageUpload}
+              />
+              {isLoading && <div className="absolute inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center text-white"><ClipLoader /></div>}
+            </div>            <div className='text-left text-[white]  w-[274px] lg:w-[35vw]   mx-auto font-urbanist lg:ml-[2.2vw]'>
+              <h1 className='font-bold font-urbanist text-[36px]  lg:text-[2.3vw] leading- text-white'>{user}</h1>
               <p className='text-[18px] lg:text-[1.3vw] leading-10'>@loremipsum</p>
               <p className='text-[12px] lg:text-[0.78vw] text-[#f8f8f8] py-5 lg:py-0'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati
