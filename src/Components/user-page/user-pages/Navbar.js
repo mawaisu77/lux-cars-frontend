@@ -76,19 +76,19 @@ const Navbar = () => {
         <div className='relative w-full lg:w-[47vw] ml-[10px] lg:ml-[23vw] mt-[5px] lg:mt-[17px] text-black text-[20px] lg:text-[1.25vw] font-urbanist font-semibold mx-auto overflow-x-auto no-scrollbar'>
       <div className='flex justify-between items-center w-[530px] lg:w-full mx-auto'>
         <Link to="/user/account/all-bids">
-          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/AllBIds')}`}>All Bids</p>
+          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/user/account/all-bids')}`}>All Bids</p>
         </Link>
         <Link to="/user/account/funds">
-          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/FUNDS')}`}>FUNDS</p>
+          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/user/account/funds')}`}>FUNDS</p>
         </Link>
         <Link to="/user/account/order">
-          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/Order')}`}>ORDERS</p>
+          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/user/account/order')}`}>ORDERS</p>
         </Link>
         <Link to="/user/account/offers">
-          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/Offers')}`}>OFFERS</p>
+          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/user/account/offers')}`}>OFFERS</p>
         </Link>
         <Link to="/user/profile">
-          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/UserAccount/Profile')}`}>MY PROFILE</p>
+          <p className={`cursor-pointer whitespace-nowrap ${getLinkStyle('/user/profile')}`}>MY PROFILE</p>
         </Link>
       </div>
     </div>
