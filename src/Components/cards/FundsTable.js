@@ -25,18 +25,18 @@ const FundsTable = () => {
           <tbody>
             {data.map((item, index) => (
               <tr key={index} className='text-[20px] h-[46px] lg:text-[1vw]'>
-                <td className='py-4 w-[260px]  text-gray-700'>
+                <td className='py-4 w-[260px]   '>
                   <div className='flex flex-col gap-3'>
-                    <p>Lorem Ipsum</p>
+                    <p className='font-bold'>{item.name}</p>
                     <p className='text-[#b5b5b5]'>Subscription</p>
                   </div>
                 </td>
-                <td className='py-4 text-gray-700'>
+                <td className='py-4 font-bold'>
                   {item.date}
                 </td>
-                <td className='py-4 text-gray-700'>
+                <td className='py-4 '>
                   <div className='flex flex-col gap-3'>
-                    <p>A.Nelson</p>
+                    <p className='font-bold'>A.Nelson</p>
                     <p className='text-[#b5b5b5]'>12/26</p>
                   </div>
                 </td>
@@ -50,7 +50,7 @@ const FundsTable = () => {
 
                   </span>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap text-gray-700'>
+                <td className='px-6 py-4 whitespace-nowrap font-bold '>
                   {item.amount}
                 </td>
               </tr>
