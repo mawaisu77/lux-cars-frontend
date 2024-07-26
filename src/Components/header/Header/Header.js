@@ -1,51 +1,115 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
+import { IoGlobeSharp } from "react-icons/io5";
+
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { HiUsers } from 'react-icons/hi2';
+import { useTranslation } from 'react-i18next';
+import { changeLanguage } from 'i18next';
+import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useLogout } from '../../../hooks/useLogout';
+import { IoCloudUploadOutline } from "react-icons/io5";
 
 const Header = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate()
+  const {user} = useAuthContext()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  const {logout} = useLogout()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  };
+  
   return (
-    <div className='border-b w-full '>
+    <div className='border-b border-[#7A798A] w-full z-50 '>
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>
         <div className='flex items-center gap-4'>
+          <Link to="/">
           <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
+          </Link>
           <div className='hidden lg:flex'>
-            <ul className='flex gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 text-[#7a798a]'>
-              <Link to="/HowWorks">
+          <ul className={`flex gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>              
+            <Link to="/how-works">
                 <li>How it works</li>
               </Link>
-              <li className='flex items-center'>
+              {/* <li className='flex items-center'>
                 Delivery Time <TiArrowSortedDown />
-              </li>
-              <Link to="/About">
-                <li>About</li>
+              </li> */}
+              <Link to="/about">
+                <li>{t('navbar.about')}</li>
               </Link>
-              <Link to="/Help">
-                <li>Help</li>
+              <Link to="/help">
+                <li>{t('navbar.help')}</li>
               </Link>
-              <Link to="/ContactUs">
-                <li>Contact</li>
+              <Link to="/contact-us">
+                <li>{t('navbar.contact')}</li>
               </Link>
+              <Link to={'/upload-car'}>
+          <li>Upload Vehicle</li>
+        </Link>
             </ul>
           </div>
         </div>
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
-          <HiUsers />
-          <Link to="/Login">
-            <button className='focus:outline-none'>login</button>
+        <div className="relative inline-block text-left">
+       
+      <div className='flex gap-x-4 items-center '>
+ 
+        
+          <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} />
+      </div>
+      {dropdownOpen && (
+        <div className="origin-top-right absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            <button
+              onClick={() => changeLanguage('en')}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
+              English
+            </button>
+            <button
+              onClick={() => changeLanguage('fr')}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
+              French
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+          <Link to="/user/account/all-bids" className={` ${isHomePage ? 'text-[#7A798A] block' : 'text-white'}`} ><HiUsers/></Link>
+          
+          {
+            !user ? (
+            <>
+          <Link to="/login">
+            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>login</button>
           </Link>
-          /
-          <Link to="/Signup">
-            <button className='focus:outline-none'>sign-up</button>
+          <div className={`  ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>
+            /
+          </div>
+          <Link to="/signup">
+            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>sign-up</button>
           </Link>
+            </>) : (
+              <>
+            <button className={`focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} onClick={handleLogout}>logout</button>
+              </>
+            )
+          }
+    
           <button className='w-[7.333333333333334vw] h-[5.23vh] bg-[#ca0000] text-white rounded-full text-[0.8vw] focus:outline-none'>
             Try Demo
           </button>
@@ -56,29 +120,33 @@ const Header = () => {
           </button>
         </div>
       </div>
+      
       {isMenuOpen && (
         <div className='lg:hidden'>
           <ul className='flex flex-col items-center gap-4 mt-4 font-urbanist font-bold text-[1rem] text-[#7a798a]'>
-            <Link to="/HowWorks" onClick={toggleMenu}>
+            <Link to="/how-works" onClick={toggleMenu}>
               <li>How it works</li>
             </Link>
-            <li className='flex items-center'>
-              Delivery Time <TiArrowSortedDown />
-            </li>
-            <Link to="/About" onClick={toggleMenu}>
+            {/* <li className='flex items-center'>
+              Fees
+            </li> */}
+            <Link to="/about" onClick={toggleMenu}>
               <li>About</li>
             </Link>
-            <Link to="/Help" onClick={toggleMenu}>
+            <Link to="/help" onClick={toggleMenu}>
               <li>Help</li>
             </Link>
-            <Link to="/ContactUs" onClick={toggleMenu}>
+            <Link to="/contact-us" onClick={toggleMenu}>
               <li>Contact</li>
             </Link>
+            <Link to='/upload-car' onClick={toggleMenu}>
+          <li>Upload Vehicle</li>
+        </Link>
             <div className='flex flex-col items-center gap-4'>
-              <Link to="/Login" onClick={toggleMenu}>
+              <Link to="/login" onClick={toggleMenu}>
                 <button className='focus:outline-none'>login</button>
               </Link>
-              <Link to="/Signup" onClick={toggleMenu}>
+              <Link to="/signup" onClick={toggleMenu}>
                 <button className='focus:outline-none'>sign-up</button>
               </Link>
               <button className='w-[132px] lg:w-[7.333333333333334vw]  h-[32px] lg:h-[5.23vh] bg-[#ca0000] text-white rounded-full lg:text-[0.8vw] focus:outline-none'>

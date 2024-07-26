@@ -21,7 +21,7 @@ const Home = () => {
     <Bid/>
     <Top/>
     <Featured/>
-    <LocalOfferz/>
+    {/* <LocalOfferz/> */}
     <BuyNow/>
     
     <Aboutdest/>

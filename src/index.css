@@ -4,6 +4,9 @@
 
 html, body {
   @apply m-0 p-0 overflow-x-hidden w-full;
+  background-color: white;
+  color: black;
+  
 }
 .text-outline {
     color: transparent; 
@@ -34,56 +37,166 @@ html, body {
       height: 44.5vh;
     }
   }
-  @media (min-width:1024px) {
-    .Backgroundimage-LogIN{
-      background-image: url('../src/assets/BG-Img/IMG\ \(41).png');
-      background-size: 100vw;
+  @media (min-width: 1025px) {
+    .Backgroundimage-LogIN {
+      position: relative;
+      background-image: url('../src/assets/BG-Img/IMG\ \(41).png'); /* Update the image path as necessary */
+      background-size: cover;
       background-repeat: no-repeat;
       height: 32.5vh;
+    }
   
+    .Backgroundimage-LogIN::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+      opacity: 0.5;
+      z-index: 1;
+    }
   
+    .Backgroundimage-LogIN > * {
+      position: relative;
+      z-index: 2;
     }
   }
 
-  @media (min-width:1024px){  
-  .Backgroundimage-Signup{
-    background-image: url('../src/assets/BG-Img/IMG\ \(42).png');
-    background-size: 100vw;
-    background-repeat: no-repeat;
-    height: 32.5vh;
-
-  }
-}
- 
-@media (min-width: 1025px){.Backgroundimage-How{
-
-    background-image: url('../src/assets/BG-Img/IMG\ \(29\).png');
-    background-size: 100vw;
-    background-repeat: no-repeat;
-    height: 32.5vh;
-  }}
+  @media (min-width: 1025px) {
+    .Backgroundimage-Signup {
+      position: relative;
+      background-image: url('../src/assets/BG-Img/IMG\ \(42).png'); /* Update the image path as necessary */
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 32.5vh;
+    }
   
-  .back-image-Help{
-    background-image: url('../src/assets/BG-Img/IMG\ \(30\).png');
-    background-size: 100vw;
+    .Backgroundimage-Signup::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+      opacity: 0.5;
+      z-index: 1;
+    }
+  
+    .Backgroundimage-Signup > * {
+      position: relative;
+      z-index: 2;
+    }
+  }
+  
+ 
+@media (min-width: 1025px) {
+  .Backgroundimage-How {
+    position: relative;
+    background-image: url('../src/assets/BG-Img/IMG (29).png');
+    background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
-  @media (min-width: 1025px){.Account-image{
-    background-image: url('../src/assets/BG-Img/IMG\ \(43\).png');
-    background-size: 100vw;
+
+  .Backgroundimage-How::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    z-index: 1;
+  }
+
+  .Backgroundimage-How > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+  
+@media (min-width: 1025px) {
+  .back-image-Help {
+    position: relative;
+    background-image: url('../src/assets/BG-Img/IMG\ \(30\).png'); /* Update the image path as necessary */
+    background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
+  }
+
+  .back-image-Help::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.8; /* Adjust the opacity as needed */
+    z-index: 1;
+  }
+
+  .back-image-Help > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+@media (min-width: 1025px) {
+  .Account-image {
+    position: relative;
+    background-image: url('../src/assets/BG-Img/IMG\ \(43\).png'); /* Update the image path as necessary */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+  }
+
+  .Account-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .Account-image > * {
+    position: relative;
+    z-index: 2;
   }
 }
 
 
-  @media (min-width: 1024px){.Backgroundimage-About{
-    background-image: url('../src/assets/BG-Img/IMG\ \(34\).png');
-    background-size: 100vw;
+@media (min-width: 1025px) {
+  .Backgroundimage-About {
+    position: relative;
+    background-image: url('../src/assets/BG-Img/IMG (34).png'); /* Update the image path as necessary */
+    background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
-  }}
+  }
+
+  .Backgroundimage-About::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    z-index: 1;
+  }
+
+  .Backgroundimage-About > * {
+    position: relative;
+    z-index: 2;
+  }
+}
   .bg-img {
     background-image: url('../src/assets/About/IMG (36).png');
     background-size: 72vw;
@@ -119,3 +232,11 @@ html, body {
 .form-checkbox:checked::before {
   transform: scale(1);
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  }

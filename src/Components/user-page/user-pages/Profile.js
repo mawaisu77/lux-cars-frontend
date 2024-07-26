@@ -1,0 +1,253 @@
+import React, { useCallback, useEffect, useState } from "react";
+import { FaImage } from "react-icons/fa6";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import image1 from "../../../assets/User-pics/Subtract.png";
+import bar from "../../../assets/User-pics/bar.png";
+import bars from "../../../assets/User-pics/bars.png";
+import icon7 from "../../../assets/User-pics/icon (7).png";
+import avatar from "../../../assets/docs.jpg";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { getProfile, updateProfile } from "../../../services/userService";
+import { saveUser } from "../../../utils/storageUtils";
+import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners"; // Optional spinner library
+import PhoneInput from "react-phone-input-2";
+import { showToast } from "../../../utils/Toast";
+import { Link } from "react-router-dom";
+import ImageViewer from "react-simple-image-viewer";
+
+const Profile = () => {
+  const { token } = useAuthContext();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [documents, setDcuments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const images = documents;
+
+  const openImageViewer = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
+
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
+
+  const fetchProfile = async () => {
+    try {
+      const response = await getProfile();
+
+      saveUser(response.data);
+      const { username, email, address, phone, documents } = response.data;
+      setDcuments(documents);
+      setUsername(username);
+      setEmail(email);
+      setAddress(address);
+      setPhone(phone || "");
+      console.log(documents[0] || []);
+    } catch (error) {
+      console.error(error);
+      showToast("Error fetching profile data", "error");
+      // toast.error("Error fetching profile data");
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, [token]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const profileData = { username, email, address, phone: `+${phone}` };
+      const response = await updateProfile(profileData);
+      setLoading(false);
+      fetchProfile();
+      showToast(response.message, "success");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      
+      showToast("Error updating profile", "error");
+      // toast.error("Error updating profile");
+    }
+  };
+
+  return (
+    <>
+      <div className="w-[344px] md:w-[650px]  lg:w-[74vw] mx-auto    mt-[50px]  text-black ">
+        <div className="text-left text-[36px] lg:text-[2.3vw] font-urbanist font-bold">
+          Profile Info
+        </div>
+        <div className="flex flex-col">
+          <form className="" onSubmit={handleSubmit}>
+            <div className="text-left  w-full ">
+              <div className="flex flex-col lg:flex-row">
+                <div className="flex flex-col lg:flex-row lg:flex-wrap h-[13vh] gap-5 ">
+                  <input
+                    name="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Full Name"
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh] rounded-lg p-2 border"
+                  />
+
+                  <input
+                    name="email"
+                    disabled
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
+                  />
+
+                  <div className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]">
+                    <PhoneInput
+                      country={"us"}
+                      countryCodeEditable={false}
+                      disableDropdown={true}
+                      buttonStyle={{
+                        background: "white",
+                        borderRight: "0px",
+                      }}
+                      containerClass="  mx-auto border-none  outline-none  p-0 m-0 "
+                      inputStyle={{ width: "100%", height: "4.68vh" }}
+                      inputClass="bg-blue-400 text-black p-0 m-0 border-none rounded outline-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      value={phone}
+                      onChange={(phone) => setPhone(phone)}
+                    />
+                  </div>
+
+                  <input
+                    name="address"
+                    placeholder="Address"
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                </div>
+                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[120px] lg:mt-0  border rounded-lg p-5 ">
+                  <div className="flex gap-3 my-2">
+                    <div className="flex justify-center items-center bg-red-600 w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] rounded-full">
+                      <img src={image1} />
+                    </div>
+                    <div>
+                      <p className="text-[15px] lg:text-[0.9vw]  text-[#9698ab] font-urbanist">
+                        Documentation
+                      </p>
+                      <p className="text-[20px] lg:text-[1vw] font-urbanist font-semibold">
+                        {username}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="">
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
+                      <div
+                        className={`bg-red-600 h-2.5 rounded-full ${
+                          documents.length === 0 || null
+                            ? "w-0"
+                            : documents.length === 1
+                            ? "w-[50%]"
+                            : "w-[100%]"
+                        }`}
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-end">
+                    <div className="flex gap-x-2">
+                      <img src={bars} />
+                      <p className="text-red-500 ">
+                        {documents.length === 0 || null
+                          ? "0%"
+                          : documents.length === 1
+                          ? "50%"
+                          : "completed"}
+                      </p>
+                    </div>
+                    <div>
+                      <img src={icon7} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className={`w-[3vw] h-[5vh] ${images.length > 0 ? 'flex':'hidden'}`}>
+                  {images.map((src, index) => (
+                    <img
+                      className="w-full h-full cursor-pointer hover:scale-105 duration-200"
+                      src={src}
+                      onClick={() => openImageViewer(index)}
+                      key={index}
+                      style={{ margin: "2px" }}
+                      alt=""
+                    />
+                  ))}
+
+                  {isViewerOpen && (
+                    <ImageViewer
+                      src={images}
+                      currentIndex={currentImage}
+                      disableScroll={false}
+                      closeOnClickOutside={true}
+                      onClose={closeImageViewer}
+                    />
+                  )}
+      
+                  {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
+                  <img src={documents[0]} />
+                </div> */}
+                </div>
+
+                  {
+                    images.length === 0 && (<>
+                        <div className="h-[88px] w-[88px] mt-[60px] lg:mt-0 ">
+                                      <img src={avatar} className="wifull h-full object-cover" alt="avatar-img"/>
+                          </div>
+
+                    </>)
+                  }
+            
+                <div>
+                  <div className=" mt-[60px] lg:mt-0">
+                    <div className="flex gap-3 ml-5">
+                      {documents.length < 2 && (
+                        <div className="flex flex-col gap-y-2">
+                          <Link to={"/user/documents-upload"}>
+                            <button className="text-[16px] lg:text-[1vw] w-[96px] lg:w-[6vw] font-urbanist h-[46px] lg:h-[4.25vh] text-white hover:text-white bg-[#343444] rounded-full">
+                              Upload
+                            </button>
+                          </Link>
+                          <p className="text-[14px] lg:text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
+                            Images must be of your official ID (Passport/License)
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button className="flex justify-center mb-10 items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[16px] lg:text-[0.8vw] text-[#ca0000] rounded-full mt-[3vh]">
+              {loading ? (
+                <ClipLoader size={20} color={"#ca0000"} />
+              ) : (
+                "Update Profile"
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Profile;

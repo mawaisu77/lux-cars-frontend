@@ -41,11 +41,11 @@ const Abouttest = () => {
                         <SwiperSlide key={index} className='relative w-[370px]'>
                             <div className='flex flex-col justify-center items-center mb-10'>
                                 <div className='w-[340px] lg:w-[30.5vw] h-[420px] lg:h-[40.65vh] mx-auto rounded-lg shadow-lg bg-white p-5'>
-                                    <p className='text-[18px] lg:text-[1.2vw] font-urbanist'>{testimonial.para}</p>
-                                    <p className='text-[24px] lg:text-[1.5vw] font-bold font-urbanist mt-[4vh]'>
+                                    <p className='text-[18px] lg:text-[1.17vw] font-urbanist'>{testimonial.para}</p>
+                                    <p className='text-[24px] lg:text-[1.56vw] font-bold font-urbanist mt-[4vh]'>
                                         {testimonial.name}
                                     </p>
-                                    <p className='text-[14px] lg:text-[0.8vw] font-urbanist'>{testimonial.designation}</p>
+                                    <p className='text-[14px] lg:text-[0.91vw] font-urbanist'>{testimonial.designation}</p>
                                 </div>
                                 <div className='flex flex-col justify-center items-center -mt-[12vh]'>
                                     <img src={testimonial.image} alt='Client' className='w-[150px] lg:w-[10vw] h-[158px] lg:h-[22.4vh]' />
