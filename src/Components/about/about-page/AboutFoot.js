@@ -10,15 +10,15 @@ import { FaTwitch } from "react-icons/fa6";
 const AboutFoot = () => {
   return (
    <>
-    <div className= 'w-[343px] md:w-[80%] lg:w-[72vw] h-[1113px] lg:h-[35vh] mx-auto '>
-        <div className='flex flex-col lg:flex-row  h-[1013px] gap-5 justify-between '>
-        <div className='text-left  w-[343px] lg:w-[25vw] h-[236px] lg:h-[20vh]'>
+    <div className= 'w-[343px] md:w-[80%] lg:w-[72vw]    mx-auto '>
+        <div className='flex flex-col lg:flex-row  h-[1013px] my-[50px] lg:h-auto gap-5 justify-between '>
+        <div className='text-left mx-auto w-[343px] lg:w-[25vw] h-[236px] lg:h-[20vh]'>
            <p className='text-[36px] lg:text-[2vw] font-bold font-urbanist pb-[3vh]'> 
             Contact Us
            </p>
             <p className='text-[18px] lg:text-[1vw] font-urbanist text-[#7a798a]' >Ready to find your perfect car? Contact us today to learn more about our selection and services. Whether you’re looking for a family vehicle, a luxury ride, or something in between, we’re here to help you every step of the way.</p>
           </div>
-          <div className='text-left  w-[343px] lg:w-[25vw] h-[236px] lg:h-[20vh]'>
+          <div className='text-left mx-auto w-[343px] lg:w-[25vw] h-[236px] lg:h-[20vh]'>
              <p className='text-[36px] lg:text-[2vw] font-bold font-urbanist'>
                 Follow
              </p>
@@ -34,8 +34,8 @@ const AboutFoot = () => {
           </div>
 
 
-          <div className='text-left'>
-            <div className='text-[34px] lg:text-[2vw] font-bold font-urbanist'>
+          <div className='text-left mx-auto w-[343px]'>
+            <div className='text-[34px]  lg:text-[2vw] font-bold font-urbanist'>
             Get in touch
             </div>
             <div  className='flex  items-center gap-[1vw] py-[2.5vh]'>

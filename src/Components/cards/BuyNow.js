@@ -32,7 +32,7 @@ import "swiper/css/pagination";
               }}
               scrollbar={{ draggable: true }}
               loop={true}
-              navigation={true}
+              navigation={false}
               pagination={{ clickable: true }}
               modules={[Navigation, Pagination]}
               className="w-full lg:w-[72vw] h-[550px] lg:h-[66vh] mt-[40px]    flex justify-center items-center"
@@ -40,7 +40,7 @@ import "swiper/css/pagination";
               <div className="w-[74vw]  flex justify-center mx-auto gap-[1.3vw] items-center mt-[9vh]">
                 {BUY.map((card, index) => (
                   <SwiperSlide key={index} className="relative w-[370px]">
-                    <div className="w-[327px] bg-white mx-auto lg:w-[17.3vw] h-[500px] lg:h-[60.5vh]  rounded-xl shadow-lg">
+                    <div className="w-[327px] bg-white mx-auto lg:w-[17.3vw] h-[500px] lg:h-[54.5vh]  rounded-xl shadow-lg">
                       <div className="p-5 lg:p-[1vw]">
                         <img
                           className="w-[290px]  lg:w-[15.8vw] h-[290px] lg:h-[31.2vh]"
@@ -49,7 +49,7 @@ import "swiper/css/pagination";
                         />
                       </div>
                       <div>
-                        <div className="flex justify-between px-5 lg:px-[1vw] font-urbanist text-[18px] lg:text-[1.17vw] font-bold py-3 leading-[3vh] text-left">
+                        <div className="flex justify-between px-5 lg:px-[1vw] font-urbanist text-[18px] lg:text-[1.17vw] font-bold py-2 leading-[3vh] text-left">
                           "{card.Car}"
                           <button className="flex justify-center text-center mr-5 lg:mr-[0.5vw]  text-[12px] lg:text-[0.78vw] h-[24px] lg:h-[3vh]  w-[43px] lg:w-[2.7vw] border text-white bg-[#ca0000] rounded-lg">
                             BID

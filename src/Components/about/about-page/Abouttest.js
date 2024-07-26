@@ -32,7 +32,7 @@ const Abouttest = () => {
                     //     prevEl: <IoIosArrowBack />,
                     //     nextEl: <IoIosArrowForward />,
                     // }}
-                    navigation={true}
+                    navigation={false}
                     pagination={{ clickable: true }}
                     modules={[Navigation, Pagination]}
                     className='w-full lg:w-[72vw] h-[480px] lg:h-[53vh] mt-[40px] flex justify-center items-center'
@@ -40,7 +40,7 @@ const Abouttest = () => {
                     {testi.map((testimonial, index) => (
                         <SwiperSlide key={index} className='relative w-[370px]'>
                             <div className='flex flex-col justify-center items-center mb-10'>
-                                <div className='w-[340px] lg:w-[30.5vw] h-[420px] lg:h-[40.65vh] mx-auto rounded-lg shadow-lg bg-white p-5'>
+                                <div className='w-[340px] lg:w-[464px] h-[420px] lg:h-[300px] mx-auto rounded-lg shadow-lg bg-white p-5'>
                                     <p className='text-[18px] lg:text-[1.17vw] font-urbanist'>{testimonial.para}</p>
                                     <p className='text-[24px] lg:text-[1.56vw] font-bold font-urbanist mt-[4vh]'>
                                         {testimonial.name}
