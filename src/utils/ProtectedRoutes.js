@@ -15,7 +15,6 @@ const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
     "/forgot-password",
     "/reset-password/:token",
     "/verify-email/:token",
-
   ];
 
   if (storedToken && publicPaths.includes(location.pathname)) {

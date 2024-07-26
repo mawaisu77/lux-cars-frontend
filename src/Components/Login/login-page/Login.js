@@ -32,7 +32,8 @@ const Login = () => {
       if (success) {
         showToast(message,'success')
         // toast.success(message);
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
+        navigate("/Successfull-login")
       } else {
         showToast(message,'error')
         // toast.error(message);

@@ -1,11 +1,15 @@
 import React from "react";
 import { useState, useRef } from "react";
+import { useNavigate,useLocation } from 'react-router-dom';
 import registerBg from "../../assets/registerBg.png";
 import IconPlay from "../../assets/IconPlay.png";
 
 function Successfull_Login() {
   const [isPlaying, setIsPlaying] = useState(false);
   const iframeRef = useRef(null);
+  const location=useLocation()
+  const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate()
 
   const handlePlayButtonClick = () => {
     setIsPlaying(true);
@@ -54,10 +58,10 @@ function Successfull_Login() {
           </p>
         </div>
         <div className="mt-6 flex flex-col sm:flex-row justify-between space-y-2 sm:space-y-0 sm:space-x-4">
-          <button className="bg-gray-200 text-gray-700 w-full sm:w-[22.5vw] md:w-[17.5vw] lg:w-[12.5vw] rounded-lg py-2 px-4">
+          <button className="bg-gray-200 text-gray-700 w-full sm:w-[22.5vw] md:w-[17.5vw] lg:w-[12.5vw] rounded-lg py-2 px-4" onClick={()=> navigate(from, { replace: true })}>
             Skip
           </button>
-          <button className="bg-red-600 text-white w-full sm:w-[22.5vw] md:w-[17.5vw] lg:w-[12.5vw] rounded-lg py-2 px-4">
+          <button className="bg-red-600 text-white w-full sm:w-[22.5vw] md:w-[17.5vw] lg:w-[12.5vw] rounded-lg py-2 px-4" onClick={()=> navigate(from, { replace: true })}>
             Next
           </button>
         </div>
