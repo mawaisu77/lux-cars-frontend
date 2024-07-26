@@ -1,47 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Components/home/index.js';
-import Footer from './Components/Footer/index.js';
-import Login from './Components/Login/login-page/Login.js';
-import Signup from './Components/sign-up/index.js';
- import ContactUs from './Components/Contact/Cantact-page/ContactUs.js';
- import HowWorks from './Components/howWork/howWork-page/HowWorks.js';
- import Help from './Components/help/help-page/Help.js';
- import About from './Components/about/index.js';
- import Header from './Components/header/Header/Header.js';
-import UserAccount from './Components/user-page/index.js';
-import UserLayout from './Components/layouts/UserLayout.jsx';
-import AllBids from './Components/user-page/index.js';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Components/home/index.js";
+import Footer from "./Components/Footer/index.js";
+import Login from "./Components/Login/login-page/Login.js";
+import Signup from "./Components/sign-up/index.js";
+import ContactUs from "./Components/Contact/Cantact-page/ContactUs.js";
+import HowWorks from "./Components/howWork/howWork-page/HowWorks.js";
+import Help from "./Components/help/help-page/Help.js";
+import About from "./Components/about/index.js";
+import Header from "./Components/header/Header/Header.js";
+import UserAccount from "./Components/user-page/index.js";
+import UserLayout from "./Components/layouts/UserLayout.jsx";
+import AllBids from "./Components/user-page/index.js";
+import SearchPage from "./Components/SearchPage/index.js";
+import Successfull_Login from "./Components/successfullLogin/index.jsx";
 
 function App() {
   return (
-     <>
-    <Router>
-      <div className="App">
-       
-        {/* Define your routes here */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login/>}/>
-          <Route path="/Signup" element={<Signup/>}/>
-          <Route path="/ContactUs" element={<ContactUs/>}/>
-          <Route path="/HowWorks" element={<HowWorks/>}/>
-          <Route path="/Help" element={<Help/>}/>
-          <Route path="/About" element={<About/>}/>
+    <>
+      <Router>
+        <div className="App">
+          {/* Define your routes here */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="/ContactUs" element={<ContactUs />} />
+            <Route path="/HowWorks" element={<HowWorks />} />
+            <Route path="/Help" element={<Help />} />
+            <Route path="/search-page" element={<SearchPage />} />
+            <Route path="/Successfull-login" element={<Successfull_Login />} />
+            <Route path="/About" element={<About />} />
 
-          <Route path="/UserAccount" element={<UserAccount/>}/>
-          <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
-          <Route path="/UserAccount/funds" element={<UserLayout> <div>hello 2nd page</div></UserLayout>}/>
-
-
-        </Routes>
-        {/* Include the Footer component so it appears on all pages */}
-        <Footer />
-      </div>
-    </Router>
-     </>
+            <Route path="/UserAccount" element={<UserAccount />} />
+            <Route
+              path="/UserAccount/allbids"
+              element={
+                <UserLayout>
+                  {" "}
+                  <AllBids />{" "}
+                </UserLayout>
+              }
+            />
+            <Route
+              path="/UserAccount/funds"
+              element={
+                <UserLayout>
+                  {" "}
+                  <div>hello 2nd page</div>
+                </UserLayout>
+              }
+            />
+          </Routes>
+          {/* Include the Footer component so it appears on all pages */}
+          <Footer />
+        </div>
+      </Router>
+    </>
   );
 }
 
