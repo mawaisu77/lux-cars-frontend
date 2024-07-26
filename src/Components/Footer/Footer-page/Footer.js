@@ -10,10 +10,10 @@ const Footer = () => {
     {
       heading: "Shipping destinations",
      items:[
-        { text: "Bremerhaven, DE", link: "/shipping/bremerhaven-de" },
-        { text: "Gdynia, PL", link: "/shipping/gdynia-pl" },
-        { text: "Rotterdam, NL", link: "/shipping/rotterdam-nl" },
-        { text: "Klaipeda, LT", link: "/shipping/klaipeda-lt" },
+        { text: "Bremerhaven, DE", link: "/" },
+        { text: "Gdynia, PL", link: "/" },
+        { text: "Rotterdam, NL", link: "/" },
+        { text: "Klaipeda, LT", link: "/" },
       ],
     },
     {

@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
+import { IoCloudUploadOutline } from "react-icons/io5";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -45,6 +46,7 @@ const Header = () => {
               </Link>
               {/* <li className='flex items-center'>
                Fees
+                Delivery Time <TiArrowSortedDown />
               </li> */}
               <Link to="/about">
                 <li>{t('navbar.about')}</li>
@@ -55,13 +57,18 @@ const Header = () => {
               <Link to="/contact-us">
                 <li>{t('navbar.contact')}</li>
               </Link>
+              <Link to={'/upload-car'}>
+          <li>Upload Vehicle</li>
+        </Link>
             </ul>
           </div>
         </div>
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
         <div className="relative inline-block text-left">
-      <div>
-
+       
+      <div className='flex gap-x-4 items-center '>
+ 
+        
           <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} />
       </div>
       {dropdownOpen && (
@@ -83,7 +90,7 @@ const Header = () => {
         </div>
       )}
     </div>
-          <Link to="/user/account/all-bids" className={` ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} ><HiUsers/></Link>
+          <Link to="/user/account/all-bids" className={` ${isHomePage ? 'text-[#7A798A] block' : 'text-white'}`} ><HiUsers/></Link>
           
           {
             !user ? (
@@ -114,6 +121,7 @@ const Header = () => {
           </button>
         </div>
       </div>
+      
       {isMenuOpen && (
         <div className='lg:hidden'>
           <ul className='flex flex-col items-center gap-4 mt-4 font-urbanist font-bold text-[1rem] text-[#7a798a]'>
@@ -132,6 +140,9 @@ const Header = () => {
             <Link to="/contact-us" onClick={toggleMenu}>
               <li>Contact</li>
             </Link>
+            <Link to='/upload-car' onClick={toggleMenu}>
+          <li>Upload Vehicle</li>
+        </Link>
             <div className='flex flex-col items-center gap-4'>
               <Link to="/login" onClick={toggleMenu}>
                 <button className='focus:outline-none'>login</button>
