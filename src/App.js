@@ -127,9 +127,9 @@ function App() {
               path="/user/account"
               element={
                 <>
-                  {/* <ProtectedRoute> */}
+                  <ProtectedRoute>
                     <UserAccount />
-                  {/* </ProtectedRoute> */}
+                  </ProtectedRoute>
                 </>
               }
             />
