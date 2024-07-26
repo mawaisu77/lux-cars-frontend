@@ -43,9 +43,9 @@ const Header = () => {
             <Link to="/how-works">
                 <li>How it works</li>
               </Link>
-              <li className='flex items-center'>
-                Delivery Time <TiArrowSortedDown />
-              </li>
+              {/* <li className='flex items-center'>
+               Fees
+              </li> */}
               <Link to="/about">
                 <li>{t('navbar.about')}</li>
               </Link>
@@ -120,9 +120,9 @@ const Header = () => {
             <Link to="/how-works" onClick={toggleMenu}>
               <li>How it works</li>
             </Link>
-            <li className='flex items-center'>
+            {/* <li className='flex items-center'>
               Fees
-            </li>
+            </li> */}
             <Link to="/about" onClick={toggleMenu}>
               <li>About</li>
             </Link>

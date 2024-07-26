@@ -31,18 +31,18 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className='  w-[343px] md:w-[650px] lg:w-[74vw] mt-[7vh] mx-auto bg-[#f8f8f8] rounded-2xl'>
-        <div className='flex flex-col lg:flex-row justify-center lg:justify-between    bg-[#0000004d] rounded-t-2xl'>
+      <div className='  w-[343px] md:w-[650px] lg:w-[74vw] h-auto mt-[7vh] mx-auto lg:h-[38vh] bg-[#f8f8f8] rounded-2xl'>
+        <div className='flex flex-col lg:flex-row justify-center lg:justify-between lg:h-[30vh]    bg-[#000000]/70 rounded-t-2xl'>
           <div className='flex flex-col font-urbanist lg:flex-row mt-[4.6vh]   lg:ml-[2.2vw]     w-full lg:w-[48vw]'>
             <img src={image1} className='w-[274px] md:w-[400px] mx-auto lg:w-[15vw] h-[274px] md:h-[400px] lg:h-[30vh] left-[36px] top-[36px] rounded-xl' />
             <div className='text-left text-[white]  w-[274px] lg:w-[35vw]   mx-auto font-urbanist lg:ml-[2.2vw]'>
               <h1 className='font-bold font-urbanist text-[36px]  lg:text-[2.3vw] leading- text-white'>Joshua Paul</h1>
               <p className='text-[18px] lg:text-[1.3vw] leading-10'>@loremipsum</p>
-              <p className='text-[14px] lg:text-[0.82vw] text-[#f8f8f8] py-5 lg:py-0'>
+              <p className='text-[12px] lg:text-[0.78vw] text-[#f8f8f8] py-5 lg:py-0'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum obcaecati
                 dignissimos quae quo ad iste ipsum officiis deleniti asperiores sit.
               </p>
-              <button className='flex justify-center items-center gap-2 w-[190px] lg:w-[12vw] h-[36px] lg:h-[4.6vh] text-[13px] text-[#7a798a] bg-white rounded-full lg:mt-[2vh]'>
+              <button className='flex justify-center items-center gap-2 w-[160px] lg:w-[10vw] h-[36px] lg:h-[3.6vh] text-[12px] lg:text-[0.7vw] text-[#7a798a] bg-white rounded-full lg:mt-[1vh]'>
                 Bidding Power: $0/0$
                 <ImFilesEmpty />
               </button>
@@ -50,7 +50,7 @@ const Navbar = () => {
           </div>
           <div>
            <div className='flex flex-col gap-6 lg:gap-0 lg:flex-row justify-center py-5  lg:w-[20vw] ml-9 lg:ml-0  mx-auto lg:items-center'>
-           <div className='flex flex-row gap-3 lg:mr-[2.5vw] lg:mt-[6vh]'>
+           {/* <div className='flex flex-row gap-3 lg:mr-[2.5vw] lg:mt-[6vh]'>
               <div className='flex justify-center items-center w-[40px] lg:w-[2.5vw] h-[40px] lg:h-[5.1vh] bg-white rounded-lg'>
                 <FaFacebook size={25} />
               </div>
@@ -64,9 +64,9 @@ const Navbar = () => {
                 <FaLinkedinIn />
               </div>
              
-            </div>
-            <div className='text-left  '>
-            <button className='text-[14px] lg:text-[0.82vw] text-white w-[100px] lg:w-[6.3vw] h-[40px]  lg:h-[5.1vh] lg:mt-[5vh] lg:mr-[1.7vw] border border-white rounded-full'>
+            </div> */}
+            <div className='   mx-auto   '>
+            <button className='text-[14px] lg:text-[0.82vw] text-white w-[100px] lg:w-[6.3vw] h-[40px]  lg:h-[5.1vh] lg:mt-[2vh] lg:mr-[1.7vw] border border-white rounded-full'>
                 Create Bid
               </button>
             </div>
