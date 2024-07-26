@@ -45,6 +45,7 @@ const Header = () => {
                 <li>How it works</li>
               </Link>
               {/* <li className='flex items-center'>
+               Fees
                 Delivery Time <TiArrowSortedDown />
               </li> */}
               <Link to="/about">
