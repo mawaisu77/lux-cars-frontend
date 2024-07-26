@@ -19,7 +19,7 @@ function Successfull_Login() {
               ref={iframeRef}
               width="100%"
               height="auto"
-              src="https://www.youtube.com/watch?v=JIWxbB7l_vE"
+              src="https://www.youtube.com/embed/HfC8mKwhH2E?si=ZDPpmK5nfWdjl02U"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="w-full rounded-t-lg"
