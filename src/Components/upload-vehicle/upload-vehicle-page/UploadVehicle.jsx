@@ -9,21 +9,26 @@ import { getToken } from "../../../utils/storageUtils";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import useGetCarDealer from "../../../hooks/useGetCarDealer";
 import CurrencyInput from "react-currency-input-field";
-import { ClipLoader } from 'react-spinners'; // Optional spinner library
+import { ClipLoader } from "react-spinners"; // Optional spinner library
 import { showToast } from "../../../utils/Toast";
 import uploadCarValidation from "../../../utils/validations/upload-car-validation";
 import { API_BASE_URL } from "../../../services/baseService";
+import { FaTag } from "react-icons/fa";
+import { HiUserGroup } from "react-icons/hi";
+import registerDealerValidations from "../../../utils/validations/register-dealer-validations";
 
 const UploadVehicle = () => {
   const { dealerData, dealerLoading, dealerError } = useGetCarDealer(
     `car-dealer/get-car-dealer`
   );
+  const [mainloading, setMainLoading] = useState(false);
 
   const { user } = useAuthContext();
 
   const option = useMemo(() => countryList().getData(), []);
 
   const [carErrors, setCarErrors] = useState({});
+  const [dealerErrors, setDealerErrors] = useState({});
 
   const [submitLoading, setDealerLoading] = useState(true);
 
@@ -183,14 +188,18 @@ const UploadVehicle = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMainLoading(true); // Start loading
+
     const newErrors = uploadCarValidation(formData);
-    if (Object.keys(newErrors).length === 0) {
-      // Proceed with form submission
-      console.log("Form submitted successfully", formData);
-    } else {
-      setCarErrors(newErrors);
-      console.log("Form has errors", newErrors);
-    }
+    const dealerFormErrors = registerDealerValidations(formData);
+    // if (Object.keys(newErrors).length <= 4) {
+    //   // Proceed with form submission
+    //   console.log("Form submitted successfully", formData);
+    // } else {
+    //   setCarErrors(newErrors);
+    //   showToast("please fill all field ");
+    //   console.log("Form has errors", newErrors);
+    // }
 
     const DealerDetails = new FormData();
     DealerDetails.append("buyerFeeDetails", formData.buyerFeeDetails);
@@ -230,63 +239,127 @@ const UploadVehicle = () => {
     });
 
     // =====================================================================================
-
-    try {
+    if (userType === "dealer") {
+      console.log("pehla log");
       if (!dealerData) {
-        console.log("please...");
-        // If dealer data is available, call both APIs
-        await Promise.all([
-          axios.post(
-            `${API_BASE_URL}car-dealer/register-car-dealer`,
-            DealerDetails,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: `Bearer ${getToken()}`,
-              },
+        console.log("dosra log");
+
+        if (
+          Object.keys(newErrors).length === 0 &&
+          Object.keys(dealerFormErrors).length === 0
+        ) {
+          console.log("tesra log");
+
+          try {
+            await Promise.all([
+              axios.post(
+                `${API_BASE_URL}car-dealer/register-car-dealer`,
+                DealerDetails,
+                {
+                  headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${getToken()}`,
+                  },
+                }
+              ),
+              axios.post(`${API_BASE_URL}local-cars/upload-car`, CarDetails, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                  Authorization: `Bearer ${getToken()}`,
+                },
+              }),
+            ]);
+          } catch (error) {
+            console.log("error log");
+            if (error.response) {
+              showToast(
+                `Submission failed: ${
+                  error.response.data.message || "An error occurred"
+                }`,
+                "error"
+              );
+            } else if (error.request) {
+              // Request was made but no response received
+              console.log("Error request:", error.request);
+              showToast("Submission failed: No response from server", "error");
+            } else {
+              showToast(`Submission failed: ${error.message}`, "error");
             }
-          ),
-          axios.post(
-            `${API_BASE_URL}local-cars/upload-car`,
-            CarDetails,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: `Bearer ${getToken()}`,
-              },
-            }
-          ),
-        ]);
+          }
+        } else {
+          setCarErrors(newErrors);
+          setDealerErrors(dealerFormErrors);
+          showToast("please fill all field..");
+        }
       } else {
         console.log(" =============  else  ==================");
-        // Call the second API
-        await axios.post(
-          `${API_BASE_URL}local-cars/upload-car`,
-          CarDetails,
-          {
+
+        if (Object.keys(newErrors).length === 0) {
+          try {
+            await axios.post(
+              `${API_BASE_URL}local-cars/upload-car`,
+              CarDetails,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                  Authorization: `Bearer ${getToken()}`,
+                },
+              }
+            );
+          } catch (error) {
+            if (error.response) {
+              showToast(
+                `Submission failed: ${
+                  error.response.data.message || "An error occurred"
+                }`,
+                "error"
+              );
+            } else if (error.request) {
+              // Request was made but no response received
+              console.log("Error request:", error.request);
+              showToast("Submission failed: No response from server", "error");
+            } else {
+              showToast(`Submission failed: ${error.message}`, "error");
+            }
+          }
+        } else {
+          // sjjs
+          setCarErrors(newErrors);
+          showToast("please fill all field ");
+        }
+      }
+    } else if (userType === "private") {
+      if (Object.keys(newErrors).length === 0) {
+        // ============================= End Else ======================
+        try {
+          await axios.post(`${API_BASE_URL}local-cars/upload-car`, CarDetails, {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${getToken()}`,
             },
+          });
+        } catch (error) {
+          if (error.response) {
+            showToast(
+              `Submission failed: ${
+                error.response.data.message || "An error occurred"
+              }`,
+              "error"
+            );
+          } else if (error.request) {
+            // Request was made but no response received
+            console.log("Error request:", error.request);
+            showToast("Submission failed: No response from server", "error");
+          } else {
+            showToast(`Submission failed: ${error.message}`, "error");
           }
-        );
-      }
-    } catch (error) {
-      if (error.response) {
-        showToast(
-          `Submission failed: ${
-            error.response.data.message || "An error occurred"
-          }`,
-          "error"
-        );
-      } else if (error.request) {
-        // Request was made but no response received
-        console.log("Error request:", error.request);
-        showToast("Submission failed: No response from server", "error");
+        }
       } else {
-        showToast(`Submission failed: ${error.message}`, "error");
+        console.log("Unexpected error:");
+        showToast("Please fill all required fields", "error");
       }
     }
+    setMainLoading(false); // Start loading
   };
 
   const handleUploadClick = () => {
@@ -416,35 +489,40 @@ const UploadVehicle = () => {
         </div>
       </div>
 
-      <div className=" w-[1400px] mx-auto  ">
+      <div className=" md:w-[1200px] mx-auto  md:bg-white">
         <form
-          className=" flex flex-col items-start ml-10 gap-y-6"
+          className=" flex flex-col mx-10 items-start gap-y-6"
           onSubmit={handleSubmit}
         >
-          <h1 className="text-3xl font-bold">Your Info</h1>
+          <h1 className="text-[36px] font-bold">Your Info</h1>
+          <h1 className="text-[20px] font-bold mt-2">
+            Deliever or private party?
+          </h1>
 
-          <div className="flex justify-between gap-x-4">
+          <div className="grid grid-cols-3 space-x-4 w-full">
             <button
               type="button"
-              className={`w-[350px] border rounded-lg py-2 ${
+              className={` border rounded-lg py-2 text-[#8A8AA0] flex justify-center items-center gap-x-2 ${
                 userType === "dealer"
-                  ? "bg-gray-200 text-red-600 font-bold"
+                  ? "bg-[#EEECFF] text-[#CA0000] font-bold"
                   : ""
               }`}
               onClick={() => setUserType("dealer")}
             >
+              <FaTag />
               Dealer
             </button>
             <button
               type="button"
-              className={`w-[350px] border rounded-lg py-2 ${
+              className={` border bg-[#F8F8F8] text-[#8A8AA0] rounded-lg py-2 flex justify-center items-center gap-x-2 ${
                 userType === "private"
-                  ? "bg-gray-200 text-red-600 font-bold"
+                  ? "bg-[#EEECFF] text-[#CA0000] font-bold"
                   : ""
               }`}
               onClick={() => setUserType("private")}
             >
-              Private
+              <HiUserGroup />
+              Private Party
             </button>
           </div>
 
@@ -452,18 +530,22 @@ const UploadVehicle = () => {
             <>
               <div className="grid w-full">
                 <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold">
+                  <label className="font-bold text-[20px]">
                     Are there any additional fees the buyer will have to pay?
                   </label>
                   <input
                     type="text"
                     name="buyerFeeDetails"
                     className={`${
-                      formData.buyerFeeDetails
-                        ? "cursor-not-allowed text-gray-500"
+                      dealerErrors.buyerFeeDetails
+                        ? "border-red-600 placeholder-red-600"
                         : ""
                     } border w-full py-2 px-4 rounded-lg`}
-                    placeholder="Write here..."
+                    placeholder={`${
+                      dealerErrors.buyerFeeDetails
+                        ? dealerErrors.buyerFeeDetails
+                        : "Write here.."
+                    } `}
                     disabled={dealerData?.data.buyerFeeDetails ? true : false}
                     value={formData.buyerFeeDetails}
                     onChange={handleInputChange}
@@ -471,16 +553,22 @@ const UploadVehicle = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 space-x-4 w-full">
+              <div className="grid md:grid-cols-3 md:space-x-4 w-full">
                 <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold">Dealership Name</label>
+                  <label className="font-bold text-[20px]">
+                    Dealership Name
+                  </label>
                   <input
                     type="text"
                     name="dealershipName"
-                    placeholder="Write here..."
+                    placeholder={`${
+                      dealerErrors.dealershipName
+                        ? dealerErrors.dealershipName
+                        : "Write here.."
+                    } `}
                     className={`${
-                      formData.dealershipName
-                        ? "cursor-not-allowed text-gray-500"
+                      dealerErrors.dealershipName
+                        ? "border-red-600 placeholder-red-600"
                         : ""
                     } border w-full py-2 px-4 rounded-lg`}
                     disabled={dealerData?.data.dealershipName ? true : false}
@@ -489,14 +577,20 @@ const UploadVehicle = () => {
                   />
                 </div>
                 <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold">Dealership Website</label>
+                  <label className="font-bold text-[20px]">
+                    Dealership Website
+                  </label>
                   <input
                     type="text"
                     name="dealershipWebsite"
-                    placeholder="Write here..."
+                    placeholder={`${
+                      dealerErrors.dealershipWebsite
+                        ? dealerErrors.dealershipWebsite
+                        : "Write here.."
+                    } `}
                     className={`${
-                      formData.dealershipWebsite
-                        ? "cursor-not-allowed text-gray-500"
+                      dealerErrors.dealershipWebsite
+                        ? "border-red-600 placeholder-red-600"
                         : ""
                     } border w-full py-2 px-4 rounded-lg`}
                     value={formData.dealershipWebsite}
@@ -508,11 +602,11 @@ const UploadVehicle = () => {
 
               <div className="w-full">
                 <div className="text-left mb-1">
-                  <label className="font-bold">
+                  <label className="font-bold text-[20px]">
                     How many vehicles does your dealership retail each month?
                   </label>
                 </div>
-                <div className="grid grid-cols-3 space-x-4">
+                <div className="grid md:grid-cols-3 md:space-x-4">
                   <div className="w-full ">
                     <div className="relative w-full ">
                       <button
@@ -520,7 +614,11 @@ const UploadVehicle = () => {
                           dealerData?.data.vehicleSalesEachMonth ? true : false
                         }
                         type="button"
-                        className="border py-2 px-4 w-full text-left rounded-lg"
+                        className={`${
+                          dealerErrors.dealershipWebsite
+                            ? "border-red-600 "
+                            : ""
+                        } border py-2 px-4 w-full text-left rounded-lg`}
                         onClick={() => setIsOpen(!isOpen)}
                       >
                         {dealerData?.data.vehicleSalesEachMonth
@@ -548,9 +646,9 @@ const UploadVehicle = () => {
           )}
           {(userType === "private" || userType === "dealer") && (
             <div className="w-full">
-              <div className="grid grid-cols-3 space-x-4">
+              <div className="grid md:grid-cols-3 md:space-x-4">
                 <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold">Full Name</label>
+                  <label className="font-bold text-[20px]">Full Name</label>
                   <input
                     type="text"
                     disabled
@@ -561,7 +659,9 @@ const UploadVehicle = () => {
                   />
                 </div>
                 <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold">Contact Phone Number</label>
+                  <label className="font-bold text-[20px]">
+                    Contact Phone Number
+                  </label>
                   <PhoneInput
                     disabled
                     country={"us"}
@@ -590,11 +690,11 @@ const UploadVehicle = () => {
           {/* ===============================  IMAGE  ========================================= */}
 
           <div className="flex flex-col items-start gap-y-4">
-            <label className="font-bold">
+            <label className="font-bold text-[20px]">
               Please upload a photo of your dealer license.
             </label>
 
-            <h5 className="text-gray-500">
+            <h5 className="text-gray-500 text-left">
               *This information will be kept private and only used for
               verification. It will not be shown in the auction listing.
             </h5>
@@ -655,12 +755,14 @@ const UploadVehicle = () => {
 
           {/* =================================== CAR Details ======================================== */}
           <div className="w-full flex flex-col gap-y-4">
-            <h1 className="text-3xl font-bold text-left mt-8">Car details</h1>
+            <h1 className="text-[36px] font-bold text-left mt-8 ">
+              Car details
+            </h1>
 
             {/* VIN  */}
-            <div className="grid grid-cols-3 ">
+            <div className="grid md:grid-cols-3 ">
               <div className="flex flex-col items-start gap-y-2 mt-6 w-full">
-                <label className="font-bold">VIN</label>
+                <label className="font-bold text-[20px]">VIN</label>
                 <input
                   type="text"
                   name="vin"
@@ -677,9 +779,9 @@ const UploadVehicle = () => {
             </div>
 
             {/* Year, Make, Model */}
-            <div className="grid grid-cols-3 space-x-4">
+            <div className="grid md:grid-cols-3 md:space-x-4">
               <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold">Year</label>
+                <label className="font-bold text-[20px]">Year</label>
                 <input
                   type="text"
                   name="year"
@@ -694,7 +796,7 @@ const UploadVehicle = () => {
                 />
               </div>
               <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold">Make</label>
+                <label className="font-bold text-[20px]">Make</label>
                 <input
                   type="text"
                   name="make"
@@ -709,7 +811,7 @@ const UploadVehicle = () => {
                 />
               </div>
               <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold">Model</label>
+                <label className="font-bold text-[20px]">Model</label>
                 <input
                   type="text"
                   name="model"
@@ -726,9 +828,9 @@ const UploadVehicle = () => {
             </div>
 
             {/* Transmissions, Mileage */}
-            <div className="grid grid-cols-3 space-x-4">
+            <div className="grid md:grid-cols-3 md:space-x-4">
               <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold">Transmission</label>
+                <label className="font-bold text-[20px]">Transmission</label>
                 <div className="relative w-full ">
                   <button
                     type="button"
@@ -757,7 +859,7 @@ const UploadVehicle = () => {
                 </div>
               </div>
               <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold">Millage (miles)</label>
+                <label className="font-bold text-[20px]">Millage (miles)</label>
                 <input
                   type="text"
                   name="mileage"
@@ -778,7 +880,9 @@ const UploadVehicle = () => {
             {/* Select option Equipment */}
             <div className="grid grid-cols-1 space-x-4">
               <div className="flex flex-col items-start gap-y-2 mt-2">
-                <label className="font-bold">Select option/equipment</label>
+                <label className="font-bold text-[20px]">
+                  Select option/equipment
+                </label>
                 <input
                   type="text"
                   name="description"
@@ -801,7 +905,9 @@ const UploadVehicle = () => {
 
           {/* toggle  --> Car Modification Status */}
           <div className="flex flex-col items-start w-full gap-4">
-            <label className="font-bold">Has the car been modified?</label>
+            <label className="font-bold text-[20px]">
+              Has the car been modified?
+            </label>
             <div className="flex flex-col items-start gap-y-2">
               <div className="flex justify-center items-center gap-x-4">
                 <input
@@ -837,8 +943,11 @@ const UploadVehicle = () => {
                   </label>
                   <textarea
                     name="modification"
-                    className="border w-full py-2 px-4 rounded-lg mt-2"
+                    className={` border w-full py-2 px-4 rounded-lg mt-2`}
                     placeholder="Describe the modifications..."
+                    required={
+                      carModificationStatus === "modified" ? true : false
+                    }
                     rows={4}
                     value={formData.carDetails.modification}
                     onChange={handleCarDetailsChange}
@@ -850,7 +959,7 @@ const UploadVehicle = () => {
 
           {/* toggle  --> significant changes */}
           <div className="flex flex-col items-start gap-y-4">
-            <label className="font-bold">
+            <label className="font-bold text-[20px] text-left">
               Are there any significant mechanical or cosmetic flaws that we
               should know about?
             </label>
@@ -878,6 +987,7 @@ const UploadVehicle = () => {
                       ? "placeholder-red-600 border-red-600"
                       : ""
                   }`}
+                  required={selectedOptions.significantFlaws ? true : false}
                   value={formData.carDetails.significantFlaws}
                   onChange={handleCarDetailsChange}
                   disabled={!selectedOptions.significantFlaws}
@@ -887,9 +997,11 @@ const UploadVehicle = () => {
           )}
 
           {/*dropdown --> Car located */}
-          <div className="grid grid-cols-3 w-full">
+          <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
-              <label className="font-bold">Where is the car located?</label>
+              <label className="font-bold text-[20px] text-left">
+                Where is the car located?
+              </label>
               <Select
                 value={option.find(
                   (opt) => opt.label === formData.carDetails.carLocation
@@ -908,9 +1020,9 @@ const UploadVehicle = () => {
           </div>
 
           {/* ZIPCODE  */}
-          <div className="grid grid-cols-3 w-full">
+          <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-6 w-full">
-              <label className="font-bold">Zipcode</label>
+              <label className="font-bold text-[20px]">Zipcode</label>
               <input
                 type="text"
                 name="zip"
@@ -927,9 +1039,9 @@ const UploadVehicle = () => {
           </div>
 
           {/* Toggle => Car for sale  |  add more +  */}
-          <div className="grid grid-cols-3 w-full">
+          <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start">
-              <label className="flex items-center font-bold">
+              <label className="flex items-center text-left font-bold text-[20px]">
                 Is the car for sale elsewhere?
               </label>
               <input
@@ -952,16 +1064,16 @@ const UploadVehicle = () => {
           {selectedOptions.isCarForSale && (
             <div className="grid grid-cols-1 w-full">
               <div className="flex flex-col items-start gap-y-2 w-full">
-                <label className="text-gray-500">
+                <label className="text-gray-500 text-center">
                   *If we accept your car all other listings will be need to
                   taken down before it can be listed on our site.
                 </label>
-                {/* <input type="text" className="border py-2 px-4 w-full" /> */}
                 <div className="flex flex-col items-start gap-y-2 mt-4 w-full">
                   {additionalFields.map((field, index) => (
                     <input
                       key={index}
                       type="text"
+                      required={selectedOptions.isCarForSale ? true : false}
                       value={field}
                       onChange={(e) => handleAdditionalFieldChange(index, e)}
                       className="border mb-2 py-2 px-4 w-full"
@@ -981,12 +1093,16 @@ const UploadVehicle = () => {
           )}
 
           {/*=========================== TITLE INFO ===========================*/}
-          <h1 className="text-3xl font-bold text-left mt-8">Title Info</h1>
+          <h1 className="text-3xl font-bold text-left mt-8 text-[36px]">
+            Title Info
+          </h1>
 
           {/*dropdown --> Car titled AT -  */}
-          <div className="grid grid-cols-3 w-full">
+          <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
-              <label className="font-bold">Where is the car titled?</label>
+              <label className="font-bold text-[20px]">
+                Where is the car titled?
+              </label>
               <Select
                 value={option.find(
                   (opt) => opt.label === formData.carDetails.carTitledAt
@@ -1001,9 +1117,9 @@ const UploadVehicle = () => {
           </div>
 
           {/* Toggle => Vechicle titled info  */}
-          <div className="grid grid-cols-3 w-full  ">
+          <div className="grid md:grid-cols-3 w-full  ">
             <div className="flex flex-col gap-y-4">
-              <label className="text-left font-bold">
+              <label className="text-left font-bold text-[20px]">
                 Is the vehicle titled in your name?
               </label>
               <input
@@ -1019,7 +1135,7 @@ const UploadVehicle = () => {
             </div>
           </div>
           {!selectedOptions.carTitledInfo && (
-            <p className="text-gray-500">
+            <p className="text-gray-500 text-left">
               if the vehicle is titled or registered in the name of another
               individual, a photo of the person's ID will be requested for
               furthor verification.
@@ -1029,7 +1145,7 @@ const UploadVehicle = () => {
           {!selectedOptions.carTitledInfo && (
             <div className="grid grid-cols-1 w-full">
               <div className="flex flex-col gap-y-4 items-start ">
-                <label className="font-bold">
+                <label className="font-bold text-[20px] text-left">
                   Whose name is on the title? What's your relationship with
                   them?
                 </label>
@@ -1037,6 +1153,7 @@ const UploadVehicle = () => {
                   type="text"
                   name="carTitledInfo"
                   placeholder="Write here..."
+                  required
                   className="border py-6 px-4 rounded-lg w-full"
                   value={formData.carDetails.carTitledInfo}
                   onChange={handleCarDetailsChange}
@@ -1046,9 +1163,11 @@ const UploadVehicle = () => {
           )}
 
           {/*dropdown --> Car status */}
-          <div className="grid grid-cols-3 w-full">
+          <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
-              <label className="font-bold">Where is the title's status?</label>
+              <label className="font-bold text-[20px] text-left">
+                Where is the title's status?
+              </label>
               <Select
                 value={titleStatusOptions.find(
                   (opt) => opt.label === formData.carDetails.titlesStatus
@@ -1067,12 +1186,14 @@ const UploadVehicle = () => {
           </div>
 
           {/*=========================== Reserve Price ===========================*/}
-          <h1 className="text-3xl font-bold text-left mt-8">Reserve Price</h1>
+          <h1 className="text-3xl font-bold text-left mt-8 text-[36px]">
+            Reserve Price
+          </h1>
 
           {/* Toggle => Reserve price  */}
-          <div className="grid grid-cols-2 w-full  ">
+          <div className="grid grid-cols-1 w-full  ">
             <div className="flex flex-col gap-y-4">
-              <label className="text-left font-bold">
+              <label className="text-left font-bold text-[20px]">
                 Do you want to set a minimum price required for your vehicle to
                 sell?
               </label>
@@ -1089,9 +1210,9 @@ const UploadVehicle = () => {
             </div>
           </div>
           {selectedOptions.minPrice && (
-            <div className="grid grid-cols-1 w-full">
+            <div className="grid md:grid-cols-3 w-full">
               <div className="flex flex-col gap-y-4 items-start ">
-                <label className="font-bold">
+                <label className="font-bold text-[20px] text-left">
                   What reserve price would you like?
                 </label>
                 <CurrencyInput
@@ -1099,13 +1220,10 @@ const UploadVehicle = () => {
                   name="minPrice"
                   // placeholder="Price in USD"
                   prefix="$"
-                  className={`border py-6 px-4 rounded-lg w-full ${
-                    carErrors.minPrice
-                      ? "placeholder-red-600 border-red-600"
-                      : ""
-                  }`}
+                  className={`border py-2 px-4 rounded-lg w-full `}
                   defaultValue={0}
                   decimalsLimit={2}
+                  required={selectedOptions.minPrice ? true : false}
                   value={formData.carDetails.minPrice}
                   onValueChange={(value) => handleMinPriceChange(value)}
                 />
@@ -1114,13 +1232,13 @@ const UploadVehicle = () => {
           )}
 
           {/*================================ mul images ============================ */}
-          <h1 className="text-3xl font-bold text-left mt-8">Photos</h1>
+          <h1 className="text-[36px] font-bold text-left mt-8">Photos</h1>
 
           <div className="flex flex-col items-start gap-y-4">
-            <label className="font-bold">
+            <label className="font-bold text-[20px]">
               Please upload photos of your dealer license.
             </label>
-            <h5 className="text-gray-500">
+            <h5 className="text-gray-500 text-left">
               *This information will be kept private and only used for
               verification. It will not be shown in the auction listing.
             </h5>
@@ -1174,10 +1292,10 @@ const UploadVehicle = () => {
           </div>
 
           {/*===========================  Referral ===========================*/}
-          <h1 className="text-3xl font-bold text-left mt-8">Referral</h1>
+          <h1 className="text-[36px] font-bold text-left mt-8">Referral</h1>
           <div className="grid grid-cols-1 w-full">
             <div className="flex flex-col gap-y-4 items-start ">
-              <label className="font-bold">
+              <label className="font-bold text-[20px] text-left">
                 How did you hear about us? if a user referred us, please mention
                 their username.
               </label>
@@ -1198,9 +1316,9 @@ const UploadVehicle = () => {
 
           <button
             type="submit"
-            className="bg-gray-300 text-red-600 font-bold rounded-3xl p-2 mt-4 w-full"
+            className="bg-gray-300 my-4 text-[15px] text-red-600 font-bold rounded-3xl p-2 mt-4 w-full"
           >
-            Submit
+            {mainloading ? <ClipLoader /> : "Save"}
           </button>
         </form>
       </div>

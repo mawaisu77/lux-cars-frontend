@@ -117,7 +117,7 @@ function App() {
             <Route path="/upload-car" element={
                                 <ProtectedRoute>
                                  <UploadVehiclePage />
-                                </ProtectedRoute>
+                               </ProtectedRoute>
 
               } />
 
