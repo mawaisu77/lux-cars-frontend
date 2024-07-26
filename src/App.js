@@ -26,6 +26,8 @@ import ForgotPassword from "./Components/Login/login-page/ForgotPassword.js";
 import UploadVehiclePage from "./Components/upload-vehicle/index.js";
 import Funds from "./Components/user-page/user-pages/Funds.js";
 import ProtectedRoute from "./utils/ProtectedRoutes.js";
+import SearchPage from "./Components/SearchPage/index.js";
+import Successfull_Login from "./Components/successfullLogin/index.jsx";
 function App() {
   return (
     <>
@@ -37,7 +39,7 @@ function App() {
             <Route
               path="/"
               element={
-                  <Home />
+                <Home />
               }
             />
             <Route
@@ -75,7 +77,7 @@ function App() {
             <Route
               path="/verify-email/:token"
               element={
-                  <VerifyEmail />
+                <VerifyEmail />
               }
             />
             <Route
@@ -90,36 +92,36 @@ function App() {
             <Route
               path="/contact-us"
               element={
-                  <ContactUs />
+                <ContactUs />
               }
             />
             <Route
               path="/how-works"
               element={
-                  <HowWorks />
+                <HowWorks />
               }
             />
             <Route
               path="/help"
               element={
-                  <Help />
+                <Help />
               }
             />
             <Route
               path="/about"
               element={
-                  <About />
+                <About />
               }
             />
             <Route path="/privacy-policies" element={<Privacy />} />
             <Route path="/terms&conditions" element={<Term />} />
             <Route path="/loan-application" element={<Loan />} />
             <Route path="/upload-car" element={
-                                <ProtectedRoute>
-                                 <UploadVehiclePage />
-                               </ProtectedRoute>
+              <ProtectedRoute>
+                <UploadVehiclePage />
+              </ProtectedRoute>
 
-              } />
+            } />
 
             <Route
               path="/user/account"
@@ -134,53 +136,55 @@ function App() {
             <Route
               path="/user/account/all-bids"
               element={
-                //  <ProtectedRoute>
+                <ProtectedRoute>
                   <UserLayout>
                     <AllBids />
                   </UserLayout>
-                //  </ProtectedRoute>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/user/profile"
               element={
-                //  <ProtectedRoute>
-                <UserLayout>
-                  <Profile />
-                </UserLayout>
-                //  </ProtectedRoute>
+                <ProtectedRoute>
+                  <UserLayout>
+                    <Profile />
+                  </UserLayout>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/user/account/offers"
               element={
-                //  <ProtectedRoute>
-                <UserLayout> 
-                  <Offers />
-                </UserLayout>
-                //  </ProtectedRoute>
+                <ProtectedRoute>
+                  <UserLayout>
+                    <Offers />
+                  </UserLayout>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/user/account/order"
               element={
-                //  <ProtectedRoute>
-                <UserLayout>
-                  <Order />
-                </UserLayout>
-                //  </ProtectedRoute>
+                <ProtectedRoute>
+                  <UserLayout>
+                    <Order />
+                  </UserLayout>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/user/account/funds"
               element={
-                //  <ProtectedRoute>
-                <UserLayout>    
-                  <Funds />
-                </UserLayout>
-                //  </ProtectedRoute>
+                <ProtectedRoute>
+                  <UserLayout>
+                    <Funds />
+                  </UserLayout>
+                </ProtectedRoute>
               }
             />
+            <Route path="/search-page" element={<SearchPage />} />
+            <Route path="/Successfull-login" element={<Successfull_Login />} />
           </Routes>
           {/* Include the Footer component so it appears on all pages */}
           <Footer />
