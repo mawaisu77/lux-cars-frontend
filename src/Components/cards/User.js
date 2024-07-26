@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import image1 from '../../assets/User-pics/Car1.png';
+import image2 from '../../assets/HCards/IMG (12).png'
+import image3 from '../../assets/HCards/IMG (13).png'
+import image4 from '../../assets/HCards/IMG (16).png'
+import image5 from '../../assets/HCards/IMG (17).png'
+import image6 from '../../assets/HCards/IMG (18).png'
+import image7 from '../../assets/HCards/IMG (19).png'
+import image8 from '../../assets/HCards/IMG (20).png'
 import { TfiReload } from "react-icons/tfi";
 import { IoMdHeartEmpty } from "react-icons/io";
 
@@ -34,7 +41,7 @@ const User = () => {
       view: "View history"
     },
     {
-      carPic: image1,
+      carPic: image2,
       model: `"2018 BMW X1 DRIVE"`,
       vin: "VIN:WBHT3C3J3H",
       lot: "Lot:38498458",
@@ -45,7 +52,7 @@ const User = () => {
       view: "View history"
     },
     {
-      carPic: image1,
+      carPic: image3,
       model: `"2018 BMW X1 DRIVE"`,
       vin: "VIN:WBHT3C3J3H",
       lot: "Lot:38498458",
@@ -56,7 +63,7 @@ const User = () => {
       view: "View history"
     },
     {
-      carPic: image1,
+      carPic: image4,
       model: `"2018 BMW X1 DRIVE"`,
       vin: "VIN:WBHT3C3J3H",
       lot: "Lot:38498458",
@@ -67,7 +74,7 @@ const User = () => {
       view: "View history"
     },
     {
-      carPic: image1,
+      carPic: image5,
       model: `"2018 BMW X1 DRIVE"`,
       vin: "VIN:WBHT3C3J3H",
       lot: "Lot:38498458",
@@ -78,7 +85,7 @@ const User = () => {
       view: "View history"
     },
     {
-      carPic: image1,
+      carPic: image6,
       model: `"2018 BMW X1 DRIVE"`,
       vin: "VIN:WBHT3C3J3H",
       lot: "Lot:38498458",
@@ -89,7 +96,7 @@ const User = () => {
       view: "View history"
     },
     {
-      carPic: image1,
+      carPic: image7,
       model: `"2018 BMW X1 DRIVE"`,
       vin: "VIN:WBHT3C3J3H",
       lot: "Lot:38498458",
@@ -100,7 +107,7 @@ const User = () => {
       view: "View history"
     },
     {
-      carPic: image1,
+      carPic: image8,
       model: `"2018 BMW X1 DRIVE"`,
       vin: "VIN:WBHT3C3J3H",
       lot: "Lot:38498458",
@@ -160,7 +167,7 @@ const User = () => {
       {visibleCards < UserCard.length && (
         <div
           onClick={loadMoreCards}
-          className='flex justify-center mx-auto items-center w-[150px] lg:w-[9vw] h-[54px] lg:h-[7vh] bg-[#f3f3f6] text-[15px] lg:text-[1vw] text-[#ca0000] rounded-full my-[2vh] cursor-pointer'
+          className='flex justify-center mx-auto items-center w-[150px] lg:w-[9vw] h-[54px] lg:h-[7vh] bg-[#f3f3f6] text-[15px] lg:text-[1vw] text-[#ca0000] rounded-full mb-[10vh] cursor-pointer'
         >
           load more
         </div>
