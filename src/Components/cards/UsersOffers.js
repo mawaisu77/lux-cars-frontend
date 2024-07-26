@@ -61,9 +61,9 @@ const UsersOffers = () => {
 
   return (
     <>
-      <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh]'>
+      <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh] mb-[10vh]'>
         {UserCard.slice(0, visibleCards).map((card, index) => (
-          <div key={index} className='w-[330px] lg:w-[17.5vw] h-[528px] lg:h-[60vh] rounded-xl shadow-xl py-3'>
+          <div key={index} className='w-[330px] lg:w-[17.5vw] h-[520px] lg:h-[60vh] rounded-xl shadow-xl py-3'>
             <div className='relative'>
               <img src={card.carPic} className='w-[290px] lg:w-[15.5vw] h-[290px] lg:h-[30vh] rounded-xl mx-auto' />
               <div className='flex justify-center items-center absolute w-[64px] lg:w-[4vw] h-[24px] lg:h-[3.8vh] bg-black text-[white] rounded-lg top-3 right-6'>

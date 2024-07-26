@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import image1 from '../../assets/User-pics/Car1.png';
 import { TfiReload } from "react-icons/tfi";
 import { IoMdHeartEmpty } from "react-icons/io";
 
 const User = () => {
-  const [visibleCards, setVisibleCards] = useState(2);
+  const [visibleCards, setVisibleCards] = useState(8); // Show 8 cards initially
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= 1024);
+      setVisibleCards(window.innerWidth >= 1024 ? 4 : 2); // Initial cards display
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Call initially to set the state
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const UserCard = [
     {
@@ -104,7 +119,7 @@ const User = () => {
 
   return (
     <>
-      <div className='flex flex-wrap gap-x-5   justify-center items-center gap-y-10 mt-[10vh]'>
+      <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh] mb-[10vh]'>
         {UserCard.slice(0, visibleCards).map((card, index) => (
           <div key={index} className='w-[328px] lg:w-[17.5vw] rounded-xl shadow-xl py-3'>
             <div className='relative'>
