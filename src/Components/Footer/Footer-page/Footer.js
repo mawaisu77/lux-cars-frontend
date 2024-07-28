@@ -37,7 +37,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="h-full lg:h-[48.5vh] w-full bg-[#f8f8f8] text-black">
+    <div className="  lg:h-[48.5vh] w-full bg-[#f8f8f8] text-black">
       <div className="flex flex-wrap gap-6 lg:gap-[4.6vw] w-[90%] lg:w-[79vw] mx-auto pt-[5vh] lg:pt-[8.5vh]">
         <div className="w-full md:w-[30%] lg:w-[15vw]">
           <img
@@ -111,7 +111,7 @@ const Footer = () => {
           </form>
         </div>
       </div>
-      <div className="border-t mt-[5vh]">
+      <div className="border-t mt-[5vh] mb-[5vh]">
         <div className="flex justify-center items-center text-center w-full pt-[5vh] lg:mt-0 text-[4vw] md:text-[2vw] lg:text-[0.81vw] font-urbanist">
           ©2024 LUX® First Choice Cars. All rights reserved.
         </div>
