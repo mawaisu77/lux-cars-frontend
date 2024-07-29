@@ -28,10 +28,49 @@ import Funds from "./Components/user-page/user-pages/Funds.js";
 import ProtectedRoute from "./utils/ProtectedRoutes.js";
 import SearchPage from "./Components/SearchPage/index.js";
 import Successfull_Login from "./Components/successfullLogin/index.jsx";
+import Review from "./Components/review/index.js";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "./hooks/useAuthContext.js";
+
 function App() {
+  const [showReviewPopup, setShowReviewPopup] = useState(false);
+  const {user} = useAuthContext()
+
+  useEffect(() => {
+    const checkReviewPopup = () => {
+      const hasReviewed = localStorage.getItem('hasReviewed');
+      const now = new Date().getTime();
+      const loginTime = localStorage.getItem('loginTime');
+      if (user && !hasReviewed) {
+        if (!loginTime) {
+          localStorage.setItem('loginTime', now);
+        } else {
+          const elapsed = now - loginTime;
+          if (elapsed >= 10000) { // for testing purpose time is setted to 10sec
+            setShowReviewPopup(true);
+          }
+        }
+      }
+    };
+
+    checkReviewPopup();
+
+    const interval = setInterval(checkReviewPopup, 1000); // Check every minute
+
+    return () => clearInterval(interval);
+  }, [user]);
+  const handleClosePopup = () => {
+    setShowReviewPopup(false);
+    localStorage.removeItem('loginTime');
+
+  };
   return (
     <>
+   
       <Router>
+      <div>
+      {showReviewPopup &&<Review onClose={handleClosePopup} />}
+      </div>
         <div className="App">
           {/* <Header/> */}
           {/* Define your routes here */}
@@ -185,6 +224,8 @@ function App() {
             />
             <Route path="/search-page" element={<SearchPage />} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
+            {/* <Route path="/review" element={<Review />} /> */}
+
           </Routes>
           {/* Include the Footer component so it appears on all pages */}
           <Footer />
