@@ -16,7 +16,7 @@ import UserLayout from './Components/layouts/UserLayout.jsx';
 import Privacy from './Components/privacy/index.js';
 import Term from './Components/term/index.js'; 
 import Loan from './Components/loanapplication/index.js';
-
+import Fees from './Components/fees/index.js';
 function App() {
   return (
      <>
@@ -35,6 +35,7 @@ function App() {
           <Route path="/PrivacyPolicies" element={<Privacy/>} />
           <Route path="/Terms&Conditions" element={<Term/>} />
           <Route path="/LoanApplication" element={<Loan />} />
+          <Route path="/Fees" element={<Fees />} />
 
           <Route path="/UserAccount" element={<UserAccount/>}/>
           <Route path="/UserAccount/allbids" element={<UserLayout> <AllBids/> </UserLayout>}/>
