@@ -51,7 +51,7 @@ const ReviewPopup = ({ onClose }) => {
                 count={5}
                 onChange={ratingChanged}
                 size={44}
-                isHalf={true}
+                isHalf={false}
                 emptyIcon={<TiStarOutline />}
                 halfIcon={<TiStarHalfOutline />}
                 fullIcon={<TiStarFullOutline />}

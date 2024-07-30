@@ -225,6 +225,8 @@ function App() {
             <Route path="/search-page" element={<SearchPage />} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
             {/* <Route path="/review" element={<Review />} /> */}
+            <Route path="/admin/dashboard" element={<>welcome</>} />
+
 
           </Routes>
           {/* Include the Footer component so it appears on all pages */}

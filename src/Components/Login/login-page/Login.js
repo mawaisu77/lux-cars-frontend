@@ -28,12 +28,18 @@ const Login = () => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      const {success, message} = await login(values.email, values.password);
+      const {success, message, role} = await login(values.email, values.password);
       if (success) {
-        showToast(message,'success')
-        // toast.success(message);
-        // navigate(from, { replace: true });
+        // showToast(message,'success')
+        // // toast.success(message);
+        // // navigate(from, { replace: true });
+
+        // navigate("/Successfull-login")
+        if (role === 'admin') {
+          navigate("/admin/dahboard");
+        } else {
         navigate("/Successfull-login")
+      }
       } else {
         showToast(message,'error')
         // toast.error(message);

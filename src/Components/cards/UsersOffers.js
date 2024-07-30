@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { TfiReload } from "react-icons/tfi";
-import { IoMdHeartEmpty } from "react-icons/io";
-import image1 from '../../assets/User-pics/IMG (46).png';
-import image2 from '../../assets/User-pics/IMG (47).png';
+
 import useGetLocalCars from '../../hooks/useGetLocalCars';
 import { showToast } from '../../utils/Toast';
 
 const UsersOffers = () => {
 
   const { carData, carLoading, carError } = useGetLocalCars('local-cars/get-all-cars');
-
- 
 
 // useEffect(() => {
 //   if(carError){
@@ -33,8 +29,6 @@ if (carLoading) {
 
   return (
     <>
-  
-  
         <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh] mb-[10vh]'>
         {carData?.data?.map((card, index) => (
           <div key={index} className='w-[330px] lg:w-[17.5vw]  rounded-xl shadow-xl py-3'>
@@ -87,8 +81,6 @@ if (carLoading) {
           </div>
         ))}
       </div>
-  
-   
     </>
   );
 };
