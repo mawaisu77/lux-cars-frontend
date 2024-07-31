@@ -28,14 +28,11 @@ import Funds from "./Components/user-page/user-pages/Funds.js";
 import ProtectedRoute from "./utils/ProtectedRoutes.js";
 import SearchPage from "./Components/SearchPage/index.js";
 import Successfull_Login from "./Components/successfullLogin/index.jsx";
-<<<<<<< HEAD
 import Vehicle from "./Components/vehicle/index.js";
-=======
 import Review from "./Components/review/index.js";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext.js";
 
->>>>>>> 5a3f7847aeae5f7bf8e78c73b43d64614810b2e5
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
   const {user} = useAuthContext()
