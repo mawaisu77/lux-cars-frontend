@@ -63,6 +63,13 @@ html, body {
     height: 32.5vh;
 
   }
+  .bg-fees {
+    background-image: url('../src/assets/BG-Img/IMG.png');
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+    
+  }
 }
  
 @media (min-width: 1025px){.Backgroundimage-How{
@@ -105,6 +112,8 @@ html, body {
     align-items: center;
     
 }
+
+
 
 
 /* media query for radio button for large or more then large screeen is started */
