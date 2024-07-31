@@ -164,9 +164,9 @@ const Bid = () => {
           </div>
           
 
-          <div className=" relative h-[600px]">
+          <div className=" relative h-[600px] -z-50">
           <div className="absolute bg-white opacity-80 rounded-xl shadow-xl right-[10%] w-[105px]  h-[95px]">
-                     <div className="flex flex-col p-2  items-center ">
+                     <div className="flex flex-col p-2   items-center ">
                          <p className="font-bold text-[23px]">
                              50+
                          </p>
@@ -191,7 +191,7 @@ const Bid = () => {
                 has used our services such as selling, buying, or even buying their parts.
               </div>
               <div className="flex gap-[0.5vw] flex-wrap mt-[2vh]">
-                <button className="border border-[#df4949] py-[10px] px-[26px] rounded-full text-[#df4949] text-[16px]">
+                <button className="border  border-[#df4949] py-[10px] px-[26px] rounded-full text-[#df4949] text-[16px]">
                   Bid
                 </button>
                 <button className="border border-[#df4949] py-[10px] px-[26px] rounded-full text-[#df4949] text-[16px]">
@@ -226,7 +226,7 @@ const Bid = () => {
                 </div>
 
 
-                <div className="h-[110px]">
+                <div className="h-[110px] ">
                   <p className="text-[14px] font-urbanist font-semibold">Car Types</p>
                   <p className="flex justify-between text-[13px] gap-1">
                     All Vehicles

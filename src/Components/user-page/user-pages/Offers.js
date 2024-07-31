@@ -16,7 +16,7 @@ const Offers = () => {
   return (
     <>
       <div className='w-full lg:w-[74vw]    mx-auto  mt-[50px] text-black'>
-        <div className='flex flex-col lg:flex-row    lg:justify-between'>
+        {/* <div className='flex flex-col lg:flex-row    lg:justify-between'>
           <div className='flex justify-center items-center'>
             <input
               type="text"
@@ -58,7 +58,7 @@ const Offers = () => {
       )}
     </div>
           
-        </div>
+        </div> */}
         <UsersOffers/>
       </div>
     </>

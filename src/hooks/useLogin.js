@@ -18,7 +18,7 @@ export const useLogin = () => {
         saveToken(response.data.token);
         dispatch({type: 'LOGIN', payload: response.data});
         setIsLoading(false);
-        return {success:response.success, message:response.message}
+        return {success:response.success, message:response.message, role:response?.data?.user?.role}
     } catch (error) {
         setIsLoading(false);
         if (error.response) {

@@ -1,12 +1,13 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { getToken } from "./storageUtils";
+import { getToken, getUser } from "./storageUtils";
 
 const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
 //   const {user} = useAuthContext();
   const storedToken = getToken();
   const location = useLocation();
+  const user = getUser()
 
   const publicPaths = [
     "/",
@@ -25,6 +26,9 @@ const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
     return <Navigate to="/login" state={{ from: location }}/>;
   }
 
+  // if (user && user.role === 'admin' && location.pathname !== "/admin/dahsboard") {
+  //   return <Navigate to="/admin" />;
+  // }
 
   return <>{children}</>;
 };
