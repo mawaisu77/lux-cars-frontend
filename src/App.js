@@ -28,6 +28,7 @@ import Funds from "./Components/user-page/user-pages/Funds.js";
 import ProtectedRoute from "./utils/ProtectedRoutes.js";
 import SearchPage from "./Components/SearchPage/index.js";
 import Successfull_Login from "./Components/successfullLogin/index.jsx";
+import Vehicle from "./Components/vehicle/index.js";
 function App() {
   return (
     <>
@@ -185,6 +186,7 @@ function App() {
             />
             <Route path="/search-page" element={<SearchPage />} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
+            <Route path="/vehicle-detail" element={<Vehicle />} />
           </Routes>
           {/* Include the Footer component so it appears on all pages */}
           <Footer />
