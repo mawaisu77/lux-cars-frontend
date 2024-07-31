@@ -102,8 +102,11 @@ function LoanApplication() {
 
                       <div className=" rounded-[12px] w-[100%]  md:w-[23.5vw] lg:w-[17vw]">
                         <PhoneInput
-                          // className="phone-input-wrapper  phone-input-container"
                           country={"us"}
+                          disableDropdown
+                          onlyCountries={["us"]}
+                          // className="phone-input-wrapper  phone-input-container"
+                          defaultCountry="US"
                           buttonStyle={{
                             background: "white",
                             borderRight: "0px",
@@ -130,6 +133,8 @@ function LoanApplication() {
 
                       <div className="bg-red-400 rounded-[12px] w-[100%]  md:w-[23.5vw] lg:w-[17vw]">
                         <PhoneInput
+                          onlyCountries={["us"]}
+                          disableDropdown
                           // className="phone-input-wrapper  phone-input-container"
                           country={"us"}
                           buttonStyle={{
@@ -158,13 +163,15 @@ function LoanApplication() {
                         Months At Address*
                       </p>
 
-                      <div className=" text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
+                      <div className="flex justify-between items-center  text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
                         <CurrencyInput
                           prefix={selectedCurrency}
                           className=" w-[75%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
-
-                        <select
+                        <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
+                          USD
+                        </p>
+                        {/* <select
                           containerClass={SeclectContainer}
                           buttonClass={{ background: "white" }}
                           searchStyle={{ background: "white" }}
@@ -181,7 +188,7 @@ function LoanApplication() {
                               {currency.code}
                             </option>
                           ))}
-                        </select>
+                        </select> */}
                       </div>
                     </div>
                   </div>
@@ -199,13 +206,15 @@ function LoanApplication() {
                         Work Phone Number
                       </p>
 
-                      <div className=" text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
+                      <div className="flex justify-between items-center  text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
                         <CurrencyInput
                           prefix={selectedCurrency}
                           className=" w-[75%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
-
-                        <select
+                        <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
+                          USD
+                        </p>
+                        {/* <select
                           containerClass={SeclectContainer}
                           buttonClass={{ background: "white" }}
                           searchStyle={{ background: "white" }}
@@ -222,7 +231,7 @@ function LoanApplication() {
                               {currency.code}
                             </option>
                           ))}
-                        </select>
+                        </select> */}
                       </div>
                     </div>
                   </div>
@@ -264,16 +273,19 @@ function LoanApplication() {
                     <div className="flex-1 flex flex-col ">
                       <p className="text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
                         {" "}
-                        Months At Address*
+                        Monthly Paments
                       </p>
 
-                      <div className=" md:text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
+                      <div className="flex justify-between items-center  md:text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
                         <CurrencyInput
-                          prefix={selectedCurrency}
+                          prefix="$"
+                          // prefix={selectedCurrency}
                           className=" w-[75%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
-
-                        <select
+                        <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
+                          USD
+                        </p>
+                        {/* <select
                           containerClass={SeclectContainer}
                           buttonClass={{ background: "white" }}
                           searchStyle={{ background: "white" }}
@@ -290,7 +302,7 @@ function LoanApplication() {
                               {currency.code}
                             </option>
                           ))}
-                        </select>
+                        </select> */}
                       </div>
                     </div>
                   </div>
@@ -350,8 +362,10 @@ function LoanApplication() {
                         </p>
                         <div className=" rounded-[12px] w-[100%] h-[30px]  md:w-[23.5vw] lg:w-[17vw]">
                           <PhoneInput
+                            onlyCountries={["us"]}
                             // className="phone-input-wrapper  phone-input-container"
                             country={"us"}
+                            disableDropdown
                             buttonStyle={{
                               background: "white",
                               borderRight: "0px",
@@ -385,12 +399,15 @@ function LoanApplication() {
                         Gross Monthly Income (cash/tips/etc)*
                       </p>
 
-                      <div className=" md:w-[24vw] lg:w-[16.8vw] h-[35px] text-[.5vw] flex md:h-[4.68vh] border rounded-[8px] p-1">
+                      <div className="flex justify-between items-center  md:w-[24vw] lg:w-[16.8vw] h-[35px] text-[.5vw] flex md:h-[4.68vh] border rounded-[8px] p-1">
                         <CurrencyInput
                           prefix={selectedCurrency}
                           className=" w-[70%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
-                        <select
+                        <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
+                          USD
+                        </p>
+                        {/* <select
                           className="w-[25%] text-[14px] md:text-[1vw] border-none outline-none"
                           id="currency-select"
                           value={selectedCurrency}
@@ -406,7 +423,7 @@ function LoanApplication() {
                           ))}
 
                           {console.log(selectedCurrency)}
-                        </select>
+                        </select> */}
                       </div>
                     </div>
                   </div>
@@ -487,12 +504,15 @@ function LoanApplication() {
                         Estimated Financing Amount Needed
                       </p>
 
-                      <div className=" md:w-[24vw] lg:w-[16.8vw] text-[.5vw] flex h-[35px] md:h-[4.68vh] border rounded-[8px] p-1">
+                      <div className="flex justify-between items-center  md:w-[24vw] lg:w-[16.8vw] text-[.5vw] flex h-[35px] md:h-[4.68vh] border rounded-[8px] p-1">
                         <CurrencyInput
                           prefix={selectedCurrency}
                           className=" w-[70%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
-                        <select
+                        <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
+                          USD
+                        </p>
+                        {/* <select
                           className="w-[25%] text-[14px] md:text-[1vw] border-none outline-none"
                           id="currency-select"
                           value={selectedCurrency}
@@ -508,7 +528,7 @@ function LoanApplication() {
                           ))}
 
                           {console.log(selectedCurrency)}
-                        </select>
+                        </select> */}
                       </div>
                     </div>
 
@@ -518,13 +538,13 @@ function LoanApplication() {
                         Down Payment Amount
                       </p>
 
-                      <div className=" text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[16.8vw] border rounded-[8px] p-1">
+                      <div className="flex justify-between items-center  text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[16.8vw] border rounded-[8px] p-1">
                         <CurrencyInput
                           prefix={selectedCurrency}
                           className=" w-[75%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
 
-                        <select
+                        {/* <select
                           className="w-[25%] text-[14px] mdtext-[1vw] border-none outline-none"
                           id="currency-select"
                           value={selectedCurrency}
@@ -540,7 +560,10 @@ function LoanApplication() {
                           ))}
 
                           {console.log(selectedCurrency)}
-                        </select>
+                        </select> */}
+                        <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
+                          USD
+                        </p>
                       </div>
                     </div>
 
