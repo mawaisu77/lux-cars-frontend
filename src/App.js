@@ -28,6 +28,7 @@ import Funds from "./Components/user-page/user-pages/Funds.js";
 import ProtectedRoute from "./utils/ProtectedRoutes.js";
 import SearchPage from "./Components/SearchPage/index.js";
 import Successfull_Login from "./Components/successfullLogin/index.jsx";
+import Vehicle from "./Components/vehicle/index.js";
 import Review from "./Components/review/index.js";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext.js";
@@ -224,6 +225,7 @@ function App() {
             />
             <Route path="/search-page" element={<SearchPage />} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
+            <Route path="/vehicle-detail" element={<Vehicle />} />
             {/* <Route path="/review" element={<Review />} /> */}
             <Route path="/admin/dashboard" element={<>welcome</>} />
 
