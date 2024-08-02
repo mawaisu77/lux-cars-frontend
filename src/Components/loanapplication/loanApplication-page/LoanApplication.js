@@ -50,26 +50,26 @@ function LoanApplication() {
         </div>
       </div>
 
-      <div className="w-[90vw] md:w-[55vw] lg:w-[42.708vw] mx-auto  rounded-[2.083vw] my-[4.167vh] boxShadow shadow">
-        <div className=" px-[14px] py-[12px] md:px-[3vw] md:py-[1.4vh] lg:px-[3.8vw] py-[4.167vh]  text-left ">
+      <div className="w-[90vw] md:w-[55vw] lg:w-[42.708vw] mx-auto  rounded-[2.083vw]  my-[7.813vh] boxShadow shadow">
+        <div className=" px-[14px] md:px-[3vw] lg:px-[3.8vw] py-[30px] md:py-[8.333vh]  text-left ">
           <div className=" ">
-            <h1 className="text-center md:text-left text-[27px] md:text-[1.354vw] font-semibold text-[#1F1F2C] mb-[1.875vh]  ">
+            <h1 className="text-center md:text-left text-[27px] md:text-[1.354vw] font-semibold text-[#1F1F2C] mb-[30px] md:mb-[5.208vh]  ">
               Personal Information
             </h1>
             <div className="">
               <form className=" ">
                 <div>
-                  <h1 className="text-[20px] md:text-[1.042vw]  font-semibold text-[#1F1F2C] mb-[6.67px] md:mb-[1.042vh]  ">
+                  <h1 className="text-[20px] md:text-[1.042vw]  font-semibold text-[#1F1F2C] mb-[30px] md:mb-[3.385vh]  ">
                     Title
                   </h1>
 
-                  <div className=" mb-[3.12vh] bg-[#F8F8F8] h-[46px] w-[100px] md:h-[4.68vh] md:w-[8vw] lg:w-[5.12vw] flex items-center  rounded-[0.313vw]">
-                    <select className="text-[15px] md:text-[1vw] lg:text-[1.09vw] text-[#1F1F2C] w-[68px] md:w-auto mx-[10px] md:mx-[5px] outline-none font-[400] bg-transparent my-[10px] ">
+                  <div className=" border mb-[3.12vh] bg-[#F8F8F8] h-[40px] md:h-[4.68vh] w-[70px]   md:w-[4.5vw] flex items-center  rounded-[0.313vw]">
+                    <select className="text-[12px] md:text-[.5vw] lg:text-[1.09vw] text-[#1F1F2C] w-[100%] mx-[10px] md:mx-[5px] outline-none font-[400] bg-transparent my-[10px] ">
                       <option>Mr</option>
                       <option>Mr.s</option>
                     </select>
                   </div>
-                  <div className=" md:flex lg:flex  md:gap-x-[1.042vw] flex-col md:flex-row  items-end mb-[3.12vh]">
+                  <div className=" md:flex lg:flex  md:gap-x-[1.042vw] flex-col md:flex-row  items-end mb-[3.646vh]">
                     <div className="flex-1  flex flex-col ">
                       <p className="text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
                         {" "}
@@ -88,7 +88,7 @@ function LoanApplication() {
                     </div>
                   </div>
 
-                  <div className="md:flex gap-x-[1.042vw] flex-col md:flex-row items-start mb-[3.12vh]">
+                  <div className="md:flex gap-x-[1.042vw] flex-col md:flex-row items-start mb-[3.646vh]">
                     <div className="flex-1  flex flex-col w-[100%] md:w-[40%]">
                       <p className="text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
                         Email*
@@ -114,7 +114,7 @@ function LoanApplication() {
                           containerClass="  mx-auto border-none  outline-none  p-0 m-0 "
                           // containerStyle={{height:"20px"}}
                           inputStyle={{ width: "100%", height: "4.68vh" }}
-                          inputClass="bg-blue-400 text-black p-0 m-0   border-none rounded outline-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          inputClass="bg-blue-400 text-black p-0 m-0   border-none rounded outline-none focus:outline-none focus:ring-2 focus:ring-grey-400"
                         />
                       </div>
                     </div>
@@ -165,7 +165,8 @@ function LoanApplication() {
 
                       <div className="flex justify-between items-center  text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
                         <CurrencyInput
-                          prefix={selectedCurrency}
+                          // prefix={selectedCurrency}
+                           prefix="$"
                           className=" w-[75%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
                         <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
@@ -208,7 +209,8 @@ function LoanApplication() {
 
                       <div className="flex justify-between items-center  text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[17vw] border rounded-[8px] p-1">
                         <CurrencyInput
-                          prefix={selectedCurrency}
+                          // prefix={selectedCurrency}
+                           prefix="$"
                           className=" w-[75%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
                         <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
@@ -236,11 +238,11 @@ function LoanApplication() {
                     </div>
                   </div>
                   <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row  mb-[1.25vh]">
-                    <div className="flex-1  flex flex-col mb-[1.56vh] ">
-                      <p className="text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[1.56vh]">
+                    <div className="flex-1  flex flex-col mb-[20px] md:mb-[1.56vh] ">
+                      <p className="text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[20px] md:mb-[1.56vh]">
                         Residence Type
                       </p>
-                      <div className="flex items-center mb-[3.12vh]">
+                      <div className="flex gap-[6px] md:gap-[0.313vw] items-center mb-[3.12vh]">
                         <input
                           type="radio"
                           value="option1"
@@ -255,7 +257,7 @@ function LoanApplication() {
                         </label>
                       </div>
 
-                      <div className="flex items-center mb-[3.12vh]">
+                      <div className="flex gap-[6px] md:gap-[0.313vw] items-center mb-[3.12vh]">
                         <input
                           type="radio"
                           value="option1"
@@ -312,7 +314,7 @@ function LoanApplication() {
                       <p className="text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[1.56vh]">
                         Vehicle Information
                       </p>
-                      <div className="flex items-center mb-[3.12vh]">
+                      <div className="flex gap-[6px] md:gap-[0.313vw] items-center mb-[3.12vh]">
                         <input
                           type="radio"
                           value="option1"
@@ -326,7 +328,7 @@ function LoanApplication() {
                           New
                         </label>
                       </div>
-                      <div className="flex items-center mb-[3.12vh]">
+                      <div className="flex gap-[6px] md:gap-[0.313vw] items-center mb-[3.12vh]">
                         <input
                           type="radio"
                           value="option1"
@@ -344,7 +346,7 @@ function LoanApplication() {
                   </div>
 
                   <div>
-                    <h1 className="text-[20px] md:text-[1.354vw] font-[700] text-[#1F1F2C] mb-[1.875vh]  ">
+                    <h1 className="text-[20px] md:text-[1.354vw] font-[700] text-[#1F1F2C] mb-[30px] md:mb-[5.208vh]  ">
                       Employment Information
                     </h1>
 
@@ -366,6 +368,7 @@ function LoanApplication() {
                             // className="phone-input-wrapper  phone-input-container"
                             country={"us"}
                             disableDropdown
+                             
                             buttonStyle={{
                               background: "white",
                               borderRight: "0px",
@@ -401,7 +404,8 @@ function LoanApplication() {
 
                       <div className="flex justify-between items-center  md:w-[24vw] lg:w-[16.8vw] h-[35px] text-[.5vw] flex md:h-[4.68vh] border rounded-[8px] p-1">
                         <CurrencyInput
-                          prefix={selectedCurrency}
+                          // prefix={selectedCurrency}
+                           prefix="$"
                           className=" w-[70%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
                         <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
@@ -429,7 +433,7 @@ function LoanApplication() {
                   </div>
 
                   <div className=" ">
-                    <h1 className="text-[20px] md:text-[1.354vw] font-semibold text-[#1F1F2C] mb-[1.875vh]  ">
+                    <h1 className="text-[20px] md:text-[1.354vw] font-semibold text-[#1F1F2C] mb-[30px] md:mb-[2.604vh] mt-[75px] md:mt-[3.906vh]  ">
                       Financial Information
                     </h1>
 
@@ -498,7 +502,7 @@ function LoanApplication() {
                       </div>
                     </div>
 
-                    <div className="flex-1 flex flex-col mb-[1.25vh]">
+                    <div className="flex-1 flex flex-col mb-[50px] md:mb-[2.604vh]">
                       <p className="text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
                         {" "}
                         Estimated Financing Amount Needed
@@ -506,7 +510,8 @@ function LoanApplication() {
 
                       <div className="flex justify-between items-center  md:w-[24vw] lg:w-[16.8vw] text-[.5vw] flex h-[35px] md:h-[4.68vh] border rounded-[8px] p-1">
                         <CurrencyInput
-                          prefix={selectedCurrency}
+                          // prefix={selectedCurrency}
+                          prefix="$"
                           className=" w-[70%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
                         <p className="text-[14px] md:text-[0.729vw]  font-[400] text-[#8A8AA0] font-urbanist">
@@ -532,7 +537,7 @@ function LoanApplication() {
                       </div>
                     </div>
 
-                    <div className="flex-1 flex flex-col mb-[1.25vh]">
+                    <div className="flex-1 flex flex-col mb-[50px] md:mb-[2.604vh]">
                       <p className="text-[14px] md:text-[0.729vw]  font-[600] text-[#1F1F2C] font-urbanist mb-[6px]">
                         {" "}
                         Down Payment Amount
@@ -540,7 +545,8 @@ function LoanApplication() {
 
                       <div className="flex justify-between items-center  text-[.5vw] flex h-[35px] md:h-[4.68vh] md:w-[24vw] lg:w-[16.8vw] border rounded-[8px] p-1">
                         <CurrencyInput
-                          prefix={selectedCurrency}
+                          // prefix={selectedCurrency}
+                          prefix="$"
                           className=" w-[75%] text-[14px] md:text-[1vw] border-none outline-none"
                         />
 
@@ -615,11 +621,11 @@ function LoanApplication() {
 
                     <div className="xl:flex gap-x-[1.042vw] flex-col xl:flex-row items-end mb-[1.25vh]">
                       <div className="flex-1/2   flex flex-col ">
-                        <p className="text-[19px] md:text-[1.46vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[1.56vh]">
+                        <p className="text-[19px]  md:text-[1.1vw] font-[700] text-[#1F1F2C] font-urbanist mb-[1.56vh]">
                           Which bank do you want to contact you? (please check
                           all that apply)
                         </p>
-                        <div className="flex  mb-[1.56vh] items-center">
+                        <div className="flex gap-[6px] md:gap-[0.313vw] mb-[1.56vh] items-center">
                           {" "}
                           <input
                             type="radio"
@@ -631,7 +637,7 @@ function LoanApplication() {
                             Scotland
                           </label>
                         </div>
-                        <div className="flex mb-[1.56vh] items-center">
+                        <div className="flex gap-[6px] md:gap-[0.313vw] mb-[1.56vh] items-center">
                           <input
                             type="radio"
                             value="option1"
@@ -642,7 +648,7 @@ function LoanApplication() {
                             RBC Royal Bank
                           </label>
                         </div>
-                        <div className="flex  mb-[1.56vh] items-center">
+                        <div className="flex gap-[6px] md:gap-[0.313vw]  mb-[1.56vh] items-center">
                           {" "}
                           <input
                             type="radio"
@@ -654,7 +660,7 @@ function LoanApplication() {
                             Commonwealth Bank
                           </label>
                         </div>
-                        <div className="flex mb-[1.56vh] items-center">
+                        <div className="flex gap-[6px] md:gap-[0.313vw] mb-[1.56vh] items-center">
                           <input
                             type="radio"
                             value="option1"
@@ -674,7 +680,7 @@ function LoanApplication() {
                           Best time to contact?
                         </p>
 
-                        <div className="flex  mb-[1.56vh] items-center">
+                        <div className="flex gap-[6px] md:gap-[0.313vw]  mb-[1.56vh] items-center">
                           {" "}
                           <input
                             type="radio"
@@ -686,7 +692,7 @@ function LoanApplication() {
                             Morning
                           </label>
                         </div>
-                        <div className="flex mb-[1.56vh] items-center">
+                        <div className="flex gap-[6px] md:gap-[0.313vw] mb-[1.56vh] items-center">
                           <input
                             type="radio"
                             value="option1"
@@ -697,7 +703,7 @@ function LoanApplication() {
                             Afternoon
                           </label>
                         </div>
-                        <div className="flex  mb-[1.56vh] items-center">
+                        <div className="flex gap-[6px] md:gap-[0.313vw]  mb-[1.56vh] items-center">
                           {" "}
                           <input
                             type="radio"
@@ -709,7 +715,7 @@ function LoanApplication() {
                             Evening
                           </label>
                         </div>
-                        <div className="flex mb-[1.56vh] items-center">
+                        <div className="flex mb-[1.56vh] gap-[6px] md:gap-[0.313vw] items-center">
                           <input
                             type="radio"
                             value="option1"
