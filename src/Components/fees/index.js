@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Feespage from "./Feespage"
+import Feespage from "./fees-page/Feespage.js"
 const Fees = () => {
   return (
     <>

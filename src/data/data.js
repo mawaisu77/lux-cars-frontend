@@ -56,6 +56,17 @@ import client1 from "../assets/About/image (3).png"
 import client2 from "../assets/About/image (4).png"
 
 
+
+import { PiUsersFill } from "react-icons/pi";
+import { TiCreditCard } from "react-icons/ti";
+import { FaFolderPlus } from "react-icons/fa";
+import { BsCartFill } from "react-icons/bs";
+// import { BsCartFill } from "react-icons/bs";
+import { RiDiscountPercentFill } from "react-icons/ri";
+import { FaWifi } from "react-icons/fa";
+
+
+
 export const archieved =[
     {
         img: image21,
@@ -474,5 +485,62 @@ export const testi = [
     name: "Jody Andrew",
     designation: "Project Manager",
     image: client2
+},
+];
+
+
+
+
+export const feesLeftCard = [
+  {
+    heading: "no dealer license required",
+    icon: <PiUsersFill size={25} className="mx-auto"/>,
+},
+  {
+      heading: "no annual membership fee",
+      icon: <TiCreditCard size={25} className="mx-auto"/>,
+  },
+  {
+      heading: "ability to search two auctions",
+      icon: <FaWifi size={25} className="mx-auto"/>,
+  },
+  {
+      heading: "availability of full vehicle descriptions and details ",
+      icon: <FaFolderPlus size={25} className="mx-auto"/>,
+        },
+  {
+      heading: "helps buyers avoid purchasing staged cars ",
+      icon: <BsCartFill size={25} className="mx-auto"/>,
+     
+  },
+];
+
+
+export const feesRightCard = [
+  {
+    heading: "requirement for a dealer/broker license",
+    icon: <PiUsersFill size={25} className="mx-auto"/>,
+},
+  {
+      heading: "annual membership fee at both sites",
+      icon: <TiCreditCard size={25} className="mx-auto"/>,
+  },
+  {
+      heading: "separate deposits for each auction",
+      icon: <FaWifi size={25} className="mx-auto"/>,
+  },
+  {
+      heading: "shorter vehicle descriptions and details",
+      icon: <FaFolderPlus size={25} className="mx-auto"/>,
+        },
+  {
+      heading: "higher public fees available",
+      icon: <RiDiscountPercentFill size={25} className="mx-auto"/>,
+     
+  },
+  {
+    heading: "increased risk of purchasing staged vehicles",
+    icon: <TiCreditCard size={25} className="mx-auto"/>,
+   
 },
 ];
