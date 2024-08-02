@@ -51,18 +51,18 @@ const SingleProductTabs = ({ data }) => {
         <TabPanel className="max-w-[1000px] mx-auto">
           <div className="flex justify-between text-left my-10 leading-8">
             <div className="text-left">
-              <p className="text-[0.84vw] text-[#7a798a]">Engine: <span className="text-[1vw] text-black font-urbanist font-bold">4.3L V6</span></p>
-              <p className="text-[0.84vw] text-[#7a798a]">Drivetrain: <span className="text-[1vw] text-black font-urbanist font-bold">Rear-Wheel Drive</span></p>
-              <p className="text-[0.84vw] text-[#7a798a]">Transmission: <span className="text-[1vw] text-black font-urbanist font-bold">Manual</span></p>
-              <p className="text-[0.84vw] text-[#7a798a]">Odometer: <span className="text-[1vw] text-black font-urbanist font-bold">255,936 mi (411,889 km)</span></p>
-              <p className="text-[0.84vw] text-[#7a798a]">Condition: <span className="text-[1vw] text-black font-urbanist font-bold">Normal Wear, Minor Dent/Scratches</span></p>
-              <p className="text-[0.84vw] text-[#7a798a]">Start Code: <span className="text-[1vw] text-black font-urbanist font-bold">Run and Drive</span></p>
-              <p className="text-[0.84vw] text-[#7a798a]">Airbag Checked: <span className="text-[1vw] text-black font-urbanist font-bold">Driver, Passenger, Left, Right</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">Engine: <span className="text-[1vw] text-black font-urbanist font-bold">{data?.year}</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">Drivetrain: <span className="text-[1vw] text-black font-urbanist font-bold">{data?.drive}</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">Transmission: <span className="text-[1vw] text-black font-urbanist font-bold">{data?.transmission}</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">Odometer: <span className="text-[1vw] text-black font-urbanist font-bold">{data?.odometer}</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">Condition: <span className="text-[1vw] text-black font-urbanist font-bold">{data?.damage_pr + " " + data?.damage_sec}</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">Start Code: <span className="text-[1vw] text-black font-urbanist font-bold">{data?.status}</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">Airbag Checked: <span className="text-[1vw] text-black font-urbanist font-bold">Not integrated</span></p>
             </div>
             <div>
-              <p className="text-[0.84vw] text-[#7a798a]">From: <span className="text-[1vw] text-black font-urbanist font-bold">Kansas City, KS</span></p>
-              <p className="text-[0.84vw] text-[#7a798a]">To: <span className="text-[1vw] text-black font-urbanist font-bold">Houston, TX</span></p>
-              <p className="text-[0.84vw] text-[#7a798a]">Date: <span className="text-[1vw] text-black font-urbanist font-bold">Monday, May 13, 2024</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">From: <span className="text-[1vw] text-black font-urbanist font-bold">Not integrated</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">To: <span className="text-[1vw] text-black font-urbanist font-bold">Not integrated</span></p>
+              <p className="text-[0.84vw] text-[#7a798a]">Date: <span className="text-[1vw] text-black font-urbanist font-bold">Not integrated</span></p>
             </div>
           </div>
         </TabPanel>

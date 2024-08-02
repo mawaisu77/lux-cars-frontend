@@ -9,6 +9,7 @@ import useGetAllBidsCar from '../../hooks/useGetAllBidsCar';
 import Shimmer from '../../utils/loaders/Shimmer';
 import "./swiperstyles.css"
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 
 
@@ -83,9 +84,11 @@ import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
                       <div>
                         <div className="flex justify-between px-5 lg:px-[1vw] font-urbanist text-[18px] lg:text-[1.17vw] font-bold py-2 leading-[3vh] text-left">
                           "{card.title}"
+                          <Link to={`vehicle-detail/1249363`}>
                           <button className="flex justify-center text-center mr-5 lg:mr-[0.5vw]  text-[12px] lg:text-[0.78vw] h-[24px] lg:h-[3vh]  w-[43px] lg:w-[2.7vw] border text-white bg-[#ca0000] rounded-lg">
                             BID
                           </button>
+                          </Link>
                         </div>
                         <div>
                           <div className="flex   px-5 pb-[1vh]  ">

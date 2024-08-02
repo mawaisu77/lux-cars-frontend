@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import baseService from '../services/baseService';
 
-const useGetAllBidsCar = (url) => {
+const useGetCarDetail = (url) => {
   const [carDetailData, setCarDetailData] = useState(null);
   const [carDetailLoading, setCarDetailLoading] = useState(true);
   const [carDetailError, setCarDetailError] = useState(null);
@@ -30,4 +30,4 @@ const useGetAllBidsCar = (url) => {
   return { carDetailData, carDetailLoading, carDetailError };
 };
 
-export default useGetAllBidsCar;
+export default useGetCarDetail;
