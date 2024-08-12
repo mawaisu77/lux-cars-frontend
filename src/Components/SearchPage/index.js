@@ -3,6 +3,7 @@ import Header from "../header/Header/Header";
 import { Link } from "react-router-dom";
 import Sidebar from "./search-page/sidebar";
 
+
 function SearchPage() {
   return (
     <>

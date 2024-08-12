@@ -11,10 +11,10 @@ function SearchMainPage() {
   const options = ["Won Bids", "Lost Bids", "Saved"];
   return (
     <div>
-      <div className="w-[74vw] mx-auto mt-[2.604vw]">
+      <div className="w-[54vw] mx-auto mt-[2.604vw] font-urbanist">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
           <div className="flex mb-4 lg:mb-0">
-            <h2 className="text-lg lg:text-2xl font-bold">
+            <h2 className="text-[1.95vw] font-urbanist font-bold">
               "72,243 Available Vehicles"
             </h2>
           </div>
@@ -22,20 +22,20 @@ function SearchMainPage() {
             <input
               type="text"
               placeholder="Search here..."
-              className="w-52 lg:w-80 h-10 lg:h-12 rounded-l-xl border p-2"
+              className=" lg:w-[17vw]  lg:h-[4.8vh] rounded-l-lg border p-2 text-[0.8vw]"
             />
-            <div className="flex w-10 lg:w-12 h-10 lg:h-12 justify-center items-center bg-red-700 rounded-r-xl">
+            <div className="flex h-[4.8vh] w-[3vw] justify-center items-center bg-red-700 rounded-r-lg">
               <GoSearch size={20} color="white" className="cursor-pointer" />
             </div>
             <button
               onClick={toggleDropdown}
-              className="w-24 lg:w-28 h-10 lg:h-12 flex items-center justify-center ml-2 border bg-white"
+              className=" w-[5.5vw] h-[4.8vh] rounded-lg text-[0.8vw] flex items-center justify-center ml-2 border bg-white"
             >
               Sort By
               <RiArrowDropDownLine size={20} className="ml-1 cursor-pointer" />
             </button>
             {isDropdownOpen && (
-              <div className="origin-top-right z-10 absolute right-0 mt-2 w-24 lg:w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div className="origin-top-right z-10 absolute right-0 mt-[5vh]  w-[5.5vw] h-[15.8vh]  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div
                   className="py-1"
                   role="menu"
@@ -45,7 +45,7 @@ function SearchMainPage() {
                   {options.map((option, index) => (
                     <button
                       key={index}
-                      className="w-full h-10 lg:h-12 flex items-center justify-center text-sm text-gray-700 hover:bg-red-700 hover:text-white"
+                      className="  flex items-center justify-center w-[5.5vw] h-[4.8vh] text-sm text-gray-700 hover:bg-red-700 hover:text-white"
                       role="menuitem"
                       onClick={() => {
                         console.log(option);
