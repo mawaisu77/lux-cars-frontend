@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import ImageViewer from "react-simple-image-viewer";
 
 const SwiperGallery = ({ images }) => {
@@ -28,12 +28,16 @@ const SwiperGallery = ({ images }) => {
           "--swiper-pagination-color": "#fff",
         }}
         loop={true}
+        autoplay={{
+          delay: 2000, 
+          disableOnInteraction: false, 
+        }}
         spaceBetween={10}
         navigation={true}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         className="mySwiper2"
       >
         {images && images.map((image, index) => (

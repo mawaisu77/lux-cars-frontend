@@ -96,7 +96,7 @@ const VehicleHero = () => {
                 </div>
 
                 <div className="w-[33vw] ">
-                  <div>{`${days} ${hours} ${minutes} ${seconds}`}</div>
+                  {/* <div>{`${days} ${hours} ${minutes} ${seconds}`}</div> */}
                   <div>
                     <div className="flex justify-between mb-[3vh]">
                       <div className="flex justify-center items-center gap-2">
@@ -112,16 +112,16 @@ const VehicleHero = () => {
                         <p className="w-[1.69vw] h-[3.79vh] font-urbanist text-white bg-[#47a432] text-[1.1vw] rounded-full font-bold">
                           R
                         </p>
-                        <p className="text-[1.7vw] font-urbanist font-semibold">
+                        <p className="text-[1.7vw] font-urbanist font-semibold ">
                           {carDetailData?.data?.title}
                         </p>
                       </div>
-                      <div className="flex justify-center items-center gap-1">
+                      {/* <div className="flex justify-center items-center gap-1">
                         <div className="flex justify-center items-center gap-1 bg-[#f8f8f8] font-semibold rounded-xl text-[0.9vw] cursor-pointer w-[4vw] h-[4vh]">
                           <IoEyeOutline />
                           <p>225</p>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="flex justify-between mb-[3vh]">
                       <div className="flex px-2 gap-2 items-center w-[16vw] h-[6.7vh] rounded-lg bg-[#f8f8f8]">
@@ -181,20 +181,18 @@ const VehicleHero = () => {
                         </div>
                         <div className="flex items-center">
                           <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                            Year :
+                            Year/Make :
                           </p>
                           <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                            {carDetailData?.data?.year}
+                            {carDetailData?.data?.year + " " + carDetailData?.data?.make }
                           </p>
                         </div>
                         <div className="flex items-center">
                           <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                            Make/Model:
+                            Model:
                           </p>
                           <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                            {carDetailData?.data?.make +
-                              " " +
-                              carDetailData?.data?.model}
+                             {carDetailData?.data?.model}
                           </p>
                         </div>
                       </div>

@@ -97,8 +97,8 @@ const SingleProductTabs = ({ data }) => {
           <div className="grid  md:grid-cols-3 my-4 leading-8 md:gap-x-20">
             <div className="flex flex-col items-start text-[20px] leading-10">
               <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Title:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
+                <p className="text-[20px] text-[#7a798a] font-urbanist text-left">Title:</p>
+                <span className="text-[20px] text-black font-urbanist font-semibold text-left">
                   {data?.title}
                 </span>
               </div>
