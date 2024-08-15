@@ -9,13 +9,14 @@ import { getToken } from "../../../utils/storageUtils";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import useGetCarDealer from "../../../hooks/useGetCarDealer";
 import CurrencyInput from "react-currency-input-field";
-import { ClipLoader } from "react-spinners"; // Optional spinner library
+import { ClipLoader } from "react-spinners";
 import { showToast } from "../../../utils/Toast";
 import uploadCarValidation from "../../../utils/validations/upload-car-validation";
 import { API_BASE_URL } from "../../../services/baseService";
 import { FaTag } from "react-icons/fa";
 import { HiUserGroup } from "react-icons/hi";
 import registerDealerValidations from "../../../utils/validations/register-dealer-validations";
+import { RegionDropdown } from "react-country-region-selector";
 
 const UploadVehicle = () => {
   const { dealerData, dealerLoading, dealerError } = useGetCarDealer(
@@ -34,8 +35,10 @@ const UploadVehicle = () => {
 
   const [userType, setUserType] = useState("dealer");
   const [selectedOption, setSelectedOption] = useState("Select sales range");
-  const [transmission, setTransmission] = useState("transmission type");
+  const [transmission, setTransmission] = useState("Select transmission type");
   const [additionalFields, setAdditionalFields] = useState([""]);
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
 
   // toggles
   const [carModificationStatus, setCarModificationStatus] = useState("stock");
@@ -46,12 +49,62 @@ const UploadVehicle = () => {
     minPrice: false,
   });
 
-  const changeHandler = (selectedOption) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [transmissionIsOpen, setTransmissionIsOpen] = useState(false);
+
+
+  const [imagePreview, setImagePreview] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const filesInputRef = useRef(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
+
+
+
+  const options = ["Less than 10", "10-50", "50-100", "More than 100"];
+
+  const transmissionOptions = [
+    "Automatic",
+    "Manual",
+  ];
+
+  const titleStatusOptions = [
+    { value: "status_1", label: "status_1" },
+    { value: "status_2", label: "status_2" },
+    { value: "status_3", label: "status_3" },
+  ];
+  // const titleStatusOptions = [
+  //   { value: "stationary", label: "Stationary" },
+  //   { value: "run&drive", label: "Run & Drive" },
+  //   { value: "starts", label: "Starts" },
+  // ];
+
+  const customStyles = {
+    control: (defaultStyles) => ({
+      ...defaultStyles,
+      padding: "2px 0px",
+    }),
+  };
+
+
+  const handleCountryChange = (selectedOption) => {
+    setCountry(selectedOption ? selectedOption.label : "");
     setFormData((prevData) => ({
       ...prevData,
       carDetails: {
         ...prevData.carDetails,
         carLocation: selectedOption ? selectedOption.label : "",
+        carState: "", // Reset state when country changes
+      },
+    }));
+  };
+  const handleStateChange = (val) => {
+    setRegion(val);
+    setFormData((prevData) => ({
+      ...prevData,
+      carDetails: {
+        ...prevData.carDetails,
+        carState: val,
       },
     }));
   };
@@ -66,30 +119,6 @@ const UploadVehicle = () => {
     }));
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [transmissionIsOpen, setTransmissionIsOpen] = useState(false);
-
-  const options = ["1-10", "11-50", "51-100", "101-200", "201+"];
-
-  const transmissionOptions = [
-    "transmission_1",
-    "transmission_2",
-    "transmission_3",
-    "transmission_4",
-    "transmission_5",
-  ];
-
-  const titleStatusOptions = [
-    { value: "status_1", label: "status_1" },
-    { value: "status_2", label: "status_2" },
-    { value: "status_3", label: "status_3" },
-  ];
-
-  const [imagePreview, setImagePreview] = useState(null);
-  const fileInputRef = useRef(null);
-
-  const filesInputRef = useRef(null);
-  const [imagePreviews, setImagePreviews] = useState([]);
 
   const [formData, setFormData] = useState({
     buyerFeeDetails: dealerData ? dealerData?.data?.buyerFeeDetails : "",
@@ -113,11 +142,14 @@ const UploadVehicle = () => {
       carTitledAt: "",
       carTitledInfo: "",
       referral: "",
+      carLocation: "",
+      carState: "",
     },
 
     dealershipLicense: null,
     carImages: [],
   });
+
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
@@ -223,6 +255,7 @@ const UploadVehicle = () => {
     CarDetails.append("modification", formData.carDetails.modification);
     CarDetails.append("significantFlaws", formData.carDetails.significantFlaws);
     CarDetails.append("carLocation", formData.carDetails.carLocation);
+    CarDetails.append("carState", formData.carDetails.ca);
     CarDetails.append("zip", formData.carDetails.zip);
     CarDetails.append("carTitledAt", formData.carDetails.carTitledAt);
     CarDetails.append("carTitledInfo", formData.carDetails.carTitledInfo);
@@ -387,12 +420,7 @@ const UploadVehicle = () => {
     }));
   };
 
-  const customStyles = {
-    control: (defaultStyles) => ({
-      ...defaultStyles,
-      padding: "2px 0px",
-    }),
-  };
+  
 
   const carTiltledAtHandler = (selectedOption) => {
     setFormData((prevData) => ({
@@ -999,7 +1027,7 @@ const UploadVehicle = () => {
           )}
 
           {/*dropdown --> Car located */}
-          <div className="grid md:grid-cols-3 w-full">
+          <div className="grid md:grid-cols-3  md:gap-x-4 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
               <label className="font-bold text-[20px] text-left">
                 Where is the car located?
@@ -1010,7 +1038,7 @@ const UploadVehicle = () => {
                 )}
                 options={option}
                 styles={customStyles}
-                onChange={changeHandler}
+                onChange={handleCountryChange}
                 className={`w-full border ${
                   carErrors.carLocation
                     ? "placeholder-[#CA0000]  border-[#CA0000] "
@@ -1019,6 +1047,24 @@ const UploadVehicle = () => {
                 placeholder="Select country"
               />
             </div>
+            {country && (
+              <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
+                <label className="font-bold text-[20px] text-left">
+                  Select Region
+                </label>
+                <RegionDropdown
+                  country={country}
+                  value={region}
+                  onChange={handleStateChange}
+                  className={`w-full h-full border-2 border-gray-300 rounded-sm ${
+                    carErrors.carState
+                      ? "placeholder-[#CA0000] border-[#CA0000]"
+                      : "text-black"
+                  }`}
+                  placeholder="Select state"
+                />
+              </div>
+            )}
           </div>
 
           {/* ZIPCODE  */}
@@ -1144,7 +1190,7 @@ const UploadVehicle = () => {
               </div>
             </div>
           </div>
-          {!selectedOptions.carTitledInfo && (
+          {selectedOptions.carTitledInfo && (
             <p className="text-gray-500 text-left">
               if the vehicle is titled or registered in the name of another
               individual, a photo of the person's ID will be requested for
@@ -1152,7 +1198,7 @@ const UploadVehicle = () => {
             </p>
           )}
 
-          {!selectedOptions.carTitledInfo && (
+          {selectedOptions.carTitledInfo && (
             <div className="grid grid-cols-1 w-full">
               <div className="flex flex-col gap-y-4 items-start ">
                 <label className="font-bold text-[20px] text-left">

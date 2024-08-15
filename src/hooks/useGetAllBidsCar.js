@@ -10,17 +10,14 @@ const useGetAllBidsCar = (url) => {
     const fetchData = async () => {
       try {
         const response = await baseService.get(url);
-        setCarData(response.data);
+        setCarData(response.data.data.cars);
       } catch (err) {
         console.log(err)
         if (err.response) {
-          // Server responded with a status other than 200 range
           setCarError(`${err.response.data.message}`);
         } else if (err.request) {
-          // Request was made but no response
           setCarError('Error: No response from server');
         } else {
-          // Something else happened while setting up the request
           setCarError(`Error: ${err.message}`);
         }
       } finally {

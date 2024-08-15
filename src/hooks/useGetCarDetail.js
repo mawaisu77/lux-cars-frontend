@@ -9,6 +9,7 @@ const useGetCarDetail = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("is render ")
         const response = await baseService.get(url);
         setCarDetailData(response.data);
       } catch (err) {
