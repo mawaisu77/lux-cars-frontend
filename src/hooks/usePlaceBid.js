@@ -11,7 +11,7 @@ const usePlaceBid = () => {
     setPlaceBidError(null);
     setPlaceBidSuccess(false);
     try {
-      await baseService.post(`bid-cars/create-bid-car`, {
+      await baseService.post(`bid-cars/place-bid`, {
         lot_id,
         currentBid,
       });

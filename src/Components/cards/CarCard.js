@@ -69,7 +69,7 @@ const CarCard = ({ card }) => {
             </div>
           </div>
         </div>
-        <Link to={'vehicle-detail/1249363'}>
+        <Link to={`vehicle-detail/${card.lot_id}`}>
         <button className=" w-[270px] mb-[1vh] lg:w-[15vw]  rounded-xl h-[40px] lg:h-[5.5vh] text-[16px] lg:text-[1.04vw] bg-[#7a798a] text-white font-urbanist mt-3 hover:bg-[#ca0000] duration-200">
           Bid Now
         </button>

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Header from "../../header/Header/Header";
 import { Link, useParams } from "react-router-dom";
 import logo from "../../../assets/Vehicle/Rectangle 767.png";
@@ -26,37 +26,51 @@ import CurrencyInput from "react-currency-input-field";
 import usePlaceBid from "../../../hooks/usePlaceBid";
 import image31 from "../../../assets/HCards/Avatar.png";
 import useTimer from "../../../hooks/useTimer";
+import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
   const [placeBidAmount, setPlaceBidAmount] = useState("");
 
   const { carDetailData, carDetailLoading, carDetailError } = useGetCarDetail(
-    `cars/get-car-by-lot-id/testing?lotID=${lotID}`
+    `cars/get-car-by-lot-id?lot_id=${lotID}`
   );
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
 
-  // const handlePlaceBid = (event) => {
-  //   event.preventDefault()
-  // };
-
-  // const handlePlaceBidConfirmation = (event) => {
-  //   event.preventDefault()
-  //   placeBid({ lot_id:lotID, currentBid:placeBidAmount });
-  // };
-
   const handlePlaceBid = () => {
-    console.log("Bid placed:", placeBidAmount);
     document.getElementById("my_modal_2").showModal();
   };
 
   const handleCloseModal2 = () => {
+    console.log("modal 2")
+    document.getElementById("my_modal_2").close();
+  };
+
+  const handleBidPlace = () => {
+    console.log(placeBidAmount)
+   placeBid({ lot_id:lotID, currentBid:placeBidAmount });
     document.getElementById("my_modal_2").close();
   };
 
   const targetTime = useMemo(() => Date.now() + 3600000, []);
   const { days, hours, minutes, seconds } = useTimer(targetTime);
+
+  useEffect(() => {
+    if (placeBidloading) {
+      // Show loader or do something when placing bid
+    }
+
+    if (placeBidSuccess) {
+      toast.success("Bid has been placed successfully");
+      document.getElementById("my_modal_2").close();
+    }
+
+    if (placeBiderror) {
+      toast.error(placeBiderror);
+    }
+  }, [placeBidloading, placeBidSuccess, placeBiderror]);
 
   return (
     <>
@@ -211,7 +225,7 @@ const VehicleHero = () => {
                             No of Bids :
                           </p>
                           <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                            {/* {carDetailData?.data?.vin} */}0
+                            {carDetailData?.data?.noOfBids}
                           </p>
                         </div>
                        </div>
@@ -285,7 +299,15 @@ const VehicleHero = () => {
                     }
                     className="flex justify-center items-center gap-2 h-[4.8vh] text-[0.97vw] mb-[3vh] rounded-full text-red-600 font-urbanist font-bold bg-[#f8f8f8] hover:bg-red-600 hover:text-white w-full duration-200"
                   >
-                    <TiLockClosed size={20} /> place Max bid
+                    {
+                      placeBidloading ? <ClipLoader /> : (
+                      <>
+                          <TiLockClosed size={20} /> 
+                          place Max bid
+                       </>
+                      )
+                    }
+                
                   </button>
 
                   <div className="flex justify-between">
@@ -402,8 +424,10 @@ const VehicleHero = () => {
                 Close
               </button>
               <button
-                className="btn w-[100px] text-green-600"
+                className={`btn w-[100px] text-green-600 ${placeBidAmount <= 0 ? 'bg-gray-200':''}`}
                 onClick={handlePlaceBid}
+                disabled={!placeBidAmount || placeBidAmount <= 0} // Disable button if bid amount is not set or less than or equal to 0
+
               >
                 Place Bid
               </button>
@@ -421,7 +445,7 @@ const VehicleHero = () => {
           <div className="flex gap-x-2 justify-center">
             <button
               className="btn text-green-600 w-[100px]"
-              onClick={handleCloseModal2}
+              onClick={handleBidPlace}
             >
               Yes
             </button>
