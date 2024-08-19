@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import bgImage from "../../../assets/BG-Img/kk 1.png";
 import img1 from "../../../assets/Home/Ellipse 2.png";
 import img2 from "../../../assets/Home/Ellipse 3.png";
 import img3 from "../../../assets/Home/Ellipse 4.png";
@@ -77,29 +76,29 @@ const Bid = () => {
       ...base,
       fontSize: '0.9vw',
       borderRadius: '0.74vh',
-      backgroundColor: 'transparent', // Makes the control's background transparent
-      border: '1px solid #ccc', // Optional: add a border for better visibility
-      boxShadow: 'none', // Remove default box shadow
+      backgroundColor: 'transparent', 
+      border: '1px solid #ccc', 
+      boxShadow: 'none', 
     }),
     menu: (base) => ({
       ...base,
-      backgroundColor: 'rgba(255, 255, 255, 0.8)', // Optional: make the dropdown menu background semi-transparent
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Optional: add a subtle shadow
+      backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
     }),
     placeholder: (base) => ({
       ...base,
-      color: '#8a8aa0', // Optional: change placeholder text color
+      color: '#8a8aa0', 
     }),
     singleValue: (base) => ({
       ...base,
-      color: '#333', // Optional: change the color of the selected value
+      color: '#333', 
     }),
     option: (base, state) => ({
       ...base,
       backgroundColor: state.isSelected ? '#CA0000' : 'transparent',
       color: state.isSelected ? 'white' : '#333',
       '&:hover': {
-        backgroundColor: '#f5f5f5', // Optional: hover effect for dropdown options
+        backgroundColor: '#f5f5f5', 
       },
     }),
   };
@@ -143,7 +142,7 @@ const Bid = () => {
             <div className=" flex flex-row justify-between text-left px-[1vw] items-center bottom-[5vh] w-[56vw] h-[12vh] bg-[#ffffffcc] rounded-xl absolute">
               {/* Dropdown for Makes (Car Makes) */}
               <div className="flex flex-col justify-center items-center border-r w-[12vw] text-left">
-              <p className="text-[1.17vw] font-urbanist font-semibold">Makes</p>
+              <p className={`text-[1.17vw] font-urbanist font-semibold ${error ? 'hidden': 'block'}`}>Makes</p>
               {loading && !carData ? (
                 <div className="flex justify-center items-center py-4">
                   <ClipLoader size={30} />
@@ -156,11 +155,12 @@ const Bid = () => {
                   options={carOptions}
                   isClearable
                   placeholder="Select Make"
+                  className={`${error ? 'hidden': 'block'}`}
                 />
               )}
               {error && (
                 <div className="py-4 text-center text-red-500">
-                  Error: {error}
+                  {error}
                 </div>
               )}
             </div>

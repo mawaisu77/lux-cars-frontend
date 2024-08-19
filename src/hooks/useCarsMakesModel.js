@@ -12,10 +12,14 @@ const useCarMakesModels = () => {
       try {
         const response = await axios.get(`${API_BASE_URL}cars/get-cars-makes-models`);
         setCarData(response?.data?.data);
-        console.log(response)
       } catch (err) {
-        setError(err);
-      } finally {
+        if (err.response) {
+          setError(`${err.response.data.message}`);
+        } else if (err.request) {
+          setError('No response from server');
+        } else {
+          setError(`${err.message}`);
+        }      } finally {
         setLoading(false);
       }
     };

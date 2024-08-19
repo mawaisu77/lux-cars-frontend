@@ -13,7 +13,6 @@ const useGetLocalCars = (url) => {
         const response = await baseService.get(url);
         setCarData(response.data);
       } catch (err) {
-        console.log(err)
         if (err.response) {
           setCarError(`${err.response.data.message}`);
         } else if (err.request) {

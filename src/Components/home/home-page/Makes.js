@@ -8,7 +8,7 @@ const Makes = () => {
   const { carData, loading, error } = useCarMakesModels();
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="text-red-600"> {error}</div>;
   }
 
 
