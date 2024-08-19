@@ -5,22 +5,13 @@ import { Link, useParams } from "react-router-dom";
 import logo from "../../../assets/Vehicle/Rectangle 767.png";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { BsDownload } from "react-icons/bs";
-import { IoEyeOutline } from "react-icons/io5";
-import { IoIosHeartEmpty } from "react-icons/io";
 import { PiUsersFill } from "react-icons/pi";
 import { CgFileDocument } from "react-icons/cg";
-import {
-  FaXTwitter,
-  FaGoogle,
-  FaLinkedinIn,
-  FaFacebook,
-} from "react-icons/fa6";
 import { TiLockClosed } from "react-icons/ti";
 import VehicleCards from "../../cards/VehicleCards";
 import VehicleTab from "../../vehicle/Vehicle-page/VehicleTab";
 import useGetCarDetail from "../../../hooks/useGetCarDetail";
 import FadeLoader from "react-spinners/FadeLoader";
-
 import SwiperGallery from "./SwiperGallery";
 import CurrencyInput from "react-currency-input-field";
 import usePlaceBid from "../../../hooks/usePlaceBid";
@@ -28,14 +19,17 @@ import image31 from "../../../assets/HCards/Avatar.png";
 import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import TimeLeftCounter from "./TimeLeftCounter";
+import { BsInfoCircle } from "react-icons/bs";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
-  const [placeBidAmount, setPlaceBidAmount] = useState("");
+  const [placeBidAmount, setPlaceBidAmount] = useState(0);
+  const [shouldRefetch, setShouldRefetch] = useState(false);
 
-  const { carDetailData, carDetailLoading, carDetailError } = useGetCarDetail(
-    `cars/get-car-by-lot-id?lot_id=${lotID}`
-  );
+  const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
+    useGetCarDetail(`cars/get-car-by-lot-id/testing?lot_id=${lotID}`);
+
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
 
@@ -44,25 +38,45 @@ const VehicleHero = () => {
   };
 
   const handleCloseModal2 = () => {
-    console.log("modal 2")
     document.getElementById("my_modal_2").close();
   };
 
-  const handleBidPlace = () => {
-    console.log(placeBidAmount)
-   placeBid({ lot_id:lotID, currentBid:placeBidAmount });
-    document.getElementById("my_modal_2").close();
+  const handleBidPlace = async () => {
+    try {
+      const placeBidAmountConvert = parseInt(placeBidAmount, 10);
+
+      await placeBid({ lot_id: lotID, currentBid: placeBidAmountConvert });
+      document.getElementById("my_modal_2").close();
+    } catch (error) {
+      toast.error(`Error placing bid: ${error.message}`);
+    }
   };
 
-  const targetTime = useMemo(() => Date.now() + 3600000, []);
+  const targetTime = useMemo(
+    () =>
+      carDetailData?.data?.auction_date
+        ? new Date(carDetailData?.data?.auction_date)
+        : null,
+    [carDetailData?.data?.auction_date]
+  );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
+  const isAuctionDateFuture =
+    targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
   useEffect(() => {
-    if (placeBidloading) {
-      // Show loader or do something when placing bid
-    }
+    fetchCarDetail();
+  }, [fetchCarDetail]);
 
+  useEffect(() => {
+    if (shouldRefetch) {
+      fetchCarDetail();
+      setShouldRefetch(false);
+    }
+  }, [shouldRefetch, fetchCarDetail]);
+
+  useEffect(() => {
     if (placeBidSuccess) {
+      setShouldRefetch(true);
       toast.success("Bid has been placed successfully");
       document.getElementById("my_modal_2").close();
     }
@@ -97,6 +111,12 @@ const VehicleHero = () => {
         <>
           {carDetailData && (
             <>
+              {!isAuctionDateFuture && (
+                <div className="bg-[#CA0000] shadow tracking-wider text-white text-center p-3 font-bold">
+                  Preliminary Bidding is Over for this vehicle
+                </div>
+              )}
+
               <div className="flex justify-between mx-auto w-[74vw] mt-[80px] mb-[20px]">
                 <div className="w-[36vw]">
                   <SwiperGallery images={carDetailData?.data?.link_img_hd} />
@@ -126,20 +146,16 @@ const VehicleHero = () => {
                         <p className="w-[1.69vw] h-[3.79vh] font-urbanist text-white bg-[#47a432] text-[1.1vw] rounded-full font-bold">
                           R
                         </p>
+
                         <p className="text-[1.7vw] font-urbanist font-semibold ">
                           {carDetailData?.data?.title}
                         </p>
+                    
                       </div>
-                      {/* <div className="flex justify-center items-center gap-1">
-                        <div className="flex justify-center items-center gap-1 bg-[#f8f8f8] font-semibold rounded-xl text-[0.9vw] cursor-pointer w-[4vw] h-[4vh]">
-                          <IoEyeOutline />
-                          <p>225</p>
-                        </div>
-                      </div> */}
                     </div>
                     <div className="flex justify-between mb-[3vh]">
                       <div className="flex px-2 gap-2 items-center w-[16vw] h-[6.7vh] rounded-lg bg-[#f8f8f8]">
-                        <div className="flex justify-center items-center rounded-lg w-[2.5vw] h-[5vh] bg-red-600">
+                        <div className="flex justify-center items-center rounded-lg w-[2.5vw] h-[5vh] bg-[#CA0000]">
                           <PiUsersFill color="white" />
                         </div>
                         <div className="text-left">
@@ -147,12 +163,12 @@ const VehicleHero = () => {
                             Owned by
                           </p>
                           <p className="text-[0.9vw] font-urbanist font-semibold">
-                            Non-insurance Company
+                            {carDetailData?.data?.seller || "Unknown"}
                           </p>
                         </div>
                       </div>
                       <div className="flex px-2 gap-2 items-center w-[16vw] h-[6.7vh] rounded-lg bg-[#f8f8f8]">
-                        <div className="flex justify-center items-center rounded-lg w-[2.5vw] h-[5vh] bg-red-600">
+                        <div className="flex justify-center items-center rounded-lg w-[2.5vw] h-[5vh] bg-[#CA0000]">
                           <CgFileDocument color="white" />
                         </div>
                         <div className="text-left">
@@ -198,7 +214,9 @@ const VehicleHero = () => {
                             Year/Make :
                           </p>
                           <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                            {carDetailData?.data?.year + " " + carDetailData?.data?.make }
+                            {carDetailData?.data?.year +
+                              " " +
+                              carDetailData?.data?.make}
                           </p>
                         </div>
                         <div className="flex items-center">
@@ -206,71 +224,60 @@ const VehicleHero = () => {
                             Model:
                           </p>
                           <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                             {carDetailData?.data?.model}
+                            {carDetailData?.data?.model}
                           </p>
                         </div>
                       </div>
-                      <div className="flex flex-col justify-evenly w-[16vw]  leading-8 rounded-lg ">
-                       <div className="flex flex-col bg-[#f8f8f8] px-2 py-2 justify-between rounded-lg">
-                       <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                            Current Bid:
-                          </p>
-                          <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                            {carDetailData?.data?.currentBid}
-                          </p>
+                      <div className="flex flex-col  w-[16vw]  leading-8 rounded-lg ">
+                        <div className="flex flex-col bg-[#f8f8f8] px-2 py-2 justify-between rounded-lg">
+                          <div className="flex items-center">
+                            <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                              Current Bid:
+                            </p>
+  
+                            <p className="font-urbanist font-bold text-[0.97vw] ml-2">
+                              {carDetailData?.data?.currentBid}
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                              No of Bids :
+                            </p>
+                            <p className="font-urbanist font-bold text-[0.97vw] ml-2">
+                              {carDetailData?.data?.noOfBids}
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                            No of Bids :
-                          </p>
-                          <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                            {carDetailData?.data?.noOfBids}
-                          </p>
-                        </div>
-                       </div>
+
+                        {carDetailData?.data?.auction_date ? (
+                          !isAuctionDateFuture ? (
+                            <>
+                              <TimeLeftCounter
+                                days={days}
+                                hours={hours}
+                                minutes={minutes}
+                                seconds={seconds}
+                              />
+                          
+                            </>
+                          ) : (
+                            ""
+                          )
+                        ) : (
+                          "Future"
+                        )}
+
                         {/* ================= */}
-                        <div className=" bg-[#f8f8f8] p-2 mt-2 rounded-lg">
-                          <span className="text-center font-bold">Time Left</span>
-                          <div className="flex justify-center  gap-3 items-center ">
-                          <div className="">
-                            <div className="shadow w-12 py-2 text-white font-bold bg-[#DF4949] border flex justify-center items-center rounded-md">
-                              {days}
-                            </div>
-                            <div className="text-black text-center text-sm  pt-1">
-                              Days
-                            </div>
-                          </div>
-                          <div className="">
-                            <div className="shadow w-12 py-2 text-white font-bold bg-[#DF4949] border flex justify-center items-center rounded-md">
-                              {hours}
-                            </div>
-                            <div className="text-black text-center text-sm  pt-1">
-                              Hours
-                            </div>
-                          </div>
-                          <div className="">
-                            <div className="shadow w-12 py-2 text-white font-bold bg-[#DF4949] border flex justify-center items-center rounded-md">
-                              {minutes}
-                            </div>
-                            <div className="text-black text-center text-sm  pt-1">
-                              Min
-                            </div>
-                          </div>
-                          <div className="">
-                            <div className="shadow w-12 py-2 text-white font-bold bg-[#DF4949] border flex justify-center items-center rounded-md">
-                              {seconds}
-                            </div>
-                            <div className="text-black text-center text-sm  pt-1">
-                              Sec
-                            </div>
-                          </div>
-                          </div>
-                         </div>
+                        {/* <TimeLeftCounter days={days} hours={hours} minutes={minutes} seconds={seconds} /> */}
+                        {/* {isAuctionDateFuture && (
+                     <div className="bg-red-600 tracking-wider text-white text-center p-3 font-bold">
+                     <TimeLeftCounter days={days} hours={hours} minutes={minutes} seconds={seconds} />
+                     </div>
+                   )} */}
                       </div>
                     </div>
                   </div>
-                  <div className="text-left flex gap-2 items-center mb-5">
+                  {/* <div className="text-left flex gap-2 items-center mb-5">
                     <p className="text-[1vw] font-urbanist font-bold">
                       Share :
                     </p>
@@ -291,23 +298,20 @@ const VehicleHero = () => {
                     <p className="underline font-urbanist text-[0.8vw] ml-5 cursor-pointer">
                       More
                     </p>
-                  </div>
-                
+                  </div> */}
+
                   <button
-                    onClick={() =>
-                      document.getElementById("my_modal_1").showModal()
-                    }
-                    className="flex justify-center items-center gap-2 h-[4.8vh] text-[0.97vw] mb-[3vh] rounded-full text-red-600 font-urbanist font-bold bg-[#f8f8f8] hover:bg-red-600 hover:text-white w-full duration-200"
+                    onClick={() => document.getElementById("my_modal_1").showModal()}
+                    className="flex justify-center mt-4 items-center gap-x-2 h-10 text-lg mb-4 rounded-xl text-white font-semibold bg-red-600 hover:bg-red-700 shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 w-full"
                   >
-                    {
-                      placeBidloading ? <ClipLoader /> : (
+                    {placeBidloading ? (
+                      <ClipLoader color="#ffffff" size={20} />
+                    ) : (
                       <>
-                          <TiLockClosed size={20} /> 
-                          place Max bid
-                       </>
-                      )
-                    }
-                
+                        <TiLockClosed size={24} />
+                        <span className="">PlACE MAX BID</span>
+                      </>
+                    )}
                   </button>
 
                   <div className="flex justify-between">
@@ -424,10 +428,11 @@ const VehicleHero = () => {
                 Close
               </button>
               <button
-                className={`btn w-[100px] text-green-600 ${placeBidAmount <= 0 ? 'bg-gray-200':''}`}
+                className={`btn w-[100px] text-green-600 ${
+                  placeBidAmount <= 0 ? "bg-gray-200" : ""
+                }`}
                 onClick={handlePlaceBid}
                 disabled={!placeBidAmount || placeBidAmount <= 0} // Disable button if bid amount is not set or less than or equal to 0
-
               >
                 Place Bid
               </button>

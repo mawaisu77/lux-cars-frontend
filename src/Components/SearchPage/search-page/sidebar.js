@@ -2,41 +2,55 @@ import React, { useEffect, useState } from "react";
 import SearchMainPage from "../search-page/searchMainPage";
 import useCarMakesModels from "../../../hooks/useCarsMakesModel";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const initialMake = queryParams.get("make") || "";
+  const initialModel = queryParams.get("model") || "";
+  const initialFromYear = queryParams.get("year_from") || "";
+  const initialToYear = queryParams.get("year_to") || "";
+  const initialPartner = queryParams.get("partner") || null;
 
-  const [selectedModel, setSelectedModel] = useState("");
-  const [selectedMake, setSelectedMake] = useState("");
+
+  const [selectedModel, setSelectedModel] = useState(initialModel || "");
+  const [selectedMake, setSelectedMake] = useState(initialMake || "");
   const [selectedFilters, setSelectedFilters] = useState({
-    source: [],
+    site: initialPartner ? initialPartner : null,
     make: initialMake,
-    model: "",
+    model: initialModel,
     tranmission: [],
     status: [],
     fuel: [],
-    year_from: "",
-    year_to: "",
+    year_from: initialFromYear || "",
+    year_to: initialToYear || "",
   });
   const [appliedFilters, setAppliedFilters] = useState({});
 
   const [filteredModels, setFilteredModels] = useState([]);
   const { carData, loading, error } = useCarMakesModels();
-
+  // console.log(typeof initialPartner, "sjsjjsbjs")
   useEffect(() => {
     if (selectedMake) {
       const selectedCar = carData.find((car) => car.make === selectedMake);
       setFilteredModels(selectedCar ? selectedCar.models : []);
     } else {
+
       setFilteredModels([]);
     }
   }, [selectedMake, carData]);
 
+    // Automatically apply initial filters if present
+    useEffect(() => {
+      if (initialMake || initialPartner || initialModel || initialFromYear || initialToYear) {
+        setAppliedFilters(selectedFilters);
+      }
+    }, [initialMake, initialPartner, initialModel, initialFromYear, initialToYear, selectedFilters]);
+  
   const dropdownData = {
-    source: [
+    site: [
       { id: 1, label: "COPART" },
       { id: 2, label: "IAAI" },
     ],
@@ -74,9 +88,9 @@ const Sidebar = () => {
   }, [selectedFilters.make, carData]);
 
   const [dropdownStates, setDropdownStates] = useState({
-    source: false,
-    make: !!initialMake, // Open make dropdown if initial make is present
-    model: !!initialMake, // Open model dropdown if initial make is present
+    source: !!initialPartner,
+    make: !!initialMake, 
+    model: !!initialMake, 
     tranmission: false,
     status: false,
     fuelType: false,
@@ -135,7 +149,7 @@ const Sidebar = () => {
 
   const resetFilters = () => {
     setSelectedFilters({
-      source: [],
+      site: "",
       make: "",
       model: "",
       tranmission: [],
@@ -148,6 +162,8 @@ const Sidebar = () => {
     setSelectedMake("");
     setSelectedModel("");
     setFilteredModels([]);
+    // on reset filtrs -> Remove query parameters from the URL
+    navigate(location.pathname);
   };
 
   return (
@@ -201,6 +217,8 @@ const Sidebar = () => {
                           ? selectedFilters.make === id
                           : dropdownKey === "model"
                           ? selectedFilters.model === id
+                          : dropdownKey === "site"
+                          ? selectedFilters.site.includes(id.toString())
                           : selectedFilters[dropdownKey].includes(id)
                       }
                     />

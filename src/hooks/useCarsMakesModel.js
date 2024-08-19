@@ -11,7 +11,7 @@ const useCarMakesModels = () => {
     const fetchCarData = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}cars/get-cars-makes-models`);
-        setCarData(response.data.data);
+        setCarData(response?.data?.data);
         console.log(response)
       } catch (err) {
         setError(err);

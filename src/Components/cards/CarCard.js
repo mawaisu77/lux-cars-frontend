@@ -11,6 +11,7 @@ const CarCard = ({ card }) => {
   // Determine if the auction date is in the future or null
   const isAuctionDateFuture = targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
+  
 
   return (
     <div className="w-[330px]  mx-auto lg:w-[25.3vw] xl:w-[18.3vw] rounded-xl shadow-lg">

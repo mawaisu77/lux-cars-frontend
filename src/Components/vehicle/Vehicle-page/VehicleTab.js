@@ -8,7 +8,6 @@ const SingleProductTabs = ({ data }) => {
 
   const [loading, setLoading] = useState(true);
 
-  // Handler to update loading state when iframe is loaded
   const handleLoad = () => {
     setLoading(false);
   };
@@ -70,193 +69,100 @@ const SingleProductTabs = ({ data }) => {
 
   return (
     <TabGroup className=" w-[1400px] mx-auto mt-20">
-      <TabList className="w-full flex px-5 justify-between p-3 bg-[#f8f8f8] font-bold rounded-md">
-        <Tab className="hover:text-red-500 text-[20px] active:text-red-500 focus:text-red-500 active:border-none focus:border-none outline-none">
-          Vehicle Info
-        </Tab>
-        <Tab className="hover:text-red-500 text-[20px] active:text-red-500 focus:text-red-500 active:border-none focus:border-none outline-none">
-          360° View
-        </Tab>
-        
-        <Tab className="hover:text-red-500 text-[20px] active:text-red-500 focus:text-red-500 active:border-none focus:border-none outline-none">
-          Bid History
-        </Tab>
-        <Tab className="hover:text-red-500 text-[20px] active:text-red-500 focus:text-red-500 active:border-none focus:border-none outline-none">
-          Calculator
-        </Tab>
-        <Tab className="hover:text-red-500 text-[20px] active:text-red-500 focus:text-red-500 active:border-none focus:border-none outline-none">
-          Get Report
-        </Tab>
-        <Tab className="hover:text-red-500 text-[20px] active:text-red-500 focus:text-red-500 active:border-none focus:border-none outline-none">
-          Help
-        </Tab>
-      </TabList>
-      <TabPanels className={'bg-[#f8f8f8] px-10  max-w-[1400px] '}>
-        <TabPanel className="mt-2 py-2 mx-auto ">
-          {/* <div className="flex justify-start gap-x-20 text-left my-10 leading-8"> */}
-          <div className="grid  md:grid-cols-3 my-4 leading-8 md:gap-x-20">
-            <div className="flex flex-col items-start text-[20px] leading-10">
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist text-left">Title:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold text-left">
-                  {data?.title}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Engine:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.engine}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Year:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.year}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Drivetrain:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.drive}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-              <p className="text-[20px] text-[#7a798a] font-urbanist">Transmission:</p>
-              <span className="text-[20px] text-black font-urbanist font-semibold">
-                {data?.transmission}
-              </span>
-              </div>
-        
-              <div className="flex justify-start gap-x-2 item-center">
-              <p className="text-[20px] text-[#7a798a] font-urbanist">Damage Primary:</p>
-              <span className="text-[20px] text-black font-urbanist font-semibold">
-                {data?.damage_pr }
-              </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-              <p className="text-[20px] text-[#7a798a] font-urbanist">Damage Secondary:</p>
-              <span className="text-[20px] text-black font-urbanist font-semibold">
-                {data?.damage_sec }
-              </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Start Code:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.status}
-                </span>
-              </div>
-             
-            </div>
-
-            
-            {/* ===================== */}
-            <div className="leading-10 flex flex-col items-start text-[20px]">                   
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Odometer:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.odometer}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                        <p className="text-[20px] text-[#7a798a] font-urbanist">Odobrand:</p>
-                        <span className="text-[20px] text-black font-urbanist font-semibold">
-                          {data?.odobrand}
-                        </span>
-              </div>              
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Location:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.location}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Location Old:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold text-nowrap">
-                  {data?.location_old}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                        <p className="text-[20px] text-[#7a798a] font-urbanist">Country:</p>
-                        <span className="text-[20px] text-black font-urbanist font-semibold">
-                          {data?.country}
-                        </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">State:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.state}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Document:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.document}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Document Old:</p>
-                <span className="text-[20px] text-black font-urbanist text-nowrap font-semibold">
-                  {data?.document_old}
-                </span>
-              </div>            
-            </div>
-
-
-            {/* ===================== */}
-            <div className="leading-10">
-            <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">VehicleType:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.vehicle_type}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Cylinders:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.cylinders}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Make:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.make}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Model:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.model}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Series:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.series}
-                </span>
-              </div> 
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Keys:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.keys}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Fuel:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.fuel}
-                </span>
-              </div>
-              <div className="flex justify-start gap-x-2 item-center">
-                <p className="text-[20px] text-[#7a798a] font-urbanist">Color:</p>
-                <span className="text-[20px] text-black font-urbanist font-semibold">
-                  {data?.color}
-                </span>
-              </div>
-            </div>
-       
-          </div>
+        <TabList className="w-full flex gap-x-10 px-5 py-3 bg-[#f8f8f8] font-bold rounded-md border border-gray-200">
+          <Tab
+            className={({ selected }) =>
+              `text-[20px] p-2 rounded-md  outline-none transition-all duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
+            }
+          >
+            Vehicle Info
+          </Tab>
+          <Tab
+            className={({ selected }) =>
+              `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
+            }
+          >
+            360° View
+          </Tab>
+          <Tab
+            className={({ selected }) =>
+              `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
+            }
+          >
+            Bid History
+          </Tab>
+          <Tab
+            className={({ selected }) =>
+              `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
+            }
+          >
+            Calculator
+          </Tab>
+          <Tab
+            className={({ selected }) =>
+              `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
+            }
+          >
+            Get Report
+          </Tab>
+          <Tab
+            className={({ selected }) =>
+              `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
+            }
+          >
+            Help
+          </Tab>
+       </TabList>
+      <TabPanels className={'bg-[#f8f8f8] px-10 max-w-[1400px] '}>
+      <TabPanel className='mt-2 py-10 mx-auto'>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
           
-        </TabPanel>
+          {/* Vehicle Info */}
+          <section className='bg-white p-6 rounded-lg shadow-md'>
+            <h2 className='text-2xl font-semibold mb-4 border-b-2 border-gray-200 pb-2'>Vehicle Info</h2>
+            <div className='space-y-4'>
+              <InfoRow label='Title' value={data?.title} />
+              <InfoRow label='Engine' value={data?.engine} />
+              <InfoRow label='Year' value={data?.year} />
+              <InfoRow label='Drivetrain' value={data?.drive} />
+              <InfoRow label='Transmission' value={data?.transmission} />
+              <InfoRow label='Damage Primary' value={data?.damage_pr} />
+              <InfoRow label='Damage Secondary' value={data?.damage_sec} />
+              <InfoRow label='Start Code' value={data?.status} />
+            </div>
+          </section>
+
+          {/* Location */}
+          <section className='bg-white p-6 rounded-lg shadow-md'>
+            <h2 className='text-2xl font-semibold mb-4 border-b-2 border-gray-200 pb-2'>Location</h2>
+            <div className='space-y-4'>
+              <InfoRow label='Location' value={data?.location} />
+              <InfoRow label='Location Old' value={data?.location_old} />
+              <InfoRow label='Country' value={data?.country} />
+              <InfoRow label='State' value={data?.state} />
+              <InfoRow label='Document' value={data?.document} />
+              <InfoRow label='Document Old' value={data?.document_old} />
+            </div>
+          </section>
+
+          {/* Specifications */}
+          <section className='bg-white p-6 rounded-lg shadow-md'>
+            <h2 className='text-2xl font-semibold mb-4 border-b-2 border-gray-200 pb-2'>Specifications</h2>
+            <div className='space-y-4'>
+              <InfoRow label='Vehicle Type' value={data?.vehicle_type} />
+              <InfoRow label='Cylinders' value={data?.cylinders} />
+              <InfoRow label='Make' value={data?.make} />
+              <InfoRow label='Model' value={data?.model} />
+              <InfoRow label='Series' value={data?.series} />
+              <InfoRow label='Keys' value={data?.keys} />
+              <InfoRow label='Fuel' value={data?.fuel} />
+              <InfoRow label='Color' value={data?.color} />
+            </div>
+          </section>
+
+        </div>
+      </TabPanel>
+     
         <TabPanel className="max-w-[1400px] mt-2 px-5 py-1 mx-auto overflow-auto">
         {data.base_site === 'iaai' && data.iaai_360 && renderIAAIView()}
         {data.base_site === 'copart' && (data.copart_exterior_360.length > 0 || data.copart_interior_360) && renderCopartView()}
@@ -314,5 +220,12 @@ const SingleProductTabs = ({ data }) => {
     </TabGroup>
   );
 };
+
+const InfoRow = ({ label, value }) => (
+  <div className='flex justify-between'>
+    <p className='text-gray-600 font-medium'>{label}:</p>
+    <span className='text-black'>{value}</span>
+  </div>
+);
 
 export default SingleProductTabs;

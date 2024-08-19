@@ -56,9 +56,7 @@ function SearchMainPage({ appliedFilters }) {
     });
 
       const queryString = params.toString().replace(/\+/g, '%20');
-      // const queryString = params.toString().replace(/\+/g, '%20');
-      console.log("Query Params:", queryString);
-
+      console.log("<<<< ====== >>>>",queryString)
       const response = await baseService.get(`cars/get-all-cars/testing?${queryString}`);
       
       setCards((prevCards) => [...prevCards, ...response.data.data.cars]);
@@ -66,13 +64,10 @@ function SearchMainPage({ appliedFilters }) {
 
     } catch (error) {
       if (error.response) {
-        // Backend error
         setError(error.response.data.message || 'An error occurred on the server.');
       } else if (error.request) {
-        // Network error or no response from server
         setError('No response from server. Please check your network.');
       } else {
-        // Other errors
         setError('Something went wrong.');
       }
   
