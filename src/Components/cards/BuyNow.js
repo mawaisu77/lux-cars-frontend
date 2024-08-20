@@ -34,7 +34,7 @@ const BuyNow = () => {
       <div className="h-[784px] lg:h-[90vh] relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
         <div className="">
           <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[5vh]">
-            Buy Now
+            Bid Now
           </div>
           <hr className="h-1 bg-[#ca0000] mt-[15px]  w-20 mx-auto" />
 
@@ -77,7 +77,7 @@ const BuyNow = () => {
                 {carData &&
                   carData.map((card, index) => (
                     <SwiperSlide key={index} className="relative ">
-                      <CarCard card={card} />
+                      <CarCard card={card} isBuy={false} />
                       {/* <div className="w-[330px]  mx-auto lg:w-[25.3vw] xl:w-[18.3vw] bg-yellow-200 rounded-xl shadow-lg">
                         <div className="p-5 w-full bg-blue-400 lg:p-[1vw]">
                           <img

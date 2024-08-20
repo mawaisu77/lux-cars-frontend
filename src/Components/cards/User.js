@@ -1,177 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import image1 from '../../assets/User-pics/Car1.png';
-import image2 from '../../assets/HCards/IMG (12).png'
-import image3 from '../../assets/HCards/IMG (13).png'
-import image4 from '../../assets/HCards/IMG (16).png'
-import image5 from '../../assets/HCards/IMG (17).png'
-import image6 from '../../assets/HCards/IMG (18).png'
-import image7 from '../../assets/HCards/IMG (19).png'
-import image8 from '../../assets/HCards/IMG (20).png'
-import { TfiReload } from "react-icons/tfi";
-import { IoMdHeartEmpty } from "react-icons/io";
+import React from 'react';
 
-const User = () => {
-  const [visibleCards, setVisibleCards] = useState(8); // Show 8 cards initially
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024);
-      setVisibleCards(window.innerWidth >= 1024 ? 4 : 2); // Initial cards display
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Call initially to set the state
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const UserCard = [
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history"
-    },
-    {
-      carPic: image2,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history"
-    },
-    {
-      carPic: image3,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history"
-    },
-    {
-      carPic: image4,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history"
-    },
-    {
-      carPic: image5,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history"
-    },
-    {
-      carPic: image6,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history"
-    },
-    {
-      carPic: image7,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history"
-    },
-    {
-      carPic: image8,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history"
-    },
-    // Add more car objects here
-  ];
-
-  const loadMoreCards = () => {
-    setVisibleCards((prevVisibleCards) => prevVisibleCards + 2);
-  };
+const User = ({bid}) => {
 
   return (
     <>
       <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh] mb-[10vh]'>
-        {UserCard.slice(0, visibleCards).map((card, index) => (
-          <div key={index} className='w-[328px] lg:w-[17.5vw] rounded-xl shadow-xl py-3'>
+          <div className='w-[328px] lg:w-[17.5vw] rounded-xl shadow-xl py-3'>
             <div className='relative'>
-              <img src={card.carPic} className='w-[290px] lg:w-[15.5vw] h-[290px] lg:h-[30vh] rounded-xl mx-auto' />
-              <div className='flex justify-center items-center absolute w-[64px] lg:w-[4vw] h-[28px] lg:h-[3.8vh] bg-black text-[white] rounded-lg top-3 right-6'>
-                <IoMdHeartEmpty />
-                100
-              </div>
+              <img src={bid.carDetails.image} alt='bid_car_image' className='w-[290px] lg:w-[15.5vw] h-[290px] lg:h-[30vh] rounded-xl mx-auto' />
             </div>
             <div>
               <div className='text-left px-3 border-b font-urbanist'>
                 <p className='font-semibold text-[18px] lg:text-[1.12vw] py-2'>
-                  {card.model}
+                  {bid.carDetails.title}
                 </p>
-                <p className='text-[15px] lg:text-[0.9vw] font-semibold'>
-                  {card.vin}
+                
+                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
+                <p className='font-semibold'>
+                  {"Lot "}
                 </p>
-                <div className='text-[13px] lg:text-[0.8vw] text-[#7a798a] py-2'>
-                  <p>{card.lot}</p>
-                  <p>{card.Damage}</p>
-                  <p>{card.Destination}</p>
+                <p className=''>
+                  {bid.carDetails.lot_id}
+                </p>
                 </div>
+
+                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
+                <p className='font-semibold'>
+                  {"Status"}
+                </p>
+                <p className=''>
+                  {bid.carDetails.status}
+                </p>
+                </div>
+                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
+                <p className='font-semibold'>
+                  {"Location"}
+                </p>
+                <p className=''>
+                  {bid.carDetails.location}
+                </p>
+                </div>
+               
               </div>
               <div className='flex px-3 justify-between border-t py-2'>
                 <div>
-                  <p className='text-[13px] lg:text-[0.8vw] text-[#7a798a]'>{card.Price}</p>
-                  <p className='text-[18px] lg:text-[1.1vw] font-semibold'>{card.amount}</p>
+                  <p className='text-[18px] lg:text-[1.1vw] font-semibold'>${bid.bidPrice}</p>
                 </div>
-                <div className='flex justify-center items-center text-right lg:gap-[0.3vw]'>
-                  <TfiReload />
-                  <p className='text-[16px] text-[#7a798a]'>{card.view}</p>
+                <div className='flex justify-center items-center text-right lg:gap-[0.5vw]'>
+                  <p className=''>{"Status :"}</p>
+                  <p className={`font-semibold ${bid.isValid?'text-green-600':'text-red-600' } text-[16px] text-[#7a798a]`}>{bid.isValid ? "Active":"Expire" }</p>
                 </div>
               </div>
             </div>
           </div>
-        ))}
       </div>
-      {visibleCards < UserCard.length && (
-        <div
-          onClick={loadMoreCards}
-          className='flex justify-center mx-auto items-center w-[150px] lg:w-[9vw] h-[54px] lg:h-[7vh] bg-[#f3f3f6] text-[15px] lg:text-[1vw] text-[#ca0000] rounded-full mb-[10vh] cursor-pointer'
-        >
-          load more
-        </div>
-      )}
+  
     </>
   );
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
 import fireImgTimer from "../../assets/001-fire.png";
 
-const CarCard = ({ card }) => {
+const CarCard = ({ card, isBuy=false}) => {
   // Memoize the targetTime to prevent unnecessary recalculations
   const targetTime = useMemo(() => (card.auction_date ? new Date(card.auction_date) : null), [card.auction_date]);
   const { days, hours, minutes, seconds } = useTimer(targetTime);
@@ -11,7 +11,7 @@ const CarCard = ({ card }) => {
   // Determine if the auction date is in the future or null
   const isAuctionDateFuture = targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
-  
+
 
   return (
     <div className="w-[330px]  mx-auto lg:w-[25.3vw] xl:w-[18.3vw] rounded-xl shadow-lg">
@@ -72,8 +72,10 @@ const CarCard = ({ card }) => {
         </div>
         <Link to={`vehicle-detail/${card.lot_id}`}>
         <button className=" w-[270px] mb-[1vh] lg:w-[15vw]  rounded-xl h-[40px] lg:h-[5.5vh] text-[16px] lg:text-[1.04vw] bg-[#7a798a] text-white font-urbanist mt-3 hover:bg-[#ca0000] duration-200">
-          Bid Now
-        </button>
+        {
+          isBuy ? `Buy Now in ${card.price_new ? card.price_new : "Tbd" }`: "Bid Now"
+        }    
+       </button>
         </Link>
       </div>
     </div>

@@ -12,8 +12,14 @@ const useGetCarDealer = (url) => {
         const response = await axios.get(url);
         setDealerData(response.data);
       } catch (err) {
-        setDealerError(err);
-      } finally {
+        if (err.response) {
+          setDealerError(`${err.response.data.message}`);
+        } else if (err.request) {
+          setDealerError('Error: No response from server');
+        } else {
+          setDealerError(`Error: ${err.message}`);
+        }
+     } finally {
         setDealerLoading(false);
       }
     };

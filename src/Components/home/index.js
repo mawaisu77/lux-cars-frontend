@@ -2,7 +2,7 @@ import React from 'react'
  
  import Bid from "./home-page/Bid.js"
  import Top from './home-page/Top.js'
- import  Featured  from '../cards/Featured.js'
+ import  BuyNow  from '../cards/Featured.js'
  import LocalOfferz from '../cards/LocalOfferz.js'
  import Live from '../cards/Live.js'
  import Archieved from '../cards/Archieved.js'
@@ -10,7 +10,7 @@ import React from 'react'
  import Makes from './home-page/Makes.js'
  import Header from '../header/Header/Header.js'
  import Abouttest from '../about/about-page/Abouttest.js'
- import BuyNow from '../cards/BuyNow.js'
+ import BidNow from '../cards/BuyNow.js'
 
  import Aboutdest from '../about/about-page/Aboutdest.js'
 
@@ -20,9 +20,9 @@ const Home = () => {
    <Header/>
     <Bid/>
     <Top/>
-    <Featured/>
-    {/* <LocalOfferz/> */}
     <BuyNow/>
+    {/* <LocalOfferz/> */}
+    <BidNow/>
     
     <Aboutdest/>
     <Abouttest/>

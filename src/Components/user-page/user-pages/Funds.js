@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import FundsCard from "../../cards/FundsCard";
 import { FiMinusCircle } from "react-icons/fi";
@@ -9,13 +9,22 @@ import slider from '../../../assets/User-pics/Slider.png'
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import FundsTable from "../../cards/FundsTable";
+import useGetFunds from "../../../hooks/useGetFunds"; // Adjust the path to your hook file
+import { ClipLoader } from "react-spinners";
 
 const Funds = () => {
+  const { funds, loading, error, fetchFunds } = useGetFunds();
+
+  useEffect(() => {
+    fetchFunds();
+  }, []);
+
   const [showDropdown, setShowDropdown] = useState(false);
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
+
 
   return (
     <>
@@ -50,7 +59,31 @@ const Funds = () => {
             </button>
           </div>
         </div>
-        <FundsCard className="font-semibold" />
+          {/* Loading State */}
+          {loading && (
+          <div className="flex justify-center items-center min-h-[30vh]">
+            <ClipLoader size={50} color={"#D0021B"} loading={loading} />
+            <p className="ml-3 text-[18px] lg:text-[1.2vw] font-urbanist text-gray-500">Loading your funds...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="flex justify-center items-center flex-col min-h-[30vh]">
+            <p className="text-[18px] lg:text-[1.2vw] font-urbanist text-red-600">Error: {error}</p>
+            <button
+              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg"
+              onClick={fetchFunds}
+            >
+              Deposit Funds
+            </button>
+          </div>
+        )}
+
+        {/* Funds Data */}
+        {!loading && !error && funds.data && (
+          <FundsCard fund={funds.data} className="font-semibold" />
+        )}
       </div>
       <div className="flex  flex-col lg:flex-row lg:justify-between w-[343px] md:w-[650px]  lg:w-[70vw] mx-auto leading-[4vh] ">
         <div>
@@ -93,53 +126,10 @@ const Funds = () => {
           </div>
         </div>
 
-        <div className="w-[343px] md:w-[650px] lg:w-[19vw]  mt-[6vh] font-urbanist leading-[5vh]">
-           <div className="w-full   text-left">
-           <p className="text-[18px] lg:text-[0.9vw] text-[#667085]  ">
-                Bidding Limit: <span className="text-[] lg:text-[1.1vw] text-black font-semibold">$7500 USD</span>
-            </p>
-            <p className=" text-[18px] lg:text-[0.9vw] text-[#667085]  ">Purchase Limit: 
-                <span className="text-[20px] lg:text-[1.1vw] text-black font-semibold">1 Vehicles(s)</span>
-            </p>
-               
-           </div>
-           <div className="text-left">
-            <p  className="border-y text-[18px] lg:text-[1vw] text-[#667085]  flex justify-between ">
-                Refund Sucrity Deposite: <span className="text-[20px] lg:text-[1.1vw] text-black font-semibold">$750 USD</span>
-            </p>
-            <p className="border-y text-[18px] lg:text-[1vw] text-[#667085] flex justify-between ">
-                Total Payment Due: <span className="text-[20px] lg:text-[1.1vw] text-black font-semibold">$750 USD</span>
-            </p>
-            </div>
-            <button className="w-full text-[18px] lg:text-[1vw] rounded-xl bg-red-600 text-white">
-                Increase Bid Limit
-            </button>
-            
-
-        </div>
-        
+       {/* 1 */}
       </div>
-      <div className="w-[343px] md:w-[650px]  lg:w-[74vw] mx-auto mt-[7vh]">
-        <div className="flex flex-col lg:flex-row lg:justify-between">
-            <div className="text-left text-[30px] my-5  lg:my-0 lg:text-[2vw] font-urbanist font-bold">
-               Transaction History
-            </div>
-            <div className="flex justify-between lg:justify-center items-center  gap-3 ">
-              <div className="flex justify-center items-center gap-2 w-[206px] lg:w-[13vw] h-[46px] lg:h-[6vh] bg-[#f8f8f8] rounded-xl">
-              <LuCalendarDays size={25} />
-              <p className="text-[16px] lg:text-[0.9vw]">
-                Dec 2023- jan 2024
-              </p>
-              </div>
-              <div className="flex justify-center  text-[0.9vw] items-center w-[66px] lg:w-[4.2vw] h-[46px] lg:h-[6vh] bg-[#f8f8f8] rounded-xl">
-              <IoSettingsOutline size={25} />
-              </div>
-
-          </div>
-        </div>
-        <FundsTable/>
-        
-      </div>
+      {/* 2 */}
+    
     </>
   );
 };

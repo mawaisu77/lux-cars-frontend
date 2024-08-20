@@ -17,5 +17,22 @@ export const getProfile = async () => {
       throw error;
     }
   };
+  export const getAllBids = async () => {
+    try {
+      const response = await baseService.get('bids/user-all-bids');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+  export const getUserFunds = async () => {
+    try {
+      const response = await baseService.get('funds/get-funds');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
 
   
