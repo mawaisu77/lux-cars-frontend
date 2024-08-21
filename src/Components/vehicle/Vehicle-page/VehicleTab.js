@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import useBidHistory from "../../../hooks/useGetBidHistoryByLotId";
 import TimeAgo from 'react-timeago'
+import CarReportViewer from "./Report";
 
 const SingleProductTabs = ({ data }) => {
   
@@ -14,7 +15,6 @@ const SingleProductTabs = ({ data }) => {
     if (data.lot_id) {
       fetchBidHistory();
     }
-    console.log("history ===> ",bidHistory)
 
   }, [data.lot_id]);
 
@@ -55,29 +55,7 @@ const SingleProductTabs = ({ data }) => {
     </div>
   );
 
-  const TabHistory = [
-    {
-      img: image1,
-      name: "Mason Woodward",
-      bid: "bid accepted",
-      time: "8 hours ago",
-      price: "$400",
-    },
-    {
-      img: image1,
-      name: "Mason Woodward",
-      bid: "bid accepted",
-      time: "8 hours ago",
-      price: "$400",
-    },
-    {
-      img: image1,
-      name: "Mason Woodward",
-      bid: "bid accepted",
-      time: "8 hours ago",
-      price: "$400",
-    },
-  ];
+
 
   return (
     <TabGroup className=" w-[1400px] mx-auto mt-20">
@@ -125,6 +103,7 @@ const SingleProductTabs = ({ data }) => {
             Help
           </Tab>
        </TabList>
+
       <TabPanels className={'bg-[#f8f8f8] px-10 max-w-[1400px] '}>
       <TabPanel className='mt-2 py-10 mx-auto'>
         <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
@@ -244,9 +223,9 @@ const SingleProductTabs = ({ data }) => {
             \tab 3 content
           </div>
         </TabPanel>
-        <TabPanel className="max-w-[1000px] mx-auto">
-          <div className="flex flex-col justify-center gap-y-4">
-            \tab 4 content
+        <TabPanel className="max-w-[1400px] flex justify-center mt-2 py-10 mx-auto">
+          <div className="flex flex-col justify-center max-w-[700px] gap-y-4">
+            <CarReportViewer vin={data.vin}/>
           </div>
         </TabPanel>
         <TabPanel className="max-w-[1000px] mx-auto">

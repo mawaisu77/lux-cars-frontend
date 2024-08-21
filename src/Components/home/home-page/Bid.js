@@ -232,8 +232,8 @@ const Bid = () => {
             </div>
 
 
-              <div onClick={handleSearch} className="self-end mb-[1.5vh] flex h-[6.23vh] w-[3.5vw] justify-center items-center bg-[#ca0000] rounded-xl">
-                <GoSearch size={27} color="white" className="cursor-pointer" />
+              <div onClick={handleSearch} className="self-end mb-[1.5vh] group flex h-[6.23vh] w-[3.5vw] justify-center items-center bg-[#ca0000] rounded-xl">
+                <GoSearch size={27} color="white" className="cursor-pointer group-hover:text-blue-600 duration-150" />
               </div>
             </div>
           </div>

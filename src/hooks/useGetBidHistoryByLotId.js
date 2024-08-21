@@ -11,6 +11,7 @@ const useBidHistory = (lotId) => {
     try {
       const data = await getBidHistoryByLotId(lotId);
       setBidHistory(data);
+      console.log("first")
     } catch (err) {
       console.log("Error fetching bid history", err);
       if (err.response) {

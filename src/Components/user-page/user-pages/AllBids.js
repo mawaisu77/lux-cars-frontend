@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { GoSearch } from "react-icons/go";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import React, { useEffect } from "react";
+
 import User from "../../cards/User";
 import useGetAllUserBids from "../../../hooks/useGetAllUserBids"; // Adjust the path to your hook file
 import { ClipLoader } from "react-spinners"; // Optional spinner library
