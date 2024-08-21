@@ -1,10 +1,22 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 import image1 from "../../../assets/Vehicle/IMG (54).png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import useBidHistory from "../../../hooks/useGetBidHistoryByLotId";
+import TimeAgo from 'react-timeago'
 
 const SingleProductTabs = ({ data }) => {
+  
+  const { bidHistory, loading: loadingBidHistory, error:bidHistoryError, fetchBidHistory } = useBidHistory(data.lot_id);
+
+  useEffect(() => {
+    if (data.lot_id) {
+      fetchBidHistory();
+    }
+    console.log("history ===> ",bidHistory)
+
+  }, [data.lot_id]);
 
   const [loading, setLoading] = useState(true);
 
@@ -167,38 +179,65 @@ const SingleProductTabs = ({ data }) => {
         {data.base_site === 'iaai' && data.iaai_360 && renderIAAIView()}
         {data.base_site === 'copart' && (data.copart_exterior_360.length > 0 || data.copart_interior_360) && renderCopartView()}
         </TabPanel>
-        <TabPanel className="max-w-[1000px] mx-auto">
-          {TabHistory.map((item, index) => (
-            <div key={index} className="flex w-full my-2">
-              <div>
-                <img
-                  className="w-[44px] h-[44px] rounded-lg"
-                  src={item.img}
-                  alt="Bidder"
-                />
-              </div>
-              <div className="flex justify-between w-full px-2">
-                <div className="text-left">
-                  <div className="flex gap-3">
-                    <p className="text-[0.97vw] font-urbanist font-bold">
-                      {item.name}
-                    </p>
-                    <p className="text-[0.84vw] text-[#7a798a] font-urbanist">
-                      {item.bid}
-                    </p>
-                  </div>
-                  <p className="text-[0.84vw] text-[#7a798a] font-urbanist">
-                    {item.time}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[0.97vw] font-urbanist font-bold">
-                    {item.price}
-                  </p>
-                </div>
-              </div>
+        <TabPanel className="max-w-[1000px] mx-auto my-4 py-10">
+          {loadingBidHistory ? (
+            <div className="flex justify-center items-center">
+              <ClipLoader color="#000" loading={loadingBidHistory} size={50} />
             </div>
-          ))}
+          ) : bidHistoryError ? (
+            <div className="text-red-500 text-center">
+              Error loading bid history. Please try again later.
+            </div>
+          ) : bidHistory?.data?.length === 0 ? (
+            <div className="text-center text-gray-500">
+              No bid history available.
+            </div>
+          ) : (
+            bidHistory?.data && bidHistory?.data
+              .sort((a, b) => new Date(b.bid.createdAt) - new Date(a.bid.createdAt))
+              .map((item, index) => (
+                <div
+                  key={index}
+                  className="flex bg-white shadow-md rounded-lg p-4 mt-1"
+                >
+                  <div className="flex items-center">
+                    <img
+                      className="w-[44px] h-[44px] rounded-lg"
+                      src={item.profilePicture}
+                      alt="Profile"
+                    />
+                  </div>
+                  <div className="flex justify-between w-full ml-4">
+                    <div className="text-left">
+                      <div className="flex items-center gap-2">
+                        <p className="text-[1rem] font-urbanist font-bold">
+                          {item.username}
+                        </p>
+                        <p className="text-[0.9rem] text-gray-500 font-urbanist">
+                          <TimeAgo date={item.bid.createdAt} />
+                        </p>
+                      </div>
+                      <p
+                        className={`text-[0.9rem] ${
+                          item.bid.isValid ? 'text-green-600' : 'text-red-600'
+                        } font-urbanist`}
+                      >
+                        {item.bid.isValid ? 'Active' : 'Expired'}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <p
+                        className={`text-[1rem] font-urbanist font-bold ${
+                          item.bid.isValid ? 'text-black' : 'text-gray-500'
+                        }`}
+                      >
+                        ${item.bid.bidPrice}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+          )}
         </TabPanel>
         <TabPanel className="max-w-[1000px] mx-auto">
           <div className="flex flex-col justify-center gap-y-4">

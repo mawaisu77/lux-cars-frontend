@@ -13,7 +13,7 @@ import CarCard from "./CarCard";
 
 const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars?buy_now=true"
+    "cars/get-all-cars/testing?buy_now=true"
   );
   console.log("first", carData);
   if (carLoading) {
