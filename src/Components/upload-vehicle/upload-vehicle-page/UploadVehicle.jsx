@@ -9,13 +9,14 @@ import { getToken } from "../../../utils/storageUtils";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import useGetCarDealer from "../../../hooks/useGetCarDealer";
 import CurrencyInput from "react-currency-input-field";
-import { ClipLoader } from "react-spinners"; // Optional spinner library
+import { ClipLoader } from "react-spinners";
 import { showToast } from "../../../utils/Toast";
 import uploadCarValidation from "../../../utils/validations/upload-car-validation";
 import { API_BASE_URL } from "../../../services/baseService";
 import { FaTag } from "react-icons/fa";
 import { HiUserGroup } from "react-icons/hi";
 import registerDealerValidations from "../../../utils/validations/register-dealer-validations";
+import { RegionDropdown } from "react-country-region-selector";
 
 const UploadVehicle = () => {
   const { dealerData, dealerLoading, dealerError } = useGetCarDealer(
@@ -34,8 +35,10 @@ const UploadVehicle = () => {
 
   const [userType, setUserType] = useState("dealer");
   const [selectedOption, setSelectedOption] = useState("Select sales range");
-  const [transmission, setTransmission] = useState("transmission type");
-  const [additionalFields, setAdditionalFields] = useState([]);
+  const [transmission, setTransmission] = useState("Select transmission type");
+  const [additionalFields, setAdditionalFields] = useState([""]);
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
 
   // toggles
   const [carModificationStatus, setCarModificationStatus] = useState("stock");
@@ -46,12 +49,62 @@ const UploadVehicle = () => {
     minPrice: false,
   });
 
-  const changeHandler = (selectedOption) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [transmissionIsOpen, setTransmissionIsOpen] = useState(false);
+
+
+  const [imagePreview, setImagePreview] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const filesInputRef = useRef(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
+
+
+
+  const options = ["Less than 10", "10-50", "50-100", "More than 100"];
+
+  const transmissionOptions = [
+    "Automatic",
+    "Manual",
+  ];
+
+  const titleStatusOptions = [
+    { value: "status_1", label: "status_1" },
+    { value: "status_2", label: "status_2" },
+    { value: "status_3", label: "status_3" },
+  ];
+  // const titleStatusOptions = [
+  //   { value: "stationary", label: "Stationary" },
+  //   { value: "run&drive", label: "Run & Drive" },
+  //   { value: "starts", label: "Starts" },
+  // ];
+
+  const customStyles = {
+    control: (defaultStyles) => ({
+      ...defaultStyles,
+      padding: "2px 0px",
+    }),
+  };
+
+
+  const handleCountryChange = (selectedOption) => {
+    setCountry(selectedOption ? selectedOption.label : "");
     setFormData((prevData) => ({
       ...prevData,
       carDetails: {
         ...prevData.carDetails,
         carLocation: selectedOption ? selectedOption.label : "",
+        carState: "", // Reset state when country changes
+      },
+    }));
+  };
+  const handleStateChange = (val) => {
+    setRegion(val);
+    setFormData((prevData) => ({
+      ...prevData,
+      carDetails: {
+        ...prevData.carDetails,
+        carState: val,
       },
     }));
   };
@@ -66,30 +119,6 @@ const UploadVehicle = () => {
     }));
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [transmissionIsOpen, setTransmissionIsOpen] = useState(false);
-
-  const options = ["1-10", "11-50", "51-100", "101-200", "201+"];
-
-  const transmissionOptions = [
-    "transmission_1",
-    "transmission_2",
-    "transmission_3",
-    "transmission_4",
-    "transmission_5",
-  ];
-
-  const titleStatusOptions = [
-    { value: "status_1", label: "status_1" },
-    { value: "status_2", label: "status_2" },
-    { value: "status_3", label: "status_3" },
-  ];
-
-  const [imagePreview, setImagePreview] = useState(null);
-  const fileInputRef = useRef(null);
-
-  const filesInputRef = useRef(null);
-  const [imagePreviews, setImagePreviews] = useState([]);
 
   const [formData, setFormData] = useState({
     buyerFeeDetails: dealerData ? dealerData?.data?.buyerFeeDetails : "",
@@ -109,15 +138,18 @@ const UploadVehicle = () => {
       modification: "",
       significantFlaws: "",
       zip: "",
-      isCarForSale: [],
+      isCarForSale: [""],
       carTitledAt: "",
       carTitledInfo: "",
       referral: "",
+      carLocation: "",
+      carState: "",
     },
 
     dealershipLicense: null,
     carImages: [],
   });
+
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
@@ -223,6 +255,7 @@ const UploadVehicle = () => {
     CarDetails.append("modification", formData.carDetails.modification);
     CarDetails.append("significantFlaws", formData.carDetails.significantFlaws);
     CarDetails.append("carLocation", formData.carDetails.carLocation);
+    CarDetails.append("carState", formData.carDetails.ca);
     CarDetails.append("zip", formData.carDetails.zip);
     CarDetails.append("carTitledAt", formData.carDetails.carTitledAt);
     CarDetails.append("carTitledInfo", formData.carDetails.carTitledInfo);
@@ -270,7 +303,6 @@ const UploadVehicle = () => {
               }),
             ]);
           } catch (error) {
-            console.log("error log");
             if (error.response) {
               showToast(
                 `Submission failed: ${
@@ -280,7 +312,6 @@ const UploadVehicle = () => {
               );
             } else if (error.request) {
               // Request was made but no response received
-              console.log("Error request:", error.request);
               showToast("Submission failed: No response from server", "error");
             } else {
               showToast(`Submission failed: ${error.message}`, "error");
@@ -292,8 +323,6 @@ const UploadVehicle = () => {
           showToast("please fill all field..");
         }
       } else {
-        console.log(" =============  else  ==================");
-
         if (Object.keys(newErrors).length === 0) {
           try {
             await axios.post(
@@ -316,7 +345,6 @@ const UploadVehicle = () => {
               );
             } else if (error.request) {
               // Request was made but no response received
-              console.log("Error request:", error.request);
               showToast("Submission failed: No response from server", "error");
             } else {
               showToast(`Submission failed: ${error.message}`, "error");
@@ -348,14 +376,12 @@ const UploadVehicle = () => {
             );
           } else if (error.request) {
             // Request was made but no response received
-            console.log("Error request:", error.request);
             showToast("Submission failed: No response from server", "error");
           } else {
             showToast(`Submission failed: ${error.message}`, "error");
           }
         }
       } else {
-        console.log("Unexpected error:");
         showToast("Please fill all required fields", "error");
       }
     }
@@ -394,12 +420,7 @@ const UploadVehicle = () => {
     }));
   };
 
-  const customStyles = {
-    control: (defaultStyles) => ({
-      ...defaultStyles,
-      padding: "2px 0px",
-    }),
-  };
+  
 
   const carTiltledAtHandler = (selectedOption) => {
     setFormData((prevData) => ({
@@ -453,8 +474,6 @@ const UploadVehicle = () => {
 
   useEffect(() => {
     if (dealerData && user) {
-      console.log("first", dealerData);
-
       setFormData({
         ...formData,
         buyerFeeDetails: dealerData?.data?.buyerFeeDetails || "",
@@ -538,7 +557,7 @@ const UploadVehicle = () => {
                     name="buyerFeeDetails"
                     className={`${
                       dealerErrors.buyerFeeDetails
-                        ? "border-red-600 placeholder-red-600"
+                        ? "border-[#CA0000]  placeholder-[#CA0000] "
                         : ""
                     } border w-full py-2 px-4 rounded-lg`}
                     placeholder={`${
@@ -568,7 +587,7 @@ const UploadVehicle = () => {
                     } `}
                     className={`${
                       dealerErrors.dealershipName
-                        ? "border-red-600 placeholder-red-600"
+                        ? "border-[#CA0000]  placeholder-[#CA0000] "
                         : ""
                     } border w-full py-2 px-4 rounded-lg`}
                     disabled={dealerData?.data.dealershipName ? true : false}
@@ -576,7 +595,7 @@ const UploadVehicle = () => {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="flex flex-col items-start gap-y-2">
+                <div className="flex flex-col items-start gap-y-2 mt-4 md:mt-0">
                   <label className="font-bold text-[20px]">
                     Dealership Website
                   </label>
@@ -590,7 +609,7 @@ const UploadVehicle = () => {
                     } `}
                     className={`${
                       dealerErrors.dealershipWebsite
-                        ? "border-red-600 placeholder-red-600"
+                        ? "border-[#CA0000]  placeholder-[#CA0000] "
                         : ""
                     } border w-full py-2 px-4 rounded-lg`}
                     value={formData.dealershipWebsite}
@@ -616,7 +635,7 @@ const UploadVehicle = () => {
                         type="button"
                         className={`${
                           dealerErrors.dealershipWebsite
-                            ? "border-red-600 "
+                            ? "border-[#CA0000]  "
                             : ""
                         } border py-2 px-4 w-full text-left rounded-lg`}
                         onClick={() => setIsOpen(!isOpen)}
@@ -642,6 +661,72 @@ const UploadVehicle = () => {
                   </div>
                 </div>
               </div>
+              {/* ===============================  IMAGE  ========================================= */}
+
+              <div className="flex flex-col items-start gap-y-4">
+                <label className="font-bold text-[20px]">
+                  Please upload a photo of your dealer license.
+                </label>
+
+                <h5 className="text-gray-500 text-left">
+                  *This information will be kept private and only used for
+                  verification. It will not be shown in the auction listing.
+                </h5>
+              </div>
+              <div className="flex items-center justify-center w-full ">
+                <label
+                  htmlFor="dropzone-file"
+                  className="flex items-center justify-between w-full py-8 px-6 border-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100 "
+                >
+                  {formData.dealershipLicense || imagePreview ? (
+                    <div className="flex justify-between w-full items-center">
+                      <img
+                        src={
+                          formData.dealershipLicense === null ||
+                          formData.dealershipLicense === ""
+                            ? formData.dealershipLicense
+                            : formData.dealershipLicense
+                        }
+                        alt="Uploaded preview"
+                        style={{ width: "80px", height: "auto" }}
+                      />
+                      <button
+                        type="button"
+                        disabled={formData.dealershipLicense ? true : false}
+                        onClick={handleCancelImage}
+                        className="border rounded-full bg-red-200 font-bold text-[#CA0000] py-2 px-4 mt-2"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center">
+                      <p className="text-gray-500">
+                        PNG, JPG, JPEG or WEBP. Max 200mb.
+                      </p>
+                    </div>
+                  )}
+                  <input
+                    id="dropzone-file"
+                    name="dealershipLicense"
+                    type="file"
+                    disabled={formData.dealershipLicense ? true : false}
+                    className="hidden"
+                    onChange={handleFileChange}
+                    ref={fileInputRef}
+                  />
+                  {!imagePreview && !formData.dealershipLicense && (
+                    <button
+                      type="button"
+                      disabled={formData.dealershipLicense ? true : false}
+                      onClick={handleUploadClick}
+                      className="border rounded-full bg-[#EEECFF] font-bold text-[#CA0000] py-2 px-4"
+                    >
+                      Upload file
+                    </button>
+                  )}
+                </label>
+              </div>
             </>
           )}
           {(userType === "private" || userType === "dealer") && (
@@ -658,7 +743,7 @@ const UploadVehicle = () => {
                     value={formData.fullName}
                   />
                 </div>
-                <div className="flex flex-col items-start gap-y-2">
+                <div className="flex flex-col items-start gap-y-2 mt-4 md:mt-0">
                   <label className="font-bold text-[20px]">
                     Contact Phone Number
                   </label>
@@ -687,72 +772,6 @@ const UploadVehicle = () => {
             </div>
           )}
 
-          {/* ===============================  IMAGE  ========================================= */}
-
-          <div className="flex flex-col items-start gap-y-4">
-            <label className="font-bold text-[20px]">
-              Please upload a photo of your dealer license.
-            </label>
-
-            <h5 className="text-gray-500 text-left">
-              *This information will be kept private and only used for
-              verification. It will not be shown in the auction listing.
-            </h5>
-          </div>
-          <div className="flex items-center justify-center w-full ">
-            <label
-              htmlFor="dropzone-file"
-              className="flex items-center justify-between w-full py-8 px-6 border-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-            >
-              {formData.dealershipLicense || imagePreview ? (
-                <div className="flex justify-between w-full items-center">
-                  <img
-                    src={
-                      formData.dealershipLicense
-                        ? formData.dealershipLicense
-                        : imagePreview
-                    }
-                    alt="Uploaded preview"
-                    style={{ width: "180px", height: "auto" }}
-                  />
-                  <button
-                    type="button"
-                    disabled={formData.dealershipLicense ? true : false}
-                    onClick={handleCancelImage}
-                    className="border rounded-full bg-red-200 font-bold text-red-600 py-2 px-4 mt-2"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center justify-center">
-                  <p className="text-gray-500">
-                    PNG, JPG, JPEG or WEBP. Max 200mb.
-                  </p>
-                </div>
-              )}
-              <input
-                id="dropzone-file"
-                name="dealershipLicense"
-                type="file"
-                disabled={formData.dealershipLicense ? true : false}
-                className="hidden"
-                onChange={handleFileChange}
-                ref={fileInputRef}
-              />
-              {!imagePreview && !formData.dealershipLicense && (
-                <button
-                  type="button"
-                  disabled={formData.dealershipLicense ? true : false}
-                  onClick={handleUploadClick}
-                  className="border rounded-full bg-gray-200 font-bold text-red-600 py-2 px-4"
-                >
-                  Upload file
-                </button>
-              )}
-            </label>
-          </div>
-
           {/* =================================== CAR Details ======================================== */}
           <div className="w-full flex flex-col gap-y-4">
             <h1 className="text-[36px] font-bold text-left mt-8 ">
@@ -770,7 +789,9 @@ const UploadVehicle = () => {
                     carErrors.vin ? carErrors.vin : "Write here.."
                   } `}
                   className={`border py-2 px-4 rounded-lg w-full ${
-                    carErrors.vin ? "placeholder-red-600 border-red-600" : ""
+                    carErrors.vin
+                      ? "placeholder-[#CA0000]  border-[#CA0000] "
+                      : ""
                   }`}
                   value={formData.carDetails.vin}
                   onChange={handleCarDetailsChange}
@@ -789,13 +810,15 @@ const UploadVehicle = () => {
                     carErrors.year ? carErrors.year : "Write here.."
                   } `}
                   className={`border py-2 px-4 rounded-lg w-full ${
-                    carErrors.year ? "placeholder-red-600 border-red-600" : ""
+                    carErrors.year
+                      ? "placeholder-[#CA0000]  border-[#CA0000] "
+                      : ""
                   }`}
                   value={formData.carDetails.year}
                   onChange={handleCarDetailsChange}
                 />
               </div>
-              <div className="flex flex-col items-start gap-y-2">
+              <div className="flex flex-col items-start gap-y-2 mt-4 md:mt-0">
                 <label className="font-bold text-[20px]">Make</label>
                 <input
                   type="text"
@@ -804,13 +827,15 @@ const UploadVehicle = () => {
                     carErrors.make ? carErrors.make : "Write here.."
                   } `}
                   className={`border py-2 px-4 rounded-lg w-full ${
-                    carErrors.make ? "placeholder-red-600 border-red-600" : ""
+                    carErrors.make
+                      ? "placeholder-[#CA0000]  border-[#CA0000] "
+                      : ""
                   }`}
                   value={formData.carDetails.make}
                   onChange={handleCarDetailsChange}
                 />
               </div>
-              <div className="flex flex-col items-start gap-y-2">
+              <div className="flex flex-col items-start mt-4 md:mt-0 gap-y-2">
                 <label className="font-bold text-[20px]">Model</label>
                 <input
                   type="text"
@@ -819,7 +844,9 @@ const UploadVehicle = () => {
                     carErrors.model ? carErrors.model : "Write here.."
                   } `}
                   className={`border py-2 px-4 rounded-lg w-full ${
-                    carErrors.model ? "placeholder-red-600 border-red-600" : ""
+                    carErrors.model
+                      ? "placeholder-[#CA0000]  border-[#CA0000] "
+                      : ""
                   }`}
                   value={formData.carDetails.model}
                   onChange={handleCarDetailsChange}
@@ -836,7 +863,7 @@ const UploadVehicle = () => {
                     type="button"
                     className={`${
                       carErrors.transmission
-                        ? "placeholder-red-600 border-red-600 text-red-600"
+                        ? "placeholder-[#CA0000]  border-[#CA0000]  text-[#CA0000] "
                         : "text-black"
                     }  border py-2 px-4 rounded-lg w-full  text-left`}
                     onClick={() => setTransmissionIsOpen(!transmissionIsOpen)}
@@ -858,7 +885,7 @@ const UploadVehicle = () => {
                   )}
                 </div>
               </div>
-              <div className="flex flex-col items-start gap-y-2">
+              <div className="flex flex-col items-start mt-4 md:mt-0 gap-y-2">
                 <label className="font-bold text-[20px]">Millage (miles)</label>
                 <input
                   type="text"
@@ -868,7 +895,7 @@ const UploadVehicle = () => {
                   } `}
                   className={`border py-2 px-4 rounded-lg w-full ${
                     carErrors.mileage
-                      ? "placeholder-red-600 border-red-600"
+                      ? "placeholder-[#CA0000]  border-[#CA0000] "
                       : ""
                   }`}
                   value={formData.carDetails.mileage}
@@ -893,7 +920,7 @@ const UploadVehicle = () => {
                   } `}
                   className={`border py-8 px-4 rounded-lg w-full ${
                     carErrors.description
-                      ? "placeholder-red-600 border-red-600"
+                      ? "placeholder-[#CA0000]  border-[#CA0000] "
                       : ""
                   }`}
                   value={formData.carDetails.description}
@@ -963,16 +990,19 @@ const UploadVehicle = () => {
               Are there any significant mechanical or cosmetic flaws that we
               should know about?
             </label>
-            <input
-              type="checkbox"
-              className={`toggle  ${
-                selectedOptions.significantFlaws
-                  ? "[--tglbg:red] bg-white hover:bg-white"
-                  : "[--tglbg:white] bg-gray-400 hover:bg-gray-400"
-              }`}
-              checked={selectedOptions.significantFlaws}
-              onChange={() => handleToggleChange("significantFlaws")}
-            />
+            <div className="flex gap-x-3">
+              <input
+                type="checkbox"
+                className={`toggle  ${
+                  selectedOptions.significantFlaws
+                    ? "[--tglbg:#CA0000] bg-white hover:bg-white"
+                    : "[--tglbg:white] bg-[#EEECFF] hover:bg-[#EEECFF]"
+                }`}
+                checked={selectedOptions.significantFlaws}
+                onChange={() => handleToggleChange("significantFlaws")}
+              />
+              {selectedOptions.significantFlaws ? "Yes" : "No"}
+            </div>
           </div>
 
           {selectedOptions.significantFlaws && (
@@ -984,7 +1014,7 @@ const UploadVehicle = () => {
                   placeholder={`Please give details... `}
                   className={`border py-6 px-4 rounded-lg w-full ${
                     carErrors.significantFlaws
-                      ? "placeholder-red-600 border-red-600"
+                      ? "placeholder-[#CA0000]  border-[#CA0000] "
                       : ""
                   }`}
                   required={selectedOptions.significantFlaws ? true : false}
@@ -997,7 +1027,7 @@ const UploadVehicle = () => {
           )}
 
           {/*dropdown --> Car located */}
-          <div className="grid md:grid-cols-3 w-full">
+          <div className="grid md:grid-cols-3  md:gap-x-4 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
               <label className="font-bold text-[20px] text-left">
                 Where is the car located?
@@ -1008,15 +1038,33 @@ const UploadVehicle = () => {
                 )}
                 options={option}
                 styles={customStyles}
-                onChange={changeHandler}
+                onChange={handleCountryChange}
                 className={`w-full border ${
                   carErrors.carLocation
-                    ? "placeholder-red-600 border-red-600 "
+                    ? "placeholder-[#CA0000]  border-[#CA0000] "
                     : "text-black"
                 }`}
                 placeholder="Select country"
               />
             </div>
+            {country && (
+              <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
+                <label className="font-bold text-[20px] text-left">
+                  Select Region
+                </label>
+                <RegionDropdown
+                  country={country}
+                  value={region}
+                  onChange={handleStateChange}
+                  className={`w-full h-full border-2 border-gray-300 rounded-sm ${
+                    carErrors.carState
+                      ? "placeholder-[#CA0000] border-[#CA0000]"
+                      : "text-black"
+                  }`}
+                  placeholder="Select state"
+                />
+              </div>
+            )}
           </div>
 
           {/* ZIPCODE  */}
@@ -1030,7 +1078,9 @@ const UploadVehicle = () => {
                   carErrors.zip ? carErrors.zip : "Write here.."
                 } `}
                 className={`border py-2 px-4 rounded-lg w-full ${
-                  carErrors.zip ? "placeholder-red-600 border-red-600" : ""
+                  carErrors.zip
+                    ? "placeholder-[#CA0000]  border-[#CA0000] "
+                    : ""
                 }`}
                 value={formData.carDetails.zip}
                 onChange={handleCarDetailsChange}
@@ -1040,24 +1090,27 @@ const UploadVehicle = () => {
 
           {/* Toggle => Car for sale  |  add more +  */}
           <div className="grid md:grid-cols-3 w-full">
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col gap-y-4 items-start">
               <label className="flex items-center text-left font-bold text-[20px]">
                 Is the car for sale elsewhere?
               </label>
-              <input
-                type="checkbox"
-                className={`toggle  ${
-                  selectedOptions.isCarForSale
-                    ? "[--tglbg:red] bg-white hover:bg-white"
-                    : "[--tglbg:white] bg-gray-400 hover:bg-gray-400"
-                }`}
-                // checked={isCarForSaleElsewhere}
-                // onChange={() =>
-                //   setIsCarForSaleElsewhere(!isCarForSaleElsewhere)
-                // }
-                checked={selectedOptions.isCarForSale}
-                onChange={() => handleToggleChange("isCarForSale")}
-              />
+              <div className="flex gap-x-3">
+                <input
+                  type="checkbox"
+                  className={`toggle  ${
+                    selectedOptions.isCarForSale
+                      ? "[--tglbg:#CA0000] bg-white hover:bg-white"
+                      : "[--tglbg:white] bg-[#EEECFF] hover:bg-[#EEECFF]"
+                  }`}
+                  // checked={isCarForSaleElsewhere}
+                  // onChange={() =>
+                  //   setIsCarForSaleElsewhere(!isCarForSaleElsewhere)
+                  // }
+                  checked={selectedOptions.isCarForSale}
+                  onChange={() => handleToggleChange("isCarForSale")}
+                />
+                {selectedOptions.isCarForSale ? "Yes" : "No"}
+              </div>
             </div>
           </div>
 
@@ -1073,7 +1126,7 @@ const UploadVehicle = () => {
                     <input
                       key={index}
                       type="text"
-                      required={selectedOptions.isCarForSale ? true : false}
+                      required={selectedOptions.isCarForSale}
                       value={field}
                       onChange={(e) => handleAdditionalFieldChange(index, e)}
                       className="border mb-2 py-2 px-4 w-full"
@@ -1083,7 +1136,7 @@ const UploadVehicle = () => {
                   <button
                     type="button"
                     onClick={handleAddMoreFields}
-                    className="font-bold text-red-600"
+                    className="font-bold text-[#CA0000] "
                   >
                     Add More +
                   </button>
@@ -1122,19 +1175,22 @@ const UploadVehicle = () => {
               <label className="text-left font-bold text-[20px]">
                 Is the vehicle titled in your name?
               </label>
-              <input
-                type="checkbox"
-                className={`toggle  ${
-                  selectedOptions.carTitledInfo
-                    ? "[--tglbg:red] bg-white hover:bg-white"
-                    : "[--tglbg:white] bg-gray-400 hover:bg-gray-400"
-                }`}
-                checked={selectedOptions.carTitledInfo}
-                onChange={() => handleToggleChange("carTitledInfo")}
-              />
+              <div className="flex gap-x-3">
+                <input
+                  type="checkbox"
+                  className={`toggle  ${
+                    selectedOptions.carTitledInfo
+                      ? "[--tglbg:#CA0000] bg-white hover:bg-white"
+                      : "[--tglbg:white] bg-[#EEECFF] hover:bg-[#EEECFF]"
+                  }`}
+                  checked={selectedOptions.carTitledInfo}
+                  onChange={() => handleToggleChange("carTitledInfo")}
+                />
+                {selectedOptions.carTitledInfo ? "Yes" : "No"}
+              </div>
             </div>
           </div>
-          {!selectedOptions.carTitledInfo && (
+          {selectedOptions.carTitledInfo && (
             <p className="text-gray-500 text-left">
               if the vehicle is titled or registered in the name of another
               individual, a photo of the person's ID will be requested for
@@ -1142,7 +1198,7 @@ const UploadVehicle = () => {
             </p>
           )}
 
-          {!selectedOptions.carTitledInfo && (
+          {selectedOptions.carTitledInfo && (
             <div className="grid grid-cols-1 w-full">
               <div className="flex flex-col gap-y-4 items-start ">
                 <label className="font-bold text-[20px] text-left">
@@ -1177,7 +1233,7 @@ const UploadVehicle = () => {
                 onChange={titlesStatusHandler}
                 className={`w-full border ${
                   carErrors.titlesStatus
-                    ? "placeholder-red-600 border-red-600 "
+                    ? "placeholder-[#CA0000]  border-[#CA0000] "
                     : "text-black"
                 }`}
                 placeholder="Select status"
@@ -1197,16 +1253,19 @@ const UploadVehicle = () => {
                 Do you want to set a minimum price required for your vehicle to
                 sell?
               </label>
-              <input
-                type="checkbox"
-                className={`toggle  ${
-                  selectedOptions.minPrice
-                    ? "[--tglbg:red] bg-white hover:bg-white"
-                    : "[--tglbg:white] bg-gray-400 hover:bg-gray-400"
-                }`}
-                checked={selectedOptions.minPrice}
-                onChange={() => handleToggleChange("minPrice")}
-              />
+              <div className="flex gap-x-3">
+                <input
+                  type="checkbox"
+                  className={`toggle  ${
+                    selectedOptions.minPrice
+                      ? "[--tglbg:#CA0000] bg-white hover:bg-white"
+                      : "[--tglbg:white] bg-[#EEECFF] hover:bg-[#EEECFF]"
+                  }`}
+                  checked={selectedOptions.minPrice}
+                  onChange={() => handleToggleChange("minPrice")}
+                />
+                {selectedOptions.minPrice ? "Yes" : "No"}
+              </div>
             </div>
           </div>
           {selectedOptions.minPrice && (
@@ -1236,11 +1295,11 @@ const UploadVehicle = () => {
 
           <div className="flex flex-col items-start gap-y-4">
             <label className="font-bold text-[20px]">
-              Please upload photos of your dealer license.
+              Please upload at least 6 photos of the exterior & interior of the
+              car.
             </label>
             <h5 className="text-gray-500 text-left">
-              *This information will be kept private and only used for
-              verification. It will not be shown in the auction listing.
+              *To learn more check our photo guide.
             </h5>
           </div>
           <div className="flex items-center justify-center w-full flex-wrap gap-4">
@@ -1254,7 +1313,7 @@ const UploadVehicle = () => {
                 <button
                   type="button"
                   onClick={() => handleCancelImages(index)}
-                  className="absolute text-xs top-0 right-0 border rounded-full bg-red-200 font-bold text-red-600 py-0.5 px-1.5 mt-2"
+                  className="absolute text-xs top-0 right-0 border rounded-full bg-red-200 font-bold text-[#CA0000]  py-0.5 px-1.5 mt-2"
                 >
                   Cancel
                 </button>
@@ -1265,7 +1324,7 @@ const UploadVehicle = () => {
           <div className="flex items-center justify-center w-full ">
             <label
               htmlFor="dropzone-files"
-              className="flex items-center justify-between w-full py-8 px-6 border-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              className="flex items-center justify-between w-full py-8 px-6 border-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100 "
             >
               <div className="flex flex-col items-center justify-center">
                 <p className="text-gray-500">
@@ -1284,7 +1343,7 @@ const UploadVehicle = () => {
               <button
                 type="button"
                 onClick={handleUploadClicks}
-                className="border rounded-full bg-gray-200 font-bold text-red-600 py-2 px-4"
+                className="border rounded-full bg-[#EEECFF] font-bold text-[#CA0000]  py-2 px-4"
               >
                 Upload files
               </button>
@@ -1306,7 +1365,9 @@ const UploadVehicle = () => {
                   carErrors.referral ? carErrors.referral : "Write here.."
                 } `}
                 className={`border py-2 px-4 rounded-lg w-full ${
-                  carErrors.referral ? "placeholder-red-600 border-red-600" : ""
+                  carErrors.referral
+                    ? "placeholder-[#CA0000]  border-[#CA0000] "
+                    : ""
                 }`}
                 value={formData.carDetails.referral}
                 onChange={handleCarDetailsChange}
@@ -1316,7 +1377,7 @@ const UploadVehicle = () => {
 
           <button
             type="submit"
-            className="bg-gray-300 my-4 text-[15px] text-red-600 font-bold rounded-3xl p-2 mt-4 w-full"
+            className="bg-[#EEECFF] my-4 text-[15px] text-[#CA0000]  font-bold rounded-3xl p-2 mt-4 w-full"
           >
             {mainloading ? <ClipLoader /> : "Save"}
           </button>

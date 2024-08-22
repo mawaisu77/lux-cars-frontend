@@ -8,6 +8,62 @@ html, body {
   color: black;
   
 }
+ 
+@media (min-width: 1025px) {
+  .bg-vehicle{
+    position: relative;
+    background-image: url('../src/assets/BG-Img/IMG\ \(49\).png'); /* Update the image path as necessary */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+  }
+
+
+  @media (min-width: 1025px) {
+    .back-image-search-page{
+      position: relative;
+      background-image: url('../src/assets/Vehicle/IMG\ \(55\).png'); /* Update the image path as necessary */
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 32.5vh;
+    }
+  
+    .back-image-search-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+      opacity: 0.5;
+      z-index: 1;
+    }
+  
+    .back-image-search-page > * {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  .Backgroundimage-LogIN::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  .Backgroundimage-LogIN > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
 .text-outline {
     color: transparent; 
     -webkit-text-stroke: 0.09vw black;
@@ -38,7 +94,7 @@ html, body {
       height: 32.5vh;
     }
   
-    .Backgroundimage-LogIN::before {
+    .back-image::before {
       content: '';
       position: absolute;
       top: 0;
@@ -50,7 +106,7 @@ html, body {
       z-index: 1;
     }
   
-    .Backgroundimage-LogIN > * {
+    .back-image > * {
       position: relative;
       z-index: 2;
     }
@@ -228,8 +284,8 @@ html, body {
 }
 .form-checkbox{
   appearance: none;
-  background-color: #f00; /* Red background */
-  border: none;
+  background-color: white; /* Red background */
+  border: 1px solid gray;
   width: 1.5em;
   height: 1.5em;
   display: grid;
@@ -244,7 +300,7 @@ html, body {
   height: 0.75em;
   transform: scale(0);
   transition: transform 120ms ease-in-out;
-  box-shadow: inset 1em 1em white; /* White tick */
+  box-shadow: inset 1em 1em rgb(255, 0, 0); /* White tick */
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 0, 80% 0, 38% 70%);
 }
 .form-checkbox:checked::before {

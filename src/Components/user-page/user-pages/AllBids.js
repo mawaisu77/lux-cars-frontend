@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
-import { GoSearch } from "react-icons/go";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import User from '../../cards/User';
+import React, { useEffect } from "react";
+
+import User from "../../cards/User";
+import useGetAllUserBids from "../../../hooks/useGetAllUserBids"; // Adjust the path to your hook file
+import { ClipLoader } from "react-spinners"; // Optional spinner library
 
 const AllBids = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { bids, loading, error, fetchBids } = useGetAllUserBids();
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  useEffect(() => {
+    fetchBids();
+  }, []);
 
-  const options = ['Won Bids', 'Lost Bids', 'Saved'];
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <ClipLoader size={50} color={"#D0021B"} loading={loading} />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="text-center text-red-500">Error: {error}</p>;
+  }
+
+  console.log("+++++",bids)
 
   return (
     <>
-      <div className='w-full lg:w-[74vw]    mx-auto  mt-[50px] text-black'>
-        <div className='flex flex-col lg:flex-row    lg:justify-between'>
-          <div className='flex justify-center items-center'>
+      <div className="w-full lg:w-[74vw]  mx-auto  mt-[50px] text-black">
+        {/* <div className="flex flex-col lg:flex-row    lg:justify-between">
+          <div className="flex justify-center items-center">
             <input
               type="text"
               placeholder="Search here..."
@@ -26,39 +39,23 @@ const AllBids = () => {
               <GoSearch size={27} color="white" className="cursor-pointer" />
             </div>
           </div>
-
-          <div className="mx-auto lg:mx-0 relative inline-block mt-[20px] lg:mt-0 text-left">
-      <button
-        onClick={toggleDropdown}
-        className="w-[100px] lg:w-[6.2vw] h-[46px] lg:h-[6vh] text-[15px] lg:text-[0.8vw] flex items-center justify-center border bg-white"
-      >
-        Sort By
-        <RiArrowDropDownLine className="cursor-pointer" />
-      </button>
-
-      {isDropdownOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-[100px] lg:w-[6.2vw] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            {options.map((option, index) => (
-              <button
-                key={index}
-                className="w-full h-[46px] lg:h-[6vh] flex items-center justify-center text-[15px] lg:text-[0.8vw] text-gray-700 hover:bg-red-700 hover:text-white"
-                role="menuitem"
-                onClick={() => {
-                  console.log(option);
-                  setIsDropdownOpen(false);
-                }}
-              >
-                {option}
-              </button>
+        </div> */}
+        {bids && bids?.data?.length === 0 ? (
+          <div className="flex flex-col items-center justify-center min-h-[50vh]">
+            <p className="text-2xl font-bold text-gray-500">
+              No bids available for any car
+            </p>
+            <p className="text-gray-400 mt-2">
+              It looks like you haven't placed any bids yet.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            {bids && bids?.data?.map((bid) => (
+              <User key={bid.id} bid={bid} />
             ))}
           </div>
-        </div>
-      )}
-    </div>
-          
-        </div>
-        <User/>
+        )}
       </div>
     </>
   );

@@ -1,149 +1,103 @@
-import React from "react";
-import image1 from "../../../assets/HCards/IMG (22).png";
+import React, { useMemo } from "react";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { TfiReload } from "react-icons/tfi";
+import useTimer from "../../../hooks/useTimer";
+import fireImgTimer from "../../../assets/001-fire.png";
 
-function SearchCard() {
-  const UserCard = [
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history",
-    },
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history",
-    },
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history",
-    },
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history",
-    },
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history",
-    },
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history",
-    },
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history",
-    },
-    {
-      carPic: image1,
-      model: `"2018 BMW X1 DRIVE"`,
-      vin: "VIN:WBHT3C3J3H",
-      lot: "Lot:38498458",
-      Damage: "Damage: Engine Damage",
-      Destination: "Location: YorkTown",
-      Price: "Bid price",
-      amount: "76,500$",
-      view: "View history",
-    },
-  ];
+function SearchCard({ data }) {
   return (
-    <div className="container mx-auto mt-10">
-      <div className="grid grid-cols-1 gap-y-5 gap-x-4 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-        {UserCard.map((card, index) => (
-          <div className="w-full max-w-xs bg-white mx-auto lg:max-w-xs h-auto rounded-xl shadow-lg">
-            <div className="relative p-5 lg:p-4">
-              <img
-                src={card.carPic}
-                className="w-full h-60 lg:h-48 rounded-xl mx-auto object-cover"
-                alt={card.model}
-              />
-              <div className="flex justify-center items-center absolute w-12 lg:w-16 h-8 lg:h-10 bg-black text-white rounded-lg top-3 right-6">
-                <IoMdHeartEmpty className="mr-1" />
-                100
-              </div>
+    <div className="w-[54vw] container mx-auto mt-10">
+      <div className="flex flex-wrap gap-4">
+        {data && data.map((card, index) => <Card key={index} card={card} />)}
+      </div>
+    </div>
+  );
+}
+
+function Card({ card }) {
+  // const targetTime = useMemo(
+  //   () => new Date(card.auction_date),
+  //   [card.auction_date]
+  // );
+  // const { days, hours, minutes, seconds } = useTimer(targetTime);
+  // console.log("target time", targetTime);
+   // Memoize the targetTime to prevent unnecessary recalculations
+   const targetTime = useMemo(() => (card.auction_date ? new Date(card.auction_date) : null), [card.auction_date]);
+   const { days, hours, minutes, seconds } = useTimer(targetTime);
+ 
+   // Determine if the auction date is in the future or null
+   const isAuctionDateFuture = targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+ 
+
+  return (
+    <div className="w-[343px] lg:w-[17.2vw] mx-auto rounded-xl shadow-lg">
+      <div className="relative px-4">
+        <img
+          src={card.image || null}
+          className="w-[290px] lg:w-[14.9vw] h-[290px] lg:h-[31vh] rounded-xl mx-auto object-cover"
+          alt={card.model}
+        />
+        <div className="absolute  bottom-4 left-1/2 transform -translate-x-1/2 w-[185px] h-10 bg-white rounded-2xl z-50 flex justify-center items-center">
+          <div className="flex justify-center items-center gap-x-2 px-2">
+            <div>
+              <img src={fireImgTimer} alt="bid_status"/>
             </div>
             <div>
-              <div className="text-left px-3 lg:px-2 border-b font-urbanist">
-                <p className="font-semibold text-base lg:text-lg py-1 lg:py-2">
-                  {card.model}
-                </p>
-                <p className="text-sm lg:text-base font-semibold">{card.vin}</p>
-                <div className="text-xs lg:text-sm text-gray-500 py-1 lg:py-2">
-                  <p>{card.lot}</p>
-                  <p>{card.Damage}</p>
-                  <p>{card.Destination}</p>
-                </div>
-              </div>
-              <div className="flex px-3 lg:px-2 justify-between border-t py-1 lg:py-2">
-                <div>
-                  <p className="text-xs lg:text-sm text-gray-500">
-                    {card.Price}
+              <p className="font-bold">
+              {card.auction_date
+                  ? isAuctionDateFuture
+                    ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
+                    : "Bidding Over"
+                  : "Future"}
                   </p>
-                  <p className="text-base lg:text-lg font-semibold">
-                    {card.amount}
-                  </p>
-                </div>
-                <div className="flex justify-center items-center text-right gap-1 lg:gap-2">
-                  <TfiReload className="mr-1" />
-                  <p className="text-xs lg:text-sm text-gray-500">
-                    {card.view}
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
-        ))}
+        </div>
       </div>
-      <div className="flex justify-center mx-auto items-center w-36 lg:w-32 h-12 lg:h-16 bg-gray-200 text-sm lg:text-base text-red-600 rounded-full mt-20 mb-20">
-        load more
+      <div className="px-[0.8vw]">
+        <div className="text-left px-3 lg:px-2 border-b font-urbanist">
+          <p className="font-semibold py-[0.5vh] text-[1.17vw]">
+            {card.title.length > 20
+              ? `${card.title.slice(0, 20)}...`
+              : card.title}
+          </p>
+          <div className="flex gap-x-1">
+            <p className="text-sm lg:text-[0.9vw] py-[0.5vh] font-semibold">
+              VIN :
+            </p>
+            <p className="text-sm lg:text-[0.9vw] py-[0.5vh] font-semibold">
+              {card.vin}
+            </p>
+          </div>
+          <div className="text-xs lg:text-[0.84vw] text-gray-500 py-[1vh]">
+            <div className="flex gap-x-1">
+              <p className="py-[0.5vh] font-semibold">Lot :</p>
+              <p className="py-[0.5vh]">{card.lot_id}</p>
+            </div>
+            <div className="flex gap-x-1">
+              <p className="py-[0.5vh] font-semibold">Status :</p>
+              <p className="py-[0.5vh]">{card.status}</p>
+            </div>
+            <div className="flex gap-x-1">
+              <p className="py-[0.5vh] font-semibold">Location :</p>
+              <p className="py-[0.5vh]">{card.location}</p>
+            </div>
+          </div>
+        </div>
+        <div className="flex px-3 lg:px-2 justify-between border-t py-[0.8vh] lg:py-[2vh]">
+          <div className="py-[0.5vh]">
+            <p className="text-xs lg:text-[0.84vw] text-gray-500">
+              {card.Price}
+            </p>
+            <p className="text-base lg:text-[1vw] font-semibold">
+              {card.amount}
+            </p>
+          </div>
+          <div className="flex justify-center items-center text-right gap-1 lg:gap-2">
+            <TfiReload className="mr-1" />
+            <p className="text-xs lg:text-[1vw] text-gray-500">{card.view}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

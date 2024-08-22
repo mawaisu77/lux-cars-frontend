@@ -28,10 +28,56 @@ import Funds from "./Components/user-page/user-pages/Funds.js";
 import ProtectedRoute from "./utils/ProtectedRoutes.js";
 import SearchPage from "./Components/SearchPage/index.js";
 import Successfull_Login from "./Components/successfullLogin/index.jsx";
+import Vehicle from "./Components/vehicle/index.js";
+import Review from "./Components/review/index.js";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "./hooks/useAuthContext.js";
+
 function App() {
+  const [showReviewPopup, setShowReviewPopup] = useState(false);
+  const {user} = useAuthContext()
+  
+
+  useEffect(() => {
+    const checkReviewPopup = () => {
+      if (user && user.email) {
+        const now = new Date().getTime();
+        const loginTime = localStorage.getItem(`loginTime_${user.email}`);
+        const hasReviewed = localStorage.getItem(`hasReviewed_${user.email}`);
+        
+        if (!hasReviewed) {
+          if (!loginTime) {
+            localStorage.setItem(`loginTime_${user.email}`, now);
+          } else {
+            const elapsed = now - loginTime;
+            if (elapsed >= 10000) { // For testing purpose time is set to 10 seconds
+              setShowReviewPopup(true);
+            }
+          }
+        }
+      }
+    };
+
+    checkReviewPopup();
+
+    const interval = setInterval(checkReviewPopup, 1000); // Check every second
+
+    return () => clearInterval(interval);
+  }, [user]);
+
+  const handleClosePopup = () => {
+    if (user && user.email) {
+      setShowReviewPopup(false);
+      localStorage.removeItem(`loginTime_${user.email}`);
+    }
+  };
   return (
     <>
+   
       <Router>
+      <div>
+      {showReviewPopup &&<Review user={user}  onClose={handleClosePopup} />}
+      </div>
         <div className="App">
           {/* <Header/> */}
           {/* Define your routes here */}
@@ -61,9 +107,9 @@ function App() {
             <Route
               path="/reset-password/:token"
               element={
-                <ProtectedRoute>
+                // <ProtectedRoute>
                   <ResetPassword />
-                </ProtectedRoute>
+                // </ProtectedRoute>
               }
             />
             <Route
@@ -127,9 +173,9 @@ function App() {
               path="/user/account"
               element={
                 <>
-                  {/* <ProtectedRoute> */}
+                  <ProtectedRoute>
                     <UserAccount />
-                  {/* </ProtectedRoute> */}
+                  </ProtectedRoute>
                 </>
               }
             />
@@ -185,6 +231,11 @@ function App() {
             />
             <Route path="/search-page" element={<SearchPage />} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
+            <Route path="/vehicle-detail/:lotID" element={<Vehicle />} />
+            {/* <Route path="/review" element={<Review />} /> */}
+            <Route path="/admin/dashboard" element={<>welcome</>} />
+
+
           </Routes>
           {/* Include the Footer component so it appears on all pages */}
           <Footer />

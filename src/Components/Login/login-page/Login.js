@@ -1,24 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../../header/Header/Header";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from '../../../hooks/useLogin';
 import { ClipLoader } from 'react-spinners'; 
-import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { showToast } from "../../../utils/Toast";
 
 
 const Login = () => {
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
   const navigate = useNavigate()
-  const { login, isLoading, error } = useLogin();
+  const { login, isLoading } = useLogin();
 
 
   const loginFormik = useFormik({
@@ -28,12 +27,18 @@ const Login = () => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      const {success, message} = await login(values.email, values.password);
+      const {success, message, role} = await login(values.email, values.password);
       if (success) {
-        showToast(message,'success')
-        // toast.success(message);
-        // navigate(from, { replace: true });
+        // showToast(message,'success')
+        // // toast.success(message);
+        // // navigate(from, { replace: true });
+
+        // navigate("/Successfull-login")
+        if (role === 'admin') {
+          navigate("/admin/dahboard");
+        } else {
         navigate("/Successfull-login")
+      }
       } else {
         showToast(message,'error')
         // toast.error(message);

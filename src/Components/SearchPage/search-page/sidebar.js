@@ -1,23 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchMainPage from "../search-page/searchMainPage";
-import { Calendar } from "primereact/calendar";
+import useCarMakesModels from "../../../hooks/useCarsMakesModel";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const initialMake = queryParams.get("make") || "";
+  const initialModel = queryParams.get("model") || "";
+  const initialFromYear = queryParams.get("year_from") || "";
+  const initialToYear = queryParams.get("year_to") || "";
+  const initialPartner = queryParams.get("partner") || null;
+
+
+  const [selectedModel, setSelectedModel] = useState(initialModel || "");
+  const [selectedMake, setSelectedMake] = useState(initialMake || "");
+  const [selectedFilters, setSelectedFilters] = useState({
+    site: initialPartner ? initialPartner : null,
+    make: initialMake,
+    model: initialModel,
+    tranmission: [],
+    status: [],
+    fuel: [],
+    year_from: initialFromYear || "",
+    year_to: initialToYear || "",
+  });
+  const [appliedFilters, setAppliedFilters] = useState({});
+
+  const [filteredModels, setFilteredModels] = useState([]);
+  const { carData, loading, error } = useCarMakesModels();
+  // console.log(typeof initialPartner, "sjsjjsbjs")
+  useEffect(() => {
+    if (selectedMake) {
+      const selectedCar = carData.find((car) => car.make === selectedMake);
+      setFilteredModels(selectedCar ? selectedCar.models : []);
+    } else {
+
+      setFilteredModels([]);
+    }
+  }, [selectedMake, carData]);
+
+    // Automatically apply initial filters if present
+    useEffect(() => {
+      if (initialMake || initialPartner || initialModel || initialFromYear || initialToYear) {
+        setAppliedFilters(selectedFilters);
+      }
+    }, [initialMake, initialPartner, initialModel, initialFromYear, initialToYear, selectedFilters]);
+  
+  const dropdownData = {
+    site: [
+      { id: 1, label: "COPART" },
+      { id: 2, label: "IAAI" },
+    ],
+    make:  carData && carData.map((car) => ({ id: car.make, label: car.make })),
+    model: filteredModels.map((model) => ({ id: model, label: model })),
+    tranmission: [
+      { id: "Automatic", label: "Automatic" },
+      { id: "Manual", label: "Manual" },
+    ],
+    status: [
+      { id: "Stationary", label: "Stationary" },
+      { id: "Run & Drive", label: "Run & Drive" },
+      { id: "Starts", label: "Starts" },
+    ],
+    fuel: [
+      { id: "Diesel", label: "Diesel" },
+      { id: "Electric", label: "Electric" },
+      { id: "Flexible Fuel", label: "Flexible Fuel" },
+      { id: "Gasoline", label: "Gasoline" },
+      { id: "Hybrid", label: "Hybrid" },
+      { id: "Other", label: "Other" },
+      { id: "Unknown", label: "Unknown" },
+    ],
+  };
+
+  useEffect(() => {
+    if (selectedFilters.make.length > 0) {
+      const selectedModels = carData
+        .filter((car) => selectedFilters.make.includes(car.make))
+        .flatMap((car) => car.models);
+      setFilteredModels(selectedModels);
+    } else {
+      setFilteredModels([]);
+    }
+  }, [selectedFilters.make, carData]);
 
   const [dropdownStates, setDropdownStates] = useState({
-    source: false,
-    vehicleType: false,
-    make: false,
-    model: false,
-    trim: false,
-    year: false,
+    source: !!initialPartner,
+    make: !!initialMake, 
+    model: !!initialMake, 
     tranmission: false,
-    condition: false,
+    status: false,
     fuelType: false,
-    documentType: false,
-    damage: false,
-    distance: false,
   });
 
   const toggleDropdown = (dropdown) => {
@@ -27,504 +103,194 @@ const Sidebar = () => {
     }));
   };
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+  const handleFilterChange = (filterCategory, filterValue) => {
+    if (filterCategory === "make") {
+      setSelectedMake(filterValue);
+      setSelectedFilters((prevFilters) => ({
+        ...prevFilters,
+        make: filterValue,
+        model: "", // Clear the model when make changes
+      }));
+      setSelectedModel(""); // Clear selected model
+    } else if (filterCategory === "model") {
+      setSelectedModel(filterValue);
+      setSelectedFilters((prevFilters) => ({
+        ...prevFilters,
+        model: filterValue,
+      }));
+    } else if (filterCategory === "year_from" || filterCategory === "year_to") {
+      setSelectedFilters((prevFilters) => ({
+        ...prevFilters,
+        [filterCategory]: filterValue,
+      }));
+    } else {
+      setSelectedFilters((prevFilters) => {
+        const currentValues = prevFilters[filterCategory];
+        if (currentValues.includes(filterValue)) {
+          return {
+            ...prevFilters,
+            [filterCategory]: currentValues.filter(
+              (val) => val !== filterValue
+            ),
+          };
+        } else {
+          return {
+            ...prevFilters,
+            [filterCategory]: [...currentValues, filterValue],
+          };
+        }
+      });
+    }
   };
 
-  const [fromDate, setFromDate] = useState(null);
-  const [tillDate, setTillDate] = useState(null);
+  const applyFilters = () => {
+    setAppliedFilters(selectedFilters);
+  };
+
+  const resetFilters = () => {
+    setSelectedFilters({
+      site: "",
+      make: "",
+      model: "",
+      tranmission: [],
+      status: [],
+      fuel: [],
+      year_from: "",
+      year_to: "",
+    });
+    setAppliedFilters({});
+    setSelectedMake("");
+    setSelectedModel("");
+    setFilteredModels([]);
+    // on reset filtrs -> Remove query parameters from the URL
+    navigate(location.pathname);
+  };
 
   return (
-    <div className="flex">
-      <div
-        className={`fixed lg:relative z-30 lg:z-0 lg:w-[20.667vw] shadow-lg lg:shadow-none transform lg:transform-none transition-all duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
-      >
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
+    <div className="flex justify-center gap-[3vw] w-[80vw] mx-auto font-urbanist">
+      <div className="fixed lg:relative mt-[2.604vw] bg-[#1c181840]/10 lg:bg-white z-30 lg:z-0 lg:w-[17.667vw] shadow-xl rounded-lg">
+        {Object.keys(dropdownData).map((dropdownKey) => (
           <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("source")}
+            key={dropdownKey}
+            className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200"
           >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Source
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.source ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+            <div
+              className="flex items-center justify-between cursor-pointer"
+              onClick={() => toggleDropdown(dropdownKey)}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.source && (
-            <div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="copart" type="checkbox" value="copart" />
-                <label
-                  htmlFor="copart"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  COPART
-                </label>
-              </div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="iaai" type="checkbox" value="iaai" />
-                <label
-                  htmlFor="iaai"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  IAAI
-                </label>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="ml-[5vw] mt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("vehicleType")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Vehicle Type
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.vehicleType ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.vehicleType && (
-            <div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="atv" type="checkbox" value="atv" />
-                <label
-                  htmlFor="atv"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  ATV
-                </label>
-              </div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="automobile" type="checkbox" value="automobile" />
-                <label
-                  htmlFor="automobile"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  AUTOMOBILE
-                </label>
-              </div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="boat" type="checkbox" value="boat" />
-                <label
-                  htmlFor="boat"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  BOAT
-                </label>
-              </div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="bus" type="checkbox" value="bus" />
-                <label
-                  htmlFor="bus"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  BUS
-                </label>
-              </div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="minibus" type="checkbox" value="minibus" />
-                <label
-                  htmlFor="minibus"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  MINIBUS
-                </label>
-              </div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input
-                  id="industrialEquipment"
-                  type="checkbox"
-                  value="industrialEquipment"
-                />
-                <label
-                  htmlFor="industrialEquipment"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  INDUSTRIAL EQUIPMENT
-                </label>
-              </div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="jetSki" type="checkbox" value="jetSki" />
-                <label
-                  htmlFor="jetSki"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  JET SKI
-                </label>
-              </div>
-              <div className="flex items-center mb-[0.833vw]">
-                <input id="superCars" type="checkbox" value="superCars" />
-                <label
-                  htmlFor="superCars"
-                  className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
-                >
-                  SUPER CARS
-                </label>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("make")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Make
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.make ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.make && <div></div>}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("model")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Model
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.model ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.model && <div></div>}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("trim")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Trim
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.trim ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.trim && <div></div>}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("year")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              year
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.year ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.year && (
-            <div className="card flex justify-content-center">
-              <label
-                htmlFor="from"
-                className="text-[0.9vw] text-left font-medium text-gray-900 dark:text-gray-300"
+              <h1 className="text-[1.3vw] text-left font-bold mb-[0.729vw]">
+                {dropdownKey.charAt(0).toUpperCase() + dropdownKey.slice(1)}
+              </h1>
+              <svg
+                className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
+                  dropdownStates[dropdownKey] ? "transform rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                From:
-              </label>
-              <Calendar
-                value={fromDate}
-                onChange={(e) => setFromDate(e.value)}
-                id="from"
-                view="year"
-                dateFormat="yy"
-                className="border-[2px] mb-[3vh] border-black h-[5vh] rounded"
-              />
-              <label
-                htmlFor="till"
-                className="text-[0.9vw] text-left font-medium text-gray-900 dark:text-gray-300"
-              >
-                Till:
-              </label>
-              <Calendar
-                value={tillDate}
-                onChange={(e) => setTillDate(e.value)}
-                view="year"
-                id="till"
-                dateFormat="yy"
-                className="border-[2px] mb-[3vh] border-black h-[5vh] rounded"
-              />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
             </div>
-          )}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("transmission")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Tranmission
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.transmission ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
+            {dropdownStates[dropdownKey] && (
+              <div className="overflow-y-scroll max-h-52">
+                {dropdownData[dropdownKey].map(({ id, label }) => (
+                  <div key={id} className="flex items-center mb-[0.833vw]">
+                    <input
+                      id={id}
+                      type={
+                        dropdownKey === "make" || dropdownKey === "model"
+                          ? "radio"
+                          : "checkbox"
+                      }
+                      value={id}
+                      onChange={() => handleFilterChange(dropdownKey, id)}
+                      className="form-checkbox"
+                      checked={
+                        dropdownKey === "make"
+                          ? selectedFilters.make === id
+                          : dropdownKey === "model"
+                          ? selectedFilters.model === id
+                          : dropdownKey === "site"
+                          ? selectedFilters.site.includes(id.toString())
+                          : selectedFilters[dropdownKey].includes(id)
+                      }
+                    />
+                    <label
+                      htmlFor={id}
+                      className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
+                    >
+                      {label}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          {dropdownStates.transmission && <div></div>}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("condition")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Condition
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.condition ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.condition && <div></div>}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("fuelType")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Fuel Type
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.fuelType ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.fuelType && <div></div>}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("documentType")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Document Type
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.documentType ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.documentType && <div></div>}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("damage")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Damage
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.damage ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.damage && <div></div>}
-        </div>
-        <div className="ml-[5vw] pt-[3vw] border-b-[2px] border-grey-200">
-          <div
-            className="flex items-center justify-between cursor-pointer"
-            onClick={() => toggleDropdown("distance")}
-          >
-            <h1 className="text-[1.042vw] text-left font-bold mb-[0.729vw]">
-              Distance
-            </h1>
-            <svg
-              className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                dropdownStates.distance ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-          {dropdownStates.distance && <div></div>}
-        </div>
-      </div>
+        ))}
 
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="lg:hidden p-4 bg-white shadow">
+        <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
+          <div className="flex items-center justify-between cursor-pointer">
+            <h1 className="text-[1.3vw] text-left font-bold mb-[0.729vw]">
+              Year
+            </h1>
+          </div>
+          <div className="flex gap-[1vw]">
+            <input
+              id="year_from"
+              name="year_from"
+              type="number"
+              maxLength={4}
+              min={0}
+              placeholder="From"
+              className="form-input w-full px-2 border rounded-md py-1.5"
+              value={selectedFilters.year_from}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^\d{0,4}$/.test(value)) {
+                  handleFilterChange("year_from", value);
+                }
+              }}
+            />
+            <input
+              type="number"
+              min={0}
+              maxLength={4}
+              placeholder="To"
+              className="form-input w-full border px-2 rounded-md py-1.5"
+              value={selectedFilters.year_to}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^\d{0,4}$/.test(value)) {
+                  handleFilterChange("year_to", value);
+                }
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row justify-center items-center my-5 gap-x-2 lg:gap-y-4">
           <button
-            onClick={toggleSidebar}
-            className="text-gray-500 focus:outline-none"
+            onClick={applyFilters}
+            className="p-2 bg-[#CA0000] hover:bg-[#b30f0f] text-white rounded"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              ></path>
-            </svg>
+            Apply Filters
+          </button>
+          <button
+            onClick={resetFilters}
+            className="p-2 bg-gray-500 hover:bg-gray-600 text-white rounded"
+          >
+            Reset Filters
           </button>
         </div>
-
-        <div>
-          <SearchMainPage />
-        </div>
       </div>
+      <SearchMainPage appliedFilters={appliedFilters} />
     </div>
   );
 };
