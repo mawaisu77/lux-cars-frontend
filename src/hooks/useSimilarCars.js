@@ -11,7 +11,7 @@ const useSimilarCars = (year, make) => {
       try {
         setLoading(true);
         const response = await baseService.get(
-          `cars/get-all-cars/testing?year=${year}&make=${make}`
+          `cars/get-all-cars?year=${year}&make=${make}`
         );
         setCars(response.data);
       } catch (err) {

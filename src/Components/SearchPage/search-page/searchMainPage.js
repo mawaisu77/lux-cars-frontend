@@ -54,7 +54,7 @@ function SearchMainPage({ appliedFilters }) {
 
       const queryString = params.toString().replace(/\+/g, '%20');
       console.log("<<<< ====== >>>>",queryString)
-      const response = await baseService.get(`cars/get-all-cars/testing?${queryString}`);
+      const response = await baseService.get(`cars/get-all-cars?${queryString}`);
       
       setCards((prevCards) => [...prevCards, ...response.data.data.cars]);
       setTotalResults(response.data.data.totalLength);
