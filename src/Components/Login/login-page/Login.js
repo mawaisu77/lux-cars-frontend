@@ -1,24 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../../header/Header/Header";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from '../../../hooks/useLogin';
 import { ClipLoader } from 'react-spinners'; 
-import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { showToast } from "../../../utils/Toast";
 
 
 const Login = () => {
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
   const navigate = useNavigate()
-  const { login, isLoading, error } = useLogin();
+  const { login, isLoading } = useLogin();
 
 
   const loginFormik = useFormik({

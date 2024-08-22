@@ -1,5 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
-import axios from 'axios';
+import { useState, useLayoutEffect } from 'react';
 import baseService from '../services/baseService';
 
 const useGetLocalCars = (url) => {

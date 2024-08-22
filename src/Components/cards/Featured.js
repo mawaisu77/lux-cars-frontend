@@ -8,7 +8,6 @@ import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
-import { Link } from "react-router-dom";
 import CarCard from "./CarCard";
 
 const BuyNow = () => {

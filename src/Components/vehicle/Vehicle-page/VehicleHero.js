@@ -20,7 +20,6 @@ import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import TimeLeftCounter from "./TimeLeftCounter";
-import { BsInfoCircle } from "react-icons/bs";
 
 const VehicleHero = () => {
   const { lotID } = useParams();

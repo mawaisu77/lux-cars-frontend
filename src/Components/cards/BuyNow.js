@@ -32,13 +32,13 @@ const BuyNow = () => {
   return (
     <>
       <div className="h-[784px] lg:h-[90vh] relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
-        <div className="">
+        <div className="" id="startBidding" > 
           <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[5vh]">
             Bid Now
           </div>
           <hr className="h-1 bg-[#ca0000] mt-[15px]  w-20 mx-auto" />
 
-          <div className="relative ">
+          <div className="relative">
             <Swiper
               style={{
                 "--swiper-pagination-color": "#FFBA08",

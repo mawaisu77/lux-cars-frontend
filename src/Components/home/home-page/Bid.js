@@ -14,6 +14,7 @@ import useCarMakesModels from "../../../hooks/useCarsMakesModel";
 import { useNavigate } from "react-router-dom";
 import ReactSelect from "react-select";
 import { ClipLoader } from "react-spinners";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const Bid = () => {
   const [selectedMake, setSelectedMake] = useState(null);
@@ -117,9 +118,11 @@ const Bid = () => {
               necessitatibus est nemo error sed vero sapiente cum quae
               temporibus sed quaerat
             </div>
-            <button className="bg-[#ca0000] font-urbanist flex text-white rounded-full items-center lg:text-[1vw] lg:px-[1.3vw] h-[5.284vh] my-[2vh]">
+            <AnchorLink href="#startBidding">
+            <button className="bg-[#ca0000] hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center lg:text-[1vw] lg:px-[1.3vw] h-[5.284vh] my-[2vh]">
               Start Bidding
             </button>
+            </AnchorLink>
             <div className="text-left w-[87px] flex justify-between gap-4 mt-[5vh]">
               <img src={img4} alt="icon1" />
               <img src={img5} alt="icon2" />
@@ -287,9 +290,10 @@ const Bid = () => {
               necessitatibus est nemo error sed vero sapiente cum quae
               temporibus sed quaerat
             </div>
-            <button className="bg-[#ca0000] font-urbanist flex text-white rounded-full items-center text-[16px] px-3 h-[5.284vh] my-[2vh]">
-              Start Bidding
-            </button>
+              <button className="bg-[#ca0000] font-urbanist flex text-white rounded-full items-center text-[16px] px-3 h-[5.284vh] my-[2vh]">
+                Start Bidding
+              </button>
+        
             <div className="text-left w-[87px] flex justify-between gap-4 mt-[5vh]">
               <img src={img4} alt="icon8" />
               <img src={img5} alt="icon9" />
