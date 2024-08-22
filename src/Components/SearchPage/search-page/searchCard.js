@@ -3,6 +3,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { TfiReload } from "react-icons/tfi";
 import useTimer from "../../../hooks/useTimer";
 import fireImgTimer from "../../../assets/001-fire.png";
+import { Link } from "react-router-dom";
 
 function SearchCard({ data }) {
   return (
@@ -93,9 +94,14 @@ function Card({ card }) {
               {card.amount}
             </p>
           </div>
-          <div className="flex justify-center items-center text-right gap-1 lg:gap-2">
-            <TfiReload className="mr-1" />
-            <p className="text-xs lg:text-[1vw] text-gray-500">{card.view}</p>
+          <div className="flex justify-center items-center ">
+            {/* <TfiReload className="mr-1" /> */}
+            {/* <p className="text-xs lg:text-[1vw] text-gray-500">{card.view}</p> */}
+            <Link to={`/vehicle-detail/${card.lot_id}`}>
+            <button className=" w-[270px] mb-[1vh] lg:w-[15vw]  rounded-xl h-[40px] lg:h-[5.5vh] text-[16px] lg:text-[1.04vw] bg-[#7a798a] text-white font-urbanist  hover:bg-[#ca0000] duration-200">
+              BID NOW
+            </button>
+            </Link>
           </div>
         </div>
       </div>

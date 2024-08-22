@@ -85,9 +85,10 @@ const Verification = () => {
   };
 
   const customChooseButton = () => (
-    <div className="mx-auto leading-[6vh] lg:w-[32vw] ">
+    <div className="mx-auto  lg:w-[32vw] ">
       <p className="text-left text-[18px] lg:text-[1.16vw] font-urbanist font-semibold text-black">Verify and Start Bidding!</p>
       <p className="text-left text-[#7a798a] text-[14px] lg:text-[0.9vw]">Submit the photo of your official ID (Passport/License)</p>
+      <p className="text-left text-[#7a798a] text-[14px] lg:text-[0.9vw]">You can upload only two documents</p>
       <div className="w-full bg-slate-100 h-[15.5vh] my-6 border rounded-xl flex flex-col justify-center items-center">
         <div className="flex justify-center items-center w-[2.6vw] h-[5.4vh] bg-[#f9fafb] rounded-full">
           <FiUploadCloud color="red" size={30} />
@@ -127,15 +128,15 @@ const Verification = () => {
           </div>
         </div>
       </div>
-      <div className=" lg:h-[85vh] mb-52 w-[36.1vw] mx-auto ">
-        <div className="mt-[8.6vh]  text-[36px] lg:text-[2vw] font-bold font-urbanist">Documents</div>
-        <div className="w-[342px] lg:w-[37vw] h-[43vh]   mx-auto leading-10 ">
+      <div className=" mb-52 w-[36.1vw] mx-auto ">
+        <div className="mt-[8.6vh]  text-[36px] lg:text-[2vw] font-bold font-urbanist">Upload Documents</div>
+        <div className="w-[342px] lg:w-[37vw]  mx-auto leading-10 ">
           <FileUpload 
           className="  "
             ref={fileUploadRef}
             headerClassName=" w-[370px] lg:w-[37vw] lg:h-[50vh]  mt-[30px] bg-white mx-auto "
-            contentClassName="overflow-y-scroll"
-            contentStyle={{height:'300px'}}
+            contentClassName="overflow-y-auto "
+            contentStyle={{maxHeightheight:'700px'}}
             customUpload={true}
             multiple
             uploadHandler={documentUploadHandler}

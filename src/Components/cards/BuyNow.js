@@ -13,7 +13,7 @@ import CarCard from "./CarCard";
 
 const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars/testing"
+    "cars/get-all-cars"
   );
   console.log("first", carData);
   if (carLoading) {
@@ -78,54 +78,6 @@ const BuyNow = () => {
                   carData.map((card, index) => (
                     <SwiperSlide key={index} className="relative ">
                       <CarCard card={card} isBuy={false} />
-                      {/* <div className="w-[330px]  mx-auto lg:w-[25.3vw] xl:w-[18.3vw] bg-yellow-200 rounded-xl shadow-lg">
-                        <div className="p-5 w-full bg-blue-400 lg:p-[1vw]">
-                          <img
-                            className="w-full  rounded-xl xl:w-[15.8vw] h-[290px] lg:h-[31.2vh]"
-                            src={card.image}
-                            alt="Car"
-                          />
-                        </div> 
-                        <div>
-                          <div className="flex justify-between px-5 lg:px-[1vw] font-urbanist text-[18px] lg:text-[1.17vw] font-bold py-2 leading-[3vh] text-left">
-                            {card.title.length > 20 ? `${card.title.slice(0, 20)}...` : card.title}
-            
-                          </div>
-                          <div>
-                            <div className="flex px-5 pb-[1vh]  ">
-                              <div className="flex justify-between items-center   w-full">
-                                <div className="flex flex-col">
-                                  <div className="flex gap-x-1">
-                                    <p className="py-[0.5vh] font-semibold">
-                                      Lot:
-                                    </p>
-                                    <p className="py-[0.5vh]">{card.lot_id}</p>
-                                  </div>
-                                  <div className="flex gap-x-1">
-                                    <p className="py-[0.5vh] font-semibold">
-                                      Status:
-                                    </p>
-                                    <p className="py-[0.5vh]">{card.status}</p>
-                                  </div>
-                                  <div className="flex gap-x-1 flex-n">
-                                    <p className="py-[0.5vh] font-semibold">
-                                      Location:
-                                    </p>
-                                    <p className="py-[0.5vh] text-nowrap">
-                                      {card.location}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <Link to={'vehicle-detail/1249363'}>
-                            <button className=" w-[270px] mb-[1vh] lg:w-[15vw]  rounded-xl h-[40px] lg:h-[5.5vh] text-[16px] lg:text-[1.04vw] bg-[#7a798a] text-white font-urbanist mt-3 hover:bg-[#ca0000] duration-200">
-                              Bid Now
-                            </button>
-                            </Link>
-                          </div>
-                        </div>
-                      </div> */}
                     </SwiperSlide>
                   ))}
               </div>
@@ -137,7 +89,7 @@ const BuyNow = () => {
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"
             />
           </button>
-          <button className="arrow-right arrow">
+          <button className="arrow-right arrow sm:block ">
             <IoIosArrowDropright
               size={35}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"

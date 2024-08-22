@@ -52,21 +52,15 @@ const UploadVehicle = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [transmissionIsOpen, setTransmissionIsOpen] = useState(false);
 
-
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
 
   const filesInputRef = useRef(null);
   const [imagePreviews, setImagePreviews] = useState([]);
 
-
-
   const options = ["Less than 10", "10-50", "50-100", "More than 100"];
 
-  const transmissionOptions = [
-    "Automatic",
-    "Manual",
-  ];
+  const transmissionOptions = ["Automatic", "Manual"];
 
   const titleStatusOptions = [
     { value: "status_1", label: "status_1" },
@@ -85,7 +79,6 @@ const UploadVehicle = () => {
       padding: "2px 0px",
     }),
   };
-
 
   const handleCountryChange = (selectedOption) => {
     setCountry(selectedOption ? selectedOption.label : "");
@@ -118,7 +111,6 @@ const UploadVehicle = () => {
       },
     }));
   };
-
 
   const [formData, setFormData] = useState({
     buyerFeeDetails: dealerData ? dealerData?.data?.buyerFeeDetails : "",
@@ -419,8 +411,6 @@ const UploadVehicle = () => {
       },
     }));
   };
-
-  
 
   const carTiltledAtHandler = (selectedOption) => {
     setFormData((prevData) => ({

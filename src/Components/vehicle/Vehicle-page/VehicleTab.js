@@ -24,37 +24,53 @@ const SingleProductTabs = ({ data }) => {
     setLoading(false);
   };
 
-  const renderIAAIView = () => (
-    <div className="flex flex-col items-center justify-center gap-y-4">
-       {loading && (
-        <div className="absolute flex items-center justify-center w-full h-52">
-          <ClipLoader color="#000" loading={loading} size={50} />
-        </div>
-      )}
-      <iframe
-        src={data.iaai_360}
-        width="80%"
-        height="600px"
-        allowFullScreen
-        onLoad={handleLoad} 
-        style={{ display: loading ? "none" : "block" }} 
-      />
-    </div>
-  );
-
-  const renderCopartView = () => (
-    <div className="flex flex-col justify-center gap-y-4">
-      <div className="flex justify-center mt-8">
-        {data.copart_exterior_360.map((image, index) => (
-          <img key={index} src={image} alt={`Copart Exterior View ${index + 1}`} className="w-full h-auto mb-2" />
-        ))}
-        {data.copart_interior_360 && (
-          <img src={data.copart_interior_360} alt="Copart Interior View" className="w-full h-auto" />
+  const renderIAAIView = () => {
+    if (!data.iaai_360) {
+      return <p className="text-center text-gray-500">360° View not available for this vehicle.</p>;
+    }
+  
+    return (
+      <div className="flex flex-col items-center justify-center gap-y-4">
+        {loading && (
+          <div className="absolute flex items-center justify-center w-full h-52">
+            <ClipLoader color="#000" loading={loading} size={50} />
+          </div>
         )}
+        <iframe
+          src={data.iaai_360}
+          width="80%"
+          height="600px"
+          allowFullScreen
+          onLoad={handleLoad}
+          style={{ display: loading ? "none" : "block" }}
+        />
       </div>
-    </div>
-  );
+    );
+  };
 
+  const renderCopartView = () => {
+    if (!data.copart_exterior_360.length && !data.copart_interior_360) {
+      return <p className="text-center text-gray-500">360° View not available for this vehicle.</p>;
+    }
+  
+    return (
+      <div className="flex flex-col justify-center gap-y-4">
+        <div className="flex justify-center mt-8">
+          {data.copart_exterior_360.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Copart Exterior View ${index + 1}`}
+              className="w-full h-auto mb-2"
+            />
+          ))}
+          {data.copart_interior_360 && (
+            <img src={data.copart_interior_360} alt="Copart Interior View" className="w-full h-auto" />
+          )}
+        </div>
+      </div>
+    );
+  };
 
 
   return (
@@ -155,8 +171,8 @@ const SingleProductTabs = ({ data }) => {
       </TabPanel>
      
         <TabPanel className="max-w-[1400px] mt-2 px-5 py-1 mx-auto overflow-auto">
-        {data.base_site === 'iaai' && data.iaai_360 && renderIAAIView()}
-        {data.base_site === 'copart' && (data.copart_exterior_360.length > 0 || data.copart_interior_360) && renderCopartView()}
+          {data.base_site === 'iaai' && data.iaai_360 && renderIAAIView()}
+          {data.base_site === 'copart' && (data.copart_exterior_360.length > 0 || data.copart_interior_360) && renderCopartView()}
         </TabPanel>
         <TabPanel className="max-w-[1000px] mx-auto my-4 py-10">
           {loadingBidHistory ? (

@@ -12,13 +12,13 @@ const Sidebar = () => {
   const initialModel = queryParams.get("model") || "";
   const initialFromYear = queryParams.get("year_from") || "";
   const initialToYear = queryParams.get("year_to") || "";
-  const initialPartner = queryParams.get("partner") || null;
+  const initialPartner = queryParams.get("partner") || "";
 
 
   const [selectedModel, setSelectedModel] = useState(initialModel || "");
   const [selectedMake, setSelectedMake] = useState(initialMake || "");
   const [selectedFilters, setSelectedFilters] = useState({
-    site: initialPartner ? initialPartner : null,
+    site: initialPartner ? initialPartner : "",
     make: initialMake,
     model: initialModel,
     tranmission: [],
@@ -149,7 +149,7 @@ const Sidebar = () => {
 
   const resetFilters = () => {
     setSelectedFilters({
-      site: "",
+      site: null,
       make: "",
       model: "",
       tranmission: [],

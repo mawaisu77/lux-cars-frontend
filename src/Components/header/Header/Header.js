@@ -90,7 +90,7 @@ const Header = () => {
         </div>
       )}
     </div>
-          <Link to="/user/account/all-bids" className={` ${isHomePage ? 'text-[#7A798A] block' : 'text-white'}`} ><HiUsers/></Link>
+          <Link to="/user/profile" className={` ${isHomePage ? 'text-[#7A798A] block' : 'text-white'}`} ><HiUsers/></Link>
           
           {
             !user ? (
