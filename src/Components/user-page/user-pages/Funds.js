@@ -9,11 +9,18 @@ import slider from '../../../assets/User-pics/Slider.png'
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import FundsTable from "../../cards/FundsTable";
-import useGetFunds from "../../../hooks/useGetFunds"; // Adjust the path to your hook file
+import useGetFunds from "../../../hooks/useGetFunds"; 
+import useAddFunds from "../../../hooks/useAddFunds"; 
 import { ClipLoader } from "react-spinners";
+import PackageModal from "./funds/PackageModal.jsx"
+import { showToast } from '../../../utils/Toast';
 
 const Funds = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   const { funds, loading, error, fetchFunds } = useGetFunds();
+  const { handleAddFunds, loading: addingFundsLoading, error: addingFundsError } = useAddFunds();
 
   useEffect(() => {
     fetchFunds();
@@ -23,6 +30,27 @@ const Funds = () => {
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
+  };
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSelectPackage = async (packageType) => {
+    console.log(`Selected package: ${packageType}`);
+    try {
+      const data = await handleAddFunds(packageType);
+      console.log("Funds added successfully", data);
+      showToast("Funds added successfully")
+      fetchFunds(); 
+    } catch (error) {
+      console.error("Failed to add funds", error);
+    } finally {
+      handleCloseModal();
+    }
   };
 
 
@@ -54,7 +82,7 @@ const Funds = () => {
                 </ul>
               </div>
             )}
-            <button className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold items-center bg-[#f8f8f8] text-[15px] lg:text-[0.97vw] font-urbanist">
+            <button onClick={handleOpenModal} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold items-center bg-[#f8f8f8] text-[15px] lg:text-[0.97vw] font-urbanist">
               Add Deposite
             </button>
           </div>
@@ -69,15 +97,19 @@ const Funds = () => {
 
         {/* Error State */}
         {error && (
+          <>
+         <FundsCard fund={funds.data} className="font-semibold" />
+
           <div className="flex justify-center items-center flex-col min-h-[30vh]">
             <p className="text-[18px] lg:text-[1.2vw] font-urbanist text-red-600">Error: {error}</p>
             <button
               className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg"
               onClick={fetchFunds}
-            >
+              >
               Deposit Funds
             </button>
           </div>
+              </>
         )}
 
         {/* Funds Data */}
@@ -94,7 +126,7 @@ const Funds = () => {
               with security deposit of $750 USD
             </p>
           </div>
-          <img src={slider} className="w-[257px] h-auto my-5 lg:w-[30vw] mx-auto"/>
+          <img src={slider} alt="funds_img" className="w-[257px] h-auto my-5 lg:w-[30vw] mx-auto"/>
 
           <div className="flex flex-col lg:flex-row gap-3">
             <div className="flex flex-col text-left">
@@ -125,11 +157,39 @@ const Funds = () => {
            </div>
           </div>
         </div>
+        <div className="w-[343px] md:w-[650px] lg:w-[19vw]  mt-[6vh] font-urbanist leading-[5vh]">
+           <div className="w-full   text-left">
+           <p className="text-[18px] lg:text-[0.9vw] text-[#667085]  ">
+                Bidding Limit: <span className="text-[] lg:text-[1.1vw] text-black font-semibold">$7500 USD</span>
+            </p>
+            <p className=" text-[18px] lg:text-[0.9vw] text-[#667085]  ">Purchase Limit: 
+                <span className="text-[20px] lg:text-[1.1vw] text-black font-semibold">1 Vehicles(s)</span>
+            </p>
+               
+           </div>
+           <div className="text-left">
+            <p  className="border-y text-[18px] lg:text-[1vw] text-[#667085]  flex justify-between ">
+                Refund Sucrity Deposite: <span className="text-[20px] lg:text-[1.1vw] text-black font-semibold">$750 USD</span>
+            </p>
+            <p className="border-y text-[18px] lg:text-[1vw] text-[#667085] flex justify-between ">
+                Total Payment Due: <span className="text-[20px] lg:text-[1.1vw] text-black font-semibold">$750 USD</span>
+            </p>
+            </div>
+            <button className="w-full text-[18px] lg:text-[1vw] rounded-xl bg-red-600 text-white">
+                Increase Bid Limit
+            </button>
+            
 
+        </div>
        {/* 1 */}
       </div>
       {/* 2 */}
-    
+      <div>
+      {/* <button onClick={handleOpenModal}>Choose Package</button> */}
+      {isModalOpen && (
+        <PackageModal onClose={handleCloseModal} onSelectPackage={handleSelectPackage} />
+      )}
+    </div>
     </>
   );
 };

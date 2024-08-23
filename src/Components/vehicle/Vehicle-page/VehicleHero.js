@@ -59,8 +59,13 @@ const VehicleHero = () => {
     [carDetailData?.data?.auction_date]
   );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
-  const isAuctionDateFuture =
+
+  const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+
+// console.log("targetTime",targetTime)
+// console.log("carDetailData?.data?.auction_date",carDetailData?.data)
+// console.log("ValidDate",ValidDate)
 
   useEffect(() => {
     fetchCarDetail();
@@ -85,6 +90,7 @@ const VehicleHero = () => {
     }
   }, [placeBidloading, placeBidSuccess, placeBiderror]);
 
+  // console.log("is auction date future",isAuctionDateFuture)
   return (
     <>
       <div className="bg-vehicle">
@@ -110,11 +116,25 @@ const VehicleHero = () => {
         <>
           {carDetailData && (
             <>
-              {!isAuctionDateFuture && (
+              {/* {ValidDate && (
                 <div className="bg-[#CA0000] shadow tracking-wider text-white text-center p-3 font-bold">
                   Preliminary Bidding is Over for this vehicle
                 </div>
-              )}
+              )} */}
+
+              {carDetailData.data.auction_date
+                  ? ValidDate
+                    ? ``
+                    : (
+                      <div className="bg-[#CA0000] shadow tracking-wider text-white text-center p-3 font-bold">
+                      Preliminary Bidding is Over for this vehicle
+                    </div>
+                    )
+                  : (
+                    <div className="bg-[#217bf0] shadow tracking-wider text-white text-center p-3 font-bold">
+                      Auction date is not decided yet, Be one on the top of bidding list
+                  </div>
+                  )}
 
               <div className="flex justify-between mx-auto w-[74vw] mt-[80px] mb-[20px]">
                 <div className="w-[36vw]">
@@ -248,22 +268,27 @@ const VehicleHero = () => {
                           </div>
                         </div>
 
+                        {/* {carDetailData?.data?.auction_date ? 
+                   ValidDate
+                    ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
+                    : "Bidding Over"
+                  : "Future"} */}
                         {carDetailData?.data?.auction_date ? (
-                          !isAuctionDateFuture ? (
+                          ValidDate ? (                        
                             <>
-                              <TimeLeftCounter
-                                days={days}
-                                hours={hours}
-                                minutes={minutes}
-                                seconds={seconds}
-                              />
-                          
-                            </>
-                          ) : (
-                            ""
+                            <TimeLeftCounter
+                              days={days}
+                              hours={hours}
+                              minutes={minutes}
+                              seconds={seconds}
+                            />               
+                          </>
+                            
+                          ) : ( //bidding over
+                          ""
                           )
                         ) : (
-                          "Future"
+                          ""
                         )}
 
                         {/* ================= */}

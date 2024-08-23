@@ -27,10 +27,16 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleLogout = () => {
+  const handleLogoutModal = () => {
+    document.getElementById("my_logout_modal").showModal();
+  };
+
+  const handleLogoout = () => {
     logout()
     navigate('/')
-  };
+    document.getElementById("my_logout_modal").close();
+  }
+
   
   return (
     <div className='border-b border-[#7A798A] w-full z-50 '>
@@ -106,7 +112,7 @@ const Header = () => {
           </Link>
             </>) : (
               <>
-            <button className={`focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} onClick={handleLogout}>logout</button>
+            <button className={`focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} onClick={handleLogoutModal}>logout</button>
               </>
             )
           }
@@ -155,6 +161,26 @@ const Header = () => {
           </ul>
         </div>
       )}
+      <dialog id="my_logout_modal" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg my-4">Do you want to logout your account?</h3>
+        
+          <div className="flex gap-x-2 justify-center">
+            <button
+              className="btn text-green-600 w-[70px]"
+              onClick={handleLogoout}
+            >
+              Yes
+            </button>
+            <button
+              className="btn text-red-600 w-[70px]"
+              onClick={() => document.getElementById("my_logout_modal").close()}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

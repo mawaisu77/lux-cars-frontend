@@ -7,55 +7,59 @@ import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-function SearchMainPage({ appliedFilters }) {
+function SearchMainPage({ appliedFilters, triggerFetch }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10); // Set default page size
   const [totalResults, setTotalResults] = useState(0);
-  const [loading, setLoading] = useState(false); 
-  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
   const options = ["Won Bids", "Lost Bids", "Saved"];
 
   useEffect(() => {
     setPage(1);
     setCards([]);
-    fetchCards(1); // Fetch first page when filters change
-  }, [appliedFilters]);
+    fetchCards(1);
+  }, [triggerFetch]);
 
   useEffect(() => {
     if (page > 1) fetchCards(page);
   }, [page]);
 
   const fetchCards = async (page) => {
-    setLoading(true); 
-    setError(null); 
+    setLoading(true);
+    setError(null);
     try {
       const params = new URLSearchParams({
         page,
         size,
       });
-    // Iterate over appliedFilters
-    Object.entries(appliedFilters).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        // Append each non-empty array item as a separate parameter
-        value.forEach((item) => {
-          if (item) params.append(key, item);
-        });
-      } else if (value) {
-        // Append non-empty single values
-        params.append(key, value);
-      }
-    });
+      console.log("appliedFilters in search main page", appliedFilters)
+
+      Object.entries(appliedFilters).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          value.forEach((item) => {
+            if (item) params.append(key, item);
+          });
+        } else if (value) {
+          params.append(key, value);
+        }
+      });
 
       const queryString = params.toString().replace(/\+/g, '%20');
-      console.log("<<<< ====== >>>>",queryString)
-      const response = await baseService.get(`cars/get-all-cars?${queryString}`);
-      
+      // console.log("params.toString().replace ==== > ", params.toString().replace(/\+/g, '%20'));
+      // console.log("params.toString() ==== > ", params.toString());
+      // console.log("params ==== > ", params);
+
+      const response = await baseService.get(`cars/get-all-cars/testing?${queryString}`);
+
+      // Append new cards to the existing cards
       setCards((prevCards) => [...prevCards, ...response.data.data.cars]);
       setTotalResults(response.data.data.totalLength);
 
@@ -70,18 +74,18 @@ function SearchMainPage({ appliedFilters }) {
   
       console.error("Error fetching cards:", error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   const loadMore = () => {
+    // Increment page number to load more cards
     setPage((prevPage) => prevPage + 1);
   };
 
-
   return (
     <div>
-      <div className="w-[54vw] mx-auto my-[2.604vw] font-urbanist">
+      <div className="w-[54vw]  mx-auto my-[2.604vw] font-urbanist">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
           <div className="flex mb-4 lg:mb-0">
             <h2 className="text-[1.95vw] font-urbanist font-bold">
@@ -92,20 +96,20 @@ function SearchMainPage({ appliedFilters }) {
             <input
               type="text"
               placeholder="Search here..."
-              className=" lg:w-[17vw]  lg:h-[4.8vh] rounded-l-lg border p-2 text-[0.8vw]"
+              className="lg:w-[17vw] lg:h-[4.8vh] rounded-l-lg border p-2 text-[0.8vw]"
             />
             <div className="flex h-[4.8vh] w-[3vw] justify-center items-center bg-red-700 rounded-r-lg">
               <GoSearch size={20} color="white" className="cursor-pointer" />
             </div>
             <button
               onClick={toggleDropdown}
-              className=" w-[5.5vw] h-[4.8vh] rounded-lg text-[0.8vw] flex items-center justify-center ml-2 border bg-white"
+              className="w-[5.5vw] h-[4.8vh] rounded-lg text-[0.8vw] flex items-center justify-center ml-2 border bg-white"
             >
               Sort By
               <RiArrowDropDownLine size={20} className="ml-1 cursor-pointer" />
             </button>
             {isDropdownOpen && (
-              <div className="origin-top-right z-10 absolute right-0 mt-[5vh]  w-[5.5vw] h-[15.8vh]  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div className="origin-top-right z-10 absolute right-0 mt-[5vh] w-[5.5vw] h-[15.8vh] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div
                   className="py-1"
                   role="menu"
@@ -115,7 +119,7 @@ function SearchMainPage({ appliedFilters }) {
                   {options.map((option, index) => (
                     <button
                       key={index}
-                      className="  flex items-center justify-center w-[5.5vw] h-[4.8vh] text-sm text-gray-700 hover:bg-red-700 hover:text-white"
+                      className="flex items-center justify-center w-[5.5vw] h-[4.8vh] text-sm text-gray-700 hover:bg-red-700 hover:text-white"
                       role="menuitem"
                       onClick={() => {
                         console.log(option);
@@ -132,48 +136,52 @@ function SearchMainPage({ appliedFilters }) {
         </div>
 
         {/* Conditionally render based on loading, error, or cards data */}
-        {loading && (
-          <div className="h-96 flex justify-center gap-y-4 flex-col items-center">
-            <ClipLoader size={50} color={"#123abc"} loading={loading} />
-          </div>
-        )}
+        <div className="relative">
+          {cards.length > 0 && (
+            <SearchCard data={cards} />
+          )}
 
-        {error && (
-         <div className="h-96 flex justify-center gap-y-4 flex-col items-center ">
-           <div className="font-bold text-red-600 text-3xl">
-            {error}
-          </div>
-          <Link to={'/'}>
-           <div className="font-bold text-lg flex gap-x-2 justify-center items-center">
-           <span>
-              <FaArrowLeftLong />
-            </span>
-            <span>Go to Home</span>
-          </div>
-          </Link>
-         </div>
-        )}
+          {!loading && !error && cards.length === 0 && (
+            <div className="flex justify-center my-10">
+              No vehicles found.
+            </div>
+          )}
 
-        {!loading && !error && cards.length > 0 && (
-          <SearchCard data={cards} />
-        )}
+          {loading && (
+            <div className="flex justify-center items-center my-10">
+              <ClipLoader size={50} color={"#123abc"} loading={loading} />
+            </div>
+          )}
 
-        {!loading && !error && cards.length === 0 && (
-          <div className="flex justify-center my-10">
-            No vehicles found.
-          </div>
-        )}
+          {error && (
+            <div className="h-96 flex justify-center gap-y-4 flex-col items-center">
+              <div className="font-bold text-red-600 text-3xl">
+                {error}
+              </div>
+              <Link to={'/'}>
+                <div className="font-bold text-lg flex gap-x-2 justify-center items-center">
+                  <span>
+                    <FaArrowLeftLong />
+                  </span>
+                  <span>Go to Home</span>
+                </div>
+              </Link>
+            </div>
+          )}
 
-        {cards.length < totalResults && !loading && !error &&(
-        <div onClick={loadMore}
-            className="flex cursor-pointer justify-center mx-auto items-center w-36 lg:w-32 h-12 lg:h-12 bg-gray-200 text-sm lg:text-base text-red-600 font-semibold rounded-full mt-20 mb-20">
-           load more
+          {cards.length < totalResults && !loading && !error && (
+            <div
+              onClick={loadMore}
+              className="flex cursor-pointer justify-center mx-auto items-center w-36 lg:w-32 h-12 lg:h-12 bg-gray-200 text-sm lg:text-base text-red-600 font-semibold rounded-full mt-20 mb-20"
+            >
+              Load More
+            </div>
+          )}
         </div>
-     
-         )} 
       </div>
     </div>
   );
 }
 
 export default SearchMainPage;
+

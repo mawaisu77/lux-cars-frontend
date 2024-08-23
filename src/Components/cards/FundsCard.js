@@ -4,13 +4,10 @@ import chart from '../../assets/User-pics/chart.png';
 import chart4 from '../../assets/User-pics/Path 3 (1).png';
 import chart3 from '../../assets/User-pics/Path (1).png';
 import chart2 from '../../assets/User-pics/Chart (3).png';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
-// Register chart.js components
-ChartJS.register(ArcElement, Tooltip, Legend);
+
 const FundsCard = ({fund}) => {
-  const {totalDeposits, avalaibleBidAmount, avalaibleBids, usedBidAmount, activeBids} =  fund
+  const { totalDeposits = 0, avalaibleBidAmount = 0, avalaibleBids = 0, usedBidAmount = 0, activeBids = 0 } = fund || {};
   const FundsC = [
     {
       icon: <BiSolidWallet color='#7e72f2' size={20} />,
@@ -23,7 +20,7 @@ const FundsCard = ({fund}) => {
     {
       icon: <BiSolidWallet color='#2dcd7a' size={20} />,
       States: "Bids Available",
-      Amount: avalaibleBids || null,
+      Amount: "" + avalaibleBids || null,
       Lorem: "Lorem Ipsum",
       image: chart2,
       bgColor: '#e6f7ee'
@@ -31,7 +28,7 @@ const FundsCard = ({fund}) => {
     {
       icon: <BiSolidWallet color='#ff9f43' size={20} />,
       States: "Active Bid",
-      Amount: activeBids || null,
+      Amount: "" + activeBids || null,
       Lorem: "Lorem Ipsum",
       image: chart4,
       bgColor: '#fceaea'

@@ -15,6 +15,9 @@ import PhoneInput from "react-phone-input-2";
 import { showToast } from "../../../utils/Toast";
 import { Link } from "react-router-dom";
 import ImageViewer from "react-simple-image-viewer";
+import { MdVerifiedUser } from "react-icons/md";
+import TooltipInfo from "../../common/TooltipInfo";
+import { BsInfoCircle } from "react-icons/bs";
 
 const Profile = () => {
   const { token } = useAuthContext();
@@ -23,6 +26,7 @@ const Profile = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [documents, setDcuments] = useState([]);
+  const [documentVerification, setDocumentVerification] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
@@ -43,7 +47,8 @@ const Profile = () => {
       const response = await getProfile();
 
       saveUser(response.data);
-      const { username, email, address, phone, documents } = response.data;
+      const { username, email, address, phone, documents, documentVerified } = response.data;
+      setDocumentVerification(documentVerified)
       setDcuments(documents);
       setUsername(username);
       setEmail(email);
@@ -134,8 +139,17 @@ const Profile = () => {
                 </div>
                 <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[120px] lg:mt-0  border rounded-lg p-5 ">
                   <div className="flex gap-3 my-2">
-                    <div className="flex justify-center items-center bg-red-600 w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] rounded-full">
+                    <div className="flex relative justify-center items-center bg-red-600 w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] rounded-full">
                       <img src={image1} />
+                      {documentVerification ? (
+                        <MdVerifiedUser className="absolute text-green-600 bg-white rounded-tl-lg bottom-0 right-0"/>
+                      ):(
+                    <div className="absolute -bottom-2 -right-2">
+                          <TooltipInfo  content="Your document status is pending, if you uploaded the docuemnt then please wait for update">
+                        <BsInfoCircle size={20} className='hover:text-blue-800 bg-white rounded-full text-red-600 duration-200'/>
+                      </TooltipInfo>
+                    </div>
+                      )}
                     </div>
                     <div>
                       <p className="text-[15px] lg:text-[0.9vw]  text-[#9698ab] font-urbanist">

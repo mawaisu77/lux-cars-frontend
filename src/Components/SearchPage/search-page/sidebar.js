@@ -1,62 +1,145 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import SearchMainPage from "../search-page/searchMainPage";
 import useCarMakesModels from "../../../hooks/useCarsMakesModel";
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
+
+  const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
+
   const initialMake = queryParams.get("make") || "";
   const initialModel = queryParams.get("model") || "";
   const initialFromYear = queryParams.get("year_from") || "";
   const initialToYear = queryParams.get("year_to") || "";
   const initialPartner = queryParams.get("partner") || "";
+  const initialTransmission = useMemo(() => queryParams.getAll("transmission") || [], [queryParams]);
+  const initialStatus = useMemo(() => queryParams.getAll("status") || [], [queryParams]);
+  const initialFuel = useMemo(() => queryParams.getAll("fuel") || [], [queryParams]);
 
-
-  const [selectedModel, setSelectedModel] = useState(initialModel || "");
-  const [selectedMake, setSelectedMake] = useState(initialMake || "");
+  console.log("query params ne urlSearch params",initialStatus)
+  const [selectedModel, setSelectedModel] = useState(initialModel);
+  const [selectedMake, setSelectedMake] = useState(initialMake);
   const [selectedFilters, setSelectedFilters] = useState({
-    site: initialPartner ? initialPartner : "",
+    site: initialPartner || "",
     make: initialMake,
     model: initialModel,
-    tranmission: [],
-    status: [],
-    fuel: [],
+    transmission: initialTransmission,
+    status: initialStatus,
+    fuel: initialFuel,
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
   });
-  const [appliedFilters, setAppliedFilters] = useState({});
+  const [appliedFilters, setAppliedFilters] = useState({
+    site: initialPartner || "",
+    make: initialMake,
+    model: initialModel,
+    transmission: initialTransmission,
+    status: initialStatus,
+    fuel: initialFuel,
+    year_from: initialFromYear || "",
+    year_to: initialToYear || "",
+  });
+  
 
   const [filteredModels, setFilteredModels] = useState([]);
-  const { carData, loading, error } = useCarMakesModels();
-  // console.log(typeof initialPartner, "sjsjjsbjs")
+  const { carData } = useCarMakesModels();
+
   useEffect(() => {
     if (selectedMake) {
       const selectedCar = carData.find((car) => car.make === selectedMake);
       setFilteredModels(selectedCar ? selectedCar.models : []);
     } else {
-
       setFilteredModels([]);
     }
   }, [selectedMake, carData]);
 
-    // Automatically apply initial filters if present
-    useEffect(() => {
-      if (initialMake || initialPartner || initialModel || initialFromYear || initialToYear) {
-        setAppliedFilters(selectedFilters);
+  // Load initial data based on query params
+  useEffect(() => {
+    if (
+      initialMake ||
+      initialPartner ||
+      initialModel ||
+      initialFromYear ||
+      initialToYear ||
+      initialTransmission.length > 0 ||
+      initialStatus.length > 0 ||
+      initialFuel.length > 0
+    ) {
+      setAppliedFilters({
+        site: initialPartner,
+        make: initialMake,
+        model: initialModel,
+        transmission: initialTransmission,
+        status: initialStatus,
+        fuel: initialFuel,
+        year_from: initialFromYear,
+        year_to: initialToYear,
+      });
+    }
+  }, [
+    initialMake,
+    initialPartner,
+    initialModel,
+    initialFromYear,
+    initialToYear,
+    initialTransmission,
+    initialStatus,
+    initialFuel,
+  ]);
+
+  // Apply filters and update query parameters
+  const applyFilters = () => {
+    setAppliedFilters(selectedFilters); // Apply filters when the button is clicked
+
+    const params = new URLSearchParams();
+
+    Object.keys(selectedFilters).forEach((key) => {
+      if (selectedFilters[key] && selectedFilters[key].length > 0) {
+        if (Array.isArray(selectedFilters[key])) {
+          selectedFilters[key].forEach((val) => {
+            params.append(key, val);
+          });
+        } else {
+          params.set(key, selectedFilters[key]);
+        }
       }
-    }, [initialMake, initialPartner, initialModel, initialFromYear, initialToYear, selectedFilters]);
-  
+    });
+
+    navigate({
+      pathname: location.pathname,
+      search: params.toString(),
+    });
+  };
+
+  const resetFilters = () => {
+    setSelectedFilters({
+      site: "",
+      make: "",
+      model: "",
+      transmission: [],
+      status: [],
+      fuel: [],
+      year_from: "",
+      year_to: "",
+    });
+    setAppliedFilters({});
+    setSelectedMake("");
+    setSelectedModel("");
+    setFilteredModels([]);
+    // Reset query parameters in the URL
+    navigate(location.pathname);
+  };
+
   const dropdownData = {
     site: [
       { id: 1, label: "COPART" },
       { id: 2, label: "IAAI" },
     ],
-    make:  carData && carData.map((car) => ({ id: car.make, label: car.make })),
+    make: carData && carData.map((car) => ({ id: car.make, label: car.make })),
     model: filteredModels.map((model) => ({ id: model, label: model })),
-    tranmission: [
+    transmission: [
       { id: "Automatic", label: "Automatic" },
       { id: "Manual", label: "Manual" },
     ],
@@ -88,12 +171,12 @@ const Sidebar = () => {
   }, [selectedFilters.make, carData]);
 
   const [dropdownStates, setDropdownStates] = useState({
-    source: !!initialPartner,
-    make: !!initialMake, 
-    model: !!initialMake, 
-    tranmission: false,
-    status: false,
-    fuelType: false,
+    site: !!initialPartner,
+    make: !!initialMake,
+    model: !!initialMake,
+    transmission: !!initialTransmission,
+    status: !!initialStatus,
+    fuelType: !!initialFuel,
   });
 
   const toggleDropdown = (dropdown) => {
@@ -109,7 +192,7 @@ const Sidebar = () => {
       setSelectedFilters((prevFilters) => ({
         ...prevFilters,
         make: filterValue,
-        model: "", // Clear the model when make changes
+        model: "", 
       }));
       setSelectedModel(""); // Clear selected model
     } else if (filterCategory === "model") {
@@ -143,32 +226,9 @@ const Sidebar = () => {
     }
   };
 
-  const applyFilters = () => {
-    setAppliedFilters(selectedFilters);
-  };
-
-  const resetFilters = () => {
-    setSelectedFilters({
-      site: null,
-      make: "",
-      model: "",
-      tranmission: [],
-      status: [],
-      fuel: [],
-      year_from: "",
-      year_to: "",
-    });
-    setAppliedFilters({});
-    setSelectedMake("");
-    setSelectedModel("");
-    setFilteredModels([]);
-    // on reset filtrs -> Remove query parameters from the URL
-    navigate(location.pathname);
-  };
-
   return (
-    <div className="flex justify-center gap-[3vw] w-[80vw] mx-auto font-urbanist">
-      <div className="fixed lg:relative mt-[2.604vw] bg-[#1c181840]/10 lg:bg-white z-30 lg:z-0 lg:w-[17.667vw] shadow-xl rounded-lg">
+    <div className="flex justify-center gap-[3vw] w-[80vw]  mx-auto font-urbanist">
+      <div className="fixed lg:relative mt-[2.604vw] bg-[#1c181840]/10 lg:bg-white z-30 lg:z-0 lg:w-[17vw] shadow-xl rounded-lg">
         {Object.keys(dropdownData).map((dropdownKey) => (
           <div
             key={dropdownKey}
@@ -205,26 +265,27 @@ const Sidebar = () => {
                     <input
                       id={id}
                       type={
-                        dropdownKey === "make" || dropdownKey === "model"
+                        dropdownKey === "make" ||
+                        dropdownKey === "model" ||
+                        dropdownKey === "year_from" ||
+                        dropdownKey === "year_to"
                           ? "radio"
                           : "checkbox"
                       }
                       value={id}
                       onChange={() => handleFilterChange(dropdownKey, id)}
-                      className="form-checkbox"
+                      className="form-checkbox h-[1.5vw] w-[1.5vw] text-blue-600"
                       checked={
                         dropdownKey === "make"
-                          ? selectedFilters.make === id
+                          ? selectedMake === id
                           : dropdownKey === "model"
-                          ? selectedFilters.model === id
-                          : dropdownKey === "site"
-                          ? selectedFilters.site.includes(id.toString())
+                          ? selectedModel === id
                           : selectedFilters[dropdownKey].includes(id)
                       }
                     />
                     <label
                       htmlFor={id}
-                      className="ms-2 text-[0.677vw] font-medium text-gray-900 dark:text-gray-300"
+                      className="ml-[0.5vw] text-[1vw] font-medium"
                     >
                       {label}
                     </label>
@@ -234,6 +295,28 @@ const Sidebar = () => {
             )}
           </div>
         ))}
+
+        {/* <div className="py-[2vh] px-[1vw]">
+          <h1 className="text-[1.3vw] text-left font-bold mb-[0.729vw]">
+            Year
+          </h1>
+          <div className="flex justify-between gap-[1vw]">
+            <input
+              type="number"
+              className="form-input w-full"
+              placeholder="From"
+              value={selectedFilters.year_from}
+              onChange={(e) => handleFilterChange("year_from", e.target.value)}
+            />
+            <input
+              type="number"
+              className="form-input w-full"
+              placeholder="To"
+              value={selectedFilters.year_to}
+              onChange={(e) => handleFilterChange("year_to", e.target.value)}
+            />
+          </div>
+        </div> */}
 
         <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
           <div className="flex items-center justify-between cursor-pointer">
@@ -275,22 +358,43 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center items-center my-5 gap-x-2 lg:gap-y-4">
+
+        {/* <div className="flex justify-between items-center py-[2vh] px-[1vw]">
+          <button
+            className="px-[1.5vw] py-[1vh] rounded-[1.25vw] text-[1vw] font-bold text-white bg-[#1E81FF] hover:bg-[#1c6cd6]"
+            onClick={applyFilters}
+          >
+            Apply Filters
+          </button>
+          <button
+            className="px-[1.5vw] py-[1vh] rounded-[1.25vw] text-[1vw] font-bold text-[#1E81FF] hover:text-[#1c6cd6]"
+            onClick={resetFilters}
+          >
+            Reset
+          </button>
+        </div> */}
+
+      <div className="flex  flex-col lg:flex-row justify-center items-center my-5 mx-2 gap-x-2 lg:gap-y-4">
           <button
             onClick={applyFilters}
-            className="p-2 bg-[#CA0000] hover:bg-[#b30f0f] text-white rounded"
+            className="p-2 bg-[#CA0000] w-1/2 hover:bg-[#b30f0f] text-white rounded-lg"
           >
             Apply Filters
           </button>
           <button
             onClick={resetFilters}
-            className="p-2 bg-gray-500 hover:bg-gray-600 text-white rounded"
+            className="p-2 bg-gray-500 w-1/2 hover:bg-gray-600 text-white rounded-lg"
           >
             Reset Filters
           </button>
         </div>
       </div>
-      <SearchMainPage appliedFilters={appliedFilters} />
+      <div className=" w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex flex-col items-center">
+        <SearchMainPage
+          appliedFilters={appliedFilters}
+          triggerFetch={appliedFilters}
+        />
+      </div>
     </div>
   );
 };
