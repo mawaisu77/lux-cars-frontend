@@ -57,7 +57,7 @@ function SearchMainPage({ appliedFilters, triggerFetch }) {
       // console.log("params.toString() ==== > ", params.toString());
       // console.log("params ==== > ", params);
 
-      const response = await baseService.get(`cars/get-all-cars/testing?${queryString}`);
+      const response = await baseService.get(`cars/get-all-cars?${queryString}`);
 
       // Append new cards to the existing cards
       setCards((prevCards) => [...prevCards, ...response.data.data.cars]);
