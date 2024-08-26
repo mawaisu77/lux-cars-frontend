@@ -19,8 +19,8 @@ const Funds = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
 
-  const { funds, loading, error, fetchFunds } = useGetFunds();
   const { handleAddFunds, loading: addingFundsLoading, error: addingFundsError } = useAddFunds();
+  const { funds, loading, error, fetchFunds } = useGetFunds();
 
   useEffect(() => {
     fetchFunds();
@@ -42,10 +42,11 @@ const Funds = () => {
   const handleSelectPackage = async (packageType) => {
     console.log(`Selected package: ${packageType}`);
     try {
-      const data = await handleAddFunds(packageType);
-      console.log("Funds added successfully", data);
-      showToast("Funds added successfully")
+      await handleAddFunds(packageType);
+      console.log("Funds bef", funds);
+      showToast("Funds added successfully", 'success')
       fetchFunds(); 
+      console.log("Funds after", funds);
     } catch (error) {
       console.error("Failed to add funds", error);
     } finally {
@@ -98,13 +99,13 @@ const Funds = () => {
         {/* Error State */}
         {error && (
           <>
-         <FundsCard fund={funds.data} className="font-semibold" />
+         <FundsCard className="font-semibold" />
 
           <div className="flex justify-center items-center flex-col min-h-[30vh]">
             <p className="text-[18px] lg:text-[1.2vw] font-urbanist text-red-600">Error: {error}</p>
             <button
               className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg"
-              onClick={fetchFunds}
+              onClick={handleOpenModal}
               >
               Deposit Funds
             </button>
@@ -116,7 +117,29 @@ const Funds = () => {
         {!loading && !error && funds.data && (
           <FundsCard fund={funds.data} className="font-semibold" />
         )}
+
+         {/* Adding Funds Loading State */}
+         {addingFundsLoading && (
+          <div className="flex justify-center items-center min-h-[10vh] mt-4">
+            <ClipLoader size={30} color={"#D0021B"} loading={addingFundsLoading} />
+            <p className="ml-3 text-[16px] lg:text-[1vw] font-urbanist text-gray-500">Adding funds...</p>
+          </div>
+        )}
+
+        {/* Adding Funds Error State */}
+        {addingFundsError && (
+          <div className="flex justify-center items-center flex-col min-h-[10vh] mt-4">
+            <p className="text-[16px] lg:text-[1vw] font-urbanist text-red-600">Error: {addingFundsError}</p>
+            <button
+              className="mt-2 px-3 py-1 bg-red-600 text-white rounded-lg"
+              onClick={handleOpenModal}
+            >
+              Retry Adding Funds
+            </button>
+          </div>
+        )}``
       </div>
+
       <div className="flex  flex-col lg:flex-row lg:justify-between w-[343px] md:w-[650px]  lg:w-[70vw] mx-auto leading-[4vh] ">
         <div>
           <div >

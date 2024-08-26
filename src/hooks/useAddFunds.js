@@ -9,6 +9,7 @@ const useAddFunds = () => {
     setLoading(true);
     try {
       const response = await addFunds(packageType);
+      console.log("custom hook of add fund reonse", response)
       setFundsData(response);
     } catch (err) {
       console.log('Error adding funds', err);
