@@ -110,7 +110,7 @@ const Bid = () => {
         <div className="flex w-[74vw]  flex-row justify-between mx-auto bgImage tree">
           <div className="mx-auto w-[30vw] h-[73vh] mt-[7vh]">
             <h2 className="text-left font-urbanist lg:text-[3.125vw] font-bold leading-tight my-[2vh]">
-              <span className="text-outline">Bid, Buy, Drive</span> Online Car
+              <span className="animated-text">Bid, Buy, Drive</span> Online Car
               Auctions with Home Delivery!
             </h2>
             <div className="w-[19vw] text-[#8a8aa0] font-urbanist text-[1.041vw] font-medium leading-[2.8vh] text-left mt-[0.3vh]">
@@ -236,7 +236,7 @@ const Bid = () => {
 
 
               <div onClick={handleSearch} className="self-end mb-[1.5vh] group flex h-[6.23vh] w-[3.5vw] justify-center items-center bg-[#ca0000] rounded-xl">
-                <GoSearch size={27} color="white" className="cursor-pointer group-hover:text-blue-600 duration-150" />
+                <GoSearch size={27} className="cursor-pointer text-white group-hover:text-blue-500 duration-150" />
               </div>
             </div>
           </div>

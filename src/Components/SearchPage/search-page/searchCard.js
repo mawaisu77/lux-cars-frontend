@@ -4,6 +4,9 @@ import { TfiReload } from "react-icons/tfi";
 import useTimer from "../../../hooks/useTimer";
 import fireImgTimer from "../../../assets/001-fire.png";
 import { Link } from "react-router-dom";
+import { BsFire } from "react-icons/bs";
+import { MdNotInterested } from "react-icons/md";
+import { FaHourglassHalf } from "react-icons/fa6";
 
 function SearchCard({ data }) {
   return (
@@ -27,7 +30,7 @@ function Card({ card }) {
    const { days, hours, minutes, seconds } = useTimer(targetTime);
  
    // Determine if the auction date is in the future or null
-   const isAuctionDateFuture = targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+   const ValidDate = targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
  
 
   return (
@@ -41,12 +44,20 @@ function Card({ card }) {
         <div className="absolute  bottom-4 left-1/2 transform -translate-x-1/2 w-[185px] h-10 bg-white rounded-2xl z-50 flex justify-center items-center">
           <div className="flex justify-center items-center gap-x-2 px-2">
             <div>
-              <img src={fireImgTimer} alt="bid_status"/>
+            {card.auction_date ? (
+                ValidDate ? (
+                  <BsFire className="text-red-600" />
+                ) : (
+                  <MdNotInterested className="text-red-600" />
+                )
+              ) : (
+                <FaHourglassHalf className="text-red-600" />
+              )}
             </div>
             <div>
               <p className="font-bold">
               {card.auction_date
-                  ? isAuctionDateFuture
+                  ? ValidDate
                     ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
                     : "Bidding Over"
                   : "Future"}
