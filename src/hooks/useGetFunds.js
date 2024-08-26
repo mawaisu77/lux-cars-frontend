@@ -8,6 +8,7 @@ const useGetFunds = () => {
 
   const fetchFunds = async () => {
     try {
+      setError(null)
       setLoading(true);
       const response = await baseService.get("funds/get-funds");
       setFunds(response.data);
