@@ -26,6 +26,7 @@ import { Link } from 'react-router-dom';
     </div>;
   }
 
+
   return (
     <>
       <div className="h-[784px] lg:h-[90vh] relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
@@ -71,7 +72,7 @@ import { Link } from 'react-router-dom';
               className="w-full lg:w-[82vw] h-[550px] lg:h-[66vh] mt-[40px]"
             >
               <div className="w-[90vw]  flex justify-center mx-auto  items-center mt-[9vh]">
-                {carData && carData.data.map((card, index) => (
+                {carData && carData.data.cars.map((card, index) => (
                   <SwiperSlide key={index} className="relative w-[370px]">
                     <div className="w-[327px] bg-white mx-auto lg:w-[17.3vw] h-[500px] lg:h-[54.5vh]  rounded-xl shadow-lg">
                       <div className="p-5 lg:p-[1vw]">
