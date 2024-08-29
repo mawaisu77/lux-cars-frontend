@@ -30,7 +30,7 @@ if (carLoading) {
   return (
     <>
         <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh] mb-[10vh]'>
-        {carData?.data?.map((card, index) => (
+        {carData && carData?.data?.map((card, index) => (
           <div key={index} className='w-[330px] lg:w-[17.5vw]  rounded-xl shadow-xl py-3'>
             <div className='relative'>
               <img src={card.carImages} className='w-[290px] lg:w-[15.5vw] h-[290px] lg:h-[30vh] rounded-xl mx-auto' alt='car-images' />

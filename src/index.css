@@ -64,10 +64,43 @@ html, body {
   }
 }
 
-.text-outline {
+/* .text-outline {
     color: transparent; 
     -webkit-text-stroke: 0.09vw black;
   }
+  .text-outline:hover {
+    color: transparent; 
+    -webkit-text-stroke: 0.09vw red;
+  }
+   */
+/* Define the animation */
+@keyframes strokeColorChange {
+  0% {
+    -webkit-text-stroke-color: black;
+  }
+  50% {
+    -webkit-text-stroke-color: red;
+  }
+  100% {
+    -webkit-text-stroke-color: black;
+  }
+}
+
+/* Apply styles to the animated text */
+.animated-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px black;
+  animation: strokeColorChange 5s infinite;
+  transition: transform 1s ease;
+  cursor: pointer;
+}
+
+/* Add a subtle scale effect on hover */
+.animated-text:hover {
+  transform: scale(1.05);
+}
+
+
   .bgImage {
     background-image: url('../src/assets/BG-Img/kk\ 1.png') , url( '../src/assets/BG-Img/tree_7072\ 1.png'); /* Adjust the path if necessary */
     background-size: 75vw; /* Adjust the percentage to control the size of the background image */
@@ -284,8 +317,8 @@ html, body {
 }
 .form-checkbox{
   appearance: none;
-  background-color: #f00; /* Red background */
-  border: none;
+  background-color: white; /* Red background */
+  border: 1px solid gray;
   width: 1.5em;
   height: 1.5em;
   display: grid;
@@ -300,7 +333,7 @@ html, body {
   height: 0.75em;
   transform: scale(0);
   transition: transform 120ms ease-in-out;
-  box-shadow: inset 1em 1em white; /* White tick */
+  box-shadow: inset 1em 1em rgb(255, 0, 0); /* White tick */
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 0, 80% 0, 38% 70%);
 }
 .form-checkbox:checked::before {

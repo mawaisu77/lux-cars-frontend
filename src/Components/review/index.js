@@ -3,10 +3,10 @@ import { TiStarFullOutline, TiStarHalfOutline, TiStarOutline } from "react-icons
 import ReactStars from "react-rating-stars-component";
 import axios from 'axios';
 import { API_BASE_URL } from '../../services/baseService';
-import { getToken } from '../../utils/storageUtils';
+import { getToken, getUser } from '../../utils/storageUtils';
 import { showToast } from '../../utils/Toast';
 
-const ReviewPopup = ({ onClose }) => {
+const ReviewPopup = ({ onClose, user }) => {
   const [rating, setRating] = useState(0);
 
   const handleSubmit = async () => {
@@ -18,7 +18,7 @@ const ReviewPopup = ({ onClose }) => {
       });
 
       if (response.status === 201) {
-        localStorage.setItem('hasReviewed', 'true');
+        localStorage.setItem(`hasReviewed_${user.email}`, 'true');
         onClose();
       } else {
         showToast("failed to submit review")
@@ -31,7 +31,7 @@ const ReviewPopup = ({ onClose }) => {
   };
 
   const handleSkip = () => {
-    localStorage.setItem('loginTime', new Date().getTime() + 10000); // Reset the timer to 2 hours from now
+    localStorage.setItem(`loginTime_${user.email}`, new Date().getTime() + 10000); // Reset the timer to 2 hours from now
     onClose();
   };
 

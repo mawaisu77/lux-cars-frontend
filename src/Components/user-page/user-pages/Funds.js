@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import FundsCard from "../../cards/FundsCard";
 import { FiMinusCircle } from "react-icons/fi";
@@ -9,13 +9,51 @@ import slider from '../../../assets/User-pics/Slider.png'
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import FundsTable from "../../cards/FundsTable";
+import useGetFunds from "../../../hooks/useGetFunds"; 
+import useAddFunds from "../../../hooks/useAddFunds"; 
+import { ClipLoader } from "react-spinners";
+import PackageModal from "./funds/PackageModal.jsx"
+import { showToast } from '../../../utils/Toast';
 
 const Funds = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const { handleAddFunds, loading: addingFundsLoading, error: addingFundsError } = useAddFunds();
+  const { funds, loading, error, fetchFunds } = useGetFunds();
+
+  useEffect(() => {
+    fetchFunds();
+  }, []);
+
   const [showDropdown, setShowDropdown] = useState(false);
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSelectPackage = async (packageType) => {
+    console.log(`Selected package: ${packageType}`);
+    try {
+      await handleAddFunds(packageType);
+      console.log("Funds bef", funds);
+      showToast("Funds added successfully", 'success')
+      fetchFunds(); 
+      console.log("Funds after", funds);
+    } catch (error) {
+      console.error("Failed to add funds", error);
+    } finally {
+      handleCloseModal();
+    }
+  };
+
 
   return (
     <>
@@ -45,13 +83,63 @@ const Funds = () => {
                 </ul>
               </div>
             )}
-            <button className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold items-center bg-[#f8f8f8] text-[15px] lg:text-[0.97vw] font-urbanist">
+            <button onClick={handleOpenModal} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold items-center bg-[#f8f8f8] text-[15px] lg:text-[0.97vw] font-urbanist">
               Add Deposite
             </button>
           </div>
         </div>
-        <FundsCard className="font-semibold" />
+          {/* Loading State */}
+          {loading && (
+          <div className="flex justify-center items-center min-h-[30vh]">
+            <ClipLoader size={50} color={"#D0021B"} loading={loading} />
+            <p className="ml-3 text-[18px] lg:text-[1.2vw] font-urbanist text-gray-500">Loading your funds...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <>
+         <FundsCard className="font-semibold" />
+
+          <div className="flex justify-center items-center flex-col min-h-[30vh]">
+            <p className="text-[18px] lg:text-[1.2vw] font-urbanist text-red-600">Error: {error}</p>
+            <button
+              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg"
+              onClick={handleOpenModal}
+              >
+              Deposit Funds
+            </button>
+          </div>
+              </>
+        )}
+
+        {/* Funds Data */}
+        {!loading && !error && funds.data && (
+          <FundsCard fund={funds.data} className="font-semibold" />
+        )}
+
+         {/* Adding Funds Loading State */}
+         {addingFundsLoading && (
+          <div className="flex justify-center items-center min-h-[10vh] mt-4">
+            <ClipLoader size={30} color={"#D0021B"} loading={addingFundsLoading} />
+            <p className="ml-3 text-[16px] lg:text-[1vw] font-urbanist text-gray-500">Adding funds...</p>
+          </div>
+        )}
+
+        {/* Adding Funds Error State */}
+        {addingFundsError && (
+          <div className="flex justify-center items-center flex-col min-h-[10vh] mt-4">
+            <p className="text-[16px] lg:text-[1vw] font-urbanist text-red-600">Error: {addingFundsError}</p>
+            <button
+              className="mt-2 px-3 py-1 bg-red-600 text-white rounded-lg"
+              onClick={handleOpenModal}
+            >
+              Retry Adding Funds
+            </button>
+          </div>
+        )}``
       </div>
+
       <div className="flex  flex-col lg:flex-row lg:justify-between w-[343px] md:w-[650px]  lg:w-[70vw] mx-auto leading-[4vh] ">
         <div>
           <div >
@@ -61,7 +149,7 @@ const Funds = () => {
               with security deposit of $750 USD
             </p>
           </div>
-          <img src={slider} className="w-[257px] h-auto my-5 lg:w-[30vw] mx-auto"/>
+          <img src={slider} alt="funds_img" className="w-[257px] h-auto my-5 lg:w-[30vw] mx-auto"/>
 
           <div className="flex flex-col lg:flex-row gap-3">
             <div className="flex flex-col text-left">
@@ -92,7 +180,6 @@ const Funds = () => {
            </div>
           </div>
         </div>
-
         <div className="w-[343px] md:w-[650px] lg:w-[19vw]  mt-[6vh] font-urbanist leading-[5vh]">
            <div className="w-full   text-left">
            <p className="text-[18px] lg:text-[0.9vw] text-[#667085]  ">
@@ -117,29 +204,15 @@ const Funds = () => {
             
 
         </div>
-        
+       {/* 1 */}
       </div>
-      <div className="w-[343px] md:w-[650px]  lg:w-[74vw] mx-auto mt-[7vh]">
-        <div className="flex flex-col lg:flex-row lg:justify-between">
-            <div className="text-left text-[30px] my-5  lg:my-0 lg:text-[2vw] font-urbanist font-bold">
-               Transaction History
-            </div>
-            <div className="flex justify-between lg:justify-center items-center  gap-3 ">
-              <div className="flex justify-center items-center gap-2 w-[206px] lg:w-[13vw] h-[46px] lg:h-[6vh] bg-[#f8f8f8] rounded-xl">
-              <LuCalendarDays size={25} />
-              <p className="text-[16px] lg:text-[0.9vw]">
-                Dec 2023- jan 2024
-              </p>
-              </div>
-              <div className="flex justify-center  text-[0.9vw] items-center w-[66px] lg:w-[4.2vw] h-[46px] lg:h-[6vh] bg-[#f8f8f8] rounded-xl">
-              <IoSettingsOutline size={25} />
-              </div>
-
-          </div>
-        </div>
-        <FundsTable/>
-        
-      </div>
+      {/* 2 */}
+      <div>
+      {/* <button onClick={handleOpenModal}>Choose Package</button> */}
+      {isModalOpen && (
+        <PackageModal onClose={handleCloseModal} onSelectPackage={handleSelectPackage} />
+      )}
+    </div>
     </>
   );
 };

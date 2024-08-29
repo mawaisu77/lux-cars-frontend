@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import baseService from '../services/baseService';
 
 const useGetCarDealer = (url) => {
   const [dealerData, setDealerData] = useState(null);
@@ -9,11 +9,17 @@ const useGetCarDealer = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(url);
-        setDealerData(response.data);
+          const response = await baseService.get(url);
+          setDealerData(response.data);
       } catch (err) {
-        setDealerError(err);
-      } finally {
+        if (err.response) {
+          setDealerError(`${err.response.data.message}`);
+        } else if (err.request) {
+          setDealerError('Error: No response from server');
+        } else {
+          setDealerError(`Error: ${err.message}`);
+        }
+     } finally {
         setDealerLoading(false);
       }
     };

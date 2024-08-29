@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
     "/login",
     "/signup",
     "/forgot-password",
-    "/reset-password/:token",
+    // "/reset-password/:token",
     "/verify-email/:token",
   ];
 

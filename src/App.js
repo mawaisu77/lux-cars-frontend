@@ -36,19 +36,23 @@ import { useAuthContext } from "./hooks/useAuthContext.js";
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
   const {user} = useAuthContext()
+  
 
   useEffect(() => {
     const checkReviewPopup = () => {
-      const hasReviewed = localStorage.getItem('hasReviewed');
-      const now = new Date().getTime();
-      const loginTime = localStorage.getItem('loginTime');
-      if (user && !hasReviewed) {
-        if (!loginTime) {
-          localStorage.setItem('loginTime', now);
-        } else {
-          const elapsed = now - loginTime;
-          if (elapsed >= 10000) { // for testing purpose time is setted to 10sec
-            setShowReviewPopup(true);
+      if (user && user.email) {
+        const now = new Date().getTime();
+        const loginTime = localStorage.getItem(`loginTime_${user.email}`);
+        const hasReviewed = localStorage.getItem(`hasReviewed_${user.email}`);
+        
+        if (!hasReviewed) {
+          if (!loginTime) {
+            localStorage.setItem(`loginTime_${user.email}`, now);
+          } else {
+            const elapsed = now - loginTime;
+            if (elapsed >= 10000) { // For testing purpose time is set to 10 seconds
+              setShowReviewPopup(true);
+            }
           }
         }
       }
@@ -56,21 +60,23 @@ function App() {
 
     checkReviewPopup();
 
-    const interval = setInterval(checkReviewPopup, 1000); // Check every minute
+    const interval = setInterval(checkReviewPopup, 1000); // Check every second
 
     return () => clearInterval(interval);
   }, [user]);
-  const handleClosePopup = () => {
-    setShowReviewPopup(false);
-    localStorage.removeItem('loginTime');
 
+  const handleClosePopup = () => {
+    if (user && user.email) {
+      setShowReviewPopup(false);
+      localStorage.removeItem(`loginTime_${user.email}`);
+    }
   };
   return (
     <>
    
       <Router>
       <div>
-      {showReviewPopup &&<Review onClose={handleClosePopup} />}
+      {showReviewPopup &&<Review user={user}  onClose={handleClosePopup} />}
       </div>
         <div className="App">
           {/* <Header/> */}
@@ -101,9 +107,9 @@ function App() {
             <Route
               path="/reset-password/:token"
               element={
-                <ProtectedRoute>
+                // <ProtectedRoute>
                   <ResetPassword />
-                </ProtectedRoute>
+                // </ProtectedRoute>
               }
             />
             <Route

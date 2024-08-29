@@ -19,6 +19,13 @@
   right: 60px; /* Adjust this value to position the right arrow */
 }
 
+/* Hide arrows on mobile view */
+@media (max-width: 768px) {
+  .arrow {
+    display: none;
+  }
+}
+
 .swiper-pagination {
   display: flex;
   justify-content: center;

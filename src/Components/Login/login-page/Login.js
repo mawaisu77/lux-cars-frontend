@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import Header from "../../header/Header/Header";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from '../../../hooks/useLogin';
 import { ClipLoader } from 'react-spinners'; 
-import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { showToast } from "../../../utils/Toast";
 
 
 const Login = () => {
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const [showPassword, setShowPassword] = useState(false); 
+
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
   const navigate = useNavigate()
-  const { login, isLoading, error } = useLogin();
+  const { login, isLoading } = useLogin();
 
 
   const loginFormik = useFormik({
@@ -77,7 +78,7 @@ const Login = () => {
           onSubmit={loginFormik.handleSubmit}
         >
           <input
-            type=""
+            type="email"
             id="email"
             name="email"
             className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
@@ -93,7 +94,7 @@ const Login = () => {
             value={loginFormik.values.email}
           />
           <input
-            type="password"
+            type={showPassword ? "text" : "password"} 
             id="password"
             name="password"
             className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
@@ -109,12 +110,14 @@ const Login = () => {
             value={loginFormik.values.password}
           />
           <div className="w-[342px] lg:w-[34vw]  flex justify-between">
-            <div className="flex justify-between  gap-[0.5vw] text-[14px] lg:text-[0.8vw]">
+            <div className="flex justify-between items-center gap-[0.5vw] text-[14px] lg:text-[0.8vw]">
               <input
                 type="checkbox"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)} 
                 className="form-checkbox text-[14px]  flex"
-              />{" "}
-              Remenber me
+              />
+              Show Password 
             </div>
            <Link to="/forgot-password">
    <div className="font-urbanist text-[14px] lg:text-[0.8vw] font-semibold">

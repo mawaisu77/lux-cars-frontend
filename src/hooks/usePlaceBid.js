@@ -11,7 +11,7 @@ const usePlaceBid = () => {
     setPlaceBidError(null);
     setPlaceBidSuccess(false);
     try {
-      await baseService.post(`bid-cars/create-bid-car`, {
+      await baseService.post(`bid-cars/place-bid`, {
         lot_id,
         currentBid,
       });
@@ -25,13 +25,10 @@ const usePlaceBid = () => {
 
   const handleError = (err) => {
     if (err.response) {
-      // Server responded with a status other than 200 range
       return `${err.response.data.message}`;
     } else if (err.request) {
-      // Request was made but no response
       return 'Error: No response from server';
     } else {
-      // Something else happened while setting up the request
       return `Error: ${err.message}`;
     }
   };

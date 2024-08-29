@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { testi } from '../../../data/data';
 import { useRef } from "react";
 // Import Swiper React components
@@ -10,9 +10,20 @@ import "swiper/css";
 // import SwiperCard from "./SwiperTextReviewCard";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+// import { IslandContext } from '../../../context/IslandContext';
+
 const Abouttest = () => {
+    // const { selectedIsland } = useContext(IslandContext);
+
     return (
         <>
+           {/* <div>
+            {selectedIsland ? (
+                <p>Selected Island: {selectedIsland}</p>
+            ) : (
+                <p>No island selected</p>
+            )}
+        </div> */}
             <div className='h-[822px] lg:h-[77vh]   bg-[#f8f8f8]'>
                 <div className='text-[36px] lg:text-[2.3vw] font-urbanist font-semibold mb-[5vh] pt-[9.3vh]'>
                     Testimonials
@@ -60,3 +71,6 @@ const Abouttest = () => {
 };
 
 export default Abouttest;
+
+
+
