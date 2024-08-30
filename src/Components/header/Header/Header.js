@@ -4,13 +4,11 @@ import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
 import { IoGlobeSharp } from "react-icons/io5";
 
-import { TiArrowSortedDown } from 'react-icons/ti';
 import { HiUsers } from 'react-icons/hi2';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
-import { IoCloudUploadOutline } from "react-icons/io5";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -73,10 +71,10 @@ const Header = () => {
         <div className="relative inline-block text-left">
        
       <div className='flex gap-x-4 items-center '>
- 
-        
           <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} />
       </div>
+   
+
       {dropdownOpen && (
         <div className="origin-top-right absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
@@ -96,6 +94,7 @@ const Header = () => {
         </div>
       )}
     </div>
+
           <Link to="/user/profile" className={` ${isHomePage ? 'text-[#7A798A] block' : 'text-white'}`} ><HiUsers/></Link>
           
           {
