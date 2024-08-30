@@ -12,7 +12,7 @@ const useUserBids = () => {
       const data = await getAllBids();
       setBids(data);
     } catch (err) {
-        console.log("user service error",err)
+        console.log("+++",err)
       if (err.response) {
         setError(`${err.response.data.message}`);
       } else if (err.request) {

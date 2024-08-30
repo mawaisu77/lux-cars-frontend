@@ -200,6 +200,15 @@ const Navbar = () => {
                 OFFERS
               </p>
             </Link>
+            <Link to="/user/account/parts">
+              <p
+                className={`cursor-pointer whitespace-nowrap ${getLinkStyle(
+                  "/user/account/parts"
+                )}`}
+              >
+                PARTS
+              </p>
+            </Link>
             <Link to="/user/profile">
               <p
                 className={`cursor-pointer whitespace-nowrap ${getLinkStyle(

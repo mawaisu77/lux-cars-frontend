@@ -24,7 +24,7 @@ const Makes = () => {
         </div>
         <hr className="h-1 bg-[#CA0000] w-20 mx-auto mt-8" />
         {/* For desktop */}
-        <div className="hidden lg:flex w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 mt-[4vh] justify-center">
+        <div className="hidden lg:flex w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] justify-center">
           {carData && carData.map((item, index) => (
             <button
               key={index}

@@ -17,6 +17,10 @@ const Sidebar = () => {
   const initialTransmission = useMemo(() => queryParams.getAll("transmission") || [], [queryParams]);
   const initialStatus = useMemo(() => queryParams.getAll("status") || [], [queryParams]);
   const initialFuel = useMemo(() => queryParams.getAll("fuel") || [], [queryParams]);
+  const initialDrive = useMemo(() => queryParams.getAll("drive") || [], [queryParams]);
+  const initialDamage = useMemo(() => queryParams.getAll("damage_pr") || [], [queryParams]);
+  const initialFromOdometer = queryParams.get("odometer_from") || "";
+  const initialToOdometer = queryParams.get("odometer_to") || "";
 
   console.log("query params ne urlSearch params",initialStatus)
   const [selectedModel, setSelectedModel] = useState(initialModel);
@@ -28,8 +32,12 @@ const Sidebar = () => {
     transmission: initialTransmission,
     status: initialStatus,
     fuel: initialFuel,
+    drive: initialDrive,
+    damage_pr: initialDamage,
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
+    odometer_from: initialFromOdometer || "",
+    odometer_to: initialToOdometer || "",
   });
   const [appliedFilters, setAppliedFilters] = useState({
     site: initialPartner || "",
@@ -38,8 +46,12 @@ const Sidebar = () => {
     transmission: initialTransmission,
     status: initialStatus,
     fuel: initialFuel,
+    drive: initialDrive,
+    damage_pr: initialDamage,
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
+    odometer_from: initialFromOdometer || "",
+    odometer_to: initialToOdometer || "",
   });
   
 
@@ -65,7 +77,11 @@ const Sidebar = () => {
       initialToYear ||
       initialTransmission.length > 0 ||
       initialStatus.length > 0 ||
-      initialFuel.length > 0
+      initialFuel.length > 0 ||
+      initialDrive.length > 0 ||
+      initialDamage.length > 0 ||
+      initialFromOdometer ||
+      initialToOdometer
     ) {
       setAppliedFilters({
         site: initialPartner,
@@ -74,8 +90,12 @@ const Sidebar = () => {
         transmission: initialTransmission,
         status: initialStatus,
         fuel: initialFuel,
+        drive: initialDrive,
+        damage_pr: initialDamage,
         year_from: initialFromYear,
         year_to: initialToYear,
+        odometer_from: initialFromOdometer,
+        odometer_to: initialToOdometer,
       });
     }
   }, [
@@ -87,6 +107,10 @@ const Sidebar = () => {
     initialTransmission,
     initialStatus,
     initialFuel,
+    initialDrive,
+    initialDamage,
+    initialFromOdometer,
+    initialToOdometer
   ]);
 
   // Apply filters and update query parameters
@@ -121,8 +145,12 @@ const Sidebar = () => {
       transmission: [],
       status: [],
       fuel: [],
+      drive: [],
+      damage_pr: [],
       year_from: "",
       year_to: "",
+      odometer_from: "",
+      odometer_to: "",
     });
     setAppliedFilters({});
     setSelectedMake("");
@@ -143,10 +171,24 @@ const Sidebar = () => {
       { id: "Automatic", label: "Automatic" },
       { id: "Manual", label: "Manual" },
     ],
+    drive: [
+      { id: "Rear Wheel Drive", label: "Rear Wheel Drive" },
+      { id: "Front Wheel Drive", label: "Front Wheel Drive" },
+      { id: "All Wheel Drive", label: "All Wheel Drive" },
+      { id: "Unknown", label: "Unknown" },
+    ],
+    damage_pr: [
+      { id: "Partial Repair", label: "Partial Repair" },
+      { id: "Hail", label: "Hail" },
+      { id: "Stripped", label: "Stripped" },
+      { id: "Theft", label: "Theft" },
+    ],
     status: [
       { id: "Stationary", label: "Stationary" },
       { id: "Run & Drive", label: "Run & Drive" },
       { id: "Starts", label: "Starts" },
+      { id: "Can't test", label: "Can't test" },
+      { id: "Unknown", label: "Unknown" }
     ],
     fuel: [
       { id: "Diesel", label: "Diesel" },
@@ -201,7 +243,7 @@ const Sidebar = () => {
         ...prevFilters,
         model: filterValue,
       }));
-    } else if (filterCategory === "year_from" || filterCategory === "year_to") {
+    } else if (filterCategory === "year_from" || filterCategory === "year_to" || filterCategory === "odometer_from" || filterCategory === "odometer_to") {
       setSelectedFilters((prevFilters) => ({
         ...prevFilters,
         [filterCategory]: filterValue,
@@ -296,27 +338,6 @@ const Sidebar = () => {
           </div>
         ))}
 
-        {/* <div className="py-[2vh] px-[1vw]">
-          <h1 className="text-[1.3vw] text-left font-bold mb-[0.729vw]">
-            Year
-          </h1>
-          <div className="flex justify-between gap-[1vw]">
-            <input
-              type="number"
-              className="form-input w-full"
-              placeholder="From"
-              value={selectedFilters.year_from}
-              onChange={(e) => handleFilterChange("year_from", e.target.value)}
-            />
-            <input
-              type="number"
-              className="form-input w-full"
-              placeholder="To"
-              value={selectedFilters.year_to}
-              onChange={(e) => handleFilterChange("year_to", e.target.value)}
-            />
-          </div>
-        </div> */}
 
         <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
           <div className="flex items-center justify-between cursor-pointer">
@@ -357,22 +378,43 @@ const Sidebar = () => {
             />
           </div>
         </div>
+        <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
+          <div className="flex items-center justify-between cursor-pointer">
+            <h1 className="text-[1.3vw] text-left font-bold mb-[0.729vw]">
+            Odometer
+            </h1>
+          </div>
+          <div className="flex gap-[1vw]">
+            <input
+              id="odometer_from"
+              name="odometer_from"
+              type="number"
+              maxLength={4}
+              min={0}
+              placeholder="From"
+              className="form-input w-full px-2 border rounded-md py-1.5"
+              value={selectedFilters.odometer_to}
+              onChange={(e) =>
+                handleFilterChange("odometer_from", e.target.value)
+              }
+            />
+            <input
+             id="odometer_to"
+              name="odometer_to"
+              type="number"
+              min={0}
+              placeholder="To"
+              className="form-input w-full border px-2 rounded-md py-1.5"
+              value={selectedFilters.odometer_from}
+              onChange={(e) =>
+                handleFilterChange("odometer_to", e.target.value)
+              }
+             
+            />
+          </div>
+        </div>
 
 
-        {/* <div className="flex justify-between items-center py-[2vh] px-[1vw]">
-          <button
-            className="px-[1.5vw] py-[1vh] rounded-[1.25vw] text-[1vw] font-bold text-white bg-[#1E81FF] hover:bg-[#1c6cd6]"
-            onClick={applyFilters}
-          >
-            Apply Filters
-          </button>
-          <button
-            className="px-[1.5vw] py-[1vh] rounded-[1.25vw] text-[1vw] font-bold text-[#1E81FF] hover:text-[#1c6cd6]"
-            onClick={resetFilters}
-          >
-            Reset
-          </button>
-        </div> */}
 
       <div className="flex  flex-col lg:flex-row justify-center items-center my-5 mx-2 gap-x-2 lg:gap-y-4">
           <button
@@ -391,6 +433,7 @@ const Sidebar = () => {
       </div>
       <div className=" w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex flex-col items-center">
         <SearchMainPage
+         resetFilters={resetFilters}
           appliedFilters={appliedFilters}
           triggerFetch={appliedFilters}
         />
