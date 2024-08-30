@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import CurrencyInput from "react-currency-input-field";
-import { jwtDecode } from "jwt-decode";
 import useLoanApplication from "../../../hooks/useAddLoanApplication";
 import { showToast } from "../../../utils/Toast";
 
@@ -196,44 +195,40 @@ function LoanApplication() {
     }
 
     try {
-      console.log("Submitting form data:", formData);
       const res = await addLoanApplication(formData);
-      console.log("Response from addLoanApplication:", res);
+      if (res.data.statusCode === 201) {
+        showToast("Application Submitted Successfully", "success");
 
-      showToast("Application Submitted Successfully", "success");
-
-      setFormData({
-        title: "Mr",
-        firstName: "",
-        lastName: "",
-        email: "",
-        address: "",
-        city: "",
-        yearAtAddress: "",
-        monthsAtAddress: "",
-        cellPhoneNumber: "",
-        workPhoneNumber: "",
-        monthlyPayment: "",
-        residentType: "",
-        vehicleInfo: "",
-        employerName: "",
-        employerPhone: "",
-        occupation: "",
-        yearsAtEmployer: "",
-        monthlyIncome: "",
-        bankName: "",
-        accountType: "",
-        financingAmount: "",
-        downPayment: "",
-        isTrade: false,
-        isCoApplicant: false,
-        bankForContact: [],
-        timeforContact: "",
-      });
-
-      console.log("Form data reset after submission");
+        setFormData({
+          title: "Mr",
+          firstName: "",
+          lastName: "",
+          email: "",
+          address: "",
+          city: "",
+          yearAtAddress: "",
+          monthsAtAddress: "",
+          cellPhoneNumber: "",
+          workPhoneNumber: "",
+          monthlyPayment: "",
+          residentType: "",
+          vehicleInfo: "",
+          employerName: "",
+          employerPhone: "",
+          occupation: "",
+          yearsAtEmployer: "",
+          monthlyIncome: "",
+          bankName: "",
+          accountType: "",
+          financingAmount: "",
+          downPayment: "",
+          isTrade: false,
+          isCoApplicant: false,
+          bankForContact: [],
+          timeforContact: "",
+        });
+      } else showToast("Error In Uploading Application", "error");
     } catch (error) {
-      console.error("Error in submitting form:", error);
       showToast("Error submitting application. Please try again.", "error");
     }
   };
