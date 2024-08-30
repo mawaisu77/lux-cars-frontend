@@ -152,6 +152,14 @@ html, body {
       background-repeat: no-repeat;
       height: 32.5vh;
     }
+
+    .Backgroundimage-Privicy-loan-terms{
+      background-image: url('../src/assets/BG-Img/IMG\ \(28).png');
+      background-size: 100vw;
+      background-repeat: no-repeat;
+      height: 32.5vh;
+  
+    }
   
     .Backgroundimage-LogIN::before {
       content: '';
