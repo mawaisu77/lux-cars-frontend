@@ -33,11 +33,15 @@ import Review from "./Components/review/index.js";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext.js";
 import Parts from "./Components/user-page/user-pages/Parts.js";
+import { io } from "socket.io-client";
 
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
   const {user} = useAuthContext()
   
+// useEffect(()=> {
+//   const socket = io("http://localhost:8000")
+// },[])
 
   useEffect(() => {
     const checkReviewPopup = () => {
