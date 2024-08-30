@@ -20,6 +20,7 @@ import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import TimeLeftCounter from "./TimeLeftCounter";
+import VehicleCostCalculator from "./VehicleCostCalculator";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -27,7 +28,7 @@ const VehicleHero = () => {
   const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-    useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
+    useGetCarDetail(`cars/get-car-by-lot-id/testing?lot_id=${lotID}`);
 
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
@@ -429,6 +430,8 @@ const VehicleHero = () => {
           <VehicleCards carData={carDetailData.data} />
         </div>
       )}
+
+      <VehicleCostCalculator />
 
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
