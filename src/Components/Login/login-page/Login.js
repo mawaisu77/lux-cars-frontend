@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../header/Header/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from '../../../hooks/useLogin';
@@ -6,13 +6,13 @@ import { ClipLoader } from 'react-spinners';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { showToast } from "../../../utils/Toast";
+import useSaveCar from "../../../hooks/useSaveCar";
+import useGetSavedCars from "../../../hooks/useGetUserSavedCars";
 
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false); 
 
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
@@ -31,11 +31,10 @@ const Login = () => {
     onSubmit: async (values, { setSubmitting }) => {
       const {success, message, role} = await login(values.email, values.password);
       if (success) {
-        // showToast(message,'success')
-        // // toast.success(message);
-        // // navigate(from, { replace: true });
+      //  await fetchSavedCars();
+      //  const carLotIds = savedCars?.data?.map(car => car.lot_id);
+      //  localStorage.setItem("savedCars", JSON.stringify(carLotIds));
 
-        // navigate("/Successfull-login")
         if (role === 'admin') {
           navigate("/admin/dahboard");
         } else {
@@ -51,6 +50,7 @@ const Login = () => {
     validateOnBlur: true,
   });
 
+  
   return (
     <>
      <div className="Backgroundimage-LogIN ">

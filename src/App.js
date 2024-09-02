@@ -33,11 +33,13 @@ import Review from "./Components/review/index.js";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext.js";
 import Parts from "./Components/user-page/user-pages/Parts.js";
+import SavedCars from "./Components/user-page/user-pages/SavedCars.js";
+import useGetSavedCars from "./hooks/useGetUserSavedCars.js";
 
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
   const {user} = useAuthContext()
-  
+  const { error, fetchSavedCars, loading, savedCars } = useGetSavedCars();
 
   useEffect(() => {
     const checkReviewPopup = () => {
@@ -65,6 +67,23 @@ function App() {
 
     return () => clearInterval(interval);
   }, [user]);
+
+
+    // Effect to fetch saved cars when the component mounts
+    useEffect(() => {
+      if (user) { // Ensure user is authenticated before fetching
+        fetchSavedCars();
+      }
+    }, [user, savedCars?.data?.length]);
+    
+    // Effect to save savedCars IDs to localStorage
+    useEffect(() => {
+      if (savedCars && savedCars.data.length > 0) {
+        console.log("savedCars")
+        const carIds = savedCars?.data?.map(car => car.lot_id); 
+        localStorage.setItem('savedCars', JSON.stringify(carIds));
+      }
+    }, [savedCars]);
 
   const handleClosePopup = () => {
     if (user && user.email) {
@@ -234,6 +253,16 @@ function App() {
                 <ProtectedRoute>
                   <UserLayout>
                     <Funds />
+                  </UserLayout>
+                </ProtectedRoute>
+              }
+            />
+               <Route
+              path="/user/account/saved-cars"
+              element={
+                <ProtectedRoute>
+                  <UserLayout>
+                    <SavedCars />
                   </UserLayout>
                 </ProtectedRoute>
               }

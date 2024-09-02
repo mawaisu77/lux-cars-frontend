@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
 import fireImgTimer from "../../assets/001-fire.png";
-import { BsFire, BsHeart, BsHeartArrow, BsHeartbreak } from "react-icons/bs";
+import { BsFire, BsHeart, BsHeartArrow, BsHeartbreak, BsHeartFill } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa";
 import { useRef, useState } from "react";
@@ -12,9 +12,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
+import useSaveCar from "../../hooks/useSaveCar";
 
 
 const CarCard = ({ card, isBuy = false }) => {
+  const { carData, loading, error, handleSaveCar } = useSaveCar();
+ // State to track saved cars
+ const [savedCars, setSavedCars] = useState([]);
+ 
   // Memoize the targetTime to prevent unnecessary recalculations
   const targetTime = useMemo(
     () => (card.auction_date ? new Date(card.auction_date) : null),
@@ -26,15 +31,61 @@ const CarCard = ({ card, isBuy = false }) => {
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
+  // Initialize the saved cars state from localStorage
+  useEffect(() => {
+    const savedCarsFromStorage = JSON.parse(localStorage.getItem("savedCars")) || [];
+    setSavedCars(savedCarsFromStorage);
+  }, [savedCars]);
+
+
+  const handleSaveClick = (lot_id) => {
+    handleSaveCar(lot_id);
+
+    const updatedSavedCars = [...savedCars];
+    const carIndex = updatedSavedCars.indexOf(lot_id);
+
+    if (carIndex > -1) {
+      updatedSavedCars.splice(carIndex, 1); // Remove if already saved
+    } else {
+      updatedSavedCars.push(lot_id); // Add if not saved
+    }
+
+    // Update state and localStorage
+    setSavedCars(updatedSavedCars);
+    localStorage.setItem("savedCars", JSON.stringify(updatedSavedCars));
+  };
+
+  // Check if the current car is saved
+  const isCarSaved = savedCars.includes(card.lot_id);
   return (
     <div className="w-[330px]  mx-auto lg:w-[25.3vw] xl:w-[18.3vw] rounded-xl shadow-lg">
       <div className="p-5 relative w-full lg:p-[1vw]">
         <div className="w-full relative">
-          <BsHeart size={25} className="absolute z-50 right-5 top-2  hover:text-red-600" />
+          {/* <BsHeart onClick={() => handleSaveClick(card.lot_id)}  size={25} className="absolute z-50 right-5 top-2 text-red-600 " /> */}
            {/* Badge for Latest Arrival */}
           {/* <span className="absolute top-2 z-50 left-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded">
             {`Current Bid: $${200}`}
           </span> */}
+           {isCarSaved ? (
+            <div className="bg-black/80 rounded-lg px-3 py-1 absolute z-50 right-5 top-2">
+              <BsHeartFill
+                onClick={() => handleSaveClick(card.lot_id)}
+                size={23}
+                className=" cursor-pointer text-red-600"
+              />
+            </div>
+             
+            ) : (
+              <div className="bg-black/80 rounded-lg px-3 py-1 absolute z-50 right-5 top-2">
+
+              <BsHeart
+                onClick={() => handleSaveClick(card.lot_id)}
+                size={23}
+                className=" cursor-pointer text-white"
+              />
+             </div>
+
+            )}
 
           <Swiper
           className=""

@@ -34,5 +34,24 @@ export const getProfile = async () => {
     }
   };
 
+  export const saveUserCars = async (id) => {
+    try {
+      const response = await baseService.post('saved-cars/save-car', {lot_id:id});
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const getUserSavedCars = async () => {
+    try {
+      const response = await baseService.get('saved-cars/get-users-saved-cars');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
 
   

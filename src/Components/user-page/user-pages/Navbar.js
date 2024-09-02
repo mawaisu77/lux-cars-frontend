@@ -155,9 +155,14 @@ const Navbar = () => {
              
             </div> */}
               <div className="   mx-auto   ">
-                <button className="text-[14px] lg:text-[0.82vw] text-white w-[100px] lg:w-[6.3vw] h-[40px]  lg:h-[5.1vh] lg:mt-[2vh] lg:mr-[1.7vw] border border-white rounded-full">
+                {/* <button className="text-[14px] lg:text-[0.82vw] text-white w-[100px] lg:w-[6.3vw] h-[40px]  lg:h-[5.1vh] lg:mt-[2vh] lg:mr-[1.7vw] border border-white rounded-full">
                   Create Bid
-                </button>
+                </button> */}
+                <Link to={'/user/account/saved-cars'} className="">
+                  <button className="text-[14px] lg:text-[0.82vw] text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 w-[100px] lg:w-[6.3vw] h-[40px] lg:h-[5.1vh] lg:mt-[2vh] lg:mr-[1.7vw] border border-white rounded-full">
+                    My Favourites 
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
