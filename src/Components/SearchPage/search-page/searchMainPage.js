@@ -7,7 +7,7 @@ import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-function SearchMainPage({ appliedFilters, triggerFetch }) {
+function SearchMainPage({ appliedFilters, triggerFetch, resetFilters }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
@@ -142,9 +142,17 @@ function SearchMainPage({ appliedFilters, triggerFetch }) {
           )}
 
           {!loading && !error && cards.length === 0 && (
+            <>
             <div className="flex justify-center my-10">
               No vehicles found.
             </div>
+               <button
+               onClick={resetFilters}
+               className="p-2 bg-gray-500 w-1/4 hover:bg-gray-600 text-white rounded-lg"
+               >
+               Reset Filters
+             </button>
+               </>
           )}
 
           {loading && (

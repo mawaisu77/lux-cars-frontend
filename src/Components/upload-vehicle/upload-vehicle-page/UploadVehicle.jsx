@@ -247,7 +247,7 @@ const UploadVehicle = () => {
     CarDetails.append("modification", formData.carDetails.modification);
     CarDetails.append("significantFlaws", formData.carDetails.significantFlaws);
     CarDetails.append("carLocation", formData.carDetails.carLocation);
-    CarDetails.append("carState", formData.carDetails.ca);
+    CarDetails.append("carState", formData.carDetails.carState);
     CarDetails.append("zip", formData.carDetails.zip);
     CarDetails.append("carTitledAt", formData.carDetails.carTitledAt);
     CarDetails.append("carTitledInfo", formData.carDetails.carTitledInfo);
@@ -265,9 +265,7 @@ const UploadVehicle = () => {
 
     // =====================================================================================
     if (userType === "dealer") {
-      console.log("pehla log");
       if (!dealerData) {
-        console.log("dosra log");
 
         if (
           Object.keys(newErrors).length === 0 &&
@@ -357,7 +355,10 @@ const UploadVehicle = () => {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${getToken()}`,
             },
+            
           });
+          showToast("Vehicle uploaded", 'success')
+
         } catch (error) {
           if (error.response) {
             showToast(
