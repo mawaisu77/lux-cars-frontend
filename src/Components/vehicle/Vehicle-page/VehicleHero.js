@@ -20,7 +20,6 @@ import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import TimeLeftCounter from "./TimeLeftCounter";
-import VehicleCostCalculator from "./VehicleCostCalculator";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -117,12 +116,6 @@ const VehicleHero = () => {
         <>
           {carDetailData && (
             <>
-              {/* {ValidDate && (
-                <div className="bg-[#CA0000] shadow tracking-wider text-white text-center p-3 font-bold">
-                  Preliminary Bidding is Over for this vehicle
-                </div>
-              )} */}
-
               {carDetailData.data.auction_date
                   ? ValidDate
                     ? ``
@@ -139,7 +132,7 @@ const VehicleHero = () => {
 
               <div className="flex justify-between mx-auto w-[74vw] mt-[80px] mb-[20px]">
                 <div className="w-[36vw]">
-                  <SwiperGallery images={carDetailData?.data?.link_img_hd} />
+                  <SwiperGallery images={carDetailData?.data?.link_img_hd} carData={carDetailData?.data}  />
                   <div className="flex justify-between px-2 items-center w-full border text-[#101828] text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1">
                       <IoDocumentTextOutline />
@@ -150,7 +143,6 @@ const VehicleHero = () => {
                 </div>
 
                 <div className="w-[33vw] ">
-                  {/* <div>{`${days} ${hours} ${minutes} ${seconds}`}</div> */}
                   <div>
                     <div className="flex justify-between mb-[3vh]">
                       <div className="flex justify-center items-center gap-2">
@@ -269,11 +261,6 @@ const VehicleHero = () => {
                           </div>
                         </div>
 
-                        {/* {carDetailData?.data?.auction_date ? 
-                   ValidDate
-                    ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
-                    : "Bidding Over"
-                  : "Future"} */}
                         {carDetailData?.data?.auction_date ? (
                           ValidDate ? (                        
                             <>
@@ -291,39 +278,10 @@ const VehicleHero = () => {
                         ) : (
                           ""
                         )}
-
-                        {/* ================= */}
-                        {/* <TimeLeftCounter days={days} hours={hours} minutes={minutes} seconds={seconds} /> */}
-                        {/* {isAuctionDateFuture && (
-                     <div className="bg-red-600 tracking-wider text-white text-center p-3 font-bold">
-                     <TimeLeftCounter days={days} hours={hours} minutes={minutes} seconds={seconds} />
-                     </div>
-                   )} */}
+        
                       </div>
                     </div>
-                  </div>
-                  {/* <div className="text-left flex gap-2 items-center mb-5">
-                    <p className="text-[1vw] font-urbanist font-bold">
-                      Share :
-                    </p>
-                    <div className="flex gap-3">
-                      <div className="w-[1.5vw] h-[3.2vh] bg-[#f8f8f8] rounded-lg flex justify-center items-center">
-                        <FaFacebook />
-                      </div>
-                      <div className="w-[1.5vw] h-[3.2vh] bg-[#f8f8f8] rounded-lg flex justify-center items-center">
-                        <FaXTwitter />
-                      </div>
-                      <div className="w-[1.5vw] h-[3.2vh] bg-[#f8f8f8] rounded-lg flex justify-center items-center">
-                        <FaGoogle />
-                      </div>
-                      <div className="w-[1.5vw] h-[3.2vh] bg-[#f8f8f8] rounded-lg flex justify-center items-center">
-                        <FaLinkedinIn />
-                      </div>
-                    </div>
-                    <p className="underline font-urbanist text-[0.8vw] ml-5 cursor-pointer">
-                      More
-                    </p>
-                  </div> */}
+                  </div>     
 
                   <button
                     onClick={() => document.getElementById("my_modal_1").showModal()}
@@ -430,8 +388,6 @@ const VehicleHero = () => {
           <VehicleCards carData={carDetailData.data} />
         </div>
       )}
-
-      <VehicleCostCalculator />
 
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">

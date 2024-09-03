@@ -78,8 +78,7 @@ function App() {
     
     // Effect to save savedCars IDs to localStorage
     useEffect(() => {
-      if (savedCars && savedCars.data.length > 0) {
-        console.log("savedCars")
+      if (savedCars && savedCars?.data?.length > 0) {
         const carIds = savedCars?.data?.map(car => car.lot_id); 
         localStorage.setItem('savedCars', JSON.stringify(carIds));
       }

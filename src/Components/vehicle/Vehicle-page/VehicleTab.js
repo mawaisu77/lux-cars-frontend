@@ -6,6 +6,7 @@ import { ClipLoader } from "react-spinners";
 import useBidHistory from "../../../hooks/useGetBidHistoryByLotId";
 import TimeAgo from 'react-timeago'
 import CarReportViewer from "./Report";
+import VehicleCostCalculator from "./VehicleCostCalculator";
 
 const SingleProductTabs = ({ data }) => {
   
@@ -221,7 +222,7 @@ const SingleProductTabs = ({ data }) => {
         </TabPanel>
         <TabPanel className="max-w-[1000px] mx-auto">
           <div className="flex flex-col justify-center gap-y-4">
-            \tab 3 content
+            <VehicleCostCalculator />
           </div>
         </TabPanel>
         <TabPanel className="max-w-[1400px] flex justify-center mt-2 py-10 mx-auto">
