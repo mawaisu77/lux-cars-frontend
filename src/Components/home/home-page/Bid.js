@@ -87,6 +87,7 @@ const Bid = () => {
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
     }),
     placeholder: (base) => ({
+      fontSize: '0.9vw',
       ...base,
       color: '#8a8aa0', 
     }),
@@ -123,21 +124,21 @@ const Bid = () => {
               Start Bidding
             </button>
             </AnchorLink>
-            <div className="text-left w-[87px] flex justify-between gap-4 mt-[5vh]">
-              <img src={img4} alt="icon1" />
-              <img src={img5} alt="icon2" />
-              <img src={img6} alt="icon3" />
-              <img src={img7} alt="icon4" />
+            <div className="text-left w-[87px] flex justify-between gap-[1vw] mt-[5vh]">
+              <img className="h-[2vh] w-[1vw]"   src={img4} alt="icon1" />
+              <img  className="h-[2vh] w-[1vw]" src={img5} alt="icon2" />
+              <img className="h-[2vh] w-[1vw]" src={img6} alt="icon3" />
+              <img className="h-[2vh] w-[1vw]" src={img7} alt="icon4" />
             </div>
           </div>
 
           <div className="relative w-[90%] h-[75vh] text-black">
             <div className="absolute bg-white opacity-80 rounded-xl shadow-xl w-[9.2vw] right-[5vw] top-[7vh] h-[20vh]">
               <div className="flex flex-col p-2  items-center ">
-                <p className="font-bold text-[26px] md:text-[32px] lg:text-[48px]">
+                <p className="font-bold text-[26px] md:text-[32px] lg:text-[3vw]">
                   50+
                 </p>
-                <p className="text-[14px] font-urbanist px-4">
+                <p className="text-[1vw] font-urbanist px-4">
                   Catergries Available
                 </p>
               </div>
@@ -236,13 +237,13 @@ const Bid = () => {
 
 
               <div onClick={handleSearch} className="self-end mb-[1.5vh] group flex h-[6.23vh] w-[3.5vw] justify-center items-center bg-[#ca0000] rounded-xl">
-                <GoSearch size={27} className="cursor-pointer text-white group-hover:text-blue-500 duration-150" />
+                <GoSearch  className="cursor-pointer w-[1.5vw] h-[2.6vh] text-white group-hover:text-blue-500 duration-150" />
               </div>
             </div>
           </div>
 
-          <div className="w-[23vw] h-[380px] rounded-lg bg-white">
-            <div className="flex px-3 mt-[9.46vh]">
+          <div className="w-[23vw] px-[0.5vw] h-[52vh] rounded-lg bg-white">
+            <div className="flex  mt-[9.46vh]">
               <img src={img1} className="w-[4vw] h-[8.13vh]" alt="icon5" />
               <img src={img2} className="w-[4vw] h-[8.13vh]" alt="icon6" />
               <img src={img3} className="w-[4vw] h-[8.13vh]" alt="icon7" />
@@ -268,10 +269,10 @@ const Bid = () => {
                 Consult
               </button>
               <div className="flex gap-5 items-center mt-[10px]">
-                <p className="text-left font-semibold text-[18px] font-urbanist">
+                <p className="text-left font-semibold text-[1.2vw] font-urbanist">
                   Learn More
                 </p>
-                <FaArrowRightLong />
+                <FaArrowRightLong className="text-[1.2vw]" />
               </div>
             </div>
           </div>
@@ -402,7 +403,7 @@ const Bid = () => {
                   <p className="text-[14px] font-urbanist font-semibold pt-7">
                     Date
                   </p>
-                  <div className="flex justify-center items-center gap-2">
+                  <div className="flex justify-center items-center gap-2 ">
                     <LuCalendarSearch /> 09 - <LuCalendarSearch /> 12
                   </div>
                   <div className="flex w-[40px] h-[40px] justify-center items-center bg-red-700 rounded-xl">

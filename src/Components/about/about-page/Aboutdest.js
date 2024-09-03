@@ -47,7 +47,7 @@ const Aboutdest = () => {
                             {locations.map((location, index) => (
                                 <button
                                 key={index}
-                                className='flex items-center text-[14px] lg:text-[0.8vw]  bg-white hover:bg-[#CA0000] hover:text-white text-red-600 font-bold py-2 px-4 duration-200 rounded-xl m-1'
+                                className='flex items-center text-[14px] lg:text-[0.8vw]  bg-white hover:bg-[#CA0000] hover:text-white text-red-600 font-bold py-[1vh] px-[1vw] duration-200 rounded-xl m-[1vw]'
                                 onClick={() => handleButtonClick(location)}
                             >
                                 <FaLocationDot 
