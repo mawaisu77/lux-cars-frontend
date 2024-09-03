@@ -32,6 +32,7 @@ import Vehicle from "./Components/vehicle/index.js";
 import Review from "./Components/review/index.js";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext.js";
+import Parts from "./Components/user-page/user-pages/Parts.js";
 
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -217,6 +218,14 @@ function App() {
                     <Order />
                   </UserLayout>
                 </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user/account/parts"
+              element={
+                <UserLayout>
+                  <Parts />
+                </UserLayout>
               }
             />
             <Route

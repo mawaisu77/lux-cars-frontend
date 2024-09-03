@@ -12,7 +12,7 @@ const useGetAllBidsCar = (url) => {
         const response = await baseService.get(url);
         setCarData(response.data.data.cars);
       } catch (err) {
-        console.log(err)
+        console.log("error object",err)
         if (err.response) {
           setCarError(`${err.response.data.message}`);
         } else if (err.request) {

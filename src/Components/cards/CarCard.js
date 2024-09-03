@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
 import fireImgTimer from "../../assets/001-fire.png";
-import { BsFire } from "react-icons/bs";
+import { BsFire, BsHeart, BsHeartArrow, BsHeartbreak } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa";
 
@@ -21,11 +21,14 @@ const CarCard = ({ card, isBuy = false }) => {
   return (
     <div className="w-[330px]  mx-auto lg:w-[25.3vw] xl:w-[18.3vw] rounded-xl shadow-lg">
       <div className="p-5 relative w-full lg:p-[1vw]">
+        <div className="w-full relative">
+          <BsHeart size={25} className="absolute right-5 top-2  hover:text-red-600" />
         <img
-          className="w-full  rounded-xl xl:w-[15.8vw] h-[290px] lg:h-[31.2vh]"
+          className="w-full rounded-xl xl:w-[15.8vw] h-[290px] lg:h-[31.2vh]"
           src={card.image}
           alt="Car"
-        />
+          />
+        </div>
         <div className="absolute  bottom-8 left-1/2 transform -translate-x-1/2 h-10 bg-white rounded-2xl z-50 flex justify-center items-center">
           <div className="flex justify-center items-center gap-x-2 px-4">
             <div>

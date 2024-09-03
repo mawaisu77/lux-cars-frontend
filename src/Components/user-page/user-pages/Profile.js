@@ -193,7 +193,9 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="flex">
+            </div>
+            
+            <div className="flex">
                 <div className={`w-[3vw] h-[5vh] ${images.length > 0 ? 'flex':'hidden'}`}>
                   {images.map((src, index) => (
                     <img
@@ -221,36 +223,43 @@ const Profile = () => {
                 </div> */}
                 </div>
 
-                  {
+               
+                <div className="flex">
+               <div>
+               {
                     images.length === 0 && (<>
-                        <div className="h-[88px] w-[88px] mt-[60px] lg:mt-0 ">
-                                      <img src={avatar} className="wifull h-full object-cover" alt="avatar-img"/>
+                        <div className="h-[98px] w-[98px] mt-[60px] lg:mt-0 border-2 rounded shadow border-[#343444] ">
+                                      <img src={avatar} className="w-full h-full object-cover" alt="avatar-img"/>
                           </div>
 
                     </>)
                   }
+               </div>
             
-                <div>
                   <div className=" mt-[60px] lg:mt-0">
                     <div className="flex gap-3 ml-5">
                       {documents.length < 2 && (
-                        <div className="flex flex-col gap-y-2">
-                          <Link to={"/user/documents-upload"}>
-                            <button className="text-[16px] lg:text-[1vw] w-[96px] lg:w-[6vw] font-urbanist h-[46px] lg:h-[4.25vh] text-white hover:text-white bg-[#343444] rounded-full">
-                              Upload
-                            </button>
-                          </Link>
-                          <p className="text-[14px] lg:text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
+                        <div className="flex items-start justify-between flex-col gap-y-2 ">
+                           <p className="text-[14px] text-left lg:text-[0.9vw] text-[#737a99] font-urbanist  ">
                             Images must be of your official ID (Passport/License)
                           </p>
+
+                          <p className="text-[14px] text-left lg:text-[0.9vw] text-[#737a99] font-urbanist  ">
+                            You must have to upload two photos
+                          </p>
+                          <Link to={"/user/documents-upload"}>
+                            <button className="text-[16px] lg:text-[1vw] font-urbanist py-1 px-4 text-white hover:text-white bg-[#343444] rounded-xl">
+                              Upload Docs
+                            </button>
+                          </Link>
+                         
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <button className="flex justify-center mb-10 items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[16px] lg:text-[0.8vw] text-[#ca0000] rounded-full mt-[3vh]">
+            <button className="flex justify-center mb-10 items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[16px] lg:text-[0.8vw] text-[#ca0000] rounded-xl mt-[3vh]">
               {loading ? (
                 <ClipLoader size={20} color={"#ca0000"} />
               ) : (
