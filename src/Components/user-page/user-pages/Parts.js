@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FiUploadCloud } from "react-icons/fi";
 import usePartsRequest from "../../../hooks/usePartsRequest";
 import { showToast } from "../../../utils/Toast";
+import { useRef } from "react";
 
 const SearchPartsForm = () => {
   const currentYear = new Date().getFullYear();
@@ -15,6 +16,7 @@ const SearchPartsForm = () => {
   });
   const [errors, setErrors] = useState({});
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const formRef = useRef(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -65,6 +67,7 @@ const SearchPartsForm = () => {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      scrollToError(newErrors);
     } else {
       try {
         const formDataToSend = new FormData();
@@ -100,6 +103,14 @@ const SearchPartsForm = () => {
     }
   };
 
+  const scrollToError = (errors) => {
+    const firstErrorField = Object.keys(errors)[0];
+    const errorElement = formRef.current.querySelector(`[name="${firstErrorField}"]`);
+    if (errorElement) {
+      errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-white font-urbanist">
       <div className=" ">
@@ -107,6 +118,7 @@ const SearchPartsForm = () => {
           Search Parts
         </h2>
         <form
+          ref={formRef}
           onSubmit={handleSubmit}
           className="text-start bg-white rounded-lg shadow-lg w-full max-w-lg p-8 sm:p-10 md:p-16 lg:p-20 space-y-8"
         >

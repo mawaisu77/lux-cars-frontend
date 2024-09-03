@@ -191,6 +191,14 @@ function LoanApplication() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      
+      // Scroll to the first error field
+      const firstErrorField = Object.keys(newErrors)[0];
+      const errorElement = document.querySelector(`[name="${firstErrorField}"]`);
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      
       return;
     }
 
