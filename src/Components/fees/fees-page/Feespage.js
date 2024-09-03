@@ -42,15 +42,15 @@ function Feespage() {
         </div>
       </div>
 
-      <div className="w-auto px-[10px] md:px-[0px] w-[100%] md:w-[80vw]  lg:w-[73.177vw]  mx-auto md:mt-[7.813vh] mt-[64px] mb-[64px] :md:mb-[7.813vh] mt-[70px] mb-[70px]">
+      <div className=" px-[10px] md:px-[0px] w-[100%] md:w-[80vw]  lg:w-[73.177vw]  mx-auto md:mt-[7.813vh] mt-[64px] mb-[64px] :md:mb-[7.813vh] ">
         <div className="md:flex md:justify-between ">
-          <div className="w-auto w-[100%] md:w-[44vw] lg:w-[38.073vw] ">
+          <div className=" w-[100%] md:w-[44vw] lg:w-[38.073vw] ">
             <div className="">
               <h1 className="text-left text-[36px] md:text-[1.875vw]  font-[700] text-[#1F1F2C] font-urbanist md:mb-[1.25vh] mb-[40px]">
                 Bidding at LUX
               </h1>
               <div className="relative">
-                <img src={image} className="w-auto" />
+                <img src={image} className="md:w-[80vw]" />
                 <img
                   src={image3}
                   className=" w-[150px] md:w-[14vw] absolute top-[30px] md:top-[10.917vh] left-[25px] md:left-[1.5vw]"
@@ -74,14 +74,14 @@ function Feespage() {
               <h2 className="text-left text-[30px] md:text-[1.875vw] font-[700] text-[#1F1F2C] font-urbanist mb-[1.25vh]">
                 Bidding at COPART / IAAI
               </h2>
-              <img src={image1} />
+              <img src={image1} className="md:w-[33.542vw]" />
             </div>
 
             <h2 className="text-left text-[20px] md:text-[1.35vw] font-[700] text-[#1F1F2C] font-urbanist mt-[30px] md:mt-[1.563vh] mb-[1.25vh]">
               drawbacks of bidding directly t Copart/IAAI auctions
             </h2>
 
-            <div className="mt-[0.833vh] text-center justify-center flex flex-wrap mt-[30px] md:mt-[1.563vh]  gap-[12px]">
+            <div className=" text-center justify-center flex flex-wrap mt-[30px] md:mt-[1.563vh]  gap-[12px]">
               {feesRightCard.map((data, index) => (
                 <Card id={index} data={data} />
               ))}
@@ -128,7 +128,7 @@ function Feespage() {
                 Buyer Fees Lists
               </h2>
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-[7px]  gap-[0.417vw]">
+            <div className="flex flex-wrap justify-center items-center gap-[7px]  md:gap-[0.417vw]">
               <select className="w-[105px]  md:w-[6.5vw] lg:w-[6.25vw] rounded-[4px] md:rounded-[0.417vw] border border-grey-500 outline-none h-[30px] md:h-[3.385vh] text-left text-[10px] md:text-[1vw] lg:text-[0.529vw] font-[400] font-urbanist">
                 <option className="">General fee</option>
                 <option>General fee</option>
@@ -137,7 +137,7 @@ function Feespage() {
               {/* <div className="md:w-[1.8vw] lg:w-[1.563vw] h-[30px] w-[25px] md:h-[3.385vh] flex md:items-end flex-center items-center text-center md:-pt-[15px] justify-center border rounded-[6px] md:rounded-[0.217vw]">
                 <p className="text-[20px] md:text-[#292D32]">...</p>
               </div> */}
-              <div className="md:w-[1.8vw] text-[20px] md:text-[#292D32] pb-[2px] lg:w-[1.563vw] h-[30px] w-[25px] md:h-[3.385vh] flex md:items-end flex-center items-center text-center items-center justify-center border rounded-[6px] md:rounded-[0.217vw]">
+              <div className="md:w-[1.8vw] text-[20px] md:text-[#292D32] pb-[2px] lg:w-[1.563vw] h-[30px] w-[25px] md:h-[3.385vh] flex md:items-end flex-center items-center text-center justify-center border rounded-[6px] md:rounded-[0.217vw]">
                 ...
               </div>
             </div>
@@ -204,7 +204,7 @@ function Feespage() {
           </button>
           </div> */}
           <div className="flex flex-start md:block mt-[5px] md:mt-[1vw]">
-            <button className="text-left text-[15px] md:text-[1vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] md:px-[1vh] lg:py-[0.833vh] md:px-[2.5vw] md:px-[1vw]  lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist">
+            <button className=" text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh]  lg:py-[0.833vh]  md:px-[1vw]  lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist">
               Load More
             </button>
           </div>
@@ -220,17 +220,17 @@ function Feespage() {
               </h2>
             </div>
             <div className="hidden md:flex flex-wrap justify-center items-center  gap-[0.417vw]">
-              <select className="md:w-[6.5vw] bold-[700] lg:w-[6.25vw] border-grey-400 outline-none rounded-[0.417vw] border text-gray border-grey-500 outline-none h-[65px] md:h-[3.385vh] text-left md:text-[1vw] lg:text-[0.529vw] font-[400] font-urbanist">
+              <select className="md:w-[6.5vw] bold-[700] lg:w-[6.25vw] border-grey-400  rounded-[0.417vw] border text-gray border-grey-500 outline-none h-[65px] md:h-[3.385vh] text-left md:text-[1vw] lg:text-[0.529vw] font-[400] font-urbanist">
                 <option>General fee</option>
                 <option>General fee</option>
                 <option>General fee</option>
               </select>
-              <div className="md:w-[1.8vw] text-[20px] md:text-[#292D32] pb-[2px] lg:w-[1.563vw] h-[30px] w-[25px] md:h-[3.385vh] flex md:items-end flex-center items-center text-center items-center justify-center border rounded-[6px] md:rounded-[0.217vw]">
+              <div className="md:w-[1.8vw] text-[20px] md:text-[#292D32] pb-[2px] lg:w-[1.563vw] h-[30px] w-[25px] md:h-[3.385vh] flex md:items-end flex-center  text-center items-center justify-center border rounded-[6px] md:rounded-[0.217vw]">
                 ...
               </div>
             </div>
           </div>
-          <div className="w-full w-[300px]  md:w-auto overflow-x-scroll whitespace-nowrap md:overflow-hidden  ">
+          <div className=" w-[300px]  md:w-auto overflow-x-scroll whitespace-nowrap md:overflow-hidden  ">
             <div className="flex  w-[400px] md:w-auto justify-between mt-[15px]   md:mt-[0.833vh] md:mr-[1.875vw]">
               <h2 className="text-left text-[15px] md:text-[0.938vw] font-[500] md:font-[600] w-[26.823vw]  text-[#131313] font-urbanist">
                 Sale Price Range
@@ -340,7 +340,7 @@ function Feespage() {
           </div> */}
 
           <div className="flex flex-start md:block mt-[5px] md:mt-[1vw]">
-            <button className="text-left text-[15px] md:text-[1vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] md:px-[1vh] lg:py-[0.833vh] md:px-[2.5vw] md:px-[1vw]  lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist">
+            <button className=" text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh]  lg:py-[0.833vh]  md:px-[1vw]  lg:px-[2.083vh]  text-[#CA0000] font-urbanist">
               Load More
             </button>
           </div>
