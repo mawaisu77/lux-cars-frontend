@@ -29,6 +29,7 @@ const BuyNow = () => {
     );
   }
 
+
   return (
     <>
       <div className="h-[784px] lg:h-[90vh] relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
