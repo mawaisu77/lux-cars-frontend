@@ -69,13 +69,7 @@ const SingleProductTabs = ({ data }) => {
           >
             Vehicle Info
           </Tab>
-          <Tab
-            className={({ selected }) =>
-              `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
-            }
-          >
-            360° View
-          </Tab>
+    
           <Tab
             className={({ selected }) =>
               `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
@@ -156,10 +150,7 @@ const SingleProductTabs = ({ data }) => {
         </div>
       </TabPanel>
      
-        <TabPanel className="max-w-[1400px] mt-2 px-5 py-1 mx-auto overflow-auto">
-          {data.base_site === 'iaai' && data.iaai_360 && renderIAAIView()}
-          {data.base_site === 'copart' && (data.copart_exterior_360.length > 0 || data.copart_interior_360) && renderCopartView()}
-        </TabPanel>
+  
         <TabPanel className="max-w-[1000px] mx-auto my-4 py-10">
           {loadingBidHistory ? (
             <div className="flex justify-center items-center">
