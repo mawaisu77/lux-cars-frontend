@@ -92,14 +92,14 @@ const SwiperGallery = ({ images, carData }) => {
     <div>
       <div className="relative">
         <button
-          className="absolute z-10 bottom-5 text-sm right-4 bg-red-700 text-white py-1 px-2 rounded-lg"
+          className="absolute z-10 bottom-5 text-sm right-4 bg-gradient-to-b from-blue-700 to-black text-white py-1 px-2 rounded-lg"
           onClick={openModal} // Open the modal on click
 
         >
           360° View
         </button>
         <button
-          className="absolute z-10 bottom-5 text-sm left-4 bg-blue-700 text-white py-1 px-2 rounded-lg"
+          className="absolute z-10 bottom-5 text-sm left-4 bg-gradient-to-b from-blue-700 to-black text-white py-1 px-2 rounded-lg"
           onClick={openVideoModal} // Open the modal on click
 
         >

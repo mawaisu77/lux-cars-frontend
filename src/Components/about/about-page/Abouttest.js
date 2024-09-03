@@ -49,9 +49,9 @@ const Abouttest = () => {
                     className='w-full lg:w-[72vw] h-[480px] lg:h-[53vh] mt-[40px] flex justify-center items-center'
                 >
                     {testi.map((testimonial, index) => (
-                        <SwiperSlide key={index} className='relative w-[370px]'>
+                        <SwiperSlide key={index} className='relative w-[370px] '>
                             <div className='flex flex-col justify-center items-center mb-10'>
-                                <div className='w-[340px] lg:w-[464px] h-[420px] lg:h-[300px] mx-auto rounded-lg shadow-lg bg-white p-5'>
+                                <div className='w-[340px] lg:w-[30vw] h-[420px] bg-white lg:h-[40vh] mx-auto rounded-lg shadow-lg   p-[1vw]'>
                                     <p className='text-[18px] lg:text-[1.17vw] font-urbanist'>{testimonial.para}</p>
                                     <p className='text-[24px] lg:text-[1.56vw] font-bold font-urbanist mt-[4vh]'>
                                         {testimonial.name}

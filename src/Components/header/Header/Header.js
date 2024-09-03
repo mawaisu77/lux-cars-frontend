@@ -46,7 +46,7 @@ const Header = () => {
           <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
           </Link>
           <div className='hidden lg:flex'>
-          <ul className={`flex gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>              
+          <ul className={`flex gap-[1.5vw] font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>              
             <Link to="/how-works">
                 <li>How it works</li>
               </Link>
@@ -72,10 +72,10 @@ const Header = () => {
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
         <div className="relative inline-block text-left">
        
-      <div className='flex gap-x-4 items-center '>
+      <div className='flex justify-center items-center gap-[1vw] items-center '>
  
         
-          <IoGlobeSharp size={23}  onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} />
+          <IoGlobeSharp   onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}  w-[1.3vw] h-[2.7vh]` } />
       </div>
       {dropdownOpen && (
         <div className="origin-top-right absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">

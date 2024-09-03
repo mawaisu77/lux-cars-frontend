@@ -193,16 +193,7 @@ const VehicleHero = () => {
                         </div>
                       </div>
                     </div>
-                    <div>
-                      <p className="font-urbanist text-[0.75vw] text-[#7a798a] text-left mb-[2vh]">
-                        Habitant sollicitudin faucibus cursus lectus pulvinar
-                        dolor non ultrices eget. Facilisi lobortisal morbi
-                        fringilla urna amet sed ipsum vitae malesuada. Habitant
-                        sollicitudin faucibus cursus lectus pulvinar dolor non
-                        ultrices eget. Facilisi lobortisal morbi fringilla urna
-                        amet sed ipsum vitae malesuada.
-                      </p>
-                    </div>
+                
                     <div className="flex justify-between">
                       <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-[16vw] px-2 py-2 leading-8 rounded-lg ">
                         <div className="flex items-center">
@@ -297,70 +288,7 @@ const VehicleHero = () => {
                     )}
                   </button>
 
-                  <div className="flex justify-between">
-                    <div className="bg-[#f8f8f8] w-[16vw] px-3 py-2 leading-8 rounded-lg mb-[3vh]">
-                      <div className="flex items-center">
-                        <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                          Penalties and Additional Fees:
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                          Custom Clearance Total:
-                        </p>
-                        <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                          $736
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                          Estimated Total Price:
-                        </p>
-                        <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                          $100
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                          Estimated Final Price:
-                        </p>
-                        <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                          $450 - $700
-                        </p>
-                      </div>
-                    </div>
-                    <div className="bg-[#f8f8f8] w-[16vw] px-3 py-2 leading-8 rounded-lg mb-[3vh]">
-                      <div className="flex items-center">
-                        <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                          Additional Services :
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                          Hazardous Cargo :
-                        </p>
-                        <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                          $0
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                          Oversized Vehicle :
-                        </p>
-                        <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                          $250-$600
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
-                          Estimated Final Price:
-                        </p>
-                        <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                          $450 - $700
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                
                 </div>
               </div>
 

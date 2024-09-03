@@ -106,6 +106,7 @@ const Bid = () => {
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     }),
     placeholder: (base) => ({
+      fontSize: '0.9vw',
       ...base,
       color: "#8a8aa0",
     }),
@@ -144,21 +145,21 @@ const Bid = () => {
                 Start Bidding
               </button>
             </AnchorLink>
-            <div className="text-left w-[87px] flex justify-between gap-4 mt-[5vh]">
-              <img src={img4} alt="icon1" />
-              <img src={img5} alt="icon2" />
-              <img src={img6} alt="icon3" />
-              <img src={img7} alt="icon4" />
+            <div className="text-left w-[87px] flex justify-between gap-[1vw] mt-[5vh]">
+              <img className="h-[2vh] w-[1vw]"   src={img4} alt="icon1" />
+              <img  className="h-[2vh] w-[1vw]" src={img5} alt="icon2" />
+              <img className="h-[2vh] w-[1vw]" src={img6} alt="icon3" />
+              <img className="h-[2vh] w-[1vw]" src={img7} alt="icon4" />
             </div>
           </div>
 
           <div className="relative w-[90%] h-[75vh] text-black">
             <div className="absolute bg-white opacity-80 rounded-xl shadow-xl w-[9.2vw] right-[5vw] top-[7vh] h-[20vh]">
               <div className="flex flex-col p-2  items-center ">
-                <p className="font-bold text-[26px] md:text-[32px] lg:text-[48px]">
+                <p className="font-bold text-[26px] md:text-[32px] lg:text-[3vw]">
                   50+
                 </p>
-                <p className="text-[14px] font-urbanist px-4">
+                <p className="text-[1vw] font-urbanist px-4">
                   Catergries Available
                 </p>
               </div>
@@ -280,8 +281,8 @@ const Bid = () => {
             </div>
           </div>
 
-          <div className="w-[23vw] h-[380px] rounded-lg bg-white">
-            <div className="flex px-3 mt-[9.46vh]">
+          <div className="w-[23vw] px-[0.5vw] h-[52vh] rounded-lg bg-white">
+            <div className="flex  mt-[9.46vh]">
               <img src={img1} className="w-[4vw] h-[8.13vh]" alt="icon5" />
               <img src={img2} className="w-[4vw] h-[8.13vh]" alt="icon6" />
               <img src={img3} className="w-[4vw] h-[8.13vh]" alt="icon7" />
@@ -307,10 +308,152 @@ const Bid = () => {
                 Consult
               </button>
               <div className="flex gap-5 items-center mt-[10px]">
+                <p className="text-left font-semibold text-[1.2vw] font-urbanist">
+                  Learn More
+                </p>
+                <FaArrowRightLong className="text-[1.2vw]" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="block sm:hidden">
+        <div className="flex flex-col justify-between mx-auto bgImage tree">
+          <div className="w-[343px] mx-auto">
+            <h2 className="text-left font-urbanist text-[46px] font-bold leading-tight">
+              <span className="text-outline">Bid, Buy, Drive</span> Online Car
+              Auctions with Home Delivery!
+            </h2>
+            <div className="w-[265px] text-[#8a8aa0] font-urbanist text-[20px] font-medium leading-[19px] text-left">
+              Lorem ipsum dolor sit amet. Ea similique aliquam ut maxime
+              necessitatibus est nemo error sed vero sapiente cum quae
+              temporibus sed quaerat
+            </div>
+              <button className="bg-[#ca0000] font-urbanist flex text-white rounded-full items-center text-[16px] px-3 h-[5.284vh] my-[2vh]">
+                Start Bidding
+              </button>
+        
+            <div className="text-left w-[87px] flex justify-between gap-4 mt-[5vh]">
+              <img src={img4} alt="icon8" />
+              <img src={img5} alt="icon9" />
+              <img src={img6} alt="icon10" />
+              <img src={img7} alt="icon11" />
+            </div>
+          </div>
+
+          <div className=" relative h-[600px] -z-50">
+            <div className="absolute bg-white opacity-80 rounded-xl shadow-xl right-[10%] w-[105px]  h-[95px]">
+              <div className="flex flex-col p-2   items-center ">
+                <p className="font-bold text-[23px]">50+</p>
+                <p className="text-[12px] font-urbanist px-4">
+                  Catergries Available
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex w-[350px] h-[200px] mx-auto">
+            <div className="mx-auto w-[200px] h-[312px] -mt-[230px]">
+              <div className="flex">
+                <img src={img1} className="w-[60px] h-[60px]" alt="icon12" />
+                <img src={img2} className="w-[60px] h-[60px]" alt="icon13" />
+                <img src={img3} className="w-[60px] h-[60px]" alt="icon14" />
+              </div>
+              <div className="font-urbanist text-[20px] font-semibold leading-[24px] text-left mt-[2.5vh]">
+                12.5K+ People
+              </div>
+              <div className="font-urbanist text-[14px] font-normal leading-[16px] text-left mt-[1.5vh] text-[#8a8aa0]">
+                has used our services such as selling, buying, or even buying
+                their parts.
+              </div>
+              <div className="flex gap-[0.5vw] flex-wrap mt-[2vh]">
+                <button className="border  border-[#df4949] py-[10px] px-[26px] rounded-full text-[#df4949] text-[16px]">
+                  Bid
+                </button>
+                <button className="border border-[#df4949] py-[10px] px-[26px] rounded-full text-[#df4949] text-[16px]">
+                  Buy
+                </button>
+                <button className="border border-[#df4949] py-[10px] px-[26px] rounded-full text-[#df4949] text-[16px]">
+                  Sell
+                </button>
+                <button className="border border-[#df4949] py-[10px] px-[26px] rounded-full text-[#df4949] text-[16px]">
+                  Consult
+                </button>
+              </div>
+              <div className="flex gap-5 items-center mt-[10px]">
                 <p className="text-left font-semibold text-[18px] font-urbanist">
                   Learn More
                 </p>
                 <FaArrowRightLong />
+              </div>
+            </div>
+
+            <div className="text-left w-[140px] h-[550px] border bg-[#ffffffcc] rounded-xl -mt-[380px]">
+              <div className="w-[108px] py-2 mx-auto flex flex-col justify-center items-center font-urbanist">
+                <div className="h-[110px]">
+                  <p className="text-[14px] font-urbanist font-semibold">
+                    {" "}
+                    VIN/lot
+                  </p>
+                  <p className="flex justify-between text-[13px] gap-1">
+                    <input
+                      type="text"
+                      placeholder="Type Here..."
+                      className="bg-[#ffffffcc] border-none w-[64px]  font-urbanist flex "
+                    />
+                  </p>
+                </div>
+
+                <div className="h-[110px] ">
+                  <p className="text-[14px] font-urbanist font-semibold">
+                    Car Types
+                  </p>
+                  <p className="flex justify-between text-[13px] gap-1">
+                    All Vehicles
+                    <RiArrowDropDownLine size={25} className="cursor-pointer" />
+                  </p>
+                </div>
+
+                <div className="border-b pb-2">
+                  <p className="text-[14px] font-urbanist font-semibold">
+                    Models
+                  </p>
+                  <p className="flex justify-between items-center text-[13px] gap-1">
+                    All Models
+                    <RiArrowDropDownLine
+                      size={25}
+                      className="cursor-pointer  hover:bg-red-300"
+                    />
+                  </p>
+                </div>
+
+                <div className="border-b pb-2 h-[100px]">
+                  <p className="text-[14px] font-urbanist font-semibold pt-7">
+                    Partners
+                  </p>
+                  <p className="flex justify-between items-center text-[13px] gap-1">
+                    All Partners
+                    <RiArrowDropDownLine size={25} className="cursor-pointer" />
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3 pb-2">
+                  <p className="text-[14px] font-urbanist font-semibold pt-7">
+                    Date
+                  </p>
+                  <div className="flex justify-center items-center gap-2 ">
+                    <LuCalendarSearch /> 09 - <LuCalendarSearch /> 12
+                  </div>
+                  <div className="flex w-[40px] h-[40px] justify-center items-center bg-red-700 rounded-xl">
+                    <GoSearch
+                      size={27}
+                      color="white"
+                      className="cursor-pointer"
+                      onClick={handleSearch}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
