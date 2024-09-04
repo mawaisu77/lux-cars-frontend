@@ -87,25 +87,40 @@ const SwiperGallery = ({ images, carData }) => {
     </div>
   );
 
-  // console.log(carData)
-
   return (
     <div>
+    
       <div className="relative">
-        <button
-          className="absolute z-10 bottom-5 text-sm right-4 bg-gradient-to-b from-blue-700 to-black text-white py-1 px-2 rounded-lg"
-          onClick={openModal} // Open the modal on click
+        {!isViewerOpen && (
+        <>
+           <button
+           className="absolute z-10 bottom-5 text-sm right-4 bg-gradient-to-b from-blue-700 to-black text-white py-1 px-2 rounded-lg"
+           onClick={openModal} 
+ 
+         >
+           360° View
+         </button>
+         <button
+           className="absolute z-10 bottom-5 text-sm right-28 bg-gradient-to-b from-blue-700 to-black text-white py-1 px-2 rounded-lg"
+           onClick={openVideoModal} 
+ 
+         >
+           Video
+         </button>
+         <div
+           className="absolute z-10 bottom-5 w-28 text-sm left-3 rounded-lg"
+         >
+            <img
+              src={"https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"}
+              className="my-2 rounded-lg shadow-img cursor-pointer"
+              alt={`Vehicle_Image`}
+             />
+           
+         </div>
+           </>
+      )}
+     
 
-        >
-          360° View
-        </button>
-        <button
-          className="absolute z-10 bottom-5 text-sm left-4 bg-gradient-to-b from-blue-700 to-black text-white py-1 px-2 rounded-lg"
-          onClick={openVideoModal} // Open the modal on click
-
-        >
-          Video
-        </button>
         <Swiper
           style={{
             "--swiper-navigation-color": "#fff",
@@ -165,11 +180,14 @@ const SwiperGallery = ({ images, carData }) => {
           ))}
       </Swiper>
       {isViewerOpen && (
+        <div className="z-50">
         <ImageViewer
           src={images}
           currentIndex={currentImage}
           onClose={closeImageViewer}
         />
+   </div>
+
       )}
 
       {/* Modal for 360° View */}
