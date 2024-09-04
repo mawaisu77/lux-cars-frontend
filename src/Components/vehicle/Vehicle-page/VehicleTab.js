@@ -19,64 +19,64 @@ const SingleProductTabs = ({ data }) => {
 
   }, [data.lot_id]);
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  const handleLoad = () => {
-    setLoading(false);
-  };
+  // const handleLoad = () => {
+  //   setLoading(false);
+  // };
 
-  const renderIAAIView = () => (
+  // const renderIAAIView = () => (
     
-    <div className="flex flex-col items-center justify-center gap-y-4">
-       {loading && (
-        <div className="absolute flex items-center justify-center w-full h-52">
-          <ClipLoader color="#000" loading={loading} size={50} />
-        </div>
-      )}
-      <iframe
-        src={data.iaai_360}
-        width="80%"
-        height="600px"
-        allowFullScreen
-        onLoad={handleLoad} 
-        style={{ display: loading ? "none" : "block" }} 
-      />
-    </div>
-  );
+  //   <div className="flex flex-col items-center justify-center gap-y-4">
+  //      {loading && (
+  //       <div className="absolute flex items-center justify-center w-full h-52">
+  //         <ClipLoader color="#000" loading={loading} size={50} />
+  //       </div>
+  //     )}
+  //     <iframe
+  //       src={data.iaai_360}
+  //       width="80%"
+  //       height="600px"
+  //       allowFullScreen
+  //       onLoad={handleLoad} 
+  //       style={{ display: loading ? "none" : "block" }} 
+  //     />
+  //   </div>
+  // );
 
-  const renderCopartView = () => (
-    <div className="flex flex-col justify-center gap-y-4">
-      <div className="flex justify-center mt-8">
-        {data.copart_exterior_360.map((image, index) => (
-          <img key={index} src={image} alt={`Copart Exterior View ${index + 1}`} className="w-full h-auto mb-2" />
-        ))}
-        {data.copart_interior_360 && (
-          <img src={data.copart_interior_360} alt="Copart Interior View" className="w-full h-auto" />
-        )}
-      </div>
-    </div>
-  );
+  // const renderCopartView = () => (
+  //   <div className="flex flex-col justify-center gap-y-4">
+  //     <div className="flex justify-center mt-8">
+  //       {data.copart_exterior_360.map((image, index) => (
+  //         <img key={index} src={image} alt={`Copart Exterior View ${index + 1}`} className="w-full h-auto mb-2" />
+  //       ))}
+  //       {data.copart_interior_360 && (
+  //         <img src={data.copart_interior_360} alt="Copart Interior View" className="w-full h-auto" />
+  //       )}
+  //     </div>
+  //   </div>
+  // );
 
 
 
   return (
     <TabGroup className=" w-[1400px] mx-auto mt-20">
         <TabList className="w-full flex gap-x-10 px-5 py-3 bg-[#f8f8f8] font-bold rounded-md border border-gray-200">
-          <Tab
+          {/* <Tab
             className={({ selected }) =>
               `text-[20px] p-2 rounded-md  outline-none transition-all duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
             }
           >
             Vehicle Info
-          </Tab>
+          </Tab> */}
     
-          <Tab
+          {/* <Tab
             className={({ selected }) =>
               `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
             }
           >
             Bid History
-          </Tab>
+          </Tab> */}
           <Tab
             className={({ selected }) =>
               `text-[20px] p-2 rounded-md transition-all outline-none duration-300 ${selected ? 'text-red-500 border-b-2 border-red-500' : 'text-gray-700 hover:text-red-500'}`
@@ -101,10 +101,9 @@ const SingleProductTabs = ({ data }) => {
        </TabList>
 
       <TabPanels className={'bg-[#f8f8f8] px-10 max-w-[1400px] '}>
-      <TabPanel className='mt-2 py-10 mx-auto'>
+      {/* <TabPanel className='mt-2 py-10 mx-auto'>
         <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
           
-          {/* Vehicle Info */}
           <section className='bg-white p-6 rounded-lg shadow-md'>
             <h2 className='text-2xl font-semibold mb-4 border-b-2 border-gray-200 pb-2'>Vehicle Info</h2>
             <div className='space-y-4'>
@@ -119,7 +118,6 @@ const SingleProductTabs = ({ data }) => {
             </div>
           </section>
 
-          {/* Location */}
           <section className='bg-white p-6 rounded-lg shadow-md'>
             <h2 className='text-2xl font-semibold mb-4 border-b-2 border-gray-200 pb-2'>Location</h2>
             <div className='space-y-4'>
@@ -132,7 +130,6 @@ const SingleProductTabs = ({ data }) => {
             </div>
           </section>
 
-          {/* Specifications */}
           <section className='bg-white p-6 rounded-lg shadow-md'>
             <h2 className='text-2xl font-semibold mb-4 border-b-2 border-gray-200 pb-2'>Specifications</h2>
             <div className='space-y-4'>
@@ -149,9 +146,9 @@ const SingleProductTabs = ({ data }) => {
 
         </div>
       </TabPanel>
-     
+      */}
   
-        <TabPanel className="max-w-[1000px] mx-auto my-4 py-10">
+        {/* <TabPanel className="max-w-[1000px] mx-auto my-4 py-10">
           {loadingBidHistory ? (
             <div className="flex justify-center items-center">
               <ClipLoader color="#000" loading={loadingBidHistory} size={50} />
@@ -210,7 +207,7 @@ const SingleProductTabs = ({ data }) => {
                 </div>
               ))
           )}
-        </TabPanel>
+        </TabPanel> */}
         <TabPanel className="max-w-[1000px] mx-auto">
           <div className="flex flex-col justify-center gap-y-4">
             <VehicleCostCalculator />

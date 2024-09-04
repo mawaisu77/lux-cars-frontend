@@ -20,6 +20,8 @@ import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import TimeLeftCounter from "./TimeLeftCounter";
+import VehicleCostCalculator from "./VehicleCostCalculator";
+import BidHistory from "./BidHistory";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -27,7 +29,7 @@ const VehicleHero = () => {
   const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-    useGetCarDetail(`cars/get-car-by-lot-id/testing?lot_id=${lotID}`);
+    useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
 
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
@@ -63,9 +65,9 @@ const VehicleHero = () => {
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
-// console.log("targetTime",targetTime)
-// console.log("carDetailData?.data?.auction_date",carDetailData?.data)
-// console.log("ValidDate",ValidDate)
+  // console.log("targetTime",targetTime)
+  // console.log("carDetailData?.data?.auction_date",carDetailData?.data)
+  // console.log("ValidDate",ValidDate)
 
   useEffect(() => {
     fetchCarDetail();
@@ -116,23 +118,27 @@ const VehicleHero = () => {
         <>
           {carDetailData && (
             <>
-              {carDetailData.data.auction_date
-                  ? ValidDate
-                    ? ``
-                    : (
-                      <div className="bg-[#CA0000] shadow tracking-wider text-white text-center p-3 font-bold">
-                      Preliminary Bidding is Over for this vehicle
-                    </div>
-                    )
-                  : (
-                    <div className="bg-[#217bf0] shadow tracking-wider text-white text-center p-3 font-bold">
-                      Auction date is not decided yet, Be one on the top of bidding list
+              {carDetailData.data.auction_date ? (
+                ValidDate ? (
+                  ``
+                ) : (
+                  <div className="bg-[#CA0000] shadow tracking-wider text-white text-center p-3 font-bold">
+                    Preliminary Bidding is Over for this vehicle
                   </div>
-                  )}
+                )
+              ) : (
+                <div className="bg-[#217bf0] shadow tracking-wider text-white text-center p-3 font-bold">
+                  Auction date is not decided yet, Be one on the top of bidding
+                  list
+                </div>
+              )}
 
               <div className="flex justify-between mx-auto w-[74vw] mt-[80px] mb-[20px]">
-                <div className="w-[36vw]">
-                  <SwiperGallery images={carDetailData?.data?.link_img_hd} carData={carDetailData?.data}  />
+                <div className="w-[36vw] ">
+                  <SwiperGallery
+                    images={carDetailData?.data?.link_img_hd}
+                    carData={carDetailData?.data}
+                  />
                   <div className="flex justify-between px-2 items-center w-full border text-[#101828] text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1">
                       <IoDocumentTextOutline />
@@ -140,9 +146,93 @@ const VehicleHero = () => {
                     </div>
                     <BsDownload className="cursor-pointer" />
                   </div>
+                  <div className="grid  gap-6">
+                    {/* Vehicle Info */}
+                    <section className="bg-white w-full p-6 rounded-lg shadow-md mt-5">
+                      <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                        Vehicle Info
+                      </h2>
+                      <div className="space-y-4">
+                        <InfoRow
+                          label="Title"
+                          value={carDetailData?.data?.title}
+                        />
+                        <InfoRow
+                          label="Engine"
+                          value={carDetailData?.data?.engine}
+                        />
+                        <InfoRow
+                          label="Year"
+                          value={carDetailData?.data?.year}
+                        />
+                        <InfoRow
+                          label="Drivetrain"
+                          value={carDetailData?.data?.drive}
+                        />
+                        <InfoRow
+                          label="Transmission"
+                          value={carDetailData?.data?.transmission}
+                        />
+                        <InfoRow
+                          label="Damage Primary"
+                          value={carDetailData?.data?.damage_pr}
+                        />
+                        <InfoRow
+                          label="Damage Secondary"
+                          value={carDetailData?.data?.damage_sec}
+                        />
+                        <InfoRow
+                          label="Start Code"
+                          value={carDetailData?.data?.status}
+                        />
+                      </div>
+                    </section>
+
+                    {/* Location */}
+                    <section className="bg-white p-6 rounded-lg shadow-md">
+                      <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                        Location
+                      </h2>
+                      <div className="space-y-4">
+                        <InfoRow
+                          label="Location"
+                          value={carDetailData?.data?.location}
+                        />
+                        <InfoRow
+                          label="Location Old"
+                          value={carDetailData?.data?.location_old}
+                        />
+                        <InfoRow
+                          label="Country"
+                          value={carDetailData?.data?.country}
+                        />
+                        <InfoRow
+                          label="State"
+                          value={carDetailData?.data?.state}
+                        />
+                        <InfoRow
+                          label="Document"
+                          value={carDetailData?.data?.document}
+                        />
+                        <InfoRow
+                          label="Document Old"
+                          value={carDetailData?.data?.document_old}
+                        />
+                      </div>
+                    </section>
+
+                    <div className="">
+                      <div>
+                      <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                        Bid History
+                      </h2>   
+                     </div>
+                     <BidHistory data={carDetailData?.data}/>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="w-[33vw] ">
+                <div className="w-[33vw]">
                   <div>
                     <div className="flex justify-between mb-[3vh]">
                       <div className="flex justify-center items-center gap-2">
@@ -162,7 +252,6 @@ const VehicleHero = () => {
                         <p className="text-[1.7vw] font-urbanist font-semibold ">
                           {carDetailData?.data?.title}
                         </p>
-                    
                       </div>
                     </div>
                     <div className="flex justify-between mb-[3vh]">
@@ -193,7 +282,7 @@ const VehicleHero = () => {
                         </div>
                       </div>
                     </div>
-                
+
                     <div className="flex justify-between">
                       <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-[16vw] px-2 py-2 leading-8 rounded-lg ">
                         <div className="flex items-center">
@@ -237,7 +326,7 @@ const VehicleHero = () => {
                             <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
                               Current Bid:
                             </p>
-  
+
                             <p className="font-urbanist font-bold text-[0.97vw] ml-2">
                               {carDetailData?.data?.currentBid}
                             </p>
@@ -253,29 +342,30 @@ const VehicleHero = () => {
                         </div>
 
                         {carDetailData?.data?.auction_date ? (
-                          ValidDate ? (                        
+                          ValidDate ? (
                             <>
-                            <TimeLeftCounter
-                              days={days}
-                              hours={hours}
-                              minutes={minutes}
-                              seconds={seconds}
-                            />               
-                          </>
-                            
-                          ) : ( //bidding over
-                          ""
+                              <TimeLeftCounter
+                                days={days}
+                                hours={hours}
+                                minutes={minutes}
+                                seconds={seconds}
+                              />
+                            </>
+                          ) : (
+                            //bidding over
+                            ""
                           )
                         ) : (
                           ""
                         )}
-        
                       </div>
                     </div>
-                  </div>     
+                  </div>
 
                   <button
-                    onClick={() => document.getElementById("my_modal_1").showModal()}
+                    onClick={() =>
+                      document.getElementById("my_modal_1").showModal()
+                    }
                     className="flex justify-center mt-4 items-center gap-x-2 h-10 text-lg mb-4 rounded-xl text-white font-semibold bg-red-600 hover:bg-red-700 shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 w-full"
                   >
                     {placeBidloading ? (
@@ -287,8 +377,52 @@ const VehicleHero = () => {
                       </>
                     )}
                   </button>
+                  <div className="">
+                    <VehicleCostCalculator />
+                  </div>
 
-                
+                  <div className="flex flex-col justify-center gap-y-4">
+                    {/* Specifications */}
+                    <section className="bg-white p-6 rounded-lg shadow-md">
+                      <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                        Specifications
+                      </h2>
+                      <div className="space-y-4">
+                        <InfoRow
+                          label="Vehicle Type"
+                          value={carDetailData?.data?.vehicle_type}
+                        />
+                        <InfoRow
+                          label="Cylinders"
+                          value={carDetailData?.data?.cylinders}
+                        />
+                        <InfoRow
+                          label="Make"
+                          value={carDetailData?.data?.make}
+                        />
+                        <InfoRow
+                          label="Model"
+                          value={carDetailData?.data?.model}
+                        />
+                        <InfoRow
+                          label="Series"
+                          value={carDetailData?.data?.series}
+                        />
+                        <InfoRow
+                          label="Keys"
+                          value={carDetailData?.data?.keys}
+                        />
+                        <InfoRow
+                          label="Fuel"
+                          value={carDetailData?.data?.fuel}
+                        />
+                        <InfoRow
+                          label="Color"
+                          value={carDetailData?.data?.color}
+                        />
+                      </div>
+                    </section>
+                  </div>
                 </div>
               </div>
 
@@ -378,4 +512,10 @@ const VehicleHero = () => {
   );
 };
 
+const InfoRow = ({ label, value }) => (
+  <div className="flex justify-between">
+    <p className="text-gray-600 font-medium">{label}:</p>
+    <span className="text-black">{value}</span>
+  </div>
+);
 export default VehicleHero;
