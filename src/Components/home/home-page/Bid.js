@@ -124,7 +124,6 @@ const Bid = () => {
     }),
   };
 
-  // console.log(" = = = >", yearFrom)
 
   return (
     <>

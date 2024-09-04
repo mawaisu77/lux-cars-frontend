@@ -30,7 +30,7 @@ const VehicleHero = () => {
   const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-    useGetCarDetail(`cars/get-car-by-lot-id/testing?lot_id=${lotID}`);
+    useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
 
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
