@@ -562,3 +562,45 @@ export const VirtualBidFeeCardList = [
   { range: "$1,500.00 - $1,999.99", PreBidFee:'$69.00',standard: "$89.00" }
 
 ];
+  export const UserOrder = [
+  {
+    // image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Completed",
+  },
+  {
+    // image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Cancelled",
+  },
+  {
+    // image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Completed",
+  },
+  {
+    // image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Shipping",
+  },
+  {
+    // image: car1,
+    Gmt: "Chverolet gMT 400",
+    location: "From Kansas to Hoston",
+    price: "paid:700$",
+    date: "Date: 13-03-2024",
+    Status: ":Completed",
+  },
+];

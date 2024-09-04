@@ -1,0 +1,26 @@
+.custom-choose-btn {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    border: none;
+    color: white;
+    width: 100%;
+    /* padding: 10px 20px; */
+    border-radius: 4px;
+    border: none;
+  }
+
+  .custom-upload-btn  {
+    border: none;
+    color: white;
+    /* padding: 10px 20px; */
+    border-radius: 4px;
+  }
+  .custom-cancel-btn  {
+    border: none;
+    color: white;
+    /* padding: 10px 20px; */
+    border-radius: 4px;
+  }
+  
+ 

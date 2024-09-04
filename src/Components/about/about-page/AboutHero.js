@@ -6,30 +6,24 @@ import Header from '../../header/Header/Header';
 const AboutHero = () => {
   return (
     <>
-     <div className="Backgroundimage-About">
-     <Header/>
-     <div className='hidden   lg:block'>
-  <div className='  w-[15.5] flex flex-col  mt-[5.5vh] '>
-    <div className='text-[2.6vw] font-semibold text-white'>
-    About Us
+      <div className="Backgroundimage-About">
+      <Header />
+      <div className='hidden lg:block'>
+        <div className='w-[15.5] flex flex-col mt-[5.5vh]'>
+          <div className='text-[2.6vw] font-semibold text-white'>
+            About Us
+          </div>
+          <div className='text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist'>
+            <Link to="/">
+              <button className='hover:text-white'>Home</button>
+            </Link>
+            /
+            <button className='hover:text-white'>About Us</button>
+          </div>
+        </div>
+      </div>
     </div>
-  
- 
-
-  <div className='text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist '>
-   <Link to="/"> <button className='hover:text-white  '>
-        Home
-    </button></Link>
-    /
-    <button className='hover:text-white'>
-        About Us
-    </button>
-  </div>
-  
-
-   </div>
-  </div>
-   </div>
+    
       <div className="h-[1246px] lg:h-[94vh] mb-[5.5vh] lg:mb-0">
         <div className="w-[74vw] mx-auto flex  flex-col-reverse lg:flex-row justify-between mt-[8.8vh]">
           <div className="text-left w-full lg:w-[38vw] p-[1.5vw]">

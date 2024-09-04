@@ -1,48 +1,62 @@
-import React from 'react'
-import image1 from '../../assets/User-pics/Car1.png'
-import { TfiReload } from "react-icons/tfi";
+import React from 'react';
 
-const User = () => {
+const User = ({bid}) => {
+
   return (
-    <div>
-        <div className='w-[17.5vw] h-[60vh] bg-red-100 rounded-xl shadow-xl py-3 '>
-             <img src={image1} className='w-[15.5vw] h-[30vh] rounded-xl mx-auto '/>
-
-             <div>
-                <div className='text-left px-3 border border-b font-urbanist'>
-                    <p className='font-semibold text-[1.12vw] py-2'>
-                        "2018 BMW X1 DRIVE"
-                    </p>
-                    <p className=''>
-                        VIN:WBHT3C3J3H
-                    </p>
-                    <p>
-                        Lot:38498458
-                    </p>
-                    <p>
-                       Damage :Engine Damage 
-                    </p>
-                    <p>Location:YorkTown</p>
+    <>
+      <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh] mb-[10vh]'>
+          <div className='w-[328px] lg:w-[17.5vw] rounded-xl shadow-xl py-3'>
+            <div className='relative'>
+              <img src={bid.carDetails.image} alt='bid_car_image' className='w-[290px] lg:w-[15.5vw] h-[290px] lg:h-[30vh] rounded-xl mx-auto' />
+            </div>
+            <div>
+              <div className='text-left px-3 border-b font-urbanist'>
+                <p className='font-semibold text-[18px] lg:text-[1.12vw] py-2'>
+                  {bid.carDetails.title}
+                </p>
+                
+                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
+                <p className='font-semibold'>
+                  {"Lot "}
+                </p>
+                <p className=''>
+                  {bid.carDetails.lot_id}
+                </p>
                 </div>
-                <div className='flex px-3 justify-between'>
-                    <div>
-                       <p>
-                        Bid price
-                       </p>
-                       <p>
-                        76,500$
-                       </p>
 
-                    </div>
-                    <div className='flex justify-center items-center     text-right lg:gap-[0.3vw]  '>
-                    <TfiReload /> 
-                    <p  className='text-[#7a798a]  '>View history</p>
-                  </div>
+                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
+                <p className='font-semibold'>
+                  {"Status"}
+                </p>
+                <p className=''>
+                  {bid.carDetails.status}
+                </p>
                 </div>
-             </div>
-        </div>
-    </div>
-  )
+                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
+                <p className='font-semibold'>
+                  {"Location"}
+                </p>
+                <p className=''>
+                  {bid.carDetails.location}
+                </p>
+                </div>
+               
+              </div>
+              <div className='flex px-3 justify-between border-t py-2'>
+                <div>
+                  <p className='text-[18px] lg:text-[1.1vw] font-semibold'>${bid.bidPrice}</p>
+                </div>
+                <div className='flex justify-center items-center text-right lg:gap-[0.5vw]'>
+                  <p className=''>{"Status :"}</p>
+                  <p className={`font-semibold ${bid.isValid?'text-green-600':'text-red-600' } text-[16px] text-[#7a798a]`}>{bid.isValid ? "Active":"Expire" }</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  
+    </>
+  );
 }
 
-export default User
+export default User;
