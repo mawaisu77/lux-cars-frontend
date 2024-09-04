@@ -8,7 +8,6 @@ import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
-import { Link } from "react-router-dom";
 import CarCard from "./CarCard";
 
 const BuyNow = () => {
@@ -59,8 +58,8 @@ const BuyNow = () => {
               scrollbar={{ draggable: true }}
               loop={true}
               navigation={{
-                nextEl: ".arrow-right",
-                prevEl: ".arrow-left",
+                nextEl: ".arrow-right-bid",
+                prevEl: ".arrow-left-bid",
               }}
               pagination={{
                 clickable: true,
@@ -72,7 +71,7 @@ const BuyNow = () => {
                 },
               }}
               modules={[Navigation, Pagination]}
-              className="w-full  lg:w-[82vw] h-[550px] lg:h-[68vh] mt-[40px]"
+              className="w-full lg:w-[82vw] h-[550px] lg:h-[68vh] mt-[40px]"
             >
               <div className="w-[90vw]  flex justify-center mx-auto  items-center mt-[9vh]">
                 {carData &&
@@ -84,13 +83,13 @@ const BuyNow = () => {
               </div>
             </Swiper>
           </div>
-          <button className="arrow-left arrow">
+          <button className="arrow-left-bid arrow-bid">
             <IoIosArrowDropleft
               size={35}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"
             />
           </button>
-          <button className="arrow-right arrow sm:block ">
+          <button className="arrow-right-bid arrow-bid sm:block ">
             <IoIosArrowDropright
               size={35}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"

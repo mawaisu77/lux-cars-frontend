@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
-import fireImgTimer from "../../assets/001-fire.png";
 import {
   BsFire,
   BsHeart,
@@ -19,11 +18,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import useSaveCar from "../../hooks/useSaveCar";
+import ImageViewer from "react-simple-image-viewer";
+import ReactDOM from "react-dom";
 
 const CarCard = ({ card, isBuy = false }) => {
-  const { carData, loading, error, handleSaveCar } = useSaveCar();
-  // State to track saved cars
   const [savedCars, setSavedCars] = useState([]);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const { carData, loading, error, handleSaveCar } = useSaveCar();
 
   // Memoize the targetTime to prevent unnecessary recalculations
   const targetTime = useMemo(
@@ -60,9 +63,19 @@ const CarCard = ({ card, isBuy = false }) => {
     localStorage.setItem("savedCars", JSON.stringify(updatedSavedCars));
   };
 
+  const openImageViewer = (index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  };
+
+  const closeImageViewer = () => {
+    setIsViewerOpen(false);
+  };
+
   // Check if the current car is saved
   const isCarSaved = savedCars.includes(card.lot_id);
   return (
+    <>
     <div className="w-[330px]  mx-auto lg:w-[25.3vw] xl:w-[18.3vw] rounded-xl shadow-lg">
       <div className="p-5 relative w-full lg:p-[1vw]">
         <div className="w-full relative">
@@ -85,7 +98,7 @@ const CarCard = ({ card, isBuy = false }) => {
           )}
 
           <Swiper
-            className=""
+            className="relative"
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
@@ -95,12 +108,18 @@ const CarCard = ({ card, isBuy = false }) => {
           >
             {card.images &&
               card.images.map((image, index) => (
-                <SwiperSlide key={index}>
-                  <img
-                    className="w-full rounded-xl h-[250px] lg:h-[28.2vh]"
-                    src={image}
-                    alt="Car"
-                  />
+                <SwiperSlide key={index} className="relative">
+                 
+                  <div className="">        
+                    <img
+                      className="w-full rounded-xl h-[250px] lg:h-[28.2vh] cursor-pointer"
+                      src={image}
+                      alt={`Vehicle_Image ${index + 1}`}
+                      onClick={() => openImageViewer(index)}
+                    
+                      />
+                  </div>
+                    
                 </SwiperSlide>
               ))}
           </Swiper>
@@ -168,7 +187,19 @@ const CarCard = ({ card, isBuy = false }) => {
           </Link>
         </div>
       </div>
+    
     </div>
+     {/* Render ImageViewer outside the card's container using a portal */}
+     {isViewerOpen &&
+        ReactDOM.createPortal(
+          <ImageViewer
+            src={card.images}
+            currentIndex={currentImage}
+            onClose={closeImageViewer}
+          />,
+          document.body // Render in the root of the DOM
+        )}
+      </>
   );
 };
 

@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import TimeLeftCounter from "./TimeLeftCounter";
 import VehicleCostCalculator from "./VehicleCostCalculator";
 import BidHistory from "./BidHistory";
+import CarReportViewer from "./Report";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -29,7 +30,7 @@ const VehicleHero = () => {
   const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-    useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
+    useGetCarDetail(`cars/get-car-by-lot-id/testing?lot_id=${lotID}`);
 
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
@@ -64,10 +65,6 @@ const VehicleHero = () => {
 
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
-
-  // console.log("targetTime",targetTime)
-  // console.log("carDetailData?.data?.auction_date",carDetailData?.data)
-  // console.log("ValidDate",ValidDate)
 
   useEffect(() => {
     fetchCarDetail();
@@ -133,8 +130,8 @@ const VehicleHero = () => {
                 </div>
               )}
 
-              <div className="flex justify-between mx-auto w-[74vw] mt-[80px] mb-[20px]">
-                <div className="w-[36vw] ">
+              <div className="flex flex-col md:flex-row  justify-between mx-auto w-[74vw] mt-[80px] mb-[20px]">
+                <div className="w-full md:w-[36vw] ">
                   <SwiperGallery
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
@@ -223,16 +220,16 @@ const VehicleHero = () => {
 
                     <div className="">
                       <div>
-                      <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
-                        Bid History
-                      </h2>   
-                     </div>
-                     <BidHistory data={carDetailData?.data}/>
+                        <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                          Bid History
+                        </h2>
+                      </div>
+                      <BidHistory data={carDetailData?.data} />
                     </div>
                   </div>
                 </div>
 
-                <div className="w-[33vw]">
+                <div className="md:w-[33vw]">
                   <div>
                     <div className="flex justify-between mb-[3vh]">
                       <div className="flex justify-center items-center gap-2">
@@ -422,6 +419,9 @@ const VehicleHero = () => {
                         />
                       </div>
                     </section>
+                  </div>
+                  <div className="flex flex-col justify-center max-w-[700px] gap-y-4">
+                    <CarReportViewer vin={carDetailData?.data.vin} />
                   </div>
                 </div>
               </div>

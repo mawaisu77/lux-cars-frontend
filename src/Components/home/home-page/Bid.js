@@ -239,7 +239,7 @@ const Bid = () => {
               <div className="flex gap-x-2 justify-between items-center  w-[12vw] text-left">
                 <div className="flex flex-col justify-center items-center border-r w-[12vw] text-left">
                   <p className="text-[1.17vw] font-urbanist font-semibold">
-                    Year From
+                   From
                   </p>
                   <ReactSelect
                     styles={customStyles}
@@ -255,7 +255,7 @@ const Bid = () => {
                 {/* Dropdown for Year From */}
                 <div className="flex flex-col justify-center items-center border-r w-[12vw] text-left">
                   <p className="text-[1.17vw] font-urbanist font-semibold">
-                    Year From
+                   To
                   </p>
                   <ReactSelect
                     styles={customStyles}

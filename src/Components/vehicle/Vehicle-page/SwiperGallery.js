@@ -28,6 +28,7 @@ const SwiperGallery = ({ images, carData }) => {
   const closeImageViewer = () => {
     setIsViewerOpen(false);
   };
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -180,7 +181,7 @@ const SwiperGallery = ({ images, carData }) => {
           renderCopartView()}
       </Modal>
 
-        {/* Modal for 360° View */}
+        {/* Modal for Video View */}
       <VideoModal isOpen={isVideoModalOpen} onClose={closeVideoModal}>
        <ReactPlayer url={carData?.video} controls={true} width={'90%'} height={'100%'}  config={{ file: { attributes: { preload: 'auto' } } }} 
 
