@@ -31,7 +31,10 @@ const CarReportViewer = ({ vin }) => {
 
 
   return (
-    <div className="p-4">
+    <div className="mt-4 shadow-md rounded-md p-6">
+       <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+         Report
+       </h2>
     {loading && (
       <div className="flex items-center justify-center">
         <FaSpinner className="animate-spin text-blue-500 text-4xl" />
@@ -54,7 +57,7 @@ const CarReportViewer = ({ vin }) => {
             </Document>
           </div>
 
-          <div  onClick={handleClick} className="absolute cursor-pointer inset-0 bg-white hover:bg-opacity-50 bg-opacity-70 backdrop-blur-sm duration-100 rounded-lg p-2 flex items-center justify-center">
+          <div  onClick={handleClick} className="absolute cursor-pointer inset-0 bg-white hover:bg-opacity-50 bg-opacity-70  duration-100 rounded-lg p-2 flex items-center justify-center">
             {/* <p className="text-lg font-semibold">Get report</p> */}
           </div>
         </div>

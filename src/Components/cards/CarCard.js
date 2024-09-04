@@ -76,7 +76,7 @@ const CarCard = ({ card, isBuy = false }) => {
   const isCarSaved = savedCars.includes(card.lot_id);
   return (
     <>
-    <div className="w-[330px]  mx-auto lg:w-[25.3vw] xl:w-[18.3vw] rounded-xl shadow-lg">
+    <div className=" rounded-xl shadow-lg">
       <div className="p-5 relative w-full lg:p-[1vw]">
         <div className="w-full relative">
           {isCarSaved ? (

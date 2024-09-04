@@ -12,7 +12,7 @@ import CarCard from "./CarCard";
 
 const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars?buy_now=true"
+    "cars/get-all-cars/testing?buy_now=true"
   );
   console.log("first", carData);
   if (carLoading) {
@@ -30,14 +30,14 @@ const BuyNow = () => {
 
   return (
     <>
-      <div className="h-[784px] lg:h-[90vh] relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
+      <div className=" relative w-full lg:w-[98.9vw] bg-[#fdfdfd]   ">
         <div className="">
           <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[5vh]">
             Buy Now
           </div>
           <hr className="h-1 bg-[#ca0000] mt-[15px]  w-20 mx-auto" />
 
-          <div className="relative ">
+          <div className="relative">
             <Swiper
               style={{
                 "--swiper-pagination-color": "#FFBA08",
@@ -47,11 +47,11 @@ const BuyNow = () => {
                 "--swiper-pagination-bullet-horizontal-gap": "6px",
               }}
               slidesPerView={1}
-              spaceBetween={80}
+              spaceBetween={30}
               breakpoints={{
                 640: { slidesPerView: 1 },
                 740: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 },
+                1024: { slidesPerView: 4 },
                 1440: { slidesPerView: 4 },
               }}
               scrollbar={{ draggable: true }}
@@ -75,7 +75,7 @@ const BuyNow = () => {
               <div className="w-[90vw] flex justify-center mx-auto items-center mt-[9vh]">
                 {carData &&
                   carData.map((card, index) => (
-                    <SwiperSlide key={index} className="relative ">
+                    <SwiperSlide key={index} className="relative w-[330px] lg:w-[20.3vw] xl:w-[20.3vw] ">
                       <CarCard card={card} isBuy={true} />
                     </SwiperSlide>
                   ))}

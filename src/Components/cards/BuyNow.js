@@ -12,7 +12,7 @@ import CarCard from "./CarCard";
 
 const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars"
+    "cars/get-all-cars/testing"
   );
   console.log("first", carData);
   if (carLoading) {
@@ -48,11 +48,11 @@ const BuyNow = () => {
                 "--swiper-pagination-bullet-horizontal-gap": "6px",
               }}
               slidesPerView={1}
-              spaceBetween={80}
+              spaceBetween={30}
               breakpoints={{
                 640: { slidesPerView: 1 },
                 740: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 },
+                1024: { slidesPerView: 4 },
                 1440: { slidesPerView: 4 },
               }}
               scrollbar={{ draggable: true }}
@@ -73,10 +73,10 @@ const BuyNow = () => {
               modules={[Navigation, Pagination]}
               className="w-full lg:w-[82vw] h-[550px] lg:h-[68vh] mt-[40px]"
             >
-              <div className="w-[90vw]  flex justify-center mx-auto  items-center mt-[9vh]">
+              <div className="w-[90vw] flex justify-center mx-auto  items-center mt-[9vh]">
                 {carData &&
                   carData.map((card, index) => (
-                    <SwiperSlide key={index} className="relative ">
+                    <SwiperSlide key={index} className="relative w-[330px] lg:w-[20.3vw] xl:w-[20.3vw] ">
                       <CarCard card={card} isBuy={false} />
                     </SwiperSlide>
                   ))}

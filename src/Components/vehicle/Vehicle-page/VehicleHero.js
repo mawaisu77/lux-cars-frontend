@@ -152,35 +152,35 @@ const VehicleHero = () => {
                       <div className="space-y-4">
                         <InfoRow
                           label="Title"
-                          value={carDetailData?.data?.title}
+                          value={carDetailData?.data?.title || "N/A"}
                         />
                         <InfoRow
                           label="Engine"
-                          value={carDetailData?.data?.engine}
+                          value={carDetailData?.data?.engine || "N/A"}
                         />
                         <InfoRow
                           label="Year"
-                          value={carDetailData?.data?.year}
+                          value={carDetailData?.data?.year || "N/A"}
                         />
                         <InfoRow
                           label="Drivetrain"
-                          value={carDetailData?.data?.drive}
+                          value={carDetailData?.data?.drive || "N/A"}
                         />
                         <InfoRow
                           label="Transmission"
-                          value={carDetailData?.data?.transmission}
+                          value={carDetailData?.data?.transmission || "N/A"}
                         />
                         <InfoRow
                           label="Damage Primary"
-                          value={carDetailData?.data?.damage_pr}
+                          value={carDetailData?.data?.damage_pr || "N/A"}
                         />
                         <InfoRow
                           label="Damage Secondary"
-                          value={carDetailData?.data?.damage_sec}
+                          value={carDetailData?.data?.damage_sec || "N/A"}
                         />
                         <InfoRow
                           label="Start Code"
-                          value={carDetailData?.data?.status}
+                          value={carDetailData?.data?.status || "N/A"}
                         />
                       </div>
                     </section>
@@ -193,27 +193,27 @@ const VehicleHero = () => {
                       <div className="space-y-4">
                         <InfoRow
                           label="Location"
-                          value={carDetailData?.data?.location}
+                          value={carDetailData?.data?.location || "N/A"}
                         />
                         <InfoRow
                           label="Location Old"
-                          value={carDetailData?.data?.location_old}
+                          value={carDetailData?.data?.location_old || "N/A"}
                         />
                         <InfoRow
                           label="Country"
-                          value={carDetailData?.data?.country}
+                          value={carDetailData?.data?.country || "N/A"}
                         />
                         <InfoRow
                           label="State"
-                          value={carDetailData?.data?.state}
+                          value={carDetailData?.data?.state || "N/A"}
                         />
                         <InfoRow
                           label="Document"
-                          value={carDetailData?.data?.document}
+                          value={carDetailData?.data?.document || "N/A"}
                         />
                         <InfoRow
                           label="Document Old"
-                          value={carDetailData?.data?.document_old}
+                          value={carDetailData?.data?.document_old || "N/A"}
                         />
                       </div>
                     </section>
@@ -387,41 +387,41 @@ const VehicleHero = () => {
                       <div className="space-y-4">
                         <InfoRow
                           label="Vehicle Type"
-                          value={carDetailData?.data?.vehicle_type}
+                          value={carDetailData?.data?.vehicle_type || "N/A"}
                         />
                         <InfoRow
                           label="Cylinders"
-                          value={carDetailData?.data?.cylinders}
+                          value={carDetailData?.data?.cylinders || "N/A"}
                         />
                         <InfoRow
                           label="Make"
-                          value={carDetailData?.data?.make}
+                          value={carDetailData?.data?.make || "N/A"}
                         />
                         <InfoRow
                           label="Model"
-                          value={carDetailData?.data?.model}
+                          value={carDetailData?.data?.model || "N/A"}
                         />
                         <InfoRow
                           label="Series"
-                          value={carDetailData?.data?.series}
+                          value={carDetailData?.data?.series || "N/A"}
                         />
                         <InfoRow
                           label="Keys"
-                          value={carDetailData?.data?.keys}
+                          value={carDetailData?.data?.keys || "N/A"}
                         />
                         <InfoRow
                           label="Fuel"
-                          value={carDetailData?.data?.fuel}
+                          value={carDetailData?.data?.fuel || "N/A"}
                         />
                         <InfoRow
                           label="Color"
-                          value={carDetailData?.data?.color}
+                          value={carDetailData?.data?.color || "N/A"}
                         />
                       </div>
                     </section>
                   </div>
                   <div className="flex flex-col justify-center max-w-[700px] gap-y-4">
-                    <CarReportViewer vin={carDetailData?.data.vin} />
+                    <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
                   </div>
                 </div>
               </div>
