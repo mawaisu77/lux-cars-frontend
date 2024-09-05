@@ -218,16 +218,13 @@ function Feespage() {
               <h2 className="text-left text-[18px] md:text-[0.938vw] font-[500] md:font-[600]  text-[#131313] font-urbanist">
                 Virtual Bid Fee
               </h2>
-
-
-
             </div>
             <div className="hidden md:flex flex-wrap justify-center items-center  gap-[0.417vw]">
               <select className="md:w-[6.5vw] bold-[700] lg:w-[6.25vw] border-grey-400  rounded-[0.417vw] border text-gray border-grey-500 outline-none h-[65px] md:h-[3.385vh] text-left md:text-[1vw] lg:text-[0.529vw] font-[400] font-urbanist">
                 <option>General fee</option>
                 <option>General fee</option>
                 <option>General fee</option>
-              </select> 
+              </select>
               <div className="md:w-[1.8vw] text-[20px] md:text-[#292D32] pb-[2px] lg:w-[1.563vw] h-[30px] w-[25px] md:h-[3.385vh] flex md:items-end flex-center  text-center items-center justify-center border rounded-[6px] md:rounded-[0.217vw]">
                 ...
               </div>

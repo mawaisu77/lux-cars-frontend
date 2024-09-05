@@ -6,7 +6,7 @@ import image2 from "../../../assets/fees/repeat.png";
 import image3 from "../../../assets/fees/Horizontal - White0 1.png";
 import { PiUsersFill } from "react-icons/pi";
 // import { feesLeftCard } from '../../../data/data';
-import { feesLeftCard } from "../../../data/data.js";
+import { feesLeftCard } from "../../../../data/data.js";
 // import image1 from '../../../assets/fees/Horizontal - White0 1.png'
 import Card from "./Card.js";
 // feesRightCard
@@ -15,7 +15,7 @@ import {
   BuyerFeesListCardList,
   VirtualBidFeeCardList,
 } from "../../../data/data.js";
-import Header from "../../../Components/header/index";
+import Header from "../../../../Components/header/index.js";
 import BuyerFeesListCard from "./BuyerFeesListCard.js";
 import VirtualBidFeeCard from "./VirtualBidFeeCard.js";
 
