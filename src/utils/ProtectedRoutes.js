@@ -5,11 +5,9 @@ import { getToken, getUser, removeToken, removeUser } from "./storageUtils";
 import { isTokenExpired } from "./isTokenExpired";
 
 const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
-//   const {user} = useAuthContext();
+  const {dispatch} = useAuthContext()
   const storedToken = getToken();
   const location = useLocation();
-  const user = getUser()
-
   const publicPaths = [
     "/",
     "/login",
@@ -24,6 +22,7 @@ const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
     if (storedToken && isTokenExpired(storedToken)) {
       removeToken();
       removeUser()
+      dispatch({type:'LOGOUT'})
       return <Navigate to="/login" state={{ from: location }} />;
     }
 
