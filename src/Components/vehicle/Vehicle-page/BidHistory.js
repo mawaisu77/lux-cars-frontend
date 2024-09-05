@@ -13,7 +13,9 @@ const BidHistory = ({data}) => {
       }, [data.lot_id]);
     
   return (
-    <div className='max-h-[400px] overflow-y-scroll'>
+    <div className='max-h-[400px] overflow-y-scroll shadow-md p-6 '>
+     <div className=''>
+
       {loadingBidHistory ? (
             <div className="flex justify-center items-center">
               <ClipLoader color="#000" loading={loadingBidHistory} size={50} />
@@ -32,7 +34,7 @@ const BidHistory = ({data}) => {
               .map((item, index) => (
                 <div
                   key={index}
-                  className="flex bg-white shadow-md rounded-lg p-4 mt-1 "
+                  className="flex shadow-md rounded-lg p-4 mt-1 "
                 >
                   <div className="flex items-center">
                     <img
@@ -73,6 +75,8 @@ const BidHistory = ({data}) => {
               ))
           )}
     </div>
+    </div>
+
   )
 }
 

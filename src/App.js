@@ -241,9 +241,12 @@ function App() {
             <Route
               path="/user/account/parts"
               element={
+                <ProtectedRoute>
                 <UserLayout>
                   <Parts />
                 </UserLayout>
+                </ProtectedRoute>
+
               }
             />
             <Route

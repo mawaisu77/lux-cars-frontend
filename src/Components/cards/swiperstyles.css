@@ -1,27 +1,49 @@
-.arrow {
+.arrow-buy  {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10;
-
+  /* z-index: 10; */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
 
-.arrow-left {
+.arrow-left-buy {
   left: 60px;
   /* Adjust this value to position the left arrow */
 }
 
-.arrow-right {
+.arrow-right-buy {
+  right: 60px; /* Adjust this value to position the right arrow */
+}
+
+.arrow-bid  {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* z-index: 1; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.arrow-left-bid {
+  left: 60px;
+  /* Adjust this value to position the left arrow */
+}
+
+.arrow-right-bid {
   right: 60px; /* Adjust this value to position the right arrow */
 }
 
 /* Hide arrows on mobile view */
 @media (max-width: 768px) {
-  .arrow {
+  .arrow-buy {
+    display: none;
+  }
+  .arrow-bid {
     display: none;
   }
 }

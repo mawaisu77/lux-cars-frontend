@@ -4,13 +4,11 @@ import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
 import { IoGlobeSharp } from "react-icons/io5";
 
-import { TiArrowSortedDown } from 'react-icons/ti';
 import { HiUsers } from 'react-icons/hi2';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
-import { IoCloudUploadOutline } from "react-icons/io5";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -37,6 +35,7 @@ const Header = () => {
     document.getElementById("my_logout_modal").close();
   }
 
+  console.log("Navbar user", user)
   
   return (
     <div className='border-b border-[#7A798A] w-full z-50 '>

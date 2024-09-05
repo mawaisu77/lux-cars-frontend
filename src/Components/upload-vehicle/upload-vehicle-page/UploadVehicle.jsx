@@ -39,6 +39,8 @@ const UploadVehicle = () => {
   const [additionalFields, setAdditionalFields] = useState([""]);
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
+  const [showAdditionalAfterVinFields, setShowAdditionalAfterVinFields] =
+    useState(false);
 
   // toggles
   const [carModificationStatus, setCarModificationStatus] = useState("stock");
@@ -177,6 +179,9 @@ const UploadVehicle = () => {
         [name]: value,
       },
     }));
+    if (name === "vin") {
+      setShowAdditionalAfterVinFields(value.trim() !== "");
+    }
   };
   const handleToggleChange = (property) => {
     setSelectedOptions((prevOptions) => ({
@@ -266,7 +271,6 @@ const UploadVehicle = () => {
     // =====================================================================================
     if (userType === "dealer") {
       if (!dealerData) {
-
         if (
           Object.keys(newErrors).length === 0 &&
           Object.keys(dealerFormErrors).length === 0
@@ -355,10 +359,8 @@ const UploadVehicle = () => {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${getToken()}`,
             },
-            
           });
-          showToast("Vehicle uploaded", 'success')
-
+          showToast("Vehicle uploaded", "success");
         } catch (error) {
           if (error.response) {
             showToast(
@@ -790,110 +792,122 @@ const UploadVehicle = () => {
               </div>
             </div>
 
-            {/* Year, Make, Model */}
-            <div className="grid md:grid-cols-3 md:space-x-4">
-              <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold text-[20px]">Year</label>
-                <input
-                  type="text"
-                  name="year"
-                  placeholder={`${
-                    carErrors.year ? carErrors.year : "Write here.."
-                  } `}
-                  className={`border py-2 px-4 rounded-lg w-full ${
-                    carErrors.year
-                      ? "placeholder-[#CA0000]  border-[#CA0000] "
-                      : ""
-                  }`}
-                  value={formData.carDetails.year}
-                  onChange={handleCarDetailsChange}
-                />
-              </div>
-              <div className="flex flex-col items-start gap-y-2 mt-4 md:mt-0">
-                <label className="font-bold text-[20px]">Make</label>
-                <input
-                  type="text"
-                  name="make"
-                  placeholder={`${
-                    carErrors.make ? carErrors.make : "Write here.."
-                  } `}
-                  className={`border py-2 px-4 rounded-lg w-full ${
-                    carErrors.make
-                      ? "placeholder-[#CA0000]  border-[#CA0000] "
-                      : ""
-                  }`}
-                  value={formData.carDetails.make}
-                  onChange={handleCarDetailsChange}
-                />
-              </div>
-              <div className="flex flex-col items-start mt-4 md:mt-0 gap-y-2">
-                <label className="font-bold text-[20px]">Model</label>
-                <input
-                  type="text"
-                  name="model"
-                  placeholder={`${
-                    carErrors.model ? carErrors.model : "Write here.."
-                  } `}
-                  className={`border py-2 px-4 rounded-lg w-full ${
-                    carErrors.model
-                      ? "placeholder-[#CA0000]  border-[#CA0000] "
-                      : ""
-                  }`}
-                  value={formData.carDetails.model}
-                  onChange={handleCarDetailsChange}
-                />
-              </div>
-            </div>
-
-            {/* Transmissions, Mileage */}
-            <div className="grid md:grid-cols-3 md:space-x-4">
-              <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold text-[20px]">Transmission</label>
-                <div className="relative w-full ">
-                  <button
-                    type="button"
-                    className={`${
-                      carErrors.transmission
-                        ? "placeholder-[#CA0000]  border-[#CA0000]  text-[#CA0000] "
-                        : "text-black"
-                    }  border py-2 px-4 rounded-lg w-full  text-left`}
-                    onClick={() => setTransmissionIsOpen(!transmissionIsOpen)}
-                  >
-                    {transmission}
-                  </button>
-                  {transmissionIsOpen && (
-                    <div className="absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-md shadow-lg">
-                      {transmissionOptions.map((option) => (
-                        <div
-                          key={option}
-                          className="p-2 hover:bg-gray-200 cursor-pointer text-left"
-                          onClick={() => handleTransmissionOptionClick(option)}
-                        >
-                          {option}
-                        </div>
-                      ))}
-                    </div>
-                  )}
+            {showAdditionalAfterVinFields && (
+              <>
+                {/* Year, Make, Model */}
+                <div className="grid md:grid-cols-3 md:space-x-4">
+                  <div className="flex flex-col items-start gap-y-2">
+                    <label className="font-bold text-[20px]">Year</label>
+                    <input
+                      type="text"
+                      name="year"
+                      placeholder={`${
+                        carErrors.year ? carErrors.year : "Write here.."
+                      } `}
+                      className={`border py-2 px-4 rounded-lg w-full ${
+                        carErrors.year
+                          ? "placeholder-[#CA0000]  border-[#CA0000] "
+                          : ""
+                      }`}
+                      value={formData.carDetails.year}
+                      onChange={handleCarDetailsChange}
+                    />
+                  </div>
+                  <div className="flex flex-col items-start gap-y-2 mt-4 md:mt-0">
+                    <label className="font-bold text-[20px]">Make</label>
+                    <input
+                      type="text"
+                      name="make"
+                      placeholder={`${
+                        carErrors.make ? carErrors.make : "Write here.."
+                      } `}
+                      className={`border py-2 px-4 rounded-lg w-full ${
+                        carErrors.make
+                          ? "placeholder-[#CA0000]  border-[#CA0000] "
+                          : ""
+                      }`}
+                      value={formData.carDetails.make}
+                      onChange={handleCarDetailsChange}
+                    />
+                  </div>
+                  <div className="flex flex-col items-start mt-4 md:mt-0 gap-y-2">
+                    <label className="font-bold text-[20px]">Model</label>
+                    <input
+                      type="text"
+                      name="model"
+                      placeholder={`${
+                        carErrors.model ? carErrors.model : "Write here.."
+                      } `}
+                      className={`border py-2 px-4 rounded-lg w-full ${
+                        carErrors.model
+                          ? "placeholder-[#CA0000]  border-[#CA0000] "
+                          : ""
+                      }`}
+                      value={formData.carDetails.model}
+                      onChange={handleCarDetailsChange}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col items-start mt-4 md:mt-0 gap-y-2">
-                <label className="font-bold text-[20px]">Millage (miles)</label>
-                <input
-                  type="text"
-                  name="mileage"
-                  placeholder={`${
-                    carErrors.mileage ? carErrors.mileage : "Write here.."
-                  } `}
-                  className={`border py-2 px-4 rounded-lg w-full ${
-                    carErrors.mileage
-                      ? "placeholder-[#CA0000]  border-[#CA0000] "
-                      : ""
-                  }`}
-                  value={formData.carDetails.mileage}
-                  onChange={handleCarDetailsChange}
-                />
-              </div>
-            </div>
+
+                {/* Transmissions, Mileage */}
+                <div className="grid md:grid-cols-3 md:space-x-4">
+                  <div className="flex flex-col items-start gap-y-2">
+                    <label className="font-bold text-[20px]">
+                      Transmission
+                    </label>
+                    <div className="relative w-full ">
+                      <button
+                        type="button"
+                        className={`${
+                          carErrors.transmission
+                            ? "placeholder-[#CA0000]  border-[#CA0000]  text-[#CA0000] "
+                            : "text-black"
+                        }  border py-2 px-4 rounded-lg w-full  text-left`}
+                        onClick={() =>
+                          setTransmissionIsOpen(!transmissionIsOpen)
+                        }
+                      >
+                        {transmission}
+                      </button>
+                      {transmissionIsOpen && (
+                        <div className="absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-md shadow-lg">
+                          {transmissionOptions.map((option) => (
+                            <div
+                              key={option}
+                              className="p-2 hover:bg-gray-200 cursor-pointer text-left"
+                              onClick={() =>
+                                handleTransmissionOptionClick(option)
+                              }
+                            >
+                              {option}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-start mt-4 md:mt-0 gap-y-2">
+                    <label className="font-bold text-[20px]">
+                      Millage (miles)
+                    </label>
+                    <input
+                      type="text"
+                      name="mileage"
+                      placeholder={`${
+                        carErrors.mileage ? carErrors.mileage : "Write here.."
+                      } `}
+                      className={`border py-2 px-4 rounded-lg w-full ${
+                        carErrors.mileage
+                          ? "placeholder-[#CA0000]  border-[#CA0000] "
+                          : ""
+                      }`}
+                      value={formData.carDetails.mileage}
+                      onChange={handleCarDetailsChange}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
 
             {/* Select option Equipment */}
             <div className="grid grid-cols-1 space-x-4">
