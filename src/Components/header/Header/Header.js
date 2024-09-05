@@ -59,9 +59,25 @@ const Header = () => {
     >
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>
         <div className='flex items-center gap-4'>
-          <Link to="/">
-          <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
-          </Link>
+          {
+            isHomePage && navbarColor === "transparent" ? (
+              <Link to="/">
+              <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
+              </Link>
+            ) : (
+              <Link to="/">
+              <img
+                src={"https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"}
+                className="w-[142px] lg:w-[13.58vw] h-auto"
+                alt={`Logo`}
+                />
+            </Link>
+            )
+          }
+      
+   
+         
+           
           <div className='hidden lg:flex'>
           <ul className={`flex gap-[1.5vw] font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'} ${navbarColor==="transparent"?"":"text-white"}`}>              
             <Link to="/how-works">
