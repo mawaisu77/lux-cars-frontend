@@ -89,7 +89,6 @@ const VehicleHero = () => {
     }
   }, [placeBidloading, placeBidSuccess, placeBiderror]);
 
-  // console.log("is auction date future",isAuctionDateFuture)
   return (
     <>
       <div className="bg-vehicle">
@@ -274,7 +273,7 @@ const VehicleHero = () => {
                             Sale Document
                           </p>
                           <p className="text-[0.9vw] font-urbanist font-semibold">
-                            Certificate of Title(ks)
+                            {carDetailData?.data?.document_old ? carDetailData?.data?.document_old : carDetailData?.data?.document }
                           </p>
                         </div>
                       </div>
