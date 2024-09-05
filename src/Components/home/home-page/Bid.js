@@ -182,7 +182,7 @@ const Bid = () => {
                   <ReactSelect
                     styles={customStyles}
                     value={selectedMake}
-                    onChange={handleMakeChange}
+                    onChange={handleMakeChange} 
                     options={carOptions}
                     isClearable
                     placeholder="Select Make"
