@@ -30,7 +30,7 @@ const VehicleHero = () => {
   const [shouldRefetch, setShouldRefetch] = useState(false);
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-    useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
+    useGetCarDetail(`cars/get-car-by-lot-id/testing?lot_id=${lotID}`);
 
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
@@ -116,15 +116,15 @@ const VehicleHero = () => {
           {carDetailData && (
             <>
               {carDetailData.data.auction_date ? (
-                ValidDate ? (
+               ValidDate ? (
                   ``
                 ) : (
-                  <div className="bg-[#CA0000] shadow tracking-wider text-white text-center p-3 font-bold">
+                  <div className="bg-[#CA0000] text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
                     Preliminary Bidding is Over for this vehicle
                   </div>
                 )
               ) : (
-                <div className="bg-[#217bf0] shadow tracking-wider text-white text-center p-3 font-bold">
+                <div className="bg-[#217bf0]  text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
                   Auction date is not decided yet, Be one on the top of bidding
                   list
                 </div>
@@ -252,9 +252,9 @@ const VehicleHero = () => {
                       </div>
                     </div>
                     <div className="flex justify-between mb-[3vh]">
-                      <div className="flex px-2 gap-2 items-center w-[16vw] h-[6.7vh] rounded-lg bg-[#f8f8f8]">
-                        <div className="flex justify-center items-center rounded-lg w-[2.5vw] h-[5vh] bg-[#CA0000]">
-                          <PiUsersFill color="white" />
+                      <div className="flex px-[0.5vw] gap-[0.5vw] items-center w-[16vw] h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
+                        <div className="flex justify-center items-center rounded-[0.5vw] w-[2.5vw] h-[5vh] bg-[#CA0000]">
+                          <PiUsersFill color="white" className="w-[1.2vw] h-[2.5vh]" />
                         </div>
                         <div className="text-left">
                           <p className="text-[0.7vw] text-[#7a798a]">
@@ -265,9 +265,9 @@ const VehicleHero = () => {
                           </p>
                         </div>
                       </div>
-                      <div className="flex px-2 gap-2 items-center w-[16vw] h-[6.7vh] rounded-lg bg-[#f8f8f8]">
-                        <div className="flex justify-center items-center rounded-lg w-[2.5vw] h-[5vh] bg-[#CA0000]">
-                          <CgFileDocument color="white" />
+                      <div className="flex px-[0.5vw] gap-[0.5vw] items-center w-[16vw] h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
+                      <div className="flex justify-center items-center rounded-[0.5vw] w-[2.5vw] h-[5vh] bg-[#CA0000]">
+                          <CgFileDocument color="white"  className="w-[1.2vw] h-[2.5vh]" />
                         </div>
                         <div className="text-left">
                           <p className="text-[0.7vw] text-[#7a798a]">
@@ -281,7 +281,7 @@ const VehicleHero = () => {
                     </div>
 
                     <div className="flex justify-between">
-                      <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-[16vw] px-2 py-2 leading-8 rounded-lg ">
+                      <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
                         <div className="flex items-center">
                           <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
                             Lot:
@@ -317,10 +317,10 @@ const VehicleHero = () => {
                           </p>
                         </div>
                       </div>
-                      <div className="flex flex-col  w-[16vw]  leading-8 rounded-lg ">
-                        <div className="flex flex-col bg-[#f8f8f8] px-2 py-2 justify-between rounded-lg">
+                      <div className="flex flex-col  w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
+                        <div className="flex flex-col bg-[#f8f8f8] px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
                           <div className="flex items-center">
-                            <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                            <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-[0.5vw]">
                               Current Bid:
                             </p>
 
@@ -329,10 +329,10 @@ const VehicleHero = () => {
                             </p>
                           </div>
                           <div className="flex items-center">
-                            <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                            <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-[0.5vw]">
                               No of Bids :
                             </p>
-                            <p className="font-urbanist font-bold text-[0.97vw] ml-2">
+                            <p className="font-urbanist font-bold text-[0.97vw] ml-[0.5vw]">
                               {carDetailData?.data?.noOfBids}
                             </p>
                           </div>
@@ -363,14 +363,14 @@ const VehicleHero = () => {
                     onClick={() =>
                       document.getElementById("my_modal_1").showModal()
                     }
-                    className="flex justify-center mt-4 items-center gap-x-2 h-10 text-lg mb-4 rounded-xl text-white font-semibold bg-red-600 hover:bg-red-700 shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 w-full"
+                    className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 w-full"
                   >
                     {placeBidloading ? (
                       <ClipLoader color="#ffffff" size={20} />
                     ) : (
                       <>
-                        <TiLockClosed size={24} />
-                        <span className="">PlACE MAX BID</span>
+                        <TiLockClosed  className="w-[1.3vw] h-[2.8vh]" />
+                        <span className="text-[1.1vw]">PlACE MAX BID</span>
                       </>
                     )}
                   </button>
@@ -378,13 +378,13 @@ const VehicleHero = () => {
                     <VehicleCostCalculator />
                   </div>
 
-                  <div className="flex flex-col justify-center gap-y-4">
+                  <div className="flex flex-col justify-center gap-y-[2.1vh]">
                     {/* Specifications */}
-                    <section className="bg-white p-6 rounded-lg shadow-md">
-                      <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                    <section className="bg-white p-[1.5vw] rounded-lg shadow-md">
+                      <h2 className="text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                         Specifications
                       </h2>
-                      <div className="space-y-4">
+                      <div className="space-y-[2vh] text-[0.875vw]">
                         <InfoRow
                           label="Vehicle Type"
                           value={carDetailData?.data?.vehicle_type || "N/A"}

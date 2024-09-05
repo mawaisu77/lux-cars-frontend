@@ -88,17 +88,17 @@ const Dropdown = () => {
   };
 
   return (
-    <div className="relative w-full mx-auto mt-10 shadow-lg rounded-lg p-6">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+    <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
+      <h2 className="text-[1.5vw] font-semibold text-gray-800 mb-[3.2vh]">
         Bid Calculator
       </h2>
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+      <h2 className="text-[1.5vw] font-semibold text-gray-800 mb-[3.2vh]">
         Select Vehicle Category
       </h2>
-      <div className="grid grid-cols-3 gap-x-10">
+      <div className="grid grid-cols-3 gap-x-[2.6vw]">
         <button
           onClick={() => setCategory("SUV")}
-          className={`px-4 py-1 rounded-lg text-white ${
+          className={`px-[1vw] py-[0.5vh] text-[1vw] rounded-[0.5vw] text-white ${
             category === "SUV" ? "bg-[#CA0000]" : "bg-gray-300"
           }`}
         >
@@ -106,7 +106,7 @@ const Dropdown = () => {
         </button>
         <button
           onClick={() => setCategory("ATV")}
-          className={`px-4 py-1 rounded-lg text-white ${
+          className={`px-[1vw] py-[0.5vh] text-[1vw] rounded-[0.5vw] text-white ${
             category === "ATV" ? "bg-[#CA0000]" : "bg-gray-300"
           }`}
         >
@@ -114,7 +114,7 @@ const Dropdown = () => {
         </button>
         <button
           onClick={() => setCategory("Heavy Machinery")}
-          className={`px-4 py-1 rounded-lg text-white ${
+          className={`px-[1vw] py-[0.5vh] text-[1vw] rounded-[0.5vw] text-white ${
             category === "Heavy Machinery" ? "bg-[#CA0000]" : "bg-gray-300"
           }`}
         >
@@ -123,29 +123,29 @@ const Dropdown = () => {
       </div>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full mt-4 py-3 px-4  text-black border rounded-md shadow-sm focus:outline-none"
+        className="w-full mt-4 py-[1.5vh] px-[1vw]  text-black border rounded-[0.375vw] shadow-sm focus:outline-none"
       >
         {isOpen ? (
-          <div className="flex gap-x-2 justify-center items-center">
-               <h1>Close</h1>
-               <IoIosArrowUp />
+          <div className="flex gap-x-[0.5vw] justify-center items-center">
+               <h1 className="text-[1vw]">Close</h1>
+               <IoIosArrowUp  className="text-[1vw]"/>
      
           </div>
         ) : (
-          <div className="flex gap-x-2 justify-center items-center">
-                  <h1>Check Transportations Fee</h1>
-                  <IoIosArrowDown />
+          <div className="flex gap-x-[0.5vw] justify-center items-center">
+                  <h1 className="text-[1vw]">Check Transportations Fee</h1>
+                  <IoIosArrowDown  className="text-[1vw]" />
           </div>
         )}
       </button>
 
       {isOpen && (
-        <div className="mt-4 bg-gray-100 rounded-lg shadow-md">
-          <table className="min-w-full divide-y divide-gray-200">
+        <div className="mt-[2.1vh] bg-gray-100 rounded-[0.5vw] shadow-md">
+          <table className="min-w-full divide-y text-[0.9vw] divide-gray-200">
             <thead className="bg-gray-200">
               <tr>
-                <th className="px-4 py-2 text-left text-gray-700">State</th>
-                <th className="px-4 py-2 text-left text-gray-700">
+                <th className="px-[1vw] py-[1vh] text-left text-gray-700">State</th>
+                <th className="px-[1vw] py-[vh] text-left text-gray-700">
                   Calculated Rate
                 </th>
               </tr>
@@ -159,8 +159,8 @@ const Dropdown = () => {
                   }`}
                   onClick={() => handleSelection(item)}
                 >
-                  <td className="px-4 py-2 text-left">{item.state}</td>
-                  <td className="px-4 py-2 text-left">${item.calculatedRate}</td>
+                  <td className="px-[1vw] py-[1vh] text-left">{item.state}</td>
+                  <td className="px-[1vw] py-[1vh] text-left">${item.calculatedRate}</td>
                 </tr>
               ))}
             </tbody>
@@ -169,74 +169,74 @@ const Dropdown = () => {
       )}
 
       <div className="my-6">
-        <label className="block text-lg font-medium text-gray-700 mb-2">
+        <label className="block text-[1.12vw] font-medium text-gray-700 mb-[1vh]">
           Select Fuel Type
         </label>
         <select
           value={fuelType}
           onChange={(e) => setFuelType(e.target.value)}
-          className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="block w-full px-[1vw] py-[1vh] border lg:text-[0.8vw] border-gray-300 rounded-[0.375vw] shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
         >
-          <option value="Gasoline">Gasoline</option>
-          <option value="Hybrid">Hybrid</option>
+          <option value="Gasoline" className="text-[0.8vw]">Gasoline</option>
+          <option value="Hybrid" className="text-[0.8vw]">Hybrid</option>
         </select>
       </div>
 
-      <div className="mt-6 p-6 bg-white rounded-lg shadow-xl border border-gray-200">
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+      <div className="mt-[3.2vh] p-[1.5vw] bg-white rounded-[0.5vw] shadow-xl border border-gray-200">
+        <h3 className="text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh]">
           Fees & Calculations
         </h3>
-        <div className="space-y-3">
-          <div className="flex justify-between">
-            <span className="text-sm text-gray-700">Processing Fee:</span>
-            <span className="text-sm font-medium text-gray-800">
+        <div className="space-y-3 ">
+          <div className="flex justify-between ">
+            <span className="text-[0.875vw] text-gray-700">Processing Fee:</span>
+            <span className="text-[0.875vw] font-medium text-gray-800">
               ${calculateProcessingFee().toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-700">Bank Transfer Fee:</span>
-            <span className="text-sm font-medium text-gray-800">
+            <span className="text-[0.875vw] text-gray-700">Bank Transfer Fee:</span>
+            <span className="text-[0.875vw] font-medium text-gray-800">
               ${calculateBankTransferFee().toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-700">Custom Duty Fee:</span>
-            <span className="text-sm font-medium text-gray-800">
+            <span className="text-[0.875vw] text-gray-700">Custom Duty Fee:</span>
+            <span className="text-[0.875vw] font-medium text-gray-800">
               ${calculateCustomsDuty().toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-700">Levy Fee:</span>
-            <span className="text-sm font-medium text-gray-800">
+            <span className="text-[0.875vw] text-gray-700">Levy Fee:</span>
+            <span className="text-[0.875vw] font-medium text-gray-800">
               ${calculateLevyFee().toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-sm text-gray-700">VAT Base:</span>
-            <span className="text-sm font-medium text-gray-800">
+            <span className="text-[0.875vw] text-gray-700">VAT Base:</span>
+            <span className="text-[0.875vw] font-medium text-gray-800">
               ${calculateVATBase().toFixed(2)}
             </span>
           </div>
-          <div className="flex justify-between border-t border-gray-300 pt-3">
-            <span className="text-lg font-semibold text-gray-900">
+          <div className="flex justify-between border-t border-gray-300 pt-[1.5vh]">
+            <span className="text-[1.125vw] font-semibold text-gray-900">
               Transportation Fee:
             </span>
-            <span className="text-lg font-semibold text-gray-900">
+            <span className="text-[1.125vw] font-semibold text-gray-900">
               ${selectedItem ? selectedItem.calculatedRate : 0}
             </span>
           </div>
           <div className="flex justify-between border-t border-gray-300 pt-3">
-            <span className="text-lg font-semibold text-gray-900">
+            <span className="text-[1.125vw] font-semibold text-gray-900">
               Total Price:
             </span>
-            <span className="text-lg font-semibold text-gray-900">
+            <span className="text-[1.125vw] font-semibold text-gray-900">
               ${calculateTotal().toFixed(2)}
             </span>
           </div>
         </div>
 
         <div className="mt-6">
-          <label className="block text-sm font-medium text-gray-900 mb-2">
+          <label className="block text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
             Enter Your Final Bid
           </label>
           <input
@@ -244,7 +244,7 @@ const Dropdown = () => {
             value={finalBid}
             onChange={handleBidChange}
             placeholder="Enter bid amount"
-            className="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="block w-full lg:text-[0.875vw] px-[1vw] py-[1.5vh] border border-gray-300 rounded-[0.375vw] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
           />
         </div>
       </div>
