@@ -120,7 +120,7 @@ html, body {
   
   @media (min-width: 1025px) {
     .back-image{
-      position: relative;
+      position: absolute;
       background-image: url( '../src/assets/BG-Img/IMG\ \(26\).png'); /* Update the image path as necessary */
       background-size: cover;
       background-repeat: no-repeat;

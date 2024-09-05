@@ -36,14 +36,14 @@ const CarReportViewer = ({ vin }) => {
          Report
        </h2>
     {loading && (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-[400px]">
         <FaSpinner className="animate-spin text-blue-500 text-4xl" />
         <p className="ml-2 text-blue-500">Loading PDF...</p>
       </div>
     )}
 
     {error && (
-      <div className="text-red-500 bg-red-100 p-2 rounded-lg">
+      <div className="text-red-500 p-2 flex justify-center items-center rounded-lg h-[400px]">
         {error}
       </div>
     )}

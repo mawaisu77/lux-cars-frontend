@@ -13,7 +13,7 @@ const BidHistory = ({data}) => {
       }, [data.lot_id]);
     
   return (
-    <div className='max-h-[400px] overflow-y-scroll shadow-md p-6 '>
+    <div className='h-[400px] overflow-y-scroll flex justify-center items-center shadow-md p-6 '>
      <div className=''>
 
       {loadingBidHistory ? (

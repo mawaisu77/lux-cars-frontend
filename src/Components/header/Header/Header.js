@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img1 from '../../../assets/Logo/Horizontal0 1.png';
 import { FaTimes, FaBars } from 'react-icons/fa';
@@ -16,6 +16,8 @@ const Header = () => {
   const {user} = useAuthContext()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [navbarColor, setNavbarColor] = useState('transparent');
+
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
@@ -35,17 +37,49 @@ const Header = () => {
     document.getElementById("my_logout_modal").close();
   }
 
-  console.log("Navbar user", user)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setNavbarColor('#00000096'); 
+      } else {
+        setNavbarColor('transparent'); 
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   
   return (
-    <div className='border-b border-[#7A798A] w-full z-50 '>
+    <div className='fixed border-b border-[#7A798A] w-full z-50 '
+    style={{ backgroundColor: navbarColor, transition: 'background-color 0.5s ease-in-out' }}
+    >
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>
         <div className='flex items-center gap-4'>
-          <Link to="/">
-          <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
-          </Link>
+          {
+            isHomePage && navbarColor === "transparent" ? (
+              <Link to="/">
+              <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
+              </Link>
+            ) : (
+              <Link to="/">
+              <img
+                src={"https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"}
+                className="w-[142px] lg:w-[13.58vw] h-auto"
+                alt={`Logo`}
+                />
+            </Link>
+            )
+          }
+      
+   
+         
+           
           <div className='hidden lg:flex'>
-          <ul className={`flex gap-[1.5vw] font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>              
+          <ul className={`flex gap-[1.5vw] font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${isHomePage ? 'text-[#7A798A]' : 'text-white'} ${navbarColor==="transparent"?"":"text-white"}`}>              
             <Link to="/how-works">
                 <li>How it works</li>
               </Link>
@@ -78,7 +112,7 @@ const Header = () => {
       <div className='flex justify-center items-center gap-[1vw]  '>
  
         
-          <IoGlobeSharp   onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}  w-[1.3vw] h-[2.7vh]` } />
+          <IoGlobeSharp   onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'} ${navbarColor==="transparent"?"":"text-white"} w-[1.3vw] h-[2.7vh]` } />
       </div>
       {dropdownOpen && (
         <div className="origin-top-right absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
@@ -99,23 +133,23 @@ const Header = () => {
         </div>
       )}
     </div>
-          <Link to="/user/profile" className={` ${isHomePage ? 'text-[#7A798A] block' : 'text-white'}`} ><HiUsers/></Link>
+          <Link to="/user/profile" className={` ${isHomePage ? 'text-[#7A798A] block' : 'text-white'} ${navbarColor==="transparent"?"":"text-white"}`} ><HiUsers/></Link>
           
           {
             !user ? (
             <>
           <Link to="/login">
-            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>login</button>
+            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'} ${navbarColor==="transparent"?"":"text-white"}`}>login</button>
           </Link>
           <div className={`  ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>
             /
           </div>
           <Link to="/signup">
-            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`}>sign-up</button>
+            <button className={` focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'} ${navbarColor==="transparent"?"":"text-white"}`}>sign-up</button>
           </Link>
             </>) : (
               <>
-            <button className={`focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'}`} onClick={handleLogoutModal}>logout</button>
+            <button className={`focus:outline-none ${isHomePage ? 'text-[#7A798A]' : 'text-white'} ${navbarColor==="transparent"?"":"text-white"}`} onClick={handleLogoutModal}>logout</button>
               </>
             )
           }
