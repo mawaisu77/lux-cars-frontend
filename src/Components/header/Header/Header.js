@@ -49,10 +49,14 @@ const Header = () => {
             <Link to="/how-works">
                 <li>How it works</li>
               </Link>
+              <Link to="/Fees">
               <li className='flex items-center'>
                Fees
                 {/* Delivery Time <TiArrowSortedDown /> */}
               </li>
+              
+              </Link>
+              
               <Link to="/about">
                 <li>{t('navbar.about')}</li>
               </Link>
@@ -71,7 +75,7 @@ const Header = () => {
         <div className='hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]'>
         <div className="relative inline-block text-left">
        
-      <div className='flex justify-center items-center gap-[1vw] items-center '>
+      <div className='flex justify-center items-center gap-[1vw]  '>
  
         
           <IoGlobeSharp   onClick={() => setDropdownOpen(!dropdownOpen)} className={` cursor-pointer ${isHomePage ? 'text-[#7A798A]' : 'text-white'}  w-[1.3vw] h-[2.7vh]` } />
@@ -120,8 +124,8 @@ const Header = () => {
             Try Demo
           </button>
         </div>
-        <div className='lg:hidden flex items-center'>
-          <button onClick={toggleMenu} className='focus:outline-none'>
+        <div className="lg:hidden flex items-center">
+          <button onClick={toggleMenu} className="focus:outline-none">
             {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
         </div>
@@ -153,7 +157,7 @@ const Header = () => {
               <Link to="/signup" onClick={toggleMenu}>
                 <button className='focus:outline-none'>sign-up</button>
               </Link>
-              <button className='w-[132px] lg:w-[7.333333333333334vw]  h-[32px] lg:h-[5.23vh] bg-[#ca0000] text-white rounded-full lg:text-[0.8vw] focus:outline-none'>
+              <button className="w-[132px] lg:w-[7.333333333333334vw]  h-[32px] lg:h-[5.23vh] bg-[#ca0000] text-white rounded-full lg:text-[0.8vw] focus:outline-none">
                 Try Demo
               </button>
             </div>

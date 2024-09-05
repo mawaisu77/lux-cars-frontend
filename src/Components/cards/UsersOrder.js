@@ -1,6 +1,6 @@
 import React from "react";
 import image1 from "../../assets/User-pics/IMG (48).png";
-import { UserOrder } from "../../data/data.js";
+import  {UserOrder}  from "../../data/data.js";
 
 const UsersOrder = () => {
   const getStatusBgColor = (status) => {

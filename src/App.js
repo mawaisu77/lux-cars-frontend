@@ -1,3 +1,6 @@
+ 
+ 
+import Fees from './Components/fees/index.js';
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -91,7 +94,7 @@ function App() {
     }
   };
   return (
-    <>
+     <>
    
       <Router>
       <div>
@@ -166,6 +169,7 @@ function App() {
                 <HowWorks />
               }
             />
+            <Route path="/Fees" element={<Fees />} />
             <Route
               path="/help"
               element={
