@@ -190,6 +190,8 @@ const CarCard = ({ card, isBuy = false }) => {
     
     </div>
      {/* Render ImageViewer outside the card's container using a portal */}
+
+     
      {isViewerOpen &&
         ReactDOM.createPortal(
           <ImageViewer
