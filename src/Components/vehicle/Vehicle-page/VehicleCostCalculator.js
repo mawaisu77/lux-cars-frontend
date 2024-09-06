@@ -84,11 +84,11 @@ const Dropdown = ({ bidAmount }) => {
 
   return (
     <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
-      <h2 className="text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
+      <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
         Calculations
       </h2>
      
-      <h3 className="text-[1.15vw] text-left font-semibold text-gray-900 mb-[1.1vh]">
+      <h3 className="text-lg lg:text-[1.15vw] text-left font-semibold rounded-[0.5vw] text-gray-900 mb-[1.1vh]">
         Select Vehicle Category
       </h3>
 
@@ -97,12 +97,12 @@ const Dropdown = ({ bidAmount }) => {
         value={selectedCategory}
         onChange={handleCategoryChange}
         placeholder="Select Category"
-        className="mb-4"
+        className="mb-[2vh]  text-md lg:text-[1vw] rounded-[0.5vw]"
       />
 
       {selectedCategory && (
         <>
-           <h3 className="text-[1.15vw] text-left font-semibold text-gray-900 mb-[1.1vh]">
+           <h3 className="text-lg lg:text-[1.15vw] text-left py-[0.4vw] font-semibold rounded-[0.5vw] text-gray-900 mb-[1.1vh]">
            Select Transportation Fee
            </h3>
 
@@ -111,14 +111,14 @@ const Dropdown = ({ bidAmount }) => {
             value={selectedTransportation}
             onChange={setSelectedTransportation}
             placeholder="Select Transportation"
-            className="mb-4"
+           className="mb-[2vh]  text-md lg:text-lg lg:text-[1vw]  rounded-[0.5vw]"
           />
         </>
       )}
 
-      <div className="my-6">
+      <div className="my-[3vh]">
        
-        <h3 className="text-[1.15vw] text-left font-semibold text-gray-900 mb-[1.1vh]">
+      <h3 className="text-lg lg:text-[1.15vw] text-left font-semibold rounded-[0.5vw]  text-gray-900 mb-[1.1vh]">
           Select Fuel Type
        </h3>
 
@@ -127,44 +127,44 @@ const Dropdown = ({ bidAmount }) => {
           value={selectedFuelType}
           onChange={setSelectedFuelType}
           placeholder="Select Fuel Type"
-          className="mb-4"
+          className="mb-[2vh]  text-md lg:text-[1vw] py-[0.4vw]  rounded-[0.5vw]"
         />
       </div>
 
-      <div className="mt-[3.2vh] p-[1.5vw] bg-white rounded-[0.5vw] shadow-xl border border-gray-200">
-        <h3 className="text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh]">
+      <div className="mt-[3.2vh] p-[1.5vw] bg-white rounded-[0.5vw] shadow-xl leading-[4vh] border border-gray-200">
+        <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh]">
           Fees & Calculations
         </h3>
         <div className="space-y-3">
           <div className="flex justify-between">
-            <span className="text-[0.875vw] text-gray-700">Your Final Bid:</span>
-            <span className="text-[0.875vw] font-medium text-gray-800">
+            <span className="text-md lg:text-[0.875vw] text-gray-700">Your Final Bid:</span>
+            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
               ${finalBid}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[0.875vw] text-gray-700">Processing Fee:</span>
-            <span className="text-[0.875vw] font-medium text-gray-800">
+            <span className=" text-md lg:text-[0.875vw] text-gray-700">Processing Fee:</span>
+            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateProcessingFee().toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[0.875vw] text-gray-700">Customs Duty:</span>
-            <span className="text-[0.875vw] font-medium text-gray-800">
+            <span className="text-md lg:text-[0.875vw] text-gray-700">Customs Duty:</span>
+            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateCustomsDuty().toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[0.875vw] text-gray-700">VAT Base:</span>
-            <span className="text-[0.875vw] font-medium text-gray-800">
+            <span className="text-md lg:text-[0.875vw] text-gray-700">VAT Base:</span>
+            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateVATBase().toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between border-t border-gray-300 pt-3">
-            <span className="text-[1.125vw] font-semibold text-gray-900">
+            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
               Total Price:
             </span>
-            <span className="text-[1.125vw] font-semibold text-gray-900">
+            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
               ${calculateTotal().toFixed(2)}
             </span>
           </div>

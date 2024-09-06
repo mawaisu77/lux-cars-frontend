@@ -94,7 +94,7 @@ const VehicleHero = () => {
       <div className="bg-vehicle">
         <Header textColor="text-white" />
         <div className="w-[15.5] flex flex-col mt-[5.5vh]">
-          <div className="text-[2.6vw] font-semibold text-white">
+          <div className="text-2xl lg:text-[2.6vw] font-semibold text-white">
             Vehicle Detail
           </div>
           <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
@@ -118,12 +118,12 @@ const VehicleHero = () => {
                ValidDate ? (
                   ``
                 ) : (
-                  <div className="bg-[#CA0000] text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
+                  <div className="bg-[#CA0000] text-md lg:text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
                     Preliminary Bidding is Over for this vehicle
                   </div>
                 )
               ) : (
-                <div className="bg-[#217bf0]  text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
+                <div className="bg-[#217bf0]  text-md lg:text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
                   Auction date is not decided yet, Be one on the top of bidding
                   list
                 </div>
@@ -145,10 +145,10 @@ const VehicleHero = () => {
                   <div className="grid  gap-6">
                     {/* Vehicle Info */}
                     <section className="bg-white w-full p-6 rounded-lg shadow-md mt-5">
-                      <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                      <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
                         Vehicle Info
                       </h2>
-                      <div className="space-y-4">
+                      <div className="space-y-[2vh] text-md lg:text-[0.875vw]">
                         <InfoRow
                           label="Title"
                           value={carDetailData?.data?.title || "N/A"}
@@ -186,10 +186,10 @@ const VehicleHero = () => {
 
                     {/* Location */}
                     <section className="bg-white p-6 rounded-lg shadow-md">
-                      <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                      <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
                         Location
                       </h2>
-                      <div className="space-y-4">
+                      <div className="space-y-[2vh] text-md lg:text-[0.875vw]">
                         <InfoRow
                           label="Location"
                           value={carDetailData?.data?.location || "N/A"}
@@ -219,7 +219,7 @@ const VehicleHero = () => {
 
                     <div className="">
                       <div>
-                        <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+                        <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
                           Bid History
                         </h2>
                       </div>
@@ -308,7 +308,7 @@ const VehicleHero = () => {
                           </p>
                         </div>
                         <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                          <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-2">
                             Model:
                           </p>
                           <p className="font-urbanist font-bold text-[0.97vw] ml-2">
@@ -319,7 +319,7 @@ const VehicleHero = () => {
                       <div className="flex flex-col  w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
                         <div className="flex flex-col bg-[#f8f8f8] px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
                           <div className="flex items-center">
-                            <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-[0.5vw]">
+                            <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
                               Current Bid:
                             </p>
 
@@ -328,10 +328,10 @@ const VehicleHero = () => {
                             </p>
                           </div>
                           <div className="flex items-center">
-                            <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-[0.5vw]">
+                            <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
                               No of Bids :
                             </p>
-                            <p className="font-urbanist font-bold text-[0.97vw] ml-[0.5vw]">
+                            <p className="font-urbanist font-bold text-md lg:text-[0.97vw] ml-[0.5vw]">
                               {carDetailData?.data?.noOfBids}
                             </p>
                           </div>
@@ -361,7 +361,7 @@ const VehicleHero = () => {
                 
 
       <div className="mt-6">
-          <label className="block text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
+          <label className="block text-sm lg:text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
             Enter Your Final Bid
           </label>
           <CurrencyInput
@@ -369,7 +369,7 @@ const VehicleHero = () => {
             name="minPrice"
             placeholder="enter your bid ammount in usd"
             prefix="$"
-            className={`border py-2 px-4 rounded-lg w-full mt-3`}
+            className={`border text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
             defaultValue={0}
             decimalsLimit={2}
             onValueChange={(value) => setPlaceBidAmount(value)}
@@ -386,8 +386,8 @@ const VehicleHero = () => {
                       <ClipLoader color="#ffffff" size={20} />
                     ) : (
                       <>
-                        <TiLockClosed  className="w-[1.3vw] h-[2.8vh]" />
-                        <span className="text-[1.1vw]">PlACE MAX BID</span>
+                        <TiLockClosed  className="lg:w-[1.3vw] lg:h-[2.8vh]" />
+                        <span className="text-md lg:text-[1.1vw]">PlACE MAX BID</span>
                       </>
                     )}
                   </button>
@@ -400,10 +400,10 @@ const VehicleHero = () => {
                   <div className="flex flex-col justify-center gap-y-[2.1vh]">
                     {/* Specifications */}
                     <section className="bg-white p-[1.5vw] rounded-lg shadow-md">
-                      <h2 className="text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
+                      <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                         Specifications
                       </h2>
-                      <div className="space-y-[2vh] text-[0.875vw]">
+                      <div className=" space-y-[2vh] text-md lg:text-lg lg:text-[0.875vw]">
                         <InfoRow
                           label="Vehicle Type"
                           value={carDetailData?.data?.vehicle_type || "N/A"}

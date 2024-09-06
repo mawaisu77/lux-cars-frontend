@@ -13,7 +13,7 @@ const BidHistory = ({data}) => {
       }, [data.lot_id]);
     
   return (
-    <div className='h-[400px] overflow-y-scroll flex justify-center items-center shadow-md p-6 '>
+    <div className='h-[400px] overflow-y-scroll flex justify-center items-center shadow-md p-[1.5vw] '>
      <div className=''>
 
       {loadingBidHistory ? (
@@ -25,7 +25,7 @@ const BidHistory = ({data}) => {
               Error loading bid history. Please try again later.
             </div>
           ) : bidHistory?.data?.length === 0 ? (
-            <div className="text-center text-gray-500">
+            <div className="text-center text-sm lg:text-[0.875vw] text-gray-500">
               No bid history available.
             </div>
           ) : (

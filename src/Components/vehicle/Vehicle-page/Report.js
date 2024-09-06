@@ -31,19 +31,19 @@ const CarReportViewer = ({ vin }) => {
 
 
   return (
-    <div className="mt-4 shadow-md rounded-md p-6">
-       <h2 className="text-2xl font-semibold bg-gray-300 mb-4 border-b-2 border-gray-200 p-2 rounded-md">
+    <div className=" mt-[2vh] shadow-md rounded-[0.375vw] w-[full]   bg-white p-[1.5vw]">
+      <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
          Report
        </h2>
     {loading && (
-      <div className="flex items-center justify-center h-[400px]">
-        <FaSpinner className="animate-spin text-blue-500 text-4xl" />
+      <div className="flex  items-center justify-center h-[54vh]">
+        <FaSpinner className="animate-spin text-blue-500 text-[2.25vw]" />
         <p className="ml-2 text-blue-500">Loading PDF...</p>
       </div>
     )}
 
     {error && (
-      <div className="text-red-500 p-2 flex justify-center items-center rounded-lg h-[400px]">
+      <div className="text-red-500 p-[0.5vw] flex justify-center items-center rounded-[0.5vw] h-[56vh]">
         {error}
       </div>
     )}
@@ -51,7 +51,7 @@ const CarReportViewer = ({ vin }) => {
     {!loading && !error && carReport && (
       <div>
           <div className="relative">
-          <div className="h-[570px] overflow-hidden border border-gray-300 rounded-lg p-2">
+          <div className="h-[570px] overflow-hidden border border-gray-300 rounded-[0.5vw] p-[0.5vw]">
             <Document file={carReport}>
               <Page pageNumber={1}  />
             </Document>
