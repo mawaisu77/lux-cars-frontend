@@ -19,7 +19,7 @@ const About = () => {
   return (
     <div className="">
     
-    <AboutHero/>
+      <AboutHero/>
       <AboutValue/>
       <AbouTeam/>
       <AboutChoice/>
