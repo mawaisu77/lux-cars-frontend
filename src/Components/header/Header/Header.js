@@ -40,7 +40,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setNavbarColor('#00000096'); 
+        setNavbarColor('#000000bb'); 
       } else {
         setNavbarColor('transparent'); 
       }
@@ -54,7 +54,7 @@ const Header = () => {
   }, []);
   
   return (
-    <div className='fixed border-b border-[#7A798A] w-full z-50 '
+    <div className='fixed top-0 border-b border-[#7A798A] w-full z-50 '
     style={{ backgroundColor: navbarColor, transition: 'background-color 0.5s ease-in-out' }}
     >
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>

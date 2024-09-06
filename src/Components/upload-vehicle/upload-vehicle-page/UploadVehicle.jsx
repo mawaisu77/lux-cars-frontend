@@ -483,23 +483,19 @@ const UploadVehicle = () => {
   return (
     <div className="">
       <Header className="text-white" />
-      {/* <div className="back-image ">
-        <div className="hidden  lg:block">
-          <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">
-              Upload Your Vehicle
-            </div>
-
-            <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist ">
-              <Link to="/">
-                <button className="hover:text-white  ">Home</button>
-              </Link>
-              /<button className="hover:text-white">Sell A car</button>/
-              <button className="hover:text-white">Upload Vehicle</button>
-            </div>
+      <div className="bg-vehicle">
+        <div className="w-[15.5] flex flex-col pt-[12.5vh]">
+          <div className="text-[2.6vw] font-semibold text-white">
+            Vehicle Detail
+          </div>
+          <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
+              <button className="hover:text-white">Home</button>
+            </Link>
+            /<button className="hover:text-white">Vehicle Detail</button>
           </div>
         </div>
-      </div> */}
+      </div>
 
       <div className="pt-44 md:w-[1200px] mx-auto md:bg-white">
         <form

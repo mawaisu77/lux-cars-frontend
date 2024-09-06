@@ -277,10 +277,10 @@ const Sidebar = () => {
             className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200"
           >
             <div
-              className="flex items-center justify-between cursor-pointer"
+              className="flex items-center justify-between cursor-pointer "
               onClick={() => toggleDropdown(dropdownKey)}
             >
-              <h1 className="text-[1.3vw] text-left font-bold mb-[0.729vw]">
+              <h1 className="text-[1.3vw]  text-left font-bold mb-[0.729vw]">
                 {dropdownKey.charAt(0).toUpperCase() + dropdownKey.slice(1)}
               </h1>
               <svg
@@ -316,7 +316,7 @@ const Sidebar = () => {
                       }
                       value={id}
                       onChange={() => handleFilterChange(dropdownKey, id)}
-                      className="form-checkbox h-[1.5vw] w-[1.5vw] text-blue-600"
+                      className="form-checkbox h-[3.5vw] w-[1.5vw] text-blue-600"
                       checked={
                         dropdownKey === "make"
                           ? selectedMake === id

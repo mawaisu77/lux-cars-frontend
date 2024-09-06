@@ -17,7 +17,7 @@ import React from 'react'
 const Home = () => {
   return (
     <>
-   <Header/>
+    <Header/>
     <Bid/>
     <Top/>
     <BuyNow/>

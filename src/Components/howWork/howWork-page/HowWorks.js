@@ -11,10 +11,10 @@ import icon5 from "../../../assets/Order_history.svg";
 const HowWorks = () => {
   return (
     <>
-     <div className="Backgroundimage-How relative">
       <Header className="" />
+     <div className="Backgroundimage-How relative">
       <div className="hidden lg:block">
-        <div className="w-[15.5] flex flex-col mt-[5.5vh]">
+        <div className="w-[15.5] flex flex-col pt-[12.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">
             How It Works
           </div>
