@@ -481,10 +481,10 @@ const UploadVehicle = () => {
   }, [dealerData, user]);
 
   return (
-    <div>
-      <div className="back-image ">
-        <Header className="text-white" />
-        <div className="hidden   lg:block">
+    <div className="">
+      <Header className="text-white" />
+      {/* <div className="back-image ">
+        <div className="hidden  lg:block">
           <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
             <div className="text-[2.6vw] font-semibold text-white">
               Upload Your Vehicle
@@ -499,9 +499,9 @@ const UploadVehicle = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className=" md:w-[1200px] mx-auto  md:bg-white">
+      <div className="pt-44 md:w-[1200px] mx-auto md:bg-white">
         <form
           className=" flex flex-col mx-10 items-start gap-y-6"
           onSubmit={handleSubmit}

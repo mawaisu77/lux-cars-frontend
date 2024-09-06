@@ -358,11 +358,29 @@ const VehicleHero = () => {
                     </div>
                   </div>
 
-                  <button
+                
+
+      <div className="mt-6">
+          <label className="block text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
+            Enter Your Final Bid
+          </label>
+          <CurrencyInput
+            id="input-example"
+            name="minPrice"
+            placeholder="enter your bid ammount in usd"
+            prefix="$"
+            className={`border py-2 px-4 rounded-lg w-full mt-3`}
+            defaultValue={0}
+            decimalsLimit={2}
+            onValueChange={(value) => setPlaceBidAmount(value)}
+          />
+        </div>
+
+          <button
                     onClick={() =>
-                      document.getElementById("my_modal_1").showModal()
+                      document.getElementById("my_modal_2").showModal()
                     }
-                    className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105 w-full"
+                    className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
                   >
                     {placeBidloading ? (
                       <ClipLoader color="#ffffff" size={20} />
@@ -373,8 +391,10 @@ const VehicleHero = () => {
                       </>
                     )}
                   </button>
+
+
                   <div className="">
-                    <VehicleCostCalculator />
+                    <VehicleCostCalculator bidAmount={placeBidAmount} />
                   </div>
 
                   <div className="flex flex-col justify-center gap-y-[2.1vh]">

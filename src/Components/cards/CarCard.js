@@ -92,7 +92,7 @@ const CarCard = ({ card, isBuy = false }) => {
               <BsHeart
                 onClick={() => handleSaveClick(card.lot_id)}
                 size={23}
-                className=" cursor-pointer text-white"
+                className=" cursor-pointer text-white hover:text-red-600"
               />
             </div>
           )}
