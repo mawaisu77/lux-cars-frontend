@@ -461,14 +461,11 @@ const VehicleHero = () => {
 
       {carDetailData && (
         <div className="md:mt-44 mt-20">
-          <p className="text-[2.3vw] font-urbanist font-bold">
-            Similar Listings
-          </p>
-          <hr className="h-1 bg-[#ca0000] mt-[15px]  w-20 mx-auto" />
-
           <VehicleCards carData={carDetailData.data} />
         </div>
       )}
+
+
 
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
