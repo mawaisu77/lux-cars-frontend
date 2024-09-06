@@ -381,19 +381,19 @@ html, body {
   border-radius: 0.25em;
 }
 
-/* .form-checkbox::before { */
-  /* content: "";
+.form-checkbox::before { 
+  content: "";
   width: 0.75em;
   height: 0.75em;
   transform: scale(0);
-  transition: transform 120ms ease-in-out; */
-  /* box-shadow: inset 1em 1em rgb(255, 0, 0);  */
-  /* clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 0, 80% 0, 38% 70%); */
-/* } */
+  transition: transform 120ms ease-in-out; 
+  box-shadow: inset 1em 1em rgb(255, 0, 0); 
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 0, 80% 0, 38% 70%);
+ }
 
-/* .form-checkbox:checked::before {
+ .form-checkbox:checked::before {
   transform: scale(1);
-} */
+}
 
 .switch input { 
   opacity: 0;
