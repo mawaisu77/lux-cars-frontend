@@ -145,7 +145,7 @@ const VehicleHero = () => {
                   <div className="grid  gap-6">
                     {/* Vehicle Info */}
                     <section className="bg-white w-full p-6 rounded-lg shadow-md mt-5">
-                      <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
+                    <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
                         Vehicle Info
                       </h2>
                       <div className="space-y-[2vh] text-md lg:text-[0.875vw]">
@@ -186,7 +186,7 @@ const VehicleHero = () => {
 
                     {/* Location */}
                     <section className="bg-white p-6 rounded-lg shadow-md">
-                      <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
+                    <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
                         Location
                       </h2>
                       <div className="space-y-[2vh] text-md lg:text-[0.875vw]">
@@ -290,7 +290,7 @@ const VehicleHero = () => {
                           </p>
                         </div>
                         <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                          <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-2">
                             VIN :
                           </p>
                           <p className="font-urbanist font-bold text-[0.97vw] ml-2">
@@ -298,7 +298,7 @@ const VehicleHero = () => {
                           </p>
                         </div>
                         <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                          <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-2">
                             Year/Make :
                           </p>
                           <p className="font-urbanist font-bold text-[0.97vw] ml-2">
@@ -403,7 +403,7 @@ const VehicleHero = () => {
                       <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                         Specifications
                       </h2>
-                      <div className=" space-y-[2vh] text-md lg:text-lg lg:text-[0.875vw]">
+                      <div className=" space-y-[2vh] text-md lg:text-[0.875vw]">
                         <InfoRow
                           label="Vehicle Type"
                           value={carDetailData?.data?.vehicle_type || "N/A"}

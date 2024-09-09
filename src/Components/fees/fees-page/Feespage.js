@@ -42,7 +42,7 @@ function Feespage() {
         </div>
       </div>
 
-      <div className=" px-[10px] md:px-[0px] w-[100%] md:w-[80vw]  lg:w-[73.177vw]  mx-auto md:mt-[7.813vh] mt-[64px] mb-[64px] :md:mb-[7.813vh] ">
+      <div className=" px-[10px] md:px-[0px] w-[100%] md:w-[80vw]  lg:w-[73.177vw]  mx-auto md:mt-[7.813vh] mt-[100px] mb-[64px] :md:mb-[7.813vh] ">
         <div className="md:flex md:justify-between ">
           <div className=" w-[100%] md:w-[44vw] lg:w-[38.073vw] ">
             <div className="">

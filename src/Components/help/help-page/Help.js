@@ -60,7 +60,7 @@ const Help = () => {
       </div>
     </div>
             <div className="h-[2000px] lg:h-[100vh] w-[342px]   md:w-[500px] lg:w-[74vw] mx-auto">
-                <div className="flex flex-col mx-auto mt-[40px] lg:mt-[8.6vh] w-[342px]   md:w-full  lg:w-[33vw]">
+                <div className="flex flex-col mx-auto mt-[100px] lg:mt-[8.6vh] w-[342px]   md:w-full  lg:w-[33vw]">
                     <p className=" text-[30px] lg:text-[1.7vw]  font-bold font-urbanist">
                         How Can We Help You?
                     </p>
