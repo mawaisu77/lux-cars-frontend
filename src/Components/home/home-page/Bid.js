@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import img1 from "../../../assets/Home/Ellipse 2.png";
 import img2 from "../../../assets/Home/Ellipse 3.png";
 import img3 from "../../../assets/Home/Ellipse 4.png";
@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import ReactSelect from "react-select";
 import { ClipLoader } from "react-spinners";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import audioFile from "../../../assets/engine.wav"; // Import the audio file
 
 const Bid = () => {
   const [selectedMake, setSelectedMake] = useState(null);
@@ -24,6 +25,7 @@ const Bid = () => {
   const [yearTo, setYearTo] = useState(null);
   // const currentYear = new Date().getFullYear();
   const navigate = useNavigate(); // Initialize useNavigate
+  const audioRef = useRef(new Audio(audioFile));
 
   const { carData, loading, error } = useCarMakesModels();
 
@@ -124,6 +126,9 @@ const Bid = () => {
     }),
   };
 
+  const playAudio = () => {
+    audioRef.current.play();
+  };
 
   return (
     <>
@@ -140,7 +145,7 @@ const Bid = () => {
               temporibus sed quaerat
             </div>
             <AnchorLink href="#startBidding">
-              <button className="bg-[#ca0000] hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center lg:text-[1vw] px-[1.3vw]   my-[2vh]">
+              <button onClick={playAudio}  className="bg-[#ca0000] hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center lg:text-[1vw] lg:px-[1.3vw] h-[5.284vh] my-[2vh]">
                 Start Bidding
               </button>
             </AnchorLink>
