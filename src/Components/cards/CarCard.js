@@ -195,6 +195,10 @@ const CarCard = ({ card, isBuy = false }) => {
      {isViewerOpen &&
         ReactDOM.createPortal(
           <ImageViewer
+          backgroundStyle={{
+            zIndex:50
+           }}
+            disableScroll
             src={card.images}
             currentIndex={currentImage}
             onClose={closeImageViewer}

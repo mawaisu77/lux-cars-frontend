@@ -12,7 +12,7 @@ import CarCard from "./CarCard";
 
 const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars/testing"
+    "cars/get-all-cars"
   );
   console.log("first", carData);
   if (carLoading) {
