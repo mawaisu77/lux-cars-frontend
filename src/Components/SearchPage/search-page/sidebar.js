@@ -270,7 +270,7 @@ const Sidebar = () => {
 
   return (
     <div className="flex justify-center gap-[3vw] w-[80vw]  mx-auto font-urbanist">
-      <div className="fixed lg:relative mt-[2.604vw] bg-[#1c181840]/10 lg:bg-white z-30 lg:z-0 lg:w-[17vw] shadow-xl rounded-lg">
+      {/* <div className="fixed lg:relative mt-[2.604vw] bg-[#1c181840]/10 lg:bg-white z-30 lg:z-0 lg:w-[17vw] shadow-xl rounded-lg">
         {Object.keys(dropdownData).map((dropdownKey) => (
           <div
             key={dropdownKey}
@@ -430,7 +430,7 @@ const Sidebar = () => {
             Reset Filters
           </button>
         </div>
-      </div>
+      </div> */}
       <div className=" w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex flex-col items-center">
         <SearchMainPage
          resetFilters={resetFilters}
