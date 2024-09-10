@@ -37,7 +37,6 @@ const Bid = () => {
     }
     return years;
   };
-
   const yearOptions = generateYearOptions(1980);
 
   const handleMakeChange = (selectedOption) => {
@@ -53,6 +52,10 @@ const Bid = () => {
 
   const handleYearFromChange = (selectedOption) => {
     setYearFrom(selectedOption);
+    // Reset yearTo if it's now invalid (less than yearFrom)
+  if (selectedOption && yearTo && selectedOption.value > yearTo.value) {
+    setYearTo(null); // Clear the "To" dropdown if it's invalid
+  }
   };
 
   const handleYearToChange = (selectedOption) => {
@@ -101,6 +104,8 @@ const Bid = () => {
       backgroundColor: "transparent",
       border: "1px solid #ccc",
       boxShadow: "none",
+      
+
     }),
     menu: (base) => ({
       ...base,
@@ -129,6 +134,11 @@ const Bid = () => {
   const playAudio = () => {
     audioRef.current.play();
   };
+
+  // Filter "To" options based on the selected "From" year
+const filteredYearToOptions = yearFrom
+? yearOptions.filter((option) => option.value >= yearFrom.value)
+: yearOptions;
 
   return (
     <>
@@ -241,22 +251,24 @@ const Bid = () => {
               </div>
 
               <div className="flex gap-x-2 justify-between items-center  w-[12vw] text-left">
+               {/* Dropdown for Year From */}
                 <div className="flex flex-col justify-center items-center border-r w-[12vw] text-left">
                   <p className="text-[1.17vw] font-urbanist font-semibold">
                    From
                   </p>
                   <ReactSelect
+                  
                     styles={customStyles}
                     value={yearFrom}
                     onChange={handleYearFromChange}
                     options={yearOptions}
-                    isClearable
+                    isClearable={false}
                     placeholder="YYYY"
                     className={`${error ? "hidden" : "block"}`}
                   />
                 </div>
 
-                {/* Dropdown for Year From */}
+                {/* Dropdown for Year To */}
                 <div className="flex flex-col justify-center items-center border-r w-[12vw] text-left">
                   <p className="text-[1.17vw] font-urbanist font-semibold">
                    To
@@ -265,14 +277,13 @@ const Bid = () => {
                     styles={customStyles}
                     value={yearTo}
                     onChange={handleYearToChange}
-                    options={yearOptions}
-                    isClearable
+                    options={filteredYearToOptions}  
+                    isClearable={false}
                     placeholder="YYYY"
                     className={`${error ? "hidden" : "block"}`}
                   />
                 </div>
               </div>
-
               <div
                 onClick={handleSearch}
                 className="self-end mb-[1.5vh] group flex h-[6.23vh] w-[3.5vw] justify-center items-center bg-[#ca0000] rounded-xl"

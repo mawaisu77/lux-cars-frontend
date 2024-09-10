@@ -26,11 +26,12 @@ import CarReportViewer from "./Report";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
-  const [placeBidAmount, setPlaceBidAmount] = useState(0);
   const [shouldRefetch, setShouldRefetch] = useState(false);
-
+  
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-    useGetCarDetail(`cars/get-car-by-lot-id/testing?lot_id=${lotID}`);
+  useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
+  
+  const [placeBidAmount, setPlaceBidAmount] = useState(0);
 
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
@@ -66,6 +67,13 @@ const VehicleHero = () => {
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
+     // Update placeBidAmount when carDetailData?.data?.currentBid changes
+  useEffect(() => {
+    if (carDetailData?.data?.currentBid) {
+      setPlaceBidAmount(carDetailData?.data?.currentBid);
+    }
+  }, [carDetailData?.data?.currentBid]);
+
   useEffect(() => {
     fetchCarDetail();
   }, [fetchCarDetail]);
@@ -91,7 +99,7 @@ const VehicleHero = () => {
 
   return (
     <>
-    <Header textColor="text-white" />
+      <Header textColor="text-white" />
       <div className="bg-vehicle">
         <div className="w-[15.5] flex flex-col pt-[12.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">
@@ -115,7 +123,7 @@ const VehicleHero = () => {
           {carDetailData && (
             <>
               {carDetailData.data.auction_date ? (
-               ValidDate ? (
+                ValidDate ? (
                   ``
                 ) : (
                   <div className="bg-[#CA0000] text-md lg:text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
@@ -217,6 +225,7 @@ const VehicleHero = () => {
                       </div>
                     </section>
 
+                    {/* Bid history */}
                     <div className="">
                       <div>
                         <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
@@ -225,6 +234,7 @@ const VehicleHero = () => {
                       </div>
                       <BidHistory data={carDetailData?.data} />
                     </div>
+
                   </div>
                 </div>
 
@@ -232,19 +242,6 @@ const VehicleHero = () => {
                   <div>
                     <div className="flex justify-between mb-[3vh]">
                       <div className="flex justify-center items-center gap-2">
-                        <img
-                          src={
-                            carDetailData?.data?.base_site === "iaai"
-                              ? logo
-                              : image31
-                          }
-                          className="w-[2.9vw] h-[4vh]"
-                          alt="basesite_img"
-                        />
-                        <p className="w-[1.69vw] h-[3.79vh] font-urbanist text-white bg-[#47a432] text-[1.1vw] rounded-full font-bold">
-                          R
-                        </p>
-
                         <p className="text-[1.7vw] font-urbanist font-semibold ">
                           {carDetailData?.data?.title}
                         </p>
@@ -253,7 +250,10 @@ const VehicleHero = () => {
                     <div className="flex justify-between mb-[3vh]">
                       <div className="flex px-[0.5vw] gap-[0.5vw] items-center w-[16vw] h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
                         <div className="flex justify-center items-center rounded-[0.5vw] w-[2.5vw] h-[5vh] bg-[#CA0000]">
-                          <PiUsersFill color="white" className="w-[1.2vw] h-[2.5vh]" />
+                          <PiUsersFill
+                            color="white"
+                            className="w-[1.2vw] h-[2.5vh]"
+                          />
                         </div>
                         <div className="text-left">
                           <p className="text-[0.7vw] text-[#7a798a]">
@@ -265,15 +265,20 @@ const VehicleHero = () => {
                         </div>
                       </div>
                       <div className="flex px-[0.5vw] gap-[0.5vw] items-center w-[16vw] h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
-                      <div className="flex justify-center items-center rounded-[0.5vw] w-[2.5vw] h-[5vh] bg-[#CA0000]">
-                          <CgFileDocument color="white"  className="w-[1.2vw] h-[2.5vh]" />
+                        <div className="flex justify-center items-center rounded-[0.5vw] w-[2.5vw] h-[5vh] bg-[#CA0000]">
+                          <CgFileDocument
+                            color="white"
+                            className="w-[1.2vw] h-[2.5vh]"
+                          />
                         </div>
                         <div className="text-left">
                           <p className="text-[0.7vw] text-[#7a798a]">
                             Sale Document
                           </p>
                           <p className="text-[0.9vw] font-urbanist font-semibold">
-                            {carDetailData?.data?.document_old ? carDetailData?.data?.document_old : carDetailData?.data?.document }
+                            {carDetailData?.data?.document_old
+                              ? carDetailData?.data?.document_old
+                              : carDetailData?.data?.document}
                           </p>
                         </div>
                       </div>
@@ -324,7 +329,7 @@ const VehicleHero = () => {
                             </p>
 
                             <p className="font-urbanist font-bold text-[0.97vw] ml-2">
-                              {carDetailData?.data?.currentBid}
+                              ${carDetailData?.data?.currentBid}
                             </p>
                           </div>
                           <div className="flex items-center">
@@ -332,7 +337,7 @@ const VehicleHero = () => {
                               No of Bids :
                             </p>
                             <p className="font-urbanist font-bold text-md lg:text-[0.97vw] ml-[0.5vw]">
-                              {carDetailData?.data?.noOfBids}
+                              ${carDetailData?.data?.noOfBids}
                             </p>
                           </div>
                         </div>
@@ -358,25 +363,24 @@ const VehicleHero = () => {
                     </div>
                   </div>
 
-                
+                  <div className="mt-6">
+                    <label className="block text-sm lg:text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
+                      Enter Your Final Bid
+                    </label>
+                    <CurrencyInput
+                      id="input-example"
+                      name="minPrice"
+                      placeholder="enter your bid ammount in usd"
+                      prefix="$"
+                      className={`border text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
+                      defaultValue={0}
+                      decimalsLimit={2}
+                      value={placeBidAmount ? placeBidAmount :carDetailData?.data?.currentBid}
+                      onValueChange={(value) => setPlaceBidAmount(value)}
+                    />
+                  </div>
 
-      <div className="mt-6">
-          <label className="block text-sm lg:text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
-            Enter Your Final Bid
-          </label>
-          <CurrencyInput
-            id="input-example"
-            name="minPrice"
-            placeholder="enter your bid ammount in usd"
-            prefix="$"
-            className={`border text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
-            defaultValue={0}
-            decimalsLimit={2}
-            onValueChange={(value) => setPlaceBidAmount(value)}
-          />
-        </div>
-
-          <button
+                  <button
                     onClick={() =>
                       document.getElementById("my_modal_2").showModal()
                     }
@@ -386,12 +390,13 @@ const VehicleHero = () => {
                       <ClipLoader color="#ffffff" size={20} />
                     ) : (
                       <>
-                        <TiLockClosed  className="lg:w-[1.3vw] lg:h-[2.8vh]" />
-                        <span className="text-md lg:text-[1.1vw]">PlACE MAX BID</span>
+                        <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
+                        <span className="text-md lg:text-[1.1vw]">
+                          PlACE MAX BID
+                        </span>
                       </>
                     )}
                   </button>
-
 
                   <div className="">
                     <VehicleCostCalculator bidAmount={placeBidAmount} />
@@ -464,8 +469,6 @@ const VehicleHero = () => {
           <VehicleCards carData={carDetailData.data} />
         </div>
       )}
-
-
 
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
