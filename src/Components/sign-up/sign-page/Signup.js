@@ -67,7 +67,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
-      <div className="h-[730px] lg:h-[85vh] w-full lg:w-[36.1] mx-auto">
+      <div className=" py-[100px] lg:py-[9.3vh] w-full lg:w-[36.1] mx-auto">
         <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">
           Register To LUX CARS
         </div>

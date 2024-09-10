@@ -28,8 +28,8 @@ const HowWorks = () => {
       </div>
     </div>
 
-      <div className=" h-[2510px] lg:h-[150vh] w-full lg:w-[91vw] mx-auto dark">
-        <div className="flex flex-col mx-auto mt-[8.6vh] w-[344px]  lg:w-[33vw]">
+      <div className="   w-full lg:w-[91vw] mx-auto dark">
+        <div className="flex flex-col mx-auto  mt-[100px] lg:mt-[8.6vh] w-[344px]  lg:w-[33vw]">
           <p className="   text-[36px] lg:text-[2vw]  font-bold font-urbanist">
             Step-by-Step Guide for Users{" "}
           </p>

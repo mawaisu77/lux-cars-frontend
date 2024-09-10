@@ -167,7 +167,7 @@ const Header = () => {
       
       {isMenuOpen && (
         <div className='lg:hidden'>
-          <ul className='flex flex-col items-center gap-4 mt-4 font-urbanist font-bold text-[1rem] text-[#7a798a]'>
+          <ul className={`flex flex-col items-center gap-4 mt-4 font-urbanist font-bold text-[1rem] text-[#7a798a] ${isHomePage ? 'text-[#7A798A]' : 'text-white'} ${navbarColor==="transparent"?"":"text-white"}` } >
             <Link to="/how-works" onClick={toggleMenu}>
               <li>How it works</li>
             </Link>

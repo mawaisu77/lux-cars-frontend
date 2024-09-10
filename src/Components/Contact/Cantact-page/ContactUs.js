@@ -23,16 +23,16 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-      <div className="pt-44 ">
+      <div className="py-[9.3vh] ">
         <div className="w-[77.5vw] py-20 flex flex-col md:flex-col lg:flex-row justify-between items-center mx-auto lg:gap-[7vw]">
           <div>
             <img
-              className="w-[355px] lg:w-[27.14vw] h-[229px] lg:h-[56.5vh] mt-[50px] lg:mt-[13.14vh]"
+              className="w-[355px] lg:w-[27.14vw]   mt-[50px] lg:mt-[13.14vh]"
               src={image}
               alt="bg_img"
             />
           </div>
-          <div className="w-[344px] lg:w-[35.8vw]  h-[631px] lg:h-[65vh] mt-[50px] lg:mt-[10vh] text-left">
+          <div className="w-[344px] lg:w-[35.8vw]   mt-[50px] lg:mt-[10vh] text-left">
             <div>
               <p className="text-[36px] lg:text-[2vw] font-bold font-urbanist">
                 Drop up a message

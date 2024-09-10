@@ -144,7 +144,7 @@ const filteredYearToOptions = yearFrom
     <>
       <div className="hidden sm:block text-black pt-20">
         <div className="flex w-[74vw]  flex-row justify-between mx-auto bgImage tree">
-          <div className="mx-auto w-[30vw] h-[73vh] mt-[7vh]">
+          <div className="mx-auto w-[30vw]   mt-[7vh]">
             <h2 className="text-left font-urbanist lg:text-[3.125vw] font-bold leading-tight my-[2vh]">
               <span className="animated-text">Bid, Buy, Drive</span> Online Car
               Auctions with Home Delivery!
@@ -167,8 +167,8 @@ const filteredYearToOptions = yearFrom
             </div>
           </div>
 
-          <div className="relative w-[90%] h-[75vh] text-black">
-            <div className="absolute bg-white opacity-80 rounded-xl shadow-xl w-[9.2vw] right-[5vw] top-[7vh] h-[20vh]">
+          <div className="relative w-[90%]   text-black">
+            <div className="absolute bg-white opacity-80 rounded-xl shadow-xl w-[9.2vw]  right-[10%] top-[10%]  ">
               <div className="flex flex-col p-2  items-center ">
                 <p className="font-bold text-[26px] md:text-[32px] lg:text-[3vw]">
                   50+
@@ -178,7 +178,7 @@ const filteredYearToOptions = yearFrom
                 </p>
               </div>
             </div>
-            <div className=" flex flex-row justify-between text-left px-[1vw] items-center bottom-[5vh] w-[56vw] h-[12vh] bg-[#ffffffcc] rounded-xl absolute">
+            <div className=" flex flex-row justify-between text-left px-[1vw] py-5 items-center top-[75%] w-[56vw]   bg-[#ffffffcc] rounded-xl absolute">
               {/* Dropdown for Makes (Car Makes) */}
               <div className="flex flex-col justify-center items-center border-r w-[12vw] text-left">
                 <p
@@ -296,30 +296,30 @@ const filteredYearToOptions = yearFrom
             </div>
           </div>
 
-          <div className="w-[23vw] px-[0.5vw] h-[52vh] rounded-lg bg-white">
+          <div className="w-[23vw] px-[0.5vw]   rounded-lg  bg-white">
             <div className="flex  mt-[9.46vh]">
-              <img src={img1} className="w-[4vw] h-[8.13vh]" alt="icon5" />
-              <img src={img2} className="w-[4vw] h-[8.13vh]" alt="icon6" />
-              <img src={img3} className="w-[4vw] h-[8.13vh]" alt="icon7" />
+              <img src={img1} className="w-[4vw]  " alt="icon5" />
+              <img src={img2} className="w-[4vw]  " alt="icon6" />
+              <img src={img3} className="w-[4vw] " alt="icon7" />
             </div>
-            <div className="font-urbanist text-[1.5vw] font-semibold leading-[3.2vh] px-3 text-left mt-[2.5vh]">
+            <div className="font-urbanist text-[1.5vw] font-semibold leading-[3.2vh] px-3 text-left  ">
               12.5K+ People
             </div>
-            <div className="font-urbanist text-[1vw] font-normal leading-[3.1vh] px-3 text-left mt-[1.5vh] text-[#8a8aa0]">
+            <div className="font-urbanist text-[1vw] font-normal   px-3 text-left  text-[#8a8aa0]">
               has used our services such as selling, buying, or even buying
               their parts.
             </div>
             <div className="flex gap-[0.2vw] flex-wrap px-3 mt-[2vh]">
-              <button className="border border-[#df4949] w-[5vw] h-[4.28vh] rounded-full text-[#df4949] text-[1.04vw]">
+              <button className="border border-[#df4949] w-[5vw]   rounded-full text-[#df4949] text-[1.04vw]">
                 Bid
               </button>
-              <button className="border border-[#df4949] w-[5vw] h-[4.28vh] rounded-full text-[#df4949] text-[1.04vw]">
+              <button className="border border-[#df4949] w-[5vw]   rounded-full text-[#df4949] text-[1.04vw]">
                 Buy
               </button>
-              <button className="border border-[#df4949] w-[5vw] h-[4.28vh] rounded-full text-[#df4949] text-[1.04vw]">
+              <button className="border border-[#df4949] w-[5vw]   rounded-full text-[#df4949] text-[1.04vw]">
                 Sell
               </button>
-              <button className="border border-[#df4949] w-[6vw] h-[4.28vh] rounded-full text-[#df4949] text-[1.04vw]">
+              <button className="border border-[#df4949] w-[6vw]   rounded-full text-[#df4949] text-[1.04vw]">
                 Consult
               </button>
               <div className="flex gap-5 items-center mt-[10px]">
@@ -333,7 +333,7 @@ const filteredYearToOptions = yearFrom
         </div>
       </div>
 
-      <div className="block sm:hidden">
+      <div className="block sm:hidden mt-[100px]">
         <div className="flex flex-col justify-between mx-auto bgImage tree">
           <div className="w-[343px] mx-auto">
             <h2 className="text-left font-urbanist text-[46px] font-bold leading-tight">
@@ -368,8 +368,8 @@ const filteredYearToOptions = yearFrom
             </div>
           </div>
 
-          <div className="flex w-[350px] h-[200px] mx-auto">
-            <div className="mx-auto w-[200px] h-[312px] -mt-[230px]">
+          <div className="flex w-[350px]   mx-auto">
+            <div className="mx-auto w-[200px]   -mt-[230px]">
               <div className="flex">
                 <img src={img1} className="w-[60px] h-[60px]" alt="icon12" />
                 <img src={img2} className="w-[60px] h-[60px]" alt="icon13" />

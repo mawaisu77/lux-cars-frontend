@@ -24,8 +24,8 @@ const AboutHero = () => {
       </div>
     </div>
     
-      <div className="h-[1246px] lg:h-[94vh] mb-[5.5vh] lg:mb-0">
-        <div className="w-[74vw] mx-auto flex  flex-col-reverse lg:flex-row justify-between mt-[8.8vh]">
+      <div className="  mb-[5.5vh] lg:mb-0">
+        <div className="w-[74vw] mx-auto flex  flex-col-reverse lg:flex-row justify-between mt-[100px] lg:mt-[8.8vh]">
           <div className="text-left w-full lg:w-[38vw] p-[1.5vw]">
             <p className="text-[20px] lg:text-[1vw] font-urbanist text-[#7a798a] font-semibold">
               OUR STORY
@@ -53,7 +53,7 @@ const AboutHero = () => {
           </div>
 
           <div>
-            <img src={image} className="w-full lg:w-[35vw] h-full lg:h-[76vh]" />
+            <img src={image} className="w-full lg:w-[35vw] h-full  " />
           </div>
         </div>
         
