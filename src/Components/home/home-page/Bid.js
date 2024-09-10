@@ -285,13 +285,13 @@ const Bid = () => {
             </div>
           </div>
 
-          <div className="w-[23vw] px-[0.5vw]   rounded-lg  bg-white">
+          <div className="w-[23vw] px-[0.5vw] h-[50vh]  rounded-lg  bg-white">
             <div className="flex  mt-[9.46vh]">
               <img src={img1} className="w-[4vw]  " alt="icon5" />
               <img src={img2} className="w-[4vw]  " alt="icon6" />
               <img src={img3} className="w-[4vw] " alt="icon7" />
             </div>
-            <div className="font-urbanist text-[1.5vw] font-semibold leading-[3.2vh] px-3 text-left  ">
+            <div className="font-urbanist text-[1.5vw] font-semibold leading-[3.2vh] p-3 text-left  ">
               12.5K+ People
             </div>
             <div className="font-urbanist text-[1vw] font-normal   px-3 text-left  text-[#8a8aa0]">
