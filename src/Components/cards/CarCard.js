@@ -20,6 +20,8 @@ import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import useSaveCar from "../../hooks/useSaveCar";
 import ImageViewer from "react-simple-image-viewer";
 import ReactDOM from "react-dom";
+import {initLightboxJS} from 'lightbox.js-react'
+import 'lightbox.js-react/dist/index.css'
 
 const CarCard = ({ card, isBuy = false }) => {
   const [savedCars, setSavedCars] = useState([]);
@@ -196,9 +198,9 @@ const CarCard = ({ card, isBuy = false }) => {
         ReactDOM.createPortal(
           <ImageViewer
           backgroundStyle={{
-            zIndex:50
+            zIndex:50,
            }}
-            disableScroll
+            disableScroll={false}
             src={card.images}
             currentIndex={currentImage}
             onClose={closeImageViewer}
