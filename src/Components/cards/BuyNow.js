@@ -1,20 +1,19 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 import CarCard from "./CarCard";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars"
+    "cars/get-all-cars/testing"
   );
-  console.log("first", carData);
   if (carLoading) {
     return <Shimmer />;
   }
@@ -50,9 +49,9 @@ const BuyNow = () => {
               slidesPerView={1}
               spaceBetween={30}
               breakpoints={{
-                640: { slidesPerView: 1 },
+                640: { slidesPerView: 2 },
                 740: { slidesPerView: 2 },
-                1024: { slidesPerView: 4 },
+                1024: { slidesPerView: 3 },
                 1440: { slidesPerView: 4 },
               }}
               scrollbar={{ draggable: true }}
@@ -76,7 +75,7 @@ const BuyNow = () => {
               <div className="w-[90vw] flex justify-center mx-auto  items-center mt-[9vh]">
                 {carData &&
                   carData.map((card, index) => (
-                    <SwiperSlide key={index} className="relative w-[330px] lg:w-[20.3vw] xl:w-[20.3vw] ">
+                    <SwiperSlide key={index} className="relative w-[300px]  lg:w-[20.3vw] xl:w-[20.3vw] ">
                       <CarCard card={card} isBuy={false} />
                     </SwiperSlide>
                   ))}

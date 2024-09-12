@@ -1,12 +1,14 @@
 import React, { useMemo } from "react";
-import { IoMdHeartEmpty } from "react-icons/io";
-import { TfiReload } from "react-icons/tfi";
 import useTimer from "../../../hooks/useTimer";
-import fireImgTimer from "../../../assets/001-fire.png";
 import { Link } from "react-router-dom";
 import { BsFire } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa6";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
+import ImageViewer from "react-simple-image-viewer";
+
+import "swiper/css";
 
 function SearchCard({ data }) {
   return (
@@ -24,12 +26,39 @@ function Card({ card }) {
 
   return (
     <div className="flex flex-col md:flex-col lg:flex-row py-5 my-5 w-full bg-white mx-auto rounded-2xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
-      <div className="flex justify-center items-center relative w-full  lg:w-[32vw]   px-4">
-        <img
+      <div className="flex justify-center items-center relative w-full lg:w-[16vw]  px-4">
+        
+        {/* <img
           src={card.image || null}
           className=" w-full h-full rounded-[0.5vw] object-cover"
           alt={card.model}
-        />
+        /> */}
+          <Swiper
+            className="relative w-full h-full"
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+            loop={true}
+          >
+            {card.images &&
+              card.images.map((image, index) => (
+                <SwiperSlide key={index} className="relative">
+                 
+                  <div className="">        
+                    <img
+                      className="w-full h-full rounded-[0.5vw] object-cover"
+                      src={image}
+                      alt={`Vehicle_Image ${index + 1}`}
+                      // onClick={() => openImageViewer(index)}
+                    
+                      />
+                  </div>
+                    
+                </SwiperSlide>
+              ))}
+          </Swiper>
        
       </div>
       <div className="flex flex-col lg:flex-row px-4 py-2">

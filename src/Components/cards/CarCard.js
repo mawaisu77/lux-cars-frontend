@@ -11,17 +11,13 @@ import {
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa";
 import { useRef, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import useSaveCar from "../../hooks/useSaveCar";
 import ImageViewer from "react-simple-image-viewer";
 import ReactDOM from "react-dom";
-import {initLightboxJS} from 'lightbox.js-react'
-import 'lightbox.js-react/dist/index.css'
 
 const CarCard = ({ card, isBuy = false }) => {
   const [savedCars, setSavedCars] = useState([]);
@@ -46,7 +42,7 @@ const CarCard = ({ card, isBuy = false }) => {
     const savedCarsFromStorage =
       JSON.parse(localStorage.getItem("savedCars")) || [];
     setSavedCars(savedCarsFromStorage);
-  }, [savedCars]);
+  }, []);
 
   const handleSaveClick = (lot_id) => {
     handleSaveCar(lot_id);
@@ -76,10 +72,11 @@ const CarCard = ({ card, isBuy = false }) => {
 
   // Check if the current car is saved
   const isCarSaved = savedCars.includes(card.lot_id);
+
   return (
     <>
-    <div className=" rounded-xl shadow-lg">
-      <div className="p-5 relative w-full lg:p-[1vw]">
+    <div className=" rounded-xl shadow-lg mx-5 lg:px-0">
+      <div className="p-[1vw] relative w-full lg:p-[1vw]">
         <div className="w-full relative">
           {isCarSaved ? (
             <div className="bg-black/80 rounded-lg px-3 py-1 absolute z-50 right-5 top-2">
@@ -157,9 +154,9 @@ const CarCard = ({ card, isBuy = false }) => {
         <div>
           <div className="flex pb-[1vh]  ">
             <div className="flex justify-between items-center w-full">
-              <div className="flex flex-col text-[0.9vw] lg:px-[1vw] ">
+              <div className="flex flex-col text-[16px] lg:text-[0.9vw] px-[10px] lg:px-[1vw] ">
               <Link to={`vehicle-detail/${card.lot_id}`}>
-                <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist text-[18px] lg:text-[1.17vw] font-bold  leading-[3vh] text-left">
+                <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist text-[18px] lg:text-[1.17vw] font-bold  lg:leading-[3vh] text-left">
                   {card.title.length > 20
                     ? `${card.title.slice(0, 20)}...`
                     : card.title}

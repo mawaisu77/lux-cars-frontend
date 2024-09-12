@@ -10,6 +10,7 @@ import Modal from "./Modal360";
 import { ClipLoader } from "react-spinners";
 import ReactPlayer from 'react-player'
 import VideoModal from "./ModalVideo";
+import ReactDOM from "react-dom";
 
 const SwiperGallery = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -24,22 +25,18 @@ const SwiperGallery = ({ images, carData }) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
   };
-
   const closeImageViewer = () => {
     setIsViewerOpen(false);
   };
-
   const openModal = () => {
     setIsModalOpen(true);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
   const openVideoModal = () => {
     setIsVideoModalOpen(true);
   };
-
   const closeVideoModal = () => {
     setIsVideoModalOpen(false);
   };
@@ -55,11 +52,12 @@ const SwiperGallery = ({ images, carData }) => {
         </div>
       )}
       <iframe
+        title="car"
         src={carData.iaai_360}
         width="80%"
         height="600px"
+        onLoad={() => setLoading(false)} // Set loading to false when iframe is fully rendered
         allowFullScreen
-        onLoad={handleLoad}
         style={{ display: loading ? "none" : "block" }}
       />
     </div>
@@ -72,6 +70,7 @@ const SwiperGallery = ({ images, carData }) => {
           <img
             key={index}
             src={image}
+            onLoad={() => setLoading(false)} // Set loading to false when iframe is fully rendered
             alt={`Copart Exterior View ${index + 1}`}
             className="w-full h-auto mb-2"
           />
@@ -80,6 +79,7 @@ const SwiperGallery = ({ images, carData }) => {
           <img
             src={carData.copart_interior_360}
             alt="Copart Interior View"
+            onLoad={() => setLoading(false)} // Set loading to false when iframe is fully rendered
             className="w-full h-auto"
           />
         )}
@@ -179,16 +179,18 @@ const SwiperGallery = ({ images, carData }) => {
             </SwiperSlide>
           ))}
       </Swiper>
-      {isViewerOpen && (
-        <div className="z-50">
-        <ImageViewer
-          src={images}
-          currentIndex={currentImage}
-          onClose={closeImageViewer}
-        />
-   </div>
-
-      )}
+      {isViewerOpen && ReactDOM.createPortal(
+          <ImageViewer
+          backgroundStyle={{
+            zIndex:50,
+           }}
+            disableScroll={false}
+            src={images}
+            currentIndex={currentImage}
+            onClose={closeImageViewer}
+          />,
+          document.body // Render in the root of the DOM
+        )}
 
       {/* Modal for 360° View */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>

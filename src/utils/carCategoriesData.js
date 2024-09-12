@@ -76,6 +76,7 @@ export const atvData = [
     { label: "California", value: "California", rate: 2052 },
     { label: "Washington", value: "Washington", rate: 2052 },
     { label: "Nevada", value: "Nevada", rate: 2352 },
+    { label: "ONTARIO", value: "ONTARIO", rate: 99999 },
   ];
 
   export const heavyMachineryData = [
