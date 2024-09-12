@@ -7,7 +7,8 @@ import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-function SearchMainPage({ appliedFilters, triggerFetch, resetFilters }) {
+
+function SearchMainPage({ appliedFilters, triggerFetch, resetFilters,setShowFiltersMob ,showFilterMob,handleFilters}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
@@ -15,6 +16,7 @@ function SearchMainPage({ appliedFilters, triggerFetch, resetFilters }) {
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+   
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -81,17 +83,18 @@ function SearchMainPage({ appliedFilters, triggerFetch, resetFilters }) {
     // Increment page number to load more cards
     setPage((prevPage) => prevPage + 1);
   };
+  
 
   return (
     <div>
       <div className="sm:w-[54vw] w-full mx-auto my-[2.604vw] font-urbanist">
-        <div className="flex flex-col lg:flex-row justify-between items-center mt-[100px] lg:mt-[9.3vh] lg:items-start">
+        <div className="flex flex-col lg:flex-row justify-between items-center   lg:mt-[9.3vh] lg:items-start">
           <div className="flex mb-4 lg:mb-0">
             <h2 className="text-[24px] lg:text-[1.95vw] font-urbanist font-bold">
               {`${totalResults} Available Vehicles`}
             </h2>
           </div>
-          <div className="flex flex-col lg:flex-row bg-slate-100 relative text-left text-sm lg:text-base">
+          <div className="flex flex-col lg:flex-row   relative text-left text-sm lg:text-base">
             <div className="flex">
             <input
               type="text"
@@ -102,6 +105,7 @@ function SearchMainPage({ appliedFilters, triggerFetch, resetFilters }) {
               <GoSearch size={20} color="white" className="cursor-pointer" />
             </div>
             </div>
+            <div className="flex justify-between items-center">
             <div>
               <button
                 onClick={toggleDropdown}
@@ -134,6 +138,28 @@ function SearchMainPage({ appliedFilters, triggerFetch, resetFilters }) {
                   </div>
                 </div>
               )}
+            </div>
+      <div>
+      {
+  showFilterMob ? (
+    <button 
+      className="lg:hidden px-4 py-2  mt-[2vh]  flex justify-center items-center mx-auto border transition-all rounded-lg duration-300"
+      onClick={handleFilters}  // Correctly hiding the filters
+    >
+      Hide Filters
+      <RiArrowDropDownLine size={20} className="ml-1 cursor-pointer rotate-180" />
+    </button>
+  ) : (
+    <button 
+      className="flex justify-center items-center mt-[2vh] px-4 py-2   border w-[150px] mx-auto rounded-lg hover:w-[160px] transition-all duration-300"
+      onClick={handleFilters}  // Correctly showing the filters
+    >
+      Show Filters
+      <RiArrowDropDownLine size={20} className="ml-1 cursor-pointer" />
+    </button>
+  )
+}
+      </div>
             </div>
           </div>
         </div>

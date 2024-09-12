@@ -2,11 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import SearchMainPage from "../search-page/searchMainPage";
 import useCarMakesModels from "../../../hooks/useCarsMakesModel";
 import { useLocation, useNavigate } from "react-router-dom";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const [showFilterMob, setShowFiltersMob] = useState(false)
+  console.log(showFilterMob)
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
   const initialMake = queryParams.get("make") || "";
@@ -268,177 +270,215 @@ const Sidebar = () => {
     }
   };
 
+  const handleFilters = () => {
+    console.log('hello')
+    setShowFiltersMob(!showFilterMob)
+  }
+
   return (
-    <div className="flex justify-center gap-[3vw] w-[80vw]  mx-auto font-urbanist">
-      {/* <div className="fixed lg:relative mt-[2.604vw] bg-[#1c181840]/10 lg:bg-white z-30 lg:z-0 lg:w-[17vw] shadow-xl rounded-lg">
-        {Object.keys(dropdownData).map((dropdownKey) => (
-          <div
+    <>
+  {/* {
+  showFilterMob ? (
+    <button 
+      className="lg:hidden px-4 py-2 mt-[100px] flex justify-center items-center mx-auto  border   transition-all rounded-lg duration-300"
+      onClick={handleFilters}
+    >
+      Hide Filters
+      <RiArrowDropDownLine size={20} className="ml-1 cursor-pointer rotate-180" />
+    </button>
+  ) : (
+    <button 
+      className=" flex justify-center items-center px-4 py-2  mt-[100px] border w-[150px] mx-auto rounded-lg hover:w-[160px] transition-all duration-300"
+      onClick={handleFilters}
+    >
+      Show Filters
+      <RiArrowDropDownLine size={20} className="ml-1 cursor-pointer" />
+    </button>
+  )
+} */}
+
+
+    <div className="lg:flex justify-center  gap-[3vw] w-[80vw] mt-[100px]    mx-auto font-urbanist">
+      <h2 className="lg:hidden text-[42px] font-bold">
+        Fliters
+      </h2>      {
+        showFilterMob && (
+          <div className=" lg:relative  lg:mt-[2.604vw] mx-auto px-3 bg-white z- lg:bg-white z-50 lg:z-0 w-[100%] lg:w-[17vw] shadow-xl rounded-lg">
+          {Object.keys(dropdownData).map((dropdownKey) => (
+            <div
             key={dropdownKey}
             className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200"
-          >
-            <div
-              className="flex items-center justify-between cursor-pointer "
-              onClick={() => toggleDropdown(dropdownKey)}
             >
-              <h1 className="text-[1.3vw]  text-left font-bold mb-[0.729vw]">
-                {dropdownKey.charAt(0).toUpperCase() + dropdownKey.slice(1)}
-              </h1>
-              <svg
-                className={`ml-2 w-[1vw] h-[1vw] transition-transform duration-200 ${
-                  dropdownStates[dropdownKey] ? "transform rotate-180" : ""
-                }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+              <div
+                className="flex items-center justify-between   cursor-pointer "
+                onClick={() => toggleDropdown(dropdownKey)}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </div>
-            {dropdownStates[dropdownKey] && (
-              <div className="overflow-y-scroll max-h-52">
-                {dropdownData[dropdownKey].map(({ id, label }) => (
-                  <div key={id} className="flex items-center mb-[0.833vw]">
-                    <input
-                      id={id}
-                      type={
-                        dropdownKey === "make" ||
-                        dropdownKey === "model" ||
-                        dropdownKey === "year_from" ||
-                        dropdownKey === "year_to"
-                          ? "radio"
-                          : "checkbox"
-                      }
-                      value={id}
-                      onChange={() => handleFilterChange(dropdownKey, id)}
-                      className="form-checkbox h-[3.5vw] w-[1.5vw] text-blue-600"
-                      checked={
-                        dropdownKey === "make"
-                          ? selectedMake === id
-                          : dropdownKey === "model"
-                          ? selectedModel === id
-                          : selectedFilters[dropdownKey].includes(id)
-                      }
-                    />
-                    <label
-                      htmlFor={id}
-                      className="ml-[0.5vw] text-[1vw] font-medium"
-                    >
-                      {label}
-                    </label>
-                  </div>
-                ))}
+                <h1 className="text-[18px] lg:text-[1.3vw]  text-left font-bold mb-[0.729vw]">
+                  {dropdownKey.charAt(0).toUpperCase() + dropdownKey.slice(1)}
+                </h1>
+                <svg
+                  className={`w-[15px]  lg:w-[1vw] h-[15px] lg:h-[1vw] transition-transform duration-200 ${
+                    dropdownStates[dropdownKey] ? "transform rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
+                </svg>
               </div>
-            )}
+              {dropdownStates[dropdownKey] && (
+                <div className="overflow-y-scroll max-h-52     after:">
+                  {dropdownData[dropdownKey].map(({ id, label }) => (
+                    <div key={id} className="flex  items-center mb-[0.833vw]">
+                      <input
+                        id={id}
+                        type={
+                          dropdownKey === "make" ||
+                          dropdownKey === "model" ||
+                          dropdownKey === "year_from" ||
+                          dropdownKey === "year_to"
+                            ? "radio"
+                            : "checkbox"
+                        }
+                        value={id}
+                        onChange={() => handleFilterChange(dropdownKey, id)}
+                        className="form-checkbox h-[3.5vw] w-[1.5vw] text-blue-600"
+                        checked={
+                          dropdownKey === "make"
+                            ? selectedMake === id
+                            : dropdownKey === "model"
+                            ? selectedModel === id
+                            : selectedFilters[dropdownKey].includes(id)
+                        }
+                      />
+                      <label
+                        htmlFor={id}
+                        className="ml-[0.5vw] text-[16px] lg:text-[1vw] font-medium"
+                      >
+                        {label}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+  
+  
+          <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
+            <div className="flex items-center justify-between cursor-pointer">
+              <h1 className="lg:text-[1.3vw] text-left font-bold mb-[0.729vw]">
+                Year
+              </h1>
+            </div>
+            <div className="flex gap-[1vw]">
+              <input
+                id="year_from"
+                name="year_from"
+                type="number"
+                maxLength={4}
+                min={0}
+                placeholder="From"
+                className="form-input w-full px-2 border rounded-md py-1.5"
+                value={selectedFilters.year_from}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d{0,4}$/.test(value)) {
+                    handleFilterChange("year_from", value);
+                  }
+                }}
+              />
+              <input
+                type="number"
+                min={0}
+                maxLength={4}
+                placeholder="To"
+                className="form-input w-full border px-2 rounded-md py-1.5"
+                value={selectedFilters.year_to}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d{0,4}$/.test(value)) {
+                    handleFilterChange("year_to", value);
+                  }
+                }}
+              />
+            </div>
           </div>
-        ))}
-
-
-        <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
-          <div className="flex items-center justify-between cursor-pointer">
-            <h1 className="text-[1.3vw] text-left font-bold mb-[0.729vw]">
-              Year
-            </h1>
-          </div>
-          <div className="flex gap-[1vw]">
-            <input
-              id="year_from"
-              name="year_from"
-              type="number"
-              maxLength={4}
-              min={0}
-              placeholder="From"
-              className="form-input w-full px-2 border rounded-md py-1.5"
-              value={selectedFilters.year_from}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (/^\d{0,4}$/.test(value)) {
-                  handleFilterChange("year_from", value);
+          <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
+            <div className="flex items-center justify-between cursor-pointer">
+              <h1 className="lg:text-[1.3vw] text-left font-bold mb-[0.729vw]">
+              Odometer
+              </h1>
+            </div>
+            <div className="flex gap-[1vw]">
+              <input
+                id="odometer_from"
+                name="odometer_from"
+                type="number"
+                maxLength={4}
+                min={0}
+                placeholder="From"
+                className="form-input w-full px-2 border rounded-md py-1.5"
+                value={selectedFilters.odometer_to}
+                onChange={(e) =>
+                  handleFilterChange("odometer_from", e.target.value)
                 }
-              }}
-            />
-            <input
-              type="number"
-              min={0}
-              maxLength={4}
-              placeholder="To"
-              className="form-input w-full border px-2 rounded-md py-1.5"
-              value={selectedFilters.year_to}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (/^\d{0,4}$/.test(value)) {
-                  handleFilterChange("year_to", value);
+              />
+              <input
+               id="odometer_to"
+                name="odometer_to"
+                type="number"
+                min={0}
+                placeholder="To"
+                className="form-input w-full border px-2 rounded-md py-1.5"
+                value={selectedFilters.odometer_from}
+                onChange={(e) =>
+                  handleFilterChange("odometer_to", e.target.value)
                 }
-              }}
-            />
+               
+              />
+            </div>
+          </div>
+  
+  
+  
+        <div className="flex  flex-col lg:flex-row justify-center items-center my-5 mx-2 gap-x-2 lg:gap-y-4">
+            <button
+              onClick={applyFilters}
+              className="p-2 bg-[#CA0000] w-1/2 hover:bg-[#b30f0f] text-white rounded-lg"
+            >
+              Apply Filters
+            </button>
+            <button
+              onClick={resetFilters}
+              className="p-2 bg-gray-500 w-1/2 hover:bg-gray-600 text-white rounded-lg"
+              >
+              Reset Filters
+            </button>
           </div>
         </div>
-        <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
-          <div className="flex items-center justify-between cursor-pointer">
-            <h1 className="text-[1.3vw] text-left font-bold mb-[0.729vw]">
-            Odometer
-            </h1>
-          </div>
-          <div className="flex gap-[1vw]">
-            <input
-              id="odometer_from"
-              name="odometer_from"
-              type="number"
-              maxLength={4}
-              min={0}
-              placeholder="From"
-              className="form-input w-full px-2 border rounded-md py-1.5"
-              value={selectedFilters.odometer_to}
-              onChange={(e) =>
-                handleFilterChange("odometer_from", e.target.value)
-              }
-            />
-            <input
-             id="odometer_to"
-              name="odometer_to"
-              type="number"
-              min={0}
-              placeholder="To"
-              className="form-input w-full border px-2 rounded-md py-1.5"
-              value={selectedFilters.odometer_from}
-              onChange={(e) =>
-                handleFilterChange("odometer_to", e.target.value)
-              }
-             
-            />
-          </div>
-        </div>
-
-
-
-      <div className="flex  flex-col lg:flex-row justify-center items-center my-5 mx-2 gap-x-2 lg:gap-y-4">
-          <button
-            onClick={applyFilters}
-            className="p-2 bg-[#CA0000] w-1/2 hover:bg-[#b30f0f] text-white rounded-lg"
-          >
-            Apply Filters
-          </button>
-          <button
-            onClick={resetFilters}
-            className="p-2 bg-gray-500 w-1/2 hover:bg-gray-600 text-white rounded-lg"
-          >
-            Reset Filters
-          </button>
-        </div>
-      </div> */}
-      <div className=" w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex flex-col items-center">
+        )
+      }
+ 
+       <div className=" w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex flex-col items-center">
         <SearchMainPage
          resetFilters={resetFilters}
           appliedFilters={appliedFilters}
           triggerFetch={appliedFilters}
+        setShowFiltersMob={setShowFiltersMob}
+        showFilterMob={showFilterMob}
+        handleFilters={handleFilters}
         />
-      </div>
+      </div> 
     </div>
+    </>
   );
 };
 

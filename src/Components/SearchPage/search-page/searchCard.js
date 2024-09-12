@@ -10,8 +10,8 @@ import { FaHourglassHalf } from "react-icons/fa6";
 
 function SearchCard({ data }) {
   return (
-    <div className="w-full md:w-full lg:w-full   mx-auto mt-10">
-      <div className=" w-[340px] md:w-full lg:w-full ">
+    <div className="w-[100%] md:w-full lg:w-full bg-black  mx-auto mt-10">
+      <div className=" w-[100%] bg-gray-300 md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => < Card key={index} card={card} />)}
       </div>
     </div>
@@ -61,38 +61,42 @@ function Card({ card }) {
             <p className="text-xl font-bold text-red-600">
               {card.amount}
             </p>
-           <div className="flex lg:flex-col flex-row gap-2">
-           <div className="flex justify-center items-center mt-4 sm:mt-0">
+           <div className="flex lg:flex-col lg:mt-[4vh] flex-row gap-2">
+           <div className="flex justify-center items-center lg:mt-4 sm:mt-0">
             <Link to={`/vehicle-detail/${card.lot_id}`}>
-              <button className="w-[130px] lg:w-[8vw] h-[30px] lg:h-[4vh] rounded-[0.8vw]  text-md lg:text-lg bg-black text-white font-urbanist hover:from-blue-600 hover:to-blue-800 duration-200">
+              <button className="w-[130px] lg:w-[10vw] h-[30px] lg:h-[4vh] rounded-[0.5vw]  text-md lg:text-md bg-black text-white font-urbanist hover:from-blue-600 hover:to-blue-800 duration-200">
                 BID NOW
               </button>
             </Link>
           </div>
-           <div className="    w-[130px] lg:w-[8vw] h-[30px] lg:h-[4vh] mt-[2vh] bg-white rounded-lg flex justify-center items-center shadow-lg">
-          <div className="flex     ">
-            <div className="flex justify-center items-center">
-              {card.auction_date ? (
-                ValidDate ? (
-                  <BsFire className="text-white text-lg md:text-xl" />
-                ) : (
-                  <MdNotInterested className=" text-md md:text-xl" />
-                )
-              ) : (
-                <FaHourglassHalf className=" text-md md:text-xl" />
-              )}
-            </div>
-            <div>
-              <p className="flex justify-center items-center text-black text-md   lg:text-[0.875vw]  ">
-                {card.auction_date
-                  ? ValidDate
-                    ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
-                    : "Bidding Over"
-                  : "Future"}
-              </p>
-            </div>
-          </div>
-        </div>
+          <div className="w-[130px] lg:w-full h-[30px] lg:h-[4vh] mt-0 lg:mt-[1vh] bg-white rounded-lg flex justify-center items-center shadow-lg">
+  <div className="flex items-center gap-2">
+    {/* Icon Section */}
+    <div className="flex justify-center items-center">
+      {card.auction_date ? (
+        ValidDate ? (
+          <BsFire className="text-red-600 text-lg lg:text-xl" />
+        ) : (
+          <MdNotInterested className="text-gray-400 text-lg lg:text-xl" />
+        )
+      ) : (
+        <FaHourglassHalf className="text-yellow-500 text-lg lg:text-xl" />
+      )}
+    </div>
+
+    {/* Timer or Status Section */}
+    <div className="flex justify-center items-center">
+      <p className="text-black text-xs lg:text-[0.875vw] font-medium">
+        {card.auction_date
+          ? ValidDate
+            ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
+            : "Bidding Over"
+          : "Future"}
+      </p>
+    </div>
+  </div>
+</div>
+
 
            </div>
           </div>
