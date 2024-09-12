@@ -10,7 +10,6 @@ const useSaveCar = () => {
     setLoading(true);
     try {
       const response = await saveUserCars(lotId);
-      console.log("Custom hook for save car response", response);
       setCarData(response);
     } catch (err) {
       console.log('Error saving car', err);

@@ -17,6 +17,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [navbarColor, setNavbarColor] = useState('transparent');
+  const [windowWidth, setWindowWidth] = useState('');
 
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -52,15 +53,37 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+
+      if (window.innerWidth < 768) {
+        setNavbarColor("#333333"); 
+      } else {
+        setNavbarColor("");
+      }
+    };
+
+    // Add the resize event listener
+    window.addEventListener("resize", handleResize);
+
+    // Call the function initially to set the correct color based on current width
+    handleResize();
+
+    // return () => {
+    //   window.removeEventListener("resize", handleResize);
+    // };
+  }, []);
   
   return (
     <div className='fixed top-0 border-b border-[#7A798A] w-full z-50 '
-    style={{ backgroundColor: navbarColor, transition: 'background-color 0.5s ease-in-out' }}
+    style={{ backgroundColor: windowWidth < 768 ? "#333333" : navbarColor, transition: 'background-color 0.5s ease-in-out' }}
     >
       <div className='flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4'>
         <div className='flex items-center gap-4'>
           {
-            isHomePage && navbarColor === "transparent" ? (
+            (isHomePage && navbarColor === "transparent" && windowWidth > 768) || ( windowWidth <! 768) ? (
               <Link to="/">
               <img className='w-[142px] lg:w-[13.58vw] h-auto' src={img1} alt='Logo' />
               </Link>

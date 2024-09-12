@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import TooltipInfo from "../../common/TooltipInfo";
 import { BsInfoCircle } from "react-icons/bs";
@@ -15,7 +15,7 @@ const fuelOptions = [
   { label: "Hybrid", value: "Hybrid" },
 ];
 
-const Dropdown = ({ bidAmount }) => {
+const Dropdown = ({ bidAmount, data }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [transportationOptions, setTransportationOptions] = useState([]);
   const [selectedTransportation, setSelectedTransportation] = useState(null);
@@ -103,9 +103,25 @@ const calculateBankTransferFee = () => {
     setSelectedTransportation(null); // Reset transportation selection
   };
 
+
+  const extractState = (fullString) => {
+    const foundState = suvData.find((item) => fullString.includes(item.label));
+    return foundState ? foundState : null;
+  };
+
+  useEffect(() => {
+    if (selectedCategory?.value === "SUV" && data.location) {
+      const matchedTransportation = extractState(data.location);
+      if (matchedTransportation) {
+        setSelectedTransportation(matchedTransportation);
+      }
+    }
+  }, [selectedCategory, data.location]);
+
+
   return (
     <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
-                             <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
+       <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
         Calculations
       </h2>
 
@@ -133,6 +149,8 @@ const calculateBankTransferFee = () => {
             onChange={setSelectedTransportation}
             placeholder="Select Transportation"
             className="mb-[2vh]  text-md lg:text-lg lg:text-[1vw]  rounded-[0.5vw]"
+            defaultValue={selectedTransportation} // Pre-select the transportation option
+
           />
         </>
       )}

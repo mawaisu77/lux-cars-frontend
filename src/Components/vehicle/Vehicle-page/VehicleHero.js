@@ -64,10 +64,9 @@ const VehicleHero = () => {
   );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
-  const ValidDate =
-    targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+  // const ValidDate =
+  //   targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
-     // Update placeBidAmount when carDetailData?.data?.currentBid changes
   useEffect(() => {
     if (carDetailData?.data?.currentBid) {
       setPlaceBidAmount(carDetailData?.data?.currentBid);
@@ -97,6 +96,7 @@ const VehicleHero = () => {
     }
   }, [placeBidloading, placeBidSuccess, placeBiderror]);
 
+console.log("detail page ")
   return (
     <>
       <Header textColor="text-white" />
@@ -122,7 +122,7 @@ const VehicleHero = () => {
         <>
           {carDetailData && (
             <>
-              {carDetailData.data.auction_date ? (
+              {/* {carDetailData.data.auction_date ? (
                 ValidDate ? (
                   ``
                 ) : (
@@ -135,7 +135,7 @@ const VehicleHero = () => {
                   Auction date is not decided yet, Be one on the top of bidding
                   list
                 </div>
-              )}
+              )} */}
 
               <div className="flex flex-col md:flex-row  justify-between mx-auto w-[74vw] mt-[80px] mb-[20px]">
                 <div className="w-full md:w-[36vw] ">
@@ -341,7 +341,7 @@ const VehicleHero = () => {
                             </p>
                           </div>
                         </div>
-
+{/* 
                         {carDetailData?.data?.auction_date ? (
                           ValidDate ? (
                             <>
@@ -358,7 +358,7 @@ const VehicleHero = () => {
                           )
                         ) : (
                           ""
-                        )}
+                        )} */}
                       </div>
                     </div>
                   </div>
@@ -399,7 +399,7 @@ const VehicleHero = () => {
                   </button>
 
                   <div className="">
-                    <VehicleCostCalculator bidAmount={placeBidAmount} />
+                    <VehicleCostCalculator data={carDetailData?.data} bidAmount={placeBidAmount} />
                   </div>
 
                   <div className="flex flex-col justify-center gap-y-[2.1vh]">

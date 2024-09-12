@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const useTimer = (targetTime) => {
   const [timeLeft, setTimeLeft] = useState({
@@ -8,10 +8,18 @@ const useTimer = (targetTime) => {
     seconds: 0,
   });
 
+  const targetTimeRef = useRef(targetTime);
+
   useEffect(() => {
+    targetTimeRef.current = targetTime;
+  }, [targetTime]);
+
+  useEffect(() => {
+    console.log("Timer effect initialized");
+
     const updateTimer = () => {
       const now = new Date();
-      const distance = targetTime - now.getTime();
+      const distance = targetTimeRef.current - now.getTime();
 
       if (distance < 0) {
         setTimeLeft({
@@ -34,12 +42,17 @@ const useTimer = (targetTime) => {
         minutes,
         seconds,
       });
+
+      console.log("Updated time left:", { days, hours, minutes, seconds });
     };
 
     const intervalId = setInterval(updateTimer, 1000);
 
-    return () => clearInterval(intervalId);
-  }, [targetTime]);
+    return () => {
+      console.log("Timer effect cleaned up");
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return timeLeft;
 };

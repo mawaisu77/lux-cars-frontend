@@ -130,6 +130,41 @@ const Bid = () => {
       },
     }),
   };
+  const customMobStyles = {
+    control: (base) => ({
+      ...base,
+      fontSize: "13px",
+      borderRadius: "0.74vh",
+      backgroundColor: "transparent",
+      border: "1px solid #ccc",
+      boxShadow: "none",
+      
+
+    }),
+    menu: (base) => ({
+      ...base,
+      backgroundColor: "white",
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    }),
+    placeholder: (base) => ({
+      fontSize: '12px',
+      ...base,
+      color: "#8a8aa0",
+    }),
+    singleValue: (base) => ({
+      ...base,
+      color: "#333",
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected ? "#CA0000" : "transparent",
+      color: state.isSelected ? "white" : "#333",
+      "&:hover": {
+        backgroundColor: "#f5f5f5",
+      },
+    }),
+  };
+
 
   const playAudio = () => {
     audioRef.current.play();
@@ -405,70 +440,120 @@ const filteredYearToOptions = yearFrom
             </div>
 
             <div className="text-left w-[140px] h-[550px] border bg-[#ffffffcc] rounded-xl -mt-[380px]">
-              <div className="w-[108px] py-2 mx-auto flex flex-col justify-center items-center font-urbanist">
-                <div className="h-[110px]">
-                  <p className="text-[14px] font-urbanist font-semibold">
-                    {" "}
-                    VIN/lot
-                  </p>
-                  <p className="flex justify-between text-[13px] gap-1">
-                    <input
-                      type="text"
-                      placeholder="Type Here..."
-                      className="bg-[#ffffffcc] border-none w-[64px]  font-urbanist flex "
-                    />
-                  </p>
-                </div>
-
-                <div className="h-[110px] ">
-                  <p className="text-[14px] font-urbanist font-semibold">
-                    Car Types
-                  </p>
-                  <p className="flex justify-between text-[13px] gap-1">
-                    All Vehicles
-                    <RiArrowDropDownLine size={25} className="cursor-pointer" />
-                  </p>
-                </div>
-
-                <div className="border-b pb-2">
-                  <p className="text-[14px] font-urbanist font-semibold">
-                    Models
-                  </p>
-                  <p className="flex justify-between items-center text-[13px] gap-1">
-                    All Models
-                    <RiArrowDropDownLine
-                      size={25}
-                      className="cursor-pointer  hover:bg-red-300"
-                    />
-                  </p>
-                </div>
-
-                <div className="border-b pb-2 h-[100px]">
-                  <p className="text-[14px] font-urbanist font-semibold pt-7">
-                    Partners
-                  </p>
-                  <p className="flex justify-between items-center text-[13px] gap-1">
-                    All Partners
-                    <RiArrowDropDownLine size={25} className="cursor-pointer" />
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-3 pb-2">
-                  <p className="text-[14px] font-urbanist font-semibold pt-7">
-                    Date
-                  </p>
-                  <div className="flex justify-center items-center gap-2 ">
-                    <LuCalendarSearch /> 09 - <LuCalendarSearch /> 12
+              <div className="w-[108px] py-2 mx-auto flex flex-col gap-y-4 justify-center items-center font-urbanist">
+           
+              {/* Dropdown for Makes (Car Makes) */}
+              <div className="flex flex-col justify-center items-start border-r w-full text-left">
+                <p
+                  className={`text-[16px] font-urbanist font-semibold ${
+                    error ? "hidden" : "block"
+                  }`}
+                >
+                  Makes
+                </p>
+                {loading && !carData ? (
+                  <div className="flex justify-center items-start py-4">
+                    <ClipLoader size={30} />
                   </div>
-                  <div className="flex w-[40px] h-[40px] justify-center items-center bg-red-700 rounded-xl">
-                    <GoSearch
-                      size={27}
-                      color="white"
-                      className="cursor-pointer"
-                      onClick={handleSearch}
-                    />
+                ) : (
+                  <ReactSelect
+                    styles={customMobStyles}
+                    value={selectedMake}
+                    onChange={handleMakeChange} 
+                    options={carOptions}
+                    isClearable
+                    placeholder="Select Make"
+                    className={`${error ? "hidden" : "block"}`}
+                  />
+                )}
+                {error && (
+                  <div className="py-4 text-center text-red-500">{error}</div>
+                )}
+              </div>
+
+             {/* Dropdown for Models (Car Models) */}
+              <div className="flex flex-col justify-center items-start border-r text-left w-full">
+                <p className="text-[16px] font-urbanist font-semibold">
+                  Models
+                </p>
+                {loading && selectedMake && !modelOptions.length ? (
+                  <div className="flex justify-center items-center py-4">
+                    <ClipLoader size={30} />
                   </div>
+                ) : (
+                  <ReactSelect
+                    styles={customMobStyles}
+                    value={selectedModel}
+                    onChange={handleModelChange}
+                    options={modelOptions}
+                    isClearable
+                    placeholder="Select Model"
+                    isDisabled={!selectedMake}
+                  />
+                )}
+                {selectedMake && !modelOptions.length && (
+                  <div className="py-4 text-center text-red-500">
+                    No models available for this make.
+                  </div>
+                )}
+              </div>
+
+            {/* Dropdown for Partners */}
+             <div className="flex flex-col w-full justify-center items-start border-r text-left">
+                <p className="text-[16px] font-urbanist font-semibold">
+                  Partners
+                </p>
+                <ReactSelect
+                  styles={customMobStyles}
+                  value={selectedPartner}
+                  onChange={handlePartnerChange}
+                  options={partnerOptions}
+                  isClearable
+                  placeholder="Select Partner"
+                />
+              </div>
+               {/* Dropdown for Year From */}
+                <div className="flex flex-col justify-center items-start border-r w-full text-left">
+                  <p className="text-[16px] font-urbanist font-semibold">
+                   From
+                  </p>
+                  <ReactSelect
+                  
+                    styles={customMobStyles}
+                    value={yearFrom}
+                    onChange={handleYearFromChange}
+                    options={yearOptions}
+                    isClearable={false}
+                    placeholder="YYYY"
+                    className={`${error ? "hidden" : "block"} w-full`}
+                  />
                 </div>
+
+                {/* Dropdown for Year To */}
+                <div className="flex flex-col justify-center items-start border-r w-full text-left">
+                  <p className="text-[16px] font-urbanist font-semibold">
+                   To
+                  </p>
+                  <ReactSelect
+                    styles={customMobStyles}
+                    value={yearTo}
+                    onChange={handleYearToChange}
+                    options={filteredYearToOptions}  
+                    isClearable={false}
+                    placeholder="YYYY"
+                    className={`${error ? "hidden" : "block"} text-[14px] w-full`}
+                  />
+                </div>
+
+                <div
+                onClick={handleSearch}
+                className="self-end mb-[10px] p-1 group flex w-full justify-center items-center bg-[#ca0000] rounded-xl"
+              >
+                <GoSearch
+                  size={27}
+                  className="cursor-pointer text-white group-hover:text-blue-500 duration-150"
+                />
+              </div>
               </div>
             </div>
           </div>
