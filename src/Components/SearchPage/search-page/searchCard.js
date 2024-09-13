@@ -12,7 +12,7 @@ import "swiper/css";
 
 function SearchCard({ data }) {
   return (
-    <div className="w-[100%] md:w-full lg:w-full    mx-auto mt-10">
+    <div className="w-[100%] md:w-full lg:w-full   mx-auto mt-10">
       <div className=" w-[100%]  md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => <Card key={index} card={card} />)}
       </div>
@@ -30,13 +30,13 @@ function Card({ card }) {
 
   return (
     <div className="flex flex-col md:flex-col lg:flex-row py-5 my-5 w-full bg-white mx-auto rounded-2xl shadow-lg  hover:shadow-2xl duration-300">
-      <div className="flex  justify-center items-center relative w-full lg:w-[16vw]  px-4">
-        {/* <img
+      <div className="flex justify-center items-center relative w-full lg:w-[16vw]  px-4">
+        <img
           src={card.image || null}
           className=" w-full h-full   rounded-[0.5vw] object-cover"
           alt={card.model}
-        /> */}
-        <Swiper
+        />
+        {/* <Swiper
           className="relative w-full h-full"
           autoplay={{
             delay: 2000,
@@ -58,7 +58,7 @@ function Card({ card }) {
                 </div>
               </SwiperSlide>
             ))}
-        </Swiper>
+        </Swiper> */}
       </div>
       <div className="flex flex-col lg:flex-row px-4 py-2">
         <div className="text-left px-2 border-b lg:border-r lg:border-b-0 font-urbanist">
