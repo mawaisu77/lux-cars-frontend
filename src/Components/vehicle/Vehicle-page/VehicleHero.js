@@ -450,7 +450,7 @@ console.log("detail page ")
                 </div>
               </div>
 
-              <VehicleTab data={carDetailData?.data} />
+              {/* <VehicleTab data={carDetailData?.data} /> */}
             </>
           )}
         </>

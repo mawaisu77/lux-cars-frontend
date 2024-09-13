@@ -94,19 +94,19 @@ const SwiperGallery = ({ images, carData }) => {
         {!isViewerOpen && (
         <>
            <button
-           className="absolute z-10 bottom-5 text-sm right-4 bg-gradient-to-b from-blue-700 to-black text-white py-1 px-2 rounded-lg"
+           className="absolute z-10 bottom-5 text-sm right-4 bg-black text-white py-1 px-2 rounded-lg"
            onClick={openModal} 
  
          >
            360° View
          </button>
-         <button
-           className="absolute z-10 bottom-5 text-sm right-28 bg-gradient-to-b from-blue-700 to-black text-white py-1 px-2 rounded-lg"
+       { carData.video && <button
+           className="absolute z-10 bottom-5 text-sm right-28 bg-black text-white py-1 px-2 rounded-lg"
            onClick={openVideoModal} 
  
          >
            Video
-         </button>
+         </button>}
          <div
            className="absolute z-10 bottom-5 w-28 text-sm left-3 rounded-lg"
          >
