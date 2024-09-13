@@ -270,10 +270,38 @@ const Sidebar = () => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        // For desktop screens (lg and above)
+        setShowFiltersMob(true); // Filters open by default
+      } else {
+        // For smaller screens (md and below)
+        setShowFiltersMob(false); // Filters hidden by default
+      }
+    };
+
+    // Set the initial state based on the current window size
+    handleResize();
+
+    // Add an event listener to handle window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Function to toggle filters only on smaller screens
   const handleFilters = () => {
-    console.log('hello')
-    setShowFiltersMob(!showFilterMob)
-  }
+    const isSmallScreen = window.innerWidth < 1024; // `lg` breakpoint in Tailwind
+    if (isSmallScreen) {
+      console.log("Toggling filters on small screen");
+      setShowFiltersMob(!showFilterMob);
+    }
+  };
+
 
   return (
     <>

@@ -12,8 +12,8 @@ import "swiper/css";
 
 function SearchCard({ data }) {
   return (
-    <div className="w-[100%] md:w-full lg:w-full bg-black  mx-auto mt-10">
-      <div className=" w-[100%] bg-gray-300 md:w-full lg:w-full mx-auto ">
+    <div className="w-[100%] md:w-full lg:w-full    mx-auto mt-10">
+      <div className=" w-[100%]  md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => < Card key={index} card={card} />)}
       </div>
     </div>
@@ -30,7 +30,7 @@ function Card({ card }) {
         
         {/* <img
           src={card.image || null}
-          className=" w-full h-full rounded-[0.5vw] object-cover"
+          className=" w-full h-full   rounded-[0.5vw] object-cover"
           alt={card.model}
         /> */}
           <Swiper
@@ -90,10 +90,10 @@ function Card({ card }) {
             <p className="text-xl font-bold text-red-600">
               {card.amount}
             </p>
-           <div className="flex lg:flex-col lg:mt-[4vh] flex-row gap-2">
-           <div className="flex justify-center items-center lg:mt-4 sm:mt-0">
+           <div className="flex lg:flex-col  flex-row gap-2">
+           <div className="flex justify-center items-center lg:mt-2 sm:mt-0">
             <Link to={`/vehicle-detail/${card.lot_id}`}>
-              <button className="w-[130px] lg:w-[10vw] h-[30px] lg:h-[4vh] rounded-[0.5vw]  text-md lg:text-md bg-black text-white font-urbanist hover:from-blue-600 hover:to-blue-800 duration-200">
+              <button className="w-[130px] lg:w-[10vw] h-[20px] lg:h-[4vh] rounded-[0.5vw]  text-md lg:text-md bg-black text-white font-urbanist hover:from-blue-600 hover:to-blue-800 duration-200">
                 BID NOW
               </button>
             </Link>

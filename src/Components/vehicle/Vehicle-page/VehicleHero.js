@@ -100,12 +100,12 @@ console.log("detail page ")
   return (
     <>
       <Header textColor="text-white" />
-      <div className="bg-vehicle">
+      <div className="lg:block hidden bg-vehicle">
         <div className="w-[15.5] flex flex-col pt-[12.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">
             Vehicle Detail
           </div>
-          <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+          <div className=" text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
               <button className="hover:text-white">Home</button>
             </Link>
@@ -137,13 +137,13 @@ console.log("detail page ")
                 </div>
               )} */}
 
-              <div className="flex flex-col md:flex-row  justify-between mx-auto w-[74vw] mt-[80px] mb-[20px]">
-                <div className="w-full md:w-[36vw] ">
+              <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[74vw] mt-[100px] mb-[20px]">
+                <div className="w-full lg:w-[36vw] ">
                   <SwiperGallery
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
                   />
-                  <div className="flex justify-between px-2 items-center w-full border text-[#101828] text-[1.04vw] h-[4.7vh] rounded-lg">
+                  <div className="flex justify-between px-2 items-center w-full border text-[#101828] lg:text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1">
                       <IoDocumentTextOutline />
                       <p>Get Report</p>
@@ -238,44 +238,44 @@ console.log("detail page ")
                   </div>
                 </div>
 
-                <div className="md:w-[33vw]">
+                <div className="w-full lg:w-[33vw]">
                   <div>
-                    <div className="flex justify-between mb-[3vh]">
-                      <div className="flex justify-center items-center gap-2">
-                        <p className="text-[1.7vw] font-urbanist font-semibold ">
+                    <div className="flex   justify-between mt-[50px] lg:mb-[3vh]">
+                      <div className="flex   justify-center items-center gap-2">
+                        <p className="lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
                           {carDetailData?.data?.title}
                         </p>
                       </div>
                     </div>
-                    <div className="flex justify-between mb-[3vh]">
-                      <div className="flex px-[0.5vw] gap-[0.5vw] items-center w-[16vw] h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
-                        <div className="flex justify-center items-center rounded-[0.5vw] w-[2.5vw] h-[5vh] bg-[#CA0000]">
+                    <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
+                      <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
+                        <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
                           <PiUsersFill
                             color="white"
-                            className="w-[1.2vw] h-[2.5vh]"
+                            className="lg:w-[1.2vw] lg:h-[2.5vh]"
                           />
                         </div>
                         <div className="text-left">
-                          <p className="text-[0.7vw] text-[#7a798a]">
+                          <p className="lg:text-[0.7vw] text-[#7a798a]">
                             Owned by
                           </p>
-                          <p className="text-[0.9vw] font-urbanist font-semibold">
+                          <p className="lg:text-[0.9vw] font-urbanist font-semibold">
                             {carDetailData?.data?.seller || "Unknown"}
                           </p>
                         </div>
                       </div>
-                      <div className="flex px-[0.5vw] gap-[0.5vw] items-center w-[16vw] h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
-                        <div className="flex justify-center items-center rounded-[0.5vw] w-[2.5vw] h-[5vh] bg-[#CA0000]">
+                      <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
+                        <div className="flex justify-center items-center p-2 rounded-[0.5vw] lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
                           <CgFileDocument
                             color="white"
-                            className="w-[1.2vw] h-[2.5vh]"
+                            className="lg:w-[1.2vw] lg:h-[2.5vh]"
                           />
                         </div>
                         <div className="text-left">
-                          <p className="text-[0.7vw] text-[#7a798a]">
+                          <p className="lg:text-[0.7vw] text-[#7a798a]">
                             Sale Document
                           </p>
-                          <p className="text-[0.9vw] font-urbanist font-semibold">
+                          <p className="lg:text-[0.9vw] font-urbanist font-semibold">
                             {carDetailData?.data?.document_old
                               ? carDetailData?.data?.document_old
                               : carDetailData?.data?.document}
@@ -284,29 +284,29 @@ console.log("detail page ")
                       </div>
                     </div>
 
-                    <div className="flex justify-between">
-                      <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
+                    <div className="flex   flex-col lg:flex-row gap-2 justify-between">
+                      <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-full lg:w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
                         <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                          <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
                             Lot:
                           </p>
-                          <p className="font-urbanist font-bold text-[0.97vw] ml-2">
+                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
                             {carDetailData?.data?.lot_id}
                           </p>
                         </div>
                         <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                          <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
                             VIN :
                           </p>
-                          <p className="font-urbanist font-bold text-[0.97vw] ml-2">
+                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
                             {carDetailData?.data?.vin}
                           </p>
                         </div>
                         <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-[0.85vw] ml-2">
+                          <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
                             Year/Make :
                           </p>
-                          <p className="font-urbanist font-bold text-[0.97vw] ml-2">
+                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
                             {carDetailData?.data?.year +
                               " " +
                               carDetailData?.data?.make}
@@ -316,19 +316,19 @@ console.log("detail page ")
                           <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-2">
                             Model:
                           </p>
-                          <p className="font-urbanist font-bold text-[0.97vw] ml-2">
+                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
                             {carDetailData?.data?.model}
                           </p>
                         </div>
                       </div>
-                      <div className="flex flex-col  w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
+                      <div className="flex flex-col  lg:w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
                         <div className="flex flex-col bg-[#f8f8f8] px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
                           <div className="flex items-center">
                             <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
                               Current Bid:
                             </p>
 
-                            <p className="font-urbanist font-bold text-[0.97vw] ml-2">
+                            <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
                               ${carDetailData?.data?.currentBid}
                             </p>
                           </div>
@@ -364,7 +364,7 @@ console.log("detail page ")
                   </div>
 
                   <div className="mt-6">
-                    <label className="block text-sm lg:text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
+                    <label className="block  lg:text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
                       Enter Your Final Bid
                     </label>
                     <CurrencyInput
@@ -372,7 +372,7 @@ console.log("detail page ")
                       name="minPrice"
                       placeholder="enter your bid ammount in usd"
                       prefix="$"
-                      className={`border text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
+                      className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
                       defaultValue={0}
                       decimalsLimit={2}
                       value={placeBidAmount ? placeBidAmount :carDetailData?.data?.currentBid}
@@ -404,7 +404,7 @@ console.log("detail page ")
 
                   <div className="flex flex-col justify-center gap-y-[2.1vh]">
                     {/* Specifications */}
-                    <section className="bg-white p-[1.5vw] rounded-lg shadow-md">
+                    <section className="bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
                       <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                         Specifications
                       </h2>

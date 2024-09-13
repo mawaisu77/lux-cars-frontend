@@ -151,7 +151,7 @@ function SearchMainPage({ appliedFilters, triggerFetch, resetFilters,setShowFilt
     </button>
   ) : (
     <button 
-      className="flex justify-center items-center mt-[2vh] px-4 py-2   border w-[150px] mx-auto rounded-lg hover:w-[160px] transition-all duration-300"
+      className="lg:hidden flex justify-center items-center mt-[2vh] px-4 py-2   border w-[150px] mx-auto rounded-lg hover:w-[160px] transition-all duration-300"
       onClick={handleFilters}  // Correctly showing the filters
     >
       Show Filters
