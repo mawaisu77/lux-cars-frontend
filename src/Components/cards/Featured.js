@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 
 const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars/testing?buy_now=true"
+    "cars/get-all-cars?buy_now=true"
   );
   if (carLoading) {
     return <Shimmer />;

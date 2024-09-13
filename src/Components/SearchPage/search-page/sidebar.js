@@ -326,7 +326,7 @@ const Sidebar = () => {
 } */}
 
 
-    <div className="lg:flex justify-center  gap-[3vw] w-[80vw] mt-[100px]    mx-auto font-urbanist">
+    <div className="flex lg:flex-row flex-col justify-center   gap-[3vw] w-[80vw] mt-[100px]  mx-auto font-urbanist">
       <h2 className="lg:hidden text-[42px] font-bold">
         Fliters
       </h2>      {
@@ -495,14 +495,14 @@ const Sidebar = () => {
         )
       }
  
-       <div className=" w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex flex-col items-center">
+       <div className="w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex justify-center flex-col items-center">
         <SearchMainPage
-         resetFilters={resetFilters}
+          resetFilters={resetFilters}
           appliedFilters={appliedFilters}
           triggerFetch={appliedFilters}
-        setShowFiltersMob={setShowFiltersMob}
-        showFilterMob={showFilterMob}
-        handleFilters={handleFilters}
+          setShowFiltersMob={setShowFiltersMob}
+          showFilterMob={showFilterMob}
+          handleFilters={handleFilters}
         />
       </div> 
     </div>
