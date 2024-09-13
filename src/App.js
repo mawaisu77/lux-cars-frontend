@@ -3,7 +3,7 @@
 import Fees from './Components/fees/index.js';
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from "react-router-dom";
 import Home from "./Components/home/index.js";
 import Footer from "./Components/Footer/index.js";
 import Login from "./Components/Login/login-page/Login.js";
@@ -38,6 +38,7 @@ import { useAuthContext } from "./hooks/useAuthContext.js";
 import Parts from "./Components/user-page/user-pages/Parts.js";
 import SavedCars from "./Components/user-page/user-pages/SavedCars.js";
 import useGetSavedCars from "./hooks/useGetUserSavedCars.js";
+import ScrollToTop from './utils/ScrollToTop.js';
 
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -95,15 +96,16 @@ function App() {
   };
   return (
      <>
-   
       <Router>
       <div>
       {showReviewPopup &&<Review user={user}  onClose={handleClosePopup} />}
       </div>
         <div className="App">
-          {/* <Header/> */}
+        <ScrollToTop />
+        {/* <Header/> */}
           {/* Define your routes here */}
           <Routes>
+
             <Route
               path="/"
               element={
