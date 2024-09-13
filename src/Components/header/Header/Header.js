@@ -17,7 +17,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [navbarColor, setNavbarColor] = useState('transparent');
-  const [windowWidth, setWindowWidth] = useState('');
+  const [windowWidth, setWindowWidth] = useState();
 
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -60,9 +60,7 @@ const Header = () => {
 
       if (window.innerWidth < 768) {
         setNavbarColor("#333333"); 
-      } else {
-        setNavbarColor("");
-      }
+      } 
     };
 
     // Add the resize event listener
@@ -71,10 +69,14 @@ const Header = () => {
     // Call the function initially to set the correct color based on current width
     handleResize();
 
-    // return () => {
-    //   window.removeEventListener("resize", handleResize);
-    // };
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
+
+
+  console.log("navbarColor", navbarColor)
+  console.log("windowWidth", windowWidth)
   
   return (
     <div className='fixed top-0 border-b border-[#7A798A] w-full z-50 '

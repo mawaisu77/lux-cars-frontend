@@ -118,7 +118,6 @@ const calculateBankTransferFee = () => {
     }
   }, [selectedCategory, data.location]);
 
-
   return (
     <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
        <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
@@ -155,6 +154,7 @@ const calculateBankTransferFee = () => {
         </>
       )}
 
+     
       <div className="my-[3vh]">
         <h3 className="text-lg lg:text-[1.15vw] text-left font-semibold rounded-[0.5vw]  text-gray-900 mb-[1.1vh]">
           Select Fuel Type

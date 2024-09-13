@@ -44,10 +44,10 @@ const VehicleCards = React.memo(({ carData }) => {
                 slidesPerView={1}
                 spaceBetween={30}
                 breakpoints={{
-                  640: { slidesPerView: 1 },
-                  740: { slidesPerView: 2 },
-                  1024: { slidesPerView: 4 },
-                  1440: { slidesPerView: 4 },
+                  640: { slidesPerView: 2 },
+                740: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+                1440: { slidesPerView: 4 },
                 }}
                 scrollbar={{ draggable: true }}
                 loop={true}
@@ -72,7 +72,7 @@ const VehicleCards = React.memo(({ carData }) => {
                     cars.data.cars.map((card, index) => (
                       <SwiperSlide
                         key={index}
-                        className="relative w-[330px] lg:w-[20.3vw] xl:w-[20.3vw] "
+                        className="relative w-[300px]  lg:w-[20.3vw] xl:w-[20.3vw]"
                       >
                         <CarCard card={card} />
                       </SwiperSlide>
