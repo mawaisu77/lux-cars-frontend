@@ -119,7 +119,7 @@ const HowWorks = () => {
             <div className=" flex lg:justify-between items-center gap-[2.5vw]   w-[186px]  lg:w-[34vw]  h-[380px] lg:h-[20.3vh] "></div>
           </div>
 
-          <div className=" w-[370px] flex md:w-[40vw] lg:w-[74vw]   mx-auto my-[5vh] ">
+          <div className=" w-[370px] flex md:w-[40vw] lg:w-[74vw]   mx-auto pb-[5vh] mt-[5vh] ">
             <div className=" flex flex-col-reverse  lg:flex-row lg:justify-between items-center gap-[2.5vw] w-[186px]  lg:w-[34vw]  h-[380px] lg:h-[20.3vh]  ">
               <div className="text-right w-[127px]  lg:w-[30vw] h-[193px] lg:h-[18vh] ">
                 <p className="font-urbanist text-[16px]  lg:text-[1.2vw] font-bold mb-[1.5vh]">
