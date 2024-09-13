@@ -12,7 +12,7 @@ import "swiper/css";
 
 function SearchCard({ data }) {
   return (
-    <div className="w-[100%] md:w-full lg:w-full   mx-auto mt-10">
+    <div className="w-[320px] md:w-full lg:w-full   mx-auto mt-10">
       <div className=" w-[100%]  md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => <Card key={index} card={card} />)}
       </div>
@@ -29,14 +29,14 @@ function Card({ card }) {
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
   return (
-    <div className="flex flex-col md:flex-col lg:flex-row py-5 my-5 w-full bg-white mx-auto rounded-2xl shadow-lg  hover:shadow-2xl duration-300">
-      <div className="flex justify-center items-center relative w-full lg:w-[16vw]  px-4">
-        <img
+    <div className="flex flex-col md:flex-col items-center justify-center lg:flex-row py-5 my-5 w-full     mx-auto rounded-2xl shadow-lg  hover:shadow-2xl duration-300">
+      <div className="flex justify-center items-center relative  w-[320px] lg:w-[16vw]  px-4">
+        {/* <img
           src={card.image || null}
           className=" w-full h-full   rounded-[0.5vw] object-cover"
           alt={card.model}
-        />
-        {/* <Swiper
+        /> */}
+        <Swiper
           className="relative w-full h-full"
           autoplay={{
             delay: 2000,
@@ -50,7 +50,7 @@ function Card({ card }) {
               <SwiperSlide key={index} className="relative">
                 <div className="">
                   <img
-                    className="w-full h-full rounded-[0.5vw] object-cover"
+                    className="  h-full rounded-[0.5vw] object-cover"
                     src={image}
                     alt={`Vehicle_Image ${index + 1}`}
                     // onClick={() => openImageViewer(index)}
@@ -58,9 +58,9 @@ function Card({ card }) {
                 </div>
               </SwiperSlide>
             ))}
-        </Swiper> */}
+        </Swiper>
       </div>
-      <div className="flex flex-col lg:flex-row px-4 py-2">
+      <div className="flex flex-col   md:justify-center md:items-center    mx-auto lg:flex-row px-4 py-2">
         <div className="text-left px-2 border-b lg:border-r lg:border-b-0 font-urbanist">
           <p className="font-semibold   py-2 ">
             {card.title.length > 40
@@ -106,18 +106,18 @@ function Card({ card }) {
           <div className="py-1 text-center sm:text-left">
             <p className="text-sm text-gray-600">{card.Price}</p>
             <p className="text-xl font-bold text-red-600">{card.amount}</p>
-            <div className="flex lg:flex-col flex-row gap-4 p-4 bg-gray-100 rounded-lg shadow-lg">
+            <div className="flex flex-col w-[260px] lg:w-full  gap-4 p-4 bg-gray-100 rounded-lg shadow-lg">
         {/* BID NOW Button Section */}
-        <div className="flex justify-center items-center lg:mt-2 sm:mt-0">
+        <div className="flex justify-center items-center   lg:mt-2 sm:mt-0">
           <Link to={`/vehicle-detail/${card.lot_id}`}>
-            <button className="w-[150px] lg:w-[12vw] h-[40px] lg:h-[5vh] rounded-[8px] text-lg lg:text-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform hover:scale-105">
+            <button className="w-[150px] lg:w-[10vw] h-[40px] lg:h-[5vh] rounded-[8px] text-lg lg:text-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform hover:scale-105">
               BID NOW
             </button>
           </Link>
         </div>
 
           {/* Auction Date & Timer Section */}
-          <div className="w-[150px] lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center p-2 shadow-md">
+          <div className="w-full  lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center p-2 shadow-md">
             <div className="flex items-center gap-3">
               {/* Icon Section */}
               <div className="flex justify-center items-center">
