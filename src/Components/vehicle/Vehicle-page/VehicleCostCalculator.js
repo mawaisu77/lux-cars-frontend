@@ -3,6 +3,12 @@ import Select from "react-select";
 import TooltipInfo from "../../common/TooltipInfo";
 import { BsInfoCircle } from "react-icons/bs";
 import { atvData, suvData, heavyMachineryData} from "../../../utils/carCategoriesData";
+import { CopartBuyerFeeCalculator } from "./copart-bid-calculations/BuyerFeeCalculations";
+import { copartEnvironmentalFee, copartGateFee, copartTitlePickupFee} from "./copart-bid-calculations/CopartFinalAuctionProps";
+import { CopartVirtualBidFeeCalculator } from "./copart-bid-calculations/VirtualFeeCalculations";
+import { IAAIBuyerFeeCalculator } from "./iaai-bid-calculations/IaaiBuyerFee";
+import { IAAIInternetBidFeeCalculator } from "./iaai-bid-calculations/InternetAndProxyFee";
+import { iaaiEnvironmentalFee, iaaiServiceFee } from "./iaai-bid-calculations/IAAIFinalAuctionProps";
 
 const categoryOptions = [
   { label: "SUV", value: "SUV" },
@@ -20,8 +26,50 @@ const Dropdown = ({ bidAmount, data }) => {
   const [transportationOptions, setTransportationOptions] = useState([]);
   const [selectedTransportation, setSelectedTransportation] = useState(null);
   const [selectedFuelType, setSelectedFuelType] = useState(fuelOptions[0]);
+  const [finalBid, setFinalBid] = useState(0); // Store the final bid in state
+  const [showApprovalMessage, setShowApprovalMessage] = useState(false); // State to show the approval message
 
-  const finalBid = bidAmount ? parseFloat(bidAmount).toFixed(2) : 0;
+  // const finalBid = bidAmount ? parseFloat(bidAmount).toFixed(2) : 0;
+  const currentYear = new Date().getFullYear();
+  // Check if the car year is older than 10 years
+  const isOlderThanTenYears = () => {
+    const carYear = data?.year || currentYear; // Assuming the car year is passed in `data`
+    return currentYear - carYear > 10;
+  };
+
+const calculateFinalBid = (bid, baseSite) => {
+  let total = 0;
+
+  if (baseSite === 'copart') {
+    // Copart fee calculations
+    const copartBuyerFee = CopartBuyerFeeCalculator(bid);
+    const copartVirtualFee = CopartVirtualBidFeeCalculator(bid);
+    total = 
+      parseFloat(bid) + 
+      copartBuyerFee + 
+      copartVirtualFee + 
+      copartGateFee + 
+      copartTitlePickupFee + 
+      copartEnvironmentalFee;
+  } 
+
+  else if (baseSite === 'iaai') {
+    
+    const iaaiBuyerFee = IAAIBuyerFeeCalculator(bid); 
+    const iaaiInternetFee = IAAIInternetBidFeeCalculator(bid); 
+    
+    total = 
+      parseFloat(bid) + 
+      iaaiBuyerFee + 
+      iaaiInternetFee + 
+      iaaiServiceFee + 
+      iaaiEnvironmentalFee;
+      // console.log("bid, iaaiBuyerFee, iaaiInternetFee, iaaiServiceFee, iaaiEnvironmentalFee",bid, iaaiBuyerFee, iaaiInternetFee, iaaiServiceFee, iaaiEnvironmentalFee)
+  }
+
+  return parseFloat(total).toFixed(2);
+};
+
 
   const calculateCustomsDuty = () => {
     const bid = parseFloat(finalBid) || 0;
@@ -65,14 +113,12 @@ const Dropdown = ({ bidAmount, data }) => {
     const ServiceFee = calculateServiceFee()
     const VAT = calculateVATBase();
     const InspectionCost = calculateInspectionCost()
-    return VAT + ServiceFee + InspectionCost +  parseFloat(finalBid) || 0 ;
+    return  ServiceFee + InspectionCost +  parseFloat(finalBid) || 0 ;
   };
 
   // Function to calculate auction fee (5% of final bid + service fee)
 const calculateAuctionFee = () => {
-  const bidAmount = parseFloat(finalBid) || 0;
-  const serviceFee = calculateServiceFee(); 
-  const auctionFee = (bidAmount + serviceFee) * 0.05;
+  const auctionFee = finalBid * 0.05;
   return auctionFee;
 };
 
@@ -118,10 +164,25 @@ const calculateBankTransferFee = () => {
     }
   }, [selectedCategory, data.location]);
 
+    // Update final bid when bidAmount or base_site changes
+    useEffect(() => {
+      const updatedFinalBid = calculateFinalBid(bidAmount, data?.base_site);
+      setFinalBid(updatedFinalBid); // Store the calculated final bid in state
+    }, [bidAmount, data?.base_site]);
+
+    useEffect(() => {
+      if (isOlderThanTenYears()) {
+        setShowApprovalMessage(true); // Show the message if the car is older than 10 years
+      } else {
+        setShowApprovalMessage(false); // Hide the message if the car is 10 years or newer
+      }
+    }, [data]);
+  
+
   return (
     <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
        <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
-        Calculations
+        Calculations (testing...)
       </h2>
 
       <h3 className="text-lg lg:text-[1.15vw] text-left font-semibold rounded-[0.5vw] text-gray-900 mb-[1.1vh]">
@@ -133,7 +194,7 @@ const calculateBankTransferFee = () => {
         value={selectedCategory}
         onChange={handleCategoryChange}
         placeholder="Select Category"
-        className="mb-[2vh]  text-md lg:text-[1vw] rounded-[0.5vw]"
+        className="mb-[2vh] text-sm lg:text-[1vw] rounded-[0.5vw]"
       />
 
       {selectedCategory && (
@@ -147,7 +208,7 @@ const calculateBankTransferFee = () => {
             value={selectedTransportation}
             onChange={setSelectedTransportation}
             placeholder="Select Transportation"
-            className="mb-[2vh]  text-md lg:text-lg lg:text-[1vw]  rounded-[0.5vw]"
+            className="mb-[2vh] text-sm lg:text-[1vw] rounded-[0.5vw]"
             defaultValue={selectedTransportation} // Pre-select the transportation option
 
           />
@@ -165,7 +226,7 @@ const calculateBankTransferFee = () => {
           value={selectedFuelType}
           onChange={setSelectedFuelType}
           placeholder="Select Fuel Type"
-          className="mb-[2vh]  text-md lg:text-[1vw] py-[0.4vw]  rounded-[0.5vw]"
+          className="mb-[2vh] text-sm lg:text-[1vw] py-[0.4vw]  rounded-[0.5vw]"
         />
       </div>
 
@@ -174,14 +235,27 @@ const calculateBankTransferFee = () => {
           Fees & Calculations
         </h3>
         <div className="space-y-3">
-          <div className="flex justify-between">
-            <span className="text-md lg:text-[0.875vw] text-gray-700">
+            {/* Transportation Rate */}
+            <div className="flex justify-between">
+          <div className="flex gap-x-1.5 justify-center items-center">
+              <span className="text-md lg:text-[0.875vw] text-gray-700">
               Your Final Bid:
-            </span>
+              </span>
+              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+                <TooltipInfo content="Auction fee included">
+                  <BsInfoCircle
+                    size={15}
+                    className="hover:text-blue-800 duration-200"
+                  />
+                </TooltipInfo>
+              </div>
+            </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
-              ${finalBid}
+            ${calculateFinalBid(bidAmount, data?.base_site)}
             </span>
           </div>
+
+         
 
           <div className="flex justify-between">
             <span className=" text-md lg:text-[0.875vw] text-gray-700">
@@ -211,15 +285,29 @@ const calculateBankTransferFee = () => {
             </span>
           </div>
 
+
           {/* Levy Fee */}
           <div className="flex justify-between">
-            <span className="text-md lg:text-[0.875vw] text-gray-700">
+          <div className="flex gap-x-1.5 justify-center items-center">
+              <span className="text-md lg:text-[0.875vw] text-gray-700">
               Levy Fee: (flat)
-            </span>
+              </span>
+              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+                <TooltipInfo content="Approval is needed from the Ministry for cars older than 10 years.">
+                  <BsInfoCircle
+                    size={15}
+                    className={`${showApprovalMessage ? "text-red-600 animate-pulse" : ""} hover:text-blue-800 duration-200`}
+                  />
+                </TooltipInfo>
+              </div>
+            </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
-              ${calculateLevyFee().toFixed(2)}
+            ${calculateLevyFee().toFixed(2)}
             </span>
           </div>
+
+
+
 
           {/* Inspection Cost */}
           <div className="flex justify-between">
@@ -287,7 +375,7 @@ const calculateBankTransferFee = () => {
               </div>
             </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
-              ${"100"}
+              ${"500"} (static)
             </span>
           </div>
 

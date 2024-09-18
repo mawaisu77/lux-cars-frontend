@@ -26,7 +26,7 @@ const Top = () => {
         ))}
       
       </div>
-      <div className='flex justify-center mx-auto items-center w-[150px] lg:w-[9vw] h-[54px] lg:h-[7vh] bg-[#f3f3f6] text-[15px] lg:text-[1vw] text-[#ca0000] rounded-full my-[2vh] cursor-pointer'>
+      <div className='flex justify-center mx-auto items-center w-[150px] lg:w-[9vw] h-[54px] lg:h-[7vh] bg-[#f3f3f6] text-[15px] lg:text-[1vw] text-[#ca0000] rounded-full my-[2vh] cursor-pointer mb-20'>
           load more
         </div>
     </div>

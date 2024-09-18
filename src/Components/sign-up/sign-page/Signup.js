@@ -52,10 +52,10 @@ const Signup = () => {
 
   return (
     <>
-     <div className="Backgroundimage-Signup">
       <Header textColor="text-white" />
+     <div className="Backgroundimage-Signup">
       <div className="hidden lg:block">
-        <div className="w-[15.5] flex flex-col mt-[5.5vh]">
+        <div className="w-[15.5] flex flex-col  pt-[14.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">SignUp</div>
           <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">

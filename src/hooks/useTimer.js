@@ -15,7 +15,7 @@ const useTimer = (targetTime) => {
   }, [targetTime]);
 
   useEffect(() => {
-    console.log("Timer effect initialized");
+    // console.log("Timer effect initialized");
 
     const updateTimer = () => {
       const now = new Date();
@@ -43,13 +43,13 @@ const useTimer = (targetTime) => {
         seconds,
       });
 
-      console.log("Updated time left:", { days, hours, minutes, seconds });
+      // console.log("Updated time left:", { days, hours, minutes, seconds });
     };
 
     const intervalId = setInterval(updateTimer, 1000);
 
     return () => {
-      console.log("Timer effect cleaned up");
+      // console.log("Timer effect cleaned up");
       clearInterval(intervalId);
     };
   }, []);

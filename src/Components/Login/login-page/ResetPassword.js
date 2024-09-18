@@ -33,15 +33,13 @@ const ResetPassword = () => {
 
   return (
     <>
-      {" "}
+       <Header className="text-white" />
       <div className="Backgroundimage-LogIN">
-        <Header className="text-white" />
-        <div className="hidden  lg:block">
-          <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
+        <div className="hidden lg:block">
+          <div className="w-[15.5] flex flex-col pt-[14.5vh]">
             <div className="text-[2.6vw] font-semibold text-white">LogIN</div>
             <div className="text-[#8A8AA0] flex gap-3 justify-center text-[1vw] font-urbanist ">
               <Link to="/">
-                {" "}
                 <button className="hover:text-white  ">Home</button>
               </Link>
               /<button className="hover:text-white">LogIn</button>

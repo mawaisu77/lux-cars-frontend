@@ -39,6 +39,7 @@ const Aboutdest = () => {
             
                     <div className='absolute lg:top-[38vh] px-3  top-10 w-full hidden md:block '>
                         <Marquee
+                            speed={50}
                             gradient={true}
                             pauseOnHover={true}
                             gradientColor='#21212184'

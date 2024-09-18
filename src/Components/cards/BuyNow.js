@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 
 const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars"
+    "cars/get-all-cars/testing"
   );
   if (carLoading) {
     return <Shimmer />;
@@ -27,32 +27,44 @@ const BuyNow = () => {
     );
   }
 
-
   return (
     <>
-      <div className="h-[784px] lg:h-[90vh] relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
-        <div className="" id="startBidding" > 
-          <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[5vh]">
-            Bid Now
+      <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
+        <div className="" id="startBidding">
+          <div className="pl-2 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw] mx-auto ">
+            <div className="flex flex-col gap-y-2">
+              <div className="flex justify-start font-urbanist text-[36px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
+                Bid Now
+              </div>
+              <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
+            </div>
+            {/* <div>
+            <span></span>
+            <span>View All</span>
+            </div> */}
           </div>
-          <hr className="h-1 bg-[#ca0000] mt-[15px]  w-20 mx-auto" />
 
-          <div className="relative">
+          <div className="relative ">
             <Swiper
               style={{
                 "--swiper-pagination-color": "#FFBA08",
                 "--swiper-pagination-bullet-inactive-color": "#999999",
                 "--swiper-pagination-bullet-inactive-opacity": "1",
-                "--swiper-pagination-bullet-size": "16px",
-                "--swiper-pagination-bullet-horizontal-gap": "6px",
+                "--swiper-pagination-bullet-size": "12px",
+                "--swiper-pagination-bullet-horizontal-gap": "3px",
               }}
-              slidesPerView={1}
-              spaceBetween={30}
+              // slidesPerView={1}
+              spaceBetween={0}
               breakpoints={{
-                640: { slidesPerView: 2 },
-                740: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 },
-                1440: { slidesPerView: 4 },
+                440: { slidesPerView: 1 },
+                580: { slidesPerView: 2 },
+                640: { slidesPerView: 3 },
+                840: { slidesPerView: 4 },
+                1024: { slidesPerView: 4 },
+                1200: { slidesPerView: 5 },
+                1440: { slidesPerView: 5 },
+                1620: { slidesPerView: 5 },
+                1920: { slidesPerView: 5 },
               }}
               scrollbar={{ draggable: true }}
               loop={true}
@@ -70,27 +82,27 @@ const BuyNow = () => {
                 },
               }}
               modules={[Navigation, Pagination]}
-              className="w-full lg:w-[82vw] h-[550px] lg:h-[68vh] mt-[40px]"
+              className="w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw] "
             >
-              <div className="w-[90vw] flex justify-center mx-auto  items-center mt-[9vh]">
+              <div className="">
                 {carData &&
                   carData.map((card, index) => (
-                    <SwiperSlide key={index} className="relative w-[300px]  lg:w-[20.3vw] xl:w-[20.3vw] ">
+                    <SwiperSlide key={index} className="relative py-5 mb-5">
                       <CarCard card={card} isBuy={false} />
                     </SwiperSlide>
                   ))}
               </div>
             </Swiper>
           </div>
-          <button className="arrow-left-bid arrow-bid">
+          <button className="arrow-left-bid arrow-bid sm:block">
             <IoIosArrowDropleft
-              size={35}
+              size={28}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"
             />
           </button>
           <button className="arrow-right-bid arrow-bid sm:block ">
             <IoIosArrowDropright
-              size={35}
+              size={28}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"
             />
           </button>

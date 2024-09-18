@@ -2,24 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   @apply m-0 p-0 overflow-x-hidden w-full;
   background-color: white;
   color: black;
-  
 }
- 
+
 @media (min-width: 1025px) {
-  .bg-vehicle{
+  .bg-vehicle {
     position: relative;
-    background-image: url('../src/assets/BG-Img/IMG\ \(49\).png'); /* Update the image path as necessary */
+    background-image: url("../src/assets/BG-Img/IMG\ \(49\).png"); /* Update the image path as necessary */
     background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
 
   .bg-vehicle::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -34,18 +34,17 @@ html, body {
     z-index: 2;
   }
 
-
   @media (min-width: 1025px) {
-    .back-image-search-page{
+    .back-image-search-page {
       position: relative;
-      background-image: url('../src/assets/Vehicle/IMG\ \(55\).png'); /* Update the image path as necessary */
+      background-image: url("../src/assets/Vehicle/IMG\ \(55\).png"); /* Update the image path as necessary */
       background-size: cover;
       background-repeat: no-repeat;
       height: 32.5vh;
     }
-  
+
     .back-image-search-page::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
@@ -55,15 +54,23 @@ html, body {
       opacity: 0.5;
       z-index: 1;
     }
-  
+
     .back-image-search-page > * {
       position: relative;
       z-index: 2;
     }
   }
 
+  .Backgroundimage-LogIN {
+    position: relative;
+    background-image: url("../src/assets/Vehicle/IMG\ \(55\).png"); /* Update the image path as necessary */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+  }
+
   .Backgroundimage-LogIN::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -110,131 +117,121 @@ html, body {
   transition: transform 1s ease;
   cursor: pointer;
 }
-
 /* Add a subtle scale effect on hover */
 .animated-text:hover {
   transform: scale(1.05);
 }
+.bgImage {
+  background-image: url("../src/assets/BG-Img/kk\ 1.png"),
+    url("../src/assets/BG-Img/tree_7072\ 1.png"); /* Adjust the path if necessary */
+  background-size: 75vw; /* Adjust the percentage to control the size of the background image */
+  background-repeat: no-repeat; /* Ensure the background image does not repeat */
+  background-position: center;
+}
 
-
+@media (max-width: 753px) {
   .bgImage {
-    background-image: url('../src/assets/BG-Img/kk\ 1.png') , url( '../src/assets/BG-Img/tree_7072\ 1.png'); /* Adjust the path if necessary */
-    background-size: 75vw; /* Adjust the percentage to control the size of the background image */
-    background-repeat: no-repeat; /* Ensure the background image does not repeat */
-    background-position:  center;
-    
+    background-size: 753px; /* Adjust background size to 753px */
+    background-position: center;
   }
- 
-  @media (max-width: 753px) {
-    .bgImage {
-      background-size: 753px; /* Adjust background size to 753px */
-      background-position: center;
-  
-    }
-  }
- 
-  
-  @media (min-width: 1025px) {
-    .back-image{
-      position: absolute;
-      background-image: url( '../src/assets/BG-Img/IMG\ \(26\).png'); /* Update the image path as necessary */
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 32.5vh;
-    }
-  
-    .back-image::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
-      opacity: 0.5;
-      z-index: 1;
-    }
-  
-    .back-image > * {
-      position: relative;
-      z-index: 2;
-    }
-  }
-  @media (min-width: 1025px) {
-    .Backgroundimage-LogIN {
-      position: relative;
-      background-image: url('../src/assets/BG-Img/IMG\ \(41).png'); /* Update the image path as necessary */
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 32.5vh;
-    }
-  
-    .Backgroundimage-LogIN::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
-      opacity: 0.5;
-      z-index: 1;
-    }
-  
-    .Backgroundimage-LogIN > * {
-      position: relative;
-      z-index: 2;
-    }
-    
-    .Backgroundimage-Privicy-loan-terms{
-      background-image: url('../src/assets/BG-Img/IMG\ \(28).png');
-      background-size: 100vw;
-      background-repeat: no-repeat;
-      height: 32.5vh;
-  
-    }
-    
+}
+@media (min-width: 1025px) {
+  .back-image {
+    position: absolute;
+    background-image: url("../src/assets/BG-Img/IMG\ \(26\).png"); /* Update the image path as necessary */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 32.5vh;
   }
 
-  @media (min-width: 1025px) {
-    .Backgroundimage-Signup {
-      position: relative;
-      background-image: url('../src/assets/BG-Img/IMG\ \(42).png'); /* Update the image path as necessary */
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 32.5vh;
-    }
-  
-    .Backgroundimage-Signup::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
-      opacity: 0.5;
-      z-index: 1;
-    }
-  
-    .Backgroundimage-Signup > * {
-      position: relative;
-      z-index: 2;
-    }
+  .back-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    opacity: 0.5;
+    z-index: 1;
   }
-  
- 
+
+  .back-image > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+@media (min-width: 1025px) {
+  .Backgroundimage-LogIN {
+    position: relative;
+    background-image: url("../src/assets/BG-Img/IMG\ \(41).png"); /* Update the image path as necessary */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 35vh;
+  }
+
+  .Backgroundimage-LogIN::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    z-index: 1;
+  }
+
+  .Backgroundimage-LogIN > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .Backgroundimage-Privicy-loan-terms {
+    background-image: url("../src/assets/BG-Img/IMG\ \(28).png");
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    height: 32.5vh;
+  }
+}
+
+@media (min-width: 1025px) {
+  .Backgroundimage-Signup {
+    position: relative;
+    background-image: url("../src/assets/BG-Img/IMG\ \(42).png"); /* Update the image path as necessary */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 35vh;
+  }
+
+  .Backgroundimage-Signup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity as needed */
+    z-index: 1;
+  }
+
+  .Backgroundimage-Signup > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
 @media (min-width: 1025px) {
   .Backgroundimage-How {
     position: relative;
-    background-image: url('../src/assets/BG-Img/IMG (29).png');
+    background-image: url("../src/assets/BG-Img/IMG (29).png");
     background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
 
   .Backgroundimage-How::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -249,18 +246,18 @@ html, body {
     z-index: 2;
   }
 }
-  
+
 @media (min-width: 1025px) {
   .back-image-Help {
     position: relative;
-    background-image: url('../src/assets/BG-Img/IMG\ \(30\).png'); /* Update the image path as necessary */
+    background-image: url("../src/assets/BG-Img/IMG\ \(30\).png"); /* Update the image path as necessary */
     background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
 
   .back-image-Help::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -279,14 +276,14 @@ html, body {
 @media (min-width: 1025px) {
   .Account-image {
     position: relative;
-    background-image: url('../src/assets/BG-Img/IMG\ \(43\).png'); /* Update the image path as necessary */
+    background-image: url("../src/assets/BG-Img/IMG\ \(43\).png"); /* Update the image path as necessary */
     background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
 
   .Account-image::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -303,18 +300,17 @@ html, body {
   }
 }
 
-
 @media (min-width: 1025px) {
   .bg-fees {
     position: relative;
-    background-image: url('../src/assets/BG-Img/IMG.png'); /* Update the image path as necessary */
+    background-image: url("../src/assets/BG-Img/IMG.png"); /* Update the image path as necessary */
     background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
 
   .bg-fees::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -331,19 +327,17 @@ html, body {
   }
 }
 
-
-
 @media (min-width: 1025px) {
   .Backgroundimage-About {
     position: relative;
-    background-image: url('../src/assets/BG-Img/IMG (34).png'); /* Update the image path as necessary */
+    background-image: url("../src/assets/BG-Img/IMG (34).png"); /* Update the image path as necessary */
     background-size: cover;
     background-repeat: no-repeat;
     height: 32.5vh;
   }
 
   .Backgroundimage-About::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -358,20 +352,19 @@ html, body {
     z-index: 2;
   }
 }
-  .bg-img {
-    background-image: url('../src/assets/About/IMG (36).png');
-    background-size: 72vw;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 47vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+.bg-img {
+  background-image: url("../src/assets/About/IMG (36).png");
+  background-size: 72vw;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 47vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.form-checkbox{
+.form-checkbox {
   appearance: none;
-  background-color: white; 
+  background-color: white;
   border: 1px solid gray;
   width: 1.5em;
   height: 1.5em;
@@ -381,21 +374,21 @@ html, body {
   border-radius: 0.25em;
 }
 
-.form-checkbox::before { 
+.form-checkbox::before {
   content: "";
   width: 0.75em;
   height: 0.75em;
   transform: scale(0);
-  transition: transform 120ms ease-in-out; 
-  box-shadow: inset 1em 1em rgb(255, 0, 0); 
+  transition: transform 120ms ease-in-out;
+  box-shadow: inset 1em 1em rgb(255, 0, 0);
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 0, 80% 0, 38% 70%);
- }
+}
 
- .form-checkbox:checked::before {
+.form-checkbox:checked::before {
   transform: scale(1);
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -409,8 +402,8 @@ html, body {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -425,7 +418,7 @@ html, body {
 }
 
 input:checked + .slider {
-  background-color: #CA0000;
+  background-color: #ca0000;
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -433,5 +426,6 @@ input:checked + .slider {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}

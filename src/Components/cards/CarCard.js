@@ -75,22 +75,22 @@ const CarCard = ({ card, isBuy = false }) => {
 
   return (
     <>
-    <div className=" rounded-xl shadow-lg mx-5 lg:px-0">
+    <div className=" rounded-xl shadow-lg mx-2 lg:px-0">
       <div className="p-[1vw] relative w-full lg:p-[1vw]">
         <div className="w-full relative">
           {isCarSaved ? (
-            <div className="bg-black/80 rounded-lg px-3 py-1 absolute z-50 right-5 top-2">
+            <div className="bg-black/80 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
               <BsHeartFill
                 onClick={() => handleSaveClick(card.lot_id)}
-                size={23}
+                size={15}
                 className=" cursor-pointer text-red-600"
               />
             </div>
           ) : (
-            <div className="bg-black/80 rounded-lg px-3 py-1 absolute z-50 right-5 top-2">
+            <div className="bg-black/80 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
               <BsHeart
                 onClick={() => handleSaveClick(card.lot_id)}
-                size={23}
+                size={15}
                 className=" cursor-pointer text-white hover:text-red-600"
               />
             </div>
@@ -107,11 +107,11 @@ const CarCard = ({ card, isBuy = false }) => {
           >
             {card.images &&
               card.images.map((image, index) => (
-                <SwiperSlide key={index} className="relative">
+                <SwiperSlide key={index} className="relative ">
                  
-                  <div className="">        
+                  <div className=" ">        
                     <img
-                      className="w-full rounded-xl h-[250px] lg:h-[28.2vh] cursor-pointer"
+                      className="w-full rounded-xl h-[250px] sm:h-[18.2vh] md:h-[18.2vh] lg:h-[18vh] xl:h-[18vh] cursor-pointer"
                       src={image}
                       alt={`Vehicle_Image ${index + 1}`}
                       onClick={() => openImageViewer(index)}
@@ -124,21 +124,21 @@ const CarCard = ({ card, isBuy = false }) => {
           </Swiper>
     
         </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 h-10 bg-white rounded-2xl z-50 flex justify-center items-center">
-          <div className="flex justify-center items-center gap-x-2 px-4">
+        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 h-6 bg-white/90 rounded-2xl z-50 flex justify-center items-center">
+          <div className="flex justify-center items-center gap-x-1.5 px-3">
             <div>
               {card.auction_date ? (
                 ValidDate ? (
-                  <BsFire className="text-red-600" />
+                  <BsFire size={10}  className="text-red-600" />
                 ) : (
-                  <MdNotInterested className="text-red-600" />
+                  <MdNotInterested size={10} className="text-red-600" />
                 )
               ) : (
-                <FaHourglassHalf className="text-red-600" />
+                <FaHourglassHalf size={10} className="text-red-600" />
               )}
             </div>
             <div>
-              <p className="font-bold text-nowrap text-sm">
+              <p className="font-bold text-nowrap text-[10px]">
                 {card.auction_date
                   ? ValidDate
                     ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
@@ -151,34 +151,38 @@ const CarCard = ({ card, isBuy = false }) => {
       </div>
       <div>
 
-        <div>
-          <div className="flex pb-[1vh]  ">
+        <div className="px-[10px] lg:px-[1vw]">
+          <div className="flex pb-[1vh] ">
             <div className="flex justify-between items-center w-full">
-              <div className="flex flex-col text-[16px] lg:text-[0.9vw] px-[10px] lg:px-[1vw] ">
+              <div className="flex flex-col text-[16px] lg:text-[0.9vw]  ">
               <Link to={`vehicle-detail/${card.lot_id}`}>
-                <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist text-[18px] lg:text-[1.17vw] font-bold  lg:leading-[3vh] text-left">
+                <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist text-[14px] lg:text-[1vw] font-bold  lg:leading-[2vh] text-left">
                   {card.title.length > 20
-                    ? `${card.title.slice(0, 20)}...`
+                    ? `${card.title.slice(0, 16)}...`
                     : card.title}
                 </div>
               </Link>
-                <div className="flex gap-x-1">
-                  <p className="py-[0.3vh] font-semibold">Lot:</p>
-                  <p className="py-[0.3vh]">{card.lot_id}</p>
+                <div className="flex gap-x-1 pt-[0.8vh] text-[12px] lg:text-[0.8vw]">
+                  <p className="py-[0.1vh] font-semibold">Lot:</p>
+                  <p className="py-[0.1vh]">{card.lot_id}</p>
                 </div>
-                <div className="flex gap-x-1">
-                  <p className="py-[0.3vh] font-semibold">Status:</p>
-                  <p className="py-[0.3vh]">{card.status}</p>
+                <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
+                  <p className="py-[0.1vh] font-semibold">Status:</p>
+                  <p className="py-[0.1vh]">{card.status}</p>
                 </div>
-                <div className="flex gap-x-1 flex-n">
-                  <p className="py-[0.3vh] font-semibold">Location:</p>
-                  <p className="py-[0.3vh] text-nowrap">{card.location}</p>
+                <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
+                  <p className="py-[0.1vh] font-semibold">Location:</p>
+                  <p className="py-[0.1vh] text-nowrap">
+                  {card.location.length > 20
+                    ? `${card.location.slice(0, 12)}...`
+                    : card.location}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
           <Link to={`vehicle-detail/${card.lot_id}`}>
-            <button className=" w-[270px] mb-[1vh] lg:w-[15vw]  rounded-xl h-[40px] lg:h-[5.5vh] text-[16px] lg:text-[1.04vw] bg-[#7a798a] text-white font-urbanist mt-1.5 hover:bg-[#ca0000] duration-200">
+            <button className="w-full mb-[0.8vh] rounded-lg py-[0.8vh] text-[13px] lg:text-[1vw] bg-[#7a798a] text-white font-urbanist mt-1 hover:bg-[#ca0000] duration-200">
               {isBuy
                 ? `Buy Now in ${card.price_new ? card.price_new : "Tbd"}`
                 : "Bid Now"}

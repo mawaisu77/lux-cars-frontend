@@ -403,7 +403,7 @@ const filteredYearToOptions = yearFrom
             </div>
           </div>
 
-          <div className="flex w-[350px]   mx-auto">
+          <div className="flex w-[350px]  mx-auto">
             <div className="mx-auto w-[200px]   -mt-[230px]">
               <div className="flex">
                 <img src={img1} className="w-[60px] h-[60px]" alt="icon12" />

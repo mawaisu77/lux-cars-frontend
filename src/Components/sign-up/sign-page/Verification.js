@@ -14,7 +14,43 @@ import { API_BASE_URL } from "../../../services/baseService";
 const Verification = () => {
   const fileUploadRef = useRef(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+
+  const [isUploadEnabled, setIsUploadEnabled] = useState(false); // To track the upload button state
   const navigate = useNavigate();
+
+    // Handle file selection process
+    const onFileSelect = (event) => {
+      const selected = Array.from(event.files);
+  
+      // Update the state with the selected files
+      setSelectedFiles(selected);
+  
+      // Check if exactly 2 files are selected, enable upload if true
+      if (selected.length === 2) {
+        setIsUploadEnabled(true);
+      } else {
+        setIsUploadEnabled(false);
+      }
+    };
+
+      // Handle file removal process
+  const onFileRemove = (event) => {
+    const remainingFiles = selectedFiles.filter(
+      (file) => file.name !== event.file.name
+    );
+
+    // Update the state with the remaining files
+    setSelectedFiles(remainingFiles);
+
+    // Check if exactly 2 files remain selected, enable upload if true
+    if (remainingFiles.length === 2) {
+      setIsUploadEnabled(true);
+    } else {
+      setIsUploadEnabled(false);
+    }
+  };
+  
 
   const uploadDocuments = async (documentFiles) => {
     let formData = new FormData();
@@ -114,9 +150,15 @@ const Verification = () => {
   );
 
   const customUploadButton = () => (
-    <button className=" w-[32vw] text-[16px] lg:text-[1vw] font-urbanist hover:bg-red-600 text-black border-2 rounded-lg">
-      Upload
-    </button>
+    <button
+    className={`w-[32vw] text-[16px] lg:text-[1vw] font-urbanist hover:bg-red-600 hover:text-white text-black duration-100 border-2 rounded-lg ${
+      isUploadEnabled ? "" : "cursor-not-allowed opacity-50"
+    }`}
+    disabled={!isUploadEnabled} // Disable button until 2 files are selected
+    onClick={uploadDocuments}
+  >
+    Upload
+  </button>
   );
 
   const customCancelButton = () => (
@@ -124,6 +166,12 @@ const Verification = () => {
       Cancel
     </button>
   );
+
+    // Handle file clearing (all files removed)
+    const onFileClear = () => {
+      setSelectedFiles([]);
+      setIsUploadEnabled(false); // Disable upload when no files are selected
+    };
 
   return (
     <div className=" ">
@@ -155,6 +203,9 @@ const Verification = () => {
             contentStyle={{ maxHeightheight: "700px" }}
             customUpload={true}
             multiple
+            onSelect={onFileSelect} // Monitor file selection
+            onRemove={onFileRemove} // Monitor file removal
+            onClear={onFileClear} 
             uploadHandler={documentUploadHandler}
             // emptyTemplate={<p className="m-0 text-[1vw]">Drag and drop files to here to upload.</p>}
             chooseLabel={customChooseButton()}
