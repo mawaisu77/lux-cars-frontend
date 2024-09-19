@@ -5,6 +5,7 @@ import image1 from "../../../assets/User-pics/Subtract.png";
 import bar from "../../../assets/User-pics/bar.png";
 import bars from "../../../assets/User-pics/bars.png";
 import icon7 from "../../../assets/User-pics/icon (7).png";
+import avatar from "../../../assets/docs.jpg";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { getProfile, updateProfile } from "../../../services/userService";
 import { saveUser } from "../../../utils/storageUtils";
@@ -14,6 +15,9 @@ import PhoneInput from "react-phone-input-2";
 import { showToast } from "../../../utils/Toast";
 import { Link } from "react-router-dom";
 import ImageViewer from "react-simple-image-viewer";
+import { MdVerifiedUser } from "react-icons/md";
+import TooltipInfo from "../../common/TooltipInfo";
+import { BsInfoCircle } from "react-icons/bs";
 
 const Profile = () => {
   const { token } = useAuthContext();
@@ -22,6 +26,7 @@ const Profile = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [documents, setDcuments] = useState([]);
+  const [documentVerification, setDocumentVerification] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
@@ -42,7 +47,8 @@ const Profile = () => {
       const response = await getProfile();
 
       saveUser(response.data);
-      const { username, email, address, phone, documents } = response.data;
+      const { username, email, address, phone, documents, documentVerified } = response.data;
+      setDocumentVerification(documentVerified)
       setDcuments(documents);
       setUsername(username);
       setEmail(email);
@@ -51,7 +57,7 @@ const Profile = () => {
       console.log(documents[0] || []);
     } catch (error) {
       console.error(error);
-      showToast("Error fetching profile data", error);
+      showToast("Error fetching profile data", "error");
       // toast.error("Error fetching profile data");
     }
   };
@@ -72,6 +78,7 @@ const Profile = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
+      
       showToast("Error updating profile", "error");
       // toast.error("Error updating profile");
     }
@@ -79,21 +86,21 @@ const Profile = () => {
 
   return (
     <>
-      <div className="w-[74vw] h-[53vh] mx-auto  mt-[50px]">
-        <div className="text-left text-[2.3vw] font-urbanist font-bold">
+      <div className="w-[344px] md:w-[650px]  lg:w-[74vw] mx-auto    mt-[50px]  text-black ">
+        <div className="text-left text-[36px] lg:text-[2.3vw] font-urbanist font-bold">
           Profile Info
         </div>
-        <div className="flex">
+        <div className="flex flex-col">
           <form className="" onSubmit={handleSubmit}>
             <div className="text-left  w-full ">
-              <div className="flex">
-                <div className="flex flex-wrap h-[13vh] gap-5 ">
+              <div className="flex flex-col lg:flex-row">
+                <div className="flex flex-col lg:flex-row lg:flex-wrap h-[13vh] gap-5 ">
                   <input
                     name="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Full Name"
-                    className="w-[26vw] h-[4.7vh] rounded-lg p-2 border"
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh] rounded-lg p-2 border"
                   />
 
                   <input
@@ -102,10 +109,10 @@ const Profile = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-[26vw] h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
                   />
 
-                  <div className="w-[26vw] h-[4.7vh]">
+                  <div className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]">
                     <PhoneInput
                       country={"us"}
                       countryCodeEditable={false}
@@ -125,21 +132,30 @@ const Profile = () => {
                   <input
                     name="address"
                     placeholder="Address"
-                    className="w-[26vw] h-[4.7vh]  rounded-lg p-2 border"
+                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
-                <div className=" w-[30vw]  border rounded-lg p-5 ">
+                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[120px] lg:mt-0  border rounded-lg p-5 ">
                   <div className="flex gap-3 my-2">
-                    <div className="flex justify-center items-center bg-red-600 w-[3vw] h-[6vh] rounded-full">
+                    <div className="flex relative justify-center items-center bg-red-600 w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] rounded-full">
                       <img src={image1} />
+                      {documentVerification ? (
+                        <MdVerifiedUser className="absolute text-green-600 bg-white rounded-tl-lg bottom-0 right-0"/>
+                      ):(
+                    <div className="absolute -bottom-2 -right-2">
+                          <TooltipInfo  content="Your document status is pending, if you uploaded the docuemnt then please wait for update">
+                        <BsInfoCircle size={20} className='hover:text-blue-800 bg-white rounded-full text-red-600 duration-200'/>
+                      </TooltipInfo>
+                    </div>
+                      )}
                     </div>
                     <div>
-                      <p className="text-[0.9vw]  text-[#9698ab] font-urbanist">
+                      <p className="text-[15px] lg:text-[0.9vw]  text-[#9698ab] font-urbanist">
                         Documentation
                       </p>
-                      <p className="text-[1vw] font-urbanist font-semibold">
+                      <p className="text-[20px] lg:text-[1vw] font-urbanist font-semibold">
                         {username}
                       </p>
                     </div>
@@ -148,7 +164,7 @@ const Profile = () => {
                   <div className="">
                     <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
                       <div
-                        className={`bg-red-600 h-2.5 rounded-full dark:bg-red-500 ${
+                        className={`bg-red-600 h-2.5 rounded-full ${
                           documents.length === 0 || null
                             ? "w-0"
                             : documents.length === 1
@@ -177,8 +193,10 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="flex ">
-                <div className="flex w-[3vw] h-[5vh]">
+            </div>
+            
+            <div className="flex">
+                <div className={`w-[3vw] h-[5vh] ${images.length > 0 ? 'flex':'hidden'}`}>
                   {images.map((src, index) => (
                     <img
                       className="w-full h-full cursor-pointer hover:scale-105 duration-200"
@@ -199,33 +217,49 @@ const Profile = () => {
                       onClose={closeImageViewer}
                     />
                   )}
+      
                   {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
                   <img src={documents[0]} />
                 </div> */}
                 </div>
 
-                <div>
-                  <div className="ml-20">
+               
+                <div className="flex">
+               <div>
+               {
+                    images.length === 0 && (<>
+                        <div className="h-[98px] w-[98px] mt-[60px] lg:mt-0 border-2 rounded shadow border-[#343444] ">
+                                      <img src={avatar} className="w-full h-full object-cover" alt="avatar-img"/>
+                          </div>
+
+                    </>)
+                  }
+               </div>
+            
+                  <div className=" mt-[60px] lg:mt-0">
                     <div className="flex gap-3 ml-5">
                       {documents.length < 2 && (
-                        <div className="flex flex-col gap-y-2">
+                        <div className="flex items-start justify-between flex-col gap-y-2 ">
+                           <p className="text-[14px] text-left lg:text-[0.9vw] text-[#737a99] font-urbanist  ">
+                            Images must be of your official ID (Passport/License)
+                          </p>
+
+                          <p className="text-[14px] text-left lg:text-[0.9vw] text-[#737a99] font-urbanist  ">
+                            You must have to upload two photos
+                          </p>
                           <Link to={"/user/documents-upload"}>
-                            <button className="text-[1vw] w-[6vw] font-urbanist h-[4.25vh] text-white hover:text-white bg-[#343444] rounded-full">
-                              Upload
+                            <button className="text-[16px] lg:text-[1vw] font-urbanist py-1 px-4 text-white hover:text-white bg-[#343444] rounded-xl">
+                              Upload Docs
                             </button>
                           </Link>
-                          <p className="text-[0.9vw] text-[#737a99] font-urbanist ml-5 ">
-                            Images must be .png or .jpg format Min size
-                            120x120px (avatar)
-                          </p>
+                         
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <button className="flex justify-center items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[12px] lg:text-[0.8vw] text-[#ca0000] rounded-full mt-[3vh]">
+            <button className="flex justify-center mb-10 items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[16px] lg:text-[0.8vw] text-[#ca0000] rounded-xl mt-[3vh]">
               {loading ? (
                 <ClipLoader size={20} color={"#ca0000"} />
               ) : (

@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { getToken } from '../utils/storageUtils';
+import { getToken, removeToken, removeUser } from '../utils/storageUtils';
+import { isTokenExpired } from '../utils/isTokenExpired';
 
-// export const API_BASE_URL = 'http://localhost:8000/api/v1/';
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -15,7 +14,13 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = getToken(); 
-    if (token) {
+    if (isTokenExpired(token)) {
+      console.log("token expired condition")
+      removeToken();
+      removeUser()
+      // window.location.href = '/login'; 
+      return Promise.reject(new Error('Token expired'));
+    } else {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;

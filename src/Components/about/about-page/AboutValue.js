@@ -7,7 +7,7 @@ const AboutValue = () => {
 
     return (
         <>
-            <div className='h-[1414px] md:h-[850px] lg:h-[51vh]'>
+            <div className=' py-[9.3vh]'>
                 <div className='text-[36px] lg:text-[2.3vw] font-urbanist font-semibold mb-[7vh]  '>
                     Our Values
                     <hr className='h-1 bg-red-500 w-20 mx-auto' />

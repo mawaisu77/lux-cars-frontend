@@ -4,7 +4,7 @@ import { team } from '../../../data/data';
 const AbouTeam = () => {
   return (
     <>
-      <div className='min-h-screen w-full mx-auto bg-[#f8f8f8]  py-[9.3vh]'>
+      <div className='  w-full mx-auto bg-[#f8f8f8]  py-[9.3vh]'>
         <div className='text-center'>
           <h1 className='text-[36px] lg:text-[2.3vw] font-urbanist font-semibold mb-4'>
             Meet Our Team
@@ -18,8 +18,8 @@ const AbouTeam = () => {
           </p>
           <div className='flex flex-wrap justify-center gap-4'>
             {team.map((member, index) => (
-              <div key={index} className='h-[375px] lg:h-[40vh] w-[330px] lg:w-[18vw] border shadow-lg rounded-xl flex flex-col items-center p-5'>
-                <img src={member.img} alt={member.name} className='h-[290px] lg:h-[31vh] w-full object-cover rounded-lg' />
+              <div key={index} className='    w-[330px] lg:w-[18vw] border shadow-lg rounded-xl flex flex-col items-center p-5'>
+                <img src={member.img} alt={member.name} className='  w-full object-cover rounded-lg' />
                 <p className='text-center text-[18px] lg:text-[1.3vw] font-urbanist mt-2'>
                   {member.name}
                 </p>

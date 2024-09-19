@@ -7,12 +7,12 @@ const AboutChoice = () => {
 
     return (
         <>
-            <div className='h-[1450px]  lg:h-[81vh] w-full '>
-                <div className='text-[36px] lg:text-[2.3vw] font-urbanist font-semibold mb-[7vh] pt-[9.3vh]'>
+            <div className='  py-[9.3vh] w-full '>
+                <div className='text-[36px] lg:text-[2.3vw] font-urbanist font-semibold mb-[7vh]  '>
                     Why Choose us
                     <hr className='h-1 bg-red-500 w-20 mx-auto' />
                 </div>
-                <div className='flex gap-3  justify-center items-center w-[341px] md:w-full lg:w-[72vw]  h-[1150px] lg:h-[45vh] bg-white mx-auto rounded-xl shadow-xl'>
+                <div className='flex gap-3  justify-center items-center w-[341px] md:w-full lg:w-[72vw]    bg-white mx-auto rounded-xl shadow-xl'>
                     <div className='flex flex-wrap  justify-around w-full'>
                         {choices.map((item, index) => (
                             <div key={index} className='flex flex-col  gap-5 justify-center items-center h-[370px] lg:h-[39vh] w-[300px] lg:w-[21vw]'>

@@ -42,33 +42,25 @@ const Help = () => {
 
     return (
         <>
-            <div className='   back-image-Help '>
-
-<Header className="text-white"/>
-<div className='hidden   lg:block'>
-<div className='  w-[15.5] flex flex-col  mt-[5.5vh]'>
- <div className='text-[2.6vw] font-semibold text-white'>
- Help
- </div>
-
-
-
-<div className='text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist '>
-<Link to="/"> <button className='hover:text-white  '>
-     Home
- </button></Link>
- /
- <button className='hover:text-white'>
-     Help
- </button>
-</div>
-
-
-</div>
-</div>
-</div>
+    <Header className="text-white" />
+     <div className='back-image-Help'>
+      <div className='hidden lg:block'>
+        <div className='w-[15.5] flex flex-col pt-[12.5vh]'>
+          <div className='text-[2.6vw] font-semibold text-white'>
+            Help
+          </div>
+          <div className='text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist'>
+            <Link to="/">
+              <button className='hover:text-white'>Home</button>
+            </Link>
+            /
+            <button className='hover:text-white'>Help</button>
+          </div>
+        </div>
+      </div>
+    </div>
             <div className="h-[2000px] lg:h-[100vh] w-[342px]   md:w-[500px] lg:w-[74vw] mx-auto">
-                <div className="flex flex-col mx-auto mt-[40px] lg:mt-[8.6vh] w-[342px]   md:w-full  lg:w-[33vw]">
+                <div className="flex flex-col mx-auto mt-[100px] lg:mt-[8.6vh] w-[342px]   md:w-full  lg:w-[33vw]">
                     <p className=" text-[30px] lg:text-[1.7vw]  font-bold font-urbanist">
                         How Can We Help You?
                     </p>
@@ -80,9 +72,8 @@ const Help = () => {
                     <form className="space-y-4">
                         <div className="flex justify-between items-center border rounded-xl my-[5vh]">
                             <input
-                                type="email"
-                                id="email"
-                                name="email"
+                                type="text"
+                                 
                                 className="sm:w-[342px] md:w-[500px] lg:w-[36vw] h-[6.23vh] rounded-l-xl pl-2 text-[18px] lg:text-[1vw]"
                                 placeholder="Type your question here"
                             />

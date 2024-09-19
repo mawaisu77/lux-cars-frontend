@@ -1,12 +1,10 @@
 import { useState } from 'react'
-import { useAuthContext } from './useAuthContext.js'
 import { signup as signupService } from '../services/authService';
 
 export const useSignup = () => {
 
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
-  // const { dispatch } = useAuthContext()
 
   const signup = async (formData) => {
      setIsLoading(true);

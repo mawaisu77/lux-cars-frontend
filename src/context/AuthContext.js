@@ -13,10 +13,10 @@ export const authReducer = (state, action) => {
     case "LOGIN":
       return {
         user: action.payload.user,
-        token:action.payload.token
+        token: action.payload.token
       };
     case "LOGOUT":
-      return { user: null, token:null  };
+      return { user: null, token: null  };
     default:
       return state;
   }

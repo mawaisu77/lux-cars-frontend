@@ -30,11 +30,10 @@ const navigate = useNavigate()
 
   return (
     <>
-      {" "}
-      <div className="Backgroundimage-LogIN">
         <Header className="text-white" />
-        <div className="hidden  lg:block">
-          <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
+      <div className="Backgroundimage-LogIN">
+        <div className="hidden lg:block">
+          <div className="w-[15.5] flex flex-col pt-[14.5vh]">
             <div className="text-[2.6vw] font-semibold text-white">
               Password Reset
             </div>
