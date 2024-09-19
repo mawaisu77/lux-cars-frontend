@@ -79,11 +79,11 @@ const Navbar = () => {
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col py-20">
             <div className="text-[2.6vw] font-semibold text-white">Account</div>
-            <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+            <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
               <Link to="/">
-                <button className="hover:text-white">Home</button>
+                <button className="hover:text-white hover:text-[1.1vw]">Home</button>
               </Link>
-              /<button className="hover:text-white">User Account</button>
+              /<button className="hover:text-white hover:text-[1.1vw]">User Account</button>
             </div>
           </div>
         </div>
