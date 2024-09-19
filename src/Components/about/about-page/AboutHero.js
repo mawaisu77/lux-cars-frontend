@@ -13,12 +13,12 @@ const AboutHero = () => {
           <div className='text-[2.6vw] font-semibold text-white'>
             About Us
           </div>
-          <div className='text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist'>
+          <div className='text-white flex gap-3 justify-center text-[1vw] font-urbanist'>
             <Link to="/">
-              <button className='hover:text-white'>Home</button>
+              <button className='hover:text-white hover:text-[1.1vw]'>Home</button>
             </Link>
             /
-            <button className='hover:text-white'>About Us</button>
+            <button className='hover:text-white hover:text-[1.1vw]'>About Us</button>
           </div>
         </div>
       </div>
