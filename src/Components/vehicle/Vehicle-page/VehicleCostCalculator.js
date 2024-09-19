@@ -39,7 +39,7 @@ const Dropdown = ({ bidAmount, data }) => {
 
 const calculateFinalBid = (bid, baseSite) => {
   let total = 0;
-
+console.log("base site ===",baseSite)
   if (baseSite === 'copart') {
     // Copart fee calculations
     const copartBuyerFee = CopartBuyerFeeCalculator(bid);
@@ -51,6 +51,13 @@ const calculateFinalBid = (bid, baseSite) => {
       copartGateFee + 
       copartTitlePickupFee + 
       copartEnvironmentalFee;
+      // console.log( "Buyer, vir, date, pickup, envir", copartBuyerFee ,
+      //   copartVirtualFee ,
+      //   copartGateFee , 
+      //   copartTitlePickupFee , 
+      //   copartEnvironmentalFee)
+      console.log("copart")
+
   } 
 
   else if (baseSite === 'iaai') {
@@ -64,6 +71,7 @@ const calculateFinalBid = (bid, baseSite) => {
       iaaiInternetFee + 
       iaaiServiceFee + 
       iaaiEnvironmentalFee;
+      console.log("iaai")
       // console.log("bid, iaaiBuyerFee, iaaiInternetFee, iaaiServiceFee, iaaiEnvironmentalFee",bid, iaaiBuyerFee, iaaiInternetFee, iaaiServiceFee, iaaiEnvironmentalFee)
   }
 
@@ -82,15 +90,13 @@ const calculateFinalBid = (bid, baseSite) => {
   const calculateInspectionCost = () => 500;
 
   const calculateVATBase = () => {
-    const bid = (parseFloat(finalBid) || 0) * 0.1;
+    const bid = (parseFloat(finalBid) || 0)
     const customsDuty = calculateCustomsDuty();
-    const transportationRate = selectedTransportation?.rate || 0;
+    const boatShipping =  1550
     const processingFee = calculateProcessingFee();
     const levyFee = calculateLevyFee();
-    return bid + customsDuty + transportationRate + processingFee + levyFee;
+    return (bid + customsDuty + boatShipping + processingFee + levyFee) * 0.1;
   };
-
-
 
   // New function to calculate the total due to customs
   const calculateTotalDueToCustom = () => {
@@ -164,9 +170,9 @@ const calculateBankTransferFee = () => {
     }
   }, [selectedCategory, data.location]);
 
-    // Update final bid when bidAmount or base_site changes
+    // Update final bid when bidAmount or base_site changes data?.base_site
     useEffect(() => {
-      const updatedFinalBid = calculateFinalBid(bidAmount, data?.base_site);
+      const updatedFinalBid = calculateFinalBid(bidAmount, 'copart');
       setFinalBid(updatedFinalBid); // Store the calculated final bid in state
     }, [bidAmount, data?.base_site]);
 
@@ -251,7 +257,7 @@ const calculateBankTransferFee = () => {
               </div>
             </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
-            ${calculateFinalBid(bidAmount, data?.base_site)}
+            ${calculateFinalBid(bidAmount, 'copart')}
             </span>
           </div>
 

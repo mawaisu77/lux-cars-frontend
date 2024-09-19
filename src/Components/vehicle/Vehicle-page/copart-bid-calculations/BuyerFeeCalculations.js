@@ -31,7 +31,7 @@ export const CopartBuyerFeeCalculator = (amount) => {
     if (amount <= 4999.99) return 750.00;
     if (amount <= 5499.99) return 750.00;
     if (amount <= 5999.99) return 750.00;
-    if (amount <= 6499.99) return 1050.00;
+    if (amount <= 6499.99) return 800.00;
     if (amount <= 6999.99) return 800.00;
     if (amount <= 7499.99) return 800.00;
     if (amount <= 7999.99) return 815.00;
