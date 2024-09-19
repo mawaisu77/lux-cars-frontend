@@ -407,7 +407,7 @@ const VehicleHero = () => {
                       <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                         Specifications
                       </h2>
-                      <div className=" space-y-[2vh] text-md lg:text-lg lg:text-[0.875vw]">
+                      <div className=" space-y-[2vh] text-md lg:text-[0.875vw]">
                         <InfoRow
                           label="Vehicle Type"
                           value={carDetailData?.data?.vehicle_type || "N/A"}
