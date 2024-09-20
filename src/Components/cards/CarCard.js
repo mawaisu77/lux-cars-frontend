@@ -4,22 +4,22 @@ import useTimer from "../../hooks/useTimer";
 import {
   BsFire,
   BsHeart,
-  BsHeartArrow,
-  BsHeartbreak,
+  // BsHeartArrow,
+  // BsHeartbreak,
   BsHeartFill,
 } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa";
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import useSaveCar from "../../hooks/useSaveCar";
-import ImageViewer from "react-simple-image-viewer";
-import ReactDOM from "react-dom";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
+// import ImageViewer from "react-simple-image-viewer";
+// import ReactDOM from "react-dom";
+// import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+// import { IoClose } from "react-icons/io5";
 import ImageModal from "./ImageModal";
 import { LuxLogoWhite } from "../../utils/constant";
 
@@ -28,7 +28,7 @@ const CarCard = ({ card, isBuy = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [savedCars, setSavedCars] = useState([]);
 
-  const { carData, loading, error, handleSaveCar } = useSaveCar();
+  const {  handleSaveCar } = useSaveCar();
 
   // Memoize the targetTime to prevent unnecessary recalculations
   const targetTime = useMemo(

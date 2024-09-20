@@ -2,24 +2,24 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Header from "../../header/Header/Header";
 import { Link, useParams } from "react-router-dom";
-import logo from "../../../assets/Vehicle/Rectangle 767.png";
+// import logo from "../../../assets/Vehicle/Rectangle 767.png";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { BsDownload } from "react-icons/bs";
 import { PiUsersFill } from "react-icons/pi";
 import { CgFileDocument } from "react-icons/cg";
 import { TiLockClosed } from "react-icons/ti";
 import VehicleCards from "../../cards/VehicleCards";
-import VehicleTab from "../../vehicle/Vehicle-page/VehicleTab";
+// import VehicleTab from "../../vehicle/Vehicle-page/VehicleTab";
 import useGetCarDetail from "../../../hooks/useGetCarDetail";
 import FadeLoader from "react-spinners/FadeLoader";
 import SwiperGallery from "./SwiperGallery";
 import CurrencyInput from "react-currency-input-field";
 import usePlaceBid from "../../../hooks/usePlaceBid";
-import image31 from "../../../assets/HCards/Avatar.png";
+// import image31 from "../../../assets/HCards/Avatar.png";
 import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
-import TimeLeftCounter from "./TimeLeftCounter";
+// import TimeLeftCounter from "./TimeLeftCounter";
 import VehicleCostCalculator from "./VehicleCostCalculator";
 import BidHistory from "./BidHistory";
 import CarReportViewer from "./Report";
@@ -64,8 +64,7 @@ const VehicleHero = () => {
   );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
-  // const ValidDate =
-  //   targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+  const ValidDate = targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
   useEffect(() => {
     if (carDetailData?.data?.currentBid) {
