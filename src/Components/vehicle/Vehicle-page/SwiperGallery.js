@@ -11,23 +11,17 @@ import { ClipLoader } from "react-spinners";
 import ReactPlayer from 'react-player'
 import VideoModal from "./ModalVideo";
 import ReactDOM from "react-dom";
+import ImageModal from "../../cards/ImageModal";
+import { LuxLogoWhite } from "../../../utils/constant";
 
 const SwiperGallery = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false); // State to manage modal visibility
   const [loading, setLoading] = useState(true); // For loading spinner
+  const [isImageModalOpen, setImageModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-
-  const openImageViewer = (index) => {
-    setCurrentImage(index);
-    setIsViewerOpen(true);
-  };
-  const closeImageViewer = () => {
-    setIsViewerOpen(false);
-  };
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -40,10 +34,28 @@ const SwiperGallery = ({ images, carData }) => {
   const closeVideoModal = () => {
     setIsVideoModalOpen(false);
   };
-  const handleLoad = () => {
-    setLoading(false);
-  };
 
+   // Open modal with selected image
+   const openModalImg = (index) => {
+    setCurrentImageIndex(index);
+    setImageModalOpen(true);
+  };
+  // Close modal
+  const closeModalImg = () => {
+    setImageModalOpen(false);
+  };
+  // Go to the next image
+  const goToNextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+  // Go to the previous image
+  const goToPrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
   const renderIAAIView = () => (
     <div className="flex flex-col items-center justify-center gap-y-4">
       {loading && (
@@ -91,7 +103,7 @@ const SwiperGallery = ({ images, carData }) => {
     <div>
     
       <div className="relative">
-        {!isViewerOpen && (
+      
         <>
            <button
            className="absolute z-10 bottom-5 text-xs right-4 bg-black text-white py-1 px-2 rounded-lg"
@@ -118,9 +130,7 @@ const SwiperGallery = ({ images, carData }) => {
            
          </div>
            </>
-      )}
-     
-
+    
         <Swiper
           style={{
             "--swiper-navigation-color": "#fff",
@@ -148,7 +158,8 @@ const SwiperGallery = ({ images, carData }) => {
                     src={image}
                     className="my-2 rounded-lg shadow-img cursor-pointer"
                     alt={`Vehicle_Image ${index + 1}`}
-                    onClick={() => openImageViewer(index)}
+                    onClick={() => openModalImg(index)} // Open modal on image click
+
                   />
 
                   <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-black via-black opacity-100 rounded-b-lg"></div>
@@ -179,18 +190,7 @@ const SwiperGallery = ({ images, carData }) => {
             </SwiperSlide>
           ))}
       </Swiper>
-      {isViewerOpen && ReactDOM.createPortal(
-          <ImageViewer
-          backgroundStyle={{
-            zIndex:50,
-           }}
-            disableScroll={false}
-            src={images}
-            currentIndex={currentImage}
-            onClose={closeImageViewer}
-          />,
-          document.body // Render in the root of the DOM
-        )}
+  
 
       {/* Modal for 360° View */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
@@ -207,6 +207,16 @@ const SwiperGallery = ({ images, carData }) => {
 
        />
       </VideoModal>
+
+      <ImageModal
+        isOpen={isImageModalOpen}
+        onClose={closeModalImg}
+        images={images}
+        currentImageIndex={currentImageIndex}
+        goToPrevImage={goToPrevImage}
+        goToNextImage={goToNextImage}
+        logo={LuxLogoWhite}
+      />
     </div>
   )
 };

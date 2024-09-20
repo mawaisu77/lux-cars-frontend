@@ -405,15 +405,6 @@ const calculateBankTransferFee = () => {
             </span>
           </div>
 
-          {/* Total Due to Customs Calculation */}
-          <div className="flex justify-between border-t border-gray-300 pt-3">
-            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
-              Total Due to Custom:
-            </span>
-            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
-              ${calculateTotalDueToCustom().toFixed(2)}
-            </span>
-          </div>
 
           {/* Total Landed Cost Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
@@ -424,6 +415,17 @@ const calculateBankTransferFee = () => {
               ${calculateTotal().toFixed(2)}
             </span>
           </div>
+
+             {/* Total Due to Customs Calculation */}
+           <div className="flex justify-between border-t border-gray-300 pt-3">
+            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+              Total Due to Custom:
+            </span>
+            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+              ${calculateTotalDueToCustom().toFixed(2)}
+            </span>
+          </div>
+
         </div>
       </div>
     </div>
