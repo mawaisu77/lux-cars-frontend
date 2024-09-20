@@ -15,12 +15,12 @@ function SearchPage() {
               Vehicle Finder
             </div>
 
-            <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist ">
+            <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist ">
               <Link to="/">
                 {" "}
-                <button className="hover:text-white  ">Home</button>
+                <button className=" hover:text-[1.1vw] ">Home</button>
               </Link>
-              /<button className="hover:text-white">Search</button>
+              /<button className=" hover:text-[1.1vw]">Search</button>
             </div>
           </div>
         </div>

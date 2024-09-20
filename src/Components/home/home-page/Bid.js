@@ -461,7 +461,7 @@ const filteredYearToOptions = yearFrom
                     onChange={handleMakeChange} 
                     options={carOptions}
                     isClearable
-                    placeholder="Select Make"
+                    placeholder="Select Make "
                     className={`${error ? "hidden" : "block"}`}
                   />
                 )}
