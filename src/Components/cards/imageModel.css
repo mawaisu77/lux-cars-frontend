@@ -1,0 +1,29 @@
+.image-container {
+    width: 80%;
+    height: 600px; /* Fixed height for medium screens */
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    object-fit: cover;
+    object-position: center bottom; /* Cropping from the bottom */
+  }
+  
+  @media (max-width: 1024px) {
+    .image-container {
+      height: 500px; /* Slightly smaller height for large tablets/smaller laptops */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .image-container {
+      height: 400px; /* Adjusted height for tablets */
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .image-container {
+      height: 300px; /* Smaller height for mobile screens */
+    }
+  }
+  
