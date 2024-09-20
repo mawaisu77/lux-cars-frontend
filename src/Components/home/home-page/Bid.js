@@ -6,8 +6,7 @@ import img4 from "../../../assets/Icons/Layer 2.png";
 import img5 from "../../../assets/Icons/Shape.png";
 import img6 from "../../../assets/Icons/Vector (5).png";
 import img7 from "../../../assets/Icons/M logo.png";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { LuCalendarSearch } from "react-icons/lu";
+ 
 import { GoSearch } from "react-icons/go";
 import { FaArrowRightLong } from "react-icons/fa6";
 import useCarMakesModels from "../../../hooks/useCarsMakesModel";
@@ -177,20 +176,20 @@ const filteredYearToOptions = yearFrom
 
   return (
     <>
-      <div className="hidden sm:block text-black pt-20">
+      <div className="hidden md:block text-black pt-20">
         <div className="flex w-[74vw]  flex-row justify-between mx-auto bgImage tree">
           <div className="mx-auto w-[30vw]   mt-[7vh]">
-            <h2 className="text-left font-urbanist lg:text-[3.125vw] font-bold leading-tight my-[2vh]">
+            <h2 className="text-left font-urbanist md:text-[3.125vw] font-bold leading-tight my-[2vh]">
               <span className="animated-text">Bid, Buy, Drive</span> Online Car
               Auctions with Home Delivery!
             </h2>
-            <div className="w-[19vw] text-[#8a8aa0] font-urbanist text-[1.041vw] font-medium leading-[2.8vh] text-left mt-[0.3vh]">
+            <div className="w-[19vw] text-[#8a8aa0] font-urbanist md:text-[1.041vw] font-medium lg:leading-[2.8vh] text-left mt-[0.3vh]">
               Lorem ipsum dolor sit amet. Ea similique aliquam ut maxime
               necessitatibus est nemo error sed vero sapiente cum quae
               temporibus sed quaerat
             </div>
             <AnchorLink href="#startBidding">
-              <button onClick={playAudio}  className="bg-[#ca0000] hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center lg:text-[1vw] lg:px-[1.3vw] h-[5.284vh] my-[2vh]">
+              <button onClick={playAudio}  className="bg-[#ca0000] hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center text-[1vw] px-[1.3vw]  my-[2vh]">
                 Start Bidding
               </button>
             </AnchorLink>
@@ -213,9 +212,9 @@ const filteredYearToOptions = yearFrom
                 </p>
               </div>
             </div>
-            <div className=" flex flex-row justify-between text-left px-[1vw] py-5 items-center top-[75%] w-[56vw]   bg-[#ffffffcc] rounded-xl absolute">
+            <div className="  flex flex-row justify-between text-left px-[1vw] py-1 items-center top-[75%]    bg-[#ffffffcc] rounded-xl absolute">
               {/* Dropdown for Makes (Car Makes) */}
-              <div className="flex flex-col justify-center items-center border-r w-[12vw] text-left">
+              <div className="flex flex-col justify-center items-center border-r     text-left">
                 <p
                   className={`text-[1.17vw] font-urbanist font-semibold ${
                     error ? "hidden" : "block"
@@ -224,7 +223,7 @@ const filteredYearToOptions = yearFrom
                   Makes
                 </p>
                 {loading && !carData ? (
-                  <div className="flex justify-center items-center py-4">
+                  <div className="flex justify-center items-center  py-4">
                     <ClipLoader size={30} />
                   </div>
                 ) : (
@@ -244,7 +243,7 @@ const filteredYearToOptions = yearFrom
               </div>
 
               {/* Dropdown for Models (Car Models) */}
-              <div className="flex flex-col justify-center items-center border-r w-[12vw] text-left">
+              <div className="flex flex-col justify-center items-center px-2 border-r w-[12vw] text-left">
                 <p className="text-[1.17vw] font-urbanist font-semibold">
                   Models
                 </p>
@@ -271,7 +270,7 @@ const filteredYearToOptions = yearFrom
               </div>
 
               {/* Dropdown for Partners */}
-              <div className="flex flex-col justify-center items-center w-[12vw] border-r text-left">
+              <div className="flex flex-col justify-center items-center px-2 w-[12vw] border-r text-left">
                 <p className="text-[1.17vw] font-urbanist font-semibold">
                   Partners
                 </p>
@@ -321,7 +320,7 @@ const filteredYearToOptions = yearFrom
               </div>
               <div
                 onClick={handleSearch}
-                className="self-end mb-[1.5vh] group flex h-[6.23vh] w-[3.5vw] justify-center items-center bg-[#ca0000] rounded-xl"
+                className="    group flex px-1  py-1 w-[3.5vw] justify-center items-center bg-[#ca0000] rounded-xl"
               >
                 <GoSearch
                   size={27}
@@ -331,7 +330,7 @@ const filteredYearToOptions = yearFrom
             </div>
           </div>
 
-          <div className="w-[23vw] px-[0.5vw] h-[50vh]  rounded-lg  bg-white">
+          <div className="hidden lg:block w-[23vw] bg-white px-[0.5vw]  py-[1vh] h-fit  rounded-lg  ">
             <div className="flex  mt-[9.46vh]">
               <img src={img1} className="w-[4vw]  " alt="icon5" />
               <img src={img2} className="w-[4vw]  " alt="icon6" />
@@ -368,23 +367,23 @@ const filteredYearToOptions = yearFrom
         </div>
       </div>
 
-      <div className="block sm:hidden mt-[100px]">
+      <div className="block md:hidden mt-[100px]">
         <div className="flex flex-col justify-between mx-auto bgImage tree">
-          <div className="w-[343px] mx-auto">
-            <h2 className="text-left font-urbanist text-[46px] font-bold leading-tight">
+          <div className="w-full mx-auto">
+            <h2 className="text-left px-[60px] font-urbanist text-[46px] font-bold leading-tight">
               <span className="text-outline">Bid, Buy, Drive</span> Online Car
               Auctions with Home Delivery!
             </h2>
-            <div className="w-[265px] text-[#8a8aa0] font-urbanist text-[20px] font-medium leading-[19px] text-left">
+            <div className="w-full px-[60px] text-[#8a8aa0] font-urbanist text-[20px] font-medium leading-[19px] text-left">
               Lorem ipsum dolor sit amet. Ea similique aliquam ut maxime
               necessitatibus est nemo error sed vero sapiente cum quae
               temporibus sed quaerat
             </div>
-              <button className="bg-[#ca0000] font-urbanist flex text-white rounded-full items-center text-[16px] px-3 h-[5.284vh] my-[2vh]">
+              <button className="bg-[#ca0000] mx-[60px] px-3 font-urbanist flex text-white rounded-full items-center text-[16px]   h-[5.284vh] my-[2vh]">
                 Start Bidding
               </button>
         
-            <div className="text-left w-[87px] flex justify-between gap-4 mt-[5vh]">
+            <div className="text-left w-[87px] flex justify-between gap-4 mx-[80px] mt-[5vh]">
               <img src={img4} alt="icon8" />
               <img src={img5} alt="icon9" />
               <img src={img6} alt="icon10" />
@@ -403,7 +402,7 @@ const filteredYearToOptions = yearFrom
             </div>
           </div>
 
-          <div className="flex w-[350px]  mx-auto">
+          <div className="flex w-[350px]   mx-auto">
             <div className="mx-auto w-[200px]   -mt-[230px]">
               <div className="flex">
                 <img src={img1} className="w-[60px] h-[60px]" alt="icon12" />
@@ -547,7 +546,7 @@ const filteredYearToOptions = yearFrom
 
                 <div
                 onClick={handleSearch}
-                className="self-end mb-[10px] p-1 group flex w-full justify-center items-center bg-[#ca0000] rounded-xl"
+                className="self-end mb-[10px] p-1  group flex w-full justify-center items-center bg-[#ca0000] rounded-xl"
               >
                 <GoSearch
                   size={27}

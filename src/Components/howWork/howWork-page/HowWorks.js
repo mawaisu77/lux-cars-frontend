@@ -18,11 +18,11 @@ const HowWorks = () => {
           <div className="text-[2.6vw] font-semibold text-white">
             How It Works
           </div>
-          <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
-              <button className="hover:text-white">Home</button>
+              <button className="hover:text-white hover:text-[1.1vw]">Home</button>
             </Link>
-            /<button className="hover:text-white">How it Works</button>
+            /<button className="hover:text-white hover:text-[1.1vw]">How it Works</button>
           </div>
         </div>
       </div>
