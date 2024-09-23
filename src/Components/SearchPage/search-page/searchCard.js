@@ -7,8 +7,7 @@ import { FaHourglassHalf } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import "swiper/css";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
+ 
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
 
@@ -18,7 +17,7 @@ function SearchCard({ data }) {
       <div className=" w-[100%]  md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => <Card key={index} card={card} />)}
       </div>
-    </div>
+    </div> 
   );
 }
 function Card({ card }) {

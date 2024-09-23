@@ -16,7 +16,7 @@ const useCarMakesModels = () => {
         if (err.response) {
           setError(`${err.response.data.message}`);
         } else if (err.request) {
-          setError('No response from server');
+          setError('server error');
         } else {
           setError(`${err.message}`);
         }      } finally {
