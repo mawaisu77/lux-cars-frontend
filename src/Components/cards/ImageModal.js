@@ -35,7 +35,7 @@ const ImageModal = ({
           {/* Logo at the bottom */}
           <img
           src={logo}
-          className="absolute rounded-lg z-10 shadow-img cursor-pointer  bottom-10 w-20"
+          className="absolute rounded-lg z-10 shadow-img cursor-pointer  bottom-7 w-20"
           alt="Logo"
         />
         <div className="absolute bg-black bottom-0 w-full h-5">

@@ -92,11 +92,11 @@ const CarCard = ({ card, isBuy = false }) => {
 
   return (
     <>
-    <div className=" rounded-xl shadow-lg mx-2 lg:px-0">
+    <div className=" rounded-xl bg-[#f8f8f8] shadow-lg mx-2 lg:px-0">
       <div className="p-[1vw] relative w-full lg:p-[1vw]">
         <div className="w-full relative">
           {isCarSaved ? (
-            <div className="bg-black/80 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
+            <div className="bg-black/70 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
               <BsHeartFill
                 onClick={() => handleSaveClick(card.lot_id)}
                 size={15}
@@ -104,7 +104,7 @@ const CarCard = ({ card, isBuy = false }) => {
               />
             </div>
           ) : (
-            <div className="bg-black/80 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
+            <div className="bg-black/70 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
               <BsHeart
                 onClick={() => handleSaveClick(card.lot_id)}
                 size={15}
@@ -128,7 +128,7 @@ const CarCard = ({ card, isBuy = false }) => {
                  
                   <div className=" ">        
                     <img
-                      className="w-full rounded-xl h-[250px] sm:h-[18.2vh] md:h-[18.2vh] lg:h-[18vh] xl:h-[18vh] cursor-pointer"
+                      className="w-full rounded-sm h-[250px] sm:h-[18.2vh] md:h-[18.2vh] lg:h-[18vh] xl:h-[18vh] cursor-pointer"
                       src={image}
                       alt={`Vehicle_Image ${index + 1}`}
                       onClick={() => openModal(index)} // Open modal on image click

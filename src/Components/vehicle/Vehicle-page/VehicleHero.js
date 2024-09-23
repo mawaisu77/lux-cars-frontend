@@ -19,7 +19,7 @@ import usePlaceBid from "../../../hooks/usePlaceBid";
 import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
-// import TimeLeftCounter from "./TimeLeftCounter";
+import TimeLeftCounter from "./TimeLeftCounter";
 import VehicleCostCalculator from "./VehicleCostCalculator";
 import BidHistory from "./BidHistory";
 import CarReportViewer from "./Report";
@@ -120,7 +120,7 @@ const VehicleHero = () => {
         <>
           {carDetailData && (
             <>
-              {/* {carDetailData.data.auction_date ? (
+              {carDetailData.data.auction_date ? (
                 ValidDate ? (
                   ``
                 ) : (
@@ -133,7 +133,7 @@ const VehicleHero = () => {
                   Auction date is not decided yet, Be one on the top of bidding
                   list
                 </div>
-              )} */}
+              )}
 
               <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[74vw] mt-[100px] mb-[20px]">
                 <div className="w-full lg:w-[36vw] ">
@@ -339,7 +339,7 @@ const VehicleHero = () => {
                             </p>
                           </div>
                         </div>
-{/* 
+
                         {carDetailData?.data?.auction_date ? (
                           ValidDate ? (
                             <>
@@ -356,7 +356,7 @@ const VehicleHero = () => {
                           )
                         ) : (
                           ""
-                        )} */}
+                        )} 
                       </div>
                     </div>
                   </div>
