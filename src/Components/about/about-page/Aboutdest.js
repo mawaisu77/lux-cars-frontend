@@ -39,7 +39,7 @@ const Aboutdest = () => {
             
                     <div className='absolute lg:top-[38vh] px-3  top-10 w-full hidden md:block '>
                         <Marquee
-                            speed={50}
+                            speed={1000}
                             gradient={true}
                             pauseOnHover={true}
                             gradientColor='#21212184'
@@ -69,6 +69,7 @@ const Aboutdest = () => {
                             reverse={true}
                             direction='left'
                             className='whitespace-nowrap'
+                            speed={1000}
                         >
                             {locations.map((location, index) => (
                                 <button

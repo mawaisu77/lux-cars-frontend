@@ -55,8 +55,8 @@ function Card({ card }) {
   };
 
   return (
-    <div className="flex flex-col md:flex-col items-center justify-center lg:flex-row py-5 my-5 w-full     mx-auto rounded-2xl shadow-lg  hover:shadow-2xl duration-300">
-      <div className="flex justify-center items-center relative  w-[320px] lg:w-[16vw]  px-4">
+    <div className="flex flex-col md:flex-col items-center justify-center lg:flex-row my-5  w-full     mx-auto rounded-2xl shadow-lg  hover:shadow-2xl duration-300">
+      <div className="flex justify-center items-center relative  w-full  lg:w-[16vw]  px-4">
         {/* <img
           src={card.image || null}
           className=" w-full h-full   rounded-[0.5vw] object-cover"
@@ -76,7 +76,7 @@ function Card({ card }) {
               <SwiperSlide key={index} className="relative">
                 <div className="">
                   <img
-                    className="h-full rounded-[0.5vw] object-cover"
+                    className="h-full lg:h-[150px] rounded-[0.5vw] object-cover"
                     src={image}
                     alt={`Vehicle_Image ${index + 1}`}
                     onClick={() => openModal(index)} // Open modal on image click

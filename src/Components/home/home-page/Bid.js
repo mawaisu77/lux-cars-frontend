@@ -212,9 +212,10 @@ const filteredYearToOptions = yearFrom
                 </p>
               </div>
             </div>
-            <div className="w-[100%] flex flex-row justify-between text-left px-[1vw] py-1 items-center top-[75%] bg-[#ffffffcc]      rounded-xl absolute">
+            <div className="w-[85%]  text-left px-[1vw] py-1 items-center   top-[65%] right-[10%] bg-[#ffffffcc]     rounded-xl absolute">
               {/* Dropdown for Makes (Car Makes) */}
-              <div className="flex flex-col justify-center items-center px-2   text-left"              >
+             <div className="flex justify-between">
+             <div className="flex flex-col justify-center items-center px-2   text-left"              >
                 <p
                   className={`text-[1.17vw] font-urbanist font-semibold ${
                     error ? "hidden" : "block"
@@ -223,7 +224,7 @@ const filteredYearToOptions = yearFrom
                   Makes
                 </p>
                 {loading && !carData ? (
-                  <div className="flex justify-center items-center  py-4">
+                  <div className="flex justify-center items-center  py-2">
                     <ClipLoader size={30} />
                   </div>
                 ) : (
@@ -234,11 +235,11 @@ const filteredYearToOptions = yearFrom
                     options={carOptions}
                     isClearable
                     placeholder=" Makes"
-                    className={`${error ? "hidden" : "block"} w-[70px]`}
+                    className={`${error ? "hidden" : "block"} `}
                   />
                 )}
                 {error && (
-                  <div className="py-4 text-center text-red-500">{error}</div>
+                  <div className="py-2 text-center text-red-500">{error}</div>
                 )}
               </div>
 
@@ -248,7 +249,7 @@ const filteredYearToOptions = yearFrom
                   Models
                 </p>
                 {loading && selectedMake && !modelOptions.length ? (
-                  <div className="flex justify-center items-center py-4">
+                  <div className="flex justify-center items-center py-2">
                     <ClipLoader size={30} />
                   </div>
                 ) : (
@@ -260,11 +261,11 @@ const filteredYearToOptions = yearFrom
                     isClearable
                     placeholder="Models"
                     isDisabled={!selectedMake}
-                    className="w-[70px]"
+                    className=""
                   />
                 )}
                 {selectedMake && !modelOptions.length && (
-                  <div className="py-4 text-center text-red-500">
+                  <div className="py-2 text-center text-red-500">
                     No models available for this make.
                   </div>
                 )}
@@ -282,10 +283,11 @@ const filteredYearToOptions = yearFrom
                   options={partnerOptions}
                   isClearable
                   placeholder="Partners"
-                  className="w-[70px]"
+                  className=""
                 />
               </div>
 
+             </div>
               <div className="flex gap-x-2 justify-between items-center  text-left">
                {/* Dropdown for Year From */}
                 <div className="flex flex-col justify-center items-center px-2   text-left"                >
@@ -300,10 +302,19 @@ const filteredYearToOptions = yearFrom
                     options={yearOptions}
                     isClearable={false}
                     placeholder="YYYY"
-                    className="w-[70px]"
+                    className=""
                     // className={`${error ? "hidden" : "block"} w-[100px]`}
                   />
                 </div>
+                <div
+                onClick={handleSearch}
+                className="    group flex px-1  py-1   justify-center items-center bg-[#ca0000] rounded-lg"
+              >
+                <GoSearch
+                  size={27}
+                  className="cursor-pointer text-white group-hover:text-blue-500 duration-150"
+                />
+              </div>
 
                 {/* Dropdown for Year To */}
                 <div className="flex flex-col justify-center items-center px-2  h-full text-left" >
@@ -317,24 +328,16 @@ const filteredYearToOptions = yearFrom
                     options={filteredYearToOptions}  
                     isClearable={false}
                     placeholder="YYYY"
-                    className="w-[70px]"
+                    className="w-"
                     // className={`${error ? "hidden" : "block"} w-[100px]`}
                   />
                 </div>
               </div>
-              <div
-                onClick={handleSearch}
-                className="    group flex px-1  py-1   justify-center items-center bg-[#ca0000] rounded-lg"
-              >
-                <GoSearch
-                  size={27}
-                  className="cursor-pointer text-white group-hover:text-blue-500 duration-150"
-                />
-              </div>
+             
             </div>
           </div>
 
-          {/* <div className="hidden lg:block w-[23vw] bg-white px-[0.5vw]  py-[1vh] h-fit  rounded-lg  ">
+          <div className="  w-[23vw] bg-white px-[0.5vw]  py-[1vh] h-fit  rounded-lg  ">
             <div className="flex  mt-[9.46vh]">
               <img src={img1} className="w-[4vw]  " alt="icon5" />
               <img src={img2} className="w-[4vw]  " alt="icon6" />
@@ -367,7 +370,7 @@ const filteredYearToOptions = yearFrom
                 <FaArrowRightLong className="text-[1.2vw]" />
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
 
