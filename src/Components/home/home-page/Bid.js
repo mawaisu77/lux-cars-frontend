@@ -101,10 +101,8 @@ const Bid = () => {
       fontSize: "0.9vw",
       borderRadius: "0.74vh",
       backgroundColor: "transparent",
-      border: "1px solid #ccc",
+      border: "1px solid gray",  
       boxShadow: "none",
-      
-
     }),
     menu: (base) => ({
       ...base,
@@ -112,7 +110,7 @@ const Bid = () => {
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     }),
     placeholder: (base) => ({
-      fontSize: '0.9vw',
+      fontSize: "0.9vw",
       ...base,
       color: "#8a8aa0",
     }),
@@ -129,6 +127,7 @@ const Bid = () => {
       },
     }),
   };
+  
   const customMobStyles = {
     control: (base) => ({
       ...base,
@@ -174,6 +173,8 @@ const filteredYearToOptions = yearFrom
 ? yearOptions.filter((option) => option.value >= yearFrom.value)
 : yearOptions;
 
+
+ 
   return (
     <>
       <div className="hidden md:block text-black pt-20">
@@ -189,7 +190,7 @@ const filteredYearToOptions = yearFrom
               temporibus sed quaerat
             </div>
             <AnchorLink href="#startBidding">
-              <button onClick={playAudio}  className="bg-[#ca0000] hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center text-[1vw] px-[1.3vw]  my-[2vh]">
+              <button onClick={playAudio}   className="bg-[#ca0000] py-2 hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center text-[1vw] px-[1.3vw]  my-[2vh]">
                 Start Bidding
               </button>
             </AnchorLink>
@@ -212,12 +213,12 @@ const filteredYearToOptions = yearFrom
                 </p>
               </div>
             </div>
-            <div className="w-[85%]  text-left px-[1vw] py-1 items-center   top-[65%] right-[10%] bg-[#ffffffcc]     rounded-xl absolute">
+            <div className="w-[100%]  text-left px-[1vw] py-3 items-center   top-[65%]  right-0 bg-[#ffffffcc]     rounded-xl absolute">
               {/* Dropdown for Makes (Car Makes) */}
-             <div className="flex justify-between">
-             <div className="flex flex-col justify-center items-center px-2   text-left"              >
+             <div className="grid grid-cols-3">
+             <div className="flex flex-col justify-center   px-2   text-left"              >
                 <p
-                  className={`text-[1.17vw] font-urbanist font-semibold ${
+                  className={`text-left text-[1.17vw] font-urbanist font-semibold ${
                     error ? "hidden" : "block"
                   }`}
                 >
@@ -235,7 +236,7 @@ const filteredYearToOptions = yearFrom
                     options={carOptions}
                     isClearable
                     placeholder=" Makes"
-                    className={`${error ? "hidden" : "block"} `}
+                    className={`${error ? "hidden" : "block"}   `}
                   />
                 )}
                 {error && (
@@ -244,8 +245,8 @@ const filteredYearToOptions = yearFrom
               </div>
 
               {/* Dropdown for Models (Car Models) */}
-              <div className="flex flex-col justify-center items-center px-2   text-left"              >
-                <p className="text-[1.17vw] font-urbanist font-semibold">
+              <div className="flex flex-col justify-center   px-2   text-left"              >
+                <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                   Models
                 </p>
                 {loading && selectedMake && !modelOptions.length ? (
@@ -272,8 +273,8 @@ const filteredYearToOptions = yearFrom
               </div>
 
               {/* Dropdown for Partners */}
-              <div className="flex flex-col justify-center items-center px-2   text-left">
-                <p className="text-[1.17vw] font-urbanist font-semibold">
+              <div className="flex flex-col justify-center   px-2   text-left">
+                <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                   Partners
                 </p>
                 <ReactSelect
@@ -288,10 +289,10 @@ const filteredYearToOptions = yearFrom
               </div>
 
              </div>
-              <div className="flex gap-x-2 justify-between items-center  text-left">
+              <div className="grid grid-cols-3   ">
                {/* Dropdown for Year From */}
-                <div className="flex flex-col justify-center items-center px-2   text-left"                >
-                  <p className="text-[1.17vw] font-urbanist font-semibold">
+                <div className="flex flex-col justify-center   px-2   text-left"                >
+                  <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                    From
                   </p>
                   <ReactSelect
@@ -306,19 +307,11 @@ const filteredYearToOptions = yearFrom
                     // className={`${error ? "hidden" : "block"} w-[100px]`}
                   />
                 </div>
-                <div
-                onClick={handleSearch}
-                className="    group flex px-1  py-1   justify-center items-center bg-[#ca0000] rounded-lg"
-              >
-                <GoSearch
-                  size={27}
-                  className="cursor-pointer text-white group-hover:text-blue-500 duration-150"
-                />
-              </div>
+              
 
                 {/* Dropdown for Year To */}
-                <div className="flex flex-col justify-center items-center px-2  h-full text-left" >
-                  <p className="text-[1.17vw] font-urbanist font-semibold">
+                <div className="flex flex-col  justify-center  px-2  h-full text-left" >
+                  <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                    To
                   </p>
                   <ReactSelect
@@ -328,9 +321,24 @@ const filteredYearToOptions = yearFrom
                     options={filteredYearToOptions}  
                     isClearable={false}
                     placeholder="YYYY"
-                    className="w-"
+                    className="border-black"
                     // className={`${error ? "hidden" : "block"} w-[100px]`}
                   />
+                </div>
+                <div className="flex flex-col">
+                <p className="text-left text-[1.17vw] font-urbanist font-semibold">
+                  Find
+                </p>
+                <div
+                onClick={handleSearch}
+                className=" text-white gap-2   group flex px-1  py-1  h-full    justify-center items-center bg-[#ca0000] rounded-lg"
+              >
+              Search
+                <GoSearch
+                  size={15}
+                  className="cursor-pointer text-white group-hover:text-blue-500 duration-150"
+                />
+              </div>
                 </div>
               </div>
              
