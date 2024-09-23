@@ -91,7 +91,7 @@ const Dropdown = ({ bidAmount, data }) => {
   const calculateVATBase = () => {
     const bid = parseFloat(finalBid) || 0;
     const customsDuty = calculateCustomsDuty();
-    const boatShipping = 1550;
+    const boatShipping = 1500;
     const processingFee = calculateProcessingFee();
     const levyFee = calculateLevyFee();
     return (bid + customsDuty + boatShipping + processingFee + levyFee) * 0.1;
@@ -117,17 +117,20 @@ const Dropdown = ({ bidAmount, data }) => {
     const ServiceFee = calculateServiceFee();
     const InspectionCost = calculateInspectionCost();
     const customClearance = calculateCustomsClearence();
-    return ServiceFee + InspectionCost + customClearance +  parseFloat(finalBid) || 0;
+    const bankFee = calculateBankTransferFee();
+    const transportationRate = selectedTransportation?.rate || 0; 
+    const boatShipping = 1500;
+    return ServiceFee + InspectionCost + customClearance + bankFee + transportationRate + boatShipping +  parseFloat(finalBid) || 0;
   };
 
   const calculateAuctionFee = () => {
-    const auctionFee = finalBid * 0.05;
+    const auctionFee = finalBid;
     return auctionFee;
   };
 
   const calculateBankTransferFee = () => {
-    const auctionFee = calculateAuctionFee();
-    return auctionFee; 
+    const bankFee = calculateAuctionFee() * 0.05;
+    return bankFee;
   };
 
   const handleCategoryChange = (selectedOption) => {
@@ -166,7 +169,7 @@ const Dropdown = ({ bidAmount, data }) => {
 
   // Update final bid when bidAmount or base_site changes data?.base_site
   useEffect(() => {
-    const updatedFinalBid = calculateFinalBid(bidAmount, "copart");
+    const updatedFinalBid = calculateFinalBid(bidAmount, data?.base_site);
     setFinalBid(updatedFinalBid); // Store the calculated final bid in state
   }, [bidAmount, data?.base_site]);
 
@@ -177,6 +180,8 @@ const Dropdown = ({ bidAmount, data }) => {
       setShowApprovalMessage(false); // Hide the message if the car is 10 years or newer
     }
   }, [data]);
+
+  console.log(selectedTransportation?.rate)
 
   return (
     <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
@@ -199,7 +204,7 @@ const Dropdown = ({ bidAmount, data }) => {
       {selectedCategory && (
         <>
           <h3 className="text-lg lg:text-[1.15vw] text-left py-[0.4vw] font-semibold rounded-[0.5vw] text-gray-900 mb-[1.1vh]">
-            Select Transportation Fee
+            Select Transportation
           </h3>
 
           <Select
@@ -232,7 +237,7 @@ const Dropdown = ({ bidAmount, data }) => {
           Fees & Calculations
         </h3>
         <div className="space-y-3">
-          {/* Transportation Rate */}
+          {/* Final Rate */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
               <span className="text-md lg:text-[0.875vw] text-gray-700">
@@ -259,7 +264,7 @@ const Dropdown = ({ bidAmount, data }) => {
               )}
             </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
-              ${calculateFinalBid(bidAmount, "copart")}
+              ${calculateFinalBid(bidAmount, data?.base_site)}
             </span>
           </div>
 
@@ -333,7 +338,8 @@ const Dropdown = ({ bidAmount, data }) => {
                 Levy Fee: (flat)
               </span>
               <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
-                <TooltipInfo content="Approval is needed from the Ministry for cars older than 10 years.">
+                <TooltipInfo content={` ${
+                      showApprovalMessage ? "Approval is needed from the Ministry for cars older than 10 years." : "flat $250"} `}>
                   <BsInfoCircle
                     size={15}
                     className={`${
@@ -422,7 +428,7 @@ const Dropdown = ({ bidAmount, data }) => {
               </div>
             </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
-              ${selectedTransportation?.rate || 0}
+              { selectedTransportation?.rate   ? `$${selectedTransportation?.rate || 0}` : "please select category and state"  }
             </span>
           </div>
 
@@ -442,7 +448,7 @@ const Dropdown = ({ bidAmount, data }) => {
               </div>
             </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
-              ${"500"} (static)
+              ${"1500"} (static)
             </span>
           </div>
 
