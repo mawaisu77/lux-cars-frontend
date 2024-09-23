@@ -126,6 +126,22 @@ const Bid = () => {
         backgroundColor: "#f5f5f5",
       },
     }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      padding: "4px", 
+      svg: {
+        width: "12px", // Adjust the size of the dropdown icon
+        height: "12px",
+      },
+    }),
+    clearIndicator: (base) => ({
+      ...base,
+      padding: "4px", // Adjust the padding for size
+      svg: {
+        width: "12px", // Adjust the size of the clear icon
+        height: "12px",
+      },
+    }),
   };
   
   const customMobStyles = {
@@ -213,7 +229,7 @@ const filteredYearToOptions = yearFrom
                 </p>
               </div>
             </div>
-            <div className="w-[100%]  text-left px-[1vw] py-3 items-center   top-[65%]  right-0 bg-[#ffffffcc]     rounded-xl absolute">
+            <div className="w-[90%]  text-left px-[1vw] py-3 items-center   top-[65%]  right-[10%] bg-[#ffffffef]     rounded-xl absolute">
               {/* Dropdown for Makes (Car Makes) */}
              <div className="grid grid-cols-3">
              <div className="flex flex-col justify-center   px-2   text-left"              >
@@ -245,7 +261,7 @@ const filteredYearToOptions = yearFrom
               </div>
 
               {/* Dropdown for Models (Car Models) */}
-              <div className="flex flex-col justify-center   px-2   text-left"              >
+              <div className="flex flex-col justify-center  px-2 text-left"              >
                 <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                   Models
                 </p>
@@ -325,18 +341,20 @@ const filteredYearToOptions = yearFrom
                     // className={`${error ? "hidden" : "block"} w-[100px]`}
                   />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col px-2">
                 <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                   Find
                 </p>
                 <div
                 onClick={handleSearch}
-                className=" text-white gap-2   group flex px-1  py-1  h-full    justify-center items-center bg-[#ca0000] rounded-lg"
+                className=" text-white gap-2 group flex py-1 h-full justify-center items-center bg-[#ca0000] rounded-lg"
               >
-              Search
+              <span>
+                Search
+              </span>
                 <GoSearch
                   size={15}
-                  className="cursor-pointer text-white group-hover:text-blue-500 duration-150"
+                  className="cursor-pointer text-white  duration-150"
                 />
               </div>
                 </div>
