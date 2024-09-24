@@ -8,7 +8,6 @@ const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [showFilterMob, setShowFiltersMob] = useState(false)
-  console.log(showFilterMob)
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
   const initialMake = queryParams.get("make") || "";
@@ -24,7 +23,6 @@ const Sidebar = () => {
   const initialFromOdometer = queryParams.get("odometer_from") || "";
   const initialToOdometer = queryParams.get("odometer_to") || "";
 
-  console.log("query params ne urlSearch params",initialStatus)
   const [selectedModel, setSelectedModel] = useState(initialModel);
   const [selectedMake, setSelectedMake] = useState(initialMake);
   const [selectedFilters, setSelectedFilters] = useState({
@@ -495,7 +493,7 @@ const Sidebar = () => {
         )
       }
  
-       <div className="w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex justify-center flex-col items-center">
+       <div className="w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex justify-center h-full flex-col items-center">
         <SearchMainPage
           resetFilters={resetFilters}
           appliedFilters={appliedFilters}

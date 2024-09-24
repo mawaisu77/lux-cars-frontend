@@ -206,7 +206,7 @@ const filteredYearToOptions = yearFrom
               temporibus sed quaerat
             </div>
             <AnchorLink href="#startBidding">
-              <button onClick={playAudio}   className="bg-[#ca0000] py-2 hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center text-[1vw] px-[1.3vw]  my-[2vh]">
+              <button onClick={playAudio}   className="bg-[#ca0000] py-[1vh] hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center text-[1vw] px-[1.3vw]  my-[2vh]">
                 Start Bidding
               </button>
             </AnchorLink>
@@ -229,10 +229,10 @@ const filteredYearToOptions = yearFrom
                 </p>
               </div>
             </div>
-            <div className="w-[90%]  text-left px-[1vw] py-3 items-center   top-[65%]  right-[10%] bg-[#ffffffef]     rounded-xl absolute">
+            <div className="w-[100%]  text-left px-[1vw] py-[1.5vh] items-center   top-[65%]  right-0 bg-[#ffffffcc]     rounded-xl absolute">
               {/* Dropdown for Makes (Car Makes) */}
              <div className="grid grid-cols-3">
-             <div className="flex flex-col justify-center   px-2   text-left"              >
+             <div className="flex flex-col justify-center   px-[0.5vw]  text-left"              >
                 <p
                   className={`text-left text-[1.17vw] font-urbanist font-semibold ${
                     error ? "hidden" : "block"
@@ -241,7 +241,7 @@ const filteredYearToOptions = yearFrom
                   Makes
                 </p>
                 {loading && !carData ? (
-                  <div className="flex justify-center items-center  py-2">
+                  <div className="flex justify-center items-center  py-[1vh]">
                     <ClipLoader size={30} />
                   </div>
                 ) : (
@@ -256,17 +256,17 @@ const filteredYearToOptions = yearFrom
                   />
                 )}
                 {error && (
-                  <div className="py-2 text-center text-red-500">{error}</div>
+                  <div className="py-[1vh] text-center text-red-500">{error}</div>
                 )}
               </div>
 
               {/* Dropdown for Models (Car Models) */}
-              <div className="flex flex-col justify-center  px-2 text-left"              >
+              <div className="flex flex-col justify-center   px-[0.5vw]   text-left"              >
                 <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                   Models
                 </p>
                 {loading && selectedMake && !modelOptions.length ? (
-                  <div className="flex justify-center items-center py-2">
+                  <div className="flex justify-center items-center py-[1vh]">
                     <ClipLoader size={30} />
                   </div>
                 ) : (
@@ -282,14 +282,14 @@ const filteredYearToOptions = yearFrom
                   />
                 )}
                 {selectedMake && !modelOptions.length && (
-                  <div className="py-2 text-center text-red-500">
+                  <div className="py-[1vh] text-center text-red-500">
                     No models available for this make.
                   </div>
                 )}
               </div>
 
               {/* Dropdown for Partners */}
-              <div className="flex flex-col justify-center   px-2   text-left">
+              <div className="flex flex-col justify-center   px-[0.5vw]   text-left">
                 <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                   Partners
                 </p>
@@ -307,7 +307,7 @@ const filteredYearToOptions = yearFrom
              </div>
               <div className="grid grid-cols-3   ">
                {/* Dropdown for Year From */}
-                <div className="flex flex-col justify-center   px-2   text-left"                >
+                <div className="flex flex-col justify-center  px-[0.5vw]   text-left"                >
                   <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                    From
                   </p>
@@ -326,7 +326,7 @@ const filteredYearToOptions = yearFrom
               
 
                 {/* Dropdown for Year To */}
-                <div className="flex flex-col  justify-center  px-2  h-full text-left" >
+                <div className="flex flex-col  justify-center  px-[0.5vw]  h-full text-left" >
                   <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                    To
                   </p>
@@ -347,11 +347,10 @@ const filteredYearToOptions = yearFrom
                 </p>
                 <div
                 onClick={handleSearch}
-                className=" text-white gap-2 group flex py-1 h-full justify-center items-center bg-[#ca0000] rounded-lg"
+                className=" text-white gap-2   group flex px-[0.25vw]  py-[1vh]     justify-center items-center bg-[#ca0000] rounded-[0.5vw]"
               >
-              <span>
-                Search
-              </span>
+                <p className=" ">Search</p>
+              
                 <GoSearch
                   size={15}
                   className="cursor-pointer text-white  duration-150"
@@ -472,7 +471,7 @@ const filteredYearToOptions = yearFrom
             </div>
 
             <div className="text-left w-[140px] h-[550px] border bg-[#ffffffcc] rounded-xl -mt-[380px]">
-              <div className="w-[108px] py-2 mx-auto flex flex-col gap-y-4 justify-center items-center font-urbanist">
+              <div className="w-[108px] py-[1vh] mx-auto flex flex-col gap-y-4 justify-center items-center font-urbanist">
            
               {/* Dropdown for Makes (Car Makes) */}
               <div className="flex flex-col justify-center items-start border-r w-full text-left">
