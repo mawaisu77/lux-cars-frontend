@@ -56,7 +56,7 @@ function Card({ card }) {
 
   return (
     <div className="flex flex-col md:flex-col items-center justify-center lg:flex-row my-5  w-full     mx-auto rounded-[1vw] shadow-lg  hover:shadow-2xl duration-300">
-      <div className="flex justify-center items-center relative  w-full  lg:w-[16vw] py-[2vh]  px-[1vw]">
+      <div className="flex justify-center items-center relative  w-full  lg:w-[16vw] py-[2vh]  px-[2vw]">
         {/* <img
           src={card.image || null}
           className=" w-full h-full   rounded-[0.5vw] object-cover"
@@ -98,8 +98,8 @@ function Card({ card }) {
         goToNextImage={goToNextImage}
         logo={LuxLogoWhite}
       />
-      <div className="flex flex-col md:justify-center md:items-center mx-auto lg:flex-row px-[1vw] py-[1vh]">
-        <div className="text-left px-[0.5vw] text-[13px] lg:text-[0.875vw] border-b lg:border-r lg:border-b-0 font-urbanist">
+      <div className="flex flex-col md:justify-center w-full text-left  md:items-center   lg:flex-row   py-[1vh]">
+        <div className="text-left px-[2vw] text-[13px] lg:text-[0.875vw] border-b lg:border-r lg:border-b-0 font-urbanist">
         <Link to={`/vehicle-detail/${card.lot_id}`}>
           <p className="font-semibold py-[1vh] hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
             {card.title.length > 40
@@ -109,7 +109,7 @@ function Card({ card }) {
           </Link>
         
           <div className="flex flex-col md:flex-row lg:flex-row leading-[3vh]">
-            <div className="flex flex-col sm:flex-row sm:flex-wrap font-urbanist gap-x-2 text-[13px] lg:text-[0.875vw] py-1  ">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap font-urbanist  text-[13px] lg:text-[0.875vw] py-1  ">
               <p className="w-full">
                 <span className="font-semibold">VIN:</span> {card.vin}
               </p>
@@ -143,28 +143,28 @@ function Card({ card }) {
             </div>
           </div>
         </div>
-        <div className="flex lg:flex-row sm:flex-row px-2 justify-between  py-3">
-          <div className="py-1 text-center sm:text-left">
+        <div className="flex lg:flex-row sm:flex-row px-2 w-full  justify-between mx-auto   py-3">
+          <div className="py-1  w-full text-center sm:text-left">
             <p className="text-sm text-gray-600">{card.Price}</p>
             <p className="text-xl font-bold text-red-600">{card.amount}</p>
-            <div className="flex flex-col  lg:w-full   gap-[1vw] p-[1vw] bg-gray-100 rounded-lg shadow-lg">
+            <div className="flex flex-col  w-full    gap-[1vw] p-[1vw]  rounded-lg shadow-lg">
               {/* BID NOW Button Section */}
-              <div className="flex justify-center items-center   lg:mt-2 sm:mt-0">
-                <Link to={`/vehicle-detail/${card.lot_id}`}>
-                  <button className="w-[150px]  lg:w-[10vw] h-[40px] lg:h-[5vh] rounded-[8px] text-lg lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform hover:scale-105">
+              <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
+                <Link to={`/vehicle-detail/${card.lot_id}`} className="w-full">
+                  <button className=" w-full h-[40px] lg:h-[5vh] rounded-[8px] text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
                     BID NOW
                   </button>
                 </Link>
               </div>
 
               {/* Auction Date & Timer Section */}
-              <div className="w-full  lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center p-2 shadow-md">
+              <div className="w-full  lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh] bg-black rounded-lg flex justify-center items-center p-2 shadow-md">
                 <div className="flex items-center text-nowrap gap-[0.75vw]">
                   {/* Icon Section */}
                   <div className="flex justify-center items-center">
                     {card.auction_date ? (
                       ValidDate ? (
-                        <BsFire className="text-red-600 text-lg lg:text-[0.875vw]" />
+                        <BsFire className="text-red-600 text-sm lg:text-[0.875vw]" />
                       ) : (
                         <MdNotInterested className="text-gray-400 text-lg lg:text-[0.875vw]" />
                       )
