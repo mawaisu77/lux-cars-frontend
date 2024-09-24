@@ -37,6 +37,7 @@ import southEleuthera from "../assets/bahams-island/southEleuthera.jpg";
 
 // Create and export the islandImages object
 export const islandImages = {
+    "NORTH ABACO": northAbaco,
     "ACKLINS ISLAND": acklins,
     "ANDROS": andros,
     "NICHOLLS TOWN AND BERRY ISLANDS": berryIsland,
@@ -61,7 +62,7 @@ export const islandImages = {
     "MAYAGUANA": mayaguana,
     "MOORE'S ISLAND": mooreIsland,
     "NEW PROVIDENCE": newProvidemce,
-    "NORTH ABACO": northAbaco,
+   
     "NORTH ANDROS": northAndros,
     "NORTH ELEUTHERA": northEleuthera,
     "SAN SALVADOR AND RUM CAY": sanSalvador,
