@@ -47,7 +47,6 @@ function SearchMainPage({
         page,
         size,
       });
-      console.log("appliedFilters in search main page", appliedFilters);
 
       Object.entries(appliedFilters).forEach(([key, value]) => {
         if (Array.isArray(value)) {
@@ -78,7 +77,6 @@ function SearchMainPage({
         setError("Something went wrong.");
       }
 
-      console.error("Error fetching cards:", error);
     } finally {
       setLoading(false);
     }
@@ -90,15 +88,15 @@ function SearchMainPage({
   };
 
   return (
-    <div>
-      <div className="sm:w-[54vw] w-full mx-auto my-[2.604vw] font-urbanist">
-        <div className="flex flex-col lg:flex-row justify-between items-center   lg:mt-[9.3vh] lg:items-start">
+    <div className="w-full">
+      <div className=" w-full mx-auto my-[2.604vw] font-urbanist flex flex-col">
+        <div className="flex flex-col w-full lg:flex-row justify-between items-center  lg:mt-[9.3vh] ">
           <div className="flex mb-4 lg:mb-0">
             <h2 className="text-[24px] lg:text-[1.95vw] font-urbanist font-bold">
               {`${totalResults} Available Vehicles`}
             </h2>
           </div>
-          <div className="flex flex-col lg:flex-row   relative text-left text-sm lg:text-base">
+          <div className="flex flex-col lg:flex-row  relative text-left text-sm lg:text-base">
             <div className="flex">
               <input
                 type="text"
