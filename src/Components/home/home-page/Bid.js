@@ -126,6 +126,22 @@ const Bid = () => {
         backgroundColor: "#f5f5f5",
       },
     }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      padding: "4px", 
+      svg: {
+        width: "12px", // Adjust the size of the dropdown icon
+        height: "12px",
+      },
+    }),
+    clearIndicator: (base) => ({
+      ...base,
+      padding: "4px", // Adjust the padding for size
+      svg: {
+        width: "12px", // Adjust the size of the clear icon
+        height: "12px",
+      },
+    }),
   };
   
   const customMobStyles = {
@@ -325,7 +341,7 @@ const filteredYearToOptions = yearFrom
                     // className={`${error ? "hidden" : "block"} w-[100px]`}
                   />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col px-2">
                 <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                   Find
                 </p>
@@ -337,7 +353,7 @@ const filteredYearToOptions = yearFrom
               
                 <GoSearch
                   size={15}
-                  className="cursor-pointer text-white group-hover:text-blue-500 duration-150"
+                  className="cursor-pointer text-white  duration-150"
                 />
               </div>
                 </div>
