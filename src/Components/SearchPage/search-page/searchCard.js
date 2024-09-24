@@ -74,9 +74,12 @@ function Card({ card }) {
           {card.images &&
             card.images.map((image, index) => (
               <SwiperSlide key={index} className="relative">
-                <div className="">
+                <div className="cursor-pointer relative mt-4">
+                  <div className="absolute w-full sm:h-2 bg-white bottom-0 rounded-b-[0.5vw]">
+                    
+                  </div>
                   <img
-                    className="h-full lg:h-[20vh] w-full lg:w-[15vw] rounded-[0.5vw] object-cover"
+                    className="h-full lg:h-[24vh] w-full lg:w-[15vw] rounded-[0.5vw] object-cover"
                     src={image}
                     alt={`Vehicle_Image ${index + 1}`}
                     onClick={() => openModal(index)} // Open modal on image click
@@ -97,11 +100,14 @@ function Card({ card }) {
       />
       <div className="flex flex-col md:justify-center md:items-center mx-auto lg:flex-row px-4 py-2">
         <div className="text-left px-2 text-[13px] lg:text-[0.875vw] border-b lg:border-r lg:border-b-0 font-urbanist">
-          <p className="font-semibold   py-2 ">
+        <Link to={`vehicle-detail/${card.lot_id}`}>
+          <p className="font-semibold py-2 hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
             {card.title.length > 40
               ? `${card.title.slice(0, 40)}...`
               : card.title}
           </p>
+          </Link>
+        
           <div className="flex flex-col md:flex-row lg:flex-row">
             <div className="flex flex-col sm:flex-row sm:flex-wrap font-urbanist gap-x-2 text-[13px] lg:text-[0.875vw] py-1  ">
               <p className="w-full">

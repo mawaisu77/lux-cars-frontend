@@ -278,9 +278,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 <TooltipInfo content="1% of final bid">
                   <BsInfoCircle
                     size={15}
-                    className={`${
-                      showApprovalMessage ? "text-red-600 animate-pulse" : ""
-                    } hover:text-blue-800 duration-200`}
+                    className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
               </div>
