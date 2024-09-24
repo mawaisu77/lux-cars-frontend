@@ -32,12 +32,15 @@ const ImageModal = ({
             alt={`image_${currentImageIndex + 1}`}
             className="object-cover w-full h-full"
         />
-          {/* Logo at the bottom */}
-          <img
+         <div className="absolute bottom-5 bg-black/50 p-2 rounded-e-sm">
+           {/* Logo at the bottom */}
+           <img
           src={logo}
-          className="absolute rounded-lg z-10 shadow-img cursor-pointer  bottom-7 w-20"
+          className="rounded-lg z-10 shadow-img cursor-pointer  w-20"
           alt="Logo"
         />
+         </div>
+
         <div className="absolute bg-black bottom-0 w-full h-5">
 
         </div>
