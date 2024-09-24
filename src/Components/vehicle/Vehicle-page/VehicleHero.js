@@ -2,20 +2,20 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Header from "../../header/Header/Header";
 import { Link, useParams } from "react-router-dom";
-import logo from "../../../assets/Vehicle/Rectangle 767.png";
+// import logo from "../../../assets/Vehicle/Rectangle 767.png";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { BsDownload } from "react-icons/bs";
 import { PiUsersFill } from "react-icons/pi";
 import { CgFileDocument } from "react-icons/cg";
 import { TiLockClosed } from "react-icons/ti";
 import VehicleCards from "../../cards/VehicleCards";
-import VehicleTab from "../../vehicle/Vehicle-page/VehicleTab";
+// import VehicleTab from "../../vehicle/Vehicle-page/VehicleTab";
 import useGetCarDetail from "../../../hooks/useGetCarDetail";
 import FadeLoader from "react-spinners/FadeLoader";
 import SwiperGallery from "./SwiperGallery";
 import CurrencyInput from "react-currency-input-field";
 import usePlaceBid from "../../../hooks/usePlaceBid";
-import image31 from "../../../assets/HCards/Avatar.png";
+// import image31 from "../../../assets/HCards/Avatar.png";
 import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
@@ -64,8 +64,7 @@ const VehicleHero = () => {
   );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
-  // const ValidDate =
-  //   targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+  const ValidDate = targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
   useEffect(() => {
     if (carDetailData?.data?.currentBid) {
@@ -104,11 +103,11 @@ const VehicleHero = () => {
           <div className="text-[2.6vw] font-semibold text-white">
             Vehicle Detail
           </div>
-          <div className=" text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+          <div className=" text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
-              <button className="hover:text-white">Home</button>
+              <button className="hover:text-white hover:text-[1.1vw]">Home</button>
             </Link>
-            /<button className="hover:text-white">Vehicle Detail</button>
+            /<button className="hover:text-white hover:text-[1.1vw]">Vehicle Detail</button>
           </div>
         </div>
       </div>
@@ -121,7 +120,7 @@ const VehicleHero = () => {
         <>
           {carDetailData && (
             <>
-              {/* {carDetailData.data.auction_date ? (
+              {carDetailData.data.auction_date ? (
                 ValidDate ? (
                   ``
                 ) : (
@@ -134,7 +133,7 @@ const VehicleHero = () => {
                   Auction date is not decided yet, Be one on the top of bidding
                   list
                 </div>
-              )} */}
+              )}
 
               <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[74vw] mt-[100px] mb-[20px]">
                 <div className="w-full lg:w-[36vw] ">
@@ -340,7 +339,7 @@ const VehicleHero = () => {
                             </p>
                           </div>
                         </div>
-{/* 
+
                         {carDetailData?.data?.auction_date ? (
                           ValidDate ? (
                             <>
@@ -357,7 +356,7 @@ const VehicleHero = () => {
                           )
                         ) : (
                           ""
-                        )} */}
+                        )} 
                       </div>
                     </div>
                   </div>

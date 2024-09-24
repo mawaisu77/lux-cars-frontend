@@ -4,27 +4,31 @@ import useTimer from "../../hooks/useTimer";
 import {
   BsFire,
   BsHeart,
-  BsHeartArrow,
-  BsHeartbreak,
+  // BsHeartArrow,
+  // BsHeartbreak,
   BsHeartFill,
 } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa";
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import useSaveCar from "../../hooks/useSaveCar";
-import ImageViewer from "react-simple-image-viewer";
-import ReactDOM from "react-dom";
+// import ImageViewer from "react-simple-image-viewer";
+// import ReactDOM from "react-dom";
+// import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+// import { IoClose } from "react-icons/io5";
+import ImageModal from "./ImageModal";
+import { LuxLogoWhite } from "../../utils/constant";
 
 const CarCard = ({ card, isBuy = false }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [savedCars, setSavedCars] = useState([]);
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
 
-  const { carData, loading, error, handleSaveCar } = useSaveCar();
+  const {  handleSaveCar } = useSaveCar();
 
   // Memoize the targetTime to prevent unnecessary recalculations
   const targetTime = useMemo(
@@ -61,25 +65,38 @@ const CarCard = ({ card, isBuy = false }) => {
     localStorage.setItem("savedCars", JSON.stringify(updatedSavedCars));
   };
 
-  const openImageViewer = (index) => {
-    setCurrentImage(index);
-    setIsViewerOpen(true);
-  };
-
-  const closeImageViewer = () => {
-    setIsViewerOpen(false);
-  };
-
   // Check if the current car is saved
   const isCarSaved = savedCars.includes(card.lot_id);
 
+    // Open modal with selected image
+    const openModal = (index) => {
+      setCurrentImageIndex(index);
+      setModalOpen(true);
+    };
+    // Close modal
+    const closeModal = () => {
+      setModalOpen(false);
+    };
+    // Go to the next image
+    const goToNextImage = () => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === card.images.length - 1 ? 0 : prevIndex + 1
+      );
+    };
+    // Go to the previous image
+    const goToPrevImage = () => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === 0 ? card.images.length - 1 : prevIndex - 1
+      );
+    };
+
   return (
     <>
-    <div className=" rounded-xl shadow-lg mx-2 lg:px-0">
+    <div className=" rounded-xl bg-[#f8f8f8] shadow-lg mx-2 lg:px-0">
       <div className="p-[1vw] relative w-full lg:p-[1vw]">
         <div className="w-full relative">
           {isCarSaved ? (
-            <div className="bg-black/80 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
+            <div className="bg-black/70 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
               <BsHeartFill
                 onClick={() => handleSaveClick(card.lot_id)}
                 size={15}
@@ -87,7 +104,7 @@ const CarCard = ({ card, isBuy = false }) => {
               />
             </div>
           ) : (
-            <div className="bg-black/80 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
+            <div className="bg-black/70 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
               <BsHeart
                 onClick={() => handleSaveClick(card.lot_id)}
                 size={15}
@@ -111,11 +128,11 @@ const CarCard = ({ card, isBuy = false }) => {
                  
                   <div className=" ">        
                     <img
-                      className="w-full rounded-xl h-[250px] sm:h-[18.2vh] md:h-[18.2vh] lg:h-[18vh] xl:h-[18vh] cursor-pointer"
+                      className="w-full rounded-sm h-[250px] sm:h-[18.2vh] md:h-[18.2vh] lg:h-[18vh] xl:h-[18vh] cursor-pointer"
                       src={image}
                       alt={`Vehicle_Image ${index + 1}`}
-                      onClick={() => openImageViewer(index)}
-                    
+                      onClick={() => openModal(index)} // Open modal on image click
+
                       />
                   </div>
                     
@@ -124,6 +141,7 @@ const CarCard = ({ card, isBuy = false }) => {
           </Swiper>
     
         </div>
+ 
         <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 h-6 bg-white/90 rounded-2xl z-50 flex justify-center items-center">
           <div className="flex justify-center items-center gap-x-1.5 px-3">
             <div>
@@ -188,26 +206,21 @@ const CarCard = ({ card, isBuy = false }) => {
                 : "Bid Now"}
             </button>
           </Link>
+          
         </div>
       </div>
     
     </div>
-     {/* Render ImageViewer outside the card's container using a portal */}
-
-     
-     {isViewerOpen &&
-        ReactDOM.createPortal(
-          <ImageViewer
-          backgroundStyle={{
-            zIndex:50,
-           }}
-            disableScroll={false}
-            src={card.images}
-            currentIndex={currentImage}
-            onClose={closeImageViewer}
-          />,
-          document.body // Render in the root of the DOM
-        )}
+     {/* Image modal */}
+     <ImageModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        images={card.images}
+        currentImageIndex={currentImageIndex}
+        goToPrevImage={goToPrevImage}
+        goToNextImage={goToNextImage}
+        logo={LuxLogoWhite}
+      />
       </>
   );
 };
