@@ -74,8 +74,8 @@ function Card({ card }) {
           {card.images &&
             card.images.map((image, index) => (
               <SwiperSlide key={index} className="relative">
-                <div className="cursor-pointer relative mt-4">
-                  <div className="absolute w-full sm:h-2 bg-white bottom-0 rounded-b-[0.5vw]">
+                <div className="cursor-pointer relative mt-[2vh]">
+                  <div className="absolute w-full sm:h-[1vh] bg-white bottom-0 rounded-b-[0.5vw]">
                     
                   </div>
                   <img
@@ -98,17 +98,17 @@ function Card({ card }) {
         goToNextImage={goToNextImage}
         logo={LuxLogoWhite}
       />
-      <div className="flex flex-col md:justify-center md:items-center mx-auto lg:flex-row px-4 py-2">
-        <div className="text-left px-2 text-[13px] lg:text-[0.875vw] border-b lg:border-r lg:border-b-0 font-urbanist">
+      <div className="flex flex-col md:justify-center md:items-center mx-auto lg:flex-row px-[1vw] py-[1vh]">
+        <div className="text-left px-[0.5vw] text-[13px] lg:text-[0.875vw] border-b lg:border-r lg:border-b-0 font-urbanist">
         <Link to={`vehicle-detail/${card.lot_id}`}>
-          <p className="font-semibold py-2 hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
+          <p className="font-semibold py-[1vh] hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
             {card.title.length > 40
               ? `${card.title.slice(0, 40)}...`
               : card.title}
           </p>
           </Link>
         
-          <div className="flex flex-col md:flex-row lg:flex-row">
+          <div className="flex flex-col md:flex-row lg:flex-row leading-[3vh]">
             <div className="flex flex-col sm:flex-row sm:flex-wrap font-urbanist gap-x-2 text-[13px] lg:text-[0.875vw] py-1  ">
               <p className="w-full">
                 <span className="font-semibold">VIN:</span> {card.vin}
@@ -147,7 +147,7 @@ function Card({ card }) {
           <div className="py-1 text-center sm:text-left">
             <p className="text-sm text-gray-600">{card.Price}</p>
             <p className="text-xl font-bold text-red-600">{card.amount}</p>
-            <div className="flex flex-col w-[260px] lg:w-full  gap-4 p-4 bg-gray-100 rounded-lg shadow-lg">
+            <div className="flex flex-col  lg:w-full   gap-[1vw] p-[1vw] bg-gray-100 rounded-lg shadow-lg">
               {/* BID NOW Button Section */}
               <div className="flex justify-center items-center   lg:mt-2 sm:mt-0">
                 <Link to={`/vehicle-detail/${card.lot_id}`}>
@@ -159,7 +159,7 @@ function Card({ card }) {
 
               {/* Auction Date & Timer Section */}
               <div className="w-full  lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center p-2 shadow-md">
-                <div className="flex items-center gap-[0.75vw]">
+                <div className="flex items-center text-nowrap gap-[0.75vw]">
                   {/* Icon Section */}
                   <div className="flex justify-center items-center">
                     {card.auction_date ? (
