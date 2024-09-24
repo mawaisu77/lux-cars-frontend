@@ -29,17 +29,17 @@ const Aboutdest = () => {
                     </button>
                 </div>
 
-                <div className='w-[343px] md:w-[500px] lg:w-[73.5vw] h-[870px] lg:h-[47vh] rounded-xl shadow-lg mx-auto mt-[8vh] relative'>
-                            <div className='absolute w-full h-full bg-transparent p-3 '>
-                                <div className=' w-full h-full bg-black p-3 opacity-20'>
+                <div className='w-[343px] md:w-[500px] lg:w-[73.5vw]  lg:h-[47vh] rounded-xl shadow-lg mx-auto mt-[8vh] relative'>
+                            <div className='absolute w-full  bg-transparent p-3 '>
+                                <div className=' w-full  bg-black p-3 opacity-20'>
 
                                 </div>
                             </div>
-                    <img src={backgroundImage} alt="Background" className='w-full h-[860px] lg:h-full object-cover rounded-xl p-3' />
+                    <img src={backgroundImage} alt="Background" className='w-full h-[500px] lg:h-full object-cover rounded-xl p-3' />
             
-                    <div className='absolute lg:top-[38vh] px-3  top-10 w-full hidden md:block '>
+                    <div className='absolute lg:top-[35vh] px-3  top-10 w-full hidden md:block '>
                         <Marquee
-                            speed={1000}
+                            speed={100}
                             gradient={true}
                             pauseOnHover={true}
                             gradientColor='#21212184'
@@ -69,7 +69,7 @@ const Aboutdest = () => {
                             reverse={true}
                             direction='left'
                             className='whitespace-nowrap'
-                            speed={1000}
+                            speed={100}
                         >
                             {locations.map((location, index) => (
                                 <button
