@@ -60,7 +60,7 @@ function SearchMainPage({
 
       const queryString = params.toString().replace(/\+/g, "%20");
       const response = await baseService.get(
-        `cars/get-all-cars/testing?${queryString}`
+        `cars/get-all-cars?${queryString}`
       );
 
       // Append new cards to the existing cards
