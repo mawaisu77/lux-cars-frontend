@@ -100,7 +100,7 @@ function Card({ card }) {
       />
       <div className="flex flex-col md:justify-center md:items-center mx-auto lg:flex-row px-[1vw] py-[1vh]">
         <div className="text-left px-[0.5vw] text-[13px] lg:text-[0.875vw] border-b lg:border-r lg:border-b-0 font-urbanist">
-        <Link to={`vehicle-detail/${card.lot_id}`}>
+        <Link to={`/vehicle-detail/${card.lot_id}`}>
           <p className="font-semibold py-[1vh] hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
             {card.title.length > 40
               ? `${card.title.slice(0, 40)}...`
