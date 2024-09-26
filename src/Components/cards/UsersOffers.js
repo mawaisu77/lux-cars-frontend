@@ -1,12 +1,10 @@
 import React from 'react';
 import { TfiReload } from "react-icons/tfi";
-
-import useGetLocalCars from '../../hooks/useGetLocalCars';
-import { showToast } from '../../utils/Toast';
+import useGetAllLocalCars from '../../hooks/useGetAllLocalCars';
 
 const UsersOffers = () => {
 
-  const { carData, carLoading, carError } = useGetLocalCars('local-cars/get-all-cars');
+  const { localCars, carLoading, carError } = useGetAllLocalCars('local-cars/get-all-cars');
 
 // useEffect(() => {
 //   if(carError){
@@ -30,7 +28,7 @@ if (carLoading) {
   return (
     <>
         <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh] mb-[10vh]'>
-        {carData && carData?.data?.map((card, index) => (
+        {localCars && localCars?.data?.map((card, index) => (
           <div key={index} className='w-[330px] lg:w-[17.5vw]  rounded-xl shadow-xl py-3'>
             <div className='relative'>
               <img src={card.carImages} className='w-[290px] lg:w-[15.5vw] h-[290px] lg:h-[30vh] rounded-xl mx-auto' alt='car-images' />

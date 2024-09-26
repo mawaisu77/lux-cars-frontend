@@ -7,6 +7,7 @@ import {
   suvData,
   heavyMachineryData,
 } from "../../../utils/carCategoriesData";
+import {stateAbbreviations, statesAndProvinces} from "../../../utils/CountryState";
 import { CopartBuyerFeeCalculator } from "./copart-bid-calculations/BuyerFeeCalculations";
 import {
   copartEnvironmentalFee,
@@ -109,8 +110,19 @@ const Dropdown = ({ bidAmount, data }) => {
   // New function to calculate the service fee
   const calculateServiceFee = () => {
     const baseFee = 1500;
-    const additionalFee = finalBid > 40000 ? finalBid * 0.04 : 0;
+    const additionalFee = finalBid > 30000 ? finalBid * 0.04 : 0;
     return baseFee + additionalFee;
+  };
+
+  
+  const calculateAuctionFee = () => {
+    const auctionFee = finalBid;
+    return auctionFee;
+  };
+
+  const calculateBankTransferFee = () => {
+    const bankFee = calculateAuctionFee() * 0.05;
+    return bankFee;
   };
 
   const calculateTotal = () => {
@@ -123,14 +135,11 @@ const Dropdown = ({ bidAmount, data }) => {
     return ServiceFee + InspectionCost + customClearance + bankFee + transportationRate + boatShipping +  parseFloat(finalBid) || 0;
   };
 
-  const calculateAuctionFee = () => {
-    const auctionFee = finalBid;
-    return auctionFee;
-  };
 
-  const calculateBankTransferFee = () => {
-    const bankFee = calculateAuctionFee() * 0.05;
-    return bankFee;
+  const calculateFinalPrice = () => {
+    const totalCustomDues = calculateTotalDueToCustom()
+    const totalLandedCost = calculateTotal()
+    return  totalCustomDues + totalLandedCost
   };
 
   const handleCategoryChange = (selectedOption) => {
@@ -153,16 +162,41 @@ const Dropdown = ({ bidAmount, data }) => {
     setSelectedTransportation(null); // Reset transportation selection
   };
 
-  const extractState = (fullString) => {
-    const foundState = suvData.find((item) => fullString.includes(item.label));
-    return foundState ? foundState : null;
+  const extractState = (location, transportationOptions) => {
+    return transportationOptions.find(
+      (option) =>
+        location.includes(option.abbreviation) || location.includes(option.label)
+    ) || null; // Return null if no match is found
   };
 
   useEffect(() => {
-    if (selectedCategory?.value === "SUV" && data.location) {
-      const matchedTransportation = extractState(data.location);
+    if (data.location && selectedCategory) {
+      let categoryData = [];
+  
+      // Select the appropriate transportation data based on the category
+      switch (selectedCategory.value) {
+        case "SUV":
+          categoryData = suvData;
+          break;
+        case "ATV":
+          categoryData = atvData;
+          break;
+        case "Heavy Machinery":
+          categoryData = heavyMachineryData;
+          break;
+        default:
+          categoryData = [];
+      }
+  
+      // Extract the matched transportation state based on the location
+      const matchedTransportation = extractState(data.location, categoryData);
+  console.log(matchedTransportation, "matchedTransportation")
       if (matchedTransportation) {
+        // Set the matched transportation option if found
         setSelectedTransportation(matchedTransportation);
+      } else {
+        // Reset the selected transportation if no match is found
+        setSelectedTransportation(null);
       }
     }
   }, [selectedCategory, data.location]);
@@ -175,13 +209,12 @@ const Dropdown = ({ bidAmount, data }) => {
 
   useEffect(() => {
     if (isOlderThanTenYears()) {
-      setShowApprovalMessage(true); // Show the message if the car is older than 10 years
+      setShowApprovalMessage(true); 
     } else {
-      setShowApprovalMessage(false); // Hide the message if the car is 10 years or newer
+      setShowApprovalMessage(false); 
     }
   }, [data]);
 
-  console.log(selectedTransportation?.rate)
 
   return (
     <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
@@ -245,7 +278,7 @@ const Dropdown = ({ bidAmount, data }) => {
               </span>
               {data && data?.base_site === "copart" ? (
                 <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
-                  <TooltipInfo content="You bid amount + enviornmental fee + virtual bid fee + gate fee + title pickup fee + buyer fee">
+                  <TooltipInfo content="You bid amount + environmental fee + virtual bid fee + gate fee + title pickup fee + buyer fee">
                     <BsInfoCircle
                       size={15}
                       className="hover:text-blue-800 duration-200"
@@ -254,7 +287,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </div>
               ) : (
                 <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
-                  <TooltipInfo content="You bid amount + buyer fee + service fee + internet fee + enviornmental fee">
+                  <TooltipInfo content="You bid amount + buyer fee + service fee + internet fee + environmental fee">
                     <BsInfoCircle
                       size={15}
                       className="hover:text-blue-800 duration-200"
@@ -379,7 +412,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 Service Fee:
               </span>
               <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
-                <TooltipInfo content="$1,500 if final price over 40000 then it will be additional 4% of final price and the 1500">
+                <TooltipInfo content="$1,500 if final price over 30000 then it will be additional 4% of final price and the 1500">
                   <BsInfoCircle
                     size={15}
                     className="hover:text-blue-800 duration-200"
@@ -426,7 +459,7 @@ const Dropdown = ({ bidAmount, data }) => {
               </div>
             </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
-              { selectedTransportation?.rate   ? `$${selectedTransportation?.rate || 0}` : "please select category and state"  }
+              { selectedTransportation?.rate   ? `$${selectedTransportation?.rate || 0}` : "please select vehicle category"  }
             </span>
           </div>
 
@@ -484,6 +517,9 @@ const Dropdown = ({ bidAmount, data }) => {
                   />
                 </TooltipInfo>
               </div>
+              <div className="">
+                <span className="text-red-600 text-[10px] px-[8px] py-[4px] bg-red-600/10 rounded-lg">Before Customs</span>
+              </div>
             </div>
             <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
               ${calculateTotal().toFixed(2)}
@@ -505,11 +541,28 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            {/* <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
-              Total Due to Custom:
-            </span> */}
+         
             <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
               ${calculateTotalDueToCustom().toFixed(2)}
+            </span>
+          </div>
+          
+
+             {/* Final Price Calculation */}
+             <div className="flex justify-between border-t border-gray-300 pt-3">
+          <div className="flex gap-x-1.5 justify-center items-center">
+              <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+              Final Price:
+              </span>
+           
+              <div className="">
+                <span className="text-green-600 text-[10px] px-[8px] py-[4px] bg-green-600/10 rounded-lg">After Customs</span>
+              </div>
+            </div>
+            
+         
+            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+              ${calculateFinalPrice().toFixed(2)}
             </span>
           </div>
         </div>
@@ -519,3 +572,4 @@ const Dropdown = ({ bidAmount, data }) => {
 };
 
 export default Dropdown;
+

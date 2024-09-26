@@ -39,6 +39,7 @@ import Parts from "./Components/user-page/user-pages/Parts.js";
 import SavedCars from "./Components/user-page/user-pages/SavedCars.js";
 import useGetSavedCars from "./hooks/useGetUserSavedCars.js";
 import ScrollToTop from './utils/ScrollToTop.js';
+import LocalVehicle from './Components/localcars-details/index.js';
 
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -278,6 +279,7 @@ function App() {
             <Route path="/search-page" element={<SearchPage />} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
             <Route path="/vehicle-detail/:lotID" element={<Vehicle />} />
+            {/* <Route path="/local-vehicle-detail/:id" element={<LocalVehicle />} /> */}
             {/* <Route path="/review" element={<Review />} /> */}
             <Route path="/admin/dashboard" element={<>welcome</>} />
 

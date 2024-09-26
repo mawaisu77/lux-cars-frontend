@@ -13,6 +13,7 @@ import React from 'react'
  import BidNow from '../cards/BuyNow.js'
 
  import Aboutdest from '../about/about-page/Aboutdest.js'
+import LocalCars from '../cards/LocalCarsSection.js'
 
 const Home = () => {
   return (
@@ -23,7 +24,7 @@ const Home = () => {
     <BuyNow/>
     {/* <LocalOfferz/> */}
     <BidNow/>
-    
+    {/* <LocalCars /> */}
     <Aboutdest/>
     <Abouttest/>
     {/* <Live/> */}

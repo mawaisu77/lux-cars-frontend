@@ -103,6 +103,7 @@ const Bid = () => {
       backgroundColor: "transparent",
       border: "1px solid gray",  
       boxShadow: "none",
+      cursor: "pointer"
     }),
     menu: (base) => ({
       ...base,
@@ -252,7 +253,7 @@ const filteredYearToOptions = yearFrom
                     options={carOptions}
                     isClearable
                     placeholder=" Makes"
-                    className={`${error ? "hidden" : "block"}   `}
+                    className={`${error ? "hidden" : "block"} `}
                   />
                 )}
                 {error && (
@@ -345,9 +346,9 @@ const filteredYearToOptions = yearFrom
                 <p className="text-left text-[1.17vw] font-urbanist font-semibold">
                   Find
                 </p>
-                <div
+              <div
                 onClick={handleSearch}
-                className=" text-white gap-2   group flex px-[0.25vw]  py-[1vh]     justify-center items-center bg-[#ca0000] rounded-[0.5vw]"
+                className=" text-white gap-2 cursor-pointer  group flex px-[0.25vw]  py-[1vh] justify-center items-center bg-[#ca0000] rounded-[0.5vw]"
               >
                 <p className=" ">Search</p>
               
