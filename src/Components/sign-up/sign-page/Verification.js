@@ -179,12 +179,12 @@ const Verification = () => {
         <Header textColor="text-white" />
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col mt-[5.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">SignUp</div>
+            <div className="text-[2.6vw] font-semibold text-white">Upload Documents</div>
             <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
               <Link to="/">
                 <button className="hover:text-white">Home</button>
               </Link>
-              /<button className="hover:text-white">SignUp</button>/
+              /<button className="hover:text-white">Documents</button>/
               <button className="hover:text-white">Verification</button>
             </div>
           </div>

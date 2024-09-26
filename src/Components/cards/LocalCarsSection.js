@@ -1,7 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
@@ -9,10 +8,12 @@ import CarCard from "./CarCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import useGetAllLocalCars from "../../hooks/useGetAllLocalCars";
+import LocalCarsCard from "./LocalCarsCard";
 
-const BuyNow = () => {
-  const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars/testing"
+const LocalCars = () => {
+  const { localCars, carLoading, carError } = useGetAllLocalCars(
+    "local-cars/get-all-cars"
   );
   if (carLoading) {
     return <Shimmer />;
@@ -27,24 +28,27 @@ const BuyNow = () => {
     );
   }
 
+console.log("======", localCars)
+
   return (
     <>
-      <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
-        <div className="" id="startBidding">
-          <div className="pl-2 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw] mx-auto ">
-            <div className="flex flex-col gap-y-2">
-              <div className="flex justify-start font-urbanist text-[36px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
-                Bid Now
-              </div>
-              <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
-            </div>
-            {/* <div>
-            <span></span>
-            <span>View All</span>
-            </div> */}
-          </div>
+      <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]  ">
+        <div className="">
 
-          <div className="relative ">
+      <div className="flex items-center justify-between  mx-auto pl-2 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw]">
+          <div className=" flex flex-col gap-y-2">
+            <div className="flex justify-start font-urbanist text-[36px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
+              Local Cars
+            </div>
+            <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
+          </div>
+          <div>
+            <span>
+            see all 
+            </span>
+          </div>
+      </div>
+          <div className="relative">
             <Swiper
               style={{
                 "--swiper-pagination-color": "#FFBA08",
@@ -69,8 +73,8 @@ const BuyNow = () => {
               scrollbar={{ draggable: true }}
               loop={true}
               navigation={{
-                nextEl: ".arrow-right-bid",
-                prevEl: ".arrow-left-bid",
+                nextEl: ".arrow-right-buy",
+                prevEl: ".arrow-left-buy",
               }}
               pagination={{
                 clickable: true,
@@ -82,25 +86,25 @@ const BuyNow = () => {
                 },
               }}
               modules={[Navigation, Pagination]}
-              className="w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw] "
+              className="w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw]"
             >
               <div className="">
-                {carData &&
-                  carData.map((card, index) => (
+                {localCars &&
+                  localCars.map((card, index) => (
                     <SwiperSlide key={index} className="relative py-5 mb-5">
-                      <CarCard card={card} isBuy={false} />
+                      <LocalCarsCard card={card}  />
                     </SwiperSlide>
                   ))}
               </div>
             </Swiper>
           </div>
-          <button className="arrow-left-bid arrow-bid sm:block">
+          <button className="arrow-left-buy arrow-buy sm:block">
             <IoIosArrowDropleft
               size={28}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"
             />
           </button>
-          <button className="arrow-right-bid arrow-bid sm:block ">
+          <button className="arrow-right-buy arrow-buy sm:block">
             <IoIosArrowDropright
               size={28}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"
@@ -112,4 +116,4 @@ const BuyNow = () => {
   );
 };
 
-export default BuyNow;
+export default LocalCars;
