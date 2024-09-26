@@ -23,7 +23,7 @@ import VirtualBidFeeCard from "./VirtualBidFeeCard.js";
 function Feespage() {
   return (
     <>
-     <Header className="text-white" />
+      <Header className="text-white" />
       <div className="bg-fees">
         <div className="hidden  lg:block">
           <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
@@ -34,9 +34,14 @@ function Feespage() {
             <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist ">
               <Link to="/">
                 {" "}
-                <button className="hover:text-white hover:text-[1.1vw]  ">Homeeee</button>
+                <button className="hover:text-white hover:text-[1.1vw]  ">
+                  Homeeee
+                </button>
               </Link>
-              /<button className="hover:text-white hover:text-[1.1vw]">Fees Overviewww</button>
+              /
+              <button className="hover:text-white hover:text-[1.1vw]">
+                Fees Overviewww
+              </button>
             </div>
           </div>
         </div>
@@ -85,16 +90,6 @@ function Feespage() {
               {feesRightCard.map((data, index) => (
                 <Card id={index} data={data} />
               ))}
-
-              {/* <div className="rounded-[0.938vw] flex items-center w-[45%] md:w-[13vw] lg:w-[10.292vw] h-[25vh] shadow ">
-                <div className="mx-auto md:mx-[1.1vw]  ">
-                <div className="h-[8vh] md:w-[4.5vw] lg:w-[3.5vw] text-white bg-[#DF4949] rounded-[0.938vw] flex items-center mx-[30px] mb-[0.781vh]">
-                <PiUsersFill size={25} className="mx-auto"/>
-                </div>
-                <h2 className=" md:text-[1.042vw]  font-[700] text-[#1F1F2C] font-urbanist">increased risk of <br/>purchasing <br/>staged vehicles
-                </h2>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -110,12 +105,7 @@ function Feespage() {
             file. Fee may differ depending on the amount of the winning bid.
           </p>
           <div className="text-left flex gap-[10px] md:gap-[0.521vw] mt-[1.563vh] mb-[0.833vh]">
-            <button className="py-[10px] w-[100px] md:w-[6vw] lg:w-[5.208vw] h-[50px] md:h-[4vh] lg:h-[5vh] md:py-[0.521vh] px-[17px] md:px-[0.885vw] rounded-[7px] md:rounded-[0.4vw]   lg:rounded-[0.313vw] bg-[#CA0000] text-[15px]  md:text-[1vw] font-[500] text-[#FFFFFF] font-urbanist">
-              COPART
-            </button>
-            <button className="py-[10px] md:py-[0.521vh] w-[60px] md:w-[4vw] lg:w-[3.125vw] h-[50px] md:h-[3.5vh] lg:h-[5vh]  px-[17px] md:px-[0.885vw] rounded-[7px] md:rounded-[0.4vw] lg:rounded-[0.313vw] bg-[#F8F8F8] text-[15px] md:text-[1vw] font-[500] text-[#1F1F2C] font-urbanist">
-              IAAI
-            </button>
+            
           </div>
         </div>
         <div className=" w-[100%] md:w-[66.823vw] mx-auto mb-[50px]  md:mb-[1.719vh]">
@@ -158,51 +148,7 @@ function Feespage() {
               </div>
             ))}
           </div>
-          {/* <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]  mb-[20px]  md:mb-[2.604vh]">
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $0.01 - $49.99
-            </h2>
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $25.00
-            </h2>
-          </div>
-          <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]  mb-[20px]  md:mb-[2.604vh]">
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $0.01 - $49.99
-            </h2>
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $45.00
-            </h2>
-          </div>
-          <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]  mb-[20px]  md:mb-[2.604vh]">
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $0.01 - $49.99
-            </h2>
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $80.00
-            </h2>
-          </div>
-          <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]  mb-[20px]  md:mb-[2.604vh]">
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $0.01 - $49.99
-            </h2>
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $135.00
-            </h2>
-          </div>
-          <div className="flex justify-between mt-[0.833vh] mr-[1.875vw] mb-[20px]  md:mb-[2.604vh]">
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $0.01 - $49.99
-            </h2>
-            <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-              $180.00
-            </h2>
-          </div> */}
-          {/* <div className="flex flex-start md:block">
-          <button className="text-left text-[15px] md:text-[0.781vw] w-[130px] md:w-[6.771vw] h-[50px] md:h-[5.208vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] py-[0.833vh] px-[2.083vh] font-[700] text-[#CA0000] font-urbanist">
-            Load More
-          </button>
-          </div> */}
+
           <div className="flex flex-start md:block mt-[5px] md:mt-[1vw]">
             <button className="text-left text-[15px] md:text-[1vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] md:px-[1vh] lg:py-[0.833vh] md:px-[2.5vw] md:px-[1vw]  lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist">
               Load More
@@ -251,93 +197,6 @@ function Feespage() {
               ))}
             </div>
           </div>
-
-          {/* <div className="bg-green-400 w-[300px] overflow-x-scroll ">
-            <div className="flex flex-col">
-            <div className="flex  justify-between mt-[15px]  md:mt-[0.833vh] md:mr-[1.875vw]">
-              <h2 className="text-left text-[10px] md:text-[0.938vw] font-[600] w-[26.823vw]  text-[#131313] font-urbanist">
-                Sale Price Range
-              </h2>
-              <h2 className="text-left text-[0.938vw] hidden md:flex font-[600] text-[#131313] font-urbanist">
-                Pre Bid Fee
-              </h2>
-              <h2 className="text-left text-[10px] md:text-[0.938vw] font-[600] text-[#131313] font-urbanist">
-                Standard Vehicle Fee
-              </h2>
-              
-            </div>
-
-            <hr className="bg-[#131313] opacity-[35%] mt-[0.521vh] mb-[0.833vh]" />
-            
-         
-            <div className="flex justify-between  mt-[0.833vh] mr-[1.875vw]   mb-[20px]  md:mb-[2.604vh]">
-              <h2 className="text-left text-[13px] md:text-[0.938vw] md:w-[25vw] font-[500] text-[#7A798A] font-urbanist">
-                $0.00 - $99.99
-              </h2>
-              <div className="flex justify-between  md:w-[22vw]">
-                <h2 className="text-left text-[13px] hidden md:flex md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  -
-                </h2>
-                <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  -
-                </h2>
-              </div>
-            </div>
-            <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]   mb-[20px]  md:mb-[2.604vh]">
-              <h2 className="text-left text-[13px] md:text-[0.938vw] md:w-[25vw] font-[500] text-[#7A798A] font-urbanist">
-                $100.00 - $499.99
-              </h2>
-              <div className="flex justify-between md:w-[24vw]">
-                <h2 className="text-left text-[13px]  hidden md:flex md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  $29.00
-                </h2>
-                <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  $49.00
-                </h2>
-              </div>
-            </div>
-            <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]   mb-[20px]  md:mb-[2.604vh]">
-              <h2 className="text-left text-[13px] md:text-[0.938vw] md:w-[25vw] font-[500] text-[#7A798A] font-urbanist">
-                $500.00 - $999.99
-              </h2>
-              <div className="flex justify-between  md:w-[24vw]">
-                <h2 className="text-left text-[13px] hidden md:flex md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  $39.00
-                </h2>
-                <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  $59.00
-                </h2>
-              </div>
-            </div>
-            <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]   mb-[20px]  md:mb-[2.604vh]">
-              <h2 className="text-left text-[13px] md:text-[0.938vw] md:w-[25vw] font-[500] text-[#7A798A] font-urbanist">
-                $1,000.00 - $1,499.99
-              </h2>
-              <div className="flex justify-between  md:w-[24vw]">
-                <h2 className="text-left  hidden md:flex text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  $59.00
-                </h2>
-                <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  $79.00
-                </h2>
-              </div>
-            </div>
-            <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]   mb-[20px]  md:mb-[2.604vh]">
-              <h2 className="text-left text-[13px] md:text-[0.938vw] md:w-[25vw] font-[500] text-[#7A798A] font-urbanist">
-                $1,500.00 - $1,999.99
-              </h2>
-              <div className="flex justify-between   md:w-[24vw]">
-                <h2 className="text-left text-[13px]  hidden md:flex md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  $69.00
-                </h2>
-                <h2 className="text-left text-[13px] md:text-[0.938vw] font-[500] text-[#7A798A] font-urbanist">
-                  $89.00
-                </h2>
-              </div>
-            </div>
-            </div>
-
-          </div> */}
 
           <div className="flex flex-start md:block mt-[5px] md:mt-[1vw]">
             <button className="text-left text-[15px] md:text-[1vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] md:px-[1vh] lg:py-[0.833vh] md:px-[2.5vw] md:px-[1vw]  lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist">
