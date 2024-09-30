@@ -379,6 +379,14 @@ const Dropdown = ({ bidAmount, data }) => {
                   />
                 </TooltipInfo>
               </div>
+              {
+                showApprovalMessage && (
+                  <div className="">
+                  <span className="text-red-600 text-[10px] px-[8px] py-[4px] bg-red-600/10 rounded-lg">Approval needed</span>
+                </div>
+                )
+              }
+             
             </div>
             <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateLevyFee().toFixed(2)}

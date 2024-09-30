@@ -2,12 +2,16 @@ import React, { useEffect, useMemo, useState } from "react";
 import SearchMainPage from "../search-page/searchMainPage";
 import useCarMakesModels from "../../../hooks/useCarsMakesModel";
 import { useLocation, useNavigate } from "react-router-dom";
-import { RiArrowDropDownLine } from "react-icons/ri";
-
+import { damageOptions, primaryDamageAPIKey, primaryDamageLabel, secondaryDamageAPIKey, secondaryDamageLabel } from "../../../utils/filtersData/damageOptions";
+import { fuelAPIKey, fuelLabel, fuelOptions } from "../../../utils/filtersData/fuelOptions";
+import { stateAPIKey, stateOptions } from "../../../utils/filtersData/stateOptions";
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [showFilterMob, setShowFiltersMob] = useState(false)
+  const [searchFilterDropdowns, setSearchFilterDropdowns] = useState({});
+  const [showAllFilters, setShowAllFilters] = useState(false); // New state to control "See All"
+
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
   const initialMake = queryParams.get("make") || "";
@@ -20,6 +24,8 @@ const Sidebar = () => {
   const initialFuel = useMemo(() => queryParams.getAll("fuel") || [], [queryParams]);
   const initialDrive = useMemo(() => queryParams.getAll("drive") || [], [queryParams]);
   const initialDamage = useMemo(() => queryParams.getAll("damage_pr") || [], [queryParams]);
+  const initialSecondaryDamage = useMemo(() => queryParams.getAll("damage_sec") || [], [queryParams]);
+  const initialState = useMemo(() => queryParams.getAll("state") || [], [queryParams]);
   const initialFromOdometer = queryParams.get("odometer_from") || "";
   const initialToOdometer = queryParams.get("odometer_to") || "";
 
@@ -33,7 +39,9 @@ const Sidebar = () => {
     status: initialStatus,
     fuel: initialFuel,
     drive: initialDrive,
+    state: initialState,
     damage_pr: initialDamage,
+    damage_sec: initialSecondaryDamage,
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
     odometer_from: initialFromOdometer || "",
@@ -47,7 +55,9 @@ const Sidebar = () => {
     status: initialStatus,
     fuel: initialFuel,
     drive: initialDrive,
+    state: initialState,
     damage_pr: initialDamage,
+    damage_sec: initialSecondaryDamage,
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
     odometer_from: initialFromOdometer || "",
@@ -79,7 +89,9 @@ const Sidebar = () => {
       initialStatus.length > 0 ||
       initialFuel.length > 0 ||
       initialDrive.length > 0 ||
+      initialState.length > 0 ||
       initialDamage.length > 0 ||
+      initialSecondaryDamage.length > 0 ||
       initialFromOdometer ||
       initialToOdometer
     ) {
@@ -91,7 +103,9 @@ const Sidebar = () => {
         status: initialStatus,
         fuel: initialFuel,
         drive: initialDrive,
+        state: initialState,
         damage_pr: initialDamage,
+        damage_sec: initialSecondaryDamage,
         year_from: initialFromYear,
         year_to: initialToYear,
         odometer_from: initialFromOdometer,
@@ -108,7 +122,9 @@ const Sidebar = () => {
     initialStatus,
     initialFuel,
     initialDrive,
+    initialState,
     initialDamage,
+    initialSecondaryDamage,
     initialFromOdometer,
     initialToOdometer
   ]);
@@ -146,7 +162,9 @@ const Sidebar = () => {
       status: [],
       fuel: [],
       drive: [],
+      state: [],
       damage_pr: [],
+      damage_sec: [],
       year_from: "",
       year_to: "",
       odometer_from: "",
@@ -177,12 +195,9 @@ const Sidebar = () => {
       { id: "All Wheel Drive", label: "All Wheel Drive" },
       { id: "Unknown", label: "Unknown" },
     ],
-    damage_pr: [
-      { id: "Partial Repair", label: "Partial Repair" },
-      { id: "Hail", label: "Hail" },
-      { id: "Stripped", label: "Stripped" },
-      { id: "Theft", label: "Theft" },
-    ],
+    [stateAPIKey]:stateOptions,
+    damage_pr: damageOptions,
+    damage_sec: damageOptions,
     status: [
       { id: "Stationary", label: "Stationary" },
       { id: "Run & Drive", label: "Run & Drive" },
@@ -190,15 +205,7 @@ const Sidebar = () => {
       { id: "Can't test", label: "Can't test" },
       { id: "Unknown", label: "Unknown" }
     ],
-    fuel: [
-      { id: "Diesel", label: "Diesel" },
-      { id: "Electric", label: "Electric" },
-      { id: "Flexible Fuel", label: "Flexible Fuel" },
-      { id: "Gasoline", label: "Gasoline" },
-      { id: "Hybrid", label: "Hybrid" },
-      { id: "Other", label: "Other" },
-      { id: "Unknown", label: "Unknown" },
-    ],
+    fuel: fuelOptions
   };
 
   useEffect(() => {
@@ -300,36 +307,29 @@ const Sidebar = () => {
     }
   };
 
+  const filterDisplayNames = {
+    [primaryDamageAPIKey]: primaryDamageLabel,
+    [secondaryDamageAPIKey]:secondaryDamageLabel,
+    [fuelAPIKey]:fuelLabel
+    
+  };
+
+  // Function to update search terms for a specific dropdown filter
+  const handleSearch = (dropdownKey, value) => {
+    setSearchFilterDropdowns((prev) => ({ ...prev, [dropdownKey]: value }));
+  };
+
 
   return (
     <>
-  {/* {
-  showFilterMob ? (
-    <button 
-      className="lg:hidden px-4 py-2 mt-[100px] flex justify-center items-center mx-auto  border   transition-all rounded-lg duration-300"
-      onClick={handleFilters}
-    >
-      Hide Filters
-      <RiArrowDropDownLine size={20} className="ml-1 cursor-pointer rotate-180" />
-    </button>
-  ) : (
-    <button 
-      className=" flex justify-center items-center px-4 py-2  mt-[100px] border w-[150px] mx-auto rounded-lg hover:w-[160px] transition-all duration-300"
-      onClick={handleFilters}
-    >
-      Show Filters
-      <RiArrowDropDownLine size={20} className="ml-1 cursor-pointer" />
-    </button>
-  )
-} */}
 
 
-    <div className="flex lg:flex-row flex-col justify-center   gap-[3vw] w-[80vw] mt-[100px]  mx-auto font-urbanist">
+    <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw]  mx-auto font-urbanist">
       <h2 className="lg:hidden text-[42px] font-bold">
         Fliters
       </h2>      {
         showFilterMob && (
-          <div className=" lg:relative  lg:mt-[2.604vw] mx-auto px-3 bg-white z- lg:bg-white z-50 lg:z-0 w-[100%] lg:w-[17vw] shadow-xl rounded-lg">
+          <div className=" lg:relative lg:mt-[2.604vw] mx-auto px-3 bg-white lg:bg-white z-50 lg:z-0 w-[100%] lg:w-[17vw] shadow-xl rounded-lg">
           {Object.keys(dropdownData).map((dropdownKey) => (
             <div
             key={dropdownKey}
@@ -339,8 +339,8 @@ const Sidebar = () => {
                 className="flex items-center justify-between   cursor-pointer "
                 onClick={() => toggleDropdown(dropdownKey)}
               >
-                <h1 className="text-[18px] lg:text-[1.3vw]  text-left font-bold mb-[0.729vw]">
-                  {dropdownKey.charAt(0).toUpperCase() + dropdownKey.slice(1)}
+                <h1 className="text-[18px] lg:text-[1.1vw]  text-left font-bold mb-[0.729vw]">
+                {filterDisplayNames[dropdownKey] || dropdownKey.charAt(0).toUpperCase() + dropdownKey.slice(1)}
                 </h1>
                 <svg
                   className={`w-[15px]  lg:w-[1vw] h-[15px] lg:h-[1vw] transition-transform duration-200 ${
@@ -360,41 +360,71 @@ const Sidebar = () => {
                 </svg>
               </div>
               {dropdownStates[dropdownKey] && (
-                <div className="overflow-y-scroll max-h-52     after:">
-                  {dropdownData[dropdownKey].map(({ id, label }) => (
-                    <div key={id} className="flex  items-center mb-[0.833vw]">
-                      <input
-                        id={id}
-                        type={
-                          dropdownKey === "make" ||
-                          dropdownKey === "model" ||
-                          dropdownKey === "year_from" ||
-                          dropdownKey === "year_to"
-                            ? "radio"
-                            : "checkbox"
-                        }
-                        value={id}
-                        onChange={() => handleFilterChange(dropdownKey, id)}
-                        className="form-checkbox h-[3.5vw] w-[1.5vw] text-blue-600"
-                        checked={
-                          dropdownKey === "make"
-                            ? selectedMake === id
-                            : dropdownKey === "model"
-                            ? selectedModel === id
-                            : selectedFilters[dropdownKey].includes(id)
-                        }
-                      />
-                      <label
-                        htmlFor={id}
-                        className="ml-[0.5vw] text-[16px] lg:text-[1vw] font-medium"
-                      >
-                        {label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              )}
+              <div className="overflow-y-scroll max-h-52 scrollbar-red">
+              {/* Search bar */}
+              <input
+                type="text"
+                placeholder={`Search ${dropdownKey}`}
+                className="form-input flex justify-start mb-3 px-2 py-1 text-xs border border-gray-600 rounded-md w-[90%]"
+                value={searchFilterDropdowns[dropdownKey] || ""}
+                onChange={(e) => handleSearch(dropdownKey, e.target.value)}
+              />
+
+              {/* Filtered list of options */}
+              {dropdownData[dropdownKey]
+                .filter(({ label }) =>
+                  label.toLowerCase().includes((searchFilterDropdowns[dropdownKey] || "").toLowerCase())
+                )
+                .slice(0, showAllFilters ? undefined : 5) // Show first 5 options unless "See All" is toggled
+                .map(({ id, label }) => (
+                  <div key={id} className="flex items-center mb-[0.833vw]">
+                    <input
+                      id={id}
+                      type={
+                        dropdownKey === "make" ||
+                        dropdownKey === "model" ||
+                        dropdownKey === "year_from" ||
+                        dropdownKey === "year_to"
+                          ? "radio"
+                          : "checkbox"
+                      }
+                      value={id}
+                      onChange={() => handleFilterChange(dropdownKey, id)}
+                      className="form-checkbox h-[3.5vw] w-[1.5vw] text-blue-600"
+                      checked={
+                        dropdownKey === "make"
+                          ? selectedMake === id
+                          : dropdownKey === "model"
+                          ? selectedModel === id
+                          : selectedFilters[dropdownKey].includes(id)
+                      }
+                    />
+                    <label
+                      htmlFor={id}
+                      className="ml-[0.5vw] text-[16px] text-left lg:text-[0.8vw] font-medium"
+                    >
+                      {label}
+                    </label>
+                    
+                  </div>
+                  
+                ))}
+                <>
+                {!showAllFilters && dropdownData[dropdownKey].length > 5 && (
+                  <button onClick={() => setShowAllFilters(true)} className="text-red-600 mt-2 text-xs">
+                    See All
+                  </button>
+                )}
+                {showAllFilters && (
+                  <button onClick={() => setShowAllFilters(false)} className="text-red-600 mt-2 text-xs">
+                    See Less
+                  </button>
+                )}
+                  </>
             </div>
+
+          )}
+        </div>
           ))}
   
   
