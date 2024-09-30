@@ -151,10 +151,10 @@ const VehicleHero = () => {
                   <div className="grid  gap-6">
                     {/* Vehicle Info */}
                     <section className="bg-white w-full p-6 rounded-lg shadow-md mt-5">
-                      <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
+                      <h2 className="text-sm lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
                         Vehicle Info
                       </h2>
-                      <div className="space-y-[2vh] text-md lg:text-[0.875vw]">
+                      <div className="space-y-[2vh] text-sm lg:text-[0.875vw]">
                         <InfoRow
                           label="Title"
                           value={carDetailData?.data?.title || "N/A"}
@@ -195,7 +195,7 @@ const VehicleHero = () => {
                       <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
                         Location
                       </h2>
-                      <div className="space-y-[2vh] text-md lg:text-[0.875vw]">
+                      <div className="space-y-[2vh] text-sm lg:text-[0.875vw]">
                         <InfoRow
                           label="Location"
                           value={carDetailData?.data?.location || "N/A"}
@@ -311,7 +311,7 @@ const VehicleHero = () => {
                           </p>
                         </div>
                         <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-2">
+                          <p className="font-urbanist text-[#7a798a] text-sm lg:text-[0.85vw] ml-2">
                             Model:
                           </p>
                           <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
@@ -334,7 +334,7 @@ const VehicleHero = () => {
                             <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
                               No of Bids :
                             </p>
-                            <p className="font-urbanist font-bold text-md lg:text-[0.97vw] ml-[0.5vw]">
+                            <p className="font-urbanist font-bold text-sm lg:text-[0.97vw] ml-[0.5vw]">
                               ${carDetailData?.data?.noOfBids}
                             </p>
                           </div>
@@ -406,8 +406,8 @@ const VehicleHero = () => {
                       <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                         Specifications
                       </h2>
-                      <div className=" space-y-[2vh] text-md lg:text-[0.875vw]">
-                        <InfoRow
+                      <div className=" space-y-[2vh] text-sm lg:text-[0.875vw]">
+                        <InfoRow 
                           label="Vehicle Type"
                           value={carDetailData?.data?.vehicle_type || "N/A"}
                         />

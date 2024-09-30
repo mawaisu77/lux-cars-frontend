@@ -36,7 +36,7 @@ const BidHistory = ({data}) => {
                   key={index}
                   className="flex shadow-md rounded-lg p-4 mt-1 "
                 >
-                  <div className="flex items-center">
+                  <div className="flex  items-center">
                     <img
                       className="w-[44px] h-[44px] rounded-lg"
                       src={item.profilePicture}

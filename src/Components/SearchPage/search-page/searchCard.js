@@ -56,7 +56,7 @@ function Card({ card }) {
 
   return (
     <div className="flex flex-col md:flex-col items-center justify-center lg:flex-row my-5  w-full     mx-auto rounded-[1vw] shadow-lg  hover:shadow-2xl duration-300">
-      <div className="flex justify-center items-center relative  w-full  lg:w-[16vw] py-[2vh]  px-[2vw]">
+      <div className="flex justify-center items-center relative  w-full  lg:w-[16vw] py-[1vh]  pl-[1vw]">
         {/* <img
           src={card.image || null}
           className=" w-full h-full   rounded-[0.5vw] object-cover"
@@ -158,7 +158,7 @@ function Card({ card }) {
               </div>
 
               {/* Auction Date & Timer Section */}
-              <div className="w-full  lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh] bg-black rounded-lg flex justify-center items-center p-2 shadow-md">
+              <div className="w-full  lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh]   rounded-lg flex justify-center items-center p-2 shadow-md">
                 <div className="flex items-center text-nowrap gap-[0.75vw]">
                   {/* Icon Section */}
                   <div className="flex justify-center items-center">
