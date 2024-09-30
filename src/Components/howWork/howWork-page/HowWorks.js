@@ -80,7 +80,7 @@ const HowWorks = () => {
             <div className=" flex lg:justify-between items-center gap-[2.5vw]   w-[186px]  lg:w-[34vw]  h-[380px] lg:h-[20.3vh] "></div>
           </div>
 
-          <div className=" w-[370px] flex md:w-[40vw] lg:w-[74vw]   mx-auto mt-[5vh] ">
+          <div className=" w-[370px] flex md:w-[40vw]   lg:w-[74vw] mb-10 mx-auto mt-[5vh] ">
             <div className=" flex flex-col-reverse  lg:flex-row lg:justify-between items-center gap-[2.5vw] w-[186px]  lg:w-[34vw]  h-[380px] lg:h-[20.3vh]  ">
               <div className="text-right w-[127px] lg:w-[30vw] h-[193px] lg:h-[18vh] ">
                 <p className="font-urbanist text-[16px]  lg:text-[1.2vw] font-bold mb-[1.5vh]">
@@ -119,16 +119,14 @@ const HowWorks = () => {
             <div className=" flex lg:justify-between items-center gap-[2.5vw]   w-[186px]  lg:w-[34vw]  h-[380px] lg:h-[20.3vh] "></div>
           </div>
 
-          <div className=" w-[370px] flex md:w-[40vw] lg:w-[74vw]   mx-auto pb-[5vh] mt-[5vh] ">
+          <div className=" w-[370px] flex md:w-[40vw] lg:w-[74vw] mb-16   mx-auto pb-[5vh] mt-[5vh] ">
             <div className=" flex flex-col-reverse  lg:flex-row lg:justify-between items-center gap-[2.5vw] w-[186px]  lg:w-[34vw]  h-[380px] lg:h-[20.3vh]  ">
               <div className="text-right w-[127px]  lg:w-[30vw] h-[193px] lg:h-[18vh] ">
                 <p className="font-urbanist text-[16px]  lg:text-[1.2vw] font-bold mb-[1.5vh]">
-                  Vehical Search
+                  Order Tracking
                 </p>
                 <p className="text-[14px] lg:text-[1vw] font-urbanist text-[#7a798a]">
-                  Users can utilize advanced filters and online search
-                  functionality to find specific lots. Detailed lot information
-                  is provided to assist in making informed choices.
+                The platform offers online order tracking, providing users with updates on their car delivery. Notifications are sent at each step of the process, including photos and interim status changes
                 </p>
               </div>
               <div className="flex justify-center  items-center w-[112px] lg:w-[9vw] h-[112px] lg:h-[16.5vh] hover:bg-[#df4949] hover:text-white rounded-3xl shadow-lg">

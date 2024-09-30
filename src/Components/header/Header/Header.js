@@ -224,7 +224,7 @@ const Header = () => {
         </div>
         <div className="lg:hidden flex items-center">
           <button onClick={toggleMenu} className="focus:outline-none">
-            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            {isMenuOpen ? <FaTimes size={24} color = "white"/> : <FaBars size={24} color="white"/>}
           </button>
         </div>
       </div>

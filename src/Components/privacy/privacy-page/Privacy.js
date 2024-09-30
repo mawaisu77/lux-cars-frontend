@@ -1,20 +1,18 @@
 import React from "react";
 import Header from "../../header/index";
 import { Link } from "react-router-dom";
-
 const PrivacyPage = () => {
   return (
     <>
-
 <div className="Backgroundimage-Privicy-loan-terms">
         <Header className="text-white" />
+        <div className="back-image w-full absolute">
         <div className="hidden  lg:block">
-          <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
+          <div className="  w-[15.5] flex flex-col  mt-[12.5vh]">
             <div className="text-[2.6vw] font-semibold text-white">
             Privacy policy
             </div>
-
-            <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist ">
+            <div className="text-[#8A8AA0] flex gap-3 justify-center text-[1vw] font-urbanist ">
               <Link to="/">
                 {" "}
                 <button className="hover:text-white  ">Home</button>
@@ -24,9 +22,7 @@ const PrivacyPage = () => {
           </div>
         </div>
       </div>
-
-
-    
+      </div>
       <div className="w-auto md:w-[50vw] lg:w-[44.115vw]  h-auto mx-auto pt-[6vh] pb-[6vh] text-left">
         <div className="text-left  ml-[16px] md:ml-[0vw] mr-[16px] md:mr-[1.5vw] mb-[15px] md:mb-[1vh]">
           <h1 className="text-[30px] md:text-[1.875vw]  font-bold font-urbanist text-[#1F1F2C] mb-[10px] md:mb-[0.6vh]  ">
@@ -70,7 +66,6 @@ const PrivacyPage = () => {
             <li>Stany Zjednoczone Ameryki.</li>
           </ul>
         </div>
-
         <div className="text-left  ml-[16px] md:ml-[0vw] mr-[16px] md:mr-[1.5vw] mb-[15px] md:mb-[1vh]">
           <h1 className="text-[30px] md:text-[1.875vw]  font-bold font-urbanist text-[#1F1F2C] mb-[10px] md:mb-[0.6vh]  ">
             Mode and place of processing the Data
@@ -86,7 +81,6 @@ const PrivacyPage = () => {
             dostarczeniem pod wskazany adres, uregulowana przez OWZ.
           </p>
         </div>
-
         <div className="text-left  ml-[16px] md:ml-[0vw] mr-[16px] md:mr-[1.5vw] mb-[15px] md:mb-[1vh]">
           <h1 className="text-[30px] md:text-[1.875vw]  font-bold font-urbanist text-[#1F1F2C] mb-[10px] md:mb-[0.6vh]  ">
             The purposes of processing
@@ -98,14 +92,12 @@ const PrivacyPage = () => {
             nieposiadająca osobowości prawnej, ale mogąca we własnym imieniu
             nabywać prawa i zaciągać zobowiązania.
           </p>
-
           <p className="text-[15px]  md:text-[0.938vw] font-normal font-urbanist text-[#737A99] mb-[5px] md:mb-[2vh]">
             może być osoba fizyczna, która ukończyła 18 lat i posiada pełną
             zdolność do czynności prawnych oraz ważny dowód osobisty lub
             paszport, oraz osoba prawna albo jednostka organizacyjna
           </p>
         </div>
-
         <div className="text-left  ml-[16px] md:ml-[0vw] mr-[16px] md:mr-[1.5vw] mb-[15px] md:mb-[1vh]">
           <h1 className="text-[30px] md:text-[1.875vw]  font-bold font-urbanist text-[#1F1F2C] mb-[10px] md:mb-[0.6vh]  ">
             Cookie Policy
@@ -122,7 +114,6 @@ const PrivacyPage = () => {
             <li>aukcji DOMÓW AUKCYJNYCH oraz zawartych</li>
           </ul>
         </div>
-
         <div className="text-left  ml-[16px] md:ml-[0vw] mr-[16px] md:mr-[1.5vw] mb-[15px] md:mb-[1vh]">
           <h1 className="text-[30px] md:text-[1.875vw]  font-bold font-urbanist text-[#1F1F2C] mb-[10px] md:mb-[0.6vh]  ">
             Information for Users
@@ -136,5 +127,4 @@ const PrivacyPage = () => {
     </>
   );
 };
-
 export default PrivacyPage;
