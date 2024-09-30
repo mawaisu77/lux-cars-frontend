@@ -278,9 +278,9 @@ function App() {
             />
             <Route path="/search-page" element={<SearchPage />} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
-            <Route path="/vehicle-detail/:lotID" element={<Vehicle />} />
+            {/* <Route path="/vehicle-detail/:lotID" element={<Vehicle />} /> */}
             {/* <Route path="/local-vehicle-detail/:id" element={<LocalVehicle />} /> */}
-            {/* <Route path="/review" element={<Review />} /> */}
+            <Route path="/review" element={<Review />} />
             <Route path="/admin/dashboard" element={<>welcome</>} />
 
 

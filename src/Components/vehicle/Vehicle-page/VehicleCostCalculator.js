@@ -218,11 +218,11 @@ const Dropdown = ({ bidAmount, data }) => {
 
   return (
     <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
-      <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
+      <h2 className="text-sm lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
         Calculations (testing...)
       </h2>
 
-      <h3 className="text-lg lg:text-[1.15vw] text-left font-semibold rounded-[0.5vw] text-gray-900 mb-[1.1vh]">
+      <h3 className="text-sm lg:text-[1.15vw] text-left font-semibold rounded-[0.5vw] text-gray-900 mb-[1.1vh]">
         Select Vehicle Category
       </h3>
 
@@ -236,7 +236,7 @@ const Dropdown = ({ bidAmount, data }) => {
 
       {selectedCategory && (
         <>
-          <h3 className="text-lg lg:text-[1.15vw] text-left py-[0.4vw] font-semibold rounded-[0.5vw] text-gray-900 mb-[1.1vh]">
+          <h3 className="text-sm lg:text-[1.15vw] text-left py-[0.4vw] font-semibold rounded-[0.5vw] text-gray-900 mb-[1.1vh]">
             Select Transportation
           </h3>
 
@@ -252,7 +252,7 @@ const Dropdown = ({ bidAmount, data }) => {
       )}
 
       <div className="my-[3vh]">
-        <h3 className="text-lg lg:text-[1.15vw] text-left font-semibold rounded-[0.5vw]  text-gray-900 mb-[1.1vh]">
+        <h3 className="text-sm lg:text-[1.15vw] text-left font-semibold rounded-[0.5vw]  text-gray-900 mb-[1.1vh]">
           Select Fuel Type
         </h3>
 
@@ -265,7 +265,7 @@ const Dropdown = ({ bidAmount, data }) => {
         />
       </div>
 
-      <div className="mt-[3.2vh] p-[1.5vw] bg-white rounded-[0.5vw] shadow-xl leading-[4vh] border border-gray-200">
+      <div className="mt-[3.2vh] p-[1.5vw]   rounded-[0.5vw] shadow-xl leading-[4vh] border border-gray-200">
         <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh]">
           Fees & Calculations
         </h3>
@@ -277,7 +277,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 Your Final Bid:
               </span>
               {data && data?.base_site === "copart" ? (
-                <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+                <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                   <TooltipInfo content="You bid amount + environmental fee + virtual bid fee + gate fee + title pickup fee + buyer fee">
                     <BsInfoCircle
                       size={15}
@@ -286,7 +286,7 @@ const Dropdown = ({ bidAmount, data }) => {
                   </TooltipInfo>
                 </div>
               ) : (
-                <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+                <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                   <TooltipInfo content="You bid amount + buyer fee + service fee + internet fee + environmental fee">
                     <BsInfoCircle
                       size={15}
@@ -296,7 +296,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </div>
               )}
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateFinalBid(bidAmount, data?.base_site)}
             </span>
           </div>
@@ -304,10 +304,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* Processing Fee  */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
                 Processing Fee: 1%
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="1% of final bid">
                   <BsInfoCircle
                     size={15}
@@ -316,7 +316,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateProcessingFee().toFixed(2)}
             </span>
           </div>
@@ -324,10 +324,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* Bank transfer Fee  */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
                 Bank Transfer Fee: 5%
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="5% of final bid">
                   <BsInfoCircle
                     size={15}
@@ -336,7 +336,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateBankTransferFee().toFixed(2)}
             </span>
           </div>
@@ -344,11 +344,11 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* Customs Duty: Fee  */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
                 Customs Duty:
                 {selectedFuelType.value === "Gasoline" ? "65%" : "10%"}
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="Customs Duty 65% if gasoline / 10% if hybrid">
                   <BsInfoCircle
                     size={15}
@@ -357,7 +357,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateCustomsDuty().toFixed(2)}
             </span>
           </div>
@@ -365,10 +365,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* Levy Fee */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
                 Levy Fee: (flat)
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content={` ${
                       showApprovalMessage ? "Approval is needed from the Ministry for cars older than 10 years." : "flat $250"} `}>
                   <BsInfoCircle
@@ -379,8 +379,16 @@ const Dropdown = ({ bidAmount, data }) => {
                   />
                 </TooltipInfo>
               </div>
+              {
+                showApprovalMessage && (
+                  <div className="">
+                  <span className="text-red-600 text-[10px] px-[8px] py-[4px] bg-red-600/10 rounded-lg">Approval needed</span>
+                </div>
+                )
+              }
+             
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateLevyFee().toFixed(2)}
             </span>
           </div>
@@ -388,10 +396,10 @@ const Dropdown = ({ bidAmount, data }) => {
         {/* Inspection cost */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
                 Inspection Cost: (flat)
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="$500">
                   <BsInfoCircle
                     size={15}
@@ -400,7 +408,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateInspectionCost().toFixed(2)}
             </span>
           </div>
@@ -408,10 +416,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* Service Fee */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
                 Service Fee:
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="$1,500 if final price over 30000 then it will be additional 4% of final price and the 1500">
                   <BsInfoCircle
                     size={15}
@@ -420,16 +428,16 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateServiceFee().toFixed(2)}
             </span>
           </div>
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
               Customs Clearence: (flat)
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="$350 flat">
                   <BsInfoCircle
                     size={15}
@@ -438,7 +446,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateCustomsClearence().toFixed(2)}
             </span>
           </div>
@@ -446,10 +454,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* Transportation Rate */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-left text-gray-700">
                 Transportation Rate:
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="transporattaion is calculated acoording to provided table">
                   <BsInfoCircle
                     size={15}
@@ -458,7 +466,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] text-right font-medium text-gray-800">
               { selectedTransportation?.rate   ? `$${selectedTransportation?.rate || 0}` : "please select vehicle category"  }
             </span>
           </div>
@@ -466,10 +474,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*Boat Shipping Rate */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
                 Boat Shipping Rate:
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="Static price for now">
                   <BsInfoCircle
                     size={15}
@@ -478,7 +486,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${"1500"} (static)
             </span>
           </div>
@@ -486,10 +494,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* VAT Base */}
           <div className="flex justify-between">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-md lg:text-[0.875vw] text-gray-700">
+              <span className="text-sm lg:text-[0.875vw] text-gray-700">
                 VAT Base:
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="VAT = 10% of (final bid +  levy fee + custom duty + boatship + processing fee)">
                   <BsInfoCircle
                     size={15}
@@ -498,7 +506,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 </TooltipInfo>
               </div>
             </div>
-            <span className="text-md lg:text-[0.875vw] font-medium text-gray-800">
+            <span className="text-sm lg:text-[0.875vw] font-medium text-gray-800">
               ${calculateVATBase().toFixed(2)}
             </span>
           </div>
@@ -506,10 +514,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* Total Landed Cost Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
              <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+              <span className="text-sm lg:text-[1.125vw] text-left font-semibold text-gray-900">
               Total Landed Cost:
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="service fee + inspection fee + custom clearence + bank transfer fee + transportation + boat ship ">
                   <BsInfoCircle
                     size={15}
@@ -521,7 +529,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 <span className="text-red-600 text-[10px] px-[8px] py-[4px] bg-red-600/10 rounded-lg">Before Customs</span>
               </div>
             </div>
-            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+            <span className="text-sm lg:text-[1.125vw] font-semibold text-gray-900">
               ${calculateTotal().toFixed(2)}
             </span>
           </div>
@@ -529,10 +537,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* Total Due to Customs Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
           <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+              <span className="text-sm lg:text-[1.125vw] font-semibold text-gray-900">
               Total Due to Custom:
               </span>
-              <div className="text-md lg:text-[0.875vw] text-gray-700 flex">
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                 <TooltipInfo content="VAT +  levy fee + custom duty + processing fee">
                   <BsInfoCircle
                     size={15}
@@ -542,7 +550,7 @@ const Dropdown = ({ bidAmount, data }) => {
               </div>
             </div>
          
-            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+            <span className="text-sm lg:text-[1.125vw] font-semibold text-gray-900">
               ${calculateTotalDueToCustom().toFixed(2)}
             </span>
           </div>
@@ -551,7 +559,7 @@ const Dropdown = ({ bidAmount, data }) => {
              {/* Final Price Calculation */}
              <div className="flex justify-between border-t border-gray-300 pt-3">
           <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+              <span className="text-sm lg:text-[1.125vw] font-semibold text-gray-900">
               Final Price:
               </span>
            
@@ -561,7 +569,7 @@ const Dropdown = ({ bidAmount, data }) => {
             </div>
             
          
-            <span className="text-lg lg:text-[1.125vw] font-semibold text-gray-900">
+            <span className="text-sm lg:text-[1.125vw] font-semibold text-gray-900">
               ${calculateFinalPrice().toFixed(2)}
             </span>
           </div>

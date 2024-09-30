@@ -89,7 +89,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="w-[343px] md:w-[650px] lg:w-[74vw] h-auto mt-[7vh] mx-auto lg:h-[38vh] bg-[#f8f8f8] rounded-2xl">
+      <div className="w-[343px] md:w-[650px] lg:w-[74vw] h-auto lg:mt-[7vh] mx-auto mt-[100px] lg:h-[38vh] bg-[#f8f8f8] rounded-2xl">
         <div className=" flex flex-col lg:flex-row justify-center lg:justify-between lg:h-[30vh]    bg-[#000000]/70 rounded-t-2xl">
           <div className="flex flex-col font-urbanist lg:flex-row mt-[4.6vh]   lg:ml-[2.2vw]     w-full lg:w-[48vw]">
             <div className="relative">

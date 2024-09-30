@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { categories } from '../../../data/data';
-
 const Top = () => {
   const [showAll, setShowAll] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1024); 
@@ -9,7 +8,6 @@ const Top = () => {
   const handleLoadMore = () => {
     setShowAll(true);
   };
-
   // Function to handle "Hide All" click
   const handleHideAll = () => {
     setShowAll(false);
@@ -48,7 +46,7 @@ const Top = () => {
                 <div className='font-urbanist text-[18px] lg:text-[1vw] font-semibold'>
                   {item.category}
                 </div>
-                <div className='text-[#8a8aa0] text-[14px] lg:text-[0.9vw]'>
+                <div className='text-[#8A8AA0] text-[14px] lg:text-[0.9vw]'>
                   {item.seeAll}
                 </div>
               </div>
@@ -56,7 +54,6 @@ const Top = () => {
           </div>
         ))}
       </div>
-
       {/* Show "Load More" or "Hide All" button on small screens */}
       {isSmallScreen && (
         <div
@@ -69,5 +66,4 @@ const Top = () => {
     </div>
   );
 };
-
 export default Top;
