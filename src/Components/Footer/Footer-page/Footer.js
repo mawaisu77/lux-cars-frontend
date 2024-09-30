@@ -37,7 +37,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="  lg:h-[48.5vh] w-full bg-[#f8f8f8] text-black">
+    <div className=" mt-[5vh] lg:h-[48.5vh] w-full bg-[#f8f8f8] text-black">
       <div className="flex flex-wrap gap-6 lg:gap-[4.6vw] w-[90%] lg:w-[79vw] mx-auto pt-[5vh] lg:pt-[8.5vh]">
         <div className="w-full md:w-[30%] lg:w-[15vw]">
           <img
