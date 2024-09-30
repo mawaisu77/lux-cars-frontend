@@ -1,0 +1,22 @@
+/* Custom Scrollbar Styles */
+.scrollbar-red::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+    background-color: #ffffffe6; /* Light background for the scrollbar track */
+}
+
+.scrollbar-red::-webkit-scrollbar-thumb {
+    background-color: #ca0000; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded edges for the thumb */
+    max-height: 20px;
+    border: 3px solid transparent; /* Creates space around the thumb */
+    background-clip: padding-box; /* Ensures border doesn't change thumb size */
+}
+
+.scrollbar-red::-webkit-scrollbar-thumb:hover {
+    background-color: #a60000; /* Darker color on hover */
+}
+
+.scrollbar-red::-webkit-scrollbar-track {
+    background: #ececec; /* Background of the track */
+    border-radius: 10px; /* Rounded edges for the track */
+}

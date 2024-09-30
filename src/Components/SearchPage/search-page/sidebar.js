@@ -5,12 +5,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { damageOptions, primaryDamageAPIKey, primaryDamageLabel, secondaryDamageAPIKey, secondaryDamageLabel } from "../../../utils/filtersData/damageOptions";
 import { fuelAPIKey, fuelLabel, fuelOptions } from "../../../utils/filtersData/fuelOptions";
 import { stateAPIKey, stateOptions } from "../../../utils/filtersData/stateOptions";
+import "./searchPage.css"
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [showFilterMob, setShowFiltersMob] = useState(false)
   const [searchFilterDropdowns, setSearchFilterDropdowns] = useState({});
-  const [showAllFilters, setShowAllFilters] = useState(false); // New state to control "See All"
+  const [showAllFilters, setShowAllFilters] = useState({}); // New state to control "See All"
 
   const queryParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
@@ -319,6 +320,15 @@ const Sidebar = () => {
     setSearchFilterDropdowns((prev) => ({ ...prev, [dropdownKey]: value }));
   };
 
+    // Function to toggle "See All" for a specific dropdown
+    const toggleSeeAll = (dropdownKey) => {
+      setShowAllFilters((prev) => ({
+        ...prev,
+        [dropdownKey]: !prev[dropdownKey] // Toggle only the clicked dropdown
+      }));
+    };
+  
+
 
   return (
     <>
@@ -360,7 +370,7 @@ const Sidebar = () => {
                 </svg>
               </div>
               {dropdownStates[dropdownKey] && (
-              <div className="overflow-y-scroll max-h-52 scrollbar-red">
+                <>
               {/* Search bar */}
               <input
                 type="text"
@@ -369,13 +379,15 @@ const Sidebar = () => {
                 value={searchFilterDropdowns[dropdownKey] || ""}
                 onChange={(e) => handleSearch(dropdownKey, e.target.value)}
               />
+              <div className={` max-h-52 scrollbar-red ${dropdownData[dropdownKey].length > 5 ? 'overflow-y-scroll': '' }`}>
+             
 
               {/* Filtered list of options */}
               {dropdownData[dropdownKey]
                 .filter(({ label }) =>
                   label.toLowerCase().includes((searchFilterDropdowns[dropdownKey] || "").toLowerCase())
                 )
-                .slice(0, showAllFilters ? undefined : 5) // Show first 5 options unless "See All" is toggled
+                .slice(0, showAllFilters[dropdownKey] ? undefined : 5) // Show first 5 options unless "See All" is toggled
                 .map(({ id, label }) => (
                   <div key={id} className="flex items-center mb-[0.833vw]">
                     <input
@@ -409,20 +421,20 @@ const Sidebar = () => {
                   </div>
                   
                 ))}
-                <>
-                {!showAllFilters && dropdownData[dropdownKey].length > 5 && (
-                  <button onClick={() => setShowAllFilters(true)} className="text-red-600 mt-2 text-xs">
+                <div className=" w-full">
+                {!showAllFilters[dropdownKey] && dropdownData[dropdownKey].length > 5 && (
+                  <button onClick={() => toggleSeeAll(dropdownKey)} className="text-red-600 mt-2 flex w-full text-left text-xs ">
                     See All
                   </button>
                 )}
-                {showAllFilters && (
-                  <button onClick={() => setShowAllFilters(false)} className="text-red-600 mt-2 text-xs">
+                {showAllFilters[dropdownKey] && (
+                  <button onClick={() => toggleSeeAll(dropdownKey)} className="text-red-600 mt-2 flex w-full text-left text-xs ">
                     See Less
                   </button>
                 )}
-                  </>
+                  </div>
             </div>
-
+            </>
           )}
         </div>
           ))}
