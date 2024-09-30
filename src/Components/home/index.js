@@ -24,7 +24,7 @@ const Home = () => {
     <BuyNow/>
     {/* <LocalOfferz/> */}
     <BidNow/>
-    {/* <LocalCars /> */}
+    <LocalCars />
     <Aboutdest/>
     <Abouttest/>
     {/* <Live/> */}
