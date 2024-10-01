@@ -212,12 +212,10 @@ function Feespage() {
         </div>
         <div className="mt-[15px] md:mt-[1.563vh]">
           <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
-            Gate fee
+          Service Fee: 
           </h2>
           <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
-            A $79 Gate Fee is assessed to all Copart purchases. This fee covers
-            administrative costs and the movement of the item from our storage
-            location to the Buyer loading area.
+          $95 per unit for vehicle handling, including vehicle pull out and loading.
           </p>
         </div>
         <div className="mt-[15px] md:mt-[1.563vh]">

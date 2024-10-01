@@ -24,6 +24,20 @@ import InternetFee from "./InternetFee.js";
 function Feespage() {
   const [baseSite, setBaseSite] = useState('COPART'); // Default to COPART
 
+  const [visibleCount, setVisibleCount] = useState(5); // Show 5 items initially
+  const [isExpanded, setIsExpanded] = useState(false); // Track if the list is expanded
+
+  const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 5); // Load more items
+    setIsExpanded(true); // Set expanded to true when loading more
+  };
+
+  const handleHide = () => {
+    setVisibleCount(5); // Reset to show only 5 items
+    setIsExpanded(false); // Set expanded to false
+  };
+
+
   return (
     <div>
       <Header className="text-white" />
@@ -158,18 +172,34 @@ function Feespage() {
             </h2>
           </div>
           <hr className="bg-[#131313] opacity-[35%] mt-[0.521vh] mb-[0.833vh]" />
-          <div className="">
-            {BuyerFeesListCardList.map((data, index) => (
-              <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]  mb-[20px]  md:mb-[2.604vh]">
-                <BuyerFeesListCard id={index} data={data} />
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-start md:block mt-[5px] md:mt-[1vw]">
-            <button className=" text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh]  lg:py-[0.833vh]  md:px-[1vw]  lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist">
-              Load More
-            </button>
-          </div>
+          <div>
+      {BuyerFeesListCardList.slice(0, visibleCount).map((data, index) => (
+        <div key={index} className="flex justify-between mt-[0.833vh] mr-[1.875vw] mb-[20px] md:mb-[2.604vh]">
+          <BuyerFeesListCard id={index} data={data} />
+        </div>
+      ))}
+
+      {/* Load More or Hide Button */}
+      {visibleCount < BuyerFeesListCardList.length ? (
+        <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
+          <button
+            onClick={handleLoadMore}
+            className="text-left text-[15px] md:text-[1vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] md:px-[1vh] lg:py-[0.833vh] md:px-[2.5vw] md:px-[1vw] lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist"
+          >
+            Load More
+          </button>
+        </div>
+      ) : isExpanded ? (
+        <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
+          <button
+            onClick={handleHide}
+            className="text-left text-[15px] md:text-[1vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] md:px-[1vh] lg:py-[0.833vh] md:px-[2.5vw] md:px-[1vw] lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist"
+          >
+            Hide
+          </button>
+        </div>
+      ) : null}
+    </div>
         </div>
         <div className=" w-[100%] md:w-[66.823vw] mx-auto  mb-[50px] md:mb-[1.719vh]">
           <div className="flex flex-wrap justify-between">
@@ -205,29 +235,42 @@ function Feespage() {
               </h2>
             </div>
             <hr className=" opacity-[35%] w-[400px]  mt-[0.521vh] mb-[0.833vh]" />
-            <div className="  ">
-              {VirtualBidFeeCardList.map((data, index) => (
-                <div className="flex w-[400px] flex-end md:w-[100%]  justify-between mt-[0.833vh] mr-[1.875vw]  mb-[20px]  md:mb-[2.604vh]">
-                  <VirtualBidFeeCard id={index} data={data} />
-                </div>
-              ))}
-            </div>
+            <div className="">
+        {VirtualBidFeeCardList.slice(0, visibleCount).map((data, index) => (
+          <div key={index} className="flex w-[400px] flex-end md:w-[100%] justify-between mt-[0.833vh] mr-[1.875vw] mb-[20px] md:mb-[2.604vh]">
+            <VirtualBidFeeCard id={index} data={data} />
           </div>
+        ))}
+      </div>
 
-          <div className="flex flex-start md:block mt-[5px] md:mt-[1vw]">
-            <button className=" text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh]  lg:py-[0.833vh]  md:px-[1vw]  lg:px-[2.083vh]  text-[#CA0000] font-urbanist">
-              Load More
-            </button>
-          </div>
+      {/* Load More or Hide Button */}
+      {visibleCount < VirtualBidFeeCardList.length ? (
+        <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
+          <button
+            onClick={handleLoadMore}
+            className="text-[15px] mb-10 md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+          >
+            Load More
+          </button>
+        </div>
+      ) : isExpanded ? (
+        <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
+          <button
+            onClick={handleHide}
+            className="text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+          >
+            Hide
+          </button>
+        </div>
+      ) : null}
+    </div>
         </div>
         <div className="mt-[15px] md:mt-[1.563vh]">
           <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
             Gate fee
           </h2>
           <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
-            A $79 Gate Fee is assessed to all Copart purchases. This fee covers
-            administrative costs and the movement of the item from our storage
-            location to the Buyer loading area.
+          A $95 Gate Fee is assessed to all Copart purchases. This fee covers administrative costs and the movement of the item from our storage location to the Buyer loading area.
           </p>
         </div>
         <div className="mt-[15px] md:mt-[1.563vh]">
@@ -235,13 +278,15 @@ function Feespage() {
             Late Fees, Storage Fees, Mailing Fees, and Relist Fees:
           </h2>
           <p className="text-left text-[15px] md:text-[0.938vw]  font-[400] text-[#7A798A] font-urbanist">
-            The vehicle amount and all applicable fees must be paid within 3
-            business days of purchase, including the day of sale, to avoid a fee
-            of $50 per vehicle (late fee). Storage rates may vary by location.
-            If the lot is not paid in full within 8 calendar days (including the
-            day of sale), the vehicle will be relisted. The Relist Fee will be
-            10% of the final sale price with a minimum of $750. Mailing fee $50
-            is applicable for each won lot.
+          The vehicle amount and all applicable fees must be paid within 3 business days of purchase, including the day of sale, to avoid a fee of $50 per vehicle (late fee). Storage rates may vary by location. If the lot is not paid in full within 8 calendar days (including the day of sale), the vehicle will be relisted. The Relist Fee will be 10% of the final sale price with a minimum of $600. Mailing fee $50 is applicable for each won lot.
+          </p>
+        </div>
+        <div className="mt-[15px] md:mt-[1.563vh]">
+          <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
+          IMPORTANT:
+          </h2>
+          <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
+          Buying a lot in Wisconsin, Alabama and Michigan via Copart account will automatically generate additional license fees plus $200 to standard fees.
           </p>
         </div>
           </div>
@@ -278,17 +323,35 @@ function Feespage() {
           </div>
           <hr className="bg-[#131313] opacity-[35%] mt-[0.521vh] mb-[0.833vh]" />
           <div className="">
-            {IAAIdatalist.map((data, index) => (
-              <div className="flex justify-between mt-[0.833vh] mr-[1.875vw]  mb-[20px]  md:mb-[2.604vh]">
-                <IAAIdata id={index} data={data} />
-              </div>
-            ))}
+      <div className="">
+        {IAAIdatalist.slice(0, visibleCount).map((data, index) => (
+          <div key={index} className="flex justify-between mt-[0.833vh] mr-[1.875vw] mb-[20px] md:mb-[2.604vh]">
+            <IAAIdata id={index} data={data} />
           </div>
-          <div className="flex flex-start md:block mt-[5px] md:mt-[1vw]">
-            <button className=" text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh]  lg:py-[0.833vh]  md:px-[1vw]  lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist">
-              Load More
-            </button>
-          </div>
+        ))}
+      </div>
+
+      {/* Load More or Hide Button */}
+      {visibleCount < IAAIdatalist.length ? (
+        <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
+          <button
+            onClick={handleLoadMore}
+            className="text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist"
+          >
+            Load More
+          </button>
+        </div>
+      ) : isExpanded ? (
+        <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
+          <button
+            onClick={handleHide}
+            className="text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist"
+          >
+            Hide
+          </button>
+        </div>
+      ) : null}
+    </div>
         </div>
         <div className=" w-[100%] md:w-[66.823vw] mx-auto  mb-[50px] md:mb-[1.719vh]">
           <div className="flex flex-wrap justify-between">
@@ -324,43 +387,83 @@ function Feespage() {
               </h2>
             </div>
             <hr className=" opacity-[35%] w-[400px]  mt-[0.521vh] mb-[0.833vh]" />
-            <div className="  ">
-              {internetFeeList.map((data, index) => (
-                <div className="flex w-[400px] flex-end md:w-[100%]  justify-between mt-[0.833vh] mr-[1.875vw]  mb-[20px]  md:mb-[2.604vh]">
-                  <InternetFee id={index} data={data} />
-                </div>
-              ))}
-            </div>
-          </div>
+            {internetFeeList.slice(0, visibleCount).map((data, index) => (
+        <div
+          key={index}
+          className="flex w-[400px] flex-end md:w-[100%] justify-between mt-[0.833vh] mr-[1.875vw] mb-[20px] md:mb-[2.604vh]"
+        >
+          <InternetFee id={index} data={data} />
+        </div>
+      ))}
 
-          <div className="flex flex-start md:block mt-[5px] md:mt-[1vw]">
-            <button className=" text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh]  lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh]  lg:py-[0.833vh]  md:px-[1vw]  lg:px-[2.083vh]  text-[#CA0000] font-urbanist">
-              Load More
-            </button>
-          </div>
+      {/* Load More or Hide Button */}
+      {visibleCount < internetFeeList.length ? (
+        <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
+          <button
+            onClick={handleLoadMore}
+            className="text-[15px] mb-10 md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+          >
+            Load More
+          </button>
+        </div>
+      ) : isExpanded ? (
+        <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
+          <button
+            onClick={handleHide}
+            className="text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+          >
+            Hide
+          </button>
+        </div>
+      ) : null}
+    </div>
         </div>
         <div className="mt-[15px] md:mt-[1.563vh]">
-          <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
-            Gate fee
+        <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
+          Service Fee: 
           </h2>
           <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
-            A $79 Gate Fee is assessed to all Copart purchases. This fee covers
-            administrative costs and the movement of the item from our storage
-            location to the Buyer loading area.
+          $95 per unit for vehicle handling, including vehicle pull out and loading.
           </p>
         </div>
         <div className="mt-[15px] md:mt-[1.563vh]">
-          <h2 className="text-left text-[22px] md:text-[1.25vw] font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
-            Late Fees, Storage Fees, Mailing Fees, and Relist Fees:
+        <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
+        Environmental Fee:  
           </h2>
-          <p className="text-left text-[15px] md:text-[0.938vw]  font-[400] text-[#7A798A] font-urbanist">
-            The vehicle amount and all applicable fees must be paid within 3
-            business days of purchase, including the day of sale, to avoid a fee
-            of $50 per vehicle (late fee). Storage rates may vary by location.
-            If the lot is not paid in full within 8 calendar days (including the
-            day of sale), the vehicle will be relisted. The Relist Fee will be
-            10% of the final sale price with a minimum of $750. Mailing fee $50
-            is applicable for each won lot.
+          <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
+          $15 per unit for handling and care in accordance with environmental regulations.
+          </p>
+        </div>
+        <div className="mt-[15px] md:mt-[1.563vh]">
+        <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
+        In-Branch Payment:   
+          </h2>
+          <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
+          Buyers who pay in the Branch with cash, money order, cashiers check or company check will be charged a $20 In-Branch Payment fee.
+          </p>
+        </div>
+        <div className="mt-[15px] md:mt-[1.563vh]">
+        <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
+        Money Order Fee:  
+          </h2>
+          <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
+          Buyers who pay in the Branch using 6+ money orders will be charged a $20 fee per money order, in addition to the $20 In-Branch Payment Fee. Buyers paying with 5 or fewer money orders will not be charged additional fees.
+          </p>
+        </div>
+        <div className="mt-[15px] md:mt-[1.563vh]">
+        <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
+        Storage Fees:  
+          </h2>
+          <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
+          Please check with your local branch regarding the total cost of per-day storage fees.
+          </p>
+        </div>
+        <div className="mt-[15px] md:mt-[1.563vh]">
+        <h2 className="text-left text-[24px]  md:text-[1.25vw]  font-[700] text-[#1F1F2C] font-urbanist mb-[15px] md:mb-[0vh]">
+        FedEx Fee:  
+          </h2>
+          <p className="text-left text-[15px] md:text-[0.938vw] font-[400] text-[#7A798A] font-urbanist">
+          The fee to deliver one or more titles via FedEx has changed from $12 to $20 per delivery.
           </p>
         </div>
           </div>

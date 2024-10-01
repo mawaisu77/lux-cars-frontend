@@ -24,7 +24,7 @@ const Abouttest = () => {
                 <p>No island selected</p>
             )}
         </div> */}
-            <div className='h-[822px] lg:h-[77vh]   bg-[#f8f8f8]'>
+            <div className='h-[822px] lg:h-[77vh]  mb-10 bg-[#f8f8f8]'>
                 <div className='text-[36px] lg:text-[2.3vw] font-urbanist font-semibold mb-[5vh] pt-[9.3vh]'>
                     Testimonials
                     <hr className='h-1 bg-red-500 w-20 mx-auto' />
@@ -58,7 +58,7 @@ const Abouttest = () => {
                                     </p>
                                     <p className='text-[14px] lg:text-[0.91vw] font-urbanist'>{testimonial.designation}</p>
                                 </div>
-                                <div className='flex flex-col justify-center items-center -mt-[12vh]'>
+                                <div className='flex flex-col justify-center items-center -mt-[14vh] mb-[5vh]'>
                                     <img src={testimonial.image} alt='Client' className='w-[150px] lg:w-[10vw] h-[158px] lg:h-[22.4vh]' />
                                 </div>
                             </div>

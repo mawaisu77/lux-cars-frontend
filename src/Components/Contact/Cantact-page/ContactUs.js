@@ -27,7 +27,7 @@ const ContactUs = () => {
         <div className="w-[77.5vw] py-20 flex flex-col md:flex-col lg:flex-row justify-between items-center mx-auto lg:gap-[7vw]">
           <div>
             <img
-              className="w-[355px] lg:w-[27.14vw]   mt-[50px] lg:mt-[13.14vh]"
+             className="w-[355px] lg:w-[27.14vw] mt-[10px] lg:mt-[170px]"
               src={image}
               alt="bg_img"
             />
