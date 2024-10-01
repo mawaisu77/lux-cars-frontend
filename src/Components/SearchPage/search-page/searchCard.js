@@ -55,7 +55,7 @@ function Card({ card }) {
   };
 
   return (
-    <div className="flex flex-col md:flex-col items-center justify-center lg:flex-row my-5  w-full     mx-auto rounded-[1vw] shadow-lg  hover:shadow-2xl duration-300">
+    <div className="flex flex-col md:flex-col items-center justify-center lg:flex-row my-5 w-full  mx-auto rounded-[1vw] shadow-md duration-300">
       <div className="flex justify-center items-center relative  w-full  lg:w-[16vw] py-[1vh]  pl-[1vw]">
         {/* <img
           src={card.image || null}
@@ -71,8 +71,8 @@ function Card({ card }) {
           modules={[FreeMode, Navigation, Thumbs, Autoplay]}
           loop={true}
         >
-          {card.images &&
-            card.images.map((image, index) => (
+          {card?.images &&
+            card?.images?.map((image, index) => (
               <SwiperSlide key={index} className="relative">
                 <div className="cursor-pointer relative mt-[2vh]">
                   <div className="absolute w-full sm:h-[1vh] bg-white bottom-0 rounded-b-[0.5vw]">
@@ -98,8 +98,8 @@ function Card({ card }) {
         goToNextImage={goToNextImage}
         logo={LuxLogoWhite}
       />
-      <div className="flex flex-col md:justify-center w-full text-left  md:items-center   lg:flex-row   py-[1vh]">
-        <div className="text-left px-[2vw] text-[13px] lg:text-[0.875vw] border-b lg:border-r lg:border-b-0 font-urbanist">
+      <div className="flex flex-col md:justify-center w-full text-left md:items-center lg:flex-row">
+        <div className="text-left px-[2vw] text-[13px] lg:text-[0.875vw] h-full border-b lg:border-r lg:border-b-0 font-urbanist">
         <Link to={`/vehicle-detail/${card.lot_id}`}>
           <p className="font-semibold py-[1vh] hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
             {card.title.length > 40
@@ -143,11 +143,11 @@ function Card({ card }) {
             </div>
           </div>
         </div>
-        <div className="flex lg:flex-row sm:flex-row px-2 w-full  justify-between mx-auto   py-3">
-          <div className="py-1  w-full text-center sm:text-left">
+        <div className="flex lg:flex-row sm:flex-row px-2 w-full  justify-between mx-auto">
+          <div className="py-1 bg-[#f3f3f3] shadow-md w-full text-center sm:text-left">
             <p className="text-sm text-gray-600">{card.Price}</p>
             <p className="text-xl font-bold text-red-600">{card.amount}</p>
-            <div className="flex flex-col  w-full    gap-[1vw] p-[1vw]  rounded-lg shadow-lg">
+            <div className="flex flex-col  w-full    gap-[1vw] p-[1vw]  rounded-lg ">
               {/* BID NOW Button Section */}
               <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
                 <Link to={`/vehicle-detail/${card.lot_id}`} className="w-full">
@@ -158,8 +158,8 @@ function Card({ card }) {
               </div>
 
               {/* Auction Date & Timer Section */}
-              <div className="w-full  lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh]   rounded-lg flex justify-center items-center p-2 shadow-md">
-                <div className="flex items-center text-nowrap gap-[0.75vw]">
+              <div className="w-full  lg:w-full h-auto lg:h-[5vh] mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center p-2 shadow-sm">
+                <div className="flex items-center text-nowrap gap-[0.75vw] ">
                   {/* Icon Section */}
                   <div className="flex justify-center items-center">
                     {card.auction_date ? (
@@ -174,7 +174,7 @@ function Card({ card }) {
                   </div>
 
                   {/* Timer or Status Section */}
-                  <div className="flex flex-col justify-center items-start">
+                  <div className="flex flex-col justify-center items-start ">
                     <p className="text-gray-800 text-sm lg:text-[0.875vw] font-medium">
                       {card.auction_date
                         ? ValidDate
