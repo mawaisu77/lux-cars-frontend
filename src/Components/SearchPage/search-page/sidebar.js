@@ -21,6 +21,9 @@ import {
 import "./searchPage.css";
 import { colorAPIKey, colorOptions, getColorStyle } from "../../../utils/filtersData/colorOptions";
 import { locationAPIKey, locationOptions } from "../../../utils/filtersData/locationOptions";
+import TooltipInfo from "../../common/TooltipInfo";
+import { BsInfoCircle } from "react-icons/bs";
+import { vehicleTypeAPIKey, vehicleTypeLabel, vehicleTypeOptions } from "../../../utils/filtersData/vehicleTypeOptions";
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -43,6 +46,7 @@ const Sidebar = () => {
   const initialFromYear = queryParams.get("year_from") || "";
   const initialToYear = queryParams.get("year_to") || "";
   const initialPartner = queryParams.get("partner") || "";
+  const initialVehicleTyoe = queryParams.get("vehicle_type") || "";
   const initialTransmission = useMemo(
     () => queryParams.getAll("transmission") || [],
     [queryParams]
@@ -100,6 +104,7 @@ const Sidebar = () => {
     damage_sec: initialSecondaryDamage,
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
+    vehicle_type: initialVehicleTyoe || "",
     odometer_from: initialFromOdometer || "",
     odometer_to: initialToOdometer || "",
   });
@@ -118,6 +123,7 @@ const Sidebar = () => {
     damage_sec: initialSecondaryDamage,
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
+    vehicle_type: initialVehicleTyoe || "" ,
     odometer_from: initialFromOdometer || "",
     odometer_to: initialToOdometer || "",
   });
@@ -142,6 +148,7 @@ const Sidebar = () => {
       initialModel ||
       initialFromYear ||
       initialToYear ||
+      initialVehicleTyoe ||
       initialTransmission.length > 0 ||
       initialStatus.length > 0 ||
       initialFuel.length > 0 ||
@@ -158,6 +165,7 @@ const Sidebar = () => {
         site: initialPartner,
         make: initialMake,
         model: initialModel,
+        vehicle_type: initialVehicleTyoe,
         transmission: initialTransmission,
         status: initialStatus,
         fuel: initialFuel,
@@ -177,6 +185,7 @@ const Sidebar = () => {
     initialMake,
     initialPartner,
     initialModel,
+    initialVehicleTyoe,
     initialFromYear,
     initialToYear,
     initialTransmission,
@@ -229,6 +238,7 @@ const Sidebar = () => {
       site: "",
       make: "",
       model: "",
+      vehicle_type:"",
       transmission: [],
       status: [],
       fuel: [],
@@ -258,6 +268,7 @@ const Sidebar = () => {
     ],
     make: carData && carData.map((car) => ({ id: car.make, label: car.make })),
     model: filteredModels.map((model) => ({ id: model, label: model })),
+    [vehicleTypeAPIKey]: vehicleTypeOptions,
     transmission: [
       { id: "Automatic", label: "Automatic" },
       { id: "Manual", label: "Manual" },
@@ -335,7 +346,14 @@ const Sidebar = () => {
         ...prevFilters,
         [filterCategory]: filterValue,
       }));
-    } else {
+    }
+    else if (filterCategory === "vehicle_type") {
+      // Radio behavior: Only one vehicle type can be selected
+      setSelectedFilters((prevFilters) => ({
+        ...prevFilters,
+        [filterCategory]: [filterValue], // Replace with new value
+      }))}
+     else {
       setSelectedFilters((prevFilters) => {
         const currentValues = prevFilters[filterCategory];
         if (currentValues.includes(filterValue)) {
@@ -444,6 +462,7 @@ const Sidebar = () => {
     [primaryDamageAPIKey]: primaryDamageLabel,
     [secondaryDamageAPIKey]: secondaryDamageLabel,
     [fuelAPIKey]: fuelLabel,
+    [vehicleTypeAPIKey]: vehicleTypeLabel,
   };
 
   // Function to update search terms for a specific dropdown filter
@@ -490,10 +509,19 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw]  mx-auto font-urbanist">
-        <h2 className="lg:hidden text-[42px] font-bold">Fliters</h2>{" "}
+      <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-10 px-5 mx-auto font-urbanist ">
+        <h2 className="lg:hidden text-[42px] font-bold ">Fliters</h2>{" "}
         {showFilterMob && (
-          <div className=" lg:relative lg:mt-[2.604vw] mx-auto px-3 bg-white lg:bg-white z-50 lg:z-0 w-[100%] lg:w-[17vw] shadow-xl rounded-lg">
+          <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-50 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
+            <div className="border-b-black  p-1 border-b flex justify-center items-center gap-x-2">
+              <h4 className="font-semibold">Filters</h4>
+              <TooltipInfo content="Please choose your preferred filters, then click the 'Apply Filters' button at the bottom. If you wish to clear the filters, you can also use the 'Reset' button next to the 'Apply Filters' option.">
+                  <BsInfoCircle
+                    size={15}
+                    className={` hover:text-blue-800 duration-200`}
+                  />
+                </TooltipInfo>
+            </div>
             {Object.keys(dropdownData).map((dropdownKey) => (
               <div
                 key={dropdownKey}
@@ -567,7 +595,8 @@ const Sidebar = () => {
                                 dropdownKey === "make" ||
                                 dropdownKey === "model" ||
                                 dropdownKey === "year_from" ||
-                                dropdownKey === "year_to"
+                                dropdownKey === "year_to"||
+                                dropdownKey === "vehicle_type"
                                   ? "radio"
                                   : "checkbox"
                               }
@@ -827,7 +856,7 @@ const Sidebar = () => {
             </div>
           </div>
         )}
-        <div className="w-[76vw] lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex justify-center h-full flex-col items-center">
+        <div className="w-[76vw]lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex justify-center h-full flex-col items-center">
           <SearchMainPage
             resetFilters={resetFilters}
             appliedFilters={appliedFilters}
