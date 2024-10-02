@@ -50,7 +50,7 @@ function SearchMainPage({
 
       Object.entries(appliedFilters).forEach(([key, value]) => {
         if (Array.isArray(value)) {
-          value.forEach((item) => {
+           value.forEach((item) => {
             if (item) params.append(key, item);
           });
         } else if (value) {
