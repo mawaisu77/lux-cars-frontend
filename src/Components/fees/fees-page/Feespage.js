@@ -184,7 +184,7 @@ function Feespage() {
         <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
           <button
             onClick={handleLoadMore}
-            className="text-left text-[15px] md:text-[1vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] md:px-[1vh] lg:py-[0.833vh] md:px-[2.5vw] md:px-[1vw] lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist"
+            className="text-[15px] mb-10 md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
           >
             Load More
           </button>
