@@ -32,7 +32,7 @@ const Partners = () => {
   ]
 
   return (
-    <div className="h-[830px] lg:h-[80vh] w-[100%] lg:w-[98.9vw]  bg-[#f8f8f8]">
+    <div className="h-[830px] lg:h-[80vh] mt-20 mb-20 w-[100%] lg:w-[98.9vw] bg-[#f8f8f8]">
       <div className="">
         <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[9.5vh]">
           Popular Partners

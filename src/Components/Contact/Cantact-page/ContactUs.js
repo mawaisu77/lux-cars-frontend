@@ -9,7 +9,7 @@ const ContactUs = () => {
       <Header className="text-white" />
       <div className="back-image w-full absolute">
         <div className="hidden lg:block">
-          <div className="  w-[15.5] flex flex-col  mt-[12.5vh]">
+          <div className=" w-full flex flex-col justify-center items-center mt-[12.5vh]">
             <div className="text-[2.6vw] font-semibold text-white">
               Contact Us
             </div>
@@ -25,14 +25,14 @@ const ContactUs = () => {
       </div>
       <div className="py-[9.3vh] ">
         <div className="w-[77.5vw] py-20 flex flex-col md:flex-col lg:flex-row justify-between items-center mx-auto lg:gap-[7vw]">
-          <div>
+          <div className="flex justify-center lg:justify-start w-full lg:w-[45%]">
             <img
-             className="w-[355px] lg:w-[27.14vw] mt-[10px] lg:mt-[170px]"
+             className="w-[355px] lg:w-[27.14vw] mt-[50px] lg:mt-[170px]"
               src={image}
               alt="bg_img"
             />
           </div>
-          <div className="w-[344px] lg:w-[35.8vw]   mt-[50px] lg:mt-[10vh] text-left">
+          <div className="w-[344px] lg:w-[45%] mt-[50px] lg:mt-[170px] text-left">
             <div>
               <p className="text-[36px] lg:text-[2vw] font-bold font-urbanist">
                 Drop up a message
