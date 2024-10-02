@@ -53,7 +53,7 @@ function SearchMainPage({
 
       const queryString = params.toString().replace(/\+/g, "%20");
       const response = await baseService.get(
-        `cars/get-all-cars?${queryString}`
+        `cars/get-all-cars/testing?${queryString}`
       );
 
       // Append new cards to the existing cards
@@ -93,8 +93,10 @@ function SearchMainPage({
         </div>
 
         {/* Conditionally render based on loading, error, or cards data */}
-        <div className="relative">
-          {cards.length > 0 && <SearchCard data={cards} />}
+        <div className="">
+          <div className="">
+            {cards.length > 0 && <SearchCard data={cards} />}
+          </div>
 
           {!loading && !error && cards.length === 0 && (
             <div className="flex flex-col items-center my-10">
