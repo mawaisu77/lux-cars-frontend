@@ -5,14 +5,19 @@ import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
+import { FaExternalLinkAlt } from "react-icons/fa";
+
 import CarCard from "./CarCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useNavigate } from "react-router-dom";
 
 const BuyNow = () => {
+  const navigate = useNavigate(); // Initialize navigate hook
+
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-carss"
+    "cars/get-all-cars"
   );
   if (carLoading) {
     return <Shimmer />;
@@ -27,21 +32,32 @@ const BuyNow = () => {
     );
   }
 
+  // Handler for "View All" button
+  const handleViewAllClick = () => {
+    navigate("/search-page"); 
+  };
+
   return (
     <>
       <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
         <div className="" id="startBidding">
-          <div className="pl-2 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw] mx-auto ">
+          <div className="pl-2 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
             <div className="flex flex-col gap-y-2">
               <div className="flex justify-start font-urbanist text-[36px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
                 Bid Now
               </div>
               <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
             </div>
-            {/* <div>
-            <span></span>
-            <span>View All</span>
-            </div> */}
+
+            <div className="flex justify-center text-[#ca0000]  items-center gap-x-1">
+              <button
+                onClick={handleViewAllClick}
+                className="font-bold text-sm hover:underline"
+              >
+                View All
+              </button>
+              <FaExternalLinkAlt size={13} />
+            </div>
           </div>
 
           <div className="relative ">

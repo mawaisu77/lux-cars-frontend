@@ -3,7 +3,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 
 const TooltipInfo = ({ content, children }) => {
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block z-50">
     <div className="cursor-pointer group ">
       {children || <BsInfoCircle className='hover:text-blue-800 duration-200'/>}
       <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-56 p-3 bg-gray-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200">

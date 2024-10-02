@@ -14,6 +14,9 @@ import React from 'react'
 
  import Aboutdest from '../about/about-page/Aboutdest.js'
 import LocalCars from '../cards/LocalCarsSection.js'
+import MotorCycleSection from '../HomeSections/MotorCyclesSection.js'
+import BoatSection from '../HomeSections/BoatSection.js'
+import ATVSection from '../HomeSections/ATVSection.js'
 
 const Home = () => {
   return (
@@ -25,6 +28,9 @@ const Home = () => {
     {/* <LocalOfferz/> */}
     <BidNow/>
     {/* <LocalCars /> */}
+    <MotorCycleSection />
+    <BoatSection />
+    <ATVSection />
     <Aboutdest/>
     <Abouttest/>
     {/* <Live/> */}
