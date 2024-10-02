@@ -33,16 +33,16 @@ const BuyNow = () => {
 
   // Handler for "View All" button
   const handleViewAllClick = () => {
-    navigate("/search-page?buy_now=true"); 
+    navigate("/search-page/testing?buy_now=true"); 
   };
 
   return (
     <>
       <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]  ">
         <div className="">
-          <div className="flex items-center justify-between  mx-auto pl-2 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw]">
+          <div className="flex items-center justify-between  mx-auto sm:pl-2 px-4 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw]">
             <div className=" flex flex-col gap-y-2">
-              <div className="flex justify-start font-urbanist text-[36px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
+              <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
                 Buy Now
               </div>
               <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
@@ -57,7 +57,7 @@ const BuyNow = () => {
               <FaExternalLinkAlt size={13} />
             </div>
           </div>
-          <div className="relative">
+          <div className="relative sm:px-0 px-10">
             <Swiper
               style={{
                 "--swiper-pagination-color": "#FFBA08",

@@ -17,7 +17,7 @@ const BuyNow = () => {
   const navigate = useNavigate(); // Initialize navigate hook
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars"
+    "cars/get-all-cars/testing"
   );
   if (carLoading) {
     return <Shimmer />;
@@ -34,16 +34,16 @@ const BuyNow = () => {
 
   // Handler for "View All" button
   const handleViewAllClick = () => {
-    navigate("/search-page"); 
+    navigate("/search-page?"); 
   };
 
   return (
     <>
       <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
         <div className="" id="startBidding">
-          <div className="pl-2 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
+          <div className="sm:pl-2 px-4 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
             <div className="flex flex-col gap-y-2">
-              <div className="flex justify-start font-urbanist text-[36px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
+              <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
                 Bid Now
               </div>
               <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
@@ -60,7 +60,7 @@ const BuyNow = () => {
             </div>
           </div>
 
-          <div className="relative ">
+          <div className="relative sm:px-0 px-10">
             <Swiper
               style={{
                 "--swiper-pagination-color": "#FFBA08",

@@ -227,6 +227,7 @@ const Sidebar = () => {
     if (auctionDateFrom) params.set("auction_date_from", auctionDateFrom);
     if (auctionDateTo) params.set("auction_date_to", auctionDateTo);
 
+    console.log(appliedFilters)
     navigate({
       pathname: location.pathname,
       search: params.toString(),

@@ -2,8 +2,6 @@ import React from 'react'
 import {logos} from "../../../data/data"
  
 const AboutFeartured = () => {
- 
-
     return (
         <>
             <div className='h-[77vh]'>
