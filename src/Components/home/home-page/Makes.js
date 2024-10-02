@@ -17,7 +17,7 @@ const Makes = () => {
   };
 
   return (
-    <div className=" w-[98.9vw]">
+    <div className=" w-[98.9vw] mb-20 mt-20">
       <div>
         <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[5.5vh]">
           Popular Makes
