@@ -12,7 +12,7 @@ const LocalVehicleDetail = () => {
   const { id } = useParams();
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-    useGetLocalCarDetail(`local-cars/get-car?id=${id}`);
+    useGetLocalCarDetail(`local-cars/get-car/testing?id=${id}`);
 
   useEffect(() => {
     fetchCarDetail();
