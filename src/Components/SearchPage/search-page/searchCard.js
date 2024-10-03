@@ -13,8 +13,8 @@ import { LuxLogoWhite } from "../../../utils/constant";
 
 function SearchCard({ data }) {
   return (
-    <div className=" md:w-full lg:w-full   mx-auto mt-10">
-      <div className=" w-[100%]  md:w-full lg:w-full mx-auto ">
+    <div className=" md:w-full lg:w-full mx-auto mt-10">
+      <div className=" w-[100%] md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => <Card key={index} card={card} />)}
       </div>
     </div> 
@@ -56,7 +56,7 @@ function Card({ card }) {
 
   return (
     <div className="flex w-full flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
-      <div className="flex justify-center items-center relative w-full lg:w-[16vw] py-[1vh]  ">
+      <div className="flex justify-center items-center relative w-full lg:w-[16vw] py-0 sm:py-[1vh]  ">
 
         <Swiper
           className="relative w-full h-full"
@@ -70,8 +70,8 @@ function Card({ card }) {
           {card?.images &&
             card?.images?.map((image, index) => (
               <SwiperSlide key={index} className="relative w-full ">
-                <div className="cursor-pointer relative mt-[2vh]">
-                  <div className="absolute w-full sm:h-[1vh] bg-white bottom-0 rounded-b-[0.5vw]">
+                <div className="cursor-pointer relative sm:mt-[2vh] ">
+                  <div className="absolute w-full sm:h-[1vh] bg-gray-100 bottom-0 rounded-b-[0.5vw]">
                     
                   </div>
                   <img
@@ -139,7 +139,7 @@ function Card({ card }) {
             </div>
           </div>
         </div>
-        <div className="flex  lg:flex-row sm:flex-row px-2 w-full  justify-between mx-auto">
+        <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row px-2 w-full  justify-between mx-auto">
           <div className="py-1 bg-[#f3f3f3] shadow-md w-full text-center sm:text-left">
             <p className="text-sm text-gray-600">{card.Price}</p>
             <p className="text-xl font-bold text-red-600">{card.amount}</p>
