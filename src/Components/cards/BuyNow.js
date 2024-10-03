@@ -17,7 +17,7 @@ const BuyNow = () => {
   const navigate = useNavigate(); // Initialize navigate hook
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars/testing"
+    "cars/get-all-cars"
   );
   if (carLoading) {
     return <Shimmer />;
@@ -34,7 +34,7 @@ const BuyNow = () => {
 
   // Handler for "View All" button
   const handleViewAllClick = () => {
-    navigate("/search-page?"); 
+    navigate("/search-page"); 
   };
 
   return (
