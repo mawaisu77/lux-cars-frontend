@@ -63,7 +63,7 @@ function Card({ card }) {
           alt={card.model}
         /> */}
         <Swiper
-          className="relative w-full h-full"
+          className="relative w-full h-full bg-orange-600"
           autoplay={{
             delay: 2000,
             disableOnInteraction: false,
@@ -79,7 +79,7 @@ function Card({ card }) {
                     
                   </div>
                   <img
-                    className="h-full lg:h-[24vh] w-full lg:w-[15vw] rounded-[0.5vw] object-cover"
+                    className="h-full  w-full lg:w-[15vw] rounded-[0.5vw] object-cover"
                     src={image}
                     alt={`Vehicle_Image ${index + 1}`}
                     onClick={() => openModal(index)} // Open modal on image click

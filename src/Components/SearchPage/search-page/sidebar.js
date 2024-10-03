@@ -510,7 +510,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-10 px-5 mx-auto font-urbanist ">
-        <h2 className="lg:hidden text-[42px] font-bold ">Fliters</h2>{" "}
+        <h2 className="lg:hidden text-[42px] font-bold mt-[100px]">Fliters</h2>{" "}
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-50 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
             <div className="border-b-black  p-1 border-b flex justify-center items-center gap-x-2">
