@@ -24,6 +24,10 @@ import { locationAPIKey, locationOptions } from "../../../utils/filtersData/loca
 import TooltipInfo from "../../common/TooltipInfo";
 import { BsInfoCircle } from "react-icons/bs";
 import { vehicleTypeAPIKey, vehicleTypeLabel, vehicleTypeOptions } from "../../../utils/filtersData/vehicleTypeOptions";
+import { documentOldLabel, documentOldOption, documentOldPIKey } from "../../../utils/filtersData/documentOld";
+import { cyclinderAPIKey, cyclinderLabel, cylinderOptions } from "../../../utils/filtersData/cyclinderOptions";
+import { documentTypeAPIKey, documentTypeLabel, documentTypeOptions } from "../../../utils/filtersData/documentTypeOptions";
+import { odoBrandAPIKey, odoBrandLabel, odoBrandOptions } from "../../../utils/filtersData/odoBrand";
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -83,8 +87,27 @@ const Sidebar = () => {
     () => queryParams.getAll("color") || [],
     [queryParams]
   );
+  const initialDocumentOld = useMemo(
+    () => queryParams.getAll("document_old") || [],
+    [queryParams]
+  );
+  const initialCyclinders = useMemo(
+    () => queryParams.getAll("cyclinders") || [],
+    [queryParams]
+  );
+  const initialDocument = useMemo(
+    () => queryParams.getAll("document") || [],
+    [queryParams]
+  );
+  const initialOdobrand = useMemo(
+    () => queryParams.getAll("odobrand") || [],
+    [queryParams]
+  );
   const initialFromOdometer = queryParams.get("odometer_from") || "";
   const initialToOdometer = queryParams.get("odometer_to") || "";
+  // Extract auction date filters
+const auctionDateFromParam = queryParams.get("auction_date_from") || "";
+const auctionDateToParam = queryParams.get("auction_date_to") || "";
 
 
   const [selectedModel, setSelectedModel] = useState(initialModel);
@@ -107,6 +130,12 @@ const Sidebar = () => {
     vehicle_type: initialVehicleTyoe || "",
     odometer_from: initialFromOdometer || "",
     odometer_to: initialToOdometer || "",
+    auction_date_from: auctionDateFromParam, // Include auction date filters
+    auction_date_to: auctionDateToParam,     // Include auction date filters
+    document_old:initialDocumentOld,
+    cyclinders:initialCyclinders,
+    document:initialDocument,
+    odobrand:initialOdobrand
   });
   const [appliedFilters, setAppliedFilters] = useState({
     site: initialPartner || "",
@@ -126,6 +155,13 @@ const Sidebar = () => {
     vehicle_type: initialVehicleTyoe || "" ,
     odometer_from: initialFromOdometer || "",
     odometer_to: initialToOdometer || "",
+    auction_date_from: auctionDateFromParam, // Include auction date filters
+    auction_date_to: auctionDateToParam,     // Include auction date filters
+    document_old:initialDocumentOld,
+    cyclinders:initialCyclinders,
+    document:initialDocument,
+    odobrand:initialOdobrand
+    
   });
 
   const [filteredModels, setFilteredModels] = useState([]);
@@ -159,7 +195,13 @@ const Sidebar = () => {
       initialDamage.length > 0 ||
       initialSecondaryDamage.length > 0 ||
       initialFromOdometer ||
-      initialToOdometer
+      initialToOdometer ||
+      auctionDateFromParam ||        // Check if auction date is part of the query params
+      auctionDateToParam  ||
+      initialDocumentOld.length > 0 ||
+      initialCyclinders.length > 0 ||
+      initialDocument.length > 0 || 
+      initialOdobrand.length > 0 
     ) {
       setAppliedFilters({
         site: initialPartner,
@@ -179,6 +221,12 @@ const Sidebar = () => {
         year_to: initialToYear,
         odometer_from: initialFromOdometer,
         odometer_to: initialToOdometer,
+        auction_date_from: auctionDateFromParam, // Set auction date from
+        auction_date_to: auctionDateToParam,
+        document_old:initialDocumentOld,
+        cyclinders:initialCyclinders,
+        document:initialDocument,
+        odobrand:initialOdobrand
       });
     }
   }, [
@@ -199,6 +247,12 @@ const Sidebar = () => {
     initialSecondaryDamage,
     initialFromOdometer,
     initialToOdometer,
+    auctionDateFromParam,   // Add auction date dependencies
+    auctionDateToParam,  
+    initialDocumentOld,
+    initialCyclinders,
+    initialDocument,
+    initialOdobrand
   ]);
 
   // Apply filters and update query parameters
@@ -227,7 +281,6 @@ const Sidebar = () => {
     if (auctionDateFrom) params.set("auction_date_from", auctionDateFrom);
     if (auctionDateTo) params.set("auction_date_to", auctionDateTo);
 
-    console.log(appliedFilters)
     navigate({
       pathname: location.pathname,
       search: params.toString(),
@@ -253,11 +306,18 @@ const Sidebar = () => {
       year_to: "",
       odometer_from: "",
       odometer_to: "",
+      document_old:[],
+      initialCyclinders:[],
+      initialDocument:[],
+      initialOdobrand:[]
     });
     setAppliedFilters({});
     setSelectedMake("");
     setSelectedModel("");
     setFilteredModels([]);
+    setSelectedOption("")
+    setAuctionDateFrom("")
+    setAuctionDateTo("")
     // Reset query parameters in the URL
     navigate(location.pathname);
   };
@@ -292,7 +352,11 @@ const Sidebar = () => {
     ],
     [locationAPIKey]:locationOptions,
     fuel: fuelOptions,
-    [colorAPIKey]:colorOptions
+    [colorAPIKey]:colorOptions,
+    [documentOldPIKey]:documentOldOption,
+    [cyclinderAPIKey]: cylinderOptions,
+    [documentTypeAPIKey]:documentTypeOptions,
+    [odoBrandAPIKey]:odoBrandOptions
   };
 
   useEffect(() => {
@@ -398,58 +462,47 @@ const Sidebar = () => {
     };
   }, []);
 
-  // date filters useeffect
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const auctionDateFromParam = params.get("auction_date_from");
-    const auctionDateToParam = params.get("auction_date_to");
-  
-    if (auctionDateFromParam && auctionDateToParam) {
-      setAuctionDateFrom(auctionDateFromParam);
-      setAuctionDateTo(auctionDateToParam);
-  
-      const today = new Date().toISOString().split('T')[0];
-  
-      const startOfWeek = new Date();
-      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
-      const endOfWeek = new Date(startOfWeek);
-      endOfWeek.setDate(endOfWeek.getDate() + 6);
-  
-      const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-      const endOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
-  
-      const auctionDateFrom = auctionDateFromParam;
-      const auctionDateTo = auctionDateToParam;
-  
-      // Check for "Today" filter
-      if (auctionDateFrom === today && auctionDateTo === today) {
-        setSelectedOption("today");
-        setCustomDatesVisible(false);
-      }
-      // Check for "This Week" filter
-      else if (
-        auctionDateFrom === startOfWeek.toISOString().split('T')[0] &&
-        auctionDateTo === endOfWeek.toISOString().split('T')[0]
-      ) {
-        setSelectedOption("thisWeek");
-        setCustomDatesVisible(false);
-      }
-      // Check for "This Month" filter
-      else if (
-        auctionDateFrom === startOfMonth.toISOString().split('T')[0] &&
-        auctionDateTo === endOfMonth.toISOString().split('T')[0]
-      ) {
-        setSelectedOption("thisMonth");
-        setCustomDatesVisible(false);
-      }
-      // If none of the predefined filters match, set it to "Custom"
-      else {
-        setSelectedOption("custom");
-        setCustomDatesVisible(true);
-      }
+// Separate useEffect for handling auction dates and showing custom options
+useEffect(() => {
+  if (auctionDateFromParam && auctionDateToParam) {
+    setAuctionDateFrom(auctionDateFromParam);
+    setAuctionDateTo(auctionDateToParam);
+
+    // Normalize both auctionDateFrom and auctionDateTo to YYYY-MM-DD
+    const normalizedFrom = auctionDateFromParam.split('T')[0];
+    const normalizedTo = auctionDateToParam.split('T')[0];
+
+    const today = new Date().toISOString().split('T')[0];
+
+    const startOfWeek = new Date();
+    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+    const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    const endOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+
+    if (normalizedFrom === today && normalizedTo === today) {
+      setSelectedOption("today");
+      setCustomDatesVisible(false);
+    } else if (
+      normalizedFrom === startOfWeek.toISOString().split('T')[0] &&
+      normalizedTo === endOfWeek.toISOString().split('T')[0]
+    ) {
+      setSelectedOption("thisWeek");
+      setCustomDatesVisible(false);
+    } else if (
+      normalizedFrom === startOfMonth.toISOString().split('T')[0] &&
+      normalizedTo === endOfMonth.toISOString().split('T')[0]
+    ) {
+      setSelectedOption("thisMonth");
+      setCustomDatesVisible(false);
+    } else {
+      setSelectedOption("custom");
+      setCustomDatesVisible(true);
     }
-  }, [location.search]);
-  
+  }
+}, [auctionDateFromParam, auctionDateToParam]);
   // Function to toggle filters only on smaller screens
   const handleFilters = () => {
     const isSmallScreen = window.innerWidth < 1024; // `lg` breakpoint in Tailwind
@@ -464,6 +517,10 @@ const Sidebar = () => {
     [secondaryDamageAPIKey]: secondaryDamageLabel,
     [fuelAPIKey]: fuelLabel,
     [vehicleTypeAPIKey]: vehicleTypeLabel,
+    [documentOldPIKey]: documentOldLabel,
+    [cyclinderAPIKey]: cyclinderLabel,
+    [documentTypeAPIKey]: documentTypeLabel,
+    [odoBrandAPIKey]: odoBrandLabel
   };
 
   // Function to update search terms for a specific dropdown filter
@@ -485,7 +542,11 @@ const Sidebar = () => {
     let fromDate, toDate;
 
     if (option === "today") {
-      fromDate = toDate = today.toISOString().split("T")[0];
+          // Set fromDate to the start of the day (00:00:00) and toDate to the end of the day (23:59:59)
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0)).toISOString();
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999)).toISOString();
+    fromDate = startOfDay;
+    toDate = endOfDay;
     } else if (option === "thisWeek") {
       const startOfWeek = new Date(
         today.setDate(today.getDate() - today.getDay())
@@ -511,7 +572,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-10 px-5 mx-auto font-urbanist ">
-        <h2 className="lg:hidden text-[42px] font-bold ">Fliters</h2>{" "}
+        <h2 className="lg:hidden text-[42px] font-bold mt-[100px]">Fliters</h2>{" "}
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-50 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
             <div className="border-b-black  p-1 border-b flex justify-center items-center gap-x-2">
@@ -529,10 +590,10 @@ const Sidebar = () => {
                 className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200"
               >
                 <div
-                  className="flex items-center justify-between cursor-pointer "
+                  className="flex items-center justify-between cursor-pointer mb-[0.729vw]"
                   onClick={() => toggleDropdown(dropdownKey)}
                 >
-                  <h1 className="text-[18px] lg:text-[1.1vw]  text-left font-bold mb-[0.729vw]">
+                  <h1 className="text-[18px] lg:text-[1.1vw]  text-left font-bold ">
                     {filterDisplayNames[dropdownKey] ||
                       dropdownKey.charAt(0).toUpperCase() +
                         dropdownKey.slice(1)}
@@ -769,7 +830,7 @@ const Sidebar = () => {
             </div>
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
               <div className="flex items-center justify-between cursor-pointer">
-                <h1 className="lg:text-[1.3vw] text-left font-bold mb-[0.729vw]">
+                <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
                   Year
                 </h1>
               </div>
@@ -781,7 +842,7 @@ const Sidebar = () => {
                   maxLength={4}
                   min={0}
                   placeholder="From"
-                  className="form-input w-full px-2 border rounded-md py-1.5"
+                  className="form-input w-full px-2 border rounded-md py-1.5 text-xs"
                   value={selectedFilters.year_from}
                   onChange={(e) => {
                     const value = e.target.value;
@@ -795,7 +856,7 @@ const Sidebar = () => {
                   min={0}
                   maxLength={4}
                   placeholder="To"
-                  className="form-input w-full border px-2 rounded-md py-1.5"
+                  className="form-input w-full border px-2 rounded-md py-1.5 text-xs"
                   value={selectedFilters.year_to}
                   onChange={(e) => {
                     const value = e.target.value;
@@ -808,7 +869,7 @@ const Sidebar = () => {
             </div>
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
               <div className="flex items-center justify-between cursor-pointer">
-                <h1 className="lg:text-[1.3vw] text-left font-bold mb-[0.729vw]">
+                <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
                   Odometer
                 </h1>
               </div>
@@ -820,7 +881,7 @@ const Sidebar = () => {
                   maxLength={4}
                   min={0}
                   placeholder="From"
-                  className="form-input w-full px-2 border rounded-md py-1.5"
+                  className="form-input w-full px-2 border rounded-md py-1.5 text-xs"
                   value={selectedFilters.odometer_to}
                   onChange={(e) =>
                     handleFilterChange("odometer_from", e.target.value)
@@ -832,7 +893,7 @@ const Sidebar = () => {
                   type="number"
                   min={0}
                   placeholder="To"
-                  className="form-input w-full border px-2 rounded-md py-1.5"
+                  className="form-input w-full border px-2 rounded-md py-1.5 text-xs"
                   value={selectedFilters.odometer_from}
                   onChange={(e) =>
                     handleFilterChange("odometer_to", e.target.value)
