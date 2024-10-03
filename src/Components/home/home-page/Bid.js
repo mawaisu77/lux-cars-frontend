@@ -230,7 +230,7 @@ const filteredYearToOptions = yearFrom
                 </p>
               </div>
             </div>
-            <div className="w-[100%]  text-left px-[1vw] py-[1.5vh] items-center   top-[65%]  right-0 bg-[#ffffffcc]     rounded-xl absolute">
+            <div className="w-[100%] text-left px-[1vw] py-[1.5vh] items-center top-[65%] right-0 bg-[#ffffff] rounded-xl absolute">
               {/* Dropdown for Makes (Car Makes) */}
              <div className="grid grid-cols-3">
              <div className="flex flex-col justify-center   px-[0.5vw]  text-left"              >

@@ -28,9 +28,9 @@ const Home = () => {
     {/* <LocalOfferz/> */}
     <BidNow/>
     {/* <LocalCars /> */}
-    <MotorCycleSection />
+    {/* <MotorCycleSection />
     <BoatSection />
-    <ATVSection />
+    <ATVSection /> */}
     <Aboutdest/>
     <Abouttest/>
     {/* <Live/> */}
