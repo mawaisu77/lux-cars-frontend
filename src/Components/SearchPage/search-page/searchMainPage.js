@@ -101,52 +101,11 @@ function SearchMainPage({
             </h2>
           </div>
           <div className="flex flex-col lg:flex-row   relative text-left text-sm lg:text-base">
-            <div className="flex">
-              <input
-                type="text"
-                placeholder="Search here..."
-                className="w-[250px] lg:w-[17vw] lg:h-[4.8vh] rounded-l-lg border p-2 text-[16px] lg:text-[0.8vw]"
-              />
-              <div className="flex lg:h-[4.8vh] w-[44px] lg:w-[3vw] justify-center items-center bg-red-700 rounded-r-lg">
-                <GoSearch size={20} color="white" className="cursor-pointer" />
-              </div>
-            </div>
+            
             <div className="flex justify-between items-center">
               <div>
-                <button
-                  onClick={toggleDropdown}
-                  className="w-[100px] mt-[2vh] lg:mt-0  lg:w-[5.5vw] h-[46px] lg:h-[4.8vh] rounded-lg text-[16px] lg:text-[0.8vw] flex items-center justify-center ml-0 lg:ml-2 border bg-white"
-                >
-                  Sort By
-                  <RiArrowDropDownLine
-                    size={20}
-                    className="ml-1 cursor-pointer"
-                  />
-                </button>
-                {isDropdownOpen && (
-                  <div className="lg:origin-top-right z-10 absolute lg:right-0   w-[100px] lg:w-[5.5vw]   lg:h-[4.8vh] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                    <div
-                      className="py-1"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      {options.map((option, index) => (
-                        <button
-                          key={index}
-                          className="flex items-center justify-center w-[100px] lg:w-[5.5vw] h-[46px] lg:h-[4.8vh] text-sm text-gray-700 hover:bg-red-700 hover:text-white"
-                          role="menuitem"
-                          onClick={() => {
-                            console.log(option);
-                            setIsDropdownOpen(false);
-                          }}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                
+              
               </div>
               <div>
                 {showFilterMob ? (
