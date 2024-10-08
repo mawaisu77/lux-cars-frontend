@@ -37,7 +37,7 @@ const Dropdown = ({ bidAmount, data }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [transportationOptions, setTransportationOptions] = useState([]);
   const [selectedTransportation, setSelectedTransportation] = useState(null);
-  const [selectedFuelType, setSelectedFuelType] = useState(fuelOptions[0]);
+  const [selectedFuelType, setSelectedFuelType] = useState('');
   const [finalBid, setFinalBid] = useState(0); // Store the final bid in state
   const [showApprovalMessage, setShowApprovalMessage] = useState(false); // State to show the approval message
 
@@ -190,7 +190,6 @@ const Dropdown = ({ bidAmount, data }) => {
   
       // Extract the matched transportation state based on the location
       const matchedTransportation = extractState(data.location, categoryData);
-  console.log(matchedTransportation, "matchedTransportation")
       if (matchedTransportation) {
         // Set the matched transportation option if found
         setSelectedTransportation(matchedTransportation);
@@ -214,6 +213,16 @@ const Dropdown = ({ bidAmount, data }) => {
       setShowApprovalMessage(false); 
     }
   }, [data]);
+
+  useEffect(() => {
+    // Check if data.fuelType exists and if it matches one of the fuel options
+    if (data?.fuel) {
+      const matchingFuelType = fuelOptions.find(option => option.value === data.fuel);
+      if (matchingFuelType) {
+        setSelectedFuelType(matchingFuelType);
+      }
+    }
+  }, []);
 
 
   return (
@@ -260,6 +269,7 @@ const Dropdown = ({ bidAmount, data }) => {
           options={fuelOptions}
           value={selectedFuelType}
           onChange={setSelectedFuelType}
+          defaultValue={"Hybrid"} 
           placeholder="Select Fuel Type"
           className="mb-[2vh] text-sm lg:text-[1vw] py-[0.4vw]  rounded-[0.5vw]"
         />

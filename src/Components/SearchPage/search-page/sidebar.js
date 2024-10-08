@@ -23,6 +23,8 @@ import { colorAPIKey, colorOptions, getColorStyle } from "../../../utils/filters
 import { locationAPIKey, locationOptions } from "../../../utils/filtersData/locationOptions";
 import TooltipInfo from "../../common/TooltipInfo";
 import { BsInfoCircle } from "react-icons/bs";
+import { IoClose } from "react-icons/io5";
+
 import { vehicleTypeAPIKey, vehicleTypeLabel, vehicleTypeOptions } from "../../../utils/filtersData/vehicleTypeOptions";
 import { documentOldLabel, documentOldOption, documentOldPIKey } from "../../../utils/filtersData/documentOld";
 import { cyclinderAPIKey, cyclinderLabel, cylinderOptions } from "../../../utils/filtersData/cyclinderOptions";
@@ -569,6 +571,89 @@ useEffect(() => {
     setCustomDatesVisible(false); // Hide custom date fields if not custom
   };
 
+ const clearFilter = (filterKey) => {
+  console.log("", filterKey)
+  // Clear the filter from selectedFilters state
+  setSelectedFilters((prev) => ({
+    ...prev,
+    [filterKey]: [],
+  }));
+
+  // Reset the applied filters for the cleared filter
+  // setAppliedFilters((prev) => ({
+  //   ...prev,
+  //   [filterKey]: [],
+  // }));
+
+    // Additional condition to clear 'make' state specifically
+    if (filterKey === "make") {
+      setSelectedMake(""); // Reset the 'make' state if 'make' filter is cleared
+    }
+
+  // Remove the filter from URL parameters only if it exists
+  const params = new URLSearchParams(location.search);
+  const hasFilter = params.has(filterKey);
+
+  if (hasFilter) {
+    params.delete(filterKey);
+    
+    // Navigate only if the filter was present in the URL
+    navigate({
+      pathname: location.pathname,
+      search: params.toString(),
+    }, { replace: true }); // Use replace to avoid page refresh
+  }
+};
+
+  const handleCloseYearFilter = (e) => {
+    e.preventDefault(); // Prevent any default action that might cause a jump
+  
+    // Clear the year filters in selectedFilters state
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      year_from: "",
+      year_to: "",
+    }));
+  
+    // Update URL params to remove year filters if they exist
+    const params = new URLSearchParams(location.search);
+    const hasYearFrom = params.has("year_from");
+    const hasYearTo = params.has("year_to");
+  
+    if (hasYearFrom) params.delete("year_from");
+    if (hasYearTo) params.delete("year_to");
+  
+    // Navigate only if either year_from or year_to was present
+    if (hasYearFrom || hasYearTo) {
+      navigate({
+        pathname: location.pathname,
+        search: params.toString(),
+      }, { replace: true }); // Use replace option to avoid refreshing
+    }
+  };
+  
+  
+  
+  const handleCloseAuctionDateDropdown = () => {
+    setIsOpen(false);             // Close the auction date dropdown
+    setSelectedOption("");        // Clear the selected auction date option
+    setAuctionDateFrom("");       // Reset auction date range
+    setAuctionDateTo("");
+    setCustomDatesVisible(false); // Hide custom date fields
+  
+    const params = new URLSearchParams(location.search);
+  
+    // Remove the auction date filters from the URL if they exist
+    if (params.has("auction_date_from")) params.delete("auction_date_from");
+    if (params.has("auction_date_to")) params.delete("auction_date_to");
+  
+    navigate({
+      pathname: location.pathname,
+      search: params.toString(),
+    });
+  };
+  
+  
   return (
     <>
       <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-10 px-5 mx-auto font-urbanist ">
@@ -598,6 +683,25 @@ useEffect(() => {
                       dropdownKey.charAt(0).toUpperCase() +
                         dropdownKey.slice(1)}
                   </h1>
+                          {/* Close Icon for Clearing Filter */}
+        {selectedFilters[dropdownKey]?.length > 0 && (
+          <svg
+            onClick={() => clearFilter(dropdownKey)}
+            className="w-4 h-4 cursor-pointer text-red-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        )}
+
                   <svg
                     className={`w-[15px]  lg:w-[1vw] h-[15px] lg:h-[1vw] transition-transform duration-200 ${
                       dropdownStates[dropdownKey] ? "transform rotate-180" : ""
@@ -728,6 +832,25 @@ useEffect(() => {
                 <span className="text-[18px] lg:text-[1.1vw] text-left font-bold ">
                   Auction Date
                 </span>
+                 {/* Close Icon */}
+      {isOpen && (
+        <svg
+          onClick={handleAuctionDateFilter}
+          className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      )}
+      {/* Dropdown Arrow Icon */}
                 <svg
                   className={`w-[15px]  lg:w-[1vw] h-[15px] lg:h-[1vw] transition-transform duration-200 ${
                     isOpen ? "transform rotate-180" : ""
@@ -828,11 +951,30 @@ useEffect(() => {
                 </div>
               )}
             </div>
+
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
               <div className="flex items-center justify-between cursor-pointer">
                 <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
                   Year
                 </h1>
+                              {/* Close Icon */}
+      
+        <svg
+          onClick={handleCloseYearFilter}
+          className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+    
               </div>
               <div className="flex gap-[1vw]">
                 <input
@@ -867,6 +1009,7 @@ useEffect(() => {
                 />
               </div>
             </div>
+
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
               <div className="flex items-center justify-between cursor-pointer">
                 <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
