@@ -34,6 +34,7 @@ const BuyNow = () => {
 
   // Handler for "View All" button
   const handleViewAllClick = () => {
+    localStorage.setItem('apiEndpoint', 'cars/get-all-cars');
     navigate("/search-page"); 
   };
 
