@@ -33,7 +33,7 @@ const BuyNow = () => {
 
   // Handler for "View All" button
   const handleViewAllClick = () => {
-    navigate("/search-page?buy_now=true"); 
+    navigate("/search-page/testing?buy_now=true"); 
   };
 
   return (

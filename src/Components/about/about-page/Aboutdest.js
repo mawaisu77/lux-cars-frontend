@@ -4,7 +4,7 @@ import Marquee from "react-fast-marquee";
 import { islandImages } from '../../../utils/IslandImages';
 
 const Aboutdest = () => {
-    const [backgroundImage, setBackgroundImage] = useState(islandImages["ACKLINS ISLAND"]); 
+    const [backgroundImage, setBackgroundImage] = useState(islandImages["NORTH ABACO"]); 
 
     const locations = Object.keys(islandImages);
 
