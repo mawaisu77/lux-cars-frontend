@@ -489,55 +489,80 @@ const Sidebar = () => {
     };
   }, []);
 
-  // Separate useEffect for handling auction dates and showing custom options
   useEffect(() => {
     if (auctionDateFromParam && auctionDateToParam) {
       setAuctionDateFrom(auctionDateFromParam);
       setAuctionDateTo(auctionDateToParam);
-
-      // Normalize both auctionDateFrom and auctionDateTo to YYYY-MM-DD
-      const normalizedFrom = auctionDateFromParam.split("T")[0];
-      const normalizedTo = auctionDateToParam.split("T")[0];
-
-      const today = new Date().toISOString().split("T")[0];
-
+  
+      // Normalize auctionDateFrom and auctionDateTo
+      const normalizedFrom = new Date(auctionDateFromParam).toISOString().split("T")[0];
+      const normalizedTo = new Date(auctionDateToParam).toISOString().split("T")[0];
+  
+      const today = new Date();
+      const normalizedToday = today.toISOString().split("T")[0];
+  
+      // Start and end of today
+      const startOfToday = normalizedToday; 
+      const endOfToday = normalizedToday;
+  
+      // Start and end of this week
       const startOfWeek = new Date();
-      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay()); // Sunday
+      const normalizedStartOfWeek = startOfWeek.toISOString().split("T")[0]; // Start of the week (Sunday)
+      
       const endOfWeek = new Date(startOfWeek);
-      endOfWeek.setDate(endOfWeek.getDate() + 6);
-
-      const startOfMonth = new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        1
-      );
-      const endOfMonth = new Date(
-        new Date().getFullYear(),
-        new Date().getMonth() + 1,
-        0
-      );
-
-      if (normalizedFrom === today && normalizedTo === today) {
+      endOfWeek.setDate(endOfWeek.getDate() + 6); // End of the week (Saturday)
+      const normalizedEndOfWeek = endOfWeek.toISOString().split("T")[0];
+  
+      // Start and end of this month
+      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1); // First day of the month
+      const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // Last day of the month
+      const normalizedStartOfMonth = startOfMonth.toISOString().split("T")[0];
+      const normalizedEndOfMonth = endOfMonth.toISOString().split("T")[0];
+  
+      // Debugging logs
+      console.log("Normalized From:", normalizedFrom);
+      console.log("Normalized To:", normalizedTo);
+      console.log("Normalized Start Of Today:", startOfToday);
+      console.log("Normalized End Of Today:", endOfToday);
+      console.log("Normalized Start Of Week:", normalizedStartOfWeek);
+      console.log("Normalized End Of Week:", normalizedEndOfWeek);
+      console.log("Normalized Start Of Month:", normalizedStartOfMonth);
+      console.log("Normalized End Of Month:", normalizedEndOfMonth);
+  
+      // Check for "today"
+      if (normalizedFrom === startOfToday && normalizedTo === endOfToday) {
         setSelectedOption("today");
         setCustomDatesVisible(false);
-      } else if (
-        normalizedFrom === startOfWeek.toISOString().split("T")[0] &&
-        normalizedTo === endOfWeek.toISOString().split("T")[0]
-      ) {
-        setSelectedOption("thisWeek");
-        setCustomDatesVisible(false);
-      } else if (
-        normalizedFrom === startOfMonth.toISOString().split("T")[0] &&
-        normalizedTo === endOfMonth.toISOString().split("T")[0]
-      ) {
-        setSelectedOption("thisMonth");
-        setCustomDatesVisible(false);
-      } else {
-        setSelectedOption("custom");
-        setCustomDatesVisible(true);
       }
+      // Check for "thisWeek"
+    // Check for "thisWeek"
+else if (
+  normalizedFrom >= normalizedStartOfWeek &&  // Include the start of the week
+  normalizedTo <= normalizedEndOfWeek          // Include the end of the week
+) {
+  setSelectedOption("thisWeek");
+  setCustomDatesVisible(false);
+}
+
+// Check for "thisMonth"
+else if (
+  normalizedFrom >= normalizedStartOfMonth &&  // Include the start of the month
+  normalizedTo <= normalizedEndOfMonth          // Include the end of the month
+) {
+  setSelectedOption("thisMonth");
+  setCustomDatesVisible(false);
+}
+
+    } else {
+      // If no dates are provided, default to "custom"
+      setSelectedOption("custom");
+      setCustomDatesVisible(true);
     }
   }, [auctionDateFromParam, auctionDateToParam]);
+  
+  
+
   // Function to toggle filters only on smaller screens
   const handleFilters = () => {
     const isSmallScreen = window.innerWidth < 1024; // `lg` breakpoint in Tailwind
@@ -573,32 +598,33 @@ const Sidebar = () => {
 
   const handleAuctionDateFilter = (option) => {
     setSelectedOption(option);
-    const today = new Date();
-    let fromDate, toDate;
-
+    const now = new Date();
+    let fromDate = now.toISOString(); // Initialize fromDate to current time
+    let toDate;
+  
     if (option === "today") {
-      // Set fromDate to the start of the day (00:00:00) and toDate to the end of the day (23:59:59)
-      const startOfDay = new Date(today.setHours(0, 0, 0, 0)).toISOString();
-      const endOfDay = new Date(today.setHours(23, 59, 59, 999)).toISOString();
-      fromDate = startOfDay;
-      toDate = endOfDay;
+      // Set toDate to the end of today
+      const endOfDay = new Date(now);
+      endOfDay.setHours(23, 59, 59, 999);
+      toDate = endOfDay.toISOString();
     } else if (option === "thisWeek") {
-      const startOfWeek = new Date(
-        today.setDate(today.getDate() - today.getDay())
-      );
-      const endOfWeek = new Date(today.setDate(today.getDate() + 6));
-      fromDate = startOfWeek.toISOString().split("T")[0];
-      toDate = endOfWeek.toISOString().split("T")[0];
+      // fromDate remains the current time
+      // Set toDate to the end of the week
+      const endOfWeek = new Date(now);
+      endOfWeek.setDate(now.getDate() + (6 - now.getDay()));
+      endOfWeek.setHours(23, 59, 59, 999);
+      toDate = endOfWeek.toISOString();
     } else if (option === "thisMonth") {
-      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-      const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-      fromDate = startOfMonth.toISOString().split("T")[0];
-      toDate = endOfMonth.toISOString().split("T")[0];
+      // fromDate remains the current time
+      // Set toDate to the end of the month
+      const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      endOfMonth.setHours(23, 59, 59, 999);
+      toDate = endOfMonth.toISOString();
     } else if (option === "custom") {
       setCustomDatesVisible(true);
       return;
     }
-
+  
     setAuctionDateFrom(fromDate);
     setAuctionDateTo(toDate);
     setCustomDatesVisible(false); // Hide custom date fields if not custom
