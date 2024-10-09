@@ -495,7 +495,7 @@ useEffect(() => {
       normalizedFrom === startOfMonth.toISOString().split('T')[0] &&
       normalizedTo === endOfMonth.toISOString().split('T')[0]
     ) {
-      setSelectedOption("thisMonth");
+      setSelectedOption("thisMonth");    
       setCustomDatesVisible(false);
     } else {
       setSelectedOption("custom");
@@ -565,7 +565,7 @@ useEffect(() => {
     }
 
     setAuctionDateFrom(fromDate);
-    setAuctionDateTo(toDate);
+    setAuctionDateTo(toDate); 
     setCustomDatesVisible(false); // Hide custom date fields if not custom
   };
 
