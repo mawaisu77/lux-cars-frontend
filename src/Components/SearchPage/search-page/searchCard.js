@@ -55,7 +55,7 @@ function Card({ card }) {
   };
 
   return (
-    <div className="flex w-full flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
+    <div className="flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
       <div className="flex justify-center items-center relative w-full ml-[0.75vw] lg:w-[16vw] py-0 sm:py-[1vh]  ">
 
         <Swiper
@@ -71,10 +71,12 @@ function Card({ card }) {
             card?.images?.map((image, index) => (
               <SwiperSlide key={index} className="relative w-full ">
                 <div className="cursor-pointer relative sm:mt-[2vh] ">
-                  <div className="absolute w-full lg:w-[16vw] sm:h-[1vh] bg-gray-100 bottom-0 rounded-b-[0.5vw]">
-                    
-                  </div>
-                  <img
+              
+
+                {
+                  (card.currentBid === '' || card.currentBid === null || card.currentBid == 0 ) &&  <div className="absolute w-full lg:w-[16vw] sm:h-[1vh] bg-gray-50 bottom-0 "> </div>
+                } 
+                 <img
                     className="h-full  w-full lg:w-[16vw] rounded-[0.5vw] object-cover"
                     src={image}
                     alt={`Vehicle_Image ${index + 1}`}
@@ -83,6 +85,14 @@ function Card({ card }) {
                 </div>
               </SwiperSlide>
             ))}
+              <div className="absolute z-50 py-0.5 bottom-0 w-full bg-blue-500/90 text-white flex justify-center items-center gap-x-2">
+                  <span>
+                    Current Bid
+                  </span>
+                  <span>
+                    ${card.currentBid}
+                  </span>
+               </div>
         </Swiper>
       </div>
       <ImageModal

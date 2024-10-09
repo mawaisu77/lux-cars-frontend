@@ -5,18 +5,18 @@ import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import CarCard from "./CarCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const BuyNow = () => {
-  const navigate = useNavigate(); // Initialize navigate hook
+const BidCarsSection = () => {
+  const navigate = useNavigate(); 
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars?buy_now=true"
+    "bid-cars/find-bid-cars"
   );
   if (carLoading) {
     return <Shimmer />;
@@ -33,21 +33,22 @@ const BuyNow = () => {
 
   // Handler for "View All" button
   const handleViewAllClick = () => {
-    localStorage.setItem('apiEndpoint', 'cars/get-all-cars');
-    navigate("/search-page?buy_now=true"); 
-  };
+    localStorage.setItem('apiEndpoint', 'bid-cars/find-bid-cars');
+    navigate("/search-page");
+};
 
   return (
     <>
-      <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]  ">
-        <div className="">
-          <div className="flex items-center justify-between  mx-auto sm:pl-2 px-4 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw]">
-            <div className=" flex flex-col gap-y-2">
+      <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
+        <div className="" id="startBidding">
+          <div className="sm:pl-2 px-4 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
+            <div className="flex flex-col gap-y-2">
               <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
-                Buy Now
+                Bid Carssss
               </div>
               <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
             </div>
+
             <div className="flex justify-center text-[#ca0000]  items-center gap-x-1">
               <button
                 onClick={handleViewAllClick}
@@ -58,6 +59,7 @@ const BuyNow = () => {
               <FaExternalLinkAlt size={13} />
             </div>
           </div>
+
           <div className="relative sm:px-0 px-10">
             <Swiper
               style={{
@@ -83,8 +85,8 @@ const BuyNow = () => {
               scrollbar={{ draggable: true }}
               loop={true}
               navigation={{
-                nextEl: ".arrow-right-buy",
-                prevEl: ".arrow-left-buy",
+                nextEl: ".arrow-right-bid",
+                prevEl: ".arrow-left-bid",
               }}
               pagination={{
                 clickable: true,
@@ -96,25 +98,25 @@ const BuyNow = () => {
                 },
               }}
               modules={[Navigation, Pagination]}
-              className="w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw]"
+              className="w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw] "
             >
               <div className="">
                 {carData &&
                   carData.map((card, index) => (
                     <SwiperSlide key={index} className="relative py-5 mb-5">
-                      <CarCard card={card} isBuy={true} />
+                      <CarCard card={card} isBuy={false} />
                     </SwiperSlide>
                   ))}
               </div>
             </Swiper>
           </div>
-          <button className="arrow-left-buy arrow-buy sm:block">
+          <button className="arrow-left-bid arrow-bid sm:block">
             <IoIosArrowDropleft
               size={28}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"
             />
           </button>
-          <button className="arrow-right-buy arrow-buy sm:block">
+          <button className="arrow-right-bid arrow-bid sm:block ">
             <IoIosArrowDropright
               size={28}
               className="text-[#ca0000] hover:bg-[#ca0000] rounded-full hover:text-white duration-150"
@@ -126,4 +128,4 @@ const BuyNow = () => {
   );
 };
 
-export default BuyNow;
+export default BidCarsSection;

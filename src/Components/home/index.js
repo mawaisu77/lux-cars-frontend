@@ -11,6 +11,7 @@ import React from 'react'
  import Header from '../header/Header/Header.js'
  import Abouttest from '../about/about-page/Abouttest.js'
  import BidNow from '../cards/BuyNow.js'
+ import BidCarsSection from '../cards/BidCarsSection.js'
 
  import Aboutdest from '../about/about-page/Aboutdest.js'
 import LocalCars from '../cards/LocalCarsSection.js'
@@ -24,6 +25,7 @@ const Home = () => {
     <Header/>
     <Bid/>
     <Top/>
+    <BidCarsSection />
     <BuyNow/>
     {/* <LocalOfferz/> */}
     <BidNow/>

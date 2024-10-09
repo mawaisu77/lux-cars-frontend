@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import SearchCard from "../search-page/searchCard";
 import baseService from "../../../services/baseService";
 import { ClipLoader } from "react-spinners";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
 
@@ -17,6 +17,7 @@ function SearchMainPage({
   handleFilters,
 }) {
 
+  const location = useLocation(); 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
@@ -24,19 +25,16 @@ function SearchMainPage({
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const initialFetchDone = useRef(false);
 
-  
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-  const options = ["Won Bids", "Lost Bids", "Saved"];
+  const apiEndpoint =  localStorage.getItem("apiEndpoint") || "cars/get-all-cars/testing";
 
 
 
   useEffect(() => {
-    setPage(1);
-    setCards([]);
-    fetchCards(1);
+    setPage(1); // Reset to first page
+    setCards([]); // Clear previous cards
+    fetchCards(1); // Fetch for the first page only once
   }, [triggerFetch]);
 
   useEffect(() => {
@@ -54,7 +52,7 @@ function SearchMainPage({
 
       Object.entries(appliedFilters).forEach(([key, value]) => {
         if (Array.isArray(value)) {
-           value.forEach((item) => {
+          value.forEach((item) => {
             if (item) params.append(key, item);
           });
         } else if (value) {
@@ -63,12 +61,14 @@ function SearchMainPage({
       });
 
       const queryString = params.toString().replace(/\+/g, "%20");
-      const response = await baseService.get(
-        `cars/get-all-cars/testing?${queryString}`
-      );
 
-      // Append new cards to the existing cards
-      setCards((prevCards) => [...prevCards, ...response.data.data.cars]);
+      const response = await baseService.get(`${apiEndpoint}?${queryString}`);
+
+      setCards((prevCards) =>
+        page === 1
+          ? response.data.data.cars
+          : [...prevCards, ...response.data.data.cars]
+      );
       setTotalResults(response.data.data.totalLength);
     } catch (error) {
       if (error.response) {
@@ -80,17 +80,14 @@ function SearchMainPage({
       } else {
         setError("Something went wrong.");
       }
-
     } finally {
       setLoading(false);
     }
   };
 
   const loadMore = () => {
-    // Increment page number to load more cards
     setPage((prevPage) => prevPage + 1);
   };
-
   return (
     <div className="w-full">
       <div className=" w-full mx-auto  font-urbanist flex flex-col">
