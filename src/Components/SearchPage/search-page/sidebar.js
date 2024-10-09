@@ -626,7 +626,7 @@ else if (
     }
   
     setAuctionDateFrom(fromDate);
-    setAuctionDateTo(toDate);
+    setAuctionDateTo(toDate); 
     setCustomDatesVisible(false); // Hide custom date fields if not custom
   };
 
