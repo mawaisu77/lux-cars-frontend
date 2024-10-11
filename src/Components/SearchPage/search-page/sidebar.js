@@ -726,7 +726,7 @@ const Sidebar = () => {
 
   return (
     <>
-    <div className="flex mt-5 gap-2 w-[80vw] bg-gray-100 p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
+    <div className="flex mt-5 gap-2 bg-gray-100  w-[80vw]  p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
 
   {Object.entries(appliedFilters).some(([, values]) => Array.isArray(values) ? values.length > 0 : values) && (
    <div className="flex w-[80vw]  gap-2  ">
@@ -734,7 +734,7 @@ const Sidebar = () => {
       values && (Array.isArray(values) ? values.length > 0 : true) ? (
         <div
           key={key}
-          className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
+          className="flex items-center  text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
         >
           <span className="text-sm font-medium">
             {key === "auction_date_from" || key === "auction_date_to"
@@ -761,7 +761,7 @@ const Sidebar = () => {
 )}
 
    </div>
-      <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-5 px-5 mx-auto font-urbanist ">
+      <div className="flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">
         <h2 className="lg:hidden text-[42px] font-bold mt-[100px]">Fliters</h2>{" "}
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-40 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
@@ -1156,7 +1156,7 @@ const Sidebar = () => {
             </div>
           </div>
         )}
-        <div className="w-[76vw]lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex justify-center h-full flex-col items-center">
+        <div className="w-[76vw]lg:w-[60vw] xl:w-[58.5vw] 2xl:w-[58.5vw] flex justify-center h-full flex-col items-center">
           <SearchMainPage
             resetFilters={resetFilters}
             appliedFilters={appliedFilters}
