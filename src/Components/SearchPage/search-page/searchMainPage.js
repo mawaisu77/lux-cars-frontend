@@ -27,7 +27,7 @@ function SearchMainPage({
   const [error, setError] = useState(null);
   const initialFetchDone = useRef(false);
 
-  const apiEndpoint =  "cars/get-all-cars/testing" || localStorage.getItem("apiEndpoint") ;
+  const apiEndpoint =  localStorage.getItem("apiEndpoint") || "cars/get-all-cars/testing"
 
 
 
