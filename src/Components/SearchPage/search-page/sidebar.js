@@ -58,6 +58,9 @@ import {
   odoBrandOptions,
 } from "../../../utils/filtersData/odoBrand";
 import { partnerAPIKey, partnerLabel, partnerOptions } from "../../../utils/filtersData/partnerOptions";
+import { driveAPIKey, driveLabel, driveOptions } from "../../../utils/filtersData/driveOptions";
+import { statusAPIKey, statusOptions } from "../../../utils/filtersData/statusOptions";
+import { transmissionAPIKey, transmissionOptions } from "../../../utils/filtersData/transmissionOptions";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -84,7 +87,7 @@ const Sidebar = () => {
   const initialVehicleTyoe = queryParams.get("vehicle_type") || "";
 
   const initialPartner = useMemo(
-    () => queryParams.getAll("partner") || [],
+    () => queryParams.getAll("site") || [],
     [queryParams]
   );
   const initialTransmission = useMemo(
@@ -342,11 +345,13 @@ const Sidebar = () => {
       odometer_from: "",
       odometer_to: "",
       document_old: [],
+      odobrand:[],
       initialCyclinders: [],
       initialDocument: [],
       initialOdobrand: [],
     });
     setAppliedFilters({});
+    // setAppliedFilters({});
     setSelectedMake("");
     setSelectedModel("");
     setFilteredModels([]);
@@ -362,28 +367,14 @@ const Sidebar = () => {
     make: carData && carData.map((car) => ({ id: car.make, label: car.make })),
     model: filteredModels.map((model) => ({ id: model, label: model })),
     [vehicleTypeAPIKey]: vehicleTypeOptions,
-    transmission: [
-      { id: "Automatic", label: "Automatic" },
-      { id: "Manual", label: "Manual" },
-    ],
-    drive: [
-      { id: "Rear Wheel Drive", label: "Rear Wheel Drive" },
-      { id: "Front Wheel Drive", label: "Front Wheel Drive" },
-      { id: "All Wheel Drive", label: "All Wheel Drive" },
-      { id: "Unknown", label: "Unknown" },
-    ],
+    [transmissionAPIKey]: transmissionOptions,
+    [driveAPIKey]: driveOptions,
     [stateAPIKey]: stateOptions,
-    damage_pr: damageOptions,
-    damage_sec: damageOptions,
-    status: [
-      { id: "Stationary", label: "Stationary" },
-      { id: "Run & Drive", label: "Run & Drive" },
-      { id: "Starts", label: "Starts" },
-      { id: "Can't test", label: "Can't test" },
-      { id: "Unknown", label: "Unknown" },
-    ],
+    [primaryDamageAPIKey]: damageOptions,
+    [secondaryDamageAPIKey]: damageOptions,
+    [statusAPIKey]: statusOptions,
     [locationAPIKey]: locationOptions,
-    fuel: fuelOptions,
+    [fuelAPIKey]: fuelOptions,
     [colorAPIKey]: colorOptions,
     [documentOldPIKey]: documentOldOption,
     [cyclinderAPIKey]: cylinderOptions,
@@ -409,6 +400,7 @@ const Sidebar = () => {
     transmission: !!initialTransmission,
     status: !!initialStatus,
     fuelType: !!initialFuel,
+    // odobrand: !!initialOdobrand,
   });
 
   const toggleDropdown = (dropdown) => {
@@ -582,6 +574,7 @@ const Sidebar = () => {
     [documentTypeAPIKey]: documentTypeLabel,
     [odoBrandAPIKey]: odoBrandLabel,
     [partnerAPIKey]: partnerLabel,
+    [driveAPIKey]: driveLabel,
   };
 
   // Function to update search terms for a specific dropdown filter
