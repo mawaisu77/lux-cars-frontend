@@ -13,7 +13,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const BuyNow = () => {
-  const navigate = useNavigate(); // Initialize navigate hook
+  const navigate = useNavigate(); 
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
     "cars/get-all-cars?buy_now=true"

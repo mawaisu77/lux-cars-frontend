@@ -50,11 +50,29 @@ const AllBids = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-            {bids && bids?.data?.map((bid) => (
-              <User key={bid.id} bid={bid} />
-            ))}
-          </div>
+          <div className=" overflow-x-auto">
+          <table className="min-w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Car Image</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Title</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Posted</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Bid Price</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Time Left</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Lot ID</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Location</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Current Bid</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bids && bids?.data?.map((bid) => (
+                <User key={bid.id} bid={bid} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         )}
       </div>
     </>
