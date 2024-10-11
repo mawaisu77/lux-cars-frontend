@@ -6,18 +6,17 @@ import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
 import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 import { FaExternalLinkAlt } from "react-icons/fa";
-
 import CarCard from "./CarCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
 
-const BuyNow = () => {
-  const navigate = useNavigate(); // Initialize navigate hook
+const BidCarsSection = () => {
+  const navigate = useNavigate(); 
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars/testing"
+    "bid-cars/find-bid-cars"
   );
   if (carLoading) {
     return <Shimmer />;
@@ -34,9 +33,9 @@ const BuyNow = () => {
 
   // Handler for "View All" button
   const handleViewAllClick = () => {
-    localStorage.setItem('apiEndpoint', process.env.REACT_APP_API_CARS_LIVE);
-    navigate("/search-page"); 
-  };
+    localStorage.setItem('apiEndpoint', 'bid-cars/find-bid-cars');
+    navigate("/search-page");
+};
 
   return (
     <>
@@ -45,7 +44,7 @@ const BuyNow = () => {
           <div className="sm:pl-2 px-4 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
             <div className="flex flex-col gap-y-2">
               <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
-                Bid Now
+                Bid Carssss
               </div>
               <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
             </div>
@@ -129,4 +128,4 @@ const BuyNow = () => {
   );
 };
 
-export default BuyNow;
+export default BidCarsSection;

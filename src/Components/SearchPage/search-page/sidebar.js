@@ -19,28 +19,57 @@ import {
   stateOptions,
 } from "../../../utils/filtersData/stateOptions";
 import "./searchPage.css";
-import { colorAPIKey, colorOptions, getColorStyle } from "../../../utils/filtersData/colorOptions";
-import { locationAPIKey, locationOptions } from "../../../utils/filtersData/locationOptions";
+import {
+  colorAPIKey,
+  colorOptions,
+  getColorStyle,
+} from "../../../utils/filtersData/colorOptions";
+import {
+  locationAPIKey,
+  locationOptions,
+} from "../../../utils/filtersData/locationOptions";
 import TooltipInfo from "../../common/TooltipInfo";
 import { BsInfoCircle } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 
-import { vehicleTypeAPIKey, vehicleTypeLabel, vehicleTypeOptions } from "../../../utils/filtersData/vehicleTypeOptions";
-import { documentOldLabel, documentOldOption, documentOldPIKey } from "../../../utils/filtersData/documentOld";
-import { cyclinderAPIKey, cyclinderLabel, cylinderOptions } from "../../../utils/filtersData/cyclinderOptions";
-import { documentTypeAPIKey, documentTypeLabel, documentTypeOptions } from "../../../utils/filtersData/documentTypeOptions";
-import { odoBrandAPIKey, odoBrandLabel, odoBrandOptions } from "../../../utils/filtersData/odoBrand";
+import {
+  vehicleTypeAPIKey,
+  vehicleTypeLabel,
+  vehicleTypeOptions,
+} from "../../../utils/filtersData/vehicleTypeOptions";
+import {
+  documentOldLabel,
+  documentOldOption,
+  documentOldPIKey,
+} from "../../../utils/filtersData/documentOld";
+import {
+  cyclinderAPIKey,
+  cyclinderLabel,
+  cylinderOptions,
+} from "../../../utils/filtersData/cyclinderOptions";
+import {
+  documentTypeAPIKey,
+  documentTypeLabel,
+  documentTypeOptions,
+} from "../../../utils/filtersData/documentTypeOptions";
+import {
+  odoBrandAPIKey,
+  odoBrandLabel,
+  odoBrandOptions,
+} from "../../../utils/filtersData/odoBrand";
+import { partnerAPIKey, partnerLabel, partnerOptions } from "../../../utils/filtersData/partnerOptions";
+
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [showFilterMob, setShowFiltersMob] = useState(false);
   const [searchFilterDropdowns, setSearchFilterDropdowns] = useState({});
-  const [showAllFilters, setShowAllFilters] = useState({}); 
+  const [showAllFilters, setShowAllFilters] = useState({});
   const [auctionDateFrom, setAuctionDateFrom] = useState("");
   const [auctionDateTo, setAuctionDateTo] = useState("");
   const [customDatesVisible, setCustomDatesVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(''); 
+  const [selectedOption, setSelectedOption] = useState("");
 
   const queryParams = useMemo(
     () => new URLSearchParams(location.search),
@@ -51,8 +80,13 @@ const Sidebar = () => {
   const initialModel = queryParams.get("model") || "";
   const initialFromYear = queryParams.get("year_from") || "";
   const initialToYear = queryParams.get("year_to") || "";
-  const initialPartner = queryParams.get("partner") || "";
+  // const initialPartner = queryParams.get("partner") || "";
   const initialVehicleTyoe = queryParams.get("vehicle_type") || "";
+
+  const initialPartner = useMemo(
+    () => queryParams.getAll("partner") || [],
+    [queryParams]
+  );
   const initialTransmission = useMemo(
     () => queryParams.getAll("transmission") || [],
     [queryParams]
@@ -108,14 +142,13 @@ const Sidebar = () => {
   const initialFromOdometer = queryParams.get("odometer_from") || "";
   const initialToOdometer = queryParams.get("odometer_to") || "";
   // Extract auction date filters
-const auctionDateFromParam = queryParams.get("auction_date_from") || "";
-const auctionDateToParam = queryParams.get("auction_date_to") || "";
-
+  const auctionDateFromParam = queryParams.get("auction_date_from") || "";
+  const auctionDateToParam = queryParams.get("auction_date_to") || "";
 
   const [selectedModel, setSelectedModel] = useState(initialModel);
   const [selectedMake, setSelectedMake] = useState(initialMake);
   const [selectedFilters, setSelectedFilters] = useState({
-    site: initialPartner || "",
+    site: initialPartner,
     make: initialMake,
     model: initialModel,
     transmission: initialTransmission,
@@ -133,14 +166,15 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
     odometer_from: initialFromOdometer || "",
     odometer_to: initialToOdometer || "",
     auction_date_from: auctionDateFromParam, // Include auction date filters
-    auction_date_to: auctionDateToParam,     // Include auction date filters
-    document_old:initialDocumentOld,
-    cyclinders:initialCyclinders,
-    document:initialDocument,
-    odobrand:initialOdobrand
+    auction_date_to: auctionDateToParam, // Include auction date filters
+    document_old: initialDocumentOld,
+    cyclinders: initialCyclinders,
+    document: initialDocument,
+    odobrand: initialOdobrand,
   });
+
   const [appliedFilters, setAppliedFilters] = useState({
-    site: initialPartner || "",
+    site: initialPartner,
     make: initialMake,
     model: initialModel,
     transmission: initialTransmission,
@@ -154,16 +188,15 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
     damage_sec: initialSecondaryDamage,
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
-    vehicle_type: initialVehicleTyoe || "" ,
+    vehicle_type: initialVehicleTyoe || "",
     odometer_from: initialFromOdometer || "",
     odometer_to: initialToOdometer || "",
     auction_date_from: auctionDateFromParam, // Include auction date filters
-    auction_date_to: auctionDateToParam,     // Include auction date filters
-    document_old:initialDocumentOld,
-    cyclinders:initialCyclinders,
-    document:initialDocument,
-    odobrand:initialOdobrand
-    
+    auction_date_to: auctionDateToParam, // Include auction date filters
+    document_old: initialDocumentOld,
+    cyclinders: initialCyclinders,
+    document: initialDocument,
+    odobrand: initialOdobrand,
   });
 
   const [filteredModels, setFilteredModels] = useState([]);
@@ -181,8 +214,8 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
   // Load initial data based on query params
   useEffect(() => {
     if (
+      initialPartner.length > 0 ||
       initialMake ||
-      initialPartner ||
       initialModel ||
       initialFromYear ||
       initialToYear ||
@@ -198,12 +231,12 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
       initialSecondaryDamage.length > 0 ||
       initialFromOdometer ||
       initialToOdometer ||
-      auctionDateFromParam ||        // Check if auction date is part of the query params
-      auctionDateToParam  ||
+      auctionDateFromParam || // Check if auction date is part of the query params
+      auctionDateToParam ||
       initialDocumentOld.length > 0 ||
       initialCyclinders.length > 0 ||
-      initialDocument.length > 0 || 
-      initialOdobrand.length > 0 
+      initialDocument.length > 0 ||
+      initialOdobrand.length > 0
     ) {
       setAppliedFilters({
         site: initialPartner,
@@ -225,15 +258,15 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
         odometer_to: initialToOdometer,
         auction_date_from: auctionDateFromParam, // Set auction date from
         auction_date_to: auctionDateToParam,
-        document_old:initialDocumentOld,
-        cyclinders:initialCyclinders,
-        document:initialDocument,
-        odobrand:initialOdobrand
+        document_old: initialDocumentOld,
+        cyclinders: initialCyclinders,
+        document: initialDocument,
+        odobrand: initialOdobrand,
       });
     }
   }, [
-    initialMake,
     initialPartner,
+    initialMake,
     initialModel,
     initialVehicleTyoe,
     initialFromYear,
@@ -249,12 +282,12 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
     initialSecondaryDamage,
     initialFromOdometer,
     initialToOdometer,
-    auctionDateFromParam,   // Add auction date dependencies
-    auctionDateToParam,  
+    auctionDateFromParam, // Add auction date dependencies
+    auctionDateToParam,
     initialDocumentOld,
     initialCyclinders,
     initialDocument,
-    initialOdobrand
+    initialOdobrand,
   ]);
 
   // Apply filters and update query parameters
@@ -294,7 +327,7 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
       site: "",
       make: "",
       model: "",
-      vehicle_type:"",
+      vehicle_type: "",
       transmission: [],
       status: [],
       fuel: [],
@@ -308,27 +341,24 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
       year_to: "",
       odometer_from: "",
       odometer_to: "",
-      document_old:[],
-      initialCyclinders:[],
-      initialDocument:[],
-      initialOdobrand:[]
+      document_old: [],
+      initialCyclinders: [],
+      initialDocument: [],
+      initialOdobrand: [],
     });
     setAppliedFilters({});
     setSelectedMake("");
     setSelectedModel("");
     setFilteredModels([]);
-    setSelectedOption("")
-    setAuctionDateFrom("")
-    setAuctionDateTo("")
+    setSelectedOption("");
+    setAuctionDateFrom("");
+    setAuctionDateTo("");
     // Reset query parameters in the URL
     navigate(location.pathname);
   };
 
   const dropdownData = {
-    site: [
-      { id: 1, label: "COPART" },
-      { id: 2, label: "IAAI" },
-    ],
+    [partnerAPIKey]: partnerOptions,
     make: carData && carData.map((car) => ({ id: car.make, label: car.make })),
     model: filteredModels.map((model) => ({ id: model, label: model })),
     [vehicleTypeAPIKey]: vehicleTypeOptions,
@@ -352,13 +382,13 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
       { id: "Can't test", label: "Can't test" },
       { id: "Unknown", label: "Unknown" },
     ],
-    [locationAPIKey]:locationOptions,
+    [locationAPIKey]: locationOptions,
     fuel: fuelOptions,
-    [colorAPIKey]:colorOptions,
-    [documentOldPIKey]:documentOldOption,
+    [colorAPIKey]: colorOptions,
+    [documentOldPIKey]: documentOldOption,
     [cyclinderAPIKey]: cylinderOptions,
-    [documentTypeAPIKey]:documentTypeOptions,
-    [odoBrandAPIKey]:odoBrandOptions
+    [documentTypeAPIKey]: documentTypeOptions,
+    [odoBrandAPIKey]: odoBrandOptions,
   };
 
   useEffect(() => {
@@ -413,14 +443,13 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
         ...prevFilters,
         [filterCategory]: filterValue,
       }));
-    }
-    else if (filterCategory === "vehicle_type") {
+    } else if (filterCategory === "vehicle_type") {
       // Radio behavior: Only one vehicle type can be selected
       setSelectedFilters((prevFilters) => ({
         ...prevFilters,
         [filterCategory]: [filterValue], // Replace with new value
-      }))}
-     else {
+      }));
+    } else {
       setSelectedFilters((prevFilters) => {
         const currentValues = prevFilters[filterCategory];
         if (currentValues.includes(filterValue)) {
@@ -464,47 +493,76 @@ const auctionDateToParam = queryParams.get("auction_date_to") || "";
     };
   }, []);
 
-// Separate useEffect for handling auction dates and showing custom options
-useEffect(() => {
-  if (auctionDateFromParam && auctionDateToParam) {
-    setAuctionDateFrom(auctionDateFromParam);
-    setAuctionDateTo(auctionDateToParam);
+  useEffect(() => {
+    if (auctionDateFromParam && auctionDateToParam) {
+        setAuctionDateFrom(auctionDateFromParam);
+        setAuctionDateTo(auctionDateToParam);
 
-    // Normalize both auctionDateFrom and auctionDateTo to YYYY-MM-DD
-    const normalizedFrom = auctionDateFromParam.split('T')[0];
-    const normalizedTo = auctionDateToParam.split('T')[0];
+        // Normalize auctionDateFrom and auctionDateTo
+        const normalizedFrom = new Date(auctionDateFromParam).toISOString().split("T")[0];
+        const normalizedTo = new Date(auctionDateToParam).toISOString().split("T")[0];
 
-    const today = new Date().toISOString().split('T')[0];
+        const today = new Date();
+        const normalizedToday = today.toISOString().split("T")[0];
 
-    const startOfWeek = new Date();
-    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(endOfWeek.getDate() + 6);
+        // Start and end of today
+        const startOfToday = normalizedToday; 
+        const endOfToday = normalizedToday;
 
-    const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-    const endOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+        // Start and end of this week
+        const startOfWeek = new Date();
+        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay()); 
+        const normalizedStartOfWeek = startOfWeek.toISOString().split("T")[0]; 
 
-    if (normalizedFrom === today && normalizedTo === today) {
-      setSelectedOption("today");
-      setCustomDatesVisible(false);
-    } else if (
-      normalizedFrom === startOfWeek.toISOString().split('T')[0] &&
-      normalizedTo === endOfWeek.toISOString().split('T')[0]
-    ) {
-      setSelectedOption("thisWeek");
-      setCustomDatesVisible(false);
-    } else if (
-      normalizedFrom === startOfMonth.toISOString().split('T')[0] &&
-      normalizedTo === endOfMonth.toISOString().split('T')[0]
-    ) {
-      setSelectedOption("thisMonth");
-      setCustomDatesVisible(false);
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(endOfWeek.getDate() + 6); 
+        const normalizedEndOfWeek = endOfWeek.toISOString().split("T")[0];
+
+        // Start and end of this month
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1); 
+        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); 
+        const normalizedStartOfMonth = startOfMonth.toISOString().split("T")[0];
+        const normalizedEndOfMonth = endOfMonth.toISOString().split("T")[0];
+
+        // Checking...
+        console.log("Normalized From ==:", normalizedFrom);
+        console.log("Normalized To:", normalizedTo);
+        console.log("Normalized Start Of Today:", startOfToday);
+        console.log("Normalized End Of Today:", endOfToday);
+        console.log("Normalized Start Of Week:", normalizedStartOfWeek);
+        console.log("Normalized End Of Week:", normalizedEndOfWeek);
+        console.log("Normalized Start Of Month:", normalizedStartOfMonth);
+        console.log("Normalized End Of Month:", normalizedEndOfMonth);
+
+        // Check for "today"
+        if (normalizedFrom === startOfToday && normalizedTo === endOfToday) {
+            setSelectedOption("today");
+            setCustomDatesVisible(false);
+        } 
+        // Check for "thisWeek"
+        else if (normalizedFrom >= normalizedStartOfWeek && normalizedTo <= normalizedEndOfWeek) {
+            setSelectedOption("thisWeek");
+            setCustomDatesVisible(false);
+        } 
+        // Check for "thisMonth"
+        else if (normalizedFrom >= normalizedStartOfMonth && normalizedTo <= normalizedEndOfMonth) {
+            setSelectedOption("thisMonth");
+            setCustomDatesVisible(false);
+        } 
+        // If dates are provided but do not match any conditions
+        else {
+            setSelectedOption("custom");
+            setCustomDatesVisible(true);
+        }
     } else {
-      setSelectedOption("custom");
-      setCustomDatesVisible(true);
+        // If no dates are provided, set to null
+        setAuctionDateFrom(null);
+        setAuctionDateTo(null);
+        setSelectedOption(null); // Set no option selected
+        setCustomDatesVisible(true); // Show custom date input
     }
-  }
 }, [auctionDateFromParam, auctionDateToParam]);
+
   // Function to toggle filters only on smaller screens
   const handleFilters = () => {
     const isSmallScreen = window.innerWidth < 1024; // `lg` breakpoint in Tailwind
@@ -522,7 +580,8 @@ useEffect(() => {
     [documentOldPIKey]: documentOldLabel,
     [cyclinderAPIKey]: cyclinderLabel,
     [documentTypeAPIKey]: documentTypeLabel,
-    [odoBrandAPIKey]: odoBrandLabel
+    [odoBrandAPIKey]: odoBrandLabel,
+    [partnerAPIKey]: partnerLabel,
   };
 
   // Function to update search terms for a specific dropdown filter
@@ -540,134 +599,180 @@ useEffect(() => {
 
   const handleAuctionDateFilter = (option) => {
     setSelectedOption(option);
-    const today = new Date();
-    let fromDate, toDate;
-
+    const now = new Date();
+    let fromDate = now.toISOString(); // Initialize fromDate to current time
+    let toDate;
+  
     if (option === "today") {
-          // Set fromDate to the start of the day (00:00:00) and toDate to the end of the day (23:59:59)
-    const startOfDay = new Date(today.setHours(0, 0, 0, 0)).toISOString();
-    const endOfDay = new Date(today.setHours(23, 59, 59, 999)).toISOString();
-    fromDate = startOfDay;
-    toDate = endOfDay;
+      // Set toDate to the end of today
+      const endOfDay = new Date(now);
+      endOfDay.setHours(23, 59, 59, 999);
+      toDate = endOfDay.toISOString();
     } else if (option === "thisWeek") {
-      const startOfWeek = new Date(
-        today.setDate(today.getDate() - today.getDay())
-      );
-      const endOfWeek = new Date(today.setDate(today.getDate() + 6));
-      fromDate = startOfWeek.toISOString().split("T")[0];
-      toDate = endOfWeek.toISOString().split("T")[0];
+      // fromDate remains the current time
+      // Set toDate to the end of the week
+      const endOfWeek = new Date(now);
+      endOfWeek.setDate(now.getDate() + (6 - now.getDay()));
+      endOfWeek.setHours(23, 59, 59, 999);
+      toDate = endOfWeek.toISOString();
     } else if (option === "thisMonth") {
-      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-      const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-      fromDate = startOfMonth.toISOString().split("T")[0];
-      toDate = endOfMonth.toISOString().split("T")[0];
+      // fromDate remains the current time
+      // Set toDate to the end of the month
+      const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      endOfMonth.setHours(23, 59, 59, 999);
+      toDate = endOfMonth.toISOString();
     } else if (option === "custom") {
-      setCustomDatesVisible(true); 
+      setCustomDatesVisible(true);
       return;
     }
-
-    setAuctionDateFrom(fromDate);
-    setAuctionDateTo(toDate);
-    setCustomDatesVisible(false); // Hide custom date fields if not custom
-  };
-
- const clearFilter = (filterKey) => {
-  console.log("", filterKey)
-  // Clear the filter from selectedFilters state
-  setSelectedFilters((prev) => ({
-    ...prev,
-    [filterKey]: [],
+  
+  // Update selected filters
+  setSelectedFilters((prevFilters) => ({
+    ...prevFilters,
+    auction_date_from: fromDate,
+    auction_date_to: toDate,
   }));
 
-  // Reset the applied filters for the cleared filter
-  // setAppliedFilters((prev) => ({
-  //   ...prev,
-  //   [filterKey]: [],
-  // }));
+    setAuctionDateFrom(fromDate);
+    setAuctionDateTo(toDate); 
+    setCustomDatesVisible(false); // Hide custom date fields if not custom
+    
+  };
+
+  const clearFilter = (filterKey) => {
+    // Clear the filter from selectedFilters state
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [filterKey]: [],
+    }));
+
+    // Reset the applied filters for the cleared filter
+    setAppliedFilters((prev) => ({
+      ...prev,
+      [filterKey]: [],
+    }));
 
     // Additional condition to clear 'make' state specifically
     if (filterKey === "make") {
       setSelectedMake(""); // Reset the 'make' state if 'make' filter is cleared
     }
 
-  // Remove the filter from URL parameters only if it exists
-  const params = new URLSearchParams(location.search);
-  const hasFilter = params.has(filterKey);
+    // Remove the filter from URL parameters only if it exists
+    const params = new URLSearchParams(location.search);
+    const hasFilter = params.has(filterKey);
 
-  if (hasFilter) {
-    params.delete(filterKey);
-    
-    // Navigate only if the filter was present in the URL
-    navigate({
-      pathname: location.pathname,
-      search: params.toString(),
-    }, { replace: true }); // Use replace to avoid page refresh
-  }
-};
+    if (hasFilter) {
+      params.delete(filterKey);
+
+      // Navigate only if the filter was present in the URL
+      navigate(
+        {
+          pathname: location.pathname,
+          search: params.toString(),
+        },
+        { replace: true }
+      ); // Use replace to avoid page refresh
+    }
+  };
 
   const handleCloseYearFilter = (e) => {
     e.preventDefault(); // Prevent any default action that might cause a jump
-  
+
     // Clear the year filters in selectedFilters state
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
       year_from: "",
       year_to: "",
     }));
-  
+
     // Update URL params to remove year filters if they exist
     const params = new URLSearchParams(location.search);
     const hasYearFrom = params.has("year_from");
     const hasYearTo = params.has("year_to");
-  
+
     if (hasYearFrom) params.delete("year_from");
     if (hasYearTo) params.delete("year_to");
-  
+
     // Navigate only if either year_from or year_to was present
     if (hasYearFrom || hasYearTo) {
-      navigate({
-        pathname: location.pathname,
-        search: params.toString(),
-      }, { replace: true }); // Use replace option to avoid refreshing
+      navigate(
+        {
+          pathname: location.pathname,
+          search: params.toString(),
+        },
+        { replace: true }
+      ); // Use replace option to avoid refreshing
     }
   };
-  
-  
-  
+
   const handleCloseAuctionDateDropdown = () => {
-    setIsOpen(false);             // Close the auction date dropdown
-    setSelectedOption("");        // Clear the selected auction date option
-    setAuctionDateFrom("");       // Reset auction date range
+    setIsOpen(false); // Close the auction date dropdown
+    setSelectedOption(""); // Clear the selected auction date option
+    setAuctionDateFrom(""); // Reset auction date range
     setAuctionDateTo("");
     setCustomDatesVisible(false); // Hide custom date fields
-  
+
     const params = new URLSearchParams(location.search);
-  
+
     // Remove the auction date filters from the URL if they exist
     if (params.has("auction_date_from")) params.delete("auction_date_from");
     if (params.has("auction_date_to")) params.delete("auction_date_to");
-  
+
     navigate({
       pathname: location.pathname,
       search: params.toString(),
     });
   };
-  
-  
+
   return (
     <>
-      <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-10 px-5 mx-auto font-urbanist ">
+    <div className="flex mt-5 gap-2 w-[80vw] bg-gray-100 p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
+
+  {Object.entries(appliedFilters).some(([, values]) => Array.isArray(values) ? values.length > 0 : values) && (
+   <div className="flex w-[80vw]  gap-2  ">
+    {Object.entries(appliedFilters).map(([key, values]) => (
+      values && (Array.isArray(values) ? values.length > 0 : true) ? (
+        <div
+          key={key}
+          className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
+        >
+          <span className="text-sm font-medium">
+            {key === "auction_date_from" || key === "auction_date_to"
+              ? `${key === "auction_date_from" ? "Auction Date From:" : "Auction Date To:"} ${new Date(values).toLocaleDateString()}`
+              : Array.isArray(values)
+              ? values
+                  .map(
+                    (id) =>
+                      dropdownData[key]?.find(({ id: itemId }) => itemId === id)
+                        ?.label
+                  )
+                  .join(", ")
+              : dropdownData[key]?.find(({ id }) => id === values)?.label || values}
+          </span>
+
+          <IoClose
+            onClick={() => clearFilter(key)}
+            className="ml-1 text-red-500 cursor-pointer"
+          />
+        </div>
+      ) : null
+    ))}
+  </div>
+)}
+
+   </div>
+      <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-5 px-5 mx-auto font-urbanist ">
         <h2 className="lg:hidden text-[42px] font-bold mt-[100px]">Fliters</h2>{" "}
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-40 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
             <div className="border-b-black  p-1 border-b flex justify-center items-center gap-x-2">
               <h4 className="font-semibold">Filters</h4>
               <TooltipInfo content="Please choose your preferred filters, then click the 'Apply Filters' button at the bottom. If you wish to clear the filters, you can also use the 'Reset' button next to the 'Apply Filters' option.">
-                  <BsInfoCircle
-                    size={15}
-                    className={` hover:text-blue-800 duration-200`}
-                  />
-                </TooltipInfo>
+                <BsInfoCircle
+                  size={15}
+                  className={` hover:text-blue-800 duration-200`}
+                />
+              </TooltipInfo>
             </div>
             {Object.keys(dropdownData).map((dropdownKey) => (
               <div
@@ -683,24 +788,16 @@ useEffect(() => {
                       dropdownKey.charAt(0).toUpperCase() +
                         dropdownKey.slice(1)}
                   </h1>
-                          {/* Close Icon for Clearing Filter */}
-        {selectedFilters[dropdownKey]?.length > 0 && (
-          <svg
-            onClick={() => clearFilter(dropdownKey)}
-            className="w-4 h-4 cursor-pointer text-red-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        )}
+
+<div className="flex gap-x-2"> 
+    {/* Close Icon for Clearing Filter */}
+    {selectedFilters[dropdownKey]?.length > 0 && (
+                   
+            <IoClose
+               onClick={() => clearFilter(dropdownKey)}
+               className="bg-red-600/20 text-red-600 rounded-full"
+               />
+                  )}
 
                   <svg
                     className={`w-[15px]  lg:w-[1vw] h-[15px] lg:h-[1vw] transition-transform duration-200 ${
@@ -718,6 +815,9 @@ useEffect(() => {
                       d="M19 9l-7 7-7-7"
                     ></path>
                   </svg>
+
+   </div>
+                
                 </div>
                 {dropdownStates[dropdownKey] && (
                   <>
@@ -761,7 +861,7 @@ useEffect(() => {
                                 dropdownKey === "make" ||
                                 dropdownKey === "model" ||
                                 dropdownKey === "year_from" ||
-                                dropdownKey === "year_to"||
+                                dropdownKey === "year_to" ||
                                 dropdownKey === "vehicle_type"
                                   ? "radio"
                                   : "checkbox"
@@ -779,7 +879,7 @@ useEffect(() => {
                                   : selectedFilters[dropdownKey].includes(id)
                               }
                             />
-              
+
                             <label
                               htmlFor={id}
                               className="ml-[0.5vw] text-[16px] text-left lg:text-[0.8vw] font-medium"
@@ -789,14 +889,10 @@ useEffect(() => {
 
                             {dropdownKey === "color" ? (
                               <div className=" self-end right-0 absolute top-0">
-                              <div
-                              style={getColorStyle(hex)} 
-                              className=" " 
-                            />
+                                <div style={getColorStyle(hex)} className=" " />
                               </div>
                             ) : null}
-
-                  </div>
+                          </div>
                         ))}
                       <div className=" w-full">
                         {!showAllFilters[dropdownKey] &&
@@ -832,25 +928,25 @@ useEffect(() => {
                 <span className="text-[18px] lg:text-[1.1vw] text-left font-bold ">
                   Auction Date
                 </span>
-                 {/* Close Icon */}
-      {isOpen && (
-        <svg
-          onClick={handleAuctionDateFilter}
-          className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
-        </svg>
-      )}
-      {/* Dropdown Arrow Icon */}
+                {/* Close Icon */}
+                {isOpen && (
+                  <svg
+                    onClick={handleAuctionDateFilter}
+                    className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                )}
+                {/* Dropdown Arrow Icon */}
                 <svg
                   className={`w-[15px]  lg:w-[1vw] h-[15px] lg:h-[1vw] transition-transform duration-200 ${
                     isOpen ? "transform rotate-180" : ""
@@ -957,24 +1053,23 @@ useEffect(() => {
                 <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
                   Year
                 </h1>
-                              {/* Close Icon */}
-      
-        <svg
-          onClick={handleCloseYearFilter}
-          className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
-        </svg>
-    
+                {/* Close Icon */}
+
+                <svg
+                  onClick={handleCloseYearFilter}
+                  className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
               </div>
               <div className="flex gap-[1vw]">
                 <input

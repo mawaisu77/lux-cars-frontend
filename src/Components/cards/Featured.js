@@ -33,7 +33,8 @@ const BuyNow = () => {
 
   // Handler for "View All" button
   const handleViewAllClick = () => {
-    navigate("/search-page/testing?buy_now=true"); 
+    localStorage.setItem('apiEndpoint', process.env.REACT_APP_API_CARS_LIVE);
+    navigate("/search-page"); 
   };
 
   return (
