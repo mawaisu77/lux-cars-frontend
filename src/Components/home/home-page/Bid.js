@@ -70,6 +70,7 @@ const Bid = () => {
     if (yearFrom) queryParams.append("year_from", yearFrom.value);
     if (yearTo) queryParams.append("year_to", yearTo.value);
 
+    localStorage.setItem('apiEndpoint', process.env.REACT_APP_API_CARS_LIVE);
     navigate(`/search-page?${queryParams.toString()}`);
   };
 

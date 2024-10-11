@@ -57,6 +57,7 @@ import {
   odoBrandLabel,
   odoBrandOptions,
 } from "../../../utils/filtersData/odoBrand";
+import { partnerAPIKey, partnerLabel, partnerOptions } from "../../../utils/filtersData/partnerOptions";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -79,8 +80,13 @@ const Sidebar = () => {
   const initialModel = queryParams.get("model") || "";
   const initialFromYear = queryParams.get("year_from") || "";
   const initialToYear = queryParams.get("year_to") || "";
-  const initialPartner = queryParams.get("partner") || "";
+  // const initialPartner = queryParams.get("partner") || "";
   const initialVehicleTyoe = queryParams.get("vehicle_type") || "";
+
+  const initialPartner = useMemo(
+    () => queryParams.getAll("partner") || [],
+    [queryParams]
+  );
   const initialTransmission = useMemo(
     () => queryParams.getAll("transmission") || [],
     [queryParams]
@@ -142,7 +148,7 @@ const Sidebar = () => {
   const [selectedModel, setSelectedModel] = useState(initialModel);
   const [selectedMake, setSelectedMake] = useState(initialMake);
   const [selectedFilters, setSelectedFilters] = useState({
-    site: initialPartner || "",
+    site: initialPartner,
     make: initialMake,
     model: initialModel,
     transmission: initialTransmission,
@@ -166,8 +172,9 @@ const Sidebar = () => {
     document: initialDocument,
     odobrand: initialOdobrand,
   });
+
   const [appliedFilters, setAppliedFilters] = useState({
-    site: initialPartner || "",
+    site: initialPartner,
     make: initialMake,
     model: initialModel,
     transmission: initialTransmission,
@@ -207,8 +214,8 @@ const Sidebar = () => {
   // Load initial data based on query params
   useEffect(() => {
     if (
+      initialPartner.length > 0 ||
       initialMake ||
-      initialPartner ||
       initialModel ||
       initialFromYear ||
       initialToYear ||
@@ -258,8 +265,8 @@ const Sidebar = () => {
       });
     }
   }, [
-    initialMake,
     initialPartner,
+    initialMake,
     initialModel,
     initialVehicleTyoe,
     initialFromYear,
@@ -351,10 +358,7 @@ const Sidebar = () => {
   };
 
   const dropdownData = {
-    site: [
-      { id: 1, label: "COPART" },
-      { id: 2, label: "IAAI" },
-    ],
+    [partnerAPIKey]: partnerOptions,
     make: carData && carData.map((car) => ({ id: car.make, label: car.make })),
     model: filteredModels.map((model) => ({ id: model, label: model })),
     [vehicleTypeAPIKey]: vehicleTypeOptions,
@@ -489,55 +493,76 @@ const Sidebar = () => {
     };
   }, []);
 
-  // Separate useEffect for handling auction dates and showing custom options
   useEffect(() => {
     if (auctionDateFromParam && auctionDateToParam) {
-      setAuctionDateFrom(auctionDateFromParam);
-      setAuctionDateTo(auctionDateToParam);
+        setAuctionDateFrom(auctionDateFromParam);
+        setAuctionDateTo(auctionDateToParam);
 
-      // Normalize both auctionDateFrom and auctionDateTo to YYYY-MM-DD
-      const normalizedFrom = auctionDateFromParam.split("T")[0];
-      const normalizedTo = auctionDateToParam.split("T")[0];
+        // Normalize auctionDateFrom and auctionDateTo
+        const normalizedFrom = new Date(auctionDateFromParam).toISOString().split("T")[0];
+        const normalizedTo = new Date(auctionDateToParam).toISOString().split("T")[0];
 
-      const today = new Date().toISOString().split("T")[0];
+        const today = new Date();
+        const normalizedToday = today.toISOString().split("T")[0];
 
-      const startOfWeek = new Date();
-      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
-      const endOfWeek = new Date(startOfWeek);
-      endOfWeek.setDate(endOfWeek.getDate() + 6);
+        // Start and end of today
+        const startOfToday = normalizedToday; 
+        const endOfToday = normalizedToday;
 
-      const startOfMonth = new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        1
-      );
-      const endOfMonth = new Date(
-        new Date().getFullYear(),
-        new Date().getMonth() + 1,
-        0
-      );
+        // Start and end of this week
+        const startOfWeek = new Date();
+        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay()); 
+        const normalizedStartOfWeek = startOfWeek.toISOString().split("T")[0]; 
 
-      if (normalizedFrom === today && normalizedTo === today) {
-        setSelectedOption("today");
-        setCustomDatesVisible(false);
-      } else if (
-        normalizedFrom === startOfWeek.toISOString().split("T")[0] &&
-        normalizedTo === endOfWeek.toISOString().split("T")[0]
-      ) {
-        setSelectedOption("thisWeek");
-        setCustomDatesVisible(false);
-      } else if (
-        normalizedFrom === startOfMonth.toISOString().split("T")[0] &&
-        normalizedTo === endOfMonth.toISOString().split("T")[0]
-      ) {
-        setSelectedOption("thisMonth");
-        setCustomDatesVisible(false);
-      } else {
-        setSelectedOption("custom");
-        setCustomDatesVisible(true);
-      }
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(endOfWeek.getDate() + 6); 
+        const normalizedEndOfWeek = endOfWeek.toISOString().split("T")[0];
+
+        // Start and end of this month
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1); 
+        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); 
+        const normalizedStartOfMonth = startOfMonth.toISOString().split("T")[0];
+        const normalizedEndOfMonth = endOfMonth.toISOString().split("T")[0];
+
+        // Checking...
+        console.log("Normalized From ==:", normalizedFrom);
+        console.log("Normalized To:", normalizedTo);
+        console.log("Normalized Start Of Today:", startOfToday);
+        console.log("Normalized End Of Today:", endOfToday);
+        console.log("Normalized Start Of Week:", normalizedStartOfWeek);
+        console.log("Normalized End Of Week:", normalizedEndOfWeek);
+        console.log("Normalized Start Of Month:", normalizedStartOfMonth);
+        console.log("Normalized End Of Month:", normalizedEndOfMonth);
+
+        // Check for "today"
+        if (normalizedFrom === startOfToday && normalizedTo === endOfToday) {
+            setSelectedOption("today");
+            setCustomDatesVisible(false);
+        } 
+        // Check for "thisWeek"
+        else if (normalizedFrom >= normalizedStartOfWeek && normalizedTo <= normalizedEndOfWeek) {
+            setSelectedOption("thisWeek");
+            setCustomDatesVisible(false);
+        } 
+        // Check for "thisMonth"
+        else if (normalizedFrom >= normalizedStartOfMonth && normalizedTo <= normalizedEndOfMonth) {
+            setSelectedOption("thisMonth");
+            setCustomDatesVisible(false);
+        } 
+        // If dates are provided but do not match any conditions
+        else {
+            setSelectedOption("custom");
+            setCustomDatesVisible(true);
+        }
+    } else {
+        // If no dates are provided, set to null
+        setAuctionDateFrom(null);
+        setAuctionDateTo(null);
+        setSelectedOption(null); // Set no option selected
+        setCustomDatesVisible(true); // Show custom date input
     }
-  }, [auctionDateFromParam, auctionDateToParam]);
+}, [auctionDateFromParam, auctionDateToParam]);
+
   // Function to toggle filters only on smaller screens
   const handleFilters = () => {
     const isSmallScreen = window.innerWidth < 1024; // `lg` breakpoint in Tailwind
@@ -556,6 +581,7 @@ const Sidebar = () => {
     [cyclinderAPIKey]: cyclinderLabel,
     [documentTypeAPIKey]: documentTypeLabel,
     [odoBrandAPIKey]: odoBrandLabel,
+    [partnerAPIKey]: partnerLabel,
   };
 
   // Function to update search terms for a specific dropdown filter
@@ -573,39 +599,47 @@ const Sidebar = () => {
 
   const handleAuctionDateFilter = (option) => {
     setSelectedOption(option);
-    const today = new Date();
-    let fromDate, toDate;
-
+    const now = new Date();
+    let fromDate = now.toISOString(); // Initialize fromDate to current time
+    let toDate;
+  
     if (option === "today") {
-      // Set fromDate to the start of the day (00:00:00) and toDate to the end of the day (23:59:59)
-      const startOfDay = new Date(today.setHours(0, 0, 0, 0)).toISOString();
-      const endOfDay = new Date(today.setHours(23, 59, 59, 999)).toISOString();
-      fromDate = startOfDay;
-      toDate = endOfDay;
+      // Set toDate to the end of today
+      const endOfDay = new Date(now);
+      endOfDay.setHours(23, 59, 59, 999);
+      toDate = endOfDay.toISOString();
     } else if (option === "thisWeek") {
-      const startOfWeek = new Date(
-        today.setDate(today.getDate() - today.getDay())
-      );
-      const endOfWeek = new Date(today.setDate(today.getDate() + 6));
-      fromDate = startOfWeek.toISOString().split("T")[0];
-      toDate = endOfWeek.toISOString().split("T")[0];
+      // fromDate remains the current time
+      // Set toDate to the end of the week
+      const endOfWeek = new Date(now);
+      endOfWeek.setDate(now.getDate() + (6 - now.getDay()));
+      endOfWeek.setHours(23, 59, 59, 999);
+      toDate = endOfWeek.toISOString();
     } else if (option === "thisMonth") {
-      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-      const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-      fromDate = startOfMonth.toISOString().split("T")[0];
-      toDate = endOfMonth.toISOString().split("T")[0];
+      // fromDate remains the current time
+      // Set toDate to the end of the month
+      const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      endOfMonth.setHours(23, 59, 59, 999);
+      toDate = endOfMonth.toISOString();
     } else if (option === "custom") {
       setCustomDatesVisible(true);
       return;
     }
+  
+  // Update selected filters
+  setSelectedFilters((prevFilters) => ({
+    ...prevFilters,
+    auction_date_from: fromDate,
+    auction_date_to: toDate,
+  }));
 
     setAuctionDateFrom(fromDate);
     setAuctionDateTo(toDate); 
     setCustomDatesVisible(false); // Hide custom date fields if not custom
+    
   };
 
   const clearFilter = (filterKey) => {
-    console.log("", filterKey);
     // Clear the filter from selectedFilters state
     setSelectedFilters((prev) => ({
       ...prev,
@@ -613,10 +647,10 @@ const Sidebar = () => {
     }));
 
     // Reset the applied filters for the cleared filter
-    // setAppliedFilters((prev) => ({
-    //   ...prev,
-    //   [filterKey]: [],
-    // }));
+    setAppliedFilters((prev) => ({
+      ...prev,
+      [filterKey]: [],
+    }));
 
     // Additional condition to clear 'make' state specifically
     if (filterKey === "make") {
@@ -692,7 +726,42 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-10 px-5 mx-auto font-urbanist ">
+    <div className="flex mt-5 gap-2 w-[80vw] bg-gray-100 p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
+
+  {Object.entries(appliedFilters).some(([, values]) => Array.isArray(values) ? values.length > 0 : values) && (
+   <div className="flex w-[80vw]  gap-2  ">
+    {Object.entries(appliedFilters).map(([key, values]) => (
+      values && (Array.isArray(values) ? values.length > 0 : true) ? (
+        <div
+          key={key}
+          className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
+        >
+          <span className="text-sm font-medium">
+            {key === "auction_date_from" || key === "auction_date_to"
+              ? `${key === "auction_date_from" ? "Auction Date From:" : "Auction Date To:"} ${new Date(values).toLocaleDateString()}`
+              : Array.isArray(values)
+              ? values
+                  .map(
+                    (id) =>
+                      dropdownData[key]?.find(({ id: itemId }) => itemId === id)
+                        ?.label
+                  )
+                  .join(", ")
+              : dropdownData[key]?.find(({ id }) => id === values)?.label || values}
+          </span>
+
+          <IoClose
+            onClick={() => clearFilter(key)}
+            className="ml-1 text-red-500 cursor-pointer"
+          />
+        </div>
+      ) : null
+    ))}
+  </div>
+)}
+
+   </div>
+      <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-5 px-5 mx-auto font-urbanist ">
         <h2 className="lg:hidden text-[42px] font-bold mt-[100px]">Fliters</h2>{" "}
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-40 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
