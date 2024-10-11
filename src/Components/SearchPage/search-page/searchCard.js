@@ -115,39 +115,60 @@ function Card({ card }) {
           </Link>
         
           <div className="flex flex-col md:flex-row lg:flex-row leading-[3vh]">
-            <div className="flex flex-col sm:flex-row sm:flex-wrap font-urbanist  text-[13px] lg:text-[0.875vw] py-1  ">
-              <p className="w-full">
-                <span className="font-semibold">VIN:</span> {card.vin}
-              </p>
-              <p className="w-full">
-                <span className="font-semibold">Lot:</span> {card.lot_id}
-              </p>
-              <p className="w-full">
-                <span className="font-semibold">Status:</span> {card.status}
-              </p>
-              <p className="w-full">
-                <span className="font-semibold">Location:</span> {card.location}
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] lg:text-[0.875vw] py-1  ">
-              <p className="w-full">
-                <span className="font-semibold ">Millage:</span>{" "}
-                {card.mileage || "Not specified"}
-              </p>
-              <p className="w-full">
-                <span className="font-semibold">Damage:</span>{" "}
-                {card.damage || "None"}
-              </p>
-              <p className="w-full">
-                <span className="font-semibold"> Engine Type:</span>{" "}
-                {card.engine_type || "Not specified"}
-              </p>
-              <p className="w-full">
-                <span className="font-semibold">Color:</span>{" "}
-                {card.color || "Not specified"}
-              </p>
-            </div>
-          </div>
+  <div className="flex flex-col sm:flex-row sm:flex-wrap font-urbanist text-[13px] lg:text-[0.875vw] py-1">
+    <p className="w-full">
+      <span className="font-semibold">VIN: </span> 
+      {window.innerWidth >= 1024 && card.vin.length > 6
+        ? `${card.vin.slice(0, 6)}...`
+        : card.vin}
+    </p>
+    <p className="w-full">
+      <span className="font-semibold">Lot: </span>
+      {window.innerWidth >= 1024 && card.lot_id.length > 6
+        ? `${card.lot_id.slice(0, 6)}...`
+        : card.lot_id}
+    </p>
+    <p className="w-full">
+      <span className="font-semibold">Status: </span>
+      {window.innerWidth >= 1024 && card.status.length > 6
+        ? `${card.status.slice(0, 6)}...`
+        : card.status}
+    </p>
+    <p className="w-full">
+      <span className="font-semibold">Location: </span>
+      {window.innerWidth >= 1024 && card.location.length > 6
+        ? `${card.location.slice(0, 6)}...`
+        : card.location}
+    </p>
+  </div>
+  <div className="flex flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] lg:text-[0.875vw] py-1">
+    <p className="w-full">
+      <span className="font-semibold">Millage: </span>
+      {window.innerWidth >= 1024 && card.mileage?.length > 6
+        ? `${card.mileage.slice(0, 6)}...`
+        : card.mileage || "Not specified"}
+    </p>
+    <p className="w-full">
+      <span className="font-semibold">Damage: </span>
+      {window.innerWidth >= 1024 && card.damage?.length > 6
+        ? `${card.damage.slice(0, 6)}...`
+        : card.damage || "None"}
+    </p>
+    <p className="w-full">
+      <span className="font-semibold">Engine Type: </span>
+      {window.innerWidth >= 1024 && card.engine_type?.length > 6
+        ? `${card.engine_type.slice(0, 6)}...`
+        : card.engine_type || "Not specified"}
+    </p>
+    <p className="w-full">
+      <span className="font-semibold">Color: </span>
+      {window.innerWidth >= 1024 && card.color?.length > 6
+        ? `${card.color.slice(0, 6)}...`
+        : card.color || "Not specified"}
+    </p>
+  </div>
+</div>
+
         </div>
         <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row px-2 w-full  justify-between mx-auto">
           <div className="py-1 bg-[#f3f3f3] shadow-md w-full text-center sm:text-left">
