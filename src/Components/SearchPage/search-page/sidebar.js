@@ -722,36 +722,38 @@ const Sidebar = () => {
     <div className="flex mt-5 gap-2 bg-gray-100  w-[80vw]  p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
 
     {Object.entries(appliedFilters).some(([, values]) => Array.isArray(values) ? values.length > 0 : values) && (
-    <div className="flex w-[80vw]  gap-2  ">
-      {Object.entries(appliedFilters).map(([key, values]) => (
-        values && (Array.isArray(values) ? values.length > 0 : true) ? (
-          <div
-            key={key}
-            className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
-          >
-            <span className="text-sm font-medium">
-              {key === "auction_date_from" || key === "auction_date_to"
-                ? `${key === "auction_date_from" ? "Auction Date From:" : "Auction Date To:"} ${new Date(values).toLocaleDateString()}`
-                : Array.isArray(values)
-                ? values
-                    .map(
-                      (id) =>
-                        dropdownData[key]?.find(({ id: itemId }) => itemId === id)
-                          ?.label
-                    )
-                    .join(", ")
-                : dropdownData[key]?.find(({ id }) => id === values)?.label || values}
-            </span>
+  <div className="flex w-[80vw] gap-2">
+    {Object.entries(appliedFilters).map(([key, values]) =>
+      values && (Array.isArray(values) ? values.length > 0 : true) ? (
+        <div
+          key={key}
+          className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
+        >
+          <span className="text-sm font-medium">
+            {key}:{" "}
+            {key === "auction_date_from" || key === "auction_date_to"
+              ? `${key === "auction_date_from" ? "Auction Date From:" : "Auction Date To:"} ${new Date(values).toLocaleDateString()}`
+              : Array.isArray(values)
+              ? values
+                  .map(
+                    (id) =>
+                      dropdownData[key]?.find(({ id: itemId }) => itemId === id)
+                        ?.label
+                  )
+                  .join(", ")
+              : dropdownData[key]?.find(({ id }) => id === values)?.label || values}
+          </span>
 
-            <IoClose
-              onClick={() => clearFilter(key)}
-              className="ml-1 text-red-500 cursor-pointer"
-            />
-          </div>
-        ) : null
-      ))}
-    </div>
+          <IoClose
+            onClick={() => clearFilter(key)}
+            className="ml-1 text-red-500 cursor-pointer"
+          />
+        </div>
+      ) : null
     )}
+  </div>
+)}
+
 
    </div>
       <div className="flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">

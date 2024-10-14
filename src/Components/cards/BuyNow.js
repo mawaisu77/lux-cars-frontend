@@ -17,7 +17,7 @@ const BuyNow = () => {
   const navigate = useNavigate(); // Initialize navigate hook
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars/testing"
+    process.env.REACT_APP_API_CARS_LIVE
   );
   if (carLoading) {
     return <Shimmer />;

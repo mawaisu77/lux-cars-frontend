@@ -16,7 +16,8 @@ const BuyNow = () => {
   const navigate = useNavigate(); 
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "cars/get-all-cars?buy_now=true"
+    
+    `${process.env.REACT_APP_API_CARS_LIVE}?buy_now=true`
   );
   if (carLoading) {
     return <Shimmer />;
@@ -39,7 +40,7 @@ const BuyNow = () => {
 
   return (
     <>
-      <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]  ">
+      <div className="relative w-full lg:w-[98.9vw] bg-white  ">
         <div className="">
           <div className="flex items-center justify-between  mx-auto sm:pl-2 px-4 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw]">
             <div className=" flex flex-col gap-y-2">
