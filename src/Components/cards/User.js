@@ -1,62 +1,85 @@
-import React from 'react';
+import React, { useMemo } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import TimeAgo from "react-timeago";
+import useTimer from "../../hooks/useTimer";
 
-const User = ({bid}) => {
+const User = ({ bid }) => {
+  const navigate = useNavigate(); // Initialize navigate hook
+
+  // Memoize the targetTime to prevent unnecessary recalculations
+  const targetTime = useMemo(
+    () => (bid.auction_date ? new Date(bid.auction_date) : null),
+    [bid.auction_date]
+  );
+  const { days, hours, minutes, seconds } = useTimer(targetTime);
+
+  // Determine if the auction date is in the future or null
+  const ValidDate =
+    targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+
+  const hanldeNavigate = () => {
+    navigate(`/vehicle-detail/${bid?.carDetails?.lot_id}`);
+  };
 
   return (
-    <>
-      <div className='flex flex-wrap gap-x-5 justify-center items-center gap-y-10 mt-[10vh] mb-[10vh]'>
-          <div className='w-[328px] lg:w-[17.5vw] rounded-xl shadow-xl py-3'>
-            <div className='relative'>
-              <img src={bid.carDetails.image} alt='bid_car_image' className='w-[290px] lg:w-[15.5vw] h-[290px] lg:h-[30vh] rounded-xl mx-auto' />
-            </div>
-            <div>
-              <div className='text-left px-3 border-b font-urbanist'>
-                <p className='font-semibold text-[18px] lg:text-[1.12vw] py-2'>
-                  {bid.carDetails.title}
-                </p>
-                
-                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
-                <p className='font-semibold'>
-                  {"Lot "}
-                </p>
-                <p className=''>
-                  {bid.carDetails.lot_id}
-                </p>
-                </div>
+    <tr className="border-t">
+      {/*1 Car Image */}
+      <td className=" text-nowrap px-4 py-2">
+        <div className="w-[60px] h-[60px] rounded-md overflow-hidden bg-gray-100">
+          <img
+            className="w-full h-full object-cover"
+            src={bid.carDetails.image || ""}
+            alt="Car"
+          />
+        </div>
+      </td>
+      {/*2 Title */}
+      <td
+        className=" text-nowrap px-4 py-2 hover:text-blue-800 hover:underline cursor-pointer"
+        onClick={hanldeNavigate}
+      >
+        {bid.carDetails.title}
+      </td>
+      {/*3 Location */}
+      <td className=" text-nowrap px-4 py-2">{bid.carDetails.location}</td>
+      {/*4 Posted Time Ago */}
+      {/* <td className=" text-nowrap px-4 py-2">
+        <TimeAgo date={bid.createdAt} />
+      </td> */}
 
-                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
-                <p className='font-semibold'>
-                  {"Status"}
-                </p>
-                <p className=''>
-                  {bid.carDetails.status}
-                </p>
-                </div>
-                <div className='text-[15px] lg:text-[0.9vw]  flex gap-x-2'>
-                <p className='font-semibold'>
-                  {"Location"}
-                </p>
-                <p className=''>
-                  {bid.carDetails.location}
-                </p>
-                </div>
-               
-              </div>
-              <div className='flex px-3 justify-between border-t py-2'>
-                <div>
-                  <p className='text-[18px] lg:text-[1.1vw] font-semibold'>${bid.bidPrice}</p>
-                </div>
-                <div className='flex justify-center items-center text-right lg:gap-[0.5vw]'>
-                  <p className=''>{"Status :"}</p>
-                  <p className={`font-semibold ${bid.isValid?'text-green-600':'text-red-600' } text-[16px] text-[#7a798a]`}>{bid.isValid ? "Active":"Expire" }</p>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-  
-    </>
+      {/*7 Lot ID */}
+      <td className=" text-nowrap px-4 py-2">{bid.carDetails.lot_id}</td>
+
+      {/*4 No of bids*/}
+      <td className=" text-nowrap px-4 py-2">{bid.carDetails.noOfBids}</td>
+
+      {/*5 Bid Price */}
+      <td className=" text-nowrap px-4 py-2 font-bold">
+        <span className={bid.isValid ? "text-green-600" : "text-red-500"}>
+          ${bid.bidPrice}
+        </span>
+      </td>
+      {/*6 Time Left */}
+      <td className=" text-nowrap px-4 py-2">
+        {bid.carDetails.auction_date
+          ? ValidDate
+            ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
+            : "Bidding Over"
+          : "Future"}
+      </td>
+
+      {/*8 Current Bid */}
+      <td className=" text-nowrap px-4 py-2">${bid.carDetails.currentBid}</td>
+      {/*9 Status */}
+      <td
+        className={` text-nowrap px-4 py-2 font-semibold ${
+          bid.isValid ? "text-green-500" : "text-red-500"
+        }`}
+      >
+        {bid.isValid ? "Active" : "Expired"}
+      </td>
+    </tr>
   );
-}
+};
 
 export default User;

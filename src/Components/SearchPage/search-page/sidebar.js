@@ -58,6 +58,9 @@ import {
   odoBrandOptions,
 } from "../../../utils/filtersData/odoBrand";
 import { partnerAPIKey, partnerLabel, partnerOptions } from "../../../utils/filtersData/partnerOptions";
+import { driveAPIKey, driveLabel, driveOptions } from "../../../utils/filtersData/driveOptions";
+import { statusAPIKey, statusOptions } from "../../../utils/filtersData/statusOptions";
+import { transmissionAPIKey, transmissionOptions } from "../../../utils/filtersData/transmissionOptions";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -84,7 +87,7 @@ const Sidebar = () => {
   const initialVehicleTyoe = queryParams.get("vehicle_type") || "";
 
   const initialPartner = useMemo(
-    () => queryParams.getAll("partner") || [],
+    () => queryParams.getAll("site") || [],
     [queryParams]
   );
   const initialTransmission = useMemo(
@@ -342,11 +345,13 @@ const Sidebar = () => {
       odometer_from: "",
       odometer_to: "",
       document_old: [],
+      odobrand:[],
       initialCyclinders: [],
       initialDocument: [],
       initialOdobrand: [],
     });
     setAppliedFilters({});
+    // setAppliedFilters({});
     setSelectedMake("");
     setSelectedModel("");
     setFilteredModels([]);
@@ -362,28 +367,14 @@ const Sidebar = () => {
     make: carData && carData.map((car) => ({ id: car.make, label: car.make })),
     model: filteredModels.map((model) => ({ id: model, label: model })),
     [vehicleTypeAPIKey]: vehicleTypeOptions,
-    transmission: [
-      { id: "Automatic", label: "Automatic" },
-      { id: "Manual", label: "Manual" },
-    ],
-    drive: [
-      { id: "Rear Wheel Drive", label: "Rear Wheel Drive" },
-      { id: "Front Wheel Drive", label: "Front Wheel Drive" },
-      { id: "All Wheel Drive", label: "All Wheel Drive" },
-      { id: "Unknown", label: "Unknown" },
-    ],
+    [transmissionAPIKey]: transmissionOptions,
+    [driveAPIKey]: driveOptions,
     [stateAPIKey]: stateOptions,
-    damage_pr: damageOptions,
-    damage_sec: damageOptions,
-    status: [
-      { id: "Stationary", label: "Stationary" },
-      { id: "Run & Drive", label: "Run & Drive" },
-      { id: "Starts", label: "Starts" },
-      { id: "Can't test", label: "Can't test" },
-      { id: "Unknown", label: "Unknown" },
-    ],
+    [primaryDamageAPIKey]: damageOptions,
+    [secondaryDamageAPIKey]: damageOptions,
+    [statusAPIKey]: statusOptions,
     [locationAPIKey]: locationOptions,
-    fuel: fuelOptions,
+    [fuelAPIKey]: fuelOptions,
     [colorAPIKey]: colorOptions,
     [documentOldPIKey]: documentOldOption,
     [cyclinderAPIKey]: cylinderOptions,
@@ -409,6 +400,7 @@ const Sidebar = () => {
     transmission: !!initialTransmission,
     status: !!initialStatus,
     fuelType: !!initialFuel,
+    // odobrand: !!initialOdobrand,
   });
 
   const toggleDropdown = (dropdown) => {
@@ -582,6 +574,7 @@ const Sidebar = () => {
     [documentTypeAPIKey]: documentTypeLabel,
     [odoBrandAPIKey]: odoBrandLabel,
     [partnerAPIKey]: partnerLabel,
+    [driveAPIKey]: driveLabel,
   };
 
   // Function to update search terms for a specific dropdown filter
@@ -726,17 +719,18 @@ const Sidebar = () => {
 
   return (
     <>
-    <div className="flex mt-5 gap-2 w-[80vw] bg-gray-100 p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
+    <div className="flex mt-5 gap-2 bg-gray-100  w-[80vw]  p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
 
-  {Object.entries(appliedFilters).some(([, values]) => Array.isArray(values) ? values.length > 0 : values) && (
-   <div className="flex w-[80vw]  gap-2  ">
-    {Object.entries(appliedFilters).map(([key, values]) => (
+    {Object.entries(appliedFilters).some(([, values]) => Array.isArray(values) ? values.length > 0 : values) && (
+  <div className="flex w-[80vw] gap-2">
+    {Object.entries(appliedFilters).map(([key, values]) =>
       values && (Array.isArray(values) ? values.length > 0 : true) ? (
         <div
           key={key}
           className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
         >
           <span className="text-sm font-medium">
+            {key}:{" "}
             {key === "auction_date_from" || key === "auction_date_to"
               ? `${key === "auction_date_from" ? "Auction Date From:" : "Auction Date To:"} ${new Date(values).toLocaleDateString()}`
               : Array.isArray(values)
@@ -756,12 +750,13 @@ const Sidebar = () => {
           />
         </div>
       ) : null
-    ))}
+    )}
   </div>
 )}
 
+
    </div>
-      <div className="flex lg:flex-row flex-col justify-center gap-[3vw] w-[80vw] bg-gray-100 mt-5 px-5 mx-auto font-urbanist ">
+      <div className="flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">
         <h2 className="lg:hidden text-[42px] font-bold mt-[100px]">Fliters</h2>{" "}
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-40 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
@@ -1156,7 +1151,7 @@ const Sidebar = () => {
             </div>
           </div>
         )}
-        <div className="w-[76vw]lg:w-[55vw] xl:w-[54.5vw] 2xl:w-[52.5vw] flex justify-center h-full flex-col items-center">
+        <div className="w-[76vw]lg:w-[60vw] xl:w-[58.5vw] 2xl:w-[58.5vw] flex justify-center h-full flex-col items-center">
           <SearchMainPage
             resetFilters={resetFilters}
             appliedFilters={appliedFilters}

@@ -44,7 +44,7 @@ const BidCarsSection = () => {
           <div className="sm:pl-2 px-4 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
             <div className="flex flex-col gap-y-2">
               <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
-                Bid Carssss
+                Bid Cars
               </div>
               <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
             </div>
