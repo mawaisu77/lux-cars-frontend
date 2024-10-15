@@ -10,8 +10,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import useGetAllLocalCars from "../../hooks/useGetAllLocalCars";
 import LocalCarsCard from "./LocalCarsCard";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const LocalCars = () => {
+  const navigate = useNavigate()
   const { localCars, carLoading, carError } = useGetAllLocalCars(
     "local-cars/get-all-approved-local-cars"
   );
@@ -28,26 +31,37 @@ const LocalCars = () => {
     );
   }
 
-console.log("======", localCars)
+    // Handler for "View All" button
+    const handleViewAllClick = () => {
+      // localStorage.setItem('apiEndpoint', process.env.REACT_APP_API_CARS_LIVE);
+      navigate("/search-local-cars"); 
+    };
+
 
   return (
     <>
       <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]  ">
         <div className="">
 
-      <div className="flex items-center justify-between  mx-auto pl-2 w-full sm:w-[85vw] md:w-[88vw] lg:w-[82vw]">
-          <div className=" flex flex-col gap-y-2">
-            <div className="flex justify-start font-urbanist text-[36px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
-              Local Cars
+        <div className="sm:pl-2 px-4 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
+            <div className="flex flex-col gap-y-2">
+              <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
+                Local Cars
+              </div>
+              <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
             </div>
-            <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
+
+            <div className="flex justify-center text-[#ca0000]  items-center gap-x-1">
+              <button
+                onClick={handleViewAllClick}
+                className="font-bold text-sm hover:underline"
+              >
+                View All
+              </button>
+              <FaExternalLinkAlt size={13} />
+            </div>
           </div>
-          <div>
-            <span>
-            see all 
-            </span>
-          </div>
-      </div>
+
           <div className="relative">
             <Swiper
               style={{
