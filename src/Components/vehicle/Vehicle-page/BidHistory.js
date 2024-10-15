@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import useBidHistory from '../../../hooks/useGetBidHistoryByLotId';
 import TimeAgo from 'react-timeago'
 import { ClipLoader } from 'react-spinners';
+import avatar from "../../../assets/avatar1.png";
 
 const BidHistory = ({data}) => {
     const { bidHistory, loading: loadingBidHistory, error:bidHistoryError, fetchBidHistory } = useBidHistory(data.lot_id);
@@ -13,8 +14,8 @@ const BidHistory = ({data}) => {
       }, [data.lot_id]);
     
   return (
-    <div className='h-[400px] overflow-y-scroll flex justify-center items-center shadow-md p-[1.5vw] '>
-     <div className=''>
+    <div className='flex justify-center items-center shadow-md'>
+     <div className='w-full h-[400px] overflow-y-scroll p-2'>
 
       {loadingBidHistory ? (
             <div className="flex justify-center items-center">
@@ -34,12 +35,12 @@ const BidHistory = ({data}) => {
               .map((item, index) => (
                 <div
                   key={index}
-                  className="flex shadow-md rounded-lg p-4 mt-1 "
+                  className="flex w-full items-center shadow-md rounded-lg p-4 mt-1 "
                 >
-                  <div className="flex  items-center">
+                  <div className="flex items-center w-[44px] h-[44px]">
                     <img
-                      className="w-[44px] h-[44px] rounded-lg"
-                      src={item.profilePicture}
+                      className=" rounded-lg w-full h-full object-cover"
+                      src={item.profilePicture ? item.profilePicture  : avatar}
                       alt="Profile"
                     />
                   </div>

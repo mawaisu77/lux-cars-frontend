@@ -28,7 +28,7 @@ const CarCard = ({ card, isBuy = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [savedCars, setSavedCars] = useState([]);
 
-  const {  handleSaveCar } = useSaveCar();
+  const { handleSaveCar } = useSaveCar();
 
   // Memoize the targetTime to prevent unnecessary recalculations
   const targetTime = useMemo(
@@ -55,9 +55,9 @@ const CarCard = ({ card, isBuy = false }) => {
     const carIndex = updatedSavedCars.indexOf(lot_id);
 
     if (carIndex > -1) {
-      updatedSavedCars.splice(carIndex, 1); // Remove if already saved
+      updatedSavedCars.splice(carIndex, 1);
     } else {
-      updatedSavedCars.push(lot_id); // Add if not saved
+      updatedSavedCars.push(lot_id); 
     }
 
     // Update state and localStorage
@@ -196,6 +196,15 @@ const CarCard = ({ card, isBuy = false }) => {
                     : card.location}
                   </p>
                 </div>
+                {
+                  card.currentBid && (
+                  <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
+                  <p className="py-[0.1vh] font-semibold">Current Bid:</p>
+                  <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">${card.currentBid ? card.currentBid : null}</p>
+                </div>
+                  )
+                }
+                
               </div>
             </div>
           </div>
