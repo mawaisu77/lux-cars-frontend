@@ -13,7 +13,7 @@ import LocalCarsCard from "./LocalCarsCard";
 
 const LocalCars = () => {
   const { localCars, carLoading, carError } = useGetAllLocalCars(
-    "local-cars/get-all-cars"
+    "local-cars/get-all-approved-local-cars"
   );
   if (carLoading) {
     return <Shimmer />;

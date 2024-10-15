@@ -29,7 +29,7 @@ const Home = () => {
     <BuyNow/>
     {/* <LocalOfferz/> */}
     <BidNow/>
-    {/* <LocalCars /> */}
+    <LocalCars />
     {/* <MotorCycleSection />
     <BoatSection />
     <ATVSection /> */}
