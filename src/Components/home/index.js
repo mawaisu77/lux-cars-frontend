@@ -18,7 +18,9 @@ import LocalCars from '../cards/LocalCarsSection.js'
 import MotorCycleSection from '../HomeSections/MotorCyclesSection.js'
 import BoatSection from '../HomeSections/BoatSection.js'
 import ATVSection from '../HomeSections/ATVSection.js'
-
+import { ErrorBoundary } from '@sentry/react'
+import Dummy from './home-page/Dummy.js'
+import * as Sentry from "@sentry/react"
 const Home = () => {
   return (
     <>
@@ -26,7 +28,7 @@ const Home = () => {
     <Bid/>
     <Top/>
     <BidCarsSection />
-    <BuyNow/>
+     <BuyNow/>
     {/* <LocalOfferz/> */}
     <BidNow/>
     <LocalCars />
@@ -39,7 +41,9 @@ const Home = () => {
     {/* <Archieved/> */}
     {/* <Partners/> */}
     <Makes/>
-  
+    <Sentry.ErrorBoundary fallback={<p>Something went very wrong.</p>}>
+     <Dummy />
+    </Sentry.ErrorBoundary>
 
     </>
   )
