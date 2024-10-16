@@ -200,7 +200,7 @@ const CarCard = ({ card, isBuy = false }) => {
                   card.currentBid && (
                   <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
                   <p className="py-[0.1vh] font-semibold">Current Bid:</p>
-                  <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">${card.currentBid ? card.currentBid : null}</p>
+                  <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">${card.currentBid ? card.currentBid.toLocaleString("en-US", { style: "currency", currency: "USD"}) : null}</p>
                 </div>
                   )
                 }

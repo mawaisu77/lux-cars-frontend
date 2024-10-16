@@ -112,9 +112,19 @@ const Footer = () => {
         </div>
       </div>
       <div className="border-t mt-[5vh] mb-[5vh]">
-        <div className="flex justify-center items-center text-center w-full pt-[5vh] lg:mt-0 text-[4vw] md:text-[2vw] lg:text-[0.81vw] font-urbanist">
+        <div   onClick={() => {
+            throw new Error(" Test Error");
+          }} className="flex justify-center items-center text-center w-full pt-[5vh] lg:mt-0 text-[4vw] md:text-[2vw] lg:text-[0.81vw] font-urbanist">
           ©2024 LUX® First Choice Cars. All rights reserved.
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            throw new Error("Sentry Test Error");
+          }}
+        >
+          Break the world
+        </button>
       </div>
     </div>
   );
