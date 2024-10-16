@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
 import LocalSearchCards from "./LocalSearchCards";
-import { Calendar } from "primereact/calendar";
 import baseService from "../../../services/baseService";
 import countryList from "react-select-country-list";
 import Select from "react-select";
 import { RegionDropdown } from "react-country-region-selector";
+import { showToast } from "../../../utils/Toast";
 
 const LocalSearchSidebar = () => {
   const option = useMemo(() => countryList().getData(), []);
@@ -59,9 +59,18 @@ const LocalSearchSidebar = () => {
     });
   };
 
+  const [milageError, setMilageError] = useState("");
   const handleApplyFilters = async () => {
-    const data = await fetchVehiclesData(selectedFilters);
-    setVehicles(data?.cars);
+    if (
+      parseInt(selectedFilters.milageTo) > parseInt(selectedFilters.milageFrom)
+    ) {
+      setMilageError("");
+      const data = await fetchVehiclesData(selectedFilters);
+      setVehicles(data?.cars);
+    } else {
+      setMilageError("Enter Large Milage To");
+      showToast("Your Milage To Is Less Than Milage From", "error");
+    }
   };
 
   const handleResetFilters = async () => {
@@ -112,7 +121,7 @@ const LocalSearchSidebar = () => {
                 <div className="mt-2 pb-4">
                   <input
                     type="text"
-                    placeholder="Search Model"
+                    placeholder="Search Make"
                     className="input input-bordered w-full mb-2"
                     value={selectedFilters.make}
                     onChange={(e) => handleFilterChange("make", e.target.value)}
@@ -156,29 +165,53 @@ const LocalSearchSidebar = () => {
                 <>
                   <div className="flex flex-col mt-2 pb-4">
                     <label className="text-lg text-left py-1">Year From</label>
-                    <Calendar
-                      view="year"
-                      inputClassName="px-2 py-3 rounded-lg"
-                      dateFormat="yy"
-                      className="custom-calendar border border-black rounded-lg"
-                      showIcon
-                      minDate={new Date(1850, 0, 1)}
-                      maxDate={new Date()}
-                      onChange={(e) => handleFilterChange("yearFrom", e.value)}
-                    />
+                    <select
+                      className="input input-bordered w-full mb-2"
+                      value={selectedFilters.yearFrom}
+                      onChange={(e) =>
+                        handleFilterChange("yearFrom", e.target.value)
+                      }
+                    >
+                      <option value="">Select Year</option>
+                      {Array.from(
+                        { length: new Date().getFullYear() - 1950 + 1 },
+                        (_, i) => 1950 + i
+                      ).map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="flex flex-col mt-2 pb-4">
                     <label className="text-lg text-left py-1">Year To</label>
-                    <Calendar
-                      view="year"
-                      inputClassName="px-2 py-3 rounded-lg"
-                      dateFormat="yy"
-                      className="custom-calendar border border-black rounded-lg"
-                      showIcon
-                      minDate={new Date(1850, 0, 1)}
-                      maxDate={new Date()}
-                      onChange={(e) => handleFilterChange("yearTo", e.value)}
-                    />
+                    <select
+                      className="input input-bordered w-full mb-2"
+                      value={selectedFilters.yearTo}
+                      onChange={(e) =>
+                        handleFilterChange("yearTo", e.target.value)
+                      }
+                    >
+                      <option value="">Select Year</option>
+                      {Array.from(
+                        {
+                          length:
+                            new Date().getFullYear() -
+                            (selectedFilters.yearFrom
+                              ? parseInt(selectedFilters.yearFrom)
+                              : 1950) +
+                            1,
+                        },
+                        (_, i) =>
+                          (selectedFilters.yearFrom
+                            ? parseInt(selectedFilters.yearFrom)
+                            : 1950) + i
+                      ).map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </>
               )}
@@ -209,12 +242,17 @@ const LocalSearchSidebar = () => {
                     <input
                       type="number"
                       placeholder="Enter Milage To"
-                      className="input input-bordered w-full mb-2"
+                      className={`input input-bordered w-full mb-2 ${
+                        milageError ? "border-red-500" : ""
+                      }`}
                       value={selectedFilters.milageTo}
                       onChange={(e) =>
                         handleFilterChange("milageTo", e.target.value)
                       }
                     />
+                    {milageError ? (
+                      <div className="text-red-500">{milageError}</div>
+                    ) : null}
                   </div>
                 </>
               )}
