@@ -14,7 +14,7 @@ function LocalSearchCards({ vehicles }) {
   };
   return (
     <div className="flex flex-col">
-      {vehicles?.length > 0 &&
+      {vehicles && vehicles?.length > 0 ? (
         vehicles.map((vehicle) => (
           <div
             key={vehicle.id}
@@ -63,7 +63,14 @@ function LocalSearchCards({ vehicles }) {
               </button>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div className="flex flex-col items-center justify-center mt-10">
+          <h2 className="text-2xl font-bold text-gray-700 mb-4">
+            No Cars Data Found
+          </h2>
+        </div>
+      )}
     </div>
   );
 }

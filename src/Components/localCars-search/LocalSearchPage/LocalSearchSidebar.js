@@ -20,8 +20,10 @@ const LocalSearchSidebar = () => {
   const [selectedFilters, setSelectedFilters] = useState({
     make: [],
     model: "",
-    year: null,
-    milage: "",
+    yearFrom: null,
+    yearTo: null,
+    milageFrom: "",
+    milageTo: "",
     transmission: [],
     isModified: null,
     location: [],
@@ -29,7 +31,7 @@ const LocalSearchSidebar = () => {
 
   const fetchVehiclesData = async (selectedFilters) => {
     const response = await baseService.get(
-      `/local-cars/get-all-approved-local-cars?make=${selectedFilters?.make}&model=${selectedFilters?.model}&year=${selectedFilters?.year}&milage=${selectedFilters?.milage}&transmission=${selectedFilters?.transmission}&modification=${selectedFilters?.isModified}&location=${selectedFilters?.location}`
+      `/local-cars/get-all-approved-local-cars?make=${selectedFilters?.make}&model=${selectedFilters?.model}&yearFrom=${selectedFilters?.yearFrom}&yearTo=${selectedFilters?.yearTo}&milageFrom=${selectedFilters?.milageFrom}&milageTo=${selectedFilters?.milageTo}&transmission=${selectedFilters?.transmission}&modification=${selectedFilters?.isModified}&location=${selectedFilters?.location}`
     );
     return response?.data?.data;
   };
@@ -67,8 +69,10 @@ const LocalSearchSidebar = () => {
     setSelectedFilters({
       make: [],
       model: "",
-      year: null,
-      milage: "",
+      yearFrom: null,
+      yearTo: null,
+      milageFrom: "",
+      milageTo: "",
       transmission: [],
       isModified: null,
       location: [],
@@ -164,18 +168,34 @@ const LocalSearchSidebar = () => {
                 <span>{showYear ? "-" : "+"}</span>
               </div>
               {showYear && (
-                <div className="mt-2 pb-4">
-                  <Calendar
-                    view="year"
-                    inputClassName="px-2 py-3 rounded-lg"
-                    dateFormat="yy"
-                    className="custom-calendar border border-black rounded-lg"
-                    showIcon
-                    minDate={new Date(1850, 0, 1)}
-                    maxDate={new Date()}
-                    onChange={(e) => handleFilterChange("year", e.value)}
-                  />
-                </div>
+                <>
+                  <div className="flex flex-col mt-2 pb-4">
+                    <label className="text-lg text-left py-1">Year From</label>
+                    <Calendar
+                      view="year"
+                      inputClassName="px-2 py-3 rounded-lg"
+                      dateFormat="yy"
+                      className="custom-calendar border border-black rounded-lg"
+                      showIcon
+                      minDate={new Date(1850, 0, 1)}
+                      maxDate={new Date()}
+                      onChange={(e) => handleFilterChange("yearFrom", e.value)}
+                    />
+                  </div>
+                  <div className="flex flex-col mt-2 pb-4">
+                    <label className="text-lg text-left py-1">Year To</label>
+                    <Calendar
+                      view="year"
+                      inputClassName="px-2 py-3 rounded-lg"
+                      dateFormat="yy"
+                      className="custom-calendar border border-black rounded-lg"
+                      showIcon
+                      minDate={new Date(1850, 0, 1)}
+                      maxDate={new Date()}
+                      onChange={(e) => handleFilterChange("yearTo", e.value)}
+                    />
+                  </div>
+                </>
               )}
             </div>
 
@@ -188,17 +208,30 @@ const LocalSearchSidebar = () => {
                 <span>{showMilage ? "-" : "+"}</span>
               </div>
               {showMilage && (
-                <div className="mt-2 pb-4">
-                  <input
-                    type="number"
-                    placeholder="Enter Milage"
-                    className="input input-bordered w-full mb-2"
-                    value={selectedFilters.milage}
-                    onChange={(e) =>
-                      handleFilterChange("milage", e.target.value)
-                    }
-                  />
-                </div>
+                <>
+                  <div className="mt-2 pb-4">
+                    <input
+                      type="number"
+                      placeholder="Enter Milage From"
+                      className="input input-bordered w-full mb-2"
+                      value={selectedFilters.milageFrom}
+                      onChange={(e) =>
+                        handleFilterChange("milageFrom", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className="mt-2 pb-4">
+                    <input
+                      type="number"
+                      placeholder="Enter Milage To"
+                      className="input input-bordered w-full mb-2"
+                      value={selectedFilters.milageTo}
+                      onChange={(e) =>
+                        handleFilterChange("milageTo", e.target.value)
+                      }
+                    />
+                  </div>
+                </>
               )}
             </div>
 
