@@ -40,7 +40,7 @@ const LocalCars = () => {
 
   return (
     <>
-      <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]  ">
+      <div className="relative w-full lg:w-[98.9vw]">
         <div className="">
 
         <div className="sm:pl-2 px-4 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
