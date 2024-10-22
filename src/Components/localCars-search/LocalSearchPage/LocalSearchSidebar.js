@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import LocalSearchCards from "./LocalSearchCards";
-import { locationOptions } from "../../../utils/filtersData/locationOptions";
-import useCarMakesModels from "../../../hooks/useCarsMakesModel";
-import { Calendar } from "primereact/calendar";
 import baseService from "../../../services/baseService";
+import countryList from "react-select-country-list";
+import Select from "react-select";
+import { RegionDropdown } from "react-country-region-selector";
+import { showToast } from "../../../utils/Toast";
 
 const LocalSearchSidebar = () => {
-  const { carData } = useCarMakesModels();
+  const option = useMemo(() => countryList().getData(), []);
 
   const [showFilters, setShowFilters] = useState(true);
   const [showMake, setShowMake] = useState(false);
@@ -14,22 +15,23 @@ const LocalSearchSidebar = () => {
   const [showYear, setShowYear] = useState(false);
   const [showMilage, setShowMilage] = useState(false);
   const [showTransmission, setShowTransmission] = useState(true);
-  const [showIsModified, setShowIsModified] = useState(false);
   const [showLocation, setShowLocation] = useState(false);
   const [vehicles, setVehicles] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({
-    make: [],
+    make: "",
     model: "",
-    year: null,
-    milage: "",
+    yearFrom: null,
+    yearTo: null,
+    milageFrom: "",
+    milageTo: "",
     transmission: [],
-    isModified: null,
-    location: [],
+    country: "",
+    region: "",
   });
 
   const fetchVehiclesData = async (selectedFilters) => {
     const response = await baseService.get(
-      `/local-cars/get-all-approved-local-cars?make=${selectedFilters?.make}&model=${selectedFilters?.model}&year=${selectedFilters?.year}&milage=${selectedFilters?.milage}&transmission=${selectedFilters?.transmission}&modification=${selectedFilters?.isModified}&location=${selectedFilters?.location}`
+      `/local-cars/get-all-approved-local-cars?make=${selectedFilters?.make}&model=${selectedFilters?.model}&yearFrom=${selectedFilters?.yearFrom}&yearTo=${selectedFilters?.yearTo}&milageFrom=${selectedFilters?.milageFrom}&milageTo=${selectedFilters?.milageTo}&transmission=${selectedFilters?.transmission}&country=${selectedFilters?.country}&region=${selectedFilters?.region}`
     );
     return response?.data?.data;
   };
@@ -57,23 +59,33 @@ const LocalSearchSidebar = () => {
     });
   };
 
+  const [milageError, setMilageError] = useState("");
   const handleApplyFilters = async () => {
-    const data = await fetchVehiclesData(selectedFilters);
-    setVehicles(data?.cars);
+    if (
+      parseInt(selectedFilters.milageTo) > parseInt(selectedFilters.milageFrom)
+    ) {
+      setMilageError("");
+      const data = await fetchVehiclesData(selectedFilters);
+      setVehicles(data?.cars);
+    } else {
+      setMilageError("Enter Large Milage To");
+      showToast("Your Milage To Is Less Than Milage From", "error");
+    }
   };
 
   const handleResetFilters = async () => {
     const data = await fetchVehiclesData();
     setSelectedFilters({
-      make: [],
+      make: "",
       model: "",
-      year: null,
-      milage: "",
+      yearFrom: null,
+      yearTo: null,
+      milageFrom: "",
+      milageTo: "",
       transmission: [],
-      isModified: null,
-      location: [],
+      country: "",
+      region: "",
     });
-    setShowIsModified(false);
     setShowLocation(false);
     setShowMake(false);
     setShowMilage(false);
@@ -106,28 +118,14 @@ const LocalSearchSidebar = () => {
                 <span>{showMake ? "-" : "+"}</span>
               </div>
               {showMake && (
-                <div
-                  className="mt-2 pb-4"
-                  style={{
-                    maxHeight: "200px",
-                    overflowY: "auto",
-                    marginBottom: "15px",
-                  }}
-                >
-                  {carData?.map((car, index) => (
-                    <div className="flex items-center mb-1" key={index}>
-                      <input
-                        type="checkbox"
-                        className="checkbox"
-                        id={car.make}
-                        checked={selectedFilters.make.includes(car.make)}
-                        onChange={() => handleFilterChange("make", car.make)}
-                      />
-                      <label className="ml-2" htmlFor={car.make}>
-                        {car.make}
-                      </label>
-                    </div>
-                  ))}
+                <div className="mt-2 pb-4">
+                  <input
+                    type="text"
+                    placeholder="Search Make"
+                    className="input input-bordered w-full mb-2"
+                    value={selectedFilters.make}
+                    onChange={(e) => handleFilterChange("make", e.target.value)}
+                  />
                 </div>
               )}
             </div>
@@ -164,18 +162,58 @@ const LocalSearchSidebar = () => {
                 <span>{showYear ? "-" : "+"}</span>
               </div>
               {showYear && (
-                <div className="mt-2 pb-4">
-                  <Calendar
-                    view="year"
-                    inputClassName="px-2 py-3 rounded-lg"
-                    dateFormat="yy"
-                    className="custom-calendar border border-black rounded-lg"
-                    showIcon
-                    minDate={new Date(1850, 0, 1)}
-                    maxDate={new Date()}
-                    onChange={(e) => handleFilterChange("year", e.value)}
-                  />
-                </div>
+                <>
+                  <div className="flex flex-col mt-2 pb-4">
+                    <label className="text-lg text-left py-1">Year From</label>
+                    <select
+                      className="input input-bordered w-full mb-2"
+                      value={selectedFilters.yearFrom}
+                      onChange={(e) =>
+                        handleFilterChange("yearFrom", e.target.value)
+                      }
+                    >
+                      <option value="">Select Year</option>
+                      {Array.from(
+                        { length: new Date().getFullYear() - 1950 + 1 },
+                        (_, i) => 1950 + i
+                      ).map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex flex-col mt-2 pb-4">
+                    <label className="text-lg text-left py-1">Year To</label>
+                    <select
+                      className="input input-bordered w-full mb-2"
+                      value={selectedFilters.yearTo}
+                      onChange={(e) =>
+                        handleFilterChange("yearTo", e.target.value)
+                      }
+                    >
+                      <option value="">Select Year</option>
+                      {Array.from(
+                        {
+                          length:
+                            new Date().getFullYear() -
+                            (selectedFilters.yearFrom
+                              ? parseInt(selectedFilters.yearFrom)
+                              : 1950) +
+                            1,
+                        },
+                        (_, i) =>
+                          (selectedFilters.yearFrom
+                            ? parseInt(selectedFilters.yearFrom)
+                            : 1950) + i
+                      ).map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </>
               )}
             </div>
 
@@ -188,17 +226,35 @@ const LocalSearchSidebar = () => {
                 <span>{showMilage ? "-" : "+"}</span>
               </div>
               {showMilage && (
-                <div className="mt-2 pb-4">
-                  <input
-                    type="number"
-                    placeholder="Enter Milage"
-                    className="input input-bordered w-full mb-2"
-                    value={selectedFilters.milage}
-                    onChange={(e) =>
-                      handleFilterChange("milage", e.target.value)
-                    }
-                  />
-                </div>
+                <>
+                  <div className="mt-2 pb-4">
+                    <input
+                      type="number"
+                      placeholder="Enter Milage From"
+                      className="input input-bordered w-full mb-2"
+                      value={selectedFilters.milageFrom}
+                      onChange={(e) =>
+                        handleFilterChange("milageFrom", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className="mt-2 pb-4">
+                    <input
+                      type="number"
+                      placeholder="Enter Milage To"
+                      className={`input input-bordered w-full mb-2 ${
+                        milageError ? "border-red-500" : ""
+                      }`}
+                      value={selectedFilters.milageTo}
+                      onChange={(e) =>
+                        handleFilterChange("milageTo", e.target.value)
+                      }
+                    />
+                    {milageError ? (
+                      <div className="text-red-500">{milageError}</div>
+                    ) : null}
+                  </div>
+                </>
               )}
             </div>
 
@@ -240,47 +296,6 @@ const LocalSearchSidebar = () => {
                 </div>
               )}
             </div>
-
-            <div className="mb-4 border-b border-black">
-              <div
-                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
-                onClick={() => setShowIsModified(!showIsModified)}
-              >
-                <h3>Modification</h3>
-                <span>{showIsModified ? "-" : "+"}</span>
-              </div>
-
-              {showIsModified && (
-                <div className="mt-2 pb-4">
-                  <div className="flex items-center mb-1">
-                    <input
-                      type="radio"
-                      name="isModified"
-                      className="radio"
-                      id="isModifiedYes"
-                      checked={selectedFilters.isModified === "Yes"}
-                      onChange={() => handleFilterChange("isModified", "Yes")}
-                    />
-                    <label className="ml-2" htmlFor="isModifiedYes">
-                      Yes
-                    </label>
-                  </div>
-                  <div className="flex items-center mb-1">
-                    <input
-                      type="radio"
-                      name="isModified"
-                      className="radio"
-                      id="isModifiedNo"
-                      checked={selectedFilters.isModified === "No"}
-                      onChange={() => handleFilterChange("isModified", "No")}
-                    />
-                    <label className="ml-2" htmlFor="isModifiedNo">
-                      No
-                    </label>
-                  </div>
-                </div>
-              )}
-            </div>
             <div className="mb-4 border-b border-black">
               <div
                 className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
@@ -291,30 +306,32 @@ const LocalSearchSidebar = () => {
               </div>
 
               {showLocation && (
-                <div
-                  className="mt-2 pb-4"
-                  style={{
-                    maxHeight: "200px",
-                    overflowY: "auto",
-                    marginBottom: "15px",
-                  }}
-                >
-                  {locationOptions.map((location, index) => (
-                    <div className="flex items-center mb-1" key={index}>
-                      <input
-                        type="checkbox"
-                        className="checkbox"
-                        id={location.id}
-                        checked={selectedFilters.location.includes(location.id)}
-                        onChange={() =>
-                          handleFilterChange("location", location.id)
-                        }
-                      />
-                      <label className="ml-2" htmlFor={location.id}>
-                        {location.label}
+                <div className="mt-2 pb-4">
+                  <div className="mb-1">
+                    <Select
+                      className="text-left"
+                      value={option.find(
+                        (opt) => opt.label === selectedFilters.country
+                      )}
+                      onChange={(e) => handleFilterChange("country", e.label)}
+                      options={option}
+                      placeholder="Select country"
+                    />
+                  </div>
+                  {selectedFilters.country && (
+                    <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
+                      <label className="font-medium text-xl text-left">
+                        Select Region
                       </label>
+                      <RegionDropdown
+                        country={selectedFilters.country}
+                        value={selectedFilters.region}
+                        onChange={(e) => handleFilterChange("region", e)}
+                        className="input input-bordered w-full mb-2"
+                        placeholder="Select state"
+                      />
                     </div>
-                  ))}
+                  )}
                 </div>
               )}
             </div>
