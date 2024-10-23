@@ -52,7 +52,7 @@ const LocalSearchSidebar = () => {
     }
     try {
       const response = await baseService.get(
-        `/local-cars/get-all-approved-local-cars?${params.toString()}`
+        `/local-cars/get-all-local-cars?status=Approved&${params.toString()}`
       );
       return response?.data?.data;
     } catch (error) {
