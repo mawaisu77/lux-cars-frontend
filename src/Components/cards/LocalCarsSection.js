@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const LocalCars = () => {
   const navigate = useNavigate()
   const { localCars, carLoading, carError } = useGetAllLocalCars(
-    "local-cars/get-all-approved-local-cars"
+    "local-cars/get-all-local-cars?status=Approved"
   );
   if (carLoading) {
     return <Shimmer />;
