@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 
 function LocalSearchCards({ vehicles }) {
   const navigate = useNavigate();
@@ -20,11 +23,31 @@ function LocalSearchCards({ vehicles }) {
             key={vehicle.id}
             className="flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4"
           >
-            <img
-              src={vehicle.carImages[0]}
-              alt={`${vehicle.make} ${vehicle.model}`}
-              className="w-full md:w-1/3 h-auto rounded-lg object-contain mb-4 md:mb-0 px-[20px]"
-            />
+            <Swiper
+              className="relative w-full md:w-[35%] rounded-lg mb-4 md:mb-0"
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+              loop={true}
+            >
+              {vehicle.carImages &&
+                vehicle.carImages.map((image, index) => (
+                  <SwiperSlide
+                    key={index}
+                    className="relative pr-0 md:px-[10px] rounded-lg"
+                  >
+                    <div className="w-full h-full m-auto flex item-center rounded-lg">
+                      <img
+                        className="rounded-lg object-contain"
+                        src={image}
+                        alt={`Vehicle_Image ${index + 1}`}
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
             <div className="text-left w-full md:w-[40%] flex-grow p-2">
               <h2 className="text-xl md:text-3xl font-bold text-gray-800 mb-6">
                 {vehicle.make} {vehicle.model}

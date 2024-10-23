@@ -25,15 +25,39 @@ const LocalSearchSidebar = () => {
     milageFrom: "",
     milageTo: "",
     transmission: [],
-    country: "",
-    region: "",
+    carLocation: "",
+    carState: "",
   });
 
   const fetchVehiclesData = async (selectedFilters) => {
-    const response = await baseService.get(
-      `/local-cars/get-all-approved-local-cars?make=${selectedFilters?.make}&model=${selectedFilters?.model}&yearFrom=${selectedFilters?.yearFrom}&yearTo=${selectedFilters?.yearTo}&milageFrom=${selectedFilters?.milageFrom}&milageTo=${selectedFilters?.milageTo}&transmission=${selectedFilters?.transmission}&country=${selectedFilters?.country}&region=${selectedFilters?.region}`
-    );
-    return response?.data?.data;
+    const params = new URLSearchParams();
+
+    if (selectedFilters) {
+      if (selectedFilters.make) params.append("make", selectedFilters.make);
+      if (selectedFilters.model) params.append("model", selectedFilters.model);
+      if (selectedFilters.yearFrom)
+        params.append("yearFrom", selectedFilters.yearFrom);
+      if (selectedFilters.yearTo)
+        params.append("yearTo", selectedFilters.yearTo);
+      if (selectedFilters.milageFrom)
+        params.append("milageFrom", selectedFilters.milageFrom);
+      if (selectedFilters.milageTo)
+        params.append("milageTo", selectedFilters.milageTo);
+      if (selectedFilters.transmission.length > 0)
+        params.append("transmission", selectedFilters.transmission.join(","));
+      if (selectedFilters.carLocation)
+        params.append("carLocation", selectedFilters.carLocation);
+      if (selectedFilters.carState)
+        params.append("carState", selectedFilters.carState);
+    }
+    try {
+      const response = await baseService.get(
+        `/local-cars/get-all-approved-local-cars?${params.toString()}`
+      );
+      return response?.data?.data;
+    } catch (error) {
+      showToast("No Car Found", "error");
+    }
   };
 
   useEffect(() => {
@@ -62,14 +86,19 @@ const LocalSearchSidebar = () => {
   const [milageError, setMilageError] = useState("");
   const handleApplyFilters = async () => {
     if (
-      parseInt(selectedFilters.milageTo) > parseInt(selectedFilters.milageFrom)
+      selectedFilters.milageFrom &&
+      selectedFilters.milageTo &&
+      parseInt(selectedFilters.milageTo) <= parseInt(selectedFilters.milageFrom)
     ) {
-      setMilageError("");
-      const data = await fetchVehiclesData(selectedFilters);
-      setVehicles(data?.cars);
-    } else {
       setMilageError("Enter Large Milage To");
       showToast("Your Milage To Is Less Than Milage From", "error");
+    } else {
+      setMilageError("");
+    }
+
+    if (milageError === "") {
+      const data = await fetchVehiclesData(selectedFilters);
+      setVehicles(data?.cars);
     }
   };
 
@@ -83,8 +112,8 @@ const LocalSearchSidebar = () => {
       milageFrom: "",
       milageTo: "",
       transmission: [],
-      country: "",
-      region: "",
+      carLocation: "",
+      carState: "",
     });
     setShowLocation(false);
     setShowMake(false);
@@ -311,22 +340,24 @@ const LocalSearchSidebar = () => {
                     <Select
                       className="text-left"
                       value={option.find(
-                        (opt) => opt.label === selectedFilters.country
+                        (opt) => opt.label === selectedFilters.carLocation
                       )}
-                      onChange={(e) => handleFilterChange("country", e.label)}
+                      onChange={(e) =>
+                        handleFilterChange("carLocation", e.label)
+                      }
                       options={option}
-                      placeholder="Select country"
+                      placeholder="Select Car Location"
                     />
                   </div>
-                  {selectedFilters.country && (
+                  {selectedFilters.carLocation && (
                     <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
                       <label className="font-medium text-xl text-left">
-                        Select Region
+                        Select Car's State
                       </label>
                       <RegionDropdown
-                        country={selectedFilters.country}
-                        value={selectedFilters.region}
-                        onChange={(e) => handleFilterChange("region", e)}
+                        country={selectedFilters.carLocation}
+                        value={selectedFilters.carState}
+                        onChange={(e) => handleFilterChange("carState", e)}
                         className="input input-bordered w-full mb-2"
                         placeholder="Select state"
                       />
@@ -338,13 +369,13 @@ const LocalSearchSidebar = () => {
             <div className="w-full flex justify-evenly mt-10">
               <button
                 onClick={handleApplyFilters}
-                className="text-white bg-red-600 w-[45%] p-2 rounded-lg"
+                className="text-white bg-red-600 w-[45%] p-[0.4rem] rounded-lg"
               >
                 Apply Filters
               </button>
               <button
                 onClick={handleResetFilters}
-                className="text-black bg-gray-200 w-[45%] p-2 rounded-lg"
+                className="text-black bg-gray-200 w-[45%] p-[0.4rem] rounded-lg"
               >
                 Reset Filters
               </button>
