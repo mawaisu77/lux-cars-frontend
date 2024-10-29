@@ -11,6 +11,9 @@ const Offers = () => {
   const {
     respondToOffer,
     isLoading: isUpdating,
+    setIsLoading,
+    setError,
+    setUpdateOfferResponse,
     error: updateError,
     success: updateSuccess,
     setSuccess,
@@ -21,10 +24,12 @@ const Offers = () => {
 
   useEffect(() => {
     fetchOffers();
+    setNeedsRefresh(false);
   }, []);
 
   useEffect(() => {
     if (needsRefresh) {
+      console.log("needsRefresh", needsRefresh);
       fetchOffers();
       setNeedsRefresh(false); 
     }
@@ -88,12 +93,15 @@ const Offers = () => {
                   </td>
                 </tr>
               ) : (
-                offers?.data?.map((offer) => (
+                offers?.data?.map((offer, index) => (
                   <OfferCards
-                    key={offer?.id}
+                    key={index}
                     offer={offer}
                     onUpdate={respondToOffer}
                     loading={isUpdating}
+                    setIsLoading={setIsLoading}
+                    setUpdateOfferResponse={setUpdateOfferResponse}
+                    setError={setError}
                     error={updateError}
                     success={updateSuccess}
                     updateOfferResponse={updateOfferResponse}
@@ -107,6 +115,7 @@ const Offers = () => {
           </div>
         )}
       </div>
+   
     </>
   );
 };

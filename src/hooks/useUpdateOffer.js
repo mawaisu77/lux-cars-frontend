@@ -13,6 +13,7 @@ const useUpdateOffer = () => {
 
     try {
       const response = await updateOfferStatus(offerId, status);
+      console.log("offerId, status", offerId, status);
       setUpdateOfferResponse(response);
       setSuccess(true);
       return response;
@@ -29,7 +30,7 @@ const useUpdateOffer = () => {
     }
   };
 
-  return { respondToOffer, isLoading, error, success, setSuccess, updateOfferResponse};
+  return { respondToOffer, isLoading, error, success, setIsLoading, setError, setSuccess, updateOfferResponse, setUpdateOfferResponse};
 };
 
 export default useUpdateOffer;
