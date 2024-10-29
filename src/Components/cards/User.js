@@ -8,8 +8,8 @@ const User = ({ bid }) => {
 
   // Memoize the targetTime to prevent unnecessary recalculations
   const targetTime = useMemo(
-    () => (bid.auction_date ? new Date(bid.auction_date) : null),
-    [bid.auction_date]
+    () => (bid?.auction_date ? new Date(bid?.auction_date) : null),
+    [bid?.auction_date]
   );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
@@ -18,7 +18,7 @@ const User = ({ bid }) => {
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
   const hanldeNavigate = () => {
-    navigate(`/vehicle-detail/${bid?.carDetails?.lot_id}`);
+    navigate(`/vehicle-detail/${bid?.carDetails?.lot_id || "-"}`);
   };
 
   return (
@@ -38,30 +38,30 @@ const User = ({ bid }) => {
         className=" text-nowrap px-4 py-2 hover:text-blue-800 hover:underline cursor-pointer"
         onClick={hanldeNavigate}
       >
-        {bid.carDetails.title}
+        {bid?.carDetails?.title || "-"}
       </td>
       {/*3 Location */}
-      <td className=" text-nowrap px-4 py-2">{bid.carDetails.location}</td>
+      <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.location || "-"}</td>
       {/*4 Posted Time Ago */}
       {/* <td className=" text-nowrap px-4 py-2">
         <TimeAgo date={bid.createdAt} />
       </td> */}
 
       {/*7 Lot ID */}
-      <td className=" text-nowrap px-4 py-2">{bid.carDetails.lot_id}</td>
+      <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.lot_id || "-"}</td>
 
       {/*4 No of bids*/}
-      <td className=" text-nowrap px-4 py-2">{bid.carDetails.noOfBids}</td>
+      <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.noOfBids}</td>
 
       {/*5 Bid Price */}
       <td className=" text-nowrap px-4 py-2 font-bold">
-        <span className={bid.isValid ? "text-green-600" : "text-red-500"}>
-          ${bid.bidPrice}
+        <span className={bid?.isValid ? "text-green-600" : "text-red-500"}>
+          ${bid?.bidPrice || "-"}
         </span>
       </td>
       {/*6 Time Left */}
       <td className=" text-nowrap px-4 py-2">
-        {bid.carDetails.auction_date
+        {bid?.auction_date
           ? ValidDate
             ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
             : "Bidding Over"
@@ -69,7 +69,7 @@ const User = ({ bid }) => {
       </td>
 
       {/*8 Current Bid */}
-      <td className=" text-nowrap px-4 py-2">${bid.carDetails.currentBid}</td>
+      <td className=" text-nowrap px-4 py-2">${bid?.carDetails?.currentBid}</td>
       {/*9 Status */}
       <td
         className={` text-nowrap px-4 py-2 font-semibold ${

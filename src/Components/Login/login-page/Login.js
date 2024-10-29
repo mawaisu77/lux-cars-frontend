@@ -33,11 +33,11 @@ const Login = () => {
       //  const carLotIds = savedCars?.data?.map(car => car.lot_id);
       //  localStorage.setItem("savedCars", JSON.stringify(carLotIds));
 
-        if (role === 'admin') {
-          navigate("/admin/dahboard");
-        } else {
-        navigate("/Successfull-login")
-      }
+      //   if (role === 'admin') {
+      //     navigate("/admin/dahboard");
+      //   } else {
+      //   navigate("/Successfull-login")
+      // }
       } else {
         showToast(message,'error')
         // toast.error(message);

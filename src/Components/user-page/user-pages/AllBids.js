@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 
 import User from "../../cards/User";
-import useGetAllUserBids from "../../../hooks/useGetAllUserBids"; // Adjust the path to your hook file
-import { ClipLoader } from "react-spinners"; // Optional spinner library
+import useGetAllUserBids from "../../../hooks/useGetAllUserBids";
+import { ClipLoader } from "react-spinners"; 
 
 const AllBids = () => {
   const { bids, loading, error, fetchBids } = useGetAllUserBids();
@@ -55,8 +55,8 @@ const AllBids = () => {
               </tr>
             </thead>
             <tbody>
-              {bids && bids?.data?.map((bid) => (
-                <User key={bid.id} bid={bid} />
+              {bids?.data && bids?.data?.map((bid) => (
+                <User key={bid?.id} bid={bid} />
               ))}
             </tbody>
           </table>
