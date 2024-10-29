@@ -73,15 +73,14 @@ function App() {
 
     checkReviewPopup();
 
-    const interval = setInterval(checkReviewPopup, 1000); // Check every second
+    const interval = setInterval(checkReviewPopup, 1000); 
 
     return () => clearInterval(interval);
   }, [user]);
 
-  // Effect to fetch saved cars when the component mounts
+  
   useEffect(() => {
     if (user) {
-      // Ensure user is authenticated before fetching
       fetchSavedCars();
     }
   }, [user, savedCars?.data?.length]);

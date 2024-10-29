@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { addFunds } from '../services/fundsService';
-
-const useAddFunds = () => {
-  const [fundsData, setFundsData] = useState(null);
+import { getAllOffers } from '../services/offerService'; 
+const useUserOffers = () => {
+  const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const handleAddFunds = async (packageType) => {
+
+  const fetchOffers = async () => {
     setLoading(true);
     try {
-      const response = await addFunds(packageType);
-      setFundsData(response);
+      const data = await getAllOffers();
+      setOffers(data);
     } catch (err) {
-      console.log('Error adding funds', err);
       if (err.response) {
         setError(`${err.response.data.message}`);
       } else if (err.request) {
@@ -24,7 +23,7 @@ const useAddFunds = () => {
     }
   };
 
-  return { fundsData, loading, error, handleAddFunds };
+  return { offers, loading, error, fetchOffers };
 };
 
-export default useAddFunds;
+export default useUserOffers;
