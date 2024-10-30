@@ -4,9 +4,7 @@ const uploadCarValidation = (formData) => {
     // Add validations for carDetails
     if (!formData.carDetails.vin) {
       errors.vin = "VIN is required";
-    } else if (!Number.isInteger(Number(formData.carDetails.vin))) {
-      errors.vin = "VIN must be an integer";
-    }
+    } 
   
     if (!formData.carDetails.year) {
       errors.year = "Year is required";

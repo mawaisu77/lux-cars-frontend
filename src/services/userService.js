@@ -52,6 +52,23 @@ export const getProfile = async () => {
     }
   };
 
+  export const getAllLocalBids = async () => {
+    try {
+      const response = await baseService.get('local-cars-bids/get-user-all-bids');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const getMyLocalCars = async () => {
+    try {
+      const response = await baseService.get('local-cars/get-user-all-local-cars');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
 
 
   

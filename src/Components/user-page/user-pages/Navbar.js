@@ -94,6 +94,7 @@ const Navbar = () => {
           <div className="flex flex-col font-urbanist lg:flex-row mt-[4.6vh]   lg:ml-[2.2vw]     w-full lg:w-[48vw]">
             <div className="relative">
               <img
+                alt="profile"
                 src={profilePicture}
                 className="object-cover w-[274px] md:w-[400px] mx-auto lg:w-[15vw] h-[274px] md:h-[400px] lg:h-[30vh] left-[36px] top-[36px] rounded-xl"
               />
@@ -115,7 +116,7 @@ const Navbar = () => {
                   <ClipLoader />
                 </div>
               )}
-            </div>{" "}
+            </div>
             <div className="text-left text-[white]  w-[274px] lg:w-[35vw]   mx-auto font-urbanist lg:ml-[2.2vw]">
               <h1 className="font-bold font-urbanist text-[36px]  lg:text-[2.3vw] leading- text-white">
                 {user}
@@ -139,28 +140,26 @@ const Navbar = () => {
           </div>
           <div>
             <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row justify-center py-5  lg:w-[20vw] ml-9 lg:ml-0  mx-auto lg:items-center">
-              {/* <div className='flex flex-row gap-3 lg:mr-[2.5vw] lg:mt-[6vh]'>
-              <div className='flex justify-center items-center w-[40px] lg:w-[2.5vw] h-[40px] lg:h-[5.1vh] bg-white rounded-lg'>
-                <FaFacebook size={25} />
-              </div>
-              <div className='flex justify-center items-center w-[40px] lg:w-[2.5vw] h-[40px] lg:h-[5.1vh] bg-white rounded-lg'>
-                <RiTwitterXLine size={25} />
-              </div>
-              <div className='flex justify-center items-center w-[40px] lg:w-[2.5vw] h-[40px] lg:h-[5.1vh] bg-white rounded-lg'>
-                <FaGoogle />
-              </div>
-              <div className='flex justify-center items-center w-[40px] lg:w-[2.5vw] h-[40px] lg:h-[5.1vh] bg-white rounded-lg'>
-                <FaLinkedinIn />
-              </div>
-             
-            </div> */}
-              <div className="   mx-auto   ">
+
+              <div className="mx-auto flex flex-col gap-4 justify-center items-center ">
+
                 {/* <button className="text-[14px] lg:text-[0.82vw] text-white w-[100px] lg:w-[6.3vw] h-[40px]  lg:h-[5.1vh] lg:mt-[2vh] lg:mr-[1.7vw] border border-white rounded-full">
                   Create Bid
                 </button> */}
+                
                 <Link to={'/user/account/saved-cars'} className="">
-                  <button className="text-[14px] lg:text-[0.82vw] text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 w-[100px] lg:w-[6.3vw] h-[40px] lg:h-[5.1vh] lg:mt-[2vh] lg:mr-[1.7vw] border border-white rounded-full">
+                  <button className="text-[14px] lg:text-[0.82vw] text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[10px] lg:px-[1.5vw] py-[5px] lg:py-[1.2vh] border border-white rounded-full">
                     My Favourites 
+                  </button>
+                </Link>
+                <Link to={'/user/account/local-cars'} className="">
+                  <button className="text-[14px] lg:text-[0.82vw] text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[10px] lg:px-[1.5vw] py-[5px] lg:py-[1.2vh] border border-white rounded-full">
+                    My Local Cars 
+                  </button>
+                </Link>
+                <Link to={'/user/account/dearler'} className="">
+                  <button className="text-[14px] lg:text-[0.82vw] text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[10px] lg:px-[1.5vw] py-[5px] lg:py-[1.2vh] border border-white rounded-full">
+                    Dealer profile
                   </button>
                 </Link>
               </div>

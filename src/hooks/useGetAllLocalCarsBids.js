@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { getAllBids } from '../services/userService'; 
+import { getAllLocalBids } from '../services/userService'; 
 
-const useUserBids = () => {
-  const [bids, setBids] = useState([]);
+const useGetAllLocalBids = () => {
+  const [localBids, setLocalBids] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchBids = async () => {
+  const fetchLocalBids = async () => {
     setLoading(true);
     try {
-      const data = await getAllBids();
-      setBids(data);
+      const data = await getAllLocalBids();
+      setLocalBids(data);
     } catch (err) {
       if (err.response) {
         setError(`${err.response.data.message}`);
@@ -24,7 +24,7 @@ const useUserBids = () => {
     }
   };
 
-  return { bids, loading, error, fetchBids };
+  return { localBids, loading, error, fetchLocalBids };
 };
 
-export default useUserBids;
+export default useGetAllLocalBids;

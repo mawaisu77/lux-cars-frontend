@@ -28,7 +28,7 @@ const User = ({ bid }) => {
         <div className="w-[60px] h-[60px] rounded-md overflow-hidden bg-gray-100">
           <img
             className="w-full h-full object-cover"
-            src={bid.carDetails.image || ""}
+            src={bid.carDetails.image[0] || bid.carDetails.image  || ""}
             alt="Car"
           />
         </div>
@@ -48,7 +48,7 @@ const User = ({ bid }) => {
       </td> */}
 
       {/*7 Lot ID */}
-      <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.lot_id || "-"}</td>
+      <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.vin || "-"}</td>
 
       {/*4 No of bids*/}
       <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.noOfBids}</td>

@@ -74,9 +74,12 @@ const Offers = () => {
                   <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
                     Status
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
-                    Edit
-                  </th>
+                  
+                 {offers?.data?.some(offer => offer.offer?.offerStatus === "Pending" || offer.offer?.offerStatus === "Expired") && (
+                   <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                     Edit
+                   </th>
+                 )}
                 </tr>
               </thead>
               <tbody>

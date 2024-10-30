@@ -44,6 +44,7 @@ import useGetSavedCars from "./hooks/useGetUserSavedCars.js";
 import ScrollToTop from "./utils/ScrollToTop.js";
 import LocalVehicle from "./Components/localcars-details/index.js";
 import LocalCarsSearchPage from "./Components/localCars-search/index.js";
+import LocalCars from "./Components/user-page/user-pages/LocalCars.js";
 
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -246,6 +247,16 @@ function App() {
                 <ProtectedRoute>
                   <UserLayout>
                     <SavedCars />
+                  </UserLayout>
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/user/account/local-cars"
+              element={
+                <ProtectedRoute>
+                  <UserLayout>
+                    <LocalCars />
                   </UserLayout>
                 </ProtectedRoute>
               }
