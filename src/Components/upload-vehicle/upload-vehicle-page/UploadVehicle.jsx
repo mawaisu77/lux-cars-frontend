@@ -275,8 +275,6 @@ const UploadVehicle = () => {
           Object.keys(newErrors).length === 0 &&
           Object.keys(dealerFormErrors).length === 0
         ) {
-          console.log("tesra log");
-
           try {
             await Promise.all([
               axios.post(
@@ -296,6 +294,8 @@ const UploadVehicle = () => {
                 },
               }),
             ]);
+            showToast("Vehicle uploaded", "success");
+            console.log("a-a---a- log");
           } catch (error) {
             if (error.response) {
               showToast(
@@ -329,6 +329,7 @@ const UploadVehicle = () => {
                 },
               }
             );
+            showToast("Vehicle uploaded", "success");
           } catch (error) {
             if (error.response) {
               showToast(
@@ -497,7 +498,14 @@ const UploadVehicle = () => {
         </div>
       </div>
 
-      <div className="pt-44 md:w-[1200px] mx-auto md:bg-white">
+      <div className="mt-4 flex flex-col gap-y-2 items-center justify-center w-full">
+        <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
+          Upload Your Vehicle
+        </div>
+        <hr className="h-[5px] bg-[#ca0000] mt-[4px] w-36 " />
+      </div>
+
+      <div className="pt-20 md:w-[1200px] mx-auto md:bg-white">
         <form
           className=" flex flex-col mx-10 items-start gap-y-6"
           onSubmit={handleSubmit}

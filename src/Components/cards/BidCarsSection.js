@@ -24,8 +24,7 @@ const BidCarsSection = () => {
 
   if (carError) {
     return (
-      <div className="text-2xl font-bold p-10 text-[#ca0000]">
-        Error: No Available Data
+      <div className="text-2xl font-bold p-10 text-[#ca0000]">      
         {carError}
       </div>
     );

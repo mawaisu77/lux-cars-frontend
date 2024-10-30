@@ -1,33 +1,78 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import User from "../../cards/User";
 import useGetAllUserBids from "../../../hooks/useGetAllUserBids";
 import { ClipLoader } from "react-spinners"; 
+import useGetAllLocalBids from "../../../hooks/useGetAllLocalCarsBids";
 
 const AllBids = () => {
   const { bids, loading, error, fetchBids } = useGetAllUserBids();
+  const { localBids, loading: localLoading, error: localError, fetchLocalBids } = useGetAllLocalBids();
+  const [selectedOption, setSelectedOption] = useState("bidding"); // Default to "Bidding Cars"
 
-  useEffect(() => {
-    fetchBids();
-  }, []);
+   // Fetch data based on selected option
+   useEffect(() => {
+    if (selectedOption === "bidding") {
+      fetchBids();
+    } else {
+      fetchLocalBids();
+    }
+  }, [selectedOption]);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <ClipLoader size={50} color={"#D0021B"} loading={loading} />
-      </div>
-    );
-  }
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
 
-  if (error) {
-    return <p className="text-center text-red-500">Error: {error}</p>;
-  }
+  const isLoading = selectedOption === "bidding" ? loading : localLoading;
+  const hasError = selectedOption === "bidding" ? error : localError;
+  const data = selectedOption === "bidding" ? bids?.data : localBids?.data;
 
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center min-h-screen">
+  //       <ClipLoader size={50} color={"#D0021B"} loading={loading} />
+  //     </div>
+  //   );
+  // }
+
+  // if (hasError) {
+  //   return <p className="text-center text-red-500">Error: {error}</p>;
+  // }
+
+  console.log(data);
 
   return (
     <>
       <div className="w-full lg:w-[74vw]  mx-auto  mt-[50px] text-black">
-        {bids && bids?.data?.length === 0 ? (
+              {/* Header with toggle buttons */}
+      <div className="flex justify-center space-x-4 mb-6">
+        <button
+          className={`px-4 py-2 font-semibold rounded ${selectedOption === "bidding" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"}`}
+          onClick={() => handleOptionChange("bidding")}
+        >
+          Bidding Cars
+        </button>
+        <button
+          className={`px-4 py-2 font-semibold rounded ${selectedOption === "local" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"}`}
+          onClick={() => handleOptionChange("local")}
+        >
+          Local Cars
+        </button>
+      </div>
+
+        {/* Loading and Error Messages */}
+        {isLoading && (
+          <div className="flex justify-center items-center mb-4">
+            <ClipLoader size={30} color={"#D0021B"} loading={isLoading} />
+          </div>
+        )}
+        {hasError && (
+          <p className="text-center text-red-500 mb-4">Error: {hasError}</p>
+        )}
+
+
+            {/* Data Table */}
+        {data && data?.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[50vh]">
             <p className="text-2xl font-bold text-gray-500">
               No bids available for any car
@@ -44,7 +89,7 @@ const AllBids = () => {
                 <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Car Image</th>
                 <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Title</th>
                 <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Location</th>
-                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Lot ID</th>
+                <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">VIN</th>
 
                 <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">No Of Bids</th>
                 {/* <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">Posted</th> */}
@@ -55,7 +100,7 @@ const AllBids = () => {
               </tr>
             </thead>
             <tbody>
-              {bids?.data && bids?.data?.map((bid) => (
+              {data && data?.map((bid) => (
                 <User key={bid?.id} bid={bid} />
               ))}
             </tbody>
