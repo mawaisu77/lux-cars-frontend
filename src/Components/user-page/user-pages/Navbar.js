@@ -157,11 +157,6 @@ const Navbar = () => {
                     My Local Cars 
                   </button>
                 </Link>
-                <Link to={'/user/account/dearler'} className="">
-                  <button className="text-[14px] lg:text-[0.82vw] text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[10px] lg:px-[1.5vw] py-[5px] lg:py-[1.2vh] border border-white rounded-full">
-                    Dealer profile
-                  </button>
-                </Link>
               </div>
             </div>
           </div>

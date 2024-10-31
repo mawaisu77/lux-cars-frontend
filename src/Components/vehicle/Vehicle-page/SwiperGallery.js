@@ -5,12 +5,10 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
-import ImageViewer from "react-simple-image-viewer";
 import Modal from "./Modal360";
 import { ClipLoader } from "react-spinners";
 import ReactPlayer from 'react-player'
 import VideoModal from "./ModalVideo";
-import ReactDOM from "react-dom";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
 

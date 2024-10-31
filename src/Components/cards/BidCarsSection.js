@@ -38,17 +38,17 @@ const BidCarsSection = () => {
 
   return (
     <>
-      <div className="relative w-full lg:w-[98.9vw] bg-[#f8f8f8]   ">
+      <div className="relative w-full lg:w-[98.9vw] bg-light-gray   ">
         <div className="" id="startBidding">
           <div className="sm:pl-2 px-4 w-full sm:w-[85vw] flex justify-between items-center md:w-[88vw] lg:w-[82vw] mx-auto ">
             <div className="flex flex-col gap-y-2">
-              <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
+              <div className="flex justify-start font-urbanist text-[26px] text-lux-black lg:text-36 font-bold leading-[2vw] pt-[2vh]">
                 Bid Cars
               </div>
-              <hr className="h-1 bg-[#ca0000] mt-[4px] w-16 " />
+              <hr className="h-1 bg-primary-red mt-[4px] w-16 " />
             </div>
 
-            <div className="flex justify-center text-[#ca0000]  items-center gap-x-1">
+            <div className="flex justify-center text-primary-red  items-center gap-x-1">
               <button
                 onClick={handleViewAllClick}
                 className="font-bold text-sm hover:underline"
@@ -59,7 +59,7 @@ const BidCarsSection = () => {
             </div>
           </div>
 
-          <div className="relative sm:px-0 px-10">
+          <div className="relative sm:px-0 px-10 mt-5">
             <Swiper
               style={{
                 "--swiper-pagination-color": "#FFBA08",
