@@ -4,22 +4,15 @@ import useTimer from "../../hooks/useTimer";
 import {
   BsFire,
   BsHeart,
-  // BsHeartArrow,
-  // BsHeartbreak,
   BsHeartFill,
 } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa";
 import {  useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import useSaveCar from "../../hooks/useSaveCar";
-// import ImageViewer from "react-simple-image-viewer";
-// import ReactDOM from "react-dom";
-// import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-// import { IoClose } from "react-icons/io5";
 import ImageModal from "./ImageModal";
 import { LuxLogoWhite } from "../../utils/constant";
 

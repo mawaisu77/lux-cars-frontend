@@ -4,12 +4,16 @@ const uploadCarValidation = (formData) => {
     // Add validations for carDetails
     if (!formData.carDetails.vin) {
       errors.vin = "VIN is required";
-    } 
+    } else if (Number(formData.carDetails.year) > 1980 && formData.carDetails.vin.length !== 17) {
+      errors.vin = "VIN must be 17 characters for vehicles newer than 1980";
+    }
   
     if (!formData.carDetails.year) {
       errors.year = "Year is required";
     } else if (!Number.isInteger(Number(formData.carDetails.year))) {
       errors.year = "Year must be an integer";
+    } else if (Number(formData.carDetails.year) > new Date().getFullYear()) {
+      errors.year = "Year cannot be in the future";
     }
   
     if (!formData.carDetails.zip) {

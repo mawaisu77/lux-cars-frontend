@@ -212,9 +212,14 @@ const Profile = () => {
                     <ImageViewer
                       src={images}
                       currentIndex={currentImage}
-                      disableScroll={false}
+                      disableScroll={true}
                       closeOnClickOutside={true}
                       onClose={closeImageViewer}
+                      closeComponent={true}
+                      backgroundStyle={{
+                        zIndex: 99999,
+                        backgroundColor: "rgba(0, 0, 0, 0.9)"
+                      }}
                     />
                   )}
       

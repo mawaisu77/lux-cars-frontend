@@ -1199,7 +1199,7 @@ const UploadVehicle = () => {
               </div>
             </div>
           </div>
-          {selectedOptions.carTitledInfo && (
+          {!selectedOptions.carTitledInfo && (
             <p className="text-gray-500 text-left">
               if the vehicle is titled or registered in the name of another
               individual, a photo of the person's ID will be requested for
@@ -1207,7 +1207,7 @@ const UploadVehicle = () => {
             </p>
           )}
 
-          {selectedOptions.carTitledInfo && (
+          {!selectedOptions.carTitledInfo && (
             <div className="grid grid-cols-1 w-full">
               <div className="flex flex-col gap-y-4 items-start ">
                 <label className="font-bold text-[20px] text-left">
