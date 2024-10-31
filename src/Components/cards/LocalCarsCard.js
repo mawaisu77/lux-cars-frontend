@@ -36,9 +36,9 @@ const LocalCarsCard = ({ card }) => {
 
   return (
     <>
-      <div className=" rounded-xl bg-[#f8f8f8] shadow-lg mx-2 lg:px-0">
-        <div className="p-[1vw] relative w-full ">
-          <div className="w-full relative">
+     <div className="rounded-xl bg-white shadow-md p-[1vw]">
+      <div className=" relative w-full">
+        <div className="w-full relative">
             <Swiper
               className="relative"
               autoplay={{
@@ -51,9 +51,9 @@ const LocalCarsCard = ({ card }) => {
               {card.carImages &&
                 card.carImages.map((image, index) => (
                   <SwiperSlide key={index} className="relative ">
-                    <div className=" ">
+                    <div className="">
                       <img
-                        className="w-full rounded-sm h-[250px] sm:h-[18.2vh] md:h-[18.2vh] lg:h-[18vh] xl:h-[18vh] cursor-pointer"
+                       className="w-full h-full rounded-sm cursor-pointer"
                         src={image}
                         alt={`Vehicle_Image ${index + 1}`}
                         onClick={() => openModal(index)} // Open modal on image click
@@ -65,12 +65,13 @@ const LocalCarsCard = ({ card }) => {
           </div>
 
           <div>
+
             <div className="sm:mt-[1.5vh] my-[10px]">
               <div className="flex ">
                 <div className="flex justify-between items-center w-full">
-                  <div className="flex flex-col text-[16px] lg:text-[0.9vw]  ">
+                  <div className="flex flex-col text-[16px] lg:text-17  ">
                     <Link to={`local-vehicle-detail/${card.id}`}>
-                      <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist text-[14px] lg:text-[1vw] font-bold  lg:leading-[2vh] text-left">
+                      <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist  font-bold  lg:leading-[2vh] text-left">
                         {`${card.make} ${card.model} ${card.year}`.length > 20
                           ? `${card.make} ${card.model} ${card.year}`.slice(
                               0,
@@ -79,15 +80,15 @@ const LocalCarsCard = ({ card }) => {
                           : `${card.make} ${card.model} ${card.year}`}
                       </div>
                     </Link>
-                    <div className="flex gap-x-1 pt-[0.8vh] text-[12px] lg:text-[0.8vw]">
+                    <div className="flex gap-x-1 pt-[0.8vh] text-[12px] lg:text-15">
                       <p className="py-[0.1vh] font-semibold">Transmission:</p>
                       <p className="py-[0.1vh]">{card.transmission}</p>
                     </div>
-                    <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
+                    <div className="flex gap-x-1 text-[12px] lg:text-15">
                       <p className="py-[0.1vh] font-semibold">Mileage:</p>
                       <p className="py-[0.1vh]">{card.mileage}</p>
                     </div>
-                    <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
+                    <div className="flex gap-x-1 text-[12px] lg:text-15">
                       <p className="py-[0.1vh] font-semibold">Location:</p>
                       <p className="py-[0.1vh] text-nowrap">
                         {`${card.carLocation} ${card.carState}`.length > 20
@@ -103,7 +104,7 @@ const LocalCarsCard = ({ card }) => {
               </div>
             </div>
             <Link to={`local-vehicle-detail/${card.id}`}>
-              <button className="w-full  rounded-lg py-[0.8vh] text-[13px] lg:text-[1vw] bg-[#7a798a] text-white font-urbanist hover:bg-[#ca0000] duration-200">
+              <button className="w-full  rounded-lg py-[0.8vh] text-[13px] lg:text-15 bg-primary-gray text-white font-urbanist hover:bg-primary-red duration-200">
                 Offer
               </button>
             </Link>

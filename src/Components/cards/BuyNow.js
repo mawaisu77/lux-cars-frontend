@@ -35,7 +35,7 @@ const BuyNow = () => {
 
   return (
     <>
-      <div className="relative w-full lg:w-[98.9vw] bg-light-gray   ">
+      <div className="relative w-full lg:w-[98.9vw] bg-light-gray py-10 ">
         <div className="" id="startBidding">
           <div className=" w-full sm:w-[85vw] flex justify-between items-center mx-auto ">
             <div className="flex flex-col gap-y-2">
