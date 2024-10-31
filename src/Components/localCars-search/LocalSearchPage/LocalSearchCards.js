@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 
-function LocalSearchCards({ vehicles }) {
+function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   const navigate = useNavigate();
 
   const handleBidNow = (id) => {
@@ -15,6 +15,39 @@ function LocalSearchCards({ vehicles }) {
       navigate("/signup");
     }
   };
+
+  const [totalPages, setTotalPages] = useState([]);
+
+  useEffect(() => {
+    const pages = Math.ceil(totalCars / 10);
+    setTotalPages(Array.from({ length: pages }, (_, i) => i + 1));
+  }, [totalCars]);
+
+  console.log("TOTAL PAGES", totalPages);
+
+  const [currentPageRange, setCurrentPageRange] = useState({
+    start: 1,
+    end: 5,
+  });
+
+  const handleNext = () => {
+    if (currentPageRange.end < totalPages.length) {
+      setCurrentPageRange({
+        start: currentPageRange.start + 1,
+        end: currentPageRange.end + 1,
+      });
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPageRange.start > 1) {
+      setCurrentPageRange({
+        start: currentPageRange.start - 1,
+        end: currentPageRange.end - 1,
+      });
+    }
+  };
+
   return (
     <div className="flex flex-col">
       {vehicles && vehicles?.length > 0 ? (
@@ -94,6 +127,39 @@ function LocalSearchCards({ vehicles }) {
           </h2>
         </div>
       )}
+
+      <div className="flex items-center space-x-2 mx-auto my-8">
+        <button
+          onClick={handlePrev}
+          // className="px-2 pb-[3px] bg-red-600 text-white rounded-xl"
+        >
+          &lt;&lt;
+        </button>
+
+        {totalPages &&
+          totalPages
+            .slice(currentPageRange.start - 1, currentPageRange.end)
+            .map((page) => (
+              <button
+                key={page}
+                className={`w-8 h-8 ${
+                  pageNo === page ? "text-white bg-red-600 rounded-full" : ""
+                }`}
+                onClick={() => {
+                  setPageNo(page);
+                }}
+              >
+                {page}
+              </button>
+            ))}
+
+        <button
+          onClick={handleNext}
+          // className="px-2 pb-[3px] bg-red-600 text-white rounded-xl"
+        >
+          &gt;&gt;
+        </button>
+      </div>
     </div>
   );
 }

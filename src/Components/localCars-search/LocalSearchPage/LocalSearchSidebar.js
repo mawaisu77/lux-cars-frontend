@@ -29,6 +29,9 @@ const LocalSearchSidebar = () => {
     carState: "",
   });
 
+  const [pageNo, setPageNo] = useState(1);
+  const [totalCars, setTotalCars] = useState(0);
+
   const fetchVehiclesData = async (selectedFilters) => {
     const params = new URLSearchParams();
 
@@ -52,7 +55,7 @@ const LocalSearchSidebar = () => {
     }
     try {
       const response = await baseService.get(
-        `/local-cars/get-all-local-cars?status=Approved&${params.toString()}`
+        `/local-cars/get-all-local-cars?page=${pageNo}&status=Approved&${params.toString()}`
       );
       return response?.data?.data;
     } catch (error) {
@@ -62,11 +65,12 @@ const LocalSearchSidebar = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchVehiclesData();
+      const data = await fetchVehiclesData(selectedFilters);
       setVehicles(data?.cars);
+      setTotalCars(data?.totalLength);
     };
     fetchData();
-  }, []);
+  }, [pageNo]);
 
   const handleFilterChange = (filterName, value) => {
     setSelectedFilters((prev) => {
@@ -99,6 +103,7 @@ const LocalSearchSidebar = () => {
     if (milageError === "") {
       const data = await fetchVehiclesData(selectedFilters);
       setVehicles(data?.cars);
+      setTotalCars(data?.totalLength);
     }
   };
 
@@ -122,6 +127,7 @@ const LocalSearchSidebar = () => {
     setShowModel(false);
     setShowYear(false);
     setVehicles(data?.cars);
+    setPageNo(1);
   };
 
   return (
@@ -383,7 +389,12 @@ const LocalSearchSidebar = () => {
           </div>
         </aside>
         <section className="w-full lg:w-3/4">
-          <LocalSearchCards vehicles={vehicles} />
+          <LocalSearchCards
+            vehicles={vehicles}
+            pageNo={pageNo}
+            totalCars={totalCars}
+            setPageNo={setPageNo}
+          />
         </section>
       </div>
     </div>
