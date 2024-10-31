@@ -19,16 +19,16 @@ const Makes = () => {
   return (
     <div className=" w-[98.9vw] mb-20 mt-20">
       <div>
-        <div className="flex justify-center font-urbanist text-[36px] lg:text-[2.34vw] font-bold leading-[2.86vw] pt-[5.5vh]">
+        <div className="flex justify-center font-urbanist text-[36px] lg:text-36 font-bold  pt-[5.5vh]">
           Popular Makes
         </div>
-        <hr className="h-1 bg-[#CA0000] w-20 mx-auto mt-8" />
+        <hr className="h-1 bg-[#CA0000] w-20 mx-auto mt-2" />
         {/* For desktop */}
         <div className="hidden lg:flex w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] justify-center">
           {carData && carData.map((item, index) => (
             <button
               key={index}
-              className="font-urbanist bg-[#ebebeb] hover:bg-[#CA0000] hover:text-white duration-200 py-[1.5vh] px-[1.1vw] rounded-lg text-[15px] lg:text-[0.75vw]"
+              className="font-urbanist bg-secondary-gray hover:bg-primary-red hover:text-white duration-200 py-[1.5vh] px-[1.1vw] rounded-lg lg:text-15"
               onClick={() => handleMakeClick(item.make)}
 
             >

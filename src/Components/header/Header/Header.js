@@ -79,7 +79,7 @@ const Header = () => {
 
   return (
     <div
-      className="fixed top-0 border-b border-[#7A798A] w-full z-50 "
+      className="fixed top-0 border-b border-primary-gray w-full z-50 "
       style={{
         backgroundColor: windowWidth < 768 ? "#333333" : navbarColor,
         transition: "background-color 0.5s ease-in-out",
@@ -110,36 +110,36 @@ const Header = () => {
 
           <div className="hidden lg:flex">
             <ul
-              className={`flex gap-[1.5vw] font-urbanist font-bold text-[1rem] lg:text-[1.1018vw] leading-6 ${
-                isHomePage ? "text-[#7A798A]" : "text-white"
+              className={`flex gap-[1.5vw] font-urbanist font-bold text-[1rem] lg:text-18 leading-6 ${
+                isHomePage ? "text-primary-gray" : "text-white"
               } ${navbarColor === "transparent" ? "" : "text-white"}`}
             >
-              <Link to="/how-works" className="hover:text-[#ff2f2f] duration-200">
-                <li>How it works</li>
+              <Link to="/how-works" className=" hover:text-primary-red duration-200">
+                <li className="">How it works</li>
               </Link>
-              <Link to="/Fees" className="hover:text-[#ff2f2f] duration-200">
+              <Link to="/Fees" className=" hover:text-primary-red duration-200">
                 <li className="flex items-center">
                   Fees
                   {/* Delivery Time <TiArrowSortedDown /> */}
                 </li>
               </Link>
 
-              <Link to="/about" className="hover:text-[#ff2f2f] duration-200">
+              <Link to="/about" className=" hover:text-primary-red duration-200">
                 <li>{t("navbar.about")}</li>
               </Link>
-              <Link to="/help" className="hover:text-[#ff2f2f] duration-200">
+              <Link to="/help" className=" hover:text-primary-red duration-200">
                 <li>{t("navbar.help")}</li>
               </Link>
-              <Link to="/contact-us" className="hover:text-[#ff2f2f] duration-200">
+              <Link to="/contact-us" className=" hover:text-primary-red duration-200">
                 <li>{t("navbar.contact")}</li>
               </Link>
-              <Link to={"/upload-car"} className="hover:text-[#ff2f2f] duration-200">
+              <Link to={"/upload-car"} className=" hover:text-primary-red duration-200">
                 <li>Upload Vehicle</li>
               </Link>
             </ul>
           </div>
         </div>
-        <div className="hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-[1.101875vw] text-[#7a798a]">
+        <div className="hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-18 text-[#7a798a]">
           <div className="relative inline-block text-left">
             <div className="flex justify-center items-center gap-[1vw]  ">
               <IoGlobeSharp
@@ -148,7 +148,7 @@ const Header = () => {
                   isHomePage ? "text-[#7A798A]" : "text-white"
                 } ${
                   navbarColor === "transparent" ? "" : "text-white"
-                } w-[1.3vw] h-[2.7vh] hover:text-[#ff2f2f] duration-200`}
+                } w-[1.3vw] h-[2.7vh] hover:text-primary-red duration-200`}
               />
             </div>
             {dropdownOpen && (
@@ -174,7 +174,7 @@ const Header = () => {
             to="/user/profile"
             className={` ${
               isHomePage ? "text-[#7A798A] block" : "text-white"
-            } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-[#ff2f2f] duration-200`}
+            } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-primary-red duration-200`}
           >
             <HiUsers />
           </Link>
@@ -184,22 +184,22 @@ const Header = () => {
               <Link to="/login">
                 <button
                   className={` focus:outline-none ${
-                    isHomePage ? "text-[#7A798A]" : "text-white"
-                  } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-[#ff2f2f] duration-200`}
+                    isHomePage ? "text-primary-gray" : "text-white"
+                  } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-primary-red duration-200`}
                 >
                   login
                 </button>
               </Link>
               <div
-                className={`  ${isHomePage ? "text-[#7A798A]" : "text-white"}`}
+                className={`  ${isHomePage ? "text-primary-gray" : "text-white"}`}
               >
                 /
               </div>
               <Link to="/signup">
                 <button
                   className={` focus:outline-none ${
-                    isHomePage ? "text-[#7A798A]" : "text-white"
-                  } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-[#ff2f2f] duration-200`}
+                    isHomePage ? "text-primary-gray" : "text-white"
+                  } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-primary-redduration-200`}
                 >
                   sign-up
                 </button>
@@ -209,7 +209,7 @@ const Header = () => {
             <>
               <button
                 className={`focus:outline-none ${
-                  isHomePage ? "text-[#7A798A]" : "text-white"
+                  isHomePage ? "text-primary-gray" : "text-white"
                 } ${navbarColor === "transparent" ? "" : "text-white"}`}
                 onClick={handleLogoutModal}
               >
@@ -218,7 +218,7 @@ const Header = () => {
             </>
           )}
 
-          <button className="w-[7.333333333333334vw] h-[5.23vh] bg-[#ca0000] text-white rounded-full text-[0.8vw] focus:outline-none">
+          <button className="w-[7.333333333333334vw] h-[5.23vh] bg-primary-red text-white rounded-full text-14 focus:outline-none">
             Try Demo
           </button>
         </div>
@@ -232,13 +232,13 @@ const Header = () => {
       {isMenuOpen && (
         <div className="lg:hidden">
           <ul
-            className={`flex flex-col items-center gap-4 my-4 font-urbanist font-bold text-[1rem] text-[#7a798a] ${
-              isHomePage ? "text-[#7A798A]" : "text-white"
+            className={`flex flex-col items-center gap-4 my-4 font-urbanist font-bold text-[1rem] text-primary-gray ${
+              isHomePage ? "text-primary-gray" : "text-white"
             } ${navbarColor === "transparent" ? "" : "text-white"}`}
           >
             <Link
               to="/how-works"
-              className="hover:text-[#ca0000]"
+              className="hover:text-primary-red"
               onClick={toggleMenu}
             >
               <li>How it works</li>
@@ -246,28 +246,28 @@ const Header = () => {
             <Link to="/fees">Fees</Link>
             <Link
               to="/about"
-              className="hover:text-[#ca0000]"
+              className="hover:text-primary-red"
               onClick={toggleMenu}
             >
               <li>About</li>
             </Link>
             <Link
               to="/help"
-              className="hover:text-[#ca0000]"
+              className="hover:text-primary-red"
               onClick={toggleMenu}
             >
               <li>Help</li>
             </Link>
             <Link
               to="/contact-us"
-              className="hover:text-[#ca0000]"
+              className="hover:text-primary-red"
               onClick={toggleMenu}
             >
               <li>Contact</li>
             </Link>
             <Link
               to="/upload-car"
-              className="hover:text-[#ca0000]"
+              className="hover:text-primary-red"
               onClick={toggleMenu}
             >
               <li>Upload Vehicle</li>
@@ -279,7 +279,7 @@ const Header = () => {
               <Link to="/signup" onClick={toggleMenu}>
                 <button className="focus:outline-none">sign-up</button>
               </Link>
-              <button className="w-[132px] lg:w-[7.333333333333334vw]  h-[32px] lg:h-[5.23vh] bg-[#ca0000] text-white rounded-full lg:text-[0.8vw] focus:outline-none">
+              <button className="w-[132px] lg:w-[7.333333333333334vw]  h-[32px] lg:h-[5.23vh] bg-[#ca0000] text-white rounded-full lg:text-14 focus:outline-none">
                 Try Demo
               </button>
             </div>

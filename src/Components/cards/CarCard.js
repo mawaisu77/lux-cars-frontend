@@ -85,8 +85,8 @@ const CarCard = ({ card, isBuy = false }) => {
 
   return (
     <>
-    <div className=" rounded-xl bg-[#f8f8f8] shadow-lg mx-2 lg:px-0">
-      <div className="p-[1vw] relative w-full lg:p-[1vw]">
+    <div className="rounded-xl bg-white shadow-md p-[1vw]">
+      <div className=" relative w-full">
         <div className="w-full relative">
           {isCarSaved ? (
             <div className="bg-black/70 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
@@ -121,7 +121,7 @@ const CarCard = ({ card, isBuy = false }) => {
                  
                   <div className=" ">        
                     <img
-                      className="w-full rounded-sm h-[250px] sm:h-[18.2vh] md:h-[18.2vh] lg:h-[18vh] xl:h-[18vh] cursor-pointer"
+                      className="w-full rounded-sm cursor-pointer"
                       src={image}
                       alt={`Vehicle_Image ${index + 1}`}
                       onClick={() => openModal(index)} // Open modal on image click
@@ -135,21 +135,21 @@ const CarCard = ({ card, isBuy = false }) => {
     
         </div>
  
-        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 h-6 bg-white/90 rounded-2xl z-50 flex justify-center items-center">
-          <div className="flex justify-center items-center gap-x-1.5 px-3">
+        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-white/90 rounded-lg z-50 flex justify-center items-center">
+          <div className="flex justify-center items-center gap-x-1.5 px-[1vw] py-[0.5vh]">
             <div>
               {card.auction_date ? (
                 ValidDate ? (
-                  <BsFire size={10}  className="text-red-600" />
+                  <BsFire  className="text-primary-red text-15" />
                 ) : (
-                  <MdNotInterested size={10} className="text-red-600" />
+                  <MdNotInterested className="text-primary-red text-15" />
                 )
               ) : (
-                <FaHourglassHalf size={10} className="text-red-600" />
+                <FaHourglassHalf className="text-primary-red text-" />
               )}
             </div>
             <div>
-              <p className="font-bold text-nowrap text-[10px]">
+              <p className="font-bold text-nowrap text-15">
                 {card.auction_date
                   ? ValidDate
                     ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
@@ -162,26 +162,26 @@ const CarCard = ({ card, isBuy = false }) => {
       </div>
       <div>
 
-        <div className="px-[10px] lg:px-[1vw]">
+        <div className="px-[10px] lg:px-0 pt-[2vh]">
           <div className="flex pb-[1vh] ">
             <div className="flex justify-between items-center w-full">
-              <div className="flex flex-col text-[16px] lg:text-[0.9vw]  ">
+              <div className="flex flex-col text-[16px] lg:text-16 ">
               <Link to={`vehicle-detail/${card.lot_id}`}>
-                <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist text-[14px] lg:text-[1vw] font-bold  lg:leading-[2vh] text-left">
+                <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist text-[14px] lg:text-18 font-bold  lg:leading-[2vh] text-left">
                   {card.title.length > 20
                     ? `${card.title.slice(0, 16)}...`
                     : card.title}
                 </div>
               </Link>
-                <div className="flex gap-x-1 pt-[0.8vh] text-[12px] lg:text-[0.8vw]">
+                <div className="flex gap-x-1 pt-[0.8vh] text-[12px] lg:text-15">
                   <p className="py-[0.1vh] font-semibold">Lot:</p>
                   <p className="py-[0.1vh]">{card.lot_id}</p>
                 </div>
-                <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
+                <div className="flex gap-x-1 text-[12px] lg:text-15">
                   <p className="py-[0.1vh] font-semibold">Status:</p>
                   <p className="py-[0.1vh]">{card.status}</p>
                 </div>
-                <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
+                <div className="flex gap-x-1 text-[12px] lg:text-15">
                   <p className="py-[0.1vh] font-semibold">Location:</p>
                   <p className="py-[0.1vh] text-nowrap">
                   {card.location.length > 20
@@ -191,7 +191,7 @@ const CarCard = ({ card, isBuy = false }) => {
                 </div>
                 {
                   card.currentBid && (
-                  <div className="flex gap-x-1 text-[12px] lg:text-[0.8vw]">
+                  <div className="flex gap-x-1 text-[12px] lg:text-15">
                   <p className="py-[0.1vh] font-semibold">Current Bid:</p>
                   <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">${card.currentBid ? card.currentBid.toLocaleString("en-US", { style: "currency", currency: "USD"}) : null}</p>
                 </div>
