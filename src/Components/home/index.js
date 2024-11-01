@@ -27,6 +27,7 @@ const Home = () => {
     <Bid/>
     <Top/>
     <BidCarsSection />
+    <Makes/>
      <BuyNow/>
     {/* <LocalOfferz/> */}
     <BidNow/>
@@ -39,10 +40,7 @@ const Home = () => {
     {/* <Live/> */}
     {/* <Archieved/> */}
     {/* <Partners/> */}
-    <Makes/>
-    <Sentry.ErrorBoundary fallback={<p>Something went very wrong.</p>}>
-     <Dummy />
-    </Sentry.ErrorBoundary>
+ 
 
     </>
   )

@@ -119,9 +119,9 @@ const CarCard = ({ card, isBuy = false }) => {
               card.images.map((image, index) => (
                 <SwiperSlide key={index} className="relative ">
                  
-                  <div className=" ">        
+                  <div className="h-[220px] ">        
                     <img
-                      className="w-full rounded-sm cursor-pointer"
+                      className="w-full h-full rounded-sm cursor-pointer"
                       src={image}
                       alt={`Vehicle_Image ${index + 1}`}
                       onClick={() => openModal(index)} // Open modal on image click
