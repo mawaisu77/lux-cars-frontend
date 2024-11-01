@@ -56,9 +56,9 @@ const OfferCards = ({
   };
 
   const handleNavigate = () => {
-    navigate(`/vehicle-detail/${offer?.carDetails?.lot_id || "-"}`);
+    navigate(`/local-vehicle-detail/${offer?.carData?.id || "-"}`);
   };
-
+// console.log("=== offer ===", offer);
   return (
     <>
       <tr className="border-t">

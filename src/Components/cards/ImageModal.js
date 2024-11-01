@@ -15,7 +15,7 @@ const ImageModal = ({
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
-    <div className="fixed inset-0 bg-black bg-opacity-100 flex justify-center items-center z-50">
+    <div style={{zIndex: 9999}} className="fixed inset-0 bg-black bg-opacity-100 flex justify-center items-center z-50">
       <div className="relative w-full h-full flex justify-center items-center">
         {/* Close button */}
         <button
