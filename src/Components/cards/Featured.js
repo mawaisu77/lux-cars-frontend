@@ -16,7 +16,7 @@ const BuyNow = () => {
   const navigate = useNavigate();
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    `${process.env.REACT_APP_API_CARS_LIVE}?size=8&buy_now=true`
+    `${process.env.REACT_APP_API_CARS_LIVE}?buy_now=true`
   );
   if (carLoading) {
     return <Shimmer />;
@@ -25,7 +25,6 @@ const BuyNow = () => {
   if (carError) {
     return (
       <div className="text-2xl font-bold p-10 text-[#ca0000]">
-        Error: No Available Data
         {carError}
       </div>
     );
@@ -61,8 +60,8 @@ const BuyNow = () => {
           </div>
           <div className="relative mt-4 mx-auto sm:w-[85vw] gap-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
             {carData &&
-              carData.map((card, index) => (
-                <CarCard card={card} isBuy={true} />
+            carData.slice(0, -2).map((card, index) => (
+                <CarCard key={index} card={card} isBuy={true} />
               ))}
           </div>
         </div>
