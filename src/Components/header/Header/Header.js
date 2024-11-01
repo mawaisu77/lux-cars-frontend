@@ -83,6 +83,7 @@ const Header = () => {
       style={{
         backgroundColor: windowWidth < 768 ? "#333333" : navbarColor,
         transition: "background-color 0.5s ease-in-out",
+        zIndex: 1000,
       }}
     >
       <div className="flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4">

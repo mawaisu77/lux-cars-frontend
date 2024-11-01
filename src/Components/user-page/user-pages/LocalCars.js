@@ -12,7 +12,6 @@ const LocalCars = () => {
     fetchLocalCars();
   }, []);
 
- console.log("<--->", localCars);
 
   return (
     <>
@@ -41,6 +40,9 @@ const LocalCars = () => {
                     VIN
                   </th>
                   <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                    Status
+                  </th>
+                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
                     Location
                   </th>
                   <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
@@ -58,7 +60,7 @@ const LocalCars = () => {
               ) : error ? (
                 <tr>
                   <td colSpan="8" className="text-center text-red-500 py-4">
-                    Error: {error}
+                    {error}
                   </td>
                 </tr>
               ) : (

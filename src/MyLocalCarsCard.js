@@ -37,6 +37,7 @@ const MyLocalCarsCard = ({
         </td>
         {/* VIN */}
         <td className="text-nowrap px-4 py-2">{localCar?.vin || "-"}</td>
+        <td className="text-nowrap px-4 py-2">{localCar?.status || "-"}</td>
         {/* Location */}
         <td className="text-nowrap px-4 py-2">
           {`${localCar?.carLocation || "-"}, ${

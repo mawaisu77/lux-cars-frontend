@@ -58,7 +58,7 @@ const BuyNow = () => {
 
           <div className="relative mt-4 mx-auto sm:w-[85vw] gap-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
                 {carData &&
-                  carData.map((card, index) => (
+                  carData.slice(0, -2).map((card, index) => (
                       <CarCard key={index} card={card} isBuy={false} />
                   ))}
           </div>

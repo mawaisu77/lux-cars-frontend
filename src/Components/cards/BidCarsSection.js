@@ -16,7 +16,7 @@ const BidCarsSection = () => {
   const navigate = useNavigate(); 
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "bid-cars/find-bid-cars?size=8"
+    "bid-cars/find-bid-cars"
   );
   if (carLoading) {
     return <Shimmer />;
