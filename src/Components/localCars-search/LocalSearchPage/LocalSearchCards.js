@@ -60,7 +60,7 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
       <div className="flex items-center space-x-2 mx-auto my-8">
         <button onClick={handlePrev}>&lt;&lt;</button>
 
-        {totalPages &&
+        {totalPages && 
           totalPages
             .slice(currentPageRange.start - 1, currentPageRange.end)
             .map((page) => (
