@@ -345,69 +345,70 @@ const LocalVehicleDetail = () => {
                       Bid History
                     </h2>
                   </div>
-                  {allBids && allBids?.data?.data.length ? (
-                    <div className="h-[400px] w-full overflow-y-scroll shadow-md p-[1.5vw] ">
-                      <div className="">
-                        {allBids?.data?.data &&
-                          allBids?.data?.data
-                            .sort(
-                              (a, b) =>
-                                new Date(b.bid.createdAt) -
-                                new Date(a.bid.createdAt)
-                            )
-                            .map((item, index) => (
-                              <div
-                                key={index}
-                                className="flex shadow-md rounded-lg p-4 mt-1 "
-                              >
-                                <div className="flex  items-center">
-                                  <img
-                                    className="w-[44px] h-[44px] rounded-lg"
-                                    src={item.userDetails.profilePicture}
-                                    alt="Profile"
-                                  />
+                  <div className="h-[400px] w-full overflow-auto shadow-md p-[1.5vw] ">
+                    <div className="">
+                      {allBids?.data?.data && allBids?.data?.data.length ? (
+                        allBids?.data?.data
+                          .sort(
+                            (a, b) =>
+                              new Date(b.bid.createdAt) -
+                              new Date(a.bid.createdAt)
+                          )
+                          .map((item, index) => (
+                            <div
+                              key={index}
+                              className="flex shadow-md rounded-lg p-4 mt-1 "
+                            >
+                              <div className="flex  items-center">
+                                <img
+                                  className="w-[44px] h-[44px] rounded-lg"
+                                  src={item.userDetails.profilePicture}
+                                  alt="Profile"
+                                />
+                              </div>
+                              <div className="flex justify-between w-full ml-4">
+                                <div className="text-left">
+                                  <div className="flex items-center gap-2">
+                                    <p className="text-[1rem] font-urbanist font-bold">
+                                      {item.userDetails.username}
+                                    </p>
+                                    <p className="text-[0.9rem] text-gray-500 font-urbanist">
+                                      <TimeAgo date={item.bid.createdAt} />
+                                    </p>
+                                  </div>
+                                  <p
+                                    className={`text-[0.9rem] ${
+                                      item.bid.isValid
+                                        ? "text-green-600"
+                                        : "text-red-600"
+                                    } font-urbanist`}
+                                  >
+                                    {item.bid.isValid ? "Active" : "Expired"}
+                                  </p>
                                 </div>
-                                <div className="flex justify-between w-full ml-4">
-                                  <div className="text-left">
-                                    <div className="flex items-center gap-2">
-                                      <p className="text-[1rem] font-urbanist font-bold">
-                                        {item.userDetails.username}
-                                      </p>
-                                      <p className="text-[0.9rem] text-gray-500 font-urbanist">
-                                        <TimeAgo date={item.bid.createdAt} />
-                                      </p>
-                                    </div>
-                                    <p
-                                      className={`text-[0.9rem] ${
-                                        item.bid.isValid
-                                          ? "text-green-600"
-                                          : "text-red-600"
-                                      } font-urbanist`}
-                                    >
-                                      {item.bid.isValid ? "Active" : "Expired"}
-                                    </p>
-                                  </div>
-                                  <div className="flex items-center">
-                                    <p
-                                      className={`text-[1rem] font-urbanist font-bold ${
-                                        item.bid.isValid
-                                          ? "text-black"
-                                          : "text-gray-500"
-                                      }`}
-                                    >
-                                      ${item.bid.bidPrice}
-                                    </p>
-                                  </div>
+                                <div className="flex items-center">
+                                  <p
+                                    className={`text-[1rem] font-urbanist font-bold ${
+                                      item.bid.isValid
+                                        ? "text-black"
+                                        : "text-gray-500"
+                                    }`}
+                                  >
+                                    ${item.bid.bidPrice}
+                                  </p>
                                 </div>
                               </div>
-                            ))}
-                      </div>
+                            </div>
+                          ))
+                      ) : (
+                        <div className="h-[350px] flex items-center justify-center">
+                          <p className="text-xl font-bold text-red-600">
+                            No Bids Yet
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="bg-[#CA0000] text-md lg:text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold rounded-lg">
-                      No Bids Yet
-                    </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>

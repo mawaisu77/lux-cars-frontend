@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import useTimer from "../../../hooks/useTimer";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { BsFire } from "react-icons/bs";
+import { MdNotInterested } from "react-icons/md";
+import { FaHourglassHalf } from "react-icons/fa6";
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 
 function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
-  const navigate = useNavigate();
-
-  const handleBidNow = (id) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate(`/local-vehicle-detail/${id}`);
-    } else {
-      navigate("/signup");
-    }
-  };
-
   const [totalPages, setTotalPages] = useState([]);
 
   useEffect(() => {
     const pages = Math.ceil(totalCars / 10);
     setTotalPages(Array.from({ length: pages }, (_, i) => i + 1));
   }, [totalCars]);
-
-  console.log("TOTAL PAGES", totalPages);
 
   const [currentPageRange, setCurrentPageRange] = useState({
     start: 1,
@@ -52,73 +43,9 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
     <div className="flex flex-col">
       {vehicles && vehicles?.length > 0 ? (
         vehicles.map((vehicle) => (
-          <div
-            key={vehicle.id}
-            className="flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4"
-          >
-            <Swiper
-              className="relative w-full md:w-[35%] rounded-lg mb-4 md:mb-0"
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-              modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-              loop={true}
-            >
-              {vehicle.carImages &&
-                vehicle.carImages.map((image, index) => (
-                  <SwiperSlide
-                    key={index}
-                    className="relative pr-0 md:px-[10px] rounded-lg"
-                  >
-                    <div className="w-full h-full m-auto flex item-center rounded-lg">
-                      <img
-                        className="rounded-lg object-contain"
-                        src={image}
-                        alt={`Vehicle_Image ${index + 1}`}
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-            <div className="text-left w-full md:w-[40%] flex-grow p-2">
-              <h2 className="text-xl md:text-3xl font-bold text-gray-800 mb-6">
-                {vehicle.make} {vehicle.model}
-              </h2>
-              <p>
-                VIN: <span className="font-medium">{vehicle.vin}</span>
-              </p>
-              <p>
-                Year: <span className="font-medium">{vehicle.year}</span>
-              </p>
-              <p>
-                Transmission:{" "}
-                <span className="font-medium">{vehicle.transmission}</span>
-              </p>
-              <p>
-                Mileage:{" "}
-                <span className="font-medium">{vehicle.mileage} miles</span>
-              </p>
-              <p>
-                Location:{" "}
-                <span className="font-medium">
-                  {vehicle.carLocation}, {vehicle.carState}, {vehicle.zip}
-                </span>
-              </p>
-              <p>
-                Current Bid:{" "}
-                <span className="font-medium">{vehicle.currentBid}</span>
-              </p>
-            </div>
-            <div className="flex justify-center items-center mt-4 md:mt-0">
-              <button
-                onClick={() => handleBidNow(vehicle.id)}
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg px-6 py-3 transition duration-200"
-              >
-                Bid Now
-              </button>
-            </div>
-          </div>
+          <>
+            <Card vehicle={vehicle} />
+          </>
         ))
       ) : (
         <div className="flex flex-col items-center justify-center mt-10">
@@ -129,12 +56,7 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
       )}
 
       <div className="flex items-center space-x-2 mx-auto my-8">
-        <button
-          onClick={handlePrev}
-          // className="px-2 pb-[3px] bg-red-600 text-white rounded-xl"
-        >
-          &lt;&lt;
-        </button>
+        <button onClick={handlePrev}>&lt;&lt;</button>
 
         {totalPages &&
           totalPages
@@ -153,12 +75,140 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
               </button>
             ))}
 
-        <button
-          onClick={handleNext}
-          // className="px-2 pb-[3px] bg-red-600 text-white rounded-xl"
-        >
-          &gt;&gt;
-        </button>
+        <button onClick={handleNext}>&gt;&gt;</button>
+      </div>
+    </div>
+  );
+}
+function Card({ vehicle }) {
+  const targetTime = useMemo(
+    () => (vehicle.auction_date ? new Date(vehicle.auction_date) : null),
+    [vehicle.auction_date]
+  );
+  const { days, hours, minutes, seconds } = useTimer(targetTime);
+  const ValidDate =
+    targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+  const navigate = useNavigate();
+
+  const handleBidNow = (id) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate(`/local-vehicle-detail/${id}`);
+    } else {
+      navigate("/signup");
+    }
+  };
+  return (
+    <div className="flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4">
+      <Swiper
+        className="relative w-full lg:w-[20vw] mx-auto h-full rounded-md "
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: true,
+        }}
+        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+        loop={true}
+      >
+        {vehicle?.carImages &&
+          vehicle?.carImages?.map((image, index) => (
+            <SwiperSlide
+              key={index}
+              className="relative w-full rounded-md"
+              style={{ height: "auto" }}
+            >
+              <img
+                className="h-full w-full lg:w-[15vw] rounded-[0.5vw] object-cover"
+                src={image}
+                alt={`Vehicle_Image ${index + 1}`}
+              />
+            </SwiperSlide>
+          ))}
+        <div className="absolute z-50 py-0.5 bottom-0 w-full bg-blue-500/90 text-white flex justify-center items-center gap-x-2 rounded-b-md">
+          <span>Current Bid</span>
+          <span className="text-yellow-300 font-bold">
+            {`
+                    $${vehicle.currentBid ? vehicle.currentBid : "0"}`}
+          </span>
+        </div>
+      </Swiper>
+      <div className="flex flex-col md:justify-center w-full text-left md:items-center   lg:justify-between lg:flex-row">
+        <div className="text-left px-[1vw] text-[13px] lg:text-[0.875vw]   h-full border-b lg:border-b-0 font-urbanist">
+          <button onClick={() => handleBidNow(vehicle.id)}>
+            <p className="font-semibold py-[1vh] hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
+              {vehicle.make} {vehicle.model}
+            </p>
+          </button>
+
+          <div className="flex flex-col md:flex-row lg:flex-row w-[26.195vw] justify-between leading-[3vh]">
+            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[13px] lg:text-[0.875vw] py-1">
+              <p className="w-full">
+                <span className="font-semibold">VIN: </span>
+                {vehicle.vin}
+              </p>
+              <p className="w-full">
+                <span className="font-semibold">Year: </span>
+                {vehicle.year}
+              </p>
+              <p className="w-full">
+                <span className="font-semibold">Location: </span>
+                {vehicle.carLocation}
+              </p>
+            </div>
+            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] lg:text-[0.875vw] py-1">
+              <p className="w-full">
+                <span className="font-semibold">Millage: </span>
+                {vehicle.mileage || "Not specified"}
+              </p>
+              <p className="w-full">
+                <span className="font-semibold">Engine Type: </span>
+                {vehicle.transmission || "Not specified"}
+              </p>
+              <p className="w-full">
+                <span className="font-semibold">Status: </span>
+                {vehicle.status || "Not specified"}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row   w-full justify-center items-center   mx-auto">
+          <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw]  text-center sm:text-left">
+            <div className="flex flex-col  w-full  gap-[1vw] p-[1vw]  rounded-lg ">
+              <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
+                <a onClick={() => handleBidNow(vehicle.id)} className="w-full">
+                  <button className=" w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+                    BID NOW
+                  </button>
+                </a>
+              </div>
+
+              <div className="w-full  lg:w-[11.1vw] h-auto  py-1  mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center  shadow-sm">
+                <div className="flex items-center text-nowrap gap-[0.75vw] ">
+                  <div className="flex justify-center items-center">
+                    {vehicle.auction_date ? (
+                      ValidDate ? (
+                        <BsFire className="text-red-600 text-sm lg:text-[0.875vw]" />
+                      ) : (
+                        <MdNotInterested className="text-gray-400 text-lg lg:text-[0.875vw]" />
+                      )
+                    ) : (
+                      <FaHourglassHalf className="text-yellow-500 text-lg lg:text-[0.875vw]" />
+                    )}
+                  </div>
+
+                  <div className="flex flex-col justify-center items-start ">
+                    <p className="text-gray-800 text-sm lg:text-[0.875vw] font-medium">
+                      {vehicle.auction_date
+                        ? ValidDate
+                          ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
+                          : "Bidding Over"
+                        : "Future Auction"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
