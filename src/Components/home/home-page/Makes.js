@@ -2,6 +2,11 @@ import React from "react";
 import useCarMakesModels from "../../../hooks/useCarsMakesModel";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+import { CgBmw } from "react-icons/cg";
+
+import { SiAudi , SiAstonmartin, SiAlfaromeo, SiTesla, SiAcura, SiMercedes, SiBentley, SiBugatti, SiCadillac, SiChevrolet, SiChrysler, SiFerrari, SiFiat, SiFord, SiHonda, SiHyundai, SiInfiniti, SiJaguar, SiJeep, SiKia, SiLamborghini, SiLandrover, SiLucid, SiMaserati, SiMazda, SiMclaren, SiMini, SiMitsubishi, SiNissan, SiPorsche, SiRam, SiRollsroyce, SiSubaru, SiSuzuki, SiToyota, SiVolkswagen, SiVolvo, SiSmart} from "react-icons/si";
+
+
 
 const Makes = () => {
   const navigate = useNavigate();
@@ -16,6 +21,62 @@ const Makes = () => {
     navigate(`/search-page?make=${make}`);
   };
 
+    // Icon mapping for makes
+    const iconMapping = {
+      Acura: <SiAcura />,
+      "Alfa Romeo": <SiAlfaromeo />, // Placeholder icon
+      "Aston Martin": <SiAstonmartin />, // Placeholder icon
+      Audi: <SiAudi />,
+      BMW: <CgBmw />,
+      Bentley: <SiBentley />,
+      Bugatti: <SiBugatti />,
+      // Buick: <GiCarDoor />,
+      Cadillac: <SiCadillac />,
+      Chevrolet: <SiChevrolet />,
+      Chrysler: <SiChrysler />,
+      // Dodge: <GiCarDoor />,
+      Ferrari: <SiFerrari />,
+      Fiat: <SiFiat />,
+      // Fisker: <GiCarDoor />,
+      Ford: <SiFord />,
+      // GMC: <SiGmc />,
+      // Genesis: <SiGenesis />,
+      Honda: <SiHonda />,
+      // Hummer: <SiHummer />,
+      Hyundai: <SiHyundai />,
+      Infiniti: <SiInfiniti />,
+      // Isuzu: <GiCarDoor />,
+      Jaguar: <SiJaguar />,
+      Jeep: <SiJeep />,
+      Kia: <SiKia />,
+      Lamborghini: <SiLamborghini />,
+      "Land Rover": <SiLandrover />,
+      // Lexus: <GiCarDoor />,
+      // Lincoln: <GiCarDoor />,
+      // Lotus: <GiCarDoor />,
+      // Lucid: <SiLucid />,
+      Maserati: <SiMaserati />,
+      Mazda: <SiMazda />,
+      McLaren: <SiMclaren />,
+      "Mercedes-Benz": <SiMercedes />,
+      // Mercury: <GiCarDoor />,
+      Mini: <SiMini />,
+      Mitsubishi: <SiMitsubishi />,
+      Nissan: <SiNissan />,
+      Porsche: <SiPorsche />,
+      Ram: <SiRam />,
+      "Rolls-Royce": <SiRollsroyce />,
+      // Saab: <SiSaab />,
+      // Scion: <SiScion />,
+      Smart: <SiSmart />,
+      Subaru: <SiSubaru />,
+      Suzuki: <SiSuzuki />,
+      Tesla: <SiTesla />,
+      Toyota: <SiToyota />,
+      Volkswagen: <SiVolkswagen />,
+      Volvo: <SiVolvo />,
+    };
+
   return (
     <div className=" w-[98.9vw] mb-20 mt-20">
       <div>
@@ -28,7 +89,7 @@ const Makes = () => {
           {carData && carData.map((item, index) => (
             <button
               key={index}
-              className="font-urbanist bg-secondary-gray hover:bg-primary-red hover:text-white duration-200 py-[1.5vh] px-[1.1vw] rounded-lg lg:text-15"
+              className="font-urbanist flex justify-center items-center bg-secondary-gray hover:bg-primary-red hover:text-white duration-200 py-[1.5vh] px-[1.1vw] rounded-lg lg:text-15"
               onClick={() => handleMakeClick(item.make)}
 
             >
@@ -37,7 +98,13 @@ const Makes = () => {
                   <ClipLoader />
                 </>
               ) : (
-                item.make
+                <>
+                {/* Only display icon if it exists in iconMapping */}
+                <span className="">
+                {iconMapping[item.make] && iconMapping[item.make]}
+                </span>
+                <span className="ml-2"> {item.make}</span>
+                </>
               )}
             </button>
           ))}
