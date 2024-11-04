@@ -136,7 +136,7 @@ const LocalSearchSidebar = () => {
   return (
     <div className="bg-gray-200 p-4 rounded-lg">
       <div className="flex flex-col lg:flex-row gap-5">
-        <aside className="w-full lg:w-1/4 bg-base-100 shadow-lg rounded-lg p-4 transition-all duration-300">
+        <aside className="w-full bg-white lg:w-1/4 shadow-lg rounded-lg p-4 transition-all duration-300">
           <h2 className="font-semibold text-2xl mb-4 bg-gray-200 w-full rounded p-3">
             Filters
           </h2>
