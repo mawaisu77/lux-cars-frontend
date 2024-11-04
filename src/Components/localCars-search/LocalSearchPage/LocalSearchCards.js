@@ -7,6 +7,8 @@ import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa6";
 import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
+import ImageModal from "../../cards/ImageModal";
+import { LuxLogoWhite } from "../../../utils/constant";
 
 function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   const [totalPages, setTotalPages] = useState([]);
@@ -81,6 +83,8 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   );
 }
 function Card({ vehicle }) {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const targetTime = useMemo(
     () => (vehicle.auction_date ? new Date(vehicle.auction_date) : null),
     [vehicle.auction_date]
@@ -98,13 +102,31 @@ function Card({ vehicle }) {
       navigate("/signup");
     }
   };
+
+  const openModal = (index) => {
+    setCurrentImageIndex(index);
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  const goToNextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === vehicle.carImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+  const goToPrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? vehicle.carImages.length - 1 : prevIndex - 1
+    );
+  };
   return (
     <div className="flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4">
       <Swiper
         className="relative w-full lg:w-[20vw] mx-auto h-full rounded-md "
         autoplay={{
           delay: 2000,
-          disableOnInteraction: true,
+          disableOnInteraction: false,
         }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         loop={true}
@@ -117,9 +139,10 @@ function Card({ vehicle }) {
               style={{ height: "auto" }}
             >
               <img
-                className="h-full w-full lg:w-[15vw] rounded-[0.5vw] object-cover"
+                className="h-full w-full lg:w-[15vw] rounded-[0.5vw] object-cover cursor-pointer"
                 src={image}
                 alt={`Vehicle_Image ${index + 1}`}
+                onClick={() => openModal(index)}
               />
             </SwiperSlide>
           ))}
@@ -131,6 +154,15 @@ function Card({ vehicle }) {
           </span>
         </div>
       </Swiper>
+      <ImageModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        images={vehicle.carImages}
+        currentImageIndex={currentImageIndex}
+        goToPrevImage={goToPrevImage}
+        goToNextImage={goToNextImage}
+        logo={LuxLogoWhite}
+      />
       <div className="flex flex-col md:justify-center w-full text-left md:items-center   lg:justify-between lg:flex-row">
         <div className="text-left px-[1vw] text-[13px] lg:text-[0.875vw]   h-full border-b lg:border-b-0 font-urbanist">
           <button onClick={() => handleBidNow(vehicle.id)}>
