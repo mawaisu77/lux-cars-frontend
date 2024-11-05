@@ -277,7 +277,7 @@ const Bid = () => {
             </AnchorLink> */}
           </div>
 
-          <div className=" relative w-[70vw] text-black">
+          <div className="mt-[2.24vw]  relative w-[70vw] text-black">
             <div className="w-[100%] grid grid-cols-6 mt-[3.5vh] px-[1.2vw] py-[2vh] items-center right-0 bg-[#ffffff] rounded-[1.25vw] ">
               <div className="flex flex-col justify-center px-[1vw] text-left">
                 <p
@@ -413,12 +413,12 @@ const Bid = () => {
                 </p>
                 <div
                   onClick={handleSearch}
-                  className=" text-white gap-x-[0.25vw] cursor-pointer  group flex px-[0.25vw]  py-[1vh] justify-center items-center bg-[#ca0000] rounded-[0.5vw]"
+                  className=" text-white gap-x-[0.25vw] text-16 cursor-pointer group flex px-[0.25vw]  py-[1vh] justify-center items-center bg-[#ca0000] rounded-[0.5vw]"
                 >
                   <p className=" text-16">Search</p>
 
                   <GoSearch
-                    className="cursor-pointer text-white  duration-150"
+                    className="cursor-pointer text-white duration-150"
                   />
                 </div>
               </div>
