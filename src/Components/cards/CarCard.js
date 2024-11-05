@@ -85,29 +85,27 @@ const CarCard = ({ card, isBuy = false }) => {
 
   return (
     <>
-    <div className="rounded-xl bg-white shadow-md p-[1vw]">
+    <div className="rounded-[1.042vw] shadow-md p-[1.042vw] w-full bg-white">
       <div className=" relative w-full">
-        <div className="w-full relative">
+        <div className="w-full relative text-16">
           {isCarSaved ? (
-            <div className="bg-black/70 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
+            <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
               <BsHeartFill
                 onClick={() => handleSaveClick(card.lot_id)}
-                size={15}
                 className=" cursor-pointer text-red-600"
               />
             </div>
           ) : (
-            <div className="bg-black/70 rounded-lg px-2.5 py-1 absolute z-50 right-2 top-1">
+            <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.3vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
               <BsHeart
                 onClick={() => handleSaveClick(card.lot_id)}
-                size={15}
                 className=" cursor-pointer text-white hover:text-red-600"
               />
             </div>
           )}
 
           <Swiper
-            className="relative"
+            className="relative rounded-[1.2625vw]"
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
@@ -119,7 +117,7 @@ const CarCard = ({ card, isBuy = false }) => {
               card.images.map((image, index) => (
                 <SwiperSlide key={index} className="relative ">
                  
-                  <div className="h-[220px] ">        
+                  <div className=" ">        
                     <img
                       className="w-full h-full rounded-sm cursor-pointer"
                       src={image}
@@ -135,8 +133,8 @@ const CarCard = ({ card, isBuy = false }) => {
     
         </div>
  
-        <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-white/90 rounded-lg z-50 flex justify-center items-center">
-          <div className="flex justify-center items-center gap-x-1.5 px-[1vw] py-[0.5vh]">
+        <div className="absolute w-[7.865vw] bottom-[1vw] left-1/2 transform -translate-x-1/2 bg-white rounded-[0.677vw] z-50 flex justify-center items-center">
+          <div className="flex justify-center items-center gap-x-[0.5vw] px-[0.5vw] py-[0.5vh]">
             <div>
               {card.auction_date ? (
                 ValidDate ? (
@@ -145,11 +143,11 @@ const CarCard = ({ card, isBuy = false }) => {
                   <MdNotInterested className="text-primary-red text-15" />
                 )
               ) : (
-                <FaHourglassHalf className="text-primary-red text-" />
+                <FaHourglassHalf className="text-primary-red text-15" />
               )}
             </div>
             <div>
-              <p className="font-bold text-nowrap text-15 -z-10">
+              <p className="font-bold text-nowrap text-14 -z-10">
                 {card.auction_date
                   ? ValidDate
                     ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
@@ -159,30 +157,31 @@ const CarCard = ({ card, isBuy = false }) => {
             </div>
           </div>
         </div>
+
       </div>
       <div>
 
-        <div className="px-[10px] lg:px-0 pt-[2vh]">
-          <div className="flex pb-[1vh] ">
+        <div className="pt-[1.2vw]">
+          <div className="flex">
             <div className="flex justify-between items-center w-full">
-              <div className="flex flex-col text-[16px] lg:text-16 ">
+              <div className="flex flex-col lg:text-18 ">
               <Link to={`vehicle-detail/${card.lot_id}`}>
-                <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist text-[14px] lg:text-18 font-bold  lg:leading-[2vh] text-left">
-                  {card.title.length > 20
-                    ? `${card.title.slice(0, 16)}...`
-                    : card.title}
+                <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
+                  "{card.title.length > 25
+                    ? `${card.title.slice(0, 25)}...`
+                    : card.title}”
                 </div>
               </Link>
-                <div className="flex gap-x-1 pt-[0.8vh] text-[12px] lg:text-15">
-                  <p className="py-[0.1vh] font-semibold">Lot:</p>
+                <div className="flex gap-x-[0.8vw] pt-[2vh] text-[12px] lg:text-14">
+                  <p className="py-[0.1vh]">Lot:</p>
                   <p className="py-[0.1vh]">{card.lot_id}</p>
                 </div>
-                <div className="flex gap-x-1 text-[12px] lg:text-15">
-                  <p className="py-[0.1vh] font-semibold">Status:</p>
+                <div className="flex gap-x-[0.8vw] text-[12px] lg:text-14">
+                  <p className="py-[0.1vh]">Status:</p>
                   <p className="py-[0.1vh]">{card.status}</p>
                 </div>
-                <div className="flex gap-x-1 text-[12px] lg:text-15">
-                  <p className="py-[0.1vh] font-semibold">Location:</p>
+                <div className="flex gap-x-[0.8vw] text-[12px] lg:text-14">
+                  <p className="py-[0.1vh]">Location:</p>
                   <p className="py-[0.1vh] text-nowrap">
                   {card.location.length > 20
                     ? `${card.location.slice(0, 12)}...`
@@ -191,7 +190,7 @@ const CarCard = ({ card, isBuy = false }) => {
                 </div>
                 {
                   card.currentBid && (
-                  <div className="flex gap-x-1 text-[12px] lg:text-15">
+                  <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-14">
                   <p className="py-[0.1vh] font-semibold">Current Bid:</p>
                   <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">{card.currentBid ? card.currentBid.toLocaleString("en-US", { style: "currency", currency: "USD"}) : null}</p>
                 </div>
@@ -202,7 +201,7 @@ const CarCard = ({ card, isBuy = false }) => {
             </div>
           </div>
           <Link to={`vehicle-detail/${card.lot_id}`}>
-            <button className="w-full mb-[0.8vh] rounded-lg py-[0.8vh] text-[13px] lg:text-[1vw] bg-[#7a798a] text-white font-urbanist mt-1 hover:bg-[#ca0000] duration-200">
+            <button className="w-full text-16 rounded-[0.625vw] p-[0.521vw] mt-[1.5vw]  bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
               {isBuy
                 ? `Buy Now in ${card.price_new ? card.price_new : "Tbd"}`
                 : "Bid Now"}
@@ -210,6 +209,7 @@ const CarCard = ({ card, isBuy = false }) => {
           </Link>
           
         </div>
+        
       </div>
     
     </div>

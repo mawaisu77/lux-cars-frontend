@@ -78,18 +78,19 @@ const Makes = () => {
     };
 
   return (
-    <div className=" w-[98.9vw] mb-20 mt-20">
+    <div className="w-[100vw]">
+    <div className=" w-[73vw] sm:my-[4.167vw] mx-auto">
       <div>
-        <div className="flex justify-center font-urbanist text-[36px] lg:text-36 font-bold  pt-[5.5vh]">
+        <div className="flex justify-center font-urbanist text-36 font-bold ">
           Popular Makes
         </div>
-        <hr className="h-1 bg-[#CA0000] w-20 mx-auto mt-2" />
+        <hr className="h-[0.26vw] bg-primary-red w-[5vw] mx-auto mt-[0.781vw]" />
         {/* For desktop */}
         <div className="hidden lg:flex w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] justify-center">
           {carData && carData.map((item, index) => (
             <button
               key={index}
-              className="font-urbanist flex justify-center items-center bg-secondary-gray hover:bg-primary-red hover:text-white duration-200 py-[1.5vh] px-[1.1vw] rounded-lg lg:text-15"
+              className="font-urbanist flex justify-center items-center bg-secondary-gray hover:bg-primary-red hover:text-white duration-200 py-[1.5vh] px-[1.1vw] rounded-lg lg:text-16"
               onClick={() => handleMakeClick(item.make)}
 
             >
@@ -103,7 +104,7 @@ const Makes = () => {
                 <span className="">
                 {iconMapping[item.make] && iconMapping[item.make]}
                 </span>
-                <span className="ml-2"> {item.make}</span>
+                <span className="ml-[0.5vw]"> {item.make}</span>
                 </>
               )}
             </button>
@@ -135,6 +136,8 @@ const Makes = () => {
         </div>
       </div>
     </div>
+    </div>
+
   );
 };
 

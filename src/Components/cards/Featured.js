@@ -38,27 +38,27 @@ const BuyNow = () => {
 
   return (
     <>
-      <div className="relative w-full lg:w-[98.9vw] bg-white  py-10">
-        <div className="">
-          <div className=" w-full sm:w-[85vw] flex justify-between items-center mx-auto ">
+      <div className="bg-secondary-gray relative w-[100vw] mx-auto sm:py-[4.167vw] ">
+        <div className="max-w-[73.229vw] mx-auto">
+          <div className="flex justify-between items-center ">
             <div className="flex flex-col gap-y-2">
-              <div className="flex justify-start items-center font-urbanist text-[26px] lg:text-34 font-bold leading-[2vw] pt-[2vh]">
-                Buy Now
+              <div className="flex justify-start items-center font-urbanist text-[26px] lg:text-36 font-bold leading-[2vw] pt-[2vh]">
+                Featured Cars
               </div>
-              <hr className="h-1 bg-primary-red w-16 " />
+              <hr className="h-[0.26vw] bg-primary-red w-[4vw] " />
             </div>
 
-            <div className="flex justify-center text-primary-red text-18  items-center gap-x-1">
+            <div className="flex justify-center text-primary-red text-24 items-center gap-x-[0.625vw]">
               <button
                 onClick={handleViewAllClick}
-                className="font-bold text-sm hover:underline"
+                className="font-bold text-20 hover:underline"
               >
                 View All
               </button>
-              <FaExternalLinkAlt size={13} />
+              <FaExternalLinkAlt />
             </div>
           </div>
-          <div className="relative mt-4 mx-auto sm:w-[85vw] gap-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          <div className="relative mt-[2.2625vh] mx-auto gap-[1.094vw]  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
             {carData &&
             carData.slice(0, -2).map((card, index) => (
                 <CarCard key={index} card={card} isBuy={true} />

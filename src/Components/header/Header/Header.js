@@ -78,42 +78,41 @@ const Header = () => {
   // console.log("windowWidth", windowWidth)
 
   return (
+    <>
     <div
-      className="fixed top-0 border-b border-primary-gray w-full z-50 "
+      className="fixed top-0 border-b border-primary-gray z-50 w-[100vw] p-[0.625vw]"
       style={{
         backgroundColor: windowWidth < 768 ? "#333333" : navbarColor,
         transition: "background-color 0.5s ease-in-out",
         zIndex: 1000,
       }}
     >
-      <div className="flex justify-between items-center w-full max-w-[1000px] lg:max-w-[88vw] mx-auto h-[72px] lg:h-[9.8vh] px-4">
-        <div className="flex items-center gap-4">
-          {(isHomePage && navbarColor === "transparent" && windowWidth > 768) ||
+      <div className="flex justify-between mx-auto items-center max-w-[73.229vw] ">
+        <div className="flex gap-[1.953125vw] items-center ">
+          {/* {( navbarColor === "transparent" && windowWidth > 768) ||
           windowWidth < !768 ? (
             <Link to="/">
               <img
-                className="w-[142px] lg:w-[13.58vw] h-auto"
+                className="w-[142px] lg:w-[12.578125vw] 2xl:w-[17.578125vw] h-auto"
                 src={img1}
                 alt="Logo"
               />
             </Link>
-          ) : (
+          ) : ( */}
             <Link to="/">
               <img
                 src={
                   "https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"
                 }
-                className="w-[142px] lg:w-[13.58vw] h-auto"
+                className="w-[142px] lg:w-[11.767vw] h-auto"
                 alt={`Logo`}
               />
-            </Link>
-          )}
+          </Link>
+          {/* )} */}
 
           <div className="hidden lg:flex">
             <ul
-              className={`flex gap-[1.5vw] font-urbanist font-bold text-[1rem] lg:text-18 leading-6 ${
-                isHomePage ? "text-primary-gray" : "text-white"
-              } ${navbarColor === "transparent" ? "" : "text-white"}`}
+              className={`flex gap-[1.5vw] font-urbanist font-bold text-18 mx-auto text-white  ${navbarColor === "transparent" ? "" : "text-white"}`}
             >
               <Link to="/how-works" className=" hover:text-primary-red duration-200">
                 <li className="">How it works</li>
@@ -140,14 +139,13 @@ const Header = () => {
             </ul>
           </div>
         </div>
-        <div className="hidden lg:flex items-center gap-2 lg:gap-4 font-urbanist font-bold text-[1rem] lg:text-18 text-[#7a798a]">
+        
+        <div className="hidden lg:flex items-center gap-2 lg:gap-[0.677vw] font-urbanist font-bold text-[1rem] lg:text-18 text-[#7a798a]">
           <div className="relative inline-block text-left">
-            <div className="flex justify-center items-center gap-[1vw]  ">
+            <div className="flex justify-center items-center">
               <IoGlobeSharp
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className={`cursor-pointer ${
-                  isHomePage ? "text-[#7A798A]" : "text-white"
-                } ${
+                className={`cursor-pointer text-white  ${
                   navbarColor === "transparent" ? "" : "text-white"
                 } w-[1.3vw] h-[2.7vh] hover:text-primary-red duration-200`}
               />
@@ -173,43 +171,39 @@ const Header = () => {
           </div>
           <Link
             to="/user/profile"
-            className={` ${
-              isHomePage ? "text-[#7A798A] block" : "text-white"
-            } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-primary-red duration-200`}
+            className={` text-white ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
           >
             <HiUsers />
           </Link>
 
           {!user ? (
-            <>
+            <div className="flex items-center gap-x-[0.3vw]">
               <Link to="/login">
                 <button
-                  className={` focus:outline-none ${
+                  className={` focus:outline-none text-white ${
                     isHomePage ? "text-primary-gray" : "text-white"
-                  } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-primary-red duration-200`}
+                  } ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
                 >
-                  login
+                  Login
                 </button>
               </Link>
               <div
-                className={`  ${isHomePage ? "text-primary-gray" : "text-white"}`}
+                className={` text-white`}
               >
                 /
               </div>
               <Link to="/signup">
                 <button
-                  className={` focus:outline-none ${
-                    isHomePage ? "text-primary-gray" : "text-white"
-                  } ${navbarColor === "transparent" ? "" : "text-white"} hover:text-primary-redduration-200`}
+                  className={` focus:outline-none text-white ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
                 >
-                  sign-up
+                  SignUp
                 </button>
               </Link>
-            </>
+            </div>
           ) : (
             <>
               <button
-                className={`focus:outline-none ${
+                className={`focus:outline-none lg:text-18 ${
                   isHomePage ? "text-primary-gray" : "text-white"
                 } ${navbarColor === "transparent" ? "" : "text-white"}`}
                 onClick={handleLogoutModal}
@@ -219,7 +213,7 @@ const Header = () => {
             </>
           )}
 
-          <button className="w-[7.333333333333334vw] h-[5.23vh] bg-primary-red text-white rounded-full text-14 focus:outline-none">
+          <button className="px-[1.719vw] py-[0.625vw]  bg-primary-red text-white rounded-full lg:text-14 focus:outline-none">
             Try Demo
           </button>
         </div>
@@ -310,6 +304,8 @@ const Header = () => {
         </div>
       </dialog>
     </div>
+    </>
+
   );
 };
 
