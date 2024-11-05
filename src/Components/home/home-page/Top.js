@@ -31,21 +31,22 @@ const Top = () => {
   const displayedCategories = isSmallScreen && !showAll ? categories.slice(0, 2) : categories;
 
   return (
-    <div className='flex flex-col mb-10 items-center justify-center mx-auto w-[88vw] mt-[10vh]'>
-      <div className='flex text-lux-black justify-center font-urbanist text-20 lg:text-24 font-bold leading-[2.86vw]'>
+    <div className='relative w-[100vw] mx-auto'>
+    <div className='relative mamax-w-[73.229vw] mx-auto sm:py-[4.167vw]'>
+    <div className='flex flex-col items-center justify-center mx-auto w-[73.229vw]'>
+      <div className='flex text-lux-black justify-center font-urbanist text-20 lg:text-36 font-bold leading-[2.86vw]'>
         Top Categories
       </div>
-      <hr className="h-1 bg-primary-red mt-[15px] w-20 mx-auto" />
-      
+      <hr className="h-[0.26vw] bg-primary-red mt-[0.781vw] w-[5vw] mx-auto" />
       <div className='flex flex-wrap justify-center mx-auto gap-3 lg:gap-[1.2vw] mt-[7vh] w-[100%] lg:w-[74vw]'>
         {displayedCategories.map((item, index) => (
-          <div key={index} className='w-[330px] lg:w-[17.2vw] flex items-center border rounded-md shadow-md'>
-            <div className='p-2  lg:p-[0.8vw] flex gap-[1vw]'>
-              <div className='w-[60px] h-[60px]'> 
+          <div key={index} className='w-[17.656vw] lg:w-[17.2vw] flex items-center border rounded-[1.042vw] shadow-md'>
+            <div className='p-[1.2625vh] lg:p-[0.8vw] flex gap-[1vw]'>
+              <div className='w-[3.125vw] h-[3.125vw]'> 
               <img src={item.img} alt={item.category} className='w-full h-full object-cover' />
               </div>
               <div className='flex flex-col justify-center items-start'>
-                <div className='font-urbanist text-lux-black text-[16px] lg:text-15 font-semibold'>
+                <div className='font-urbanist text-lux-black text-[16px] lg:text-18 font-semibold'>
                   {item.category}
                 </div>
                 <div className='text-primary-gray text-[14px] font-semi lg:text-14'>
@@ -66,6 +67,9 @@ const Top = () => {
         </div>
       )}
     </div>
+    </div>
+    </div>
+
   );
 };
 export default Top;

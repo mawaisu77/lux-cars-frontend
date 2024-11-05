@@ -8,7 +8,6 @@ import {
   ScrollRestoration,
 } from "react-router-dom";
 import Home from "./Components/home/index.js";
-import Footer from "./Components/Footer/index.js";
 import Login from "./Components/Login/login-page/Login.js";
 import Signup from "./Components/sign-up/index.js";
 import ContactUs from "./Components/Contact/Cantact-page/ContactUs.js";
@@ -45,6 +44,7 @@ import ScrollToTop from "./utils/ScrollToTop.js";
 import LocalVehicle from "./Components/localcars-details/index.js";
 import LocalCarsSearchPage from "./Components/localCars-search/index.js";
 import LocalCars from "./Components/user-page/user-pages/LocalCars.js";
+import FooterSec from "./Components/Footer/index.js";
 
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -273,7 +273,7 @@ function App() {
             <Route path="/admin/dashboard" element={<>welcome</>} />
           </Routes>
           {/* Include the Footer component so it appears on all pages */}
-          <Footer />
+          <FooterSec />
         </div>
       </Router>
     </>
