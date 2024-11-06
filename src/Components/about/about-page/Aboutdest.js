@@ -15,14 +15,14 @@ const Aboutdest = () => {
   };
 
   return (
-    <div className="bg-white w-[100vw] py-[4.167vw]">
-      <div className="w-[73.229vw] mx-auto">
-        <div className="text-36 text-lux-black lg:text-36 font-urbanist font-semibold ">
+    <div className="bg-white w-[100vw] py-[30px] sm:py-[4.167vw]">
+      <div className="max-w-[85vw] sm:max-w-[73.229vw] mx-auto">
+        <div className="text-lux-black text-[22px] sm:text-36  font-urbanist font-semibold ">
           Our Destination
-          <hr className="h-[0.26vw] bg-primary-red w-[5vw] mx-auto" />
+          <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red mt-[6px] sm:mt-[0.781vw] w-[30px] sm:w-[5vw] mx-auto" />
         </div>
-        <div className="flex gap-3 flex-col lg:flex-row lg:justify-between items-center w-full lg:w-[74vw] h-[330px] lg:h-[11vh] mx-auto mt-10">
-          <p className="w-[330px] lg:w-[55vw] text-left text-[18px] lg:text-18 text-primary-gray">
+        <div className="flex gap-3 flex-col lg:flex-row lg:justify-between items-center w-full mx-auto mt-10">
+          <p className="w-[70%] text-left text-[18px] lg:text-18 text-primary-gray">
             Lorem ipsum dolor sit amet. Vel aliquid reiciendis et molestias
             dignissimos quo eligendi eaque eum iusto explicabo et incidunt
             cupiditate. Est nemo delectus est quia Quis vel pariatur autem et
@@ -35,10 +35,10 @@ const Aboutdest = () => {
           </button>
         </div>
 
-        <div className="w-[343px] lg:w-[73.5vw] h-[500px] lg:h-[23.646vw] rounded-[1.042vw] shadow-lg mx-auto mt-[8vh] relative">
-            <div className="p-[1.042vw] w-full h-full">
+        <div className="w-full h-[500px] sm:h-[23.646vw] rounded-[1.042vw] shadow-lg mx-auto mt-[30px] sm:mt-[8vh] relative">
+            <div className=" sm:p-[1.042vw] w-full h-full">
             <div
-            className="relative bg-blue-400 w-full h-[500px] lg:h-full rounded-[1.042vw] bg-cover bg-center"
+            className="relative w-full h-[500px] lg:h-full rounded-[1.042vw] bg-cover bg-center"
             style={{ backgroundImage: `url(${backgroundImage})` }}
           >
             {/* Removed img tag and replaced with background image */}

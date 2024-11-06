@@ -16,7 +16,7 @@ const Abouttest = () => {
   // const { selectedIsland } = useContext(IslandContext);
 
   return (
-    <div className="w-[100vw] bg-secondary-gray sm:py-[4.167vw]">
+    <div className="w-[100vw] bg-secondary-gray py-[30px] sm:py-[4.167vw]">
       {/* <div>
             {selectedIsland ? (
                 <p>Selected Island: {selectedIsland}</p>
@@ -25,10 +25,10 @@ const Abouttest = () => {
             )}
         </div> */}
 
-      <div className="max-w-[62.292vw] mx-auto">
-        <div className="text-24 lg:text-36 font-urbanist font-semibold mb-[5vh]">
+      <div className="max-w-[85vw] sm:max-w-[73.292vw] mx-auto">
+        <div className="text-[22px] sm:text-36 font-urbanist font-semibold mb-[5vh]">
           Testimonials
-          <hr className="h-[0.26vw] bg-primary-red w-[5vw] mx-auto" />
+          <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red mt-[6px] sm:mt-[0.781vw] w-[30px] sm:w-[5vw] mx-auto" />
         </div>
         <Swiper
           slidesPerView={1}
@@ -47,12 +47,12 @@ const Abouttest = () => {
           navigation={false}
           pagination={{ clickable: true }}
           modules={[Navigation, Pagination]}
-          className="w-full h-[24.938vw] flex justify-center items-center"
+          className="w-full h-[370px] sm:h-[24.938vw] flex justify-center items-center"
         >
           {testi.map((testimonial, index) => (
             <SwiperSlide key={index} className="relative cursor-pointer ">
-              <div className="flex h-[20.938vw] flex-col justify-center items-center">
-                <div className="h-full bg-white mx-auto rounded-lg shadow-md p-[1.667vw] ">
+              <div className="flex bg-white h-[300px] sm:h-[20.938vw] flex-col justify-center items-center">
+                <div className="h-full mx-auto rounded-lg shadow-md p-[1.667vw] ">
                   <div className="flex flex-col justify-center items-center text-[#062A3F]">
                     <p className="text-[18px] lg:text-18 font-urbanist ">
                       {testimonial.para}
