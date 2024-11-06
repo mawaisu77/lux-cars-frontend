@@ -56,7 +56,7 @@ const LocalCarsCard = ({ card }) => {
         <div className="w-full relative text-16">
        
           <Swiper
-            className="relative rounded-[1.2625vw]"
+            className="relative rounded-[1.2625vw] h-[240px] sm:h-[12vw]"
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
@@ -66,9 +66,9 @@ const LocalCarsCard = ({ card }) => {
           >
             {card.carImages &&
               card.carImages.map((image, index) => (
-                <SwiperSlide key={index} className="relative ">
+                <SwiperSlide key={index} className="relative w-full h-full">
                  
-                  <div className=" ">        
+                  <div className="w-full h-full">        
                     <img
                       className="w-full h-full rounded-sm cursor-pointer"
                       src={image}
@@ -158,8 +158,8 @@ const LocalCarsCard = ({ card }) => {
             </div>
           </div>
           <Link to={`vehicle-detail/${card.id}`}>
-            <button className="w-full text-16 rounded-[0.625vw] p-[0.521vw] mt-[1.5vw]  bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
-              { "Bid Now"}
+          <button className="w-full text-[14px] sm:text-16 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] sm:mt-[1.5vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
+          { "Bid Now"}
             </button>
           </Link>
           

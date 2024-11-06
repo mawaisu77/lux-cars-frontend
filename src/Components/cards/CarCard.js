@@ -105,7 +105,7 @@ const CarCard = ({ card, isBuy = false }) => {
           )}
 
           <Swiper
-            className="relative rounded-[1.2625vw]"
+            className="relative rounded-[1.2625vw] h-[240px] sm:h-[12vw]"
             autoplay={{
               delay: 2000,
               disableOnInteraction: false,
@@ -115,9 +115,9 @@ const CarCard = ({ card, isBuy = false }) => {
           >
             {card.images &&
               card.images.map((image, index) => (
-                <SwiperSlide key={index} className="relative ">
+                <SwiperSlide key={index} className="relative w-full h-full">
                  
-                  <div className=" ">        
+                  <div className="w-full h-full">        
                     <img
                       className="w-full h-full rounded-sm cursor-pointer"
                       src={image}
@@ -132,7 +132,6 @@ const CarCard = ({ card, isBuy = false }) => {
           </Swiper>
     
         </div>
- 
         <div className="absolute w-[7.865vw] bottom-[1vw] left-1/2 transform -translate-x-1/2 bg-white rounded-[0.677vw] z-50 flex justify-center items-center">
           <div className="flex justify-center items-center gap-x-[0.5vw] px-[0.5vw] py-[0.5vh]">
             <div>
@@ -157,10 +156,9 @@ const CarCard = ({ card, isBuy = false }) => {
             </div>
           </div>
         </div>
-
       </div>
-      <div>
 
+      <div>
         <div className="pt-[1.2vw]">
           <div className="flex">
             <div className="flex justify-between items-center w-full">
@@ -201,7 +199,7 @@ const CarCard = ({ card, isBuy = false }) => {
             </div>
           </div>
           <Link to={`vehicle-detail/${card.lot_id}`}>
-            <button className="w-full text-16 rounded-[0.625vw] p-[0.521vw] mt-[1.5vw]  bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
+            <button className="w-full text-[14px] sm:text-16 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] sm:mt-[1.5vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
               {isBuy
                 ? `Buy Now in ${card.price_new ? card.price_new : "Tbd"}`
                 : "Bid Now"}
@@ -209,7 +207,7 @@ const CarCard = ({ card, isBuy = false }) => {
           </Link>
           
         </div>
-        
+
       </div>
     
     </div>
