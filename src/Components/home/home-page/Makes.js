@@ -79,12 +79,12 @@ const Makes = () => {
 
   return (
     <div className="w-[100vw]">
-    <div className=" w-[73vw] sm:my-[4.167vw] mx-auto">
+    <div className=" max-w-[85vw] sm:max-w-[73vw] py-[30px] sm:py-[4.167vw] mx-auto">
       <div>
-        <div className="flex justify-center font-urbanist text-36 font-bold ">
+        <div className="flex justify-center font-urbanist text-[22px] sm:text-36 font-bold ">
           Popular Makes
         </div>
-        <hr className="h-[0.26vw] bg-primary-red w-[5vw] mx-auto mt-[0.781vw]" />
+        <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[5vw] mx-auto mt-[6px] sm:mt-[0.781vw]" />
         {/* For desktop */}
         <div className="hidden lg:flex w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] justify-center">
           {carData && carData.map((item, index) => (
@@ -111,7 +111,7 @@ const Makes = () => {
           ))}
         </div>
         {/* For mobile */}
-        <div className="lg:hidden w-[78vw] h-[30vh] mx-auto overflow-x-auto">
+        <div className="lg:hidden w-[78vw] mx-auto overflow-x-auto">
           <div
             className="grid grid-rows-3 gap-y-5 gap-x-4 lg:gap-[0.5vw]  auto-cols-max mt-6"
             style={{ gridAutoFlow: "column" }}
