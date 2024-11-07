@@ -51,7 +51,7 @@ const LocalCarsCard = ({ card }) => {
 
   return (
     <>
-       <div className="rounded-[1.042vw] shadow-md p-[1.042vw] w-full bg-white">
+       <div className="rounded-[10px] sm:rounded-[1.042vw] shadow-md sm:p-[1.042vw] p-[8px] w-full bg-white">
       <div className=" relative w-full">
         <div className="w-full relative text-16">
        

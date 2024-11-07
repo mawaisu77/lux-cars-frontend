@@ -20,6 +20,7 @@ module.exports = {
         '24': '1.25vw', 
         '34': '1.771vw', 
         '36': '1.875vw', 
+        '38': '1.979vw',
         '40': '2.083vw',
         '50': '2.604vw',
         '54': '2.813vw',
@@ -34,6 +35,9 @@ module.exports = {
         'light-gray': '#F8F8F8',
         'lux-black': '#1F1F2C',
         'lux-gray': '#F3F3F6',
+      },
+      boxShadow: {
+        'inner-lg': 'inset 0px 0px 20px 3px rgba(0, 0, 0, 0.3)', // Custom inset shadow
       },
     },
   },

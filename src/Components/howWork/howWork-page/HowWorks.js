@@ -73,9 +73,9 @@ const HowWorks = () => {
         </div>
       </div>
 
-      <div className=" lg:w-[91vw] mx-auto my-[80px] ">
+      <div className=" max-w-[85vw] sm:max-w-[73.229vw] mx-auto my-[80px] sm:my-[4.175vw] ">
         <div className="flex flex-col mx-auto max-w-lg ">
-          <p className="  text-[36px] lg:text-36  font-bold font-urbanist">
+          <p className="  text-[36px] sm:text-36  font-bold font-urbanist">
             Step-by-Step Guide for Users
           </p>
           <p className="text-[16px] lg:text-16 text-[#7a798a] ">
@@ -100,8 +100,8 @@ const HowWorks = () => {
                   <div className="flex items-center justify-center">
                     {/* Content */}
                     <div
-                      className={`w-1/2 ${
-                        index % 2 === 0 ? "pr-16 text-right" : "pl-16 text-left"
+                      className={`w-1/2  ${
+                        index % 2 === 0 ? "sm:pr-16 pr-4 text-right" : "pl-4 sm:pl-16 text-left"
                       } ${index % 2 === 1 ? "order-2" : ""}`}
                     >
                       <div
@@ -109,19 +109,19 @@ const HowWorks = () => {
                           activeStep === index ? "opacity-100" : "opacity-50"
                         }`}
                       >
-                        <h3 className="text-24 font-semibold mb-4" onClick={() => setActiveStep(index)}
+                        <h3 className="sm:text-24 text-[18px] font-semibold mb-4" onClick={() => setActiveStep(index)}
                         >
                           {step.title}
                         </h3>
                         <div
-                          className={`flex items-start gap-8 ${
-                            index % 2 === 0 ? "flex-row-reverse" : "flex-row"
+                          className={`flex flex-col items-start sm:flex-row sm:items-start gap-8 ${
+                            index % 2 === 0 ? "sm:flex-row-reverse items-end" : "flex-row"
                           }`}
                         >
-                          <div onClick={() => setActiveStep(index)} className="bg-white cursor-pointer rounded-xl p-6 shadow-lg border border-gray-200 ">
-                            <step.icon className="w-8 h-8 text-gray-600" />
+                          <div onClick={() => setActiveStep(index)} className="bg-white cursor-pointer rounded-xl sm:p-6 p-4 shadow-lg border border-gray-200 ">
+                            <step.icon className="w-6 sm:w-8 h-6 sm:h-8 text-gray-600" />
                           </div>
-                          <p className="text-gray-600 text-18 ">
+                          <p className="text-gray-600 sm:text-18 text-[14px] ">
                             {step.description}
                           </p>
                         </div>

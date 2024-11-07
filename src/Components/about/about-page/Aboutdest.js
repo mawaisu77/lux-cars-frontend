@@ -30,7 +30,7 @@ const Aboutdest = () => {
             laudantium consequatur est rerum deserunt est Quis nobis qui velit
             doloribus.
           </p>
-          <button className="w-[150px] lg:w-[10vw] h-[46px] lg:h-[6vh] text-[18px] lg:text-[0.8vw] text-primary-red border border-primary-red rounded-full">
+          <button className="text-[18px] lg:text-[0.8vw] text-primary-red border border-primary-red rounded-full text-nowrap px-4 py-2">
             How it Works?
           </button>
         </div>

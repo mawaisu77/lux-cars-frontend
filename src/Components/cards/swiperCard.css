@@ -1,0 +1,11 @@
+/* Initially hide pagination bullets */
+.swiper-pagination {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show pagination bullets on card hover */
+.swiper-card:hover .swiper-pagination {
+  opacity: 1;
+}
+

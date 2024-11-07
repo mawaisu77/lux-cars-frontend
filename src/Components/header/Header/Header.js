@@ -80,14 +80,14 @@ const Header = () => {
   return (
     <>
     <div
-      className="fixed top-0 border-b border-primary-gray z-50 w-[100vw] p-[0.625vw]"
+      className="fixed top-0 border-b border-primary-gray z-50 w-[100vw] sm:p-[0.625vw] p-[10px]"
       style={{
         backgroundColor: windowWidth < 768 ? "#333333" : navbarColor,
         transition: "background-color 0.5s ease-in-out",
         zIndex: 1000,
       }}
     >
-      <div className="flex justify-between mx-auto items-center max-w-[73.229vw] ">
+      <div className="flex justify-between mx-auto items-center sm:max-w-[73.229vw] max-w-[85vw]">
         <div className="flex gap-[1.953125vw] items-center ">
           {/* {( navbarColor === "transparent" && windowWidth > 768) ||
           windowWidth < !768 ? (

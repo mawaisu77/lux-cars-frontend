@@ -338,14 +338,14 @@ export const live = [
 ];
 
 export const categories = [
-  { img: image1, category: "Automobiles", seeAll: "see all" },
-  { img: image2, category: "Super Car", seeAll: "see all" },
-  { img: image3, category: "Motor Cycles", seeAll: "see all" },
-  { img: image4, category: "ATVs", seeAll: "see all" },
-  { img: image5, category: "Buses", seeAll: "see all" },
-  { img: image6, category: "Truck", seeAll: "see all" },
-  { img: image7, category: "Trailer", seeAll: "see all" },
-  { img: image8, category: "Motor Homes", seeAll: "see all" },
+  { img: image1, category: "Automobiles",id:'Automobile' },
+  { img: image2, category: "Super Car",id:'super-car' },
+  { img: image3, category: "Motor Cycles",id:'Motorcycle' },
+  { img: image4, category: "ATVs",id:'ATV' },
+  { img: image5, category: "Buses",id:'Bus' },
+  { img: image6, category: "Truck",id:'Truck' },
+  { img: image7, category: "Trailer",id:'Trailers' },
+  { img: image8, category: "Mobile Home",id:'Mobile Home' },
 ];
 
 export const values = [

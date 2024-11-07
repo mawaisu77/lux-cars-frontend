@@ -8,10 +8,10 @@ function Card({ data}) {
         <div className="mx-[1.1vw]  ">
           <div className="md:w-[5vw] md:h-[7vh] lg:h-[8vh] h-[50px] w-[50px]  md:w-[4.5vw] lg:w-[3.5vw] text-white bg-[#DF4949] rounded-[15px] md:rounded-[0.938vw] flex items-center mx-auto mb-[0.781vh]">
             {/* <PiUsersFill size={25} className="mx-auto" /> */}
-            {data.icon}
+            {/* {data.icon} */}
           </div>
           <h2 className="text-[16px]  md:text-[1.1vw]   lg:text-[1.042vw]  font-[700] text-[#1F1F2C] font-urbanist">
-           {data.heading}
+           {/* {data.heading} */}
           </h2>
         </div>
       </div>

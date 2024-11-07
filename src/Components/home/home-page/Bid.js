@@ -219,12 +219,12 @@ const Bid = () => {
 
   return (
     <>
-      <div class="relative  h-screen text-white overflow-hidden">
+      <div class="relative h-screen text-white overflow-hidden">
         <div class="absolute inset-0">
           <img
             src={bgImage}
             alt="Background_Image"
-            class="object-cover object-center w-full h-full"
+            class="object-cover w-full h-full"
           />
           <div class="absolute inset-0 bg-black opacity-50"></div>
         </div>
@@ -257,7 +257,7 @@ const Bid = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmo
           </p>
-          <div className="flex gap-x-[1.25vw] relative z-50 justify-center items-center">
+          <div className="flex gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
             <div className="flex items-center py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border border-white rounded-full">
               <FaRocket />
               <button className="bg-transparent  duration-200 font-urbanist flex text-white items-center ">
