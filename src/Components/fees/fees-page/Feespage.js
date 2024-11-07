@@ -19,6 +19,7 @@ import BuyerFeesListCard from "./BuyerFeesListCard.js";
 import VirtualBidFeeCard from "./VirtualBidFeeCard.js";
 import IAAIdata from "./IaaIList.js";
 import InternetFee from "./InternetFee.js";
+import luxImage from "../../../assets/Pattern.png";
 
 
 function Feespage() {
@@ -60,52 +61,93 @@ function Feespage() {
         </div>
       </div>
 
-      <div className="px-[10px] md:px-[0px] w-[100%] md:w-[80vw] lg:w-[73.177vw] mx-auto md:mt-[7.813vh] mt-[100px] mb-[64px] :md:mb-[7.813vh]">
-        <div className="md:flex md:justify-between">
-          <div className="w-[100%] md:w-[44vw] lg:w-[38.073vw]">
-            <div>
-              <h1 className="text-left text-[36px] md:text-[1.875vw] font-[700] text-[#1F1F2C] font-urbanist md:mb-[1.25vh] mb-[40px]">
-                Bidding at LUX
-              </h1>
-              <div className="relative">
-                <img src={image} className="md:w-[80vw]" />
-                <img
-                  src={image3}
-                  className="w-[150px] md:w-[14vw] absolute top-[30px] md:top-[10.917vh] left-[25px] md:left-[1.5vw]"
-                />
-              </div>
-            </div>
-            <div className="mt-[30px] md:mt-[1.563vh]">
-              <h2 className="text-left text-[22px] md:text-[1.25vw] font-[700] text-[#1F1F2C] font-urbanist">
-                Advantages Of Bidding Through Lux First Choice Cars
-              </h2>
-              <div className="flex flex-wrap text-center justify-center md:justify-start lg:justify-start mt-[30px] md:mt-[1.563vh] gap-[12px]">
-                {feesLeftCard.map((data, index) => (
-                  <Card id={index} data={data} />
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          <div className="w-[100%] md:w-[33.542vw] md:mt-[0vw] mt-[105px]">
-            <div>
-              <h2 className="text-left text-[30px] md:text-[1.875vw] font-[700] text-[#1F1F2C] font-urbanist mb-[1.25vh]">
-                Bidding at COPART / IAAI
-              </h2>
-              <img src={image1} className="md:w-[33.542vw]" />
-            </div>
-
-            <h2 className="text-left text-[20px] md:text-[1.35vw] font-[700] text-[#1F1F2C] font-urbanist mt-[30px] md:mt-[1.563vh] mb-[1.25vh]">
-              Drawbacks of bidding directly at Copart/IAAI auctions
-            </h2>
-
-            <div className="text-center justify-center flex flex-wrap mt-[30px] md:mt-[1.563vh] gap-[12px]">
-              {feesRightCard.map((data, index) => (
-                <Card id={index} data={data} />
-              ))}
-            </div>
-          </div>
+<div className="w-[100vw] py-[40px] sm:py-[4.167vw]">
+<div className=" mx-auto flex flex-col md:flex-row gap-8 sm:gap-[2vw] max-w-[85vw] sm:max-w-[53.917vw]">
+      {/* COPART/IAAI Card */}
+      <div className="flex-1 relative border-2 border-blue-400 rounded-2xl p-[1.9vw]">
+        <div className="h-[2.917vw] w-[2.917vw] bg-[#DC2626] rounded-2xl sm:rounded-[1vw] flex items-center justify-center mb-8 sm:mb-[1.5vw]">
+          <PiUsersFill className="w-8 h-8 sm:w-[1.5vw] sm:h-[1.5vw] text-white" />
         </div>
+        
+        <h2 className="text-[32px] text-left sm:text-38 font-semibold mb-[1.25vw]">
+          Bidding At COPART / IAAI
+        </h2>
+        <p className="text-lux-black text-left mb-8 sm:mb-[1.5vw] sm:text-20">
+          Drawbacks of bidding directly at Copart/IAAI auctions
+        </p>
+
+        <div className="space-y-4 text-[20px] sm:space-y-[0.625vw] sm:text-24 text-left">
+          {[
+            "Dealer / Broker License Required",
+            "Annual Membership Fee At Both Sites",
+            "Separate Deposits For Each Auction",
+            "Shorter Vehicle Descriptions And Details",
+            "Increased Risk Of Purchasing Staged Vehicles",
+            "Higher Public Fees Available"
+          ].map((item, index) => (
+            <div key={index} className="flex items-center gap-[0.521vw] text-[20px] sm:text-20">
+              <span className="text-primary-red leading-none ">-</span>
+              <span className="text-lux-black ">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* LUX Card */}
+      <div className="flex-1 relative border-2 border-blue-400 rounded-2xl p-[1.9vw]">
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${luxImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+        <div className="relative z-10">
+        <div className="h-[2.917vw] w-[2.917vw] bg-[#DC2626] rounded-2xl sm:rounded-[1vw] flex items-center justify-center mb-8 sm:mb-[1.5vw]">
+          <PiUsersFill className="w-8 h-8 sm:w-[1.5vw] sm:h-[1.5vw] text-white" />
+        </div>
+          
+          <div className="flex items-center gap-[1vw] mb-[1.25vw]">
+          <h2 className="text-[32px] text-left sm:text-38 font-semibold  ">
+          Bidding At LUX
+          </h2>
+            <span className=" text-white border-[0.052vw] text-nowrap bg-transparent border-white px-[0.521vw] py-[0.26vw] rounded-[0.417vw] text-18">
+              Best Choice
+            </span>
+          </div>
+
+          <p className="text-lux-black text-left text-20 mb-8 sm:mb-[1.5vw]">
+            Advantages of bidding through Lux First Choice Cars
+          </p>
+
+          <div className="space-y-4 text-[20px] sm:space-y-[0.625vw] sm:text-24 text-left">
+          {[
+              "No Dealer License Required",
+              "No Annual Membership Fee",
+              "Ability To Search Two Auctions",
+              "Availability Of Full Vehicle Descriptions And Details",
+              "Helps Buyers Avoid Purchasing Staged Cars"
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-[0.521vw] text-[20px] sm:text-20">
+                <span className="text-primary-red leading-none ">✓</span>
+                <span className="text-lux-black ">{item}</span>
+              </div>
+            ))}
+          </div>
+
+          <button className=" mt-[2.292vw] w-full bg-[#DC0000] hover:bg-[#B00000] text-white text-20 font-medium py-[1.146vw] rounded-[0.625vw] transition duration-300">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+</div>
+
+   
+ 
+
+      <div className="px-[10px] md:px-[0px] w-[100%] md:w-[80vw] lg:w-[73.177vw] mx-auto md:mt-[7.813vh] mt-[100px] mb-[64px] :md:mb-[7.813vh]">
 
         {/* Copart and IAAI Buttons */}
         <div className="text-left flex flex-col gap-[10px] md:gap-[0.521vw] mt-[1.563vh] mb-[0.833vh]">
