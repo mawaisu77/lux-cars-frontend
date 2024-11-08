@@ -50,9 +50,13 @@ const Top = () => {
                 .map((category, index) => (
                   <div
                     onClick={() => {
-                      const vehicleType = category.category
+                      const vehicleType = category.id
                         .toLowerCase()
                         .replace(/\s+/g, "_");
+                      localStorage.setItem(
+                        "apiEndpoint",
+                        process.env.REACT_APP_API_CARS_LIVE
+                      );
                       navigate(`/search-page?vehicle_type=${vehicleType}`);
                     }}
                     key={index}
