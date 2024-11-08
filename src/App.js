@@ -49,7 +49,6 @@ import FooterSec from "./Components/Footer/index.js";
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
   const { user } = useAuthContext();
-  const { error, fetchSavedCars, loading, savedCars } = useGetSavedCars();
 
   useEffect(() => {
     const checkReviewPopup = () => {
@@ -79,20 +78,6 @@ function App() {
     return () => clearInterval(interval);
   }, [user]);
 
-  
-  useEffect(() => {
-    if (user) {
-      fetchSavedCars();
-    }
-  }, [user, savedCars?.data?.length]);
-
-  // Effect to save savedCars IDs to localStorage
-  useEffect(() => {
-    if (savedCars && savedCars?.data?.length > 0) {
-      const carIds = savedCars?.data?.map((car) => car.lot_id);
-      localStorage.setItem("savedCars", JSON.stringify(carIds));
-    }
-  }, [savedCars]);
 
   const handleClosePopup = () => {
     if (user && user.email) {
@@ -100,6 +85,9 @@ function App() {
       localStorage.removeItem(`loginTime_${user.email}`);
     }
   };
+
+  
+
   return (
     <>
       <Router>

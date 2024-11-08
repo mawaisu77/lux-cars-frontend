@@ -175,42 +175,6 @@ const Bid = () => {
     }),
   };
 
-  const customMobStyles = {
-    control: (base) => ({
-      ...base,
-      fontSize: "13px",
-      borderRadius: "0.74vh",
-      backgroundColor: "transparent",
-      border: "1px solid #ccc",
-      boxShadow: "none",
-    }),
-    menu: (base) => ({
-      ...base,
-      backgroundColor: "white",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    }),
-    placeholder: (base) => ({
-      fontSize: "12px",
-      ...base,
-      color: "#8a8aa0",
-    }),
-    singleValue: (base) => ({
-      ...base,
-      color: "#333",
-    }),
-    option: (base, state) => ({
-      ...base,
-      backgroundColor: state.isSelected ? "#CA0000" : "transparent",
-      color: state.isSelected ? "white" : "#333",
-      "&:hover": {
-        backgroundColor: "#f5f5f5",
-      },
-    }),
-  };
-
-  const playAudio = () => {
-    audioRef.current.play();
-  };
 
   // Filter "To" options based on the selected "From" year
   const filteredYearToOptions = yearFrom

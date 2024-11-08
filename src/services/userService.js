@@ -52,6 +52,24 @@ export const getProfile = async () => {
     }
   };
 
+  export const getSavedIds = async () => {
+    try {
+      const response = await baseService.get('saved-cars/get-user-saved-cars-ids');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const deleteSavedCar = async (id) => {
+    try {
+      const response = await baseService.delete(`saved-cars/delete-car`, {lot_id:id});
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   export const getAllLocalBids = async () => {
     try {
       const response = await baseService.get('local-cars-bids/get-user-all-bids');

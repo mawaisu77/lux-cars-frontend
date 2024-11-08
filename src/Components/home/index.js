@@ -18,8 +18,7 @@ import MotorCycleSection from '../HomeSections/MotorCyclesSection.js'
 import BoatSection from '../HomeSections/BoatSection.js'
 import ATVSection from '../HomeSections/ATVSection.js'
 import { ErrorBoundary } from '@sentry/react'
-import Dummy from './home-page/Dummy.js'
-import * as Sentry from "@sentry/react"
+
 const Home = () => {
   return (
     <>
