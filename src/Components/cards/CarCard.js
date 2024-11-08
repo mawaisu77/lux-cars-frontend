@@ -154,7 +154,7 @@ const CarCard = ({ card, isBuy = false, savedIds }) => {
         className="swiper-card rounded-[10px]  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
       >
         <div className=" relative w-full ">
-          <div className="w-full relative text-16">
+          <div className="w-full relative text-16 z-10">
             {isCarSaved ? (
               <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
                 <BsHeartFill
