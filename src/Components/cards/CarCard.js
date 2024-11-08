@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
 import { BsFire, BsHeart, BsHeartFill } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
@@ -17,16 +17,28 @@ import {
 import useSaveCar from "../../hooks/useSaveCar";
 import ImageModal from "./ImageModal";
 import { LuxLogoWhite } from "../../utils/constant";
+import LoginModal from "../modals/LoginModal"
+import { useAuthContext } from "../../hooks/useAuthContext";
 import "./swiperCard.css";
 
 import SwiperCore from "swiper";
+import useDeleteSaveCar from "../../hooks/useDeleteSaveCar";
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
-const CarCard = ({ card, isBuy = false }) => {
+const CarCard = ({ card, isBuy = false, savedIds }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [savedCars, setSavedCars] = useState([]);
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
   const { handleSaveCar } = useSaveCar();
+  const { deleteSavedCar } = useDeleteSaveCar();
+
+    // Local state for optimistic update
+    const [isCarSaved, setIsCarSaved] = useState(
+      savedIds?.data && savedIds?.data?.includes(String(card?.lot_id))
+    );
+  
+  // console.log("isCarSaved on card", isCarSaved)
 
   const swiperRefs = useRef([]);
 
@@ -60,32 +72,48 @@ const CarCard = ({ card, isBuy = false }) => {
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
-  // Initialize the saved cars state from localStorage
-  useEffect(() => {
-    const savedCarsFromStorage =
-      JSON.parse(localStorage.getItem("savedCars")) || [];
-    setSavedCars(savedCarsFromStorage);
-  }, []);
 
-  const handleSaveClick = (lot_id) => {
-    handleSaveCar(lot_id);
 
-    const updatedSavedCars = [...savedCars];
-    const carIndex = updatedSavedCars.indexOf(lot_id);
+    const handleSaveClick = (lot_id) => {
+      if (!user) {  
+        setModalOpen(true);
+        return;
+      }
+    
+      if (isCarSaved) {
+        // Optimistically update UI to unsave
+        setIsCarSaved(false);
+    
+        // Perform the unsave operation in the background
+        deleteSavedCar(lot_id)
+          .then(() => {
+            alert("Car unsaved successfully");
+            // Optionally, confirm unsave here or do nothing if successful
+          })
+          .catch(() => {
+            // If there’s an error, revert the optimistic update
+            setIsCarSaved(true);
+            alert("Failed to unsave car. Please try again.");
+          });
+      } else {
+        // Optimistically update UI to save
+        setIsCarSaved(true);
+    
+        // Perform the save operation in the background
+        handleSaveCar(lot_id)
+          .then(() => {
+            alert("Car saved successfully");
+            // Optionally, confirm save here or do nothing if successful
+          })
+          .catch(() => {
+            // If there’s an error, revert the optimistic update
+            setIsCarSaved(false);
+            alert("Failed to save car. Please try again.");
+          });
+      }
+    };
+    
 
-    if (carIndex > -1) {
-      updatedSavedCars.splice(carIndex, 1);
-    } else {
-      updatedSavedCars.push(lot_id);
-    }
-
-    // Update state and localStorage
-    setSavedCars(updatedSavedCars);
-    localStorage.setItem("savedCars", JSON.stringify(updatedSavedCars));
-  };
-
-  // Check if the current car is saved
-  const isCarSaved = savedCars.includes(card.lot_id);
 
   // Open modal with selected image
   const openModal = (index) => {
@@ -107,6 +135,15 @@ const CarCard = ({ card, isBuy = false }) => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? card.images.length - 1 : prevIndex - 1
     );
+  };
+
+  const closeLoginModal = () => {
+    setModalOpen(false);
+  };
+
+  const redirectToLogin = () => {
+    closeLoginModal();
+    navigate("/login"); // Adjust route as needed
   };
 
   return (

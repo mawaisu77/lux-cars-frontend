@@ -8,14 +8,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import './i18n'; // Import the i18n configuration
 import { CustomToast } from './utils/Toast';
 import "./instrument";
+import { SavedCarsProvider } from "./context/SavedCarIdsContext";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
+      <SavedCarsProvider>
        <CustomToast />
        <App />
+      </SavedCarsProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

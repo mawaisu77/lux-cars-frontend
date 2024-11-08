@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { getUserSavedCars } from '../services/userService'; 
+import { deleteSavedCar as deleteSavedCarService } from '../services/userService'; 
 
-const useGetUserSavedCars = () => {
-  const [savedCars, setSavedCars] = useState([]);
+const useDeleteSaveCar = () => {
+  const [payload, setPayload] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchSavedCars = async () => {
+  const deleteSavedCar = async (id) => {
     setLoading(true);
     try {
-      const data = await getUserSavedCars();
-      setSavedCars(data);
+      const data = await deleteSavedCarService(id);
+        setPayload(data);
     } catch (err) {
       if (err.response) {
         setError(`${err.response.data.message}`);
@@ -24,7 +24,7 @@ const useGetUserSavedCars = () => {
     }
   };
 
-  return { savedCars, loading, error, fetchSavedCars };
+    return { payload, loading, error, deleteSavedCar };
 };
 
-export default useGetUserSavedCars;
+export default useDeleteSaveCar;
