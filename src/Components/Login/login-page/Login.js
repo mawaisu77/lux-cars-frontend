@@ -66,7 +66,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-      <div className=" py-[100px] lg:py-[9.3vh] w-full  lg:w-[36.1] mx-auto">
+      <div className=" py-[80px] lg:py-[4.3vh] w-full lg:w-[36.1] mx-auto">
         <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">
           Login To LUX CARS
         </div>

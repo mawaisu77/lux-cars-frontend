@@ -75,6 +75,9 @@ const CarCard = ({ card, isBuy = false, savedIds }) => {
 
 
     const handleSaveClick = (lot_id) => {
+      // Convert lot_id to string
+      const stringLotId = String(lot_id);
+
       if (!user) {  
         setModalOpen(true);
         return;
@@ -84,14 +87,14 @@ const CarCard = ({ card, isBuy = false, savedIds }) => {
         // Optimistically update UI to unsave
         setIsCarSaved(false);
     
-        // Perform the unsave operation in the background
-        deleteSavedCar(lot_id)
+        // Perform the unsave operation in the background with string lot_id
+        deleteSavedCar(stringLotId)
           .then(() => {
             alert("Car unsaved successfully");
             // Optionally, confirm unsave here or do nothing if successful
           })
           .catch(() => {
-            // If there’s an error, revert the optimistic update
+            // If there's an error, revert the optimistic update
             setIsCarSaved(true);
             alert("Failed to unsave car. Please try again.");
           });
@@ -99,14 +102,14 @@ const CarCard = ({ card, isBuy = false, savedIds }) => {
         // Optimistically update UI to save
         setIsCarSaved(true);
     
-        // Perform the save operation in the background
-        handleSaveCar(lot_id)
+        // Perform the save operation in the background with string lot_id
+        handleSaveCar(stringLotId)
           .then(() => {
             alert("Car saved successfully");
             // Optionally, confirm save here or do nothing if successful
           })
           .catch(() => {
-            // If there’s an error, revert the optimistic update
+            // If there's an error, revert the optimistic update
             setIsCarSaved(false);
             alert("Failed to save car. Please try again.");
           });
