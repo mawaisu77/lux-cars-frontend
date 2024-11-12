@@ -62,8 +62,9 @@ export const getProfile = async () => {
   };
 
   export const deleteSavedCar = async (id) => {
+    console.log("id", id)
     try {
-      const response = await baseService.delete(`saved-cars/delete-car`, {lot_id:id});
+      const response = await baseService.put(`saved-cars/delete-car`, {lot_id:id});
       return response.data;
     } catch (error) {
       throw error;

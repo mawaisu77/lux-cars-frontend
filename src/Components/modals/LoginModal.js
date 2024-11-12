@@ -6,6 +6,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { LuxLogoWhite } from "../../utils/constant"
+import { useNavigate } from "react-router-dom"
 
 const style = {
   position: 'absolute',
@@ -20,6 +21,11 @@ const style = {
 }
 
 export default function LoginModal({ isOpen, onClose }) {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate('/login');
+  }
+
   return (
     <Modal
       aria-labelledby="login-modal-title"
@@ -47,10 +53,7 @@ export default function LoginModal({ isOpen, onClose }) {
           </Typography>
           <div className="flex justify-center space-x-4">
             <Button
-              onClick={() => {
-                // Implement login logic here
-                console.log("Login clicked")
-              }}
+              onClick={handleLogin}
               variant="contained"
               color="primary"
             >
