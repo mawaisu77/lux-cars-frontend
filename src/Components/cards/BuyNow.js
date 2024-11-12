@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
+import { useSavedCars } from "../../context/SavedCarIdsContext";
 
 const BuyNow = () => {
   const navigate = useNavigate(); // Initialize navigate hook
@@ -15,7 +16,8 @@ const BuyNow = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
     process.env.REACT_APP_API_CARS_LIVE
   );
-  // const { savedCars, loading, error } = useSavedCars();
+  const { savedIds, loading, error } = useSavedCars();
+
   
   if (carLoading) {
     return <Shimmer />;
@@ -61,7 +63,7 @@ const BuyNow = () => {
               carData
                 .slice(0, -2)
                 .map((card, index) => (
-                  <CarCard key={index} card={card} isBuy={false}  />
+                  <CarCard key={index} card={card} isBuy={false} savedIds={savedIds} />
                 ))}
           </div>
         </div>

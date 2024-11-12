@@ -20,6 +20,8 @@ import ATVSection from '../HomeSections/ATVSection.js'
 import { ErrorBoundary } from '@sentry/react'
 
 const Home = () => {
+  
+
   return (
     <>
     <Header/>
@@ -28,7 +30,7 @@ const Home = () => {
     <BidCarsSection />
     <Makes/>
      <BuyNow/>
-    {/* <LocalOfferz/> */}
+    <LocalOfferz/>
     <BidNow/>
     <LocalCars />
     {/* <MotorCycleSection />

@@ -1,27 +1,17 @@
-import React, { useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import React from "react";
 import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
-import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 import CarCard from "./CarCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-// import useGetUserSavedCars from "../../hooks/useGetUserSavedCars";
-import { useSavedCars } from "../../context/SavedCarIdsContext";
 
 const BuyNow = () => {
   const navigate = useNavigate();
   
-  const { savedIds, loading, error } = useSavedCars();
-
-  // console.log("saved---------Cars", savedCars)
-
-
   const { carData, carLoading, carError } = useGetAllBidsCar(
     `${process.env.REACT_APP_API_CARS_LIVE}?buy_now=true`
   );
@@ -37,9 +27,6 @@ const BuyNow = () => {
     );
   }
 
-  // console.log("savedCars ===== >", savedIds)
-
-  // Handler for "View All" button
   const handleViewAllClick = () => {
     localStorage.setItem("apiEndpoint", process.env.REACT_APP_API_CARS_LIVE);
     navigate("/search-page");
@@ -70,7 +57,7 @@ const BuyNow = () => {
           <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
             {carData &&
             carData.slice(0, -2).map((card, index) => (
-                <CarCard key={index} card={card} isBuy={true} savedIds={savedIds} />
+                <CarCard key={index} card={card} isBuy={true}  />
               ))}
           </div>
         </div>

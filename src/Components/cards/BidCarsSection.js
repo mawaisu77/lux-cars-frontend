@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
+import { useSavedCars } from "../../context/SavedCarIdsContext";
 
 const BidCarsSection = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const BidCarsSection = () => {
   const { carData, carLoading, carError } = useGetAllBidsCar(
     "bid-cars/find-bid-cars?size=8"
   );
+  const { savedIds, loading, error } = useSavedCars();
   if (carLoading) {
     return <Shimmer />;
   }
@@ -62,7 +64,7 @@ const BidCarsSection = () => {
           <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
             {carData &&
               carData.map((card, index) => (
-                <CarCard key={index} card={card} isBuy={false} />
+                <CarCard key={index} card={card} isBuy={false} savedIds={savedIds} />
               ))}
           </div>
         </div>

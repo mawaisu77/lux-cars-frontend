@@ -23,22 +23,26 @@ import "./swiperCard.css";
 
 import SwiperCore from "swiper";
 import useDeleteSaveCar from "../../hooks/useDeleteSaveCar";
+import { useSavedCars } from "../../context/SavedCarIdsContext";
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
-const CarCard = ({ card, isBuy = false, savedIds }) => {
+const CarCard = ({ card, isBuy = false }) => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const { handleSaveCar } = useSaveCar();
   const { deleteSavedCar } = useDeleteSaveCar();
+  const { savedIds, loading, error, refetchSavedIds } = useSavedCars();
 
-    // Local state for optimistic update
-    const [isCarSaved, setIsCarSaved] = useState(
-      savedIds?.data && savedIds?.data?.includes(String(card?.lot_id))
-    );
-  
-  // console.log("isCarSaved on card", isCarSaved)
+
+  const [isCarSaved, setIsCarSaved] = useState(false);
+
+  // Set initial saved state on mount or when savedIds change
+  useEffect(() => {
+    setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(card?.lot_id)));
+  }, [savedIds, card?.lot_id]);
 
   const swiperRefs = useRef([]);
 
@@ -73,13 +77,12 @@ const CarCard = ({ card, isBuy = false, savedIds }) => {
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
 
-
     const handleSaveClick = (lot_id) => {
       // Convert lot_id to string
       const stringLotId = String(lot_id);
 
       if (!user) {  
-        setModalOpen(true);
+        setLoginModalOpen(true);
         return;
       }
     
@@ -90,33 +93,28 @@ const CarCard = ({ card, isBuy = false, savedIds }) => {
         // Perform the unsave operation in the background with string lot_id
         deleteSavedCar(stringLotId)
           .then(() => {
+            refetchSavedIds(); 
             alert("Car unsaved successfully");
-            // Optionally, confirm unsave here or do nothing if successful
           })
           .catch(() => {
-            // If there's an error, revert the optimistic update
             setIsCarSaved(true);
             alert("Failed to unsave car. Please try again.");
           });
       } else {
-        // Optimistically update UI to save
         setIsCarSaved(true);
-    
-        // Perform the save operation in the background with string lot_id
+
         handleSaveCar(stringLotId)
           .then(() => {
+            refetchSavedIds(); 
             alert("Car saved successfully");
-            // Optionally, confirm save here or do nothing if successful
           })
           .catch(() => {
-            // If there's an error, revert the optimistic update
             setIsCarSaved(false);
             alert("Failed to save car. Please try again.");
           });
       }
     };
     
-
 
   // Open modal with selected image
   const openModal = (index) => {
@@ -141,13 +139,13 @@ const CarCard = ({ card, isBuy = false, savedIds }) => {
   };
 
   const closeLoginModal = () => {
-    setModalOpen(false);
+    setLoginModalOpen(false);
   };
 
-  const redirectToLogin = () => {
-    closeLoginModal();
-    navigate("/login"); // Adjust route as needed
-  };
+  // const redirectToLogin = () => {
+  //   closeLoginModal();
+  //   navigate("/login");
+  // };
 
   return (
     <>
@@ -293,6 +291,11 @@ const CarCard = ({ card, isBuy = false, savedIds }) => {
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
         logo={LuxLogoWhite}
+      />
+        {/* Login Modal */}
+        <LoginModal 
+        isOpen={isLoginModalOpen && !user} 
+        onClose={closeLoginModal} 
       />
     </>
   );

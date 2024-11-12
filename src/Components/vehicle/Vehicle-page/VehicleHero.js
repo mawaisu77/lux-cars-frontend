@@ -775,7 +775,7 @@ const VehicleHero = () => {
                   placeBidAmount <= 0 ? "bg-gray-200" : ""
                 }`}
                 onClick={handlePlaceBid}
-                disabled={!placeBidAmount || placeBidAmount <= 0} // Disable button if bid amount is not set or less than or equal to 0
+                disabled={!placeBidAmount || placeBidAmount <= 0} 
               >
                 Place Bid
               </button>

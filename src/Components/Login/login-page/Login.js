@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../header/Header/Header";
 import { Link, useNavigate } from "react-router-dom";
-import { useLogin } from '../../../hooks/useLogin';
-import { ClipLoader } from 'react-spinners'; 
+import { useLogin } from "../../../hooks/useLogin";
+import { ClipLoader } from "react-spinners";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { showToast } from "../../../utils/Toast";
 
-
-
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
 
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { login, isLoading } = useLogin();
 
   const loginFormik = useFormik({
@@ -27,19 +25,21 @@ const Login = () => {
     },
     validationSchema: loginValidationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      const {success, message, role} = await login(values.email, values.password);
+      const { success, message, role } = await login(
+        values.email,
+        values.password
+      );
       if (success) {
-      //  await fetchSavedCars();
-      //  const carLotIds = savedCars?.data?.map(car => car.lot_id);
-      //  localStorage.setItem("savedCars", JSON.stringify(carLotIds));
-
-      //   if (role === 'admin') {
-      //     navigate("/admin/dahboard");
-      //   } else {
-      //   navigate("/Successfull-login")
-      // }
+        //  await fetchSavedCars();
+        //  const carLotIds = savedCars?.data?.map(car => car.lot_id);
+        //  localStorage.setItem("savedCars", JSON.stringify(carLotIds));
+        //   if (role === 'admin') {
+        //     navigate("/admin/dahboard");
+        //   } else {
+        //   navigate("/Successfull-login")
+        // }
       } else {
-        showToast(message,'error')
+        showToast(message, "error");
         // toast.error(message);
       }
       setSubmitting(false);
@@ -48,24 +48,27 @@ const Login = () => {
     validateOnBlur: true,
   });
 
-  
   return (
     <>
-      <Header   className="text-white" />
-     <div className="Backgroundimage-LogIN ">
-      <div   className="hidden lg:block">
-        <div className=" w-[15.5] flex flex-col  pt-[14.5vh]">
-          <div className="text-[2.6vw] font-semibold text-white">LogIN</div>
-          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
-            <Link to="/">
-              <button className="hover:text-white hover:text-[1.1vw]">Home</button>
-            </Link>
-            /
-            <button className="hover:text-white hover:text-[1.1vw]">LogIn</button>
+      <Header className="text-white" />
+      <div className="Backgroundimage-LogIN ">
+        <div className="hidden lg:block">
+          <div className=" w-[15.5] flex flex-col  pt-[14.5vh]">
+            <div className="text-[2.6vw] font-semibold text-white">Log In</div>
+            <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
+              <Link to="/">
+                <button className="hover:text-white hover:scale-110 duration-150">
+                  Home
+                </button>
+              </Link>
+              /
+              <button className="hover:text-white hover:scale-110 duration-150">
+                LogIn
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <div className=" py-[80px] lg:py-[4.3vh] w-full lg:w-[36.1] mx-auto">
         <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">
           Login To LUX CARS
@@ -79,28 +82,32 @@ const Login = () => {
             id="email"
             name="email"
             className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
-              loginFormik.touched.email && loginFormik.errors.email ? 'border-red-600 placeholder-red-500' : 'border-gray-300'
+              loginFormik.touched.email && loginFormik.errors.email
+                ? "border-red-600 placeholder-red-500"
+                : "border-gray-300"
             }`}
             placeholder={
               loginFormik.touched.email && loginFormik.errors.email
                 ? loginFormik.errors.email
-                : 'Your Email Address*'
+                : "Your Email Address*"
             }
             onChange={loginFormik.handleChange}
             onBlur={loginFormik.handleBlur}
             value={loginFormik.values.email}
           />
           <input
-            type={showPassword ? "text" : "password"} 
+            type={showPassword ? "text" : "password"}
             id="password"
             name="password"
             className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
-              loginFormik.touched.password && loginFormik.errors.password ? 'border-red-600 placeholder-red-500' : 'border-gray-300'
+              loginFormik.touched.password && loginFormik.errors.password
+                ? "border-red-600 placeholder-red-500"
+                : "border-gray-300"
             }`}
             placeholder={
               loginFormik.touched.password && loginFormik.errors.password
                 ? loginFormik.errors.password
-                : 'Your Password*'
+                : "Your Password*"
             }
             onChange={loginFormik.handleChange}
             onBlur={loginFormik.handleBlur}
@@ -111,17 +118,17 @@ const Login = () => {
               <input
                 type="checkbox"
                 checked={showPassword}
-                onChange={() => setShowPassword(!showPassword)} 
+                onChange={() => setShowPassword(!showPassword)}
                 className="form-checkbox text-[14px]  flex"
               />
-              Show Password 
+              Show Password
             </div>
-           <Link to="/forgot-password">
-   <div className="font-urbanist text-[14px] lg:text-[0.8vw] font-semibold">
-              Forget password?
-            </div>
-           </Link>
-  </div>
+            <Link to="/forgot-password">
+              <div className="font-urbanist text-[14px] lg:text-[0.8vw] font-semibold">
+                Forget password?
+              </div>
+            </Link>
+          </div>
           <button className="w-[342px] lg:w-[36vw] h-[48px] lg:h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
             {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Login"}
           </button>
@@ -130,8 +137,7 @@ const Login = () => {
         <div className=" text-[14px] lg:text-[0.7vw] font-urbanist mt-[5vh]">
           Don't have an account?{" "}
           <Link to="/signup">
-            {" "}
-            <span className="text-[#ca0000] cursor-pointer">Sign Up</span>
+            <span className="text-[#ca0000] cursor-pointer">Signup</span>
           </Link>
         </div>
       </div>

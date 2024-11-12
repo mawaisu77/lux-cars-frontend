@@ -11,8 +11,12 @@ export const SavedCarsProvider = ({ children }) => {
     fetchSavedCarsIds();
   }, []);
 
+  const refetchSavedIds = () => {
+    fetchSavedCarsIds();
+  };
+
   return (
-    <SavedCarsContext.Provider value={{ savedIds, loading, error }}>
+    <SavedCarsContext.Provider value={{ savedIds, loading, error, refetchSavedIds }}>
       {children}
     </SavedCarsContext.Provider>
   );
