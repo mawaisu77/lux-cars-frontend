@@ -24,6 +24,12 @@ import placeholder from "../../../assets/Vehicle/IMG (50).png";
 import VerticleSwiper from "./ui/VerticleSwiper";
 import CircularProgress from "./ui/CircularProgress";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import { IoIosAdd } from "react-icons/io";
+import { IoIosRemove } from "react-icons/io";
+import { FaBagShopping } from "react-icons/fa6";
+import TooltipGlobal from "./ui/tooltip/TooltipGlobal";
+import { IoInformationCircleOutline } from "react-icons/io5";
+
 
 const ImageContainer = styled(Box)({
   width: "100%",
@@ -139,18 +145,17 @@ const BidDetails = () => {
                   </div>
              
                 </div>
-                     <div className=" flex gap-1 mb-2 ">
-                    <TextField
+                     <div className=" flex gap-3 mb-2 ">
+                          <input
                       value={manualBid}
                       onChange={(e) => setManualBid(Number(e.target.value))}
-                      sx={{ flex: 1 }}
+                      className="w-[120px] border border-gray-300 rounded-lg px-2 py-2 text-center"
                     />
-                    <IconButton onClick={() => setManualBid(manualBid - 100)}>
-                      <RemoveCircleOutline />
-                    </IconButton>
-                    <IconButton onClick={() => setManualBid(manualBid + 100)}>
-                      <AddCircleOutline />
-                    </IconButton>
+                    <div className="flex items-center gap-1">
+                      <span className="text-[22px] text-red-600 rounded-lg border border-red-600 p-1"><IoIosRemove /></span>
+                      <span className="text-[22px] text-red-600 rounded-lg border border-red-600 p-1  "><IoIosAdd /></span>
+                    </div>
+                    
                   </div>
               </div>
               <div className="col-span-4">
@@ -168,30 +173,48 @@ const BidDetails = () => {
                 </div>
               </div>
             </div>
-            <Button
-              variant="contained"
-              fullWidth
-              sx={{
-                bgcolor: "#DC2626",
-                color: "white",
-                "&:hover": { bgcolor: "#B91C1C" },
-                mb: 3,
-              }}
+            <div
+              className="w-full flex items-center justify-center gap-2 px-2 py-1.5 bg-[#DC2626] text-white hover:bg-[#B91C1C] border border-[#DC2626] rounded-lg cursor-pointer"
             >
-              Place Bid
-            </Button>
+              <FaBagShopping />
+              <span>Place Bid</span>
+            </div>
 
-            <div className="w-full">
-              <Typography variant="subtitle2" className="mb-1">
+            <div className="w-full mt-3 text-left">
+              <span className=" text-[16px] font-medium">
                 Auto Bid For Me
-              </Typography>
-              <Select className="mb-1">
-                <option value={1000}>$ 1000.00</option>
-                <option value={2000}>$ 2000.00</option>
-                <option value={3000}>$ 3000.00</option>
-              </Select>
+              </span>
+              <div className="flex items-center border rounded-lg px-3 py-2 bg-white w-full">
+              {/* Dollar Prefix */}
+              <span className="mr-2 text-gray-500">$</span>
+              
+              {/* Input Field */}
+              <input
+                type="text"
+                placeholder="Enter amount"
+                className=" focus:outline-none text-gray-700 w-full"
+              />
+             <TooltipGlobal
+                title="Dynamic Bidding Guide"
+                description="The incremental bid based on the vehicles value is as follows:"
+                tableData={[
+                  { range: '1 - 5', increment: '1' },
+                  { range: '5 - 40', increment: '5' },
+                  { range: '40 - 100', increment: '10' },
+                  { range: '100 - 1,000', increment: '25' },
+                  { range: '1,000 - 5,000', increment: '50' },
+                ]}
+                  customStyles={{
+                    color: '#fff',
+                    headerStyles: { fontSize: '18px' },
+                    paragraphStyles: { fontSize: '14px', color: '#fff' },
+                  }}
+                  placement="left"
+                  hoverComponent={<span className="cursor-pointer text-[20px]"><IoInformationCircleOutline /></span>}
+                />
+        </div>
               {/* <Typography variant="caption" color="text.secondary">
-                      This is a proxy bid when you aren't available. Enter your
+                      This is a proxy bid when you aren't teavailable. Enter your
                       max value cap
                     </Typography> */}
             </div>
