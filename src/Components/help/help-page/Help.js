@@ -5,6 +5,7 @@ import { GoSearch } from "react-icons/go";
 import { GrSend } from "react-icons/gr";
 import { BiSolidFolderPlus } from "react-icons/bi";
 import { BsCartFill } from "react-icons/bs";
+import FAQsAccordion from "./FAQsAccordion";
 
 const Help = () => {
     const helpItems = [
@@ -59,12 +60,12 @@ const Help = () => {
         </div>
       </div>
     </div>
-            <div className="h-[2000px] lg:h-[100vh] w-[342px]   md:w-[500px] lg:w-[74vw] mx-auto">
+            <div className=" w-[342px]  lg:w-[74vw] mx-auto sm:py-[2vw] py-[40px]">
                 <div className="flex flex-col mx-auto mt-[100px] lg:mt-[8.6vh] w-[342px]   md:w-full  lg:w-[33vw]">
-                    <p className=" text-[30px] lg:text-[1.7vw]  font-bold font-urbanist">
+                    <p className=" text-[30px] lg:text-30 font-bold font-urbanist">
                         How Can We Help You?
                     </p>
-                    <p className="text-[18px] lg:text-[0.9vw] text-[#7a798a]">
+                    <p className="text-[18px] lg:text-18 text-[#7a798a]">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum
                         obcaecati dignissimos quae quo ad iste ipsum officiis deleniti
                         asperiores sit.
@@ -88,15 +89,17 @@ const Help = () => {
                 </div>
                 <div className="mt-[6vh]  flex flex-wrap justify-center gap-10 lg:gap-[1vw] gap-y-6">
                     {helpItems.map((item, index) => (
-                        <div key={index} className="flex flex-col gap-[0.7vh] justify-center items-center border w-[330px] lg:w-[17.25vw] h-[230px] lg:h-[25vh] shadow-lg rounded-xl ">
+                        <div key={index} className="flex flex-col gap-[0.7vh] justify-center items-center border w-[330px] lg:w-[17.25vw] h-[230px] lg:h-[25vh] shadow-md rounded-xl ">
                             <div className="flex justify-center items-center rounded-xl w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] bg-red-500 ">
                                 {item.icon}
                             </div>
-                            <p className="text-[20px] lg:text-[1.3vw] font-urbanist font-semibold">{item.heading}</p>
-                            <p className="text-[13px] lg:text-[0.68vw] font-urbanist text-[#7a798a] w-[284px] lg:w-[15vw]">{item.p}</p>
+                            <p className="text-[20px] lg:text-20 font-urbanist font-semibold">{item.heading}</p>
+                            <p className="text-[14px] lg:text-14 font-urbanist text-[#7a798a] w-[284px] lg:w-[15vw]">{item.p}</p>
                         </div>
                     ))}
                 </div>
+                <FAQsAccordion />
+
             </div>
         </>
     );

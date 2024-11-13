@@ -18,6 +18,7 @@ import MotorCycleSection from '../HomeSections/MotorCyclesSection.js'
 import BoatSection from '../HomeSections/BoatSection.js'
 import ATVSection from '../HomeSections/ATVSection.js'
 import { ErrorBoundary } from '@sentry/react'
+import Registration from './home-page/Registration.js'
 
 const Home = () => {
   
@@ -30,7 +31,7 @@ const Home = () => {
     <BidCarsSection />
     <Makes/>
      <BuyNow/>
-    <LocalOfferz/>
+    {/* <LocalOfferz/> */}
     <BidNow/>
     <LocalCars />
     {/* <MotorCycleSection />
@@ -41,6 +42,7 @@ const Home = () => {
     {/* <Live/> */}
     {/* <Archieved/> */}
     {/* <Partners/> */}
+    <Registration/>
  
 
     </>

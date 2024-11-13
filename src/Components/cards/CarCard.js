@@ -152,7 +152,7 @@ const CarCard = ({ card, isBuy = false }) => {
       <div
         onMouseEnter={() => handleMouseEnter(card.id)}
         onMouseLeave={() => handleMouseLeave(card.id)}
-        className="swiper-card rounded-[10px]  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
+        className="swiper-card rounded-[10px] shadow-md  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
       >
         <div className=" relative w-full ">
           <div className="w-full relative text-16 z-10">
@@ -173,6 +173,7 @@ const CarCard = ({ card, isBuy = false }) => {
             )}
 
             <Swiper
+            
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
               className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[240px] sm:h-[12vw]"
               autoplay={{

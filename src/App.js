@@ -45,6 +45,7 @@ import LocalVehicle from "./Components/localcars-details/index.js";
 import LocalCarsSearchPage from "./Components/localCars-search/index.js";
 import LocalCars from "./Components/user-page/user-pages/LocalCars.js";
 import FooterSec from "./Components/Footer/index.js";
+import LiveAuction from "./Components/live-auction/index.js";
 
 function App() {
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -155,6 +156,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UploadVehiclePage />
+                </ProtectedRoute>
+              }
+            />
+               <Route
+              path="/live-auction"
+              element={
+                <ProtectedRoute>
+                  <LiveAuction/>
                 </ProtectedRoute>
               }
             />

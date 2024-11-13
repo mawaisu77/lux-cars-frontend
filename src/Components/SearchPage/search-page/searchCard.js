@@ -172,7 +172,7 @@ function Card({ card }) {
           <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw]  text-center sm:text-left">
             <p className="text-sm text-gray-600">{card.Price}</p>
             <p className="text-xl font-bold text-red-600">{card.amount}</p>
-            <div className="flex flex-col  w-full  gap-[1vw] p-[1vw]  rounded-lg ">
+            <div className="flex flex-col-reverse  w-full  gap-[1vw] p-[1vw]  rounded-lg ">
               {/* BID NOW Button Section */}
               <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
                 <Link to={`/vehicle-detail/${card.lot_id}`} className="w-full">

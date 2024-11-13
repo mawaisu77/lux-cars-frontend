@@ -141,7 +141,7 @@ const VehicleHero = () => {
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
                   />
-                  <div className="flex justify-between px-2 items-center w-full border text-[#101828] lg:text-[1.04vw] h-[4.7vh] rounded-lg">
+                  <div className="flex justify-between sm:mt-[1vh]  px-2 items-center w-full border text-primary-red border-primary-red lg:text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1">
                       <IoDocumentTextOutline />
                       <p>Get Report</p>

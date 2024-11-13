@@ -45,7 +45,7 @@ const SavedCars = () => {
                 Saved Cars ({savedCars && savedCars?.data?.length})
             </h1>
            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
                 {savedCars && savedCars?.data?.map((car) => (
                 <CarCard card={car} />
                 ))} 
