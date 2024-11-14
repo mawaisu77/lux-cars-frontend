@@ -719,7 +719,7 @@ const Sidebar = () => {
 
   return (
     <>
-    <div className="flex mt-5 gap-2 bg-gray-100  w-[80vw]  p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
+    <div className="flex mt-20 sm:mt-5 gap-2 bg-gray-100  w-[95vw] sm:w-[80vw] p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
 
     {Object.entries(appliedFilters).some(([, values]) => Array.isArray(values) ? values.length > 0 : values) && (
   <div className="flex w-[80vw] gap-2">
@@ -756,8 +756,8 @@ const Sidebar = () => {
 
 
    </div>
-      <div className="flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">
-        <h2 className="lg:hidden text-[42px] font-bold mt-[100px]">Fliters</h2>{" "}
+      <div className="flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[95vw] sm:w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">
+        <h2 className="lg:hidden sm:text-[42px] text-[20px] font-bold mt-5 sm:mt-[100px]">Fliters</h2>{" "}
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-40 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
             <div className="border-b-black  p-1 border-b flex justify-center items-center gap-x-2">
