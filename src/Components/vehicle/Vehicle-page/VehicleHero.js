@@ -113,7 +113,7 @@ const VehicleHero = () => {
       </div>
 
       {carDetailLoading ? (
-        <div className="w-full h-[100vh] flex justify-center items-center">
+        <div className="w-[100vw] h-[100vh] flex justify-center items-center">
           <FadeLoader />
         </div>
       ) : (
@@ -129,19 +129,19 @@ const VehicleHero = () => {
                   </div>
                 )
               ) : (
-                <div className="bg-[#217bf0]  text-md lg:text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
+                <div className="bg-[#217bf0] sm:mt-0 mt-[40px] text-md lg:text-[1vw] shadow tracking-wider text-white text-center p-[10px] sm:p-[0.7vw] font-bold">
                   Auction date is not decided yet, Be one on the top of bidding
                   list
                 </div>
               )}
 
-              <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[74vw] mt-[100px] mb-[20px]">
+              <div className="flex flex-col lg:flex-row  justify-between mx-auto max-w-[90vw] sm:max-w-[74vw] my-[30px]">
                 <div className="w-full lg:w-[36vw] ">
                   <SwiperGallery
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
                   />
-                  <div className="flex justify-between px-2 items-center w-full border text-[#101828] lg:text-[1.04vw] h-[4.7vh] rounded-lg">
+                  <div className="flex justify-between sm:mt-[1vh]  px-2 items-center w-full border text-primary-red border-primary-red lg:text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1">
                       <IoDocumentTextOutline />
                       <p>Get Report</p>

@@ -60,22 +60,22 @@ function Feespage() {
         </div>
       </div>
 
-      <div className="w-[100vw] py-[40px] sm:py-[4.167vw]">
+      <div className="w-[100vw] py-[80px] sm:py-[4.167vw]">
         <div className=" mx-auto flex flex-col md:flex-row gap-8 sm:gap-[2vw] max-w-[85vw] sm:max-w-[53.917vw]">
           {/* COPART/IAAI Card */}
           <div className="flex-1 relative border-2 border-blue-400 rounded-2xl p-[1.9vw]">
-            <div className="h-[2.917vw] w-[2.917vw] bg-[#DC2626] rounded-2xl sm:rounded-[1vw] flex items-center justify-center mb-8 sm:mb-[1.5vw]">
-              <PiUsersFill className="w-8 h-8 sm:w-[1.5vw] sm:h-[1.5vw] text-white" />
+            <div className="h-[40px] w-[40px] sm:h-[2.917vw] sm:w-[2.917vw] bg-[#DC2626] rounded-2xl sm:rounded-[1vw] flex items-center justify-center mb-4 sm:mb-[1.5vw]">
+              <PiUsersFill className="w-[30px] h-[30px] sm:w-[1.5vw] sm:h-[1.5vw] text-white" />
             </div>
 
-            <h2 className="text-[32px] text-left sm:text-38 font-semibold mb-[1.25vw]">
+            <h2 className="text-[28px] text-left sm:text-38 font-semibold sm:mb-[1.25vw]">
               Bidding At COPART / IAAI
             </h2>
-            <p className="text-lux-black text-left mb-8 sm:mb-[1.5vw] sm:text-20">
+            <p className="text-lux-black text-left mb-4 sm:mb-[1.5vw] sm:text-20">
               Drawbacks of bidding directly at Copart/IAAI auctions
             </p>
 
-            <div className="space-y-4 text-[20px] sm:space-y-[0.625vw] sm:text-24 text-left">
+            <div className="space-y-3 text-[18px] sm:space-y-[0.625vw] sm:text-24 text-left">
               {[
                 "Dealer / Broker License Required",
                 "Annual Membership Fee At Both Sites",
@@ -86,7 +86,7 @@ function Feespage() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-[0.521vw] text-[20px] sm:text-20"
+                  className="flex items-center gap-[0.521vw] text-[18px] sm:text-20"
                 >
                   <span className="text-primary-red leading-none ">-</span>
                   <span className="text-lux-black ">{item}</span>
@@ -106,25 +106,25 @@ function Feespage() {
               }}
             />
             <div className="relative z-10">
-              <div className="h-[2.917vw] w-[2.917vw] bg-[#DC2626] rounded-2xl sm:rounded-[1vw] flex items-center justify-center mb-8 sm:mb-[1.5vw]">
-                <PiUsersFill className="w-8 h-8 sm:w-[1.5vw] sm:h-[1.5vw] text-white" />
+            <div className="h-[40px] w-[40px] sm:h-[2.917vw] sm:w-[2.917vw] bg-[#DC2626] rounded-2xl sm:rounded-[1vw] flex items-center justify-center mb-4 sm:mb-[1.5vw]">
+                <PiUsersFill className="w-[30px] h-[30px] sm:w-[1.5vw] sm:h-[1.5vw] text-white" />
               </div>
 
               <div className="flex items-center gap-[1vw] mb-[1.25vw]">
-                <h2 className="text-[32px] text-left sm:text-38 font-semibold  ">
+                <h2 className="text-[28px] text-left sm:text-38 font-semibold  ">
                   Bidding At LUX
                 </h2>
-                <span className=" text-white border-[0.052vw] text-nowrap bg-transparent border-white px-[0.521vw] py-[0.26vw] rounded-[0.417vw] text-18">
+                <span className=" text-white text-nowrap bg-transparent border-2 sm:border-[0.052vw] border-white px-[10px] py-[5px] sm:px-[0.521vw] sm:py-[0.26vw] rounded-[8px] sm:rounded-[0.417vw] text-[16px] sm:text-18">
                   Best Choice
                 </span>
               </div>
 
-              <p className="text-lux-black text-left text-20 mb-8 sm:mb-[1.5vw]">
-                Advantages of bidding through Lux First Choice Cars
+              <p className="text-lux-black text-left mb-4 sm:mb-[1.5vw] sm:text-20">
+              Advantages of bidding through Lux First Choice Cars
               </p>
 
-              <div className="space-y-4 text-[20px] sm:space-y-[0.625vw] sm:text-24 text-left">
-                {[
+              <div className="space-y-3 text-[18px] sm:space-y-[0.625vw] sm:text-24 text-left">
+              {[
                   "No Dealer License Required",
                   "No Annual Membership Fee",
                   "Ability To Search Two Auctions",
@@ -141,7 +141,7 @@ function Feespage() {
                 ))}
               </div>
 
-              <button className=" mt-[2.292vw] w-full bg-[#DC0000] hover:bg-[#B00000] text-white text-20 font-medium py-[1.146vw] rounded-[0.625vw] transition duration-300">
+              <button className="mt-[10px] sm:mt-[2.292vw] w-full bg-[#DC0000] hover:bg-[#B00000] text-white text-[16px] sm:text-20 font-medium py-[8px] sm:py-[1.146vw] rounded-[8px] sm:rounded-[0.625vw] transition duration-300">
                 Get Started
               </button>
             </div>
@@ -164,9 +164,9 @@ function Feespage() {
               bid.
             </p>
           </div>
-          <div className="text-15 flex gap-[0.625vw]">
+          <div className="text-[15px] sm:text-15 flex gap-[0.625vw]">
             <button
-              className={`rounded-[0.313vw] px-[0.885vw] py-[0.521vw] font-urbanist ${
+              className={`rounded-[6px] sm:rounded-[0.313vw] px-[10px] sm:px-[0.885vw] py-[5px] sm:py-[0.521vw] font-urbanist ${
                 baseSite === "COPART"
                   ? "bg-[#CA0000] text-white"
                   : "bg-white text-[#1F1F2C]"
@@ -243,7 +243,7 @@ function Feespage() {
                   <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
                     <button
                       onClick={handleLoadMore}
-                      className="text-[15px] mb-10 md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+                      className="text-[15px] mb-10 sm:text-[0.781vw]  font-[700] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] py-[5px] px-[15px] sm:py-[0.833vh]  sm:px-[2.083vh] text-[#CA0000] font-urbanist"
                     >
                       Load More
                     </button>
@@ -252,7 +252,7 @@ function Feespage() {
                   <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
                     <button
                       onClick={handleHide}
-                      className="text-left text-[15px] md:text-[1vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] md:px-[1vh] lg:py-[0.833vh] md:px-[2.5vw] md:px-[1vw] lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist"
+                      className="text-[15px] mb-10 sm:text-[0.781vw]  font-[700] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] py-[5px] px-[15px] sm:py-[0.833vh]  sm:px-[2.083vh] text-[#CA0000] font-urbanist"
                     >
                       Hide
                     </button>
@@ -312,7 +312,7 @@ function Feespage() {
                   <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
                     <button
                       onClick={handleLoadMore}
-                      className="text-[15px] mb-10 md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+                      className="text-[15px] mb-10 sm:text-[0.781vw]  font-[700] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] py-[5px] px-[15px] sm:py-[0.833vh]  sm:px-[2.083vh] text-[#CA0000] font-urbanist"
                     >
                       Load More
                     </button>
@@ -321,7 +321,7 @@ function Feespage() {
                   <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
                     <button
                       onClick={handleHide}
-                      className="text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+                      className="text-[15px] mb-10 sm:text-[0.781vw]  font-[700] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] py-[5px] px-[15px] sm:py-[0.833vh]  sm:px-[2.083vh] text-[#CA0000] font-urbanist"
                     >
                       Hide
                     </button>
@@ -417,7 +417,7 @@ function Feespage() {
                   <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
                     <button
                       onClick={handleLoadMore}
-                      className="text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] font-[700] text-[#CA0000] font-urbanist"
+                      className="text-[15px] mb-10 sm:text-[0.781vw]  font-[700] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] py-[5px] px-[15px] sm:py-[0.833vh]  sm:px-[2.083vh] text-[#CA0000] font-urbanist"
                     >
                       Load More
                     </button>
@@ -482,7 +482,7 @@ function Feespage() {
                   <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
                     <button
                       onClick={handleLoadMore}
-                      className="text-[15px] mb-10 md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+                      className="text-[15px] mb-10 sm:text-[0.781vw]  font-[700] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] py-[5px] px-[15px] sm:py-[0.833vh]  sm:px-[2.083vh] text-[#CA0000] font-urbanist"
                     >
                       Load More
                     </button>
@@ -491,7 +491,7 @@ function Feespage() {
                   <div className="flex justify-center md:block mt-[5px] md:mt-[1vw]">
                     <button
                       onClick={handleHide}
-                      className="text-[15px] md:text-[0.7vw] lg:text-[0.781vw] w-[130px] font-[700] md:w-[8vw] md:h-[3.5vh] lg:w-[6.771vw] h-[50px] lg:h-[6vh] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] md:py-[0.5vh] lg:py-[0.833vh] md:px-[1vw] lg:px-[2.083vh] text-[#CA0000] font-urbanist"
+                      className="text-[15px] mb-10 sm:text-[0.781vw]  font-[700] text-center rounded-[30px] md:rounded-[1.563vw] bg-[#F3F3F6] py-[5px] px-[15px] sm:py-[0.833vh]  sm:px-[2.083vh] text-[#CA0000] font-urbanist"
                     >
                       Hide
                     </button>

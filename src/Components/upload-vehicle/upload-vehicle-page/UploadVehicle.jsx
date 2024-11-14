@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../header/Header/Header";
 import PhoneInput from "react-phone-input-2";
 import Select from "react-select";
@@ -25,6 +25,7 @@ const UploadVehicle = () => {
   const [mainloading, setMainLoading] = useState(false);
 
   const { user } = useAuthContext();
+  const navigate = useNavigate()
 
   const option = useMemo(() => countryList().getData(), []);
 
@@ -295,7 +296,7 @@ const UploadVehicle = () => {
               }),
             ]);
             showToast("Vehicle uploaded", "success");
-            console.log("a-a---a- log");
+            navigate('/user/account/local-cars')
           } catch (error) {
             if (error.response) {
               showToast(
@@ -330,6 +331,8 @@ const UploadVehicle = () => {
               }
             );
             showToast("Vehicle uploaded", "success");
+            navigate('/user/account/local-cars')
+
           } catch (error) {
             if (error.response) {
               showToast(
@@ -362,6 +365,7 @@ const UploadVehicle = () => {
             },
           });
           showToast("Vehicle uploaded", "success");
+          navigate('/user/account/local-cars')
         } catch (error) {
           if (error.response) {
             showToast(
@@ -489,18 +493,19 @@ const UploadVehicle = () => {
           <div className="text-[2.6vw] font-semibold text-white">
             Vehicle Detail
           </div>
-          <div className="text-[#8a8aa0] flex gap-3 justify-center text-[1vw] font-urbanist">
+          <div className='text-white flex gap-3 justify-center text-[1vw] font-urbanist'>
             <Link to="/">
-              <button className="hover:text-white">Home</button>
+              <button className='hover:text-white hover:scale-110 duration-150'>Home</button>
             </Link>
-            /<button className="hover:text-white">Vehicle Detail</button>
+            /
+            <button className='hover:text-white hover:scale-110 duration-150'>Vehicle Detail</button>
           </div>
         </div>
       </div>
 
       <div className="mt-4 flex flex-col gap-y-2 items-center justify-center w-full">
         <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
-          Upload Your Vehicle
+          Sell Your Car
         </div>
         <hr className="h-[5px] bg-[#ca0000] mt-[4px] w-36 " />
       </div>

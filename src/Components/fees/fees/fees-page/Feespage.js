@@ -47,16 +47,18 @@ function Feespage() {
         </div>
       </div>
 
-      <div className="w-auto px-[10px] md:px-[0px] w-[100%] md:w-[80vw]  lg:w-[73.177vw]  mx-auto md:mt-[7.813vh] mt-[64px] mb-[64px] :md:mb-[7.813vh] mt-[70px] mb-[70px]">
+      <div className="w-[100vw]">
+      <div className="max-w-[85vw]  sm:max-w-[73.177vw] mx-auto">
         <div className="md:flex md:justify-between ">
-          <div className="w-auto w-[100%] md:w-[44vw] lg:w-[38.073vw] ">
+          <div className="">
             <div className="">
               <h1 className="text-left text-[36px] md:text-[1.875vw]  font-[700] text-[#1F1F2C] font-urbanist md:mb-[1.25vh] mb-[40px]">
                 Bidding at LUX
               </h1>
               <div className="relative">
-                <img src={image} className="w-auto" />
+                <img src={image} className="w-auto" alt="image_"/>
                 <img
+                  alt="image3"
                   src={image3}
                   className=" w-[150px] md:w-[14vw] absolute top-[30px] md:top-[10.917vh] left-[25px] md:left-[1.5vw]"
                 />
@@ -79,7 +81,7 @@ function Feespage() {
               <h2 className="text-left text-[30px] md:text-[1.875vw] font-[700] text-[#1F1F2C] font-urbanist mb-[1.25vh]">
                 Bidding at COPART / IAAI
               </h2>
-              <img src={image1} />
+              <img src={image1} alt="image1" />
             </div>
 
             <h2 className="text-left text-[20px] md:text-[1.35vw] font-[700] text-[#1F1F2C] font-urbanist mt-[30px] md:mt-[1.563vh] mb-[1.25vh]">
@@ -233,6 +235,8 @@ function Feespage() {
           </p>
         </div>
       </div>
+      </div>
+
     </>
   );
 }
