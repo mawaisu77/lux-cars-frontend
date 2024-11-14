@@ -134,7 +134,7 @@ const Header = () => {
                 <li>{t("navbar.contact")}</li>
               </Link>
               <Link to={"/upload-car"} className=" hover:text-primary-red duration-200">
-                <li>Upload Vehicle</li>
+                <li>Sell Car</li>
               </Link>
             </ul>
           </div>
@@ -203,9 +203,7 @@ const Header = () => {
           ) : (
             <>
               <button
-                className={`focus:outline-none lg:text-18 ${
-                  isHomePage ? "text-primary-gray" : "text-white"
-                } ${navbarColor === "transparent" ? "" : "text-white"}`}
+                className={`focus:outline-none lg:text-18 text-white ${navbarColor === "transparent" ? "" : "text-white"}`}
                 onClick={handleLogoutModal}
               >
                 logout
@@ -213,7 +211,7 @@ const Header = () => {
             </>
           )}
 
-          <button className="px-[1.719vw] py-[0.625vw]  bg-primary-red text-white rounded-full lg:text-14 focus:outline-none">
+          <button className="px-[1.719vw] py-[0.625vw] bg-primary-red text-white rounded-full lg:text-14 focus:outline-none">
             Try Demo
           </button>
         </div>

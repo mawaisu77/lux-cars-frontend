@@ -47,8 +47,9 @@ const Profile = () => {
       const response = await getProfile();
 
       saveUser(response.data);
-      const { username, email, address, phone, documents, documentVerified } = response.data;
-      setDocumentVerification(documentVerified)
+      const { username, email, address, phone, documents, documentVerified } =
+        response.data;
+      setDocumentVerification(documentVerified);
       setDcuments(documents);
       setUsername(username);
       setEmail(email);
@@ -78,7 +79,7 @@ const Profile = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
-      
+
       showToast("Error updating profile", "error");
       // toast.error("Error updating profile");
     }
@@ -86,7 +87,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="w-[344px] md:w-[650px]  lg:w-[74vw] mx-auto    mt-[50px]  text-black ">
+      <div className="w-[344px] md:w-[650px]  lg:w-[74vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
         <div className="text-left text-[36px] lg:text-[2.3vw] font-urbanist font-bold">
           Profile Info
         </div>
@@ -137,25 +138,29 @@ const Profile = () => {
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
-                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[120px] lg:mt-0  border rounded-lg p-5 ">
+
+                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[140px] sm:mt-0  border rounded-lg p-5 ">
                   <div className="flex gap-3 my-2">
                     <div className="flex relative justify-center items-center bg-red-600 w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] rounded-full">
-                      <img src={image1} />
+                      <img src={image1} alt="image1" />
                       {documentVerification ? (
-                        <MdVerifiedUser className="absolute text-green-600 bg-white rounded-tl-lg bottom-0 right-0"/>
-                      ):(
-                    <div className="absolute -bottom-2 -right-2">
-                          <TooltipInfo  content="Your document status is pending, if you uploaded the docuemnt then please wait for update">
-                        <BsInfoCircle size={20} className='hover:text-blue-800 bg-white rounded-full text-red-600 duration-200'/>
-                      </TooltipInfo>
-                    </div>
+                        <MdVerifiedUser className="absolute text-green-600 bg-white rounded-tl-lg bottom-0 right-0" />
+                      ) : (
+                        <div className="absolute -bottom-2 -right-2">
+                          <TooltipInfo content="Your document status is pending, if you uploaded the docuemnt then please wait for update">
+                            <BsInfoCircle
+                              size={20}
+                              className="hover:text-blue-800 bg-white rounded-full text-red-600 duration-200"
+                            />
+                          </TooltipInfo>
+                        </div>
                       )}
                     </div>
                     <div>
-                      <p className="text-[15px] lg:text-[0.9vw]  text-[#9698ab] font-urbanist">
+                      <p className="text-[15px] lg:text-18  text-[#9698ab] font-urbanist">
                         Documentation
                       </p>
-                      <p className="text-[20px] lg:text-[1vw] font-urbanist font-semibold">
+                      <p className="text-[20px] lg:text-18 font-urbanist font-semibold">
                         {username}
                       </p>
                     </div>
@@ -177,7 +182,7 @@ const Profile = () => {
 
                   <div className="flex justify-between items-end">
                     <div className="flex gap-x-2">
-                      <img src={bars} />
+                      <img src={bars} alt="bars" />
                       <p className="text-red-500 ">
                         {documents.length === 0 || null
                           ? "0%"
@@ -187,83 +192,87 @@ const Profile = () => {
                       </p>
                     </div>
                     <div>
-                      <img src={icon7} />
+                      <img src={icon7} alt="icon7" />
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
-            
-            <div className="flex">
-                <div className={`w-[3vw] h-[5vh] ${images.length > 0 ? 'flex':'hidden'}`}>
-                  {images.map((src, index) => (
-                    <img
-                      className="w-full h-full cursor-pointer hover:scale-105 duration-200"
-                      src={src}
-                      onClick={() => openImageViewer(index)}
-                      key={index}
-                      style={{ margin: "2px" }}
-                      alt=""
-                    />
-                  ))}
 
-                  {isViewerOpen && (
-                    <ImageViewer
-                      src={images}
-                      currentIndex={currentImage}
-                      disableScroll={true}
-                      closeOnClickOutside={true}
-                      onClose={closeImageViewer}
-                      closeComponent={true}
-                      backgroundStyle={{
-                        zIndex: 99999,
-                        backgroundColor: "rgba(0, 0, 0, 0.9)"
-                      }}
-                    />
-                  )}
-      
-                  {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
+            <div className="flex">
+              <div
+                className={`w-[3vw] h-[5vh] ${
+                  images.length > 0 ? "flex" : "hidden"
+                }`}
+              >
+                {images.map((src, index) => (
+                  <img
+                    className="w-full h-full cursor-pointer hover:scale-105 duration-200"
+                    src={src}
+                    onClick={() => openImageViewer(index)}
+                    key={index}
+                    style={{ margin: "2px" }}
+                    alt=""
+                  />
+                ))}
+
+                {isViewerOpen && (
+                  <ImageViewer
+                    src={images}
+                    currentIndex={currentImage}
+                    disableScroll={true}
+                    closeOnClickOutside={true}
+                    onClose={closeImageViewer}
+                    closeComponent={true}
+                    backgroundStyle={{
+                      zIndex: 99999,
+                      backgroundColor: "rgba(0, 0, 0, 0.9)",
+                    }}
+                  />
+                )}
+
+                {/* <div className=" flex justify-center items-center w-[7vw] h-[12vh] bg-[#c4c4c4] rounded-xl">
                   <img src={documents[0]} />
                 </div> */}
+              </div>
+
+              <div className="flex">
+                <div>
+                  {images.length === 0 && (
+                    <>
+                      <div className="h-[98px] w-[98px] mt-[60px] lg:mt-0 border-2 rounded shadow border-[#343444] ">
+                        <img
+                          src={avatar}
+                          className="w-full h-full object-cover"
+                          alt="avatar-img"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
 
-               
-                <div className="flex">
-               <div>
-               {
-                    images.length === 0 && (<>
-                        <div className="h-[98px] w-[98px] mt-[60px] lg:mt-0 border-2 rounded shadow border-[#343444] ">
-                                      <img src={avatar} className="w-full h-full object-cover" alt="avatar-img"/>
-                          </div>
+                <div className=" mt-[60px] sm:mt-0">
+                  <div className="flex gap-3 ml-5">
+                    {documents.length < 2 && (
+                      <div className="flex items-start justify-between flex-col gap-y-2 ">
+                        <p className="text-[14px] text-left lg:text-18 text-[#737a99] font-urbanist  ">
+                          Images must be of your official ID (Passport/License)
+                        </p>
 
-                    </>)
-                  }
-               </div>
-            
-                  <div className=" mt-[60px] lg:mt-0">
-                    <div className="flex gap-3 ml-5">
-                      {documents.length < 2 && (
-                        <div className="flex items-start justify-between flex-col gap-y-2 ">
-                           <p className="text-[14px] text-left lg:text-[0.9vw] text-[#737a99] font-urbanist  ">
-                            Images must be of your official ID (Passport/License)
-                          </p>
-
-                          <p className="text-[14px] text-left lg:text-[0.9vw] text-[#737a99] font-urbanist  ">
-                            You must have to upload two photos
-                          </p>
-                          <Link to={"/user/documents-upload"}>
-                            <button className="text-[16px] lg:text-[1vw] font-urbanist py-1 px-4 text-white hover:text-white bg-[#343444] rounded-xl">
-                              Upload Docs
-                            </button>
-                          </Link>
-                         
-                        </div>
-                      )}
-                    </div>
+                        <p className="text-[14px] text-left lg:text-18 text-[#737a99] font-urbanist  ">
+                          You must have to upload two photos
+                        </p>
+                        <Link to={"/user/documents-upload"}>
+                          <button className="text-[16px] lg:text-18 font-urbanist py-1 px-4 text-white hover:text-white bg-[#343444] rounded-xl">
+                            Upload Docs
+                          </button>
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
+            </div>
             <button className="flex justify-center mb-10 items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[16px] lg:text-[0.8vw] text-[#ca0000] rounded-xl mt-[3vh]">
               {loading ? (
                 <ClipLoader size={20} color={"#ca0000"} />

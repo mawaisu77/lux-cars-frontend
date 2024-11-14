@@ -1,11 +1,7 @@
 import React from "react";
 import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
-import "./swiperstyles.css";
 import CarCard from "./CarCard";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
