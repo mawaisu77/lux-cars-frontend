@@ -23,6 +23,7 @@
     "lightbox.js-react": "^1.1.1",
     "pdfjs-dist": "^4.5.136",
     "primereact": "^10.7.0",
+    "pusher-js": "^8.4.0-rc2",
     "react": "^18.3.1",
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-awesome-slider": "^4.1.0",

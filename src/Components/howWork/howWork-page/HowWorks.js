@@ -51,7 +51,7 @@ const HowWorks = () => {
   ];
   return (
     <>
-      <Header className="" />
+      {/* <Header className="" />*/}
       <div className="Backgroundimage-How relative">
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col pt-[12.5vh]">
@@ -71,7 +71,7 @@ const HowWorks = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> 
 
       <div className=" max-w-[85vw] sm:max-w-[73.229vw] mx-auto my-[80px] sm:my-[4.175vw] ">
         <div className="flex flex-col mx-auto max-w-lg ">

@@ -48,6 +48,7 @@ import FooterSec from "./Components/Footer/index.js";
 import LiveAuction from "./Components/live-auction/index.js";
 
 function App() {
+  
   const [showReviewPopup, setShowReviewPopup] = useState(false);
   const { user } = useAuthContext();
 
@@ -97,7 +98,7 @@ function App() {
         </div>
         <div className="App">
           <ScrollToTop />
-          {/* <Header/> */}
+          <Header/>
           {/* Define your routes here */}
           <Routes>
             <Route path="/" element={<Home />} />

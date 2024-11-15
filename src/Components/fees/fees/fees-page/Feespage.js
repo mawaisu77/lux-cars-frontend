@@ -23,7 +23,6 @@ import VirtualBidFeeCard from "./VirtualBidFeeCard.js";
 function Feespage() {
   return (
     <>
-      <Header className="text-white" />
       <div className="bg-fees">
         <div className="hidden  lg:block">
           <div className="  w-[15.5] flex flex-col  mt-[5.5vh]">
