@@ -155,7 +155,7 @@ const CarCard = ({ card, isBuy = false }) => {
         className="swiper-card rounded-[10px] shadow-md  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
       >
         <div className=" relative w-full ">
-          <div className="w-full relative text-16 z-10">
+          <div className="w-full relative sm:text-24 md:text-16 z-10">
             {isCarSaved ? (
               <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
                 <BsHeartFill
@@ -175,7 +175,7 @@ const CarCard = ({ card, isBuy = false }) => {
             <Swiper
             
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
-              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[240px] sm:h-[12vw]"
+              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[240px] sm:h-[22vw] md:h-[12vw] "
               autoplay={{
                 delay: 1000,
                 disableOnInteraction: false,
@@ -206,16 +206,16 @@ const CarCard = ({ card, isBuy = false }) => {
               <div>
                 {card.auction_date ? (
                   ValidDate ? (
-                    <BsFire className="text-primary-red text-[14px] sm:text-15" />
+                    <BsFire className="text-primary-red text-[14px] sm:text-30 md:text-15  " />
                   ) : (
-                    <MdNotInterested className="text-primary-red text-[14px] sm:text-15" />
+                    <MdNotInterested className="text-primary-red text-[14px] sm:text-30 md:text-15 " />
                   )
                 ) : (
-                  <FaHourglassHalf className="text-primary-red text-[14px] sm:text-15" />
+                  <FaHourglassHalf className="text-primary-red text-[14px] sm:text-30 md:text-15 " />
                 )}
               </div>
               <div>
-                <p className="font-bold text-nowrap text-[14px] sm:text-15 -z-10">
+                <p className="font-bold text-nowrap text-[14px] md:text-15 sm:text-30 -z-10">
                   {card.auction_date
                     ? ValidDate
                       ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
@@ -274,7 +274,7 @@ const CarCard = ({ card, isBuy = false }) => {
               </div>
             </div>
             <Link to={`vehicle-detail/${card.lot_id}`}>
-              <button className="w-full text-[14px] sm:text-16 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] sm:mt-[1.5vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
+              <button className="w-full text-[14px] md:text-16 sm:text-30 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] sm:mt-[1.5vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
                 {isBuy
                   ? `Buy Now in ${card.price_new ? card.price_new : "Tbd"}`
                   : "Bid Now"}

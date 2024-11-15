@@ -487,7 +487,6 @@ const UploadVehicle = () => {
 
   return (
     <div className="">
-      <Header className="text-white" />
       <div className="bg-vehicle">
         <div className="w-[15.5] flex flex-col pt-[12.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">

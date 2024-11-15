@@ -19,13 +19,15 @@ import BoatSection from '../HomeSections/BoatSection.js'
 import ATVSection from '../HomeSections/ATVSection.js'
 import { ErrorBoundary } from '@sentry/react'
 import Registration from './home-page/Registration.js'
+import Notifications from '../../utils/Notifications.js'
+import NotificationDropdown from '../ui/dropdowns/NotificationDropdown.jsx'
 
 const Home = () => {
   
 
   return (
     <>
-    <Header/>
+    {/* <Header/> */}
     <Bid/>
     <Top/>
     <BidCarsSection />

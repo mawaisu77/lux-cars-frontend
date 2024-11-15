@@ -24,8 +24,8 @@ function Card({ card }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const targetTime = useMemo(
-    () => (card.auction_date ? new Date(card.auction_date) : null),
-    [card.auction_date]
+    () => (card?.auction_date ? new Date(card?.auction_date) : null),
+    [card?.auction_date]
   );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
   const ValidDate =
@@ -43,13 +43,13 @@ function Card({ card }) {
   // Go to the next image
   const goToNextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === card.images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === card?.images?.length - 1 ? 0 : prevIndex + 1
     );
   };
   // Go to the previous image
   const goToPrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? card.images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? card?.images?.length - 1 : prevIndex - 1
     );
   };
 
@@ -69,9 +69,9 @@ function Card({ card }) {
             card?.images?.map((image, index) => (
               <SwiperSlide key={index} className="relative w-full rounded-md">
                 <div className="cursor-pointer relative rounded-md">
-                  {(card.currentBid === "" ||
-                    card.currentBid === null ||
-                    card.currentBid == 0) && (
+                  {(card?.currentBid === "" ||
+                    card?.currentBid === null ||
+                    card?.currentBid == 0) && (
                     <div className="absolute w-full lg:w-[16vw] sm:h-[1vh] bg-gray-50 bottom-0 ">
                       {" "}
                     </div>
@@ -89,7 +89,7 @@ function Card({ card }) {
             <span>Current Bid</span>
             <span className="text-yellow-300 font-bold">
               {`
-                    $${card.currentBid ? card.currentBid : "0"}`}
+                    $${card?.currentBid ? card?.currentBid : "0"}`}
             </span>
           </div>
         </Swiper>
@@ -97,97 +97,111 @@ function Card({ card }) {
       <ImageModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        images={card.images}
+        images={card?.images}
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
         logo={LuxLogoWhite}
       />
       <div className="flex flex-col md:justify-center w-full text-left md:items-center   lg:justify-between lg:flex-row">
-        <div className="text-left px-[1vw] text-[13px] lg:text-[0.875vw]   h-full border-b lg:border-r lg:border-b-0 font-urbanist">
-          <Link to={`/vehicle-detail/${card.lot_id}`}>
-            <p className="font-semibold py-[1vh] hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
-              {card.title.length > 40
-                ? `${card.title.slice(0, 40)}...`
-                : card.title}
+        <div className="text-left px-[1vw]   h-full border-b  lg:border-b-0 font-urbanist">
+          <Link to={`/vehicle-detail/${card?.lot_id}`}>
+            <p className="font-semibold py-[1vh] hover:text-blue-800  text-[16px] md:text-[1vw] cursor-pointer hover:underline">
+              {card?.title?.length > 40
+                ? `${card?.title?.slice(0, 40)}...`
+                : card?.title}
             </p>
           </Link>
 
           <div className="flex flex-col md:flex-row lg:flex-row w-[26.195vw] justify-between leading-[3vh]">
-            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[13px] lg:text-[0.875vw] py-1">
-              <p className="w-full">
+            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[14px] md:text-[0.875vw] py-1">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">VIN: </span>
-                {window.innerWidth >= 1024 && card.vin.length > 10
-                  ? `${card.vin.slice(0, 10)}...`
-                  : card.vin}
+              <span>
+              {window.innerWidth >= 1024 && card?.vin?.length > 10
+                  ? `${card?.vin?.slice(0, 10)}...`
+                  : card?.vin}
+              </span>
               </p>
-              <p className="w-full">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Lot: </span>
-                {window.innerWidth >= 1024 && card.lot_id.length > 10
-                  ? `${card.lot_id.slice(0, 10)}...`
-                  : card.lot_id}
+                <span>
+                  {card?.lot_id || "Not specified"}
+                </span>
               </p>
-              <p className="w-full">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Status: </span>
-                {window.innerWidth >= 1024 && card.status.length > 10
-                  ? `${card.status.slice(0, 10)}...`
-                  : card.status}
+                <span className="text-nowrap">
+                  {window.innerWidth >= 1024 && card?.status?.length > 10
+                    ? `${card?.status?.slice(0, 10)}...`
+                    : card?.status}
+                </span>
               </p>
-              <p className="w-full">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Location: </span>
-                {window.innerWidth >= 1024 && card.location.length > 10
-                  ? `${card.location.slice(0, 10)}...`
-                  : card.location}
+                <span className="text-nowrap">
+                  {window.innerWidth >= 1024 && card?.location?.length > 10
+                    ? `${card?.location?.slice(0, 10)}...`
+                  : card?.location}
+                </span>
               </p>
             </div>
-            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] lg:text-[0.875vw] py-1">
-              <p className="w-full">
+            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] md:text-[0.875vw] py-1">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Millage: </span>
-                {window.innerWidth >= 1024 && card.mileage?.length > 10
-                  ? `${card.mileage.slice(0, 10)}...`
-                  : card.mileage || "Not specified"}
+                <span className="text-nowrap">
+                    {window.innerWidth >= 1024 && card.mileage?.length > 10   
+                    ? `${card?.mileage?.slice(0, 10)}...`
+                    : card?.mileage || "Not specified"}
+                </span>
               </p>
-              <p className="w-full">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Damage: </span>
-                {window.innerWidth >= 1024 && card.damage?.length > 10
-                  ? `${card.damage.slice(0, 10)}...`
-                  : card.damage || "None"}
+                <span className="text-nowrap">
+                  {window.innerWidth >= 1024 && card.damage?.length > 10
+                    ? `${card?.damage?.slice(0, 10)}...`
+                    : card?.damage || "None"}
+                </span>
               </p>
-              <p className="w-full">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Engine Type: </span>
-                {window.innerWidth >= 1024 && card.engine_type?.length > 10
-                  ? `${card.engine_type.slice(0, 10)}...`
-                  : card.engine_type || "Not specified"}
+                <span className="text-nowrap">
+                  {window.innerWidth >= 1024 && card?.engine_type?.length > 10
+                    ? `${card?.engine_type?.slice(0, 10)}...`
+                    : card?.engine_type || "Not specified"}
+                </span>
               </p>
-              <p className="w-full">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Color: </span>
-                {window.innerWidth >= 1024 && card.color?.length > 10
-                  ? `${card.color.slice(0, 10)}...`
-                  : card.color || "Not specified"}
+                <span className="text-nowrap">
+                  {window.innerWidth >= 1024 && card?.color?.length > 10
+                    ? `${card?.color?.slice(0, 10)}...`
+                    : card?.color || "Not specified"}
+                </span>
               </p>
             </div>
           </div>
         </div>
-        <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row   w-full justify-center items-center   mx-auto">
-          <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw]  text-center sm:text-left">
-            <p className="text-sm text-gray-600">{card.Price}</p>
-            <p className="text-xl font-bold text-red-600">{card.amount}</p>
-            <div className="flex flex-col-reverse  w-full  gap-[1vw] p-[1vw]  rounded-lg ">
+        <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row mr-2 w-full justify-center items-center  mx-auto">
+          <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw] w-full text-center sm:text-left">
+            <p className="text-sm text-gray-600">{card?.Price}</p>
+            <p className="text-xl font-bold text-red-600">{card?.amount}</p>
+            <div className="flex flex-col-reverse w-full gap-[1vw] p-[1vw] rounded-lg ">
               {/* BID NOW Button Section */}
-              <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
-                <Link to={`/vehicle-detail/${card.lot_id}`} className="w-full">
-                  <button className=" w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+              <div className="flex justify-center items-center w-full lg:mt-2 sm:mt-0">
+                <Link to={`/vehicle-detail/${card?.lot_id}`} className="w-full">
+                  <button className="h-auto py-2 rounded-[8px] w-full text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
                     BID NOW
                   </button>
                 </Link>
               </div>
 
               {/* Auction Date & Timer Section */}
-              <div className="w-full  lg:w-[11.1vw] h-auto  py-1  mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center  shadow-sm">
+              <div className="w-full h-auto py-2  bg-white rounded-lg flex justify-center items-center shadow-sm">
                 <div className="flex items-center text-nowrap gap-[0.75vw] ">
                   {/* Icon Section */}
                   <div className="flex justify-center items-center">
-                    {card.auction_date ? (
+                    {card?.auction_date ? (
                       ValidDate ? (
                         <BsFire className="text-red-600 text-sm lg:text-[0.875vw]" />
                       ) : (
@@ -200,8 +214,8 @@ function Card({ card }) {
 
                   {/* Timer or Status Section */}
                   <div className="flex flex-col justify-center items-start ">
-                    <p className="text-gray-800 text-sm lg:text-[0.875vw] font-medium">
-                      {card.auction_date
+                    <p className="text-gray-800 text-sm sm::text-[0.875vw] font-medium">
+                      {card?.auction_date
                         ? ValidDate
                           ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
                           : "Bidding Over"

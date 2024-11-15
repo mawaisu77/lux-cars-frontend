@@ -14,7 +14,7 @@ const Top = () => {
 
   return (
     <div className="relative w-[100vw] mx-auto">
-      <div className="relative max-w-[85vw] sm:max-w-[73.229vw] py-[30px] sm:py-[4.167vw] mx-auto">
+      <div className="relative max-w-[85vw] sm:max-w-[85vw] md:max-w-[73.229vw] py-[30px] sm:py-[4.167vw] mx-auto">
         <div className="flex flex-col items-center justify-center mx-auto w-full">
           <div className="flex flex-col items-center justify-center mx-auto w-full">
             <div className="flex text-lux-black justify-center font-urbanist text-[22px] sm:text-36 font-bold sm:leading-[2.86vw]">
@@ -23,7 +23,7 @@ const Top = () => {
             <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red mt-[6px] sm:mt-[0.781vw] w-[30px] sm:w-[5vw] mx-auto" />
           </div>
 
-          <div className=" grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto gap-3 sm:gap-[1.2vw] mt-[7vh] max-w-[100%] sm:max-w-[74vw]">
+          <div className="  grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto gap-3 sm:gap-[1.2vw] mt-[7vh] w-full">
             {loading ? (
               // Skeleton Loader Layout
               categories.map((_, index) => (

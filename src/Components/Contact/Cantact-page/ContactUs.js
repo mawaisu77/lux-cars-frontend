@@ -6,7 +6,6 @@ import ContactForm from "./ContactForm";
 const ContactUs = () => {
   return (
     <>
-      <Header className="text-white" />
       <div className="back-image w-full absolute">
         <div className="hidden lg:block">
           <div className=" w-full flex flex-col justify-center items-center mt-[12.5vh]">

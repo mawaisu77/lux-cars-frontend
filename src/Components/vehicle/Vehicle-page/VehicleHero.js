@@ -23,6 +23,8 @@ import TimeLeftCounter from "./TimeLeftCounter";
 import VehicleCostCalculator from "./VehicleCostCalculator";
 import BidHistory from "./BidHistory";
 import CarReportViewer from "./Report";
+import Pusher from "pusher-js";
+
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -35,6 +37,40 @@ const VehicleHero = () => {
 
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
+
+
+    const [liveData, setLiveData] = useState({
+      currentBid: null,
+      noOfBids: null,
+  });
+
+  useEffect(() => {
+    // Initialize Pusher
+    const pusher = new Pusher("6d700b541b1d83879b18", {
+      cluster: "ap2",
+    });
+
+    // Subscribe to the car-bids channel
+    const channel = pusher.subscribe(`public-notification-${lotID}`);
+
+    // Listen for bid updates specific to the car
+    channel.bind(`car-notifications`, (data) => {
+      console.log("data === >", data.message.bid_price);
+
+        setLiveData({
+            currentBid: data.message.bid_price,
+            noOfBids: data.message.noOfBids,
+        });
+    });
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();  
+        
+    };
+
+}, []);
+
 
   const handlePlaceBid = () => {
     document.getElementById("my_modal_2").showModal();
@@ -74,7 +110,7 @@ const VehicleHero = () => {
 
   useEffect(() => {
     fetchCarDetail();
-  }, [fetchCarDetail]);
+  }, []);
 
   useEffect(() => {
     if (shouldRefetch) {
@@ -93,11 +129,13 @@ const VehicleHero = () => {
     if (placeBiderror) {
       toast.error(placeBiderror);
     }
+
+
   }, [placeBidloading, placeBidSuccess, placeBiderror]);
 
+  console.log("liveData === >", liveData);
   return (
     <>
-      <Header textColor="text-white" />
       <div className="lg:block hidden bg-vehicle">
         <div className="w-[15.5] flex flex-col pt-[12.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">
@@ -239,7 +277,8 @@ const VehicleHero = () => {
                             </p>
 
                             <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                              ${carDetailData?.data?.currentBid}
+                            ${liveData.currentBid ? liveData.currentBid : carDetailData?.data?.currentBid}
+                            {/* {liveData.currentBid} */}
                             </p>
                           </div>
                           <div className="flex items-center">
@@ -649,15 +688,15 @@ const VehicleHero = () => {
                             </p>
 
                             <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                              ${carDetailData?.data?.currentBid}
-                            </p>
+                             ${liveData.currentBid ? liveData.currentBid : carDetailData?.data?.currentBid}
+                             </p>
                           </div>
                           <div className="flex items-center">
                             <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
                               No of Bids :
                             </p>
                             <p className="font-urbanist font-bold text-sm lg:text-[0.97vw] ml-[0.5vw]">
-                              ${carDetailData?.data?.noOfBids}
+                              {liveData.noOfBids ? liveData.noOfBids : carDetailData?.data?.noOfBids}
                             </p>
                           </div>
                         </div>

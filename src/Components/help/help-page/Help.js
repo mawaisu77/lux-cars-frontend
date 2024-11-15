@@ -44,7 +44,6 @@ const Help = () => {
 
   return (
     <>
-      <Header className="text-white" />
       <div className="back-image-Help">
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col pt-[12.5vh]">

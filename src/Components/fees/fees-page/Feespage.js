@@ -38,7 +38,6 @@ function Feespage() {
 
   return (
     <div>
-      <Header className="text-white" />
       <div className="bg-fees">
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col pt-[12.5vh]">

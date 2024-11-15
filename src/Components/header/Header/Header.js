@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { changeLanguage } from "i18next";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useLogout } from "../../../hooks/useLogout";
+import NotificationDropdown from "../../ui/dropdowns/NotificationDropdown";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -136,6 +137,7 @@ const Header = () => {
               <Link to={"/upload-car"} className=" hover:text-primary-red duration-200">
                 <li>Sell Car</li>
               </Link>
+              <NotificationDropdown />
             </ul>
           </div>
         </div>
