@@ -15,7 +15,10 @@ const LocalCars = () => {
 
   return (
     <>
-      <div className="w-full lg:w-[74vw] mx-auto  mt-[50px] text-black">
+  
+      <div className="w-full lg:w-[74vw] mx-auto  my-[60px] text-black">
+      <h1 className="text-[36px] lg:text-[2.3vw] font-urbanist text-left font-bold">Local Cars</h1>
+
         {localCars && localCars?.data?.cars?.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[50vh]">
             <p className="text-2xl font-bold text-gray-500">
