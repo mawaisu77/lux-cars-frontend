@@ -13,11 +13,14 @@ import { API_BASE_URL } from "../../../services/baseService";
 
 const Verification = () => {
   const fileUploadRef = useRef(null);
+
   const [uploadedFiles, setUploadedFiles] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
 
   const [isUploadEnabled, setIsUploadEnabled] = useState(false); // To track the upload button state
   const navigate = useNavigate();
+  let toastShown = false; // Local variable to prevent multiple toasts
+
 
     // Handle file selection process
     const onFileSelect = (event) => {
@@ -53,6 +56,9 @@ const Verification = () => {
   
 
   const uploadDocuments = async (documentFiles) => {
+    if (toastShown) return; // Prevent duplicate toasts
+    toastShown = true; // Set local flag to true
+
     let formData = new FormData();
     documentFiles.forEach((file) => {
       formData.append("documents", file);
@@ -81,29 +87,26 @@ const Verification = () => {
         }
       );
 
-      setUploadedFiles((prevFiles) => {
-        return prevFiles.map((uploadedFile) => ({
+      setUploadedFiles((prevFiles) =>
+        prevFiles.map((uploadedFile) => ({
           ...uploadedFile,
           progress: 100,
-        }));
-      });
+        }))
+      );
 
-      // Handle successful upload
-      console.log("Upload successful:", response.data);
-      navigate("/user/profile");
+      // Show toast
       showToast("Document uploaded successfully", "success");
+      navigate("/user/profile");
     } catch (error) {
-      // Handle error
       console.error("Error uploading documents:", error);
-      setUploadedFiles((prevFiles) => {
-        return prevFiles.map((uploadedFile) => ({
+      setUploadedFiles((prevFiles) =>
+        prevFiles.map((uploadedFile) => ({
           ...uploadedFile,
           progress: "error",
-        }));
-      });
-      // console.log("backend error", error.response.data.message)
-      showToast(error.response.data.message, "error");
-      navigate("/user/profile");
+        }))
+      );
+
+      showToast(error.response?.data?.message || "Error uploading documents", "error");
     }
 
     if (fileUploadRef.current) {
@@ -155,7 +158,7 @@ const Verification = () => {
       isUploadEnabled ? "" : "cursor-not-allowed opacity-50"
     }`}
     disabled={!isUploadEnabled} // Disable button until 2 files are selected
-    onClick={uploadDocuments}
+    onClick={() => uploadDocuments(selectedFiles)} // Pass selectedFiles explicitly
   >
     Upload
   </button>

@@ -199,21 +199,34 @@ const Profile = () => {
               </div>
             </div>
 
+<div className="border my-2 bg-secondary-gray p-1 border-gray-200 text-left text-22 font-urbanist font-semibold">
+  Your Uploaded Documents {documentVerification ? (
+    <span className="text-green-500">(Verified)</span>
+  ) : (
+    <span className="text-red-500">(Not Verified)</span>
+  )}
+</div>
             <div className="flex">
               <div
-                className={`w-[3vw] h-[5vh] ${
-                  images.length > 0 ? "flex" : "hidden"
+                className={`w-[10vw] h-[10vh] ${
+                  images.length > 0 ? "flex gap-x-2" : "hidden"
                 }`}
               >
                 {images.map((src, index) => (
+                    <>
+                  <div className="w-full h-full ">
+
                   <img
-                    className="w-full h-full cursor-pointer hover:scale-105 duration-200"
+                    className="w-full h-full object-cover cursor-pointer hover:scale-105 duration-200"
                     src={src}
                     onClick={() => openImageViewer(index)}
                     key={index}
                     style={{ margin: "2px" }}
                     alt=""
                   />
+
+               </div>
+                    </>
                 ))}
 
                 {isViewerOpen && (
@@ -273,6 +286,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+
             <button className="flex justify-center mb-10 items-center font-semibold w-[150px] lg:w-[10vw] h-[54px] lg:h-[6vh] bg-[#f3f3f6] text-[16px] lg:text-[0.8vw] text-[#ca0000] rounded-xl mt-[3vh]">
               {loading ? (
                 <ClipLoader size={20} color={"#ca0000"} />
