@@ -199,15 +199,21 @@ const UploadVehicle = () => {
       },
     }));
   };
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    console.log("handle file chaneg", file);
+
+const handleFileChange = (e) => {
+  const file = e.target.files[0];
+  if (file && file instanceof File) {
+    console.log("Valid File:", file);
     setFormData((prevData) => ({
       ...prevData,
       dealershipLicense: file,
     }));
-    setImagePreview(URL.createObjectURL(file));
-  };
+    setImagePreview(URL.createObjectURL(file)); // Create a preview URL
+  } else {
+    console.error("No valid file selected");
+  }
+};
+
   const handleCancelImage = () => {
     setImagePreview(null);
     fileInputRef.current.value = "";
@@ -485,6 +491,14 @@ const UploadVehicle = () => {
     }
   }, [dealerData, user]);
 
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
+
   return (
     <div className="">
       <div className="bg-vehicle">
@@ -688,15 +702,15 @@ const UploadVehicle = () => {
                       <img
                         src={
                           imagePreview ||
-                          (formData.dealershipLicense &&
-                            URL.createObjectURL(formData.dealershipLicense))
+                          formData.dealershipLicense
+                           
                         }
                         alt="Uploaded preview"
                         style={{ width: "80px", height: "auto" }}
                       />
                       <button
                         type="button"
-                        disabled={!imagePreview && !formData.dealershipLicense}
+                        // disabled={!imagePreview && !formData.dealershipLicense}
                         onClick={handleCancelImage}
                         className="border rounded-full bg-red-200 font-bold text-[#CA0000] py-2 px-4 mt-2"
                       >

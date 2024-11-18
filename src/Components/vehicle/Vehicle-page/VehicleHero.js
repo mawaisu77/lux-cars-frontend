@@ -788,7 +788,7 @@ const VehicleHero = () => {
         </div>
       )}
 
-      <dialog id="my_modal_1" className="modal">
+      <dialog id="my_modal_1" className="modal ">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Place Your bid here!</h3>
           <CurrencyInput
@@ -822,8 +822,8 @@ const VehicleHero = () => {
           </div>
         </div>
       </dialog>
-      <dialog id="my_modal_2" className="modal">
-        <div className="modal-box">
+      <dialog id="my_modal_2" className="modal ">
+        <div className="modal-box dark:bg-white">
           <h3 className="font-bold text-lg">Place Your bid here!</h3>
           <p className="py-4">
             Once you place bid then you will be no longer to bid again on this
@@ -832,13 +832,13 @@ const VehicleHero = () => {
           </p>
           <div className="flex gap-x-2 justify-center">
             <button
-              className="btn text-green-600 w-[100px]"
+              className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
               onClick={handleBidPlace}
             >
-              Yes
+              Proceed
             </button>
             <button
-              className="btn text-red-600 w-[100px]"
+              className="btn text-red-600 w-[100px] dark:bg-white hover:bg-gray-200 border-red-600"
               onClick={handleCloseModal2}
             >
               Cancel

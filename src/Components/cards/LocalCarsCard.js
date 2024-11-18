@@ -116,7 +116,7 @@ const LocalCarsCard = ({ card }) => {
           <div className="flex">
             <div className="flex justify-between items-center w-full">
               <div className="flex flex-col lg:text-18 ">
-              <Link to={`vehicle-detail/${card.lot_id}`}>
+              <Link to={`local-vehicle-detail/${card.id}`}>
                 <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
                   "{`${card.make} ${card.model} ${card.year}`.length > 20
                           ? `${card.make} ${card.model} ${card.year}`.slice(

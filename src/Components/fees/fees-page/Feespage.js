@@ -44,14 +44,12 @@ function Feespage() {
             <div className="text-[2.6vw] font-semibold text-white">
               Fees Overview
             </div>
-            <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist ">
-              <Link to="/">
-                <button className="hover:text-white hover:text-[1.1vw]">
-                  Home
-                </button>
-              </Link>
-              /
-              <button className="hover:text-white hover:text-[1.1vw]">
+            <div className='text-white flex gap-3 justify-center text-[1vw] font-urbanist'>
+            <Link to="/">
+              <button className='hover:text-white hover:scale-110 duration-150'>Home</button>
+            </Link>
+            /
+              <button className="hover:text-white hover:scale-110 duration-150">
                 Fees Overview
               </button>
             </div>
