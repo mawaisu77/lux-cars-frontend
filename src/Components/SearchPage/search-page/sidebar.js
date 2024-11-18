@@ -57,15 +57,29 @@ import {
   odoBrandLabel,
   odoBrandOptions,
 } from "../../../utils/filtersData/odoBrand";
-import { partnerAPIKey, partnerLabel, partnerOptions } from "../../../utils/filtersData/partnerOptions";
-import { driveAPIKey, driveLabel, driveOptions } from "../../../utils/filtersData/driveOptions";
-import { statusAPIKey, statusOptions } from "../../../utils/filtersData/statusOptions";
-import { transmissionAPIKey, transmissionOptions } from "../../../utils/filtersData/transmissionOptions";
+import {
+  partnerAPIKey,
+  partnerLabel,
+  partnerOptions,
+} from "../../../utils/filtersData/partnerOptions";
+import {
+  driveAPIKey,
+  driveLabel,
+  driveOptions,
+} from "../../../utils/filtersData/driveOptions";
+import {
+  statusAPIKey,
+  statusOptions,
+} from "../../../utils/filtersData/statusOptions";
+import {
+  transmissionAPIKey,
+  transmissionOptions,
+} from "../../../utils/filtersData/transmissionOptions";
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [showFilterMob, setShowFiltersMob] = useState(false);
+  const [showFilterMob, setShowFiltersMob] = useState(true);
   const [searchFilterDropdowns, setSearchFilterDropdowns] = useState({});
   const [showAllFilters, setShowAllFilters] = useState({});
   const [auctionDateFrom, setAuctionDateFrom] = useState("");
@@ -345,7 +359,7 @@ const Sidebar = () => {
       odometer_from: "",
       odometer_to: "",
       document_old: [],
-      odobrand:[],
+      odobrand: [],
       initialCyclinders: [],
       initialDocument: [],
       initialOdobrand: [],
@@ -487,73 +501,83 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (auctionDateFromParam && auctionDateToParam) {
-        setAuctionDateFrom(auctionDateFromParam);
-        setAuctionDateTo(auctionDateToParam);
+      setAuctionDateFrom(auctionDateFromParam);
+      setAuctionDateTo(auctionDateToParam);
 
-        // Normalize auctionDateFrom and auctionDateTo
-        const normalizedFrom = new Date(auctionDateFromParam).toISOString().split("T")[0];
-        const normalizedTo = new Date(auctionDateToParam).toISOString().split("T")[0];
+      // Normalize auctionDateFrom and auctionDateTo
+      const normalizedFrom = new Date(auctionDateFromParam)
+        .toISOString()
+        .split("T")[0];
+      const normalizedTo = new Date(auctionDateToParam)
+        .toISOString()
+        .split("T")[0];
 
-        const today = new Date();
-        const normalizedToday = today.toISOString().split("T")[0];
+      const today = new Date();
+      const normalizedToday = today.toISOString().split("T")[0];
 
-        // Start and end of today
-        const startOfToday = normalizedToday; 
-        const endOfToday = normalizedToday;
+      // Start and end of today
+      const startOfToday = normalizedToday;
+      const endOfToday = normalizedToday;
 
-        // Start and end of this week
-        const startOfWeek = new Date();
-        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay()); 
-        const normalizedStartOfWeek = startOfWeek.toISOString().split("T")[0]; 
+      // Start and end of this week
+      const startOfWeek = new Date();
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+      const normalizedStartOfWeek = startOfWeek.toISOString().split("T")[0];
 
-        const endOfWeek = new Date(startOfWeek);
-        endOfWeek.setDate(endOfWeek.getDate() + 6); 
-        const normalizedEndOfWeek = endOfWeek.toISOString().split("T")[0];
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(endOfWeek.getDate() + 6);
+      const normalizedEndOfWeek = endOfWeek.toISOString().split("T")[0];
 
-        // Start and end of this month
-        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1); 
-        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); 
-        const normalizedStartOfMonth = startOfMonth.toISOString().split("T")[0];
-        const normalizedEndOfMonth = endOfMonth.toISOString().split("T")[0];
+      // Start and end of this month
+      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      const normalizedStartOfMonth = startOfMonth.toISOString().split("T")[0];
+      const normalizedEndOfMonth = endOfMonth.toISOString().split("T")[0];
 
-        // Checking...
-        console.log("Normalized From ==:", normalizedFrom);
-        console.log("Normalized To:", normalizedTo);
-        console.log("Normalized Start Of Today:", startOfToday);
-        console.log("Normalized End Of Today:", endOfToday);
-        console.log("Normalized Start Of Week:", normalizedStartOfWeek);
-        console.log("Normalized End Of Week:", normalizedEndOfWeek);
-        console.log("Normalized Start Of Month:", normalizedStartOfMonth);
-        console.log("Normalized End Of Month:", normalizedEndOfMonth);
+      // Checking...
+      console.log("Normalized From ==:", normalizedFrom);
+      console.log("Normalized To:", normalizedTo);
+      console.log("Normalized Start Of Today:", startOfToday);
+      console.log("Normalized End Of Today:", endOfToday);
+      console.log("Normalized Start Of Week:", normalizedStartOfWeek);
+      console.log("Normalized End Of Week:", normalizedEndOfWeek);
+      console.log("Normalized Start Of Month:", normalizedStartOfMonth);
+      console.log("Normalized End Of Month:", normalizedEndOfMonth);
 
-        // Check for "today"
-        if (normalizedFrom === startOfToday && normalizedTo === endOfToday) {
-            setSelectedOption("today");
-            setCustomDatesVisible(false);
-        } 
-        // Check for "thisWeek"
-        else if (normalizedFrom >= normalizedStartOfWeek && normalizedTo <= normalizedEndOfWeek) {
-            setSelectedOption("thisWeek");
-            setCustomDatesVisible(false);
-        } 
-        // Check for "thisMonth"
-        else if (normalizedFrom >= normalizedStartOfMonth && normalizedTo <= normalizedEndOfMonth) {
-            setSelectedOption("thisMonth");
-            setCustomDatesVisible(false);
-        } 
-        // If dates are provided but do not match any conditions
-        else {
-            setSelectedOption("custom");
-            setCustomDatesVisible(true);
-        }
+      // Check for "today"
+      if (normalizedFrom === startOfToday && normalizedTo === endOfToday) {
+        setSelectedOption("today");
+        setCustomDatesVisible(false);
+      }
+      // Check for "thisWeek"
+      else if (
+        normalizedFrom >= normalizedStartOfWeek &&
+        normalizedTo <= normalizedEndOfWeek
+      ) {
+        setSelectedOption("thisWeek");
+        setCustomDatesVisible(false);
+      }
+      // Check for "thisMonth"
+      else if (
+        normalizedFrom >= normalizedStartOfMonth &&
+        normalizedTo <= normalizedEndOfMonth
+      ) {
+        setSelectedOption("thisMonth");
+        setCustomDatesVisible(false);
+      }
+      // If dates are provided but do not match any conditions
+      else {
+        setSelectedOption("custom");
+        setCustomDatesVisible(true);
+      }
     } else {
-        // If no dates are provided, set to null
-        setAuctionDateFrom(null);
-        setAuctionDateTo(null);
-        setSelectedOption(null); // Set no option selected
-        setCustomDatesVisible(true); // Show custom date input
+      // If no dates are provided, set to null
+      setAuctionDateFrom(null);
+      setAuctionDateTo(null);
+      setSelectedOption(null); // Set no option selected
+      setCustomDatesVisible(true); // Show custom date input
     }
-}, [auctionDateFromParam, auctionDateToParam]);
+  }, [auctionDateFromParam, auctionDateToParam]);
 
   // Function to toggle filters only on smaller screens
   const handleFilters = () => {
@@ -595,7 +619,7 @@ const Sidebar = () => {
     const now = new Date();
     let fromDate = now.toISOString(); // Initialize fromDate to current time
     let toDate;
-  
+
     if (option === "today") {
       // Set toDate to the end of today
       const endOfDay = new Date(now);
@@ -618,18 +642,17 @@ const Sidebar = () => {
       setCustomDatesVisible(true);
       return;
     }
-  
-  // Update selected filters
-  setSelectedFilters((prevFilters) => ({
-    ...prevFilters,
-    auction_date_from: fromDate,
-    auction_date_to: toDate,
-  }));
+
+    // Update selected filters
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      auction_date_from: fromDate,
+      auction_date_to: toDate,
+    }));
 
     setAuctionDateFrom(fromDate);
-    setAuctionDateTo(toDate); 
+    setAuctionDateTo(toDate);
     setCustomDatesVisible(false); // Hide custom date fields if not custom
-    
   };
 
   const clearFilter = (filterKey) => {
@@ -719,45 +742,52 @@ const Sidebar = () => {
 
   return (
     <>
-    <div className="flex mt-20 sm:mt-5 gap-2 bg-gray-100  w-[95vw] sm:w-[80vw] p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
+      <div className="flex mt-20 sm:mt-5 gap-2 bg-gray-100  w-[95vw] sm:w-[80vw] p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
+        {Object.entries(appliedFilters).some(([, values]) =>
+          Array.isArray(values) ? values.length > 0 : values
+        ) && (
+          <div className="flex w-[80vw] gap-2">
+            {Object.entries(appliedFilters).map(([key, values]) =>
+              values && (Array.isArray(values) ? values.length > 0 : true) ? (
+                <div
+                  key={key}
+                  className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
+                >
+                  <span className="text-sm font-medium">
+                    {key}:{" "}
+                    {key === "auction_date_from" || key === "auction_date_to"
+                      ? `${
+                          key === "auction_date_from"
+                            ? "Auction Date From:"
+                            : "Auction Date To:"
+                        } ${new Date(values).toLocaleDateString()}`
+                      : Array.isArray(values)
+                      ? values
+                          .map(
+                            (id) =>
+                              dropdownData[key]?.find(
+                                ({ id: itemId }) => itemId === id
+                              )?.label
+                          )
+                          .join(", ")
+                      : dropdownData[key]?.find(({ id }) => id === values)
+                          ?.label || values}
+                  </span>
 
-    {Object.entries(appliedFilters).some(([, values]) => Array.isArray(values) ? values.length > 0 : values) && (
-  <div className="flex w-[80vw] gap-2">
-    {Object.entries(appliedFilters).map(([key, values]) =>
-      values && (Array.isArray(values) ? values.length > 0 : true) ? (
-        <div
-          key={key}
-          className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
-        >
-          <span className="text-sm font-medium">
-            {key}:{" "}
-            {key === "auction_date_from" || key === "auction_date_to"
-              ? `${key === "auction_date_from" ? "Auction Date From:" : "Auction Date To:"} ${new Date(values).toLocaleDateString()}`
-              : Array.isArray(values)
-              ? values
-                  .map(
-                    (id) =>
-                      dropdownData[key]?.find(({ id: itemId }) => itemId === id)
-                        ?.label
-                  )
-                  .join(", ")
-              : dropdownData[key]?.find(({ id }) => id === values)?.label || values}
-          </span>
-
-          <IoClose
-            onClick={() => clearFilter(key)}
-            className="ml-1 text-red-500 cursor-pointer"
-          />
-        </div>
-      ) : null
-    )}
-  </div>
-)}
-
-
-   </div>
+                  <IoClose
+                    onClick={() => clearFilter(key)}
+                    className="ml-1 text-red-500 cursor-pointer"
+                  />
+                </div>
+              ) : null
+            )}
+          </div>
+        )}
+      </div>
       <div className="flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[95vw] sm:w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">
-        <h2 className="lg:hidden sm:text-[42px] text-[20px] font-bold mt-5 sm:mt-[100px]">Fliters</h2>{" "}
+        <h2 className="lg:hidden sm:text-[42px] text-[20px] font-bold mt-5 sm:mt-[100px]">
+          Fliters
+        </h2>
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-40 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
             <div className="border-b-black  p-1 border-b flex justify-center items-center gap-x-2">
@@ -784,35 +814,34 @@ const Sidebar = () => {
                         dropdownKey.slice(1)}
                   </h1>
 
-<div className="flex gap-x-2"> 
-    {/* Close Icon for Clearing Filter */}
-    {selectedFilters[dropdownKey]?.length > 0 && (
-                   
-            <IoClose
-               onClick={() => clearFilter(dropdownKey)}
-               className="bg-red-600/20 text-red-600 rounded-full"
-               />
-                  )}
+                  <div className="flex gap-x-2">
+                    {/* Close Icon for Clearing Filter */}
+                    {selectedFilters[dropdownKey]?.length > 0 && (
+                      <IoClose
+                        onClick={() => clearFilter(dropdownKey)}
+                        className="bg-red-600/20 text-red-600 rounded-full"
+                      />
+                    )}
 
-                  <svg
-                    className={`w-[15px]  lg:w-[1vw] h-[15px] lg:h-[1vw] transition-transform duration-200 ${
-                      dropdownStates[dropdownKey] ? "transform rotate-180" : ""
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    ></path>
-                  </svg>
-
-   </div>
-                
+                    <svg
+                      className={`w-[15px]  lg:w-[1vw] h-[15px] lg:h-[1vw] transition-transform duration-200 ${
+                        dropdownStates[dropdownKey]
+                          ? "transform rotate-180"
+                          : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      ></path>
+                    </svg>
+                  </div>
                 </div>
                 {dropdownStates[dropdownKey] && (
                   <>
@@ -1135,16 +1164,16 @@ const Sidebar = () => {
               </div>
             </div>
 
-            <div className="flex text-xs flex-col lg:flex-row justify-center items-center my-5 gap-x-1.5 lg:gap-y-4">
+            <div className="flex text-xs flex-col lg:flex-row justify-center items-center my-5 gap-y-2 gap-x-1.5 lg:gap-y-4">
               <button
                 onClick={applyFilters}
-                className="px-1 py-2 bg-[#CA0000] w-1/2 hover:bg-[#b30f0f] text-white rounded-lg"
+                className="px-1 py-2 bg-[#CA0000] w-full md:w-1/2 hover:bg-[#b30f0f] text-white rounded-lg"
               >
                 Apply Filters
               </button>
               <button
                 onClick={resetFilters}
-                className="px-2 py-2 bg-gray-500 w-1/2 hover:bg-gray-600 text-white rounded-lg"
+                className="px-2 py-2 bg-gray-500 w-full md:w-1/2 hover:bg-gray-600 text-white rounded-lg"
               >
                 Reset Filters
               </button>

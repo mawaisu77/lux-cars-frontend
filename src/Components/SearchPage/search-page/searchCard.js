@@ -57,7 +57,7 @@ function Card({ card }) {
     <div className="flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
       <div className="flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  ">
         <Swiper
-          className="relative w-full lg:w-[14vw] mx-auto h-full rounded-md "
+          className="relative w-full lg:w-[14vw] md:h-[250px] lg:h-[180px] mx-auto rounded-md "
           autoplay={{
             delay: 2000,
             disableOnInteraction: false,
@@ -67,13 +67,12 @@ function Card({ card }) {
         >
           {card?.images &&
             card?.images?.map((image, index) => (
-              <SwiperSlide key={index} className="relative w-full rounded-md">
-                <div className="cursor-pointer relative rounded-md">
+              <SwiperSlide key={index} className="relative w-full h-full rounded-md">
+                <div className="cursor-pointer relative h-full rounded-md">
                   {(card?.currentBid === "" ||
                     card?.currentBid === null ||
                     card?.currentBid == 0) && (
-                    <div className="absolute w-full lg:w-[16vw] sm:h-[1vh] bg-gray-50 bottom-0 ">
-                      {" "}
+                    <div className="absolute w-full bg-red-400 lg:w-[16vw] sm:h-[1vh]  bottom-0 ">                   
                     </div>
                   )}
                   <img
