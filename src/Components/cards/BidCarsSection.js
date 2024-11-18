@@ -26,7 +26,17 @@ const BidCarsSection = () => {
 
   if (carError) {
     return (
-      <div className="text-2xl font-bold p-10 text-[#ca0000]">{carError}</div>
+ 
+      <div className="flex flex-col items-center justify-center min-h-[50vh]">
+      <p className="text-2xl font-bold text-gray-500">
+      {carError}
+
+      </p>
+      <p className="text-gray-400 mt-2">
+        Please try again later
+      </p>
+      </div>
+
     );
   }
 

@@ -13,7 +13,14 @@ const Makes = () => {
   const { carData, loading, error } = useCarMakesModels();
 
   if (error) {
-    return <div className="text-red-600"> {error}</div>;
+    return <div className="flex flex-col items-center justify-center min-h-[50vh]">
+    <p className="text-2xl font-bold text-gray-500">
+    {error}
+    </p>
+    <p className="text-gray-400 mt-2">
+    Please try again later
+    </p>
+    </div>;
   }
 
 

@@ -83,7 +83,7 @@ const Funds = () => {
                 </ul>
               </div>
             )}
-            <button onClick={handleOpenModal} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold items-center bg-[#f8f8f8] text-[15px] lg:text-[0.97vw] font-urbanist">
+            <button onClick={handleOpenModal} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red text-white text-[15px] lg:text-[1vw] font-urbanist">
               Add Deposite
             </button>
           </div>
@@ -102,13 +102,21 @@ const Funds = () => {
          <FundsCard className="font-semibold" />
 
           <div className="flex justify-center items-center flex-col min-h-[30vh]">
-            <p className="text-[18px] lg:text-[1.2vw] font-urbanist text-red-600">Error: {error}</p>
+            <div className="flex flex-col items-center justify-center min-h-[50vh]">
+            <p className="text-2xl font-bold text-gray-500">
+            {error}
+            </p>
+            <p className="text-gray-400 mt-2">
+              Please try again later
+            </p>
             <button
               className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg"
               onClick={handleOpenModal}
               >
               Deposit Funds
             </button>
+          </div>
+        
           </div>
               </>
         )}

@@ -14,11 +14,11 @@ const  useCarMakesModels = () => {
         setCarData(response?.data?.data);
       } catch (err) {
         if (err.response) {
-          setError(`${err.response.data.message}`);
+          setError(`${err.response.data.message || 'An error occurred.'}`);
         } else if (err.request) {
           setError('server error');
         } else {
-          setError(`${err.message}`);
+          setError(`${err.message || 'An error occurred.'}`);
         }      } finally {
         setLoading(false);
       }

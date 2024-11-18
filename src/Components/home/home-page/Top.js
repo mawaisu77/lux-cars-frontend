@@ -41,7 +41,14 @@ const Top = () => {
                 </div>
               ))
             ) : error ? (
-              <div>Error loading data</div>
+              <div className="flex col-span-4 flex-col items-center justify-center min-h-[50vh]">  
+              <p className="text-2xl font-bold text-gray-500">
+              {error}
+            </p>
+            <p className="text-gray-400 mt-2">
+              Please try again later
+            </p>
+          </div>
             ) : (
               categories
                 .filter((category) =>

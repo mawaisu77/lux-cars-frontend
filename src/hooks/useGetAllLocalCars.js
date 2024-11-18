@@ -14,11 +14,11 @@ const useGetAllLocalCars = (url) => {
       } catch (err) {
         console.log("error object",err)
         if (err.response) {
-          setCarError(`${err.response.data.message}`);
+          setCarError(`${err.response.data.message || 'An error occurred.'}`);
         } else if (err.request) {
           setCarError('Error: No response from server');
         } else {
-          setCarError(`Error: ${err.message}`);
+          setCarError(`${err.message || 'An error occurred.'}`);
         }
       } finally {
         setCarLoading(false);
