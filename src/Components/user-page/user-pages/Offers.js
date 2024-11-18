@@ -64,17 +64,16 @@ const Offers = () => {
                   <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
                     VIN
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
-                    Location
-                  </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
-                    Posted
-                  </th>
+    
                   <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
                     Offer Price
                   </th>
                   <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
                     Status
+                  </th>
+                           
+                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                    Posted
                   </th>
                   
                  {offers?.data?.some(offer => offer.offer?.offerStatus === "Pending" || offer.offer?.offerStatus === "Expired") && (

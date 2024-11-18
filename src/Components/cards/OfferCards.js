@@ -34,11 +34,11 @@ const OfferCards = ({
 
   const handleOpenModal = (id) => {
     setSelectedOfferId(id);
-    setOpen(true); 
+    setOpen(true);
   };
 
   const handleCloseModal = () => {
-    setOpen(false); 
+    setOpen(false);
     setUpdateOfferResponse(null);
     triggerRefresh();
   };
@@ -58,7 +58,7 @@ const OfferCards = ({
   const handleNavigate = () => {
     navigate(`/local-vehicle-detail/${offer?.carData?.id || "-"}`);
   };
-// console.log("=== offer ===", offer);
+  // console.log("=== offer ===", offer);
   return (
     <>
       <tr className="border-t">
@@ -83,22 +83,10 @@ const OfferCards = ({
         </td>
         {/* VIN */}
         <td className="text-nowrap px-4 py-2">{offer.carData?.vin || "-"}</td>
-        {/* Location */}
-        <td className="text-nowrap px-4 py-2">
-          {`${offer.carData?.carLocation || "-"}, ${
-            offer.carData?.carState || "-"
-          }`}
-        </td>
-        {/* Posted Time Ago */}
-        <td className="text-nowrap px-4 py-2">
-          <TimeAgo date={offer.carData?.createdAt} />
-        </td>
 
         {/* Offer Price */}
         <td className="text-nowrap px-4 py-2 font-bold">
-          <span className={""}>
-            ${offer.offer?.offerPrice || "N/A"}
-          </span>
+          <span className={""}>${offer.offer?.offerPrice || "N/A"}</span>
         </td>
 
         {/* Status */}
@@ -112,9 +100,15 @@ const OfferCards = ({
           {offer.offer?.offerStatus}
         </td>
 
+        {/* Posted Time Ago */}
+        <td className="text-nowrap px-4 py-2">
+          <TimeAgo date={offer.carData?.createdAt} />
+        </td>
+
         {/* Accept offer button */}
         <td className={`text-nowrap font-semibold`}>
-          {(offer.offer?.offerStatus === "Pending" || offer.offer?.offerStatus === "Expired") && (
+          {(offer.offer?.offerStatus === "Pending" ||
+            offer.offer?.offerStatus === "Expired") && (
             <button
               className="bg-green-500 hover:bg-green-600 text-xs text-white font-bold py-1 px-2 rounded"
               onClick={() => handleOpenModal(offer?.offer?.id)}
@@ -124,7 +118,7 @@ const OfferCards = ({
           )}
         </td>
       </tr>
-      
+
       {/* Material UI Modal for confirmation */}
       <Modal
         open={open}
@@ -139,16 +133,22 @@ const OfferCards = ({
             </div>
           ) : error ? (
             <p className="text-red-500 text-center">{error}</p>
-          ) : updateOfferResponse?.data?.offerData?.offerStatus === "OfferAccepted" ? (
+          ) : updateOfferResponse?.data?.offerData?.offerStatus ===
+            "OfferAccepted" ? (
             <>
               <div className="flex flex-col items-center">
-                <img src={luxLogo} alt="LuxCar Logo" className="w-20 h-auto mb-4" />
+                <img
+                  src={luxLogo}
+                  alt="LuxCar Logo"
+                  className="w-20 h-auto mb-4"
+                />
                 <p className="text-green-500 text-center font-semibold">
                   {updateOfferResponse?.message}
                 </p>
                 <p className="text-gray-700 text-center mt-2">
-                  Thank you for accepting the offer. Please wait for LuxCar’s response.
-                  Our team will review your offer and get back to you shortly.
+                  Thank you for accepting the offer. Please wait for LuxCar’s
+                  response. Our team will review your offer and get back to you
+                  shortly.
                 </p>
                 <button
                   className="btn text-gray-600 w-[100px] mt-4"
@@ -160,25 +160,27 @@ const OfferCards = ({
             </>
           ) : (
             <>
-              <h3 id="modal-title" className="font-bold text-lg">Confirm Offer Acceptance</h3>
+              <h3 id="modal-title" className="font-bold text-lg">
+                Confirm Offer Acceptance
+              </h3>
               <p id="modal-description" className="py-4">
                 Are you sure you want to accept this offer?
               </p>
               <div className="flex gap-x-2 justify-center">
                 <button
-                  className="btn text-green-600 w-[100px]"
+                  className="btn text-green-600 w-[100px] dark:bg-white dark:border-green-600 dark:text-green-600 hover:bg-green-600 hover:text-white"
                   onClick={() => handleAcceptOffer(offer?.offer?.id)}
                 >
                   Accept
                 </button>
                 <button
-                  className="btn text-red-600 w-[100px]"
+                  className="btn text-red-600 w-[100px] dark:bg-white dark:border-red-600 dark:text-red-600 hover:bg-red-600 hover:text-white"
                   onClick={handleRejectOffer}
                 >
                   Reject
                 </button>
                 <button
-                  className="btn text-gray-600 w-[100px]"
+                  className="btn text-gray-600 w-[100px] dark:bg-white dark:border-gray-600 dark:text-gray-600 hover:bg-gray-600 hover:text-white"
                   onClick={handleCloseModal}
                 >
                   Cancel

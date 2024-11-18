@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
  
  import Bid from "./home-page/Bid.js"
  import Top from './home-page/Top.js'
@@ -24,6 +24,9 @@ import NotificationDropdown from '../ui/dropdowns/NotificationDropdown.jsx'
 
 const Home = () => {
   
+  useEffect(() => {
+    localStorage.setItem("apiEndpoint", process.env.REACT_APP_API_CARS_LIVE);
+  }, []);
 
   return (
     <>
