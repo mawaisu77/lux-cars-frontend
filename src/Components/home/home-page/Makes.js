@@ -93,7 +93,7 @@ const Makes = () => {
         </div>
         <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[5vw] mx-auto mt-[6px] sm:mt-[0.781vw]" />
         {/* For desktop */}
-        <div className="hidden lg:flex w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] justify-center">
+        <div className="hidden lg:flex max-w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] justify-center">
           {carData && carData.map((item, index) => (
             <button
               key={index}

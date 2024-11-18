@@ -25,7 +25,7 @@ const UploadVehicle = () => {
   const [mainloading, setMainLoading] = useState(false);
 
   const { user } = useAuthContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const option = useMemo(() => countryList().getData(), []);
 
@@ -201,11 +201,12 @@ const UploadVehicle = () => {
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    console.log("handle file chaneg", file);
     setFormData((prevData) => ({
       ...prevData,
       dealershipLicense: file,
     }));
-    setImagePreview(URL.createObjectURL(file)); // Update image preview
+    setImagePreview(URL.createObjectURL(file));
   };
   const handleCancelImage = () => {
     setImagePreview(null);
@@ -296,7 +297,7 @@ const UploadVehicle = () => {
               }),
             ]);
             showToast("Vehicle uploaded", "success");
-            navigate('/user/account/local-cars')
+            navigate("/user/account/local-cars");
           } catch (error) {
             if (error.response) {
               showToast(
@@ -331,8 +332,7 @@ const UploadVehicle = () => {
               }
             );
             showToast("Vehicle uploaded", "success");
-            navigate('/user/account/local-cars')
-
+            navigate("/user/account/local-cars");
           } catch (error) {
             if (error.response) {
               showToast(
@@ -365,7 +365,7 @@ const UploadVehicle = () => {
             },
           });
           showToast("Vehicle uploaded", "success");
-          navigate('/user/account/local-cars')
+          navigate("/user/account/local-cars");
         } catch (error) {
           if (error.response) {
             showToast(
@@ -492,12 +492,16 @@ const UploadVehicle = () => {
           <div className="text-[2.6vw] font-semibold text-white">
             Vehicle Detail
           </div>
-          <div className='text-white flex gap-3 justify-center text-[1vw] font-urbanist'>
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
-              <button className='hover:text-white hover:scale-110 duration-150'>Home</button>
+              <button className="hover:text-white hover:scale-110 duration-150">
+                Home
+              </button>
             </Link>
             /
-            <button className='hover:text-white hover:scale-110 duration-150'>Vehicle Detail</button>
+            <button className="hover:text-white hover:scale-110 duration-150">
+              Vehicle Detail
+            </button>
           </div>
         </div>
       </div>
@@ -683,17 +687,16 @@ const UploadVehicle = () => {
                     <div className="flex justify-between w-full items-center">
                       <img
                         src={
-                          formData.dealershipLicense === null ||
-                          formData.dealershipLicense === ""
-                            ? formData.dealershipLicense
-                            : formData.dealershipLicense
+                          imagePreview ||
+                          (formData.dealershipLicense &&
+                            URL.createObjectURL(formData.dealershipLicense))
                         }
                         alt="Uploaded preview"
                         style={{ width: "80px", height: "auto" }}
                       />
                       <button
                         type="button"
-                        disabled={formData.dealershipLicense ? true : false}
+                        disabled={!imagePreview && !formData.dealershipLicense}
                         onClick={handleCancelImage}
                         className="border rounded-full bg-red-200 font-bold text-[#CA0000] py-2 px-4 mt-2"
                       >
