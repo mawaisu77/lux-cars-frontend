@@ -167,7 +167,7 @@ const Profile = () => {
                   </div>
 
                   <div className="">
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
                       <div
                         className={`bg-red-600 h-2.5 rounded-full ${
                           documents.length === 0 || null
@@ -199,13 +199,13 @@ const Profile = () => {
               </div>
             </div>
 
-<div className="border my-2 bg-secondary-gray p-1 border-gray-200 text-left text-22 font-urbanist font-semibold">
-  Your Uploaded Documents {documentVerification ? (
-    <span className="text-green-500">(Verified)</span>
-  ) : (
-    <span className="text-red-500">(Not Verified)</span>
-  )}
-</div>
+          <div className="border my-2 bg-secondary-gray p-1 border-gray-200 text-left text-22 font-urbanist font-semibold">
+            Your Documents Status {documentVerification ? (
+              <span className="text-green-500">(Verified)</span>
+            ) : (
+              <span className="text-red-500">(Not Verified)</span>
+            )}
+          </div>
             <div className="flex">
               <div
                 className={`w-[10vw] h-[10vh] ${

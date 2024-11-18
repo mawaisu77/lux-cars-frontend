@@ -47,13 +47,13 @@ const AllBids = () => {
               {/* Header with toggle buttons */}
       <div className="flex justify-center space-x-4 mb-6">
         <button
-          className={`px-4 py-2 font-semibold rounded ${selectedOption === "bidding" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"}`}
+          className={`px-4 py-2 font-semibold rounded ${selectedOption === "bidding" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
           onClick={() => handleOptionChange("bidding")}
         >
           Bidding Cars
         </button>
         <button
-          className={`px-4 py-2 font-semibold rounded ${selectedOption === "local" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"}`}
+          className={`px-4 py-2 font-semibold rounded ${selectedOption === "local" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
           onClick={() => handleOptionChange("local")}
         >
           Local Cars

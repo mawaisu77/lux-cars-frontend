@@ -13,11 +13,11 @@ const useGetCarsCount = () => {
       setCarsCount(data);
     } catch (err) {
       if (err.response) {
-        setError(`${err.response.data.message}`);
+        setError(`${err.response.data.message || 'An error occurred.' }`);
       } else if (err.request) {
-        setError('Error: No response from server');
+        setError('No response from server');
       } else {
-        setError(`Error: ${err.message}`);
+        setError(`${err.message}`);
       }
     } finally {
       setLoading(false);

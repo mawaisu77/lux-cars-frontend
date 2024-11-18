@@ -60,7 +60,15 @@ const LocalCars = () => {
               ) : error ? (
                 <tr>
                   <td colSpan="8" className="text-center text-red-500 py-4">
-                    {error}
+                   
+                    <div className="flex flex-col items-center justify-center min-h-[50vh]">
+            <p className="text-2xl font-bold text-gray-500">
+            {error}
+            </p>
+            <p className="text-gray-400 mt-2">
+              It looks like you haven't uploaded any cars yet.
+            </p>
+          </div>
                   </td>
                 </tr>
               ) : (
