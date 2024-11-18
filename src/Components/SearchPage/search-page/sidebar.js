@@ -781,7 +781,7 @@ useEffect(() => {
           </div>
         )}
       </div>
-      <div className="flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[95vw] sm:w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">
+      <div className="mb-0 sm:mb-20 sm:pb-10 pb-0 flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[95vw] sm:w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">
         <h2 className="lg:hidden sm:text-[42px] text-[20px] font-bold mt-5 sm:mt-[100px]">
           Fliters
         </h2>

@@ -17,7 +17,7 @@ const TimeLeftCounter = ({ days, hours, minutes, seconds }) => (
     <div className="flex justify-center gap-3 items-center">
       {[{ label: "Days", value: days }, { label: "Hours", value: hours }, { label: "Min", value: minutes }, { label: "Sec", value: seconds }].map((time, index) => (
         <div key={index}>
-          <div className="shadow lg:text-[1vw]  lg:w-[3vw] h-[6vh] py-2 text-white font-bold bg-[#CA0000] border flex justify-center items-center rounded-[0.375vw]">
+          <div className="shadow lg:text-[1vw] w-[40px] sm:w-[3vw] h-[6vh] py-2 text-white font-bold bg-[#CA0000] border flex justify-center items-center rounded-[0.375vw]">
             {time.value}
           </div>
           <div className="text-black text-sm lg:text-[0.8vw] text-center  pt-1">

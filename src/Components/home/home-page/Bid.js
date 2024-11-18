@@ -10,7 +10,7 @@ import img7 from "../../../assets/Icons/M logo.png";
 import { GoSearch } from "react-icons/go";
 import { FaArrowRightLong } from "react-icons/fa6";
 import useCarMakesModels from "../../../hooks/useCarsMakesModel";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactSelect from "react-select";
 import { ClipLoader } from "react-spinners";
 import AnchorLink from "react-anchor-link-smooth-scroll";
@@ -224,15 +224,20 @@ const Bid = () => {
           <div className="flex gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
             <div className="flex items-center py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border border-white rounded-full">
               <FaRocket />
+              <Link to="/upload-car">
               <button className="bg-transparent  duration-200 font-urbanist flex text-white items-center ">
                 Sell Your Car
               </button>
+              </Link>
             </div>
             <div className="flex items-center text-primary-red  border-primary-red bg-white py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border  rounded-full">
               <FaHandHoldingUsd />
+              <AnchorLink href="#startBidding">
               <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
                 Start Bidding
               </button>
+              </AnchorLink>
+
             </div>
             {/* <AnchorLink href="#startBidding">
               <button className="bg-white py-[1.2vh] text-[#ca0000] font-semibold hover:bg-white border border-white duration-200 font-urbanist flex rounded-full items-center text-16 px-[1.3vw] ">

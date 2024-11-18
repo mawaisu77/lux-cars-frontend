@@ -31,7 +31,7 @@ const VehicleHero = () => {
   const [shouldRefetch, setShouldRefetch] = useState(false);
   
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-  useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
+  useGetCarDetail(`cars/get-car-by-lot-ids?lot_id=${lotID}`);
   
   const [placeBidAmount, setPlaceBidAmount] = useState(0);
 
@@ -133,7 +133,6 @@ const VehicleHero = () => {
 
   }, [placeBidloading, placeBidSuccess, placeBiderror]);
 
-  console.log("liveData === >", liveData);
   return (
     <>
       <div className="lg:block hidden bg-vehicle">
@@ -173,7 +172,7 @@ const VehicleHero = () => {
                 </div>
               )}
 
-              <div className="flex flex-col lg:flex-row  justify-between mx-auto max-w-[90vw] sm:max-w-[74vw] my-[30px]">
+              <div className="flex flex-col lg:flex-row  justify-between mx-auto max-w-[90vw] sm:max-w-[74vw] mt-[80px]">
                 <div className="w-full lg:w-[36vw] ">
                   <SwiperGallery
                     images={carDetailData?.data?.link_img_hd}
@@ -783,7 +782,7 @@ const VehicleHero = () => {
       )}
 
       {carDetailData && (
-        <div className="md:mt-44 mt-20">
+        <div className=" md:mt-44 mt-20">
           <VehicleCards carData={carDetailData.data} />
         </div>
       )}
