@@ -475,29 +475,27 @@ const Sidebar = () => {
     }
   };
 
-  // resize
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        // For desktop screens (lg and above)
-        setShowFiltersMob(true); // Filters open by default
-      } else {
-        // For smaller screens (md and below)
-        setShowFiltersMob(false); // Filters hidden by default
-      }
-    };
+// Modify the useEffect for resize handling
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth >= 1024) {
+      // For desktop screens (lg and above)
+      setShowFiltersMob(true); // Filters open by default
+    }
+    // Remove the automatic hiding for mobile screens
+  };
 
-    // Set the initial state based on the current window size
-    handleResize();
+  // Set the initial state based on the current window size
+  handleResize();
 
-    // Add an event listener to handle window resize
-    window.addEventListener("resize", handleResize);
+  // Add an event listener to handle window resize
+  window.addEventListener("resize", handleResize);
 
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  // Cleanup the event listener on component unmount
+  return () => {
+    window.removeEventListener("resize", handleResize);
+  };
+}, []);
 
   useEffect(() => {
     if (auctionDateFromParam && auctionDateToParam) {
@@ -581,11 +579,8 @@ const Sidebar = () => {
 
   // Function to toggle filters only on smaller screens
   const handleFilters = () => {
-    const isSmallScreen = window.innerWidth < 1024; // `lg` breakpoint in Tailwind
-    if (isSmallScreen) {
-      console.log("Toggling filters on small screen");
+
       setShowFiltersMob(!showFilterMob);
-    }
   };
 
   const filterDisplayNames = {
@@ -739,6 +734,8 @@ const Sidebar = () => {
       search: params.toString(),
     });
   };
+
+  console.log("show filetsr == >", showFilterMob)
 
   return (
     <>

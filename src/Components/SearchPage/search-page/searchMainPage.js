@@ -100,15 +100,12 @@ function SearchMainPage({
           <div className="flex flex-col lg:flex-row   relative text-left text-sm lg:text-base">
             
             <div className="flex justify-between items-center">
-              <div>
-                
-              
-              </div>
+       
               <div>
                 {showFilterMob ? (
                   <button
                     className="lg:hidden px-4 py-2  mt-[2vh]  flex justify-center items-center mx-auto border transition-all rounded-lg duration-300"
-                    onClick={handleFilters} // Correctly hiding the filters
+                    onClick={handleFilters} 
                   >
                     Hide Filters
                     <RiArrowDropDownLine
