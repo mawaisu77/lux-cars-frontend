@@ -44,8 +44,8 @@ const NotificationDropdown = () => {
   };
 
   return (
-    <div className="relative text-left z-50 flex items-center justify-center">
-       <div className="relative">
+    <div className="relative text-left z-50 flex items-center justify-center ">
+       <div className="relative flex justify-center items-center">
         <button
           onClick={toggleDropdown}
           className="text-30 font-medium text-white rounded-md focus:outline-none"
