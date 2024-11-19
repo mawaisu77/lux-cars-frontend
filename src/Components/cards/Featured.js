@@ -40,7 +40,7 @@ const BuyNow = () => {
       <div className="flex justify-between items-center ">
           <div className="flex flex-col gap-y-[6px] sm:gap-y-2">
           <div className="flex justify-start items-center font-urbanist text-[22px] sm:text-36 font-bold sm:leading-[2vw] sm:pt-[2vh]">
-          Featured Cars
+           Buy Now
               </div>
               <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[4vw] " />
             </div>

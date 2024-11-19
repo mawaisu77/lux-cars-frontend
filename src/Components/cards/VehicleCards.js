@@ -40,6 +40,7 @@ const VehicleCards = React.memo(({ carData }) => {
           <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
             {cars?.data?.cars &&
               cars?.data?.cars
+              .slice(0, -2)
                 .map((card, index) => <CarCard key={index} card={card} />)}
           </div>
         </div>
