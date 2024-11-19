@@ -62,7 +62,7 @@ function SearchMainPage({
 
       const queryString = params.toString().replace(/\+/g, "%20");
 
-      const response = await baseService.get(`${apiEndpoint}${queryString}`);
+      const response = await baseService.get(`${apiEndpoint}?${queryString}`);
 
       setCards((prevCards) =>
         page === 1
