@@ -137,12 +137,15 @@ const Header = () => {
               <Link to={"/upload-car"} className=" hover:text-primary-red duration-200">
                 <li>Sell Car</li>
               </Link>
-              <NotificationDropdown />
             </ul>
           </div>
         </div>
+
+       
         
         <div className="hidden lg:flex items-center gap-2 lg:gap-[0.677vw] font-urbanist font-bold text-[1rem] lg:text-18 text-[#7a798a]">
+          <NotificationDropdown className=""/>
+
           <div className="relative inline-block text-left">
             <div className="flex justify-center items-center">
               <IoGlobeSharp
@@ -170,6 +173,7 @@ const Header = () => {
                 </div>
               </div>
             )}
+
           </div>
           <Link
             to="/user/profile"
@@ -180,6 +184,7 @@ const Header = () => {
 
           {!user ? (
             <div className="flex items-center gap-x-[0.3vw]">
+         
               <Link to="/login">
                 <button
                   className={` focus:outline-none text-white ${
@@ -204,12 +209,16 @@ const Header = () => {
             </div>
           ) : (
             <>
+               <div className="flex items-center ">
+              
               <button
                 className={`focus:outline-none lg:text-18 text-white ${navbarColor === "transparent" ? "" : "text-white"}`}
                 onClick={handleLogoutModal}
               >
                 logout
               </button>
+              </div>
+
             </>
           )}
 
@@ -217,6 +226,7 @@ const Header = () => {
             Try Demo
           </button>
         </div>
+
         <div className="lg:hidden flex items-center">
           <button onClick={toggleMenu} className="focus:outline-none">
             {isMenuOpen ? <FaTimes size={24} color="white"/> : <FaBars size={24} color="white"/>}
