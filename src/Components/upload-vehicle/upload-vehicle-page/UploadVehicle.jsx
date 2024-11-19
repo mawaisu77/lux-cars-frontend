@@ -536,7 +536,7 @@ const UploadVehicle = () => {
         >
           <h1 className="text-[30px] font-bold">Your Info</h1>
           <h1 className="text-[18px] font-bold mt-2">
-            Deliever or private party?
+            Deliever or private party? 
           </h1>
 
           <div className="grid grid-cols-3 space-x-4 w-full">

@@ -44,16 +44,24 @@ const NotificationDropdown = () => {
   };
 
   return (
-    <div className="relative inline-block text-left z-50">
-      <button
-        onClick={toggleDropdown}
-        className=" text-sm font-medium text-white  rounded-md focus:outline-none"
-      >
-        <BiBell />
-      </button>
+    <div className="relative text-left z-50 flex items-center justify-center">
+       <div className="relative">
+        <button
+          onClick={toggleDropdown}
+          className="text-30 font-medium text-white rounded-md focus:outline-none"
+        >
+          <BiBell />
+          {notifications.length > 0 && (
+            <div className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
+              {notifications.length}
+            </div>
+          )}
+        </button>
+      </div>
+
 
       {dropdownOpen && (
-         <div className="origin-top-right absolute right-0 mt-2 w-80 max-h-96 overflow-y-auto rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+         <div className="origin-top-right absolute top-10 w-80 max-h-96 overflow-y-auto rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
          {/* Notification Content */}
          <div className="py-2">
            {notifications.length > 0 ? (

@@ -31,7 +31,7 @@ const VehicleHistory = React.memo(({ carData }) => {
           <div className="flex justify-center items-center ">
             <div className="flex flex-col gap-y-[6px] sm:gap-y-2">
               <div className="flex justify-center items-center font-urbanist text-[22px] sm:text-36 font-bold sm:leading-[2vw] sm:pt-[2vh]">
-                Vehicle History
+                History Cars
               </div>
               <hr className="h-[2px] mx-auto sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[4vw] " />
             </div>
