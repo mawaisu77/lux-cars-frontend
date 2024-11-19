@@ -534,7 +534,7 @@ const UploadVehicle = () => {
           className="p-5 flex flex-col mx-auto max-w-[1000px] rounded-md shadow-[0px_4px_5px_6px_rgba(0,_0,_0,_0.1)] items-start gap-y-6"
           onSubmit={handleSubmit}
         >
-          <h1 className="text-[34px] font-bold">Your Info</h1>
+          <h1 className="text-[30px] font-bold">Your Info</h1>
           <h1 className="text-[18px] font-bold mt-2">
             Deliever or private party?
           </h1>
@@ -790,7 +790,7 @@ const UploadVehicle = () => {
 
           {/* =================================== CAR Details ======================================== */}
           <div className="w-full flex flex-col gap-y-4">
-            <h1 className="text-[34px] font-bold text-left mt-8 ">
+            <h1 className="text-[30px] font-bold text-left mt-8 ">
               Car details
             </h1>
 
@@ -1174,7 +1174,7 @@ const UploadVehicle = () => {
           )}
 
           {/*=========================== TITLE INFO ===========================*/}
-          <h1 className="text-3xl font-bold text-left mt-8 text-[34px]">
+          <h1 className="text-3xl font-bold text-left mt-8 text-[30px]">
             Title Info
           </h1>
 
@@ -1270,7 +1270,7 @@ const UploadVehicle = () => {
           </div>
 
           {/*=========================== Reserve Price ===========================*/}
-          <h1 className="text-3xl font-bold text-left mt-8 text-[34px]">
+          <h1 className="text-3xl font-bold text-left mt-8 text-[30px]">
             Reserve Price
           </h1>
 
@@ -1319,7 +1319,7 @@ const UploadVehicle = () => {
           )}
 
           {/*================================ mul images ============================ */}
-          <h1 className="text-[34px] font-bold text-left mt-8">Photos</h1>
+          <h1 className="text-[30px] font-bold text-left mt-8">Photos</h1>
 
           <div className="flex flex-col items-start gap-y-4">
             <label className="font-bold text-[18px]">
@@ -1379,7 +1379,7 @@ const UploadVehicle = () => {
           </div>
 
           {/*===========================  Referral ===========================*/}
-          <h1 className="text-[34px] font-bold text-left mt-8">Referral</h1>
+          <h1 className="text-[30px] font-bold text-left mt-8">Referral</h1>
           <div className="grid grid-cols-1 w-full">
             <div className="flex flex-col gap-y-4 items-start ">
               <label className="font-bold text-[18px] text-left">
