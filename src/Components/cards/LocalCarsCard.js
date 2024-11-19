@@ -84,21 +84,21 @@ const LocalCarsCard = ({ card }) => {
     
         </div>
  
-        <div className="absolute w-[7.865vw] bottom-[1vw] left-1/2 transform -translate-x-1/2 bg-white rounded-[0.677vw] z-50 flex justify-center items-center">
-          <div className="flex justify-center items-center gap-x-[0.5vw] px-[0.5vw] py-[0.5vh]">
+        <div className="absolute px-[10px] sm:px-[0.5vw] bottom-0 sm:bottom-[1.5vw] left-1/2 transform -translate-x-1/2 bg-white sm:rounded-[0.677vw] z-50 flex justify-center items-center">
+        <div className="flex justify-center items-center gap-x-[0.5vw] px-[0.5vw] py-[0.5vh]">
             <div>
               {card.auction_date ? (
                 ValidDate ? (
-                  <BsFire  className="text-primary-red text-15" />
+                  <BsFire  className="text-primary-red text-[14px] sm:text-30 md:text-15 " />
                 ) : (
-                  <MdNotInterested className="text-primary-red text-15" />
+                  <MdNotInterested className="text-primary-red text-[14px] sm:text-30 md:text-15 " />
                 )
               ) : (
-                <FaHourglassHalf className="text-primary-red text-15" />
+                <FaHourglassHalf className="text-primary-red text-[14px] sm:text-30 md:text-15 " />
               )}
             </div>
             <div>
-              <p className="font-bold text-nowrap text-14 -z-10">
+              <p className="font-bold text-nowrap text-[14px] md:text-15 sm:text-30 -z-10">
                 {card.auction_date
                   ? ValidDate
                     ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`

@@ -1,19 +1,18 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import useSimilarCars from "../../hooks/useSimilarCars";
-import "./swiperstyles.css";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import { ClipLoader } from "react-spinners";
 import CarCard from "./CarCard";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import useVehicleHistory from "../../hooks/useVehicleHistory";
+import HistoryCard from "./historyCard";
 
-const VehicleCards = React.memo(({ carData }) => {
-  const { cars, loading, error } = useSimilarCars(carData.year, carData.make);
+const VehicleHistory = React.memo(({ carData }) => {
+  const { cars, loading, error } = useVehicleHistory(
+    carData.year,
+    carData.make,
+    carData.model
+  );
   return (
     <>
       {loading ? (
@@ -32,15 +31,16 @@ const VehicleCards = React.memo(({ carData }) => {
           <div className="flex justify-center items-center ">
             <div className="flex flex-col gap-y-[6px] sm:gap-y-2">
               <div className="flex justify-center items-center font-urbanist text-[22px] sm:text-36 font-bold sm:leading-[2vw] sm:pt-[2vh]">
-                Similar Listings
+                Vehicle History
               </div>
               <hr className="h-[2px] mx-auto sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[4vw] " />
             </div>
           </div>
-          <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-            {cars?.data?.cars &&
-              cars?.data?.cars
-                .map((card, index) => <CarCard key={index} card={card} />)}
+          <div className="relative my-[2vw] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+            {cars?.data &&
+              cars?.data.map((card, index) => (
+                <HistoryCard key={index} card={card} />
+              ))}
           </div>
         </div>
       )}
@@ -48,4 +48,4 @@ const VehicleCards = React.memo(({ carData }) => {
   );
 });
 
-export default VehicleCards;
+export default VehicleHistory;
