@@ -3,8 +3,12 @@ import { FiUploadCloud } from "react-icons/fi";
 import usePartsRequest from "../../../hooks/usePartsRequest";
 import { showToast } from "../../../utils/Toast";
 import { useRef } from "react";
+import ReactSelect from "react-select";
+import { ClipLoader } from "react-spinners";
 
 const SearchPartsForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const currentYear = new Date().getFullYear();
   const [formData, setFormData] = useState({
     company: "",
@@ -70,6 +74,8 @@ const SearchPartsForm = () => {
       scrollToError(newErrors);
     } else {
       try {
+        setIsLoading(true);
+
         const formDataToSend = new FormData();
 
         formDataToSend.append("company", formData.company);
@@ -100,6 +106,9 @@ const SearchPartsForm = () => {
       } catch (error) {
         showToast("Failed To Upload Request", "error");
       }
+      finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -112,22 +121,22 @@ const SearchPartsForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white font-urbanist">
-      <div className=" ">
-        <h2 className="text-[36px] font-bold text-center mt-4 mb-4">
+    <div className="flex justify-center w-[100vw] items-center min-h-screen bg-white font-urbanist">
+      <div className="w-[70%]">
+        <h2 className="text-[36px] text-left font-bold mt-4 mb-4">
           Search Parts
         </h2>
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="text-start bg-white rounded-lg shadow-lg w-full max-w-lg p-8 sm:p-10 md:p-16 lg:p-20 space-y-8"
+          className="text-start bg-white rounded-lg mb-10 shadow-[0px_4px_5px_6px_rgba(0,_0,_0,_0.1)]  w-[100%] p-8 sm:p-10 space-y-8"
         >
-          <div className="">
+          <div className="w-full">
             <label htmlFor="company" className="block text-xl mb-4 font-bold">
-              Company
+            Your Vehicle Make
             </label>
-            <span className="text-sm mt-2 font-bold text-[#1F1F2C]">
-              Enter Company of you Car
+            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
+              Enter Make of you Car
             </span>
             <input
               id="company"
@@ -141,29 +150,58 @@ const SearchPartsForm = () => {
               <p className="text-red-500 text-sm mt-1">{errors.company}</p>
             )}
           </div>
-          <div className="space-y-4">
-            <label className="block text-xl font-bold">Year Made</label>
-            <select
+          <div className="w-full">
+            <label className="block text-xl mb-4 font-bold">Your Vehicle Year</label>
+            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
+              Select Year of you Car
+            </span>
+            <ReactSelect
+             styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                padding: '6px 4px',
+                '&:focus-within': {
+                  boxShadow: '0 0 0 1px black',
+                  borderColor: 'black'
+                },
+              }),
+              valueContainer: (baseStyles) => ({
+                ...baseStyles,
+                padding: '0 8px',     
+              }),
+              option: (baseStyles) => ({
+                ...baseStyles,
+                padding: '12px 16px',  
+              }),
+            }}
               name="yearMade"
-              value={formData.yearMade}
-              onChange={handleInputChange}
-              className="w-[50%] h-[40px] text-sm bg-[#F8F8F8] rounded-lg p-3"
-            >
-              {Array.from({ length: 124 }, (_, i) => currentYear - i).map(
-                (year) => (
-                  <option key={year} value={year.toString()}>
-                    {year}
-                  </option>
-                )
-              )}
-            </select>
+              value={{ value: formData.yearMade, label: formData.yearMade }}
+              onChange={(selectedOption) => {
+                handleInputChange({
+                  target: {
+                    name: 'yearMade',
+                    value: selectedOption.value
+                  }
+                });
+              }}
+              options={Array.from({ length: 124 }, (_, i) => {
+                const year = currentYear - i;
+                return {
+                  value: year.toString(),
+                  label: year.toString()
+                };
+              })}
+              className="w-full"
+              classNamePrefix="select"
+              placeholder="Select Year"
+            />
           </div>
 
           <div className="">
             <label htmlFor="model" className="block text-xl mb-4 font-bold">
-              Model
+            Your Vehicle Model
             </label>
-            <span className="text-sm mt-2 font-bold text-[#1F1F2C]">
+            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
               Enter Model of you Car
             </span>
             <input
@@ -183,7 +221,7 @@ const SearchPartsForm = () => {
             <label htmlFor="variant" className="block text-xl mb-4 font-bold">
               Variant
             </label>
-            <span className="text-sm font-bold mt-2 text-[#1F1F2C]">
+            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
               Enter Car Variant
             </span>
             <input
@@ -203,7 +241,7 @@ const SearchPartsForm = () => {
             <label htmlFor="location" className="block text-xl mb-4 font-bold">
               Location
             </label>
-            <span className="text-sm mt-2 font-bold text-[#1F1F2C]">
+            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
               Zipcode
             </span>
             <input
@@ -226,7 +264,7 @@ const SearchPartsForm = () => {
             >
               Part Description
             </label>
-            <span className="text-sm font-bold mt-2 text-[#1F1F2C]">
+            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
               Tell us about the part you are looking for
             </span>
             <input
@@ -295,10 +333,15 @@ const SearchPartsForm = () => {
 
           <button
             type="submit"
-            className="w-full bg-red-500 text-white rounded-lg py-4 text-xl font-medium"
+            disabled={isLoading}
+            className="w-full bg-red-500 text-white rounded-lg py-4 text-xl font-medium flex items-center justify-center"
           >
-            Submit
-          </button>
+            {isLoading ? (
+              <ClipLoader color="#ffffff" size={24} />
+            ) : (
+              "Submit"
+              )}
+            </button>
         </form>
       </div>
     </div>

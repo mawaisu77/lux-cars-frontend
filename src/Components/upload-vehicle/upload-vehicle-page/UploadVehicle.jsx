@@ -200,19 +200,19 @@ const UploadVehicle = () => {
     }));
   };
 
-const handleFileChange = (e) => {
-  const file = e.target.files[0];
-  if (file && file instanceof File) {
-    console.log("Valid File:", file);
-    setFormData((prevData) => ({
-      ...prevData,
-      dealershipLicense: file,
-    }));
-    setImagePreview(URL.createObjectURL(file)); // Create a preview URL
-  } else {
-    console.error("No valid file selected");
-  }
-};
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file instanceof File) {
+      console.log("Valid File:", file);
+      setFormData((prevData) => ({
+        ...prevData,
+        dealershipLicense: file,
+      }));
+      setImagePreview(URL.createObjectURL(file)); // Create a preview URL
+    } else {
+      console.error("No valid file selected");
+    }
+  };
 
   const handleCancelImage = () => {
     setImagePreview(null);
@@ -520,20 +520,22 @@ const handleFileChange = (e) => {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-y-2 items-center justify-center w-full">
-        <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
-          Sell Your Car
+      <div className="mt-4 flex flex-col gap-y-2 items-center justify-center w-[100vw]">
+        <div className="flex flex-col items-start justify-center">
+          <div className="flex justify-start font-urbanist text-[26px] lg:text-[2vw] font-bold leading-[2vw] pt-[2vh]">
+            Sell Your Car
+          </div>
+          <hr className="h-[5px] bg-[#ca0000] mx-auto mt-[4px] w-[110px] " />
         </div>
-        <hr className="h-[5px] bg-[#ca0000] mt-[4px] w-36 " />
       </div>
 
-      <div className="pt-20 md:w-[1200px] mx-auto md:bg-white">
+      <div className="pt-18  mx-auto w-[100vw] my-10">
         <form
-          className=" flex flex-col mx-10 items-start gap-y-6"
+          className="p-5 flex flex-col mx-auto max-w-[1000px] rounded-md shadow-[0px_4px_5px_6px_rgba(0,_0,_0,_0.1)] items-start gap-y-6"
           onSubmit={handleSubmit}
         >
-          <h1 className="text-[36px] font-bold">Your Info</h1>
-          <h1 className="text-[20px] font-bold mt-2">
+          <h1 className="text-[34px] font-bold">Your Info</h1>
+          <h1 className="text-[18px] font-bold mt-2">
             Deliever or private party?
           </h1>
 
@@ -568,7 +570,7 @@ const handleFileChange = (e) => {
             <>
               <div className="grid w-full">
                 <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold text-[20px]">
+                  <label className="font-bold text-[18px]">
                     Are there any additional fees the buyer will have to pay?
                   </label>
                   <input
@@ -593,7 +595,7 @@ const handleFileChange = (e) => {
 
               <div className="grid md:grid-cols-3 md:space-x-4 w-full">
                 <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold text-[20px]">
+                  <label className="font-bold text-[18px]">
                     Dealership Name
                   </label>
                   <input
@@ -615,7 +617,7 @@ const handleFileChange = (e) => {
                   />
                 </div>
                 <div className="flex flex-col items-start gap-y-2 mt-4 md:mt-0">
-                  <label className="font-bold text-[20px]">
+                  <label className="font-bold text-[18px]">
                     Dealership Website
                   </label>
                   <input
@@ -640,7 +642,7 @@ const handleFileChange = (e) => {
 
               <div className="w-full">
                 <div className="text-left mb-1">
-                  <label className="font-bold text-[20px]">
+                  <label className="font-bold text-[18px]">
                     How many vehicles does your dealership retail each month?
                   </label>
                 </div>
@@ -668,7 +670,7 @@ const handleFileChange = (e) => {
                           {options.map((option) => (
                             <div
                               key={option}
-                              className="p-2 hover:bg-gray-200 cursor-pointer text-left"
+                              className="p-2 hover:bg-gray-180 cursor-pointer text-left"
                               onClick={() => handleOptionClick(option)}
                             >
                               {option}
@@ -683,7 +685,7 @@ const handleFileChange = (e) => {
               {/* ===============================  IMAGE  ========================================= */}
 
               <div className="flex flex-col items-start gap-y-4">
-                <label className="font-bold text-[20px]">
+                <label className="font-bold text-[18px]">
                   Please upload a photo of your dealer license.
                 </label>
 
@@ -700,11 +702,7 @@ const handleFileChange = (e) => {
                   {formData.dealershipLicense || imagePreview ? (
                     <div className="flex justify-between w-full items-center">
                       <img
-                        src={
-                          imagePreview ||
-                          formData.dealershipLicense
-                           
-                        }
+                        src={imagePreview || formData.dealershipLicense}
                         alt="Uploaded preview"
                         style={{ width: "80px", height: "auto" }}
                       />
@@ -712,7 +710,7 @@ const handleFileChange = (e) => {
                         type="button"
                         // disabled={!imagePreview && !formData.dealershipLicense}
                         onClick={handleCancelImage}
-                        className="border rounded-full bg-red-200 font-bold text-[#CA0000] py-2 px-4 mt-2"
+                        className="border rounded-full bg-red-180 font-bold text-[#CA0000] py-2 px-4 mt-2"
                       >
                         Cancel
                       </button>
@@ -720,7 +718,7 @@ const handleFileChange = (e) => {
                   ) : (
                     <div className="flex flex-col items-center justify-center">
                       <p className="text-gray-500">
-                        PNG, JPG, JPEG or WEBP. Max 200mb.
+                        PNG, JPG, JPEG or WEBP. Max 180mb.
                       </p>
                     </div>
                   )}
@@ -751,7 +749,7 @@ const handleFileChange = (e) => {
             <div className="w-full">
               <div className="grid md:grid-cols-3 md:space-x-4">
                 <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold text-[20px]">Full Name</label>
+                  <label className="font-bold text-[18px]">Full Name</label>
                   <input
                     type="text"
                     disabled
@@ -762,7 +760,7 @@ const handleFileChange = (e) => {
                   />
                 </div>
                 <div className="flex flex-col items-start gap-y-2 mt-4 md:mt-0">
-                  <label className="font-bold text-[20px]">
+                  <label className="font-bold text-[18px]">
                     Contact Phone Number
                   </label>
                   <PhoneInput
@@ -792,14 +790,14 @@ const handleFileChange = (e) => {
 
           {/* =================================== CAR Details ======================================== */}
           <div className="w-full flex flex-col gap-y-4">
-            <h1 className="text-[36px] font-bold text-left mt-8 ">
+            <h1 className="text-[34px] font-bold text-left mt-8 ">
               Car details
             </h1>
 
             {/* VIN  */}
             <div className="grid md:grid-cols-3 ">
               <div className="flex flex-col items-start gap-y-2 mt-6 w-full">
-                <label className="font-bold text-[20px]">VIN</label>
+                <label className="font-bold text-[18px]">VIN</label>
                 <input
                   type="text"
                   name="vin"
@@ -822,7 +820,7 @@ const handleFileChange = (e) => {
                 {/* Year, Make, Model */}
                 <div className="grid md:grid-cols-3 md:space-x-4">
                   <div className="flex flex-col items-start gap-y-2">
-                    <label className="font-bold text-[20px]">Year</label>
+                    <label className="font-bold text-[18px]">Year</label>
                     <input
                       type="text"
                       name="year"
@@ -839,7 +837,7 @@ const handleFileChange = (e) => {
                     />
                   </div>
                   <div className="flex flex-col items-start gap-y-2 mt-4 md:mt-0">
-                    <label className="font-bold text-[20px]">Make</label>
+                    <label className="font-bold text-[18px]">Make</label>
                     <input
                       type="text"
                       name="make"
@@ -856,7 +854,7 @@ const handleFileChange = (e) => {
                     />
                   </div>
                   <div className="flex flex-col items-start mt-4 md:mt-0 gap-y-2">
-                    <label className="font-bold text-[20px]">Model</label>
+                    <label className="font-bold text-[18px]">Model</label>
                     <input
                       type="text"
                       name="model"
@@ -877,7 +875,7 @@ const handleFileChange = (e) => {
                 {/* Transmissions, Mileage */}
                 <div className="grid md:grid-cols-3 md:space-x-4">
                   <div className="flex flex-col items-start gap-y-2">
-                    <label className="font-bold text-[20px]">
+                    <label className="font-bold text-[18px]">
                       Transmission
                     </label>
                     <div className="relative w-full ">
@@ -899,7 +897,7 @@ const handleFileChange = (e) => {
                           {transmissionOptions.map((option) => (
                             <div
                               key={option}
-                              className="p-2 hover:bg-gray-200 cursor-pointer text-left"
+                              className="p-2 hover:bg-gray-180 cursor-pointer text-left"
                               onClick={() =>
                                 handleTransmissionOptionClick(option)
                               }
@@ -912,7 +910,7 @@ const handleFileChange = (e) => {
                     </div>
                   </div>
                   <div className="flex flex-col items-start mt-4 md:mt-0 gap-y-2">
-                    <label className="font-bold text-[20px]">
+                    <label className="font-bold text-[18px]">
                       Millage (miles)
                     </label>
                     <input
@@ -937,7 +935,7 @@ const handleFileChange = (e) => {
             {/* Select option Equipment */}
             <div className="grid grid-cols-1 space-x-4">
               <div className="flex flex-col items-start gap-y-2 mt-2">
-                <label className="font-bold text-[20px]">
+                <label className="font-bold text-[18px]">
                   Select option/equipment
                 </label>
                 <input
@@ -962,7 +960,7 @@ const handleFileChange = (e) => {
 
           {/* toggle  --> Car Modification Status */}
           <div className="flex flex-col items-start w-full gap-4">
-            <label className="font-bold text-[20px]">
+            <label className="font-bold text-[18px]">
               Has the car been modified?
             </label>
             <div className="flex flex-col items-start gap-y-2">
@@ -1016,7 +1014,7 @@ const handleFileChange = (e) => {
 
           {/* toggle  --> significant changes */}
           <div className="flex flex-col items-start gap-y-4">
-            <label className="font-bold text-[20px] text-left">
+            <label className="font-bold text-[18px] text-left">
               Are there any significant mechanical or cosmetic flaws that we
               should know about?
             </label>
@@ -1059,7 +1057,7 @@ const handleFileChange = (e) => {
           {/*dropdown --> Car located */}
           <div className="grid md:grid-cols-3  md:gap-x-4 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
-              <label className="font-bold text-[20px] text-left">
+              <label className="font-bold text-[18px] text-left">
                 Where is the car located?
               </label>
               <Select
@@ -1079,7 +1077,7 @@ const handleFileChange = (e) => {
             </div>
             {country && (
               <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
-                <label className="font-bold text-[20px] text-left">
+                <label className="font-bold text-[18px] text-left">
                   Select Region
                 </label>
                 <RegionDropdown
@@ -1100,7 +1098,7 @@ const handleFileChange = (e) => {
           {/* ZIPCODE  */}
           <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-6 w-full">
-              <label className="font-bold text-[20px]">Zipcode</label>
+              <label className="font-bold text-[18px]">Zipcode</label>
               <input
                 type="text"
                 name="zip"
@@ -1121,7 +1119,7 @@ const handleFileChange = (e) => {
           {/* Toggle => Car for sale  |  add more +  */}
           <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col gap-y-4 items-start">
-              <label className="flex items-center text-left font-bold text-[20px]">
+              <label className="flex items-center text-left font-bold text-[18px]">
                 Is the car for sale elsewhere?
               </label>
               <div className="flex gap-x-3">
@@ -1176,14 +1174,14 @@ const handleFileChange = (e) => {
           )}
 
           {/*=========================== TITLE INFO ===========================*/}
-          <h1 className="text-3xl font-bold text-left mt-8 text-[36px]">
+          <h1 className="text-3xl font-bold text-left mt-8 text-[34px]">
             Title Info
           </h1>
 
           {/*dropdown --> Car titled AT -  */}
           <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
-              <label className="font-bold text-[20px]">
+              <label className="font-bold text-[18px]">
                 Where is the car titled?
               </label>
               <Select
@@ -1202,7 +1200,7 @@ const handleFileChange = (e) => {
           {/* Toggle => Vechicle titled info  */}
           <div className="grid md:grid-cols-3 w-full  ">
             <div className="flex flex-col gap-y-4">
-              <label className="text-left font-bold text-[20px]">
+              <label className="text-left font-bold text-[18px]">
                 Is the vehicle titled in your name?
               </label>
               <div className="flex gap-x-3">
@@ -1231,7 +1229,7 @@ const handleFileChange = (e) => {
           {!selectedOptions.carTitledInfo && (
             <div className="grid grid-cols-1 w-full">
               <div className="flex flex-col gap-y-4 items-start ">
-                <label className="font-bold text-[20px] text-left">
+                <label className="font-bold text-[18px] text-left">
                   Whose name is on the title? What's your relationship with
                   them?
                 </label>
@@ -1251,7 +1249,7 @@ const handleFileChange = (e) => {
           {/*dropdown --> Car status */}
           <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
-              <label className="font-bold text-[20px] text-left">
+              <label className="font-bold text-[18px] text-left">
                 Where is the title's status?
               </label>
               <Select
@@ -1272,14 +1270,14 @@ const handleFileChange = (e) => {
           </div>
 
           {/*=========================== Reserve Price ===========================*/}
-          <h1 className="text-3xl font-bold text-left mt-8 text-[36px]">
+          <h1 className="text-3xl font-bold text-left mt-8 text-[34px]">
             Reserve Price
           </h1>
 
           {/* Toggle => Reserve price  */}
           <div className="grid grid-cols-1 w-full  ">
             <div className="flex flex-col gap-y-4">
-              <label className="text-left font-bold text-[20px]">
+              <label className="text-left font-bold text-[18px]">
                 Do you want to set a minimum price required for your vehicle to
                 sell?
               </label>
@@ -1301,7 +1299,7 @@ const handleFileChange = (e) => {
           {selectedOptions.minPrice && (
             <div className="grid md:grid-cols-3 w-full">
               <div className="flex flex-col gap-y-4 items-start ">
-                <label className="font-bold text-[20px] text-left">
+                <label className="font-bold text-[18px] text-left">
                   What reserve price would you like?
                 </label>
                 <CurrencyInput
@@ -1321,10 +1319,10 @@ const handleFileChange = (e) => {
           )}
 
           {/*================================ mul images ============================ */}
-          <h1 className="text-[36px] font-bold text-left mt-8">Photos</h1>
+          <h1 className="text-[34px] font-bold text-left mt-8">Photos</h1>
 
           <div className="flex flex-col items-start gap-y-4">
-            <label className="font-bold text-[20px]">
+            <label className="font-bold text-[18px]">
               Please upload at least 6 photos of the exterior & interior of the
               car.
             </label>
@@ -1343,7 +1341,7 @@ const handleFileChange = (e) => {
                 <button
                   type="button"
                   onClick={() => handleCancelImages(index)}
-                  className="absolute text-xs top-0 right-0 border rounded-full bg-red-200 font-bold text-[#CA0000]  py-0.5 px-1.5 mt-2"
+                  className="absolute text-xs top-0 right-0 border rounded-full bg-red-180 font-bold text-[#CA0000]  py-0.5 px-1.5 mt-2"
                 >
                   Cancel
                 </button>
@@ -1358,7 +1356,7 @@ const handleFileChange = (e) => {
             >
               <div className="flex flex-col items-center justify-center">
                 <p className="text-gray-500">
-                  PNG, JPG, JPEG or WEBP. Max 200mb.
+                  PNG, JPG, JPEG or WEBP. Max 180mb.
                 </p>
               </div>
               <input
@@ -1381,10 +1379,10 @@ const handleFileChange = (e) => {
           </div>
 
           {/*===========================  Referral ===========================*/}
-          <h1 className="text-[36px] font-bold text-left mt-8">Referral</h1>
+          <h1 className="text-[34px] font-bold text-left mt-8">Referral</h1>
           <div className="grid grid-cols-1 w-full">
             <div className="flex flex-col gap-y-4 items-start ">
-              <label className="font-bold text-[20px] text-left">
+              <label className="font-bold text-[18px] text-left">
                 How did you hear about us? if a user referred us, please mention
                 their username.
               </label>

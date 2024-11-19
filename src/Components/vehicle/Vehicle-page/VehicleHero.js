@@ -9,6 +9,7 @@ import { PiUsersFill } from "react-icons/pi";
 import { CgFileDocument } from "react-icons/cg";
 import { TiLockClosed } from "react-icons/ti";
 import VehicleCards from "../../cards/VehicleCards";
+import VehicleHistory from "../../cards/VehicleHistory";
 // import VehicleTab from "../../vehicle/Vehicle-page/VehicleTab";
 import useGetCarDetail from "../../../hooks/useGetCarDetail";
 import FadeLoader from "react-spinners/FadeLoader";
@@ -31,7 +32,7 @@ const VehicleHero = () => {
   const [shouldRefetch, setShouldRefetch] = useState(false);
   
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-  useGetCarDetail(`cars/get-car-by-lot-ids?lot_id=${lotID}`);
+  useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
   
   const [placeBidAmount, setPlaceBidAmount] = useState(0);
 
@@ -782,8 +783,14 @@ const VehicleHero = () => {
       )}
 
       {carDetailData && (
-        <div className=" md:mt-44 mt-20">
+        <div className=" md:mt-20 mt-20">
           <VehicleCards carData={carDetailData.data} />
+        </div>
+      )}
+
+{carDetailData && (
+        <div className=" md:mt-20 mt-20">
+          <VehicleHistory carData={carDetailData.data} />
         </div>
       )}
 

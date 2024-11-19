@@ -287,15 +287,15 @@ const Header = () => {
             Do you want to logout your account?
           </h3>
 
-          <div className="flex gap-x-2 justify-center">
+          <div className="flex gap-x-2 justify-center  ">
             <button
-              className="btn text-green-600 w-[70px] dark:bg-white"
+              className=" text-green-600 w-[70px] py-1 border border-green-600 dark:bg-white dark:hover:bg-gray-300 duration-200"
               onClick={handleLogoout}
             >
-              Yes
+              Confirm
             </button>
             <button
-              className="btn text-red-600 w-[70px] dark:bg-white"
+              className=" text-red-600 w-[70px] py-1 border border-red-600 dark:bg-white dark:hover:bg-gray-300 duration-200"
               onClick={() => document.getElementById("my_logout_modal").close()}
             >
               Cancel

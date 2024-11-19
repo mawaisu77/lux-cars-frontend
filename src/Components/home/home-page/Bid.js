@@ -112,24 +112,24 @@ const Bid = () => {
       boxShadow: "none",
       zIndex: 100,
       cursor: "pointer",
-      position: 'relative',
-      // Add padding to avoid overlap with the line
-      paddingRight: '10px',
-      '::after': {
+      position: "relative",
+      paddingRight: "10px", // Add padding to avoid overlap with the line
+      "::after": {
         content: '""',
-        position: 'absolute',
+        position: "absolute",
         right: 0,
-        top: '10%',
-        height: '80%', // Vertical line height set to 80%
-        width:
-         '1px', // Line width
-        backgroundColor: '#ccc', // Line color
+        top: "10%",
+        height: "80%", // Vertical line height set to 80%
+        width: "1px", // Line width
+        backgroundColor: "#ccc", // Line color
       },
-      '&:hover': {
-        borderColor: 'transparent', // Keeps the border color the same on hover
+      "&:hover": {
+        borderColor: "transparent", // Keeps the border color the same on hover
       },
-    
-    
+    }),
+    valueContainer: (base) => ({
+      ...base,
+      padding: "0px", // Adjust padding inside the select box
     }),
     menu: (base) => ({
       ...base,
@@ -174,6 +174,7 @@ const Bid = () => {
       display: "none",
     }),
   };
+  
 
 
   // Filter "To" options based on the selected "From" year
@@ -195,20 +196,7 @@ const Bid = () => {
 
         <div class="relative sm:mt-[40px] z-10 flex flex-col justify-center items-center h-full text-center">
           <div className="mx-auto">
-            {/* <h2 className="text-left font-urbanist md:text-[3.125vw] font-bold leading-tight my-[2vh]">
-        <span className="animated-text">Bid, Buy, Drive</span> Online Car
-        Auctions with Home Delivery!
-      </h2> */}
-            {/* <div className="w-[19vw] text-[#8a8aa0] font-urbanist md:text-[1.041vw] font-medium lg:leading-[2.8vh] text-left mt-[0.3vh]">
-        Lorem ipsum dolor sit amet. Ea similique aliquam ut maxime
-        necessitatibus est nemo error sed vero sapiente cum quae
-        temporibus sed quaerat
-      </div>
-      <AnchorLink href="#startBidding">
-        <button  className="bg-[#ca0000] py-[1vh] hover:text-[#ca0000] hover:bg-white border border-[#ca0000] duration-200 font-urbanist flex text-white rounded-full items-center text-[1vw] px-[1.3vw]  my-[2vh]">
-          Start Bidding
-        </button>
-      </AnchorLink> */}
+
           </div>
           <h1 class="text-56  font-bold font-urbanist leading-tight mb-[2vh]">
             Bid, Buy, Drive
@@ -222,15 +210,15 @@ const Bid = () => {
             eiusmo
           </p>
           <div className="flex gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
-            <div className="flex items-center py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border border-white rounded-full">
+            <div className="flex items-center py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border border-white hover:bg-white hover:text-black duration-200 rounded-full">
               <FaRocket />
               <Link to="/upload-car">
-              <button className="bg-transparent  duration-200 font-urbanist flex text-white items-center ">
+              <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
                 Sell Your Car
               </button>
               </Link>
             </div>
-            <div className="flex items-center text-primary-red  border-primary-red bg-white py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border  rounded-full">
+            <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border  rounded-full">
               <FaHandHoldingUsd />
               <AnchorLink href="#startBidding">
               <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
