@@ -59,6 +59,7 @@ import { BsCartFill } from "react-icons/bs";
 // import { BsCartFill } from "react-icons/bs";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { FaWifi } from "react-icons/fa";
+import boat from "../assets/Vehicle/boat.png";
 
 export const archieved = [
   {
@@ -346,6 +347,7 @@ export const categories = [
   { img: image6, category: "Truck",id:'Truck' },
   { img: image7, category: "Trailer",id:'Trailers' },
   { img: image8, category: "Mobile Home",id:'Mobile Home' },
+  { img: boat, category: "Boat",id:'Boat' },
 ];
 
 export const values = [

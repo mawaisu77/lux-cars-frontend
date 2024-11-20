@@ -73,7 +73,6 @@ const LiveAuctionDetail = () => {
 
   return (
     <>
-      <Header textColor="text-white" />
       <div className="lg:block hidden bg-vehicle">
         <div className="w-[15.5] flex flex-col pt-[12.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">

@@ -52,7 +52,6 @@ const Signup = () => {
 
   return (
     <>
-      <Header textColor="text-white" />
      <div className="Backgroundimage-Signup">
       <div className="hidden lg:block">
         <div className="w-[15.5] flex flex-col  pt-[14.5vh]">

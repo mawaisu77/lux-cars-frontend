@@ -179,7 +179,6 @@ const Verification = () => {
   return (
     <div className=" ">
       <div className="Backgroundimage-Signup">
-        <Header textColor="text-white" />
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col mt-[5.5vh]">
             <div className="text-[2.6vw] font-semibold text-white">Upload Documents</div>

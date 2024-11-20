@@ -74,7 +74,6 @@ const Navbar = () => {
   };
   return (
     <>
-     <Header className="text-white" />
       <div className="Account-image">
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col py-20">

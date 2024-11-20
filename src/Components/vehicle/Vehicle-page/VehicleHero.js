@@ -25,6 +25,7 @@ import VehicleCostCalculator from "./VehicleCostCalculator";
 import BidHistory from "./BidHistory";
 import CarReportViewer from "./Report";
 import Pusher from "pusher-js";
+import ErrorComponent from "./ErrorPage";
 
 
 const VehicleHero = () => {
@@ -774,13 +775,12 @@ const VehicleHero = () => {
         </>
       )}
 
-      {carDetailError && (
-        <>
-          <div className="text-2xl font-bold p-10 text-red-600">
-            Error: No Available Data {carDetailError}
-          </div>
-        </>
-      )}
+    {carDetailError && (
+      <div className="flex justify-center items-center h-[80vh]">
+        <ErrorComponent carDetailError={carDetailError} param={lotID}/>
+      </div>
+    )}
+
 
       {carDetailData && (
         <div className=" md:mt-20 mt-20">
@@ -837,12 +837,18 @@ const VehicleHero = () => {
             ,
           </p>
           <div className="flex gap-x-2 justify-center">
-            <button
-              className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
-              onClick={handleBidPlace}
-            >
-              Proceed
-            </button>
+            {
+              placeBidloading ? (
+                <ClipLoader color="#ffffff" size={20} />
+              ) : (
+                <button
+                  className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
+                  onClick={handleBidPlace}
+                >
+                  Proceed
+                </button>
+              )
+            }
             <button
               className="btn text-red-600 w-[100px] dark:bg-white hover:bg-gray-200 border-red-600"
               onClick={handleCloseModal2}
