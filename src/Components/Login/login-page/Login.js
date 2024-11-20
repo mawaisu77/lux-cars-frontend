@@ -50,7 +50,6 @@ const Login = () => {
 
   return (
     <>
-      <Header className="text-white" />
       <div className="Backgroundimage-LogIN ">
         <div className="hidden lg:block">
           <div className=" w-[15.5] flex flex-col  pt-[14.5vh]">

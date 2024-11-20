@@ -775,11 +775,11 @@ const VehicleHero = () => {
         </>
       )}
 
-{carDetailError && (
-  <div className="flex justify-center items-center h-[80vh]">
-    <ErrorComponent carDetailError={carDetailError} param={lotID}/>
-  </div>
-)}
+    {carDetailError && (
+      <div className="flex justify-center items-center h-[80vh]">
+        <ErrorComponent carDetailError={carDetailError} param={lotID}/>
+      </div>
+    )}
 
 
       {carDetailData && (
@@ -837,12 +837,18 @@ const VehicleHero = () => {
             ,
           </p>
           <div className="flex gap-x-2 justify-center">
-            <button
-              className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
-              onClick={handleBidPlace}
-            >
-              Proceed
-            </button>
+            {
+              placeBidloading ? (
+                <ClipLoader color="#ffffff" size={20} />
+              ) : (
+                <button
+                  className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
+                  onClick={handleBidPlace}
+                >
+                  Proceed
+                </button>
+              )
+            }
             <button
               className="btn text-red-600 w-[100px] dark:bg-white hover:bg-gray-200 border-red-600"
               onClick={handleCloseModal2}

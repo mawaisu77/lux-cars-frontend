@@ -243,7 +243,6 @@ function LoanApplication() {
 
   return (
     <>
-     <Header className="text-white" />
       <div className="Backgroundimage-Privicy-loan-terms">
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col pt-[12.5vh]">

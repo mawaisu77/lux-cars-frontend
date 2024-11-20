@@ -51,7 +51,6 @@ const HowWorks = () => {
   ];
   return (
     <>
-      {/* <Header className="" />*/}
       <div className="Backgroundimage-How relative">
         <div className="hidden lg:block">
           <div className="w-[15.5] flex flex-col pt-[12.5vh]">

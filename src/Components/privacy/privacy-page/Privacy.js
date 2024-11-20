@@ -5,7 +5,6 @@ const PrivacyPage = () => {
   return (
     <>
 <div className="Backgroundimage-Privicy-loan-terms">
-        <Header className="text-white" />
         <div className="back-image w-full absolute">
         <div className="hidden  lg:block">
           <div className="  w-[15.5] flex flex-col  mt-[12.5vh]">

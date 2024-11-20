@@ -30,7 +30,6 @@ const Home = () => {
 
   return (
     <>
-    {/* <Header/> */}
     <Bid/>
     <Top/>
     <BidCarsSection />

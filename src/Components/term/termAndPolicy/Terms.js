@@ -6,7 +6,6 @@ const Terms = () => {
     <>
      <div className="Backgroundimage-Privicy-loan-terms">
      <div className="back-image w-full absolute">
-        <Header className="text-white" />
         <div className="hidden lg:block">
           <div className="  w-[15.5] flex flex-col  mt-[4vh]">
             <div className="text-[2.6vw] font-semibold text-white">

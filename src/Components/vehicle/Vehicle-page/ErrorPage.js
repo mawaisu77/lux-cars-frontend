@@ -1,13 +1,13 @@
 import React from "react";
-import { FiAlertTriangle } from "react-icons/fi"; // For error icon
-import { BiRefresh, BiArrowBack } from "react-icons/bi"; // For retry and back icons
-import { useNavigate } from "react-router-dom"; // Assuming React Router for navigation
+import { FiAlertTriangle } from "react-icons/fi"; 
+import { BiRefresh, BiArrowBack } from "react-icons/bi"; 
+import { useNavigate } from "react-router-dom"; 
 
 function ErrorComponent({ carDetailError, param }) {
   const navigate = useNavigate();
 
   const handleRetry = () => {
-    window.location.reload(); // Or replace this with specific retry logic
+    window.location.reload(); 
   };
 
   return (
