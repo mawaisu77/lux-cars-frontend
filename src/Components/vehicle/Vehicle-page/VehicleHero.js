@@ -25,6 +25,7 @@ import VehicleCostCalculator from "./VehicleCostCalculator";
 import BidHistory from "./BidHistory";
 import CarReportViewer from "./Report";
 import Pusher from "pusher-js";
+import ErrorComponent from "./ErrorPage";
 
 
 const VehicleHero = () => {
@@ -774,13 +775,12 @@ const VehicleHero = () => {
         </>
       )}
 
-      {carDetailError && (
-        <>
-          <div className="text-2xl font-bold p-10 text-red-600">
-            Error: No Available Data {carDetailError}
-          </div>
-        </>
-      )}
+{carDetailError && (
+  <div className="flex justify-center items-center h-[80vh]">
+    <ErrorComponent carDetailError={carDetailError} param={lotID}/>
+  </div>
+)}
+
 
       {carDetailData && (
         <div className=" md:mt-20 mt-20">
