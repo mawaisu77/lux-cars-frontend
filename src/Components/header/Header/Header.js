@@ -222,7 +222,7 @@ const Header = () => {
             </>
           )}
 
-          <button className="px-[1.719vw] py-[0.625vw] bg-primary-red text-white rounded-full lg:text-14 focus:outline-none">
+          <button onClick={() => navigate("/Successfull-login")} className="px-[1.719vw] py-[0.625vw] bg-primary-red text-white rounded-full lg:text-14 focus:outline-none">
             Try Demo
           </button>
         </div>
