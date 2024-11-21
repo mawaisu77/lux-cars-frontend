@@ -70,7 +70,7 @@ const Order = () => {
                 No orders available
               </p>
               <p className="text-gray-400 mt-2">
-                It looks like there are no orders yet.
+                It looks like thered are no orders yet.
               </p>
             </div>
           )

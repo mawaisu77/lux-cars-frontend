@@ -28,7 +28,7 @@ const User = ({ bid }) => {
         <div className="w-[60px] h-[60px] rounded-md overflow-hidden bg-gray-100">
           <img
             className="w-full h-full object-cover"
-            src={bid.carDetails.image[0] || bid.carDetails.image  || ""}
+            src={bid?.carDetails?.image[0] || bid?.carDetails?.image  || ""}
             alt="Car"
           />
         </div>

@@ -232,7 +232,7 @@ const CarCard = ({ card, isBuy = false }) => {
             <div className="flex">
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-col lg:text-18 ">
-                  <Link to={`vehicle-detail/${card.lot_id}`}>
+                  <Link to={`/vehicle-detail/${card.lot_id}`}>
                     <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
                       "
                       {card.title.length > 25
@@ -273,7 +273,7 @@ const CarCard = ({ card, isBuy = false }) => {
                 </div>
               </div>
             </div>
-            <Link to={`vehicle-detail/${card.lot_id}`}>
+            <Link to={`/vehicle-detail/${card.lot_id}`}>
               <button className="w-full text-[14px] md:text-16 sm:text-30 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] sm:mt-[1.5vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
                 {isBuy
                   ? `Buy Now in ${card.price_new ? card.price_new : "Tbd"}`
