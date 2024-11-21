@@ -1,16 +1,12 @@
-import React, {  useMemo, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import {
-  Navigation,
-  Autoplay,
-  Pagination,
-} from "swiper/modules";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import ImageModal from "./ImageModal";
 import { LuxLogoWhite } from "../../utils/constant";
-import LoginModal from "../modals/LoginModal"
+import LoginModal from "../modals/LoginModal";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import "./swiperCard.css";
 import SwiperCore from "swiper";
@@ -24,29 +20,25 @@ const HistoryCard = ({ card, isBuy = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { user } = useAuthContext();
   const navigate = useNavigate();
- 
 
   const swiperRefs = useRef([]);
 
   const initializeSwiper = (swiper, index) => {
     swiperRefs.current[index] = swiper;
-    swiper.autoplay.stop(); 
+    swiper.autoplay.stop();
   };
 
   const handleMouseEnter = (index) => {
     if (swiperRefs.current[index]) {
       swiperRefs.current[index].autoplay.start();
     }
-
   };
 
   const handleMouseLeave = (index) => {
     if (swiperRefs.current[index]) {
       swiperRefs.current[index].autoplay.stop();
     }
-
   };
-
 
   // Open modal with selected image
   const openModal = (index) => {
@@ -77,9 +69,9 @@ const HistoryCard = ({ card, isBuy = false }) => {
   const statusColors = {
     "Run & Drive": "bg-green-500/20 text-green-600",
     Stationary: "bg-yellow-500/20 text-yellow-600",
-    "Starts": "bg-red-500/20 text-red-600",
+    Starts: "bg-red-500/20 text-red-600",
     "Can't test": "bg-gray-500/20 text-gray-600",
-    "Unknown": "bg-blue-500/20 text-blue-600",
+    Unknown: "bg-blue-500/20 text-blue-600",
   };
 
   return (
@@ -91,10 +83,7 @@ const HistoryCard = ({ card, isBuy = false }) => {
       >
         <div className=" relative w-full ">
           <div className="w-full relative sm:text-24 md:text-16 z-10">
-          
-
             <Swiper
-            
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
               className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[240px] sm:h-[22vw] md:h-[12vw] "
               autoplay={{
@@ -122,7 +111,6 @@ const HistoryCard = ({ card, isBuy = false }) => {
                 ))}
             </Swiper>
           </div>
-      
         </div>
 
         <div>
@@ -131,35 +119,38 @@ const HistoryCard = ({ card, isBuy = false }) => {
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-col gap-y-[0.2vw] lg:text-18 ">
                   {/* <Link to={`vehicle-detail/${card.lot_id}`}> */}
-                    <div className="flex justify-between  font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
-                      "
-                      {card.title.length > 25
-                        ? `${card.title.slice(0, 25)}...`
-                        : card.title}
-                      ”
-                    </div>
+                  <div className="flex justify-between  font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
+                    "
+                    {card.title.length > 25
+                      ? `${card.title.slice(0, 25)}...`
+                      : card.title}
+                    ”
+                  </div>
                   {/* </Link> */}
-    
+
                   <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-14">
-                      <p className="py-[0.1vh] font-semibold">Purchase Price:</p>
-                      <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">
+                    <p className="py-[0.1vh] font-semibold">Purchase Price:</p>
+                    <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">
                       ${card?.sale_history[0]?.purchase_price}
-                      </p>
-                    </div>
+                    </p>
+                  </div>
                   <div className="flex gap-x-[0.8vw] text-[12px] lg:text-14">
                     <p className="py-[0.1vh]">Status:</p>
                     <p
-    className={`py-[0.1vh] font-semibold rounded-md px-[0.4vw] ${
-      statusColors[card.status] || "bg-gray-200 text-gray-500"
-    }`}
-  >
-    {card.status}
-  </p>                  </div>
+                      className={`py-[0.1vh] font-semibold rounded-md px-[0.4vw] ${
+                        statusColors[card.status] || "bg-gray-200 text-gray-500"
+                      }`}
+                    >
+                      {card.status}
+                    </p>{" "}
+                  </div>
                   <div className="flex gap-x-[0.8vw] text-[12px] lg:text-14">
                     <p className="py-[0.1vh]">Sale Date:</p>
                     <p className="py-[0.1vh] text-nowrap">
-                      {moment(card?.sale_history[0]?.sale_date).format("MMM DD, YYYY")}
-                            </p>
+                      {moment(card?.sale_history[0]?.sale_date).format(
+                        "MMM DD, YYYY"
+                      )}
+                    </p>
                   </div>
                   {card.currentBid && (
                     <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-14">
@@ -177,7 +168,6 @@ const HistoryCard = ({ card, isBuy = false }) => {
                 </div>
               </div>
             </div>
-          
           </div>
         </div>
       </div>
@@ -191,10 +181,10 @@ const HistoryCard = ({ card, isBuy = false }) => {
         goToNextImage={goToNextImage}
         logo={LuxLogoWhite}
       />
-        {/* Login Modal */}
-        <LoginModal 
-        isOpen={isLoginModalOpen && !user} 
-        onClose={closeLoginModal} 
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen && !user}
+        onClose={closeLoginModal}
       />
     </>
   );

@@ -232,7 +232,7 @@ const CarCard = ({ card, isBuy = false }) => {
             <div className="flex">
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-col lg:text-18 ">
-                  <Link to={`/vehicle-detail/${card.lot_id}`}>
+                  <Link to={`/vehicle-detail/${card.lot_id}`}  >
                     <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
                       "
                       {card.title.length > 25
