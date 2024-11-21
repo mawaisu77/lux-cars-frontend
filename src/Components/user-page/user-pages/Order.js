@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import UsersOrder from "../../cards/UsersOrder";
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
+import useGetAllOrders from "../../../hooks/orders/useGetAllOrders";
 
 const Order = () => {
+  const { orders, loading, error, fetchOrders } = useGetAllOrders();
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const userOrders = orders?.data?.data;
+  // console.log("userOrders", userOrders);
+
   return (
     <>
-      <div className="w-[74vw]  mb-[10vh]  mx-auto mt-[50px]">
-        <div className="flex flex-col lg:flex-row justify-center lg:justify-between  ">
+      <div className="w-[100vw] mt-[50px]">
+        <div className="max-w-[73vw] mx-auto flex flex-col lg:flex-row justify-center lg:justify-between  ">
         <div className='flex justify-center items-center'>
             <input
               type="text"
@@ -34,10 +44,9 @@ const Order = () => {
 
           </div>
 
-          </div>
-        
-        
-        <UsersOrder />
+        </div>
+
+        {userOrders && <UsersOrder userOrders={userOrders} />}
       </div>
     </>
   );

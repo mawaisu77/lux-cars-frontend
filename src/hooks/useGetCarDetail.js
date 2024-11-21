@@ -13,11 +13,11 @@ const useGetCarDetail = (url) => {
       setCarDetailData(response.data);
     } catch (err) {
       if (err.response) {
-        setCarDetailError(`${err.response.data.message}`);
+        setCarDetailError(`${err.response.data.message || 'No response from server'}`);
       } else if (err.request) {
-        setCarDetailError('Error: No response from server');
+        setCarDetailError('No response from server');
       } else {
-        setCarDetailError(`Error: ${err.message}`);
+        setCarDetailError(`Error ${err.message}`);
       }
     } finally {
       setCarDetailLoading(false);

@@ -828,6 +828,7 @@ const VehicleHero = () => {
           </div>
         </div>
       </dialog>
+
       <dialog id="my_modal_2" className="modal ">
         <div className="modal-box dark:bg-white">
           <h3 className="font-bold text-lg">Place Your bid here!</h3>
@@ -839,7 +840,12 @@ const VehicleHero = () => {
           <div className="flex gap-x-2 justify-center">
             {
               placeBidloading ? (
-                <ClipLoader color="#ffffff" size={20} />
+                <button
+                  className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
+                  onClick={handleBidPlace}
+                >
+                  <ClipLoader color="#CA0000" size={20} />
+                </button>
               ) : (
                 <button
                   className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"

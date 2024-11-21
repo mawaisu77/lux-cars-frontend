@@ -13,11 +13,11 @@ const useGetCarDealer = (url) => {
           setDealerData(response.data);
       } catch (err) {
         if (err.response) {
-          setDealerError(`${err.response.data.message}`);
+          setDealerError(`${err.response.data.message || 'No response from server'}`);
         } else if (err.request) {
-          setDealerError('Error: No response from server');
+          setDealerError('No response from server');
         } else {
-          setDealerError(`Error: ${err.message}`);
+          setDealerError(`${err.message}`);
         }
      } finally {
         setDealerLoading(false);
