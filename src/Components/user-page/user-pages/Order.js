@@ -5,6 +5,7 @@ import UsersOrder from "../../cards/UsersOrder";
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import useGetAllOrders from "../../../hooks/orders/useGetAllOrders";
+import { ClipLoader } from "react-spinners";
 
 const Order = () => {
   const { orders, loading, error, fetchOrders } = useGetAllOrders();
@@ -46,7 +47,34 @@ const Order = () => {
 
         </div>
 
-        {userOrders && <UsersOrder userOrders={userOrders} />}
+        {loading && <div className="flex justify-center items-center h-[80vh]"><ClipLoader /></div>}
+
+        {error &&
+        <div className="flex flex-col items-center justify-center min-h-[50vh]">
+        <p className="text-2xl font-bold text-gray-500">
+        {error}
+  
+        </p>
+        <p className="text-gray-400 mt-2">
+          Please try again later
+        </p>
+        </div>
+          }
+
+        {userOrders ? (
+          userOrders.length > 0 ? (
+            <UsersOrder userOrders={userOrders} />
+          ) : (
+            <div className="flex flex-col items-center justify-center min-h-[50vh]">
+              <p className="text-2xl font-bold text-gray-500">
+                No orders available
+              </p>
+              <p className="text-gray-400 mt-2">
+                It looks like there are no orders yet.
+              </p>
+            </div>
+          )
+        ) : null}
       </div>
     </>
   );
