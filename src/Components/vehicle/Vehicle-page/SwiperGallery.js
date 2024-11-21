@@ -11,12 +11,13 @@ import ReactPlayer from 'react-player'
 import VideoModal from "./ModalVideo";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
+import { vehicleScoreColors } from "./VehicleScoreColor";
 
 const SwiperGallery = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false); // State to manage modal visibility
-  const [loading, setLoading] = useState(true); // For loading spinner
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false); 
+  const [loading, setLoading] = useState(true); 
   const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -66,7 +67,7 @@ const SwiperGallery = ({ images, carData }) => {
         src={carData.iaai_360}
         width="80%"
         height="600px"
-        onLoad={() => setLoading(false)} // Set loading to false when iframe is fully rendered
+        onLoad={() => setLoading(false)} 
         allowFullScreen
         style={{ display: loading ? "none" : "block" }}
       />
@@ -103,6 +104,21 @@ const SwiperGallery = ({ images, carData }) => {
       <div className="relative">
       
         <>
+       {
+        carData?.vehicle_score && (
+          <div
+           className={`absolute flex gap-x-1 items-center z-10 text-[14px] top-5 text-xs left-4 bg-black text-white py-2 px-4 rounded-lg ${vehicleScoreColors(carData?.vehicle_score?.split('/')[0])}`} 
+           onClick={openModal} 
+ 
+         >
+           Vehicle Score: 
+           <span className="font-bold text-[15px]">
+           { carData?.vehicle_score}
+           </span>
+         </div>
+        )
+       }
+
            <button
            className="absolute z-10 bottom-5 text-xs right-4 bg-black text-white py-1 px-2 rounded-lg"
            onClick={openModal} 

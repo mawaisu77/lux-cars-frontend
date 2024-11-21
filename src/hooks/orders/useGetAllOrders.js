@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { getAllBids } from '../services/userService'; 
+import { getUserOrders } from '../../services/orderService';
 
-const useUserBids = () => {
-  const [bids, setBids] = useState([]);
+const useGetAllOrders = () => {
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchBids = async () => {
+  const fetchOrders = async () => {
     setLoading(true);
     try {
-      const data = await getAllBids();
-      setBids(data);
+      const data = await getUserOrders();
+      setOrders(data);
     } catch (err) {
       if (err.response) {
         setError(`${err.response.data.message || 'No response from server'}`);
@@ -24,7 +24,7 @@ const useUserBids = () => {
     }
   };
 
-  return { bids, loading, error, fetchBids };
+  return { orders, loading, error, fetchOrders };
 };
 
-export default useUserBids;
+export default useGetAllOrders;

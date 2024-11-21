@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import UsersOrder from "../../cards/UsersOrder";
 import { LuCalendarDays } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
+import useGetAllOrders from "../../../hooks/orders/useGetAllOrders";
+import { ClipLoader } from "react-spinners";
 
 const Order = () => {
+  const { orders, loading, error, fetchOrders } = useGetAllOrders();
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const userOrders = orders?.data?.data;
+  // console.log("userOrders", userOrders);
+
   return (
     <>
-      <div className="w-[74vw]  mb-[10vh]  mx-auto mt-[50px]">
-        <div className="flex flex-col lg:flex-row justify-center lg:justify-between  ">
+      <div className="w-[100vw] mt-[50px]">
+        <div className="max-w-[73vw] mx-auto flex flex-col lg:flex-row justify-center lg:justify-between  ">
         <div className='flex justify-center items-center'>
             <input
               type="text"
@@ -34,10 +45,36 @@ const Order = () => {
 
           </div>
 
-          </div>
-        
-        
-        <UsersOrder />
+        </div>
+
+        {loading && <div className="flex justify-center items-center h-[80vh]"><ClipLoader /></div>}
+
+        {error &&
+        <div className="flex flex-col items-center justify-center min-h-[50vh]">
+        <p className="text-2xl font-bold text-gray-500">
+        {error}
+  
+        </p>
+        <p className="text-gray-400 mt-2">
+          Please try again later
+        </p>
+        </div>
+          }
+
+        {userOrders ? (
+          userOrders.length > 0 ? (
+            <UsersOrder userOrders={userOrders} />
+          ) : (
+            <div className="flex flex-col items-center justify-center min-h-[50vh]">
+              <p className="text-2xl font-bold text-gray-500">
+                No orders available
+              </p>
+              <p className="text-gray-400 mt-2">
+                It looks like there are no orders yet.
+              </p>
+            </div>
+          )
+        ) : null}
       </div>
     </>
   );
