@@ -27,23 +27,21 @@ import CarReportViewer from "./Report";
 import Pusher from "pusher-js";
 import ErrorComponent from "./ErrorPage";
 
-
 const VehicleHero = () => {
   const { lotID } = useParams();
   const [shouldRefetch, setShouldRefetch] = useState(false);
-  
+
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
-  useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
-  
+    useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
+
   const [placeBidAmount, setPlaceBidAmount] = useState(0);
 
   const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
     usePlaceBid();
 
-
-    const [liveData, setLiveData] = useState({
-      currentBid: null,
-      noOfBids: null,
+  const [liveData, setLiveData] = useState({
+    currentBid: null,
+    noOfBids: null,
   });
 
   useEffect(() => {
@@ -59,20 +57,17 @@ const VehicleHero = () => {
     channel.bind(`car-notifications`, (data) => {
       console.log("data === >", data.message.bid_price);
 
-        setLiveData({
-            currentBid: data.message.bid_price,
-            noOfBids: data.message.noOfBids,
-        });
+      setLiveData({
+        currentBid: data.message.bid_price,
+        noOfBids: data.message.noOfBids,
+      });
     });
 
     return () => {
       channel.unbind_all();
-      channel.unsubscribe();  
-        
+      channel.unsubscribe();
     };
-
-}, []);
-
+  }, []);
 
   const handlePlaceBid = () => {
     document.getElementById("my_modal_2").showModal();
@@ -102,7 +97,8 @@ const VehicleHero = () => {
   );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
-  const ValidDate = targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
+  const ValidDate =
+    targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
   useEffect(() => {
     if (carDetailData?.data?.currentBid) {
@@ -112,7 +108,7 @@ const VehicleHero = () => {
 
   useEffect(() => {
     fetchCarDetail();
-  }, []);
+  }, [lotID]);
 
   useEffect(() => {
     if (shouldRefetch) {
@@ -131,8 +127,6 @@ const VehicleHero = () => {
     if (placeBiderror) {
       toast.error(placeBiderror);
     }
-
-
   }, [placeBidloading, placeBidSuccess, placeBiderror]);
 
   return (
@@ -144,9 +138,14 @@ const VehicleHero = () => {
           </div>
           <div className=" text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
-              <button className="hover:text-white hover:text-[1.1vw]">Home</button>
+              <button className="hover:text-white hover:text-[1.1vw]">
+                Home
+              </button>
             </Link>
-            /<button className="hover:text-white hover:text-[1.1vw]">Vehicle Detail</button>
+            /
+            <button className="hover:text-white hover:text-[1.1vw]">
+              Vehicle Detail
+            </button>
           </div>
         </div>
       </div>
@@ -188,131 +187,134 @@ const VehicleHero = () => {
                     <BsDownload className="cursor-pointer" />
                   </div>
                   <div className=" block lg:hidden  w-full lg:w-[33vw]  ">
-                  <div>
-                    <div className="flex   justify-between mt-[50px] lg:mb-[3vh]">
-                      <div className="flex   justify-center items-center gap-2">
-                        <p className="text-[20px] lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
-                          {carDetailData?.data?.title}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
-                      <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
-                        <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
-                          <PiUsersFill
-                            color="white"
-                            className="lg:w-[1.2vw] lg:h-[2.5vh]"
-                          />
-                        </div>
-                        <div className="text-left">
-                          <p className="lg:text-[0.7vw] text-[#7a798a]">
-                            Owned by
-                          </p>
-                          <p className="lg:text-[0.9vw] font-urbanist font-semibold">
-                            {carDetailData?.data?.seller || "Unknown"}
+                    <div>
+                      <div className="flex justify-between mt-[50px] lg:mb-[3vh]">
+                        <div className="flex   justify-center items-center gap-2">
+                          <p className="text-[20px] lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
+                            {carDetailData?.data?.title}
                           </p>
                         </div>
                       </div>
-                      <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
-                        <div className="flex justify-center items-center p-2 rounded-[0.5vw] lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
-                          <CgFileDocument
-                            color="white"
-                            className="lg:w-[1.2vw] lg:h-[2.5vh]"
-                          />
-                        </div>
-                        <div className="text-left">
-                          <p className="lg:text-[0.7vw] text-[#7a798a]">
-                            Sale Document
-                          </p>
-                          <p className="lg:text-[0.9vw] font-urbanist font-semibold">
-                            {carDetailData?.data?.document_old
-                              ? carDetailData?.data?.document_old
-                              : carDetailData?.data?.document}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex   flex-col lg:flex-row gap-2 justify-between">
-                      <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-full lg:w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
-                        <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
-                            Lot:
-                          </p>
-                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                            {carDetailData?.data?.lot_id}
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
-                            VIN :
-                          </p>
-                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                            {carDetailData?.data?.vin}
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
-                            Year/Make :
-                          </p>
-                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                            {carDetailData?.data?.year +
-                              " " +
-                              carDetailData?.data?.make}
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <p className="font-urbanist text-[#7a798a] text-sm lg:text-[0.85vw] ml-2">
-                            Model:
-                          </p>
-                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                            {carDetailData?.data?.model}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col  lg:w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
-                        <div className="flex flex-col bg-[#f8f8f8] px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
-                          <div className="flex items-center">
-                            <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
-                              Current Bid:
+                      <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
+                        <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
+                          <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
+                            <PiUsersFill
+                              color="white"
+                              className="lg:w-[1.2vw] lg:h-[2.5vh]"
+                            />
+                          </div>
+                          <div className="text-left">
+                            <p className="lg:text-[0.7vw] text-[#7a798a]">
+                              Owned by
                             </p>
+                            <p className="lg:text-[0.9vw] font-urbanist font-semibold">
+                              {carDetailData?.data?.seller || "Unknown"}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
+                          <div className="flex justify-center items-center p-2 rounded-[0.5vw] lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
+                            <CgFileDocument
+                              color="white"
+                              className="lg:w-[1.2vw] lg:h-[2.5vh]"
+                            />
+                          </div>
+                          <div className="text-left">
+                            <p className="lg:text-[0.7vw] text-[#7a798a]">
+                              Sale Document
+                            </p>
+                            <p className="lg:text-[0.9vw] font-urbanist font-semibold">
+                              {carDetailData?.data?.document_old
+                                ? carDetailData?.data?.document_old
+                                : carDetailData?.data?.document}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
 
+                      <div className="flex   flex-col lg:flex-row gap-2 justify-between">
+                        <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-full lg:w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
+                          <div className="flex items-center">
+                            <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
+                              Lot:
+                            </p>
                             <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                            ${liveData.currentBid ? liveData.currentBid : carDetailData?.data?.currentBid}
-                            {/* {liveData.currentBid} */}
+                              {carDetailData?.data?.lot_id}
                             </p>
                           </div>
                           <div className="flex items-center">
-                            <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
-                              No of Bids :
+                            <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
+                              VIN :
                             </p>
-                            <p className="font-urbanist font-bold text-sm lg:text-[0.97vw] ml-[0.5vw]">
-                              ${carDetailData?.data?.noOfBids}
+                            <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
+                              {carDetailData?.data?.vin}
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
+                              Year/Make :
+                            </p>
+                            <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
+                              {carDetailData?.data?.year +
+                                " " +
+                                carDetailData?.data?.make}
+                            </p>
+                          </div>
+                          <div className="flex items-center">
+                            <p className="font-urbanist text-[#7a798a] text-sm lg:text-[0.85vw] ml-2">
+                              Model:
+                            </p>
+                            <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
+                              {carDetailData?.data?.model}
                             </p>
                           </div>
                         </div>
+                        <div className="flex flex-col  lg:w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
+                          <div className="flex flex-col bg-[#f8f8f8] px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
+                            <div className="flex items-center">
+                              <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
+                                Current Bid:
+                              </p>
 
-                        {carDetailData?.data?.auction_date ? (
-                          ValidDate ? (
-                            <>
-                              <TimeLeftCounter
-                                days={days}
-                                hours={hours}
-                                minutes={minutes}
-                                seconds={seconds}
-                              />
-                            </>
+                              <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
+                                $
+                                {liveData.currentBid
+                                  ? liveData.currentBid
+                                  : carDetailData?.data?.currentBid}
+                                {/* {liveData.currentBid} */}
+                              </p>
+                            </div>
+                            <div className="flex items-center">
+                              <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
+                                No of Bids :
+                              </p>
+                              <p className="font-urbanist font-bold text-sm lg:text-[0.97vw] ml-[0.5vw]">
+                                ${carDetailData?.data?.noOfBids}
+                              </p>
+                            </div>
+                          </div>
+
+                          {carDetailData?.data?.auction_date ? (
+                            ValidDate ? (
+                              <>
+                                <TimeLeftCounter
+                                  days={days}
+                                  hours={hours}
+                                  minutes={minutes}
+                                  seconds={seconds}
+                                />
+                              </>
+                            ) : (
+                              //bidding over
+                              ""
+                            )
                           ) : (
-                            //bidding over
                             ""
-                          )
-                        ) : (
-                          ""
-                        )} 
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <section className=" lg:hidden block bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
+                    <section className=" lg:hidden block bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
                       <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                         Vehicle Info
                       </h2>
@@ -356,7 +358,7 @@ const VehicleHero = () => {
                         Specifications
                       </h2>
                       <div className=" space-y-[2vh] text-sm lg:text-[0.875vw]">
-                        <InfoRow 
+                        <InfoRow
                           label="Vehicle Type"
                           value={carDetailData?.data?.vehicle_type || "N/A"}
                         />
@@ -422,51 +424,56 @@ const VehicleHero = () => {
                       </div>
                     </section>
 
-                  <div className="mt-6">
-                    <label className="block text-[20px] font-bold  lg:text-[0.875vw]   text-gray-900 mb-[1vh]">
-                      Enter Your Final Bid
-                    </label>
-                    <CurrencyInput
-                      id="input-example"
-                      name="minPrice"
-                      placeholder="enter your bid ammount in usd"
-                      prefix="$"
-                      className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
-                      defaultValue={0}
-                      decimalsLimit={2}
-                      value={placeBidAmount ? placeBidAmount :carDetailData?.data?.currentBid}
-                      onValueChange={(value) => setPlaceBidAmount(value)}
-                    />
-                  </div>
+                    <div className="mt-6">
+                      <label className="block text-[20px] font-bold  lg:text-[0.875vw]   text-gray-900 mb-[1vh]">
+                        Enter Your Final Bid
+                      </label>
+                      <CurrencyInput
+                        id="input-example"
+                        name="minPrice"
+                        placeholder="enter your bid ammount in usd"
+                        prefix="$"
+                        className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
+                        defaultValue={0}
+                        decimalsLimit={2}
+                        value={
+                          placeBidAmount
+                            ? placeBidAmount
+                            : carDetailData?.data?.currentBid
+                        }
+                        onValueChange={(value) => setPlaceBidAmount(value)}
+                      />
+                    </div>
 
-                  <button
-                    onClick={() =>
-                      document.getElementById("my_modal_2").showModal()
-                    }
-                    className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
-                  >
-                    {placeBidloading ? (
-                      <ClipLoader color="#ffffff" size={20} />
-                    ) : (
-                      <>
-                        <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
-                        <span className="text-md lg:text-[1.1vw]">
-                          PlACE MAX BID
-                        </span>
-                      </>
-                    )}
-                  </button>
-                  
+                    <button
+                      onClick={() =>
+                        document.getElementById("my_modal_2").showModal()
+                      }
+                      className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
+                    >
+                      {placeBidloading ? (
+                        <ClipLoader color="#ffffff" size={20} />
+                      ) : (
+                        <>
+                          <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
+                          <span className="text-md lg:text-[1.1vw]">
+                            PlACE MAX BID
+                          </span>
+                        </>
+                      )}
+                    </button>
 
-                  <div className="">
-                    <VehicleCostCalculator data={carDetailData?.data} bidAmount={placeBidAmount} />
-                  </div>
+                    <div className="">
+                      <VehicleCostCalculator
+                        data={carDetailData?.data}
+                        bidAmount={placeBidAmount}
+                      />
+                    </div>
 
-                  
-                  <div className="flex flex-col justify-center max-w-[700px] gap-y-4">
-                    <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
+                    <div className="flex flex-col justify-center max-w-[700px] gap-y-4">
+                      <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
+                    </div>
                   </div>
-                </div>
                   <div className="grid  gap-6">
                     {/* Vehicle Info */}
                     <section className="hidden lg:block  bg-white w-full p-6 rounded-lg shadow-md mt-5">
@@ -508,10 +515,9 @@ const VehicleHero = () => {
                         />
                       </div>
                     </section>
-                   
 
                     {/* Location */}
-                    <section className= "hidden lg:block bg-white p-6 rounded-lg shadow-md">
+                    <section className="hidden lg:block bg-white p-6 rounded-lg shadow-md">
                       <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
                         Location
                       </h2>
@@ -543,47 +549,47 @@ const VehicleHero = () => {
                       </div>
                     </section>
                     <div className="flex flex-col justify-center gap-y-[2.1vh]">
-                    {/* Specifications */}
-                    <section className=" hidden lg:block bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
-                      <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
-                        Specifications
-                      </h2>
-                      <div className=" space-y-[2vh] text-sm lg:text-[0.875vw]">
-                        <InfoRow 
-                          label="Vehicle Type"
-                          value={carDetailData?.data?.vehicle_type || "N/A"}
-                        />
-                        <InfoRow
-                          label="Cylinders"
-                          value={carDetailData?.data?.cylinders || "N/A"}
-                        />
-                        <InfoRow
-                          label="Make"
-                          value={carDetailData?.data?.make || "N/A"}
-                        />
-                        <InfoRow
-                          label="Model"
-                          value={carDetailData?.data?.model || "N/A"}
-                        />
-                        <InfoRow
-                          label="Series"
-                          value={carDetailData?.data?.series || "N/A"}
-                        />
-                        <InfoRow
-                          label="Keys"
-                          value={carDetailData?.data?.keys || "N/A"}
-                        />
-                        <InfoRow
-                          label="Fuel"
-                          value={carDetailData?.data?.fuel || "N/A"}
-                        />
-                        <InfoRow
-                          label="Color"
-                          value={carDetailData?.data?.color || "N/A"}
-                        />
-                      </div>
-                    </section>
-                  </div>
+                      {/* Specifications */}
+                      <section className=" hidden lg:block bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
+                        <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
+                          Specifications
+                        </h2>
+                        <div className=" space-y-[2vh] text-sm lg:text-[0.875vw]">
+                          <InfoRow
+                            label="Vehicle Type"
+                            value={carDetailData?.data?.vehicle_type || "N/A"}
+                          />
+                          <InfoRow
+                            label="Cylinders"
+                            value={carDetailData?.data?.cylinders || "N/A"}
+                          />
+                          <InfoRow
+                            label="Make"
+                            value={carDetailData?.data?.make || "N/A"}
+                          />
+                          <InfoRow
+                            label="Model"
+                            value={carDetailData?.data?.model || "N/A"}
+                          />
+                          <InfoRow
+                            label="Series"
+                            value={carDetailData?.data?.series || "N/A"}
+                          />
+                          <InfoRow
+                            label="Keys"
+                            value={carDetailData?.data?.keys || "N/A"}
+                          />
+                          <InfoRow
+                            label="Fuel"
+                            value={carDetailData?.data?.fuel || "N/A"}
+                          />
+                          <InfoRow
+                            label="Color"
+                            value={carDetailData?.data?.color || "N/A"}
+                          />
+                        </div>
+                      </section>
+                    </div>
 
                     {/* Bid history */}
                     <div className="">
@@ -594,17 +600,27 @@ const VehicleHero = () => {
                       </div>
                       <BidHistory data={carDetailData?.data} />
                     </div>
-
                   </div>
                 </div>
 
                 <div className=" hidden lg:block  w-full lg:w-[33vw]  ">
                   <div>
-                    <div className="flex   justify-between mt-[50px] lg:mb-[3vh]">
-                      <div className="flex   justify-center items-center gap-2">
-                        <p className="lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
+                    <div className="flex justify-between lg:mb-[3vh]">
+                      <div className="flex justify-center items-start flex-col">
+                          <div className="font-urbanist bg-yellow-500/30 px-[1vw] py-[0.2vw] rounded-[0.5vw] font-semibold flex gap-x-2">
+                          <span className=" text-black">
+                            Buy now in
+                          </span>
+                          <span className="text-green-600 font-semibold">
+                            {carDetailData?.data?.price_new
+                              ?  `$${carDetailData?.data?.price_new}`
+                              : "N/A"}
+                          </span>
+                        </div>
+                        <p className="lg:text-[1.7vw] font-urbanist font-semibold ">
                           {carDetailData?.data?.title}
                         </p>
+                      
                       </div>
                     </div>
                     <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
@@ -689,15 +705,20 @@ const VehicleHero = () => {
                             </p>
 
                             <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                             ${liveData.currentBid ? liveData.currentBid : carDetailData?.data?.currentBid}
-                             </p>
+                              $
+                              {liveData.currentBid
+                                ? liveData.currentBid
+                                : carDetailData?.data?.currentBid}
+                            </p>
                           </div>
                           <div className="flex items-center">
                             <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
                               No of Bids :
                             </p>
                             <p className="font-urbanist font-bold text-sm lg:text-[0.97vw] ml-[0.5vw]">
-                              {liveData.noOfBids ? liveData.noOfBids : carDetailData?.data?.noOfBids}
+                              {liveData.noOfBids
+                                ? liveData.noOfBids
+                                : carDetailData?.data?.noOfBids}
                             </p>
                           </div>
                         </div>
@@ -718,7 +739,7 @@ const VehicleHero = () => {
                           )
                         ) : (
                           ""
-                        )} 
+                        )}
                       </div>
                     </div>
                   </div>
@@ -735,7 +756,11 @@ const VehicleHero = () => {
                       className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
                       defaultValue={0}
                       decimalsLimit={2}
-                      value={placeBidAmount ? placeBidAmount :carDetailData?.data?.currentBid}
+                      value={
+                        placeBidAmount
+                          ? placeBidAmount
+                          : carDetailData?.data?.currentBid
+                      }
                       onValueChange={(value) => setPlaceBidAmount(value)}
                     />
                   </div>
@@ -759,10 +784,12 @@ const VehicleHero = () => {
                   </button>
 
                   <div className="">
-                    <VehicleCostCalculator data={carDetailData?.data} bidAmount={placeBidAmount} />
+                    <VehicleCostCalculator
+                      data={carDetailData?.data}
+                      bidAmount={placeBidAmount}
+                    />
                   </div>
 
-                  
                   <div className="flex flex-col justify-center max-w-[700px] gap-y-4">
                     <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
                   </div>
@@ -775,12 +802,11 @@ const VehicleHero = () => {
         </>
       )}
 
-    {carDetailError && (
-      <div className="flex justify-center items-center h-[80vh]">
-        <ErrorComponent carDetailError={carDetailError} param={lotID}/>
-      </div>
-    )}
-
+      {carDetailError && (
+        <div className="flex justify-center items-center h-[80vh]">
+          <ErrorComponent carDetailError={carDetailError} param={lotID} />
+        </div>
+      )}
 
       {carDetailData && (
         <div className=" md:mt-20 mt-20">
@@ -788,7 +814,7 @@ const VehicleHero = () => {
         </div>
       )}
 
-{carDetailData && (
+      {carDetailData && (
         <div className=" md:mt-20 mt-20">
           <VehicleHistory carData={carDetailData.data} />
         </div>
@@ -820,7 +846,7 @@ const VehicleHero = () => {
                   placeBidAmount <= 0 ? "bg-gray-200" : ""
                 }`}
                 onClick={handlePlaceBid}
-                disabled={!placeBidAmount || placeBidAmount <= 0} 
+                disabled={!placeBidAmount || placeBidAmount <= 0}
               >
                 Place Bid
               </button>
@@ -834,27 +860,24 @@ const VehicleHero = () => {
           <h3 className="font-bold text-lg">Place Your bid here!</h3>
           <p className="py-4">
             Once you place bid then you will be no longer to bid again on this
-            car for 24 hours
-            ,
+            car for 24 hours ,
           </p>
           <div className="flex gap-x-2 justify-center">
-            {
-              placeBidloading ? (
-                <button
-                  className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
-                  onClick={handleBidPlace}
-                >
-                  <ClipLoader color="#CA0000" size={20} />
-                </button>
-              ) : (
-                <button
-                  className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
-                  onClick={handleBidPlace}
-                >
-                  Proceed
-                </button>
-              )
-            }
+            {placeBidloading ? (
+              <button
+                className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
+                onClick={handleBidPlace}
+              >
+                <ClipLoader color="#CA0000" size={20} />
+              </button>
+            ) : (
+              <button
+                className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
+                onClick={handleBidPlace}
+              >
+                Proceed
+              </button>
+            )}
             <button
               className="btn text-red-600 w-[100px] dark:bg-white hover:bg-gray-200 border-red-600"
               onClick={handleCloseModal2}
