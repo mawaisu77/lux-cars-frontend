@@ -137,6 +137,9 @@ const Header = () => {
               <Link to={"/upload-car"} className=" hover:text-primary-red duration-200">
                 <li>Sell Car</li>
               </Link>
+              <Link to={"/loan-application"} className=" hover:text-primary-red duration-200">
+                <li>Loan Application</li>
+              </Link>
             </ul>
           </div>
         </div>

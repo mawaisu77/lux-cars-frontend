@@ -151,7 +151,12 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/privacy-policies" element={<Privacy />} />
             <Route path="/terms&conditions" element={<Term />} />
-            <Route path="/loan-application" element={<Loan />} />
+
+            <Route path="/loan-application" element={
+              <ProtectedRoute>
+              <Loan />
+              </ProtectedRoute>
+              } />
             <Route
               path="/upload-car"
               element={
