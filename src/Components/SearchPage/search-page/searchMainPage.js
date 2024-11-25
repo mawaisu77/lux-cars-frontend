@@ -22,7 +22,7 @@ function SearchMainPage({
   const [cards, setCards] = useState([]);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10); // Set default page size
-  const [totalResults, setTotalResults] = useState(0);
+  const [totalResults, setTotalResults] = useState("-");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const initialFetchDone = useRef(false);
