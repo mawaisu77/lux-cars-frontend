@@ -208,8 +208,8 @@ const Sidebar = () => {
     vehicle_type: initialVehicleTyoe || "",
     odometer_from: initialFromOdometer || "",
     odometer_to: initialToOdometer || "",
-    auction_date_from: auctionDateFromParam, // Include auction date filters
-    auction_date_to: auctionDateToParam, // Include auction date filters
+    auction_date_from: auctionDateFromParam, 
+    auction_date_to: auctionDateToParam, 
     document_old: initialDocumentOld,
     cyclinders: initialCyclinders,
     document: initialDocument,
@@ -273,7 +273,7 @@ const Sidebar = () => {
         year_to: initialToYear,
         odometer_from: initialFromOdometer,
         odometer_to: initialToOdometer,
-        auction_date_from: auctionDateFromParam, // Set auction date from
+        auction_date_from: auctionDateFromParam, 
         auction_date_to: auctionDateToParam,
         document_old: initialDocumentOld,
         cyclinders: initialCyclinders,
@@ -299,7 +299,7 @@ const Sidebar = () => {
     initialSecondaryDamage,
     initialFromOdometer,
     initialToOdometer,
-    auctionDateFromParam, // Add auction date dependencies
+    auctionDateFromParam, 
     auctionDateToParam,
     initialDocumentOld,
     initialCyclinders,
@@ -579,7 +579,6 @@ useEffect(() => {
 
   // Function to toggle filters only on smaller screens
   const handleFilters = () => {
-
       setShowFiltersMob(!showFilterMob);
   };
 
@@ -1141,7 +1140,7 @@ useEffect(() => {
                   min={0}
                   placeholder="From"
                   className="form-input w-full px-2 border rounded-md py-1.5 text-xs"
-                  value={selectedFilters.odometer_to}
+                  value={selectedFilters.odometer_from}
                   onChange={(e) =>
                     handleFilterChange("odometer_from", e.target.value)
                   }
@@ -1153,7 +1152,7 @@ useEffect(() => {
                   min={0}
                   placeholder="To"
                   className="form-input w-full border px-2 rounded-md py-1.5 text-xs"
-                  value={selectedFilters.odometer_from}
+                  value={selectedFilters.odometer_to}
                   onChange={(e) =>
                     handleFilterChange("odometer_to", e.target.value)
                   }

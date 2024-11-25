@@ -17,7 +17,7 @@ const BidCarsSection = () => {
   const navigate = useNavigate();
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    "bid-cars/find-bid-cars?size=8"
+    "bid-cars/find-bid-cars?document=clean&size=8"
   );
   const { savedIds, loading, error } = useSavedCars();
   if (carLoading) {
