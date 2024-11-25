@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import baseService from "../services/baseService";
 
-const useSimilarCars = (year, make) => {
+const useSimilarCars = (year, make, model) => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ const useSimilarCars = (year, make) => {
       try {
         setLoading(true);
         const response = await baseService.get(
-          `cars/get-all-cars?year=${year}&make=${make}`
+          `cars/get-all-cars?year=${year}&make=${make}&model=${model}`
         );
         setCars(response.data);
       } catch (err) {
@@ -26,7 +26,7 @@ const useSimilarCars = (year, make) => {
     };
 
     fetchData();
-  }, [year, make]);
+  }, [year, make, model]);
 
   return { cars, loading, error };
 };

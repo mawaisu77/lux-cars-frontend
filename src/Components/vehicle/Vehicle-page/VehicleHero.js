@@ -30,13 +30,14 @@ import ErrorComponent from "./ErrorPage";
 const VehicleHero = () => {
   const { lotID } = useParams();
   const [shouldRefetch, setShouldRefetch] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
 
   const [placeBidAmount, setPlaceBidAmount] = useState(0);
 
-  const { placeBid, placeBidSuccess, placeBiderror, placeBidloading } =
+  const { placeBid, placebidLoading, placeBiderror, placeBidSuccess } =
     usePlaceBid();
 
   const [liveData, setLiveData] = useState({
@@ -78,15 +79,15 @@ const VehicleHero = () => {
   };
 
   const handleBidPlace = async () => {
-    try {
-      const placeBidAmountConvert = parseInt(placeBidAmount, 10);
+    //   if (isProcessing) return;
+    // setIsProcessing(true);
+    const placeBidAmountConvert = parseInt(placeBidAmount, 10);
+    await placeBid({ lot_id: lotID, currentBid: placeBidAmountConvert });
+    // document.getElementById("my_modal_2").close();
 
-      await placeBid({ lot_id: lotID, currentBid: placeBidAmountConvert });
-      document.getElementById("my_modal_2").close();
-    } catch (error) {
-      toast.error(`Error placing bid: ${error.message}`);
-    }
   };
+
+  // console.log("main placebidloading", placeBidloading);
 
   const targetTime = useMemo(
     () =>
@@ -127,7 +128,8 @@ const VehicleHero = () => {
     if (placeBiderror) {
       toast.error(placeBiderror);
     }
-  }, [placeBidloading, placeBidSuccess, placeBiderror]);
+  }, [placebidLoading, placeBidSuccess, placeBiderror]);
+
 
   return (
     <>
@@ -451,7 +453,7 @@ const VehicleHero = () => {
                       }
                       className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
                     >
-                      {placeBidloading ? (
+                      {placebidLoading ? (
                         <ClipLoader color="#ffffff" size={20} />
                       ) : (
                         <>
@@ -771,7 +773,7 @@ const VehicleHero = () => {
                     }
                     className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
                   >
-                    {placeBidloading ? (
+                    {placebidLoading ? (
                       <ClipLoader color="#ffffff" size={20} />
                     ) : (
                       <>
@@ -820,7 +822,7 @@ const VehicleHero = () => {
         </div>
       )}
 
-      <dialog id="my_modal_1" className="modal ">
+      <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Place Your bid here!</h3>
           <CurrencyInput
@@ -855,7 +857,7 @@ const VehicleHero = () => {
         </div>
       </dialog>
 
-      <dialog id="my_modal_2" className="modal ">
+      <dialog id="my_modal_2" className="modal">
         <div className="modal-box dark:bg-white">
           <h3 className="font-bold text-lg">Place Your bid here!</h3>
           <p className="py-4">
@@ -863,7 +865,7 @@ const VehicleHero = () => {
             car for 24 hours ,
           </p>
           <div className="flex gap-x-2 justify-center">
-            {placeBidloading ? (
+            {placebidLoading ? (
               <button
                 className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
                 onClick={handleBidPlace}
@@ -872,8 +874,9 @@ const VehicleHero = () => {
               </button>
             ) : (
               <button
-                className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
+                className={`btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600 ${!placeBidAmount || placeBidAmount <= 0 || placebidLoading ? "bg-gray-200 text-black" : ""}`}
                 onClick={handleBidPlace}
+                disabled={!placeBidAmount || placeBidAmount <= 0 || placebidLoading}
               >
                 Proceed
               </button>
