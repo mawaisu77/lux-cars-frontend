@@ -13,7 +13,7 @@ import CarCard from "./CarCard";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 const VehicleCards = React.memo(({ carData }) => {
-  const { cars, loading, error } = useSimilarCars(carData.year, carData.make);
+  const { cars, loading, error } = useSimilarCars(carData.year, carData.make, carData.model);
   return (
     <>
       {loading ? (
