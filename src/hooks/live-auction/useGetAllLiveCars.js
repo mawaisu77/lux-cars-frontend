@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { getAllLocalBids } from '../services/userService'; 
+import { getLiveCars } from '../../services/liveCarsService'; 
 
-const useGetAllLocalBids = () => {
-  const [localBids, setLocalBids] = useState([]);
+const useGetAllLiveCars = () => {
+  const [liveCars, setLiveCars] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchLocalBids = async () => {
+
+  const fetchLiveCars = async () => {
     setLoading(true);
     try {
-      const data = await getAllLocalBids();
-      setLocalBids(data);
+      const response = await getLiveCars();
+      setLiveCars(response.data);
     } catch (err) {
       if (err.response) {
         setError(`${err.response.data.message || 'An error occurred.'}`);
@@ -24,7 +25,7 @@ const useGetAllLocalBids = () => {
     }
   };
 
-  return { localBids, loading, error, fetchLocalBids };
+    return { liveCars, loading, error, fetchLiveCars };
 };
 
-export default useGetAllLocalBids;
+export default useGetAllLiveCars;
