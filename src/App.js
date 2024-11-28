@@ -46,6 +46,7 @@ import LocalCarsSearchPage from "./Components/localCars-search/index.js";
 import LocalCars from "./Components/user-page/user-pages/LocalCars.js";
 import FooterSec from "./Components/Footer/index.js";
 import LiveAuction from "./Components/live-auction/index.js";
+import List from "./Components/live-aution-search/live-auction-search/List.js";
 
 function App() {
   
@@ -165,8 +166,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/live-auction-search"
+              element={
+                <ProtectedRoute>
+                  <List/>
+                </ProtectedRoute>
+              }
+            />
                <Route
-              path="/live-auction"
+              path="/live-auction/:id"
               element={
                 <ProtectedRoute>
                   <LiveAuction/>

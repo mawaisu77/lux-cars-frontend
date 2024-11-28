@@ -11,7 +11,6 @@ const NotificationDropdown = () => {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  console.log("user", user?.id);
   useEffect(() => {
     // Initialize Pusher
     const pusher = new Pusher("6d700b541b1d83879b18", {
