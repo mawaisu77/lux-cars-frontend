@@ -61,7 +61,7 @@ const BidDetails = ({localCar}) => {
 
   const handleConfirmBid = async () => {
     try {
-      await handlePlaceBidLocalCar(car?.id, manualBid);
+      await handlePlaceBidLocalCar(manualBid, car?.id);
       if (error) {
         showToast(error, "error");
       } else {

@@ -15,7 +15,6 @@ const LiveAuctionDetail = () => {
   }, [id]);
 
 
-  console.log("hehehhehe", localCar);
    
   return (
     <>
