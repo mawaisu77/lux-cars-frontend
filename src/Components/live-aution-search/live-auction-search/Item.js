@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Item = ({car}) => {
   return (
-<div className="grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] gap-4 items-center py-4 border-b border-gray-200">
+<div className="grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] gap-4 items-center py-4 shadow-md rounded-md hover:shadow-lg transition-all duration-300 px-2">
     <div className="w-24 h-16 bg-gray-200 rounded-md flex items-center justify-center">
       <img src={car.carImages[0]} alt={`${car.year} ${car.make} ${car.model}`} className="w-full h-full object-cover" />
     </div>

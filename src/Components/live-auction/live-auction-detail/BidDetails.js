@@ -2,25 +2,16 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
-  TextField,
-  Button,
-  IconButton,
-  Paper,
-  Stack,
-  TableCell,
-  Chip,
+
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import {
-  RemoveCircleOutline,
-  AddCircleOutline,
+
   Visibility,
   People,
 } from "@mui/icons-material";
 
 import Select from "react-select";
 // IMAGES path
-import placeholder from "../../../assets/Vehicle/IMG (50).png";
 import VerticleSwiper from "./ui/VerticleSwiper";
 import CircularProgress from "./ui/CircularProgress";
 import { FaArrowTrendUp } from "react-icons/fa6";
@@ -29,76 +20,121 @@ import { IoIosRemove } from "react-icons/io";
 import { FaBagShopping } from "react-icons/fa6";
 import TooltipGlobal from "./ui/tooltip/TooltipGlobal";
 import { IoInformationCircleOutline } from "react-icons/io5";
+import CountDown from "./ui/CountDown";
+import usePlaceBidLocalCar from "../../../hooks/live-auction/usePlaceBidLocalCar";
+import Modal from "../../vehicle/Vehicle-page/Modal360";
+import { showToast } from "../../../utils/Toast";
+import { MdRestartAlt } from "react-icons/md";
+import Pusher from 'pusher-js';
+import { getToken } from "../../../utils/storageUtils";
 
 
-const ImageContainer = styled(Box)({
-  width: "100%",
-  height: "150px",
-  marginBottom: "10px",
-  position: "relative",
-  overflow: "hidden",
-  borderRadius: "8px",
-  "& img": {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-});
-// Styled components
-const QuickBidButton = styled(Button)(({ theme }) => ({
-  backgroundColor: "#E8F9F9",
-  color: "#000",
-  borderRadius: "25px",
-  "&:hover": {
-    backgroundColor: "#D1F4F4",
-  },
-  textTransform: "none",
-  padding: "8px 16px",
-  width: "100%",
-}));
 
-const BidDetails = () => {
-  const [currentBid, setCurrentBid] = useState(9000);
-  const [manualBid, setManualBid] = useState(9100);
-  const [timeLeft, setTimeLeft] = useState("04 : 23 : 10 : 39");
-  const carImages = [
-    placeholder,
-    placeholder,
-    placeholder,
-    placeholder,
-    placeholder,
-    placeholder,
-    placeholder,
-  ];
+
+const BidDetails = ({localCar}) => {
+  const {car, user} = localCar;
+  const [currentBid] = useState(car?.currentBid || 0);
+  const [manualBid, setManualBid] = useState(car?.currentBid || 0); 
+  const [members, setMembers] = useState([]);
+  const [memberCount, setMemberCount] = useState(0);
+
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   const quickBids = [100, 200, 300, 400, 500, 1000];
+
+  const { bidData, loading, error, handlePlaceBidLocalCar } = usePlaceBidLocalCar();
+
+  const handlePlaceBid = () => {
+    document.getElementById("place_live_bid").showModal();
+  };
+
+    // Add reset handler
+    const handleReset = () => {
+      setManualBid(currentBid);
+    };
+  
+    // Update useEffect to sync bids
+    useEffect(() => {
+      setManualBid(currentBid);
+    }, [currentBid]);
+  
+
+  const handleConfirmBid = async () => {
+    try {
+      await handlePlaceBidLocalCar(car?.id, manualBid);
+      if (error) {
+        showToast(error, "error");
+      } else {
+        showToast("Bid placed successfully!", "success");
+        document.getElementById("place_live_bid").close();
+      }
+    } catch (err) {
+      showToast("Failed to place bid. Please try again.", "error");
+    }
+  };
+
+  useEffect(() => {
+    // Initialize Pusher
+    const pusher = new Pusher("6d700b541b1d83879b18", {
+      authEndpoint: "http://localhost:8000/api/v1/pusher/auth/live-bidding",
+      cluster: "ap2",
+      auth: {
+        headers: {
+          Authorization: `Bearer ${getToken()}`, 
+        },
+      },
+    });
+
+    // Subscribe to the presence channel
+    const channel = pusher.subscribe(`presence-car-${car?.id}`);
+    console.log("channel", channel)
+
+    // Track initial subscription success
+    channel.bind("pusher:subscription_succeeded", (members) => {
+      const allMembers = Object.values(members.members);
+      setMembers(allMembers);
+      setMemberCount(members.count);
+    });
+
+ 
+    // Cleanup on unmount
+    return () => {
+      channel.unsubscribe();
+      pusher.disconnect();
+    };
+  }, []);
+
+
+  // console.log("members", members)
+  // console.log("memberCount", memberCount)
+
   return (
     <>
       <div className="p-3 max-w-[100%] mx-auto">
         <div className="flex justify-between items-center mb-3">
           <span className="text-[30px] font-medium">
-            Chevrolet GMT-400
+            {`${car?.make} ${car?.model} ${car?.year}`}
           </span>
-            <div className="px-2 text-[26px] bg-secondary-gray rounded-xl flex items-center gap-2 py-1 rounded-20">
-              <span className="text-[18px]">Countdown:</span>
-              <span className="text-[20px]">{timeLeft}</span>
-            </div>
+
+           <CountDown timeLeft={car?.auction_date} />
 
             <div className="flex gap-4">
             <div className="flex items-center  px-2 py-1 gap-1 bg-secondary-gray rounded-3xl">
               <Visibility className="text-[14px]"/> <span className="text-[14px]">225</span>
             </div>
             <div className="flex  items-center  px-2 py-1 gap-1 bg-secondary-gray rounded-3xl">
-              <People className="text-[14px]"/> <span className="text-[14px]">10</span>
+              <People className="text-[14px]"/> <span className="text-[14px]">{memberCount || 0}</span>
             </div>
             </div>
         </div>
 
         <div className="flex gap-x-8 ">
           {/* Left side - Image gallery */}
+          {car?.carImages && (
           <div className="w-[300px]">
-            <VerticleSwiper images={carImages} />
+            <VerticleSwiper images={car?.carImages} />
           </div>
+          )}
 
           {/* Right side - Bidding interface */}
           <Box sx={{ flex: 1 }}>
@@ -118,7 +154,7 @@ const BidDetails = () => {
                       IRAQ
                     </Typography>
                     <div className="relative inline-flex">
-                      <CircularProgress />
+                      <CircularProgress timeLeft={car?.auction_date} /> 
                       {/* <div
                             sx={{
                               top: 0,
@@ -146,16 +182,33 @@ const BidDetails = () => {
              
                 </div>
                      <div className=" flex gap-3 mb-2 ">
-                          <input
-                      value={manualBid}
-                      onChange={(e) => setManualBid(Number(e.target.value))}
-                      className="w-[120px] border border-gray-300 rounded-lg px-2 py-2 text-center"
-                    />
-                    <div className="flex items-center gap-1">
-                      <span className="text-[22px] text-red-600 rounded-lg border border-red-600 p-1"><IoIosRemove /></span>
-                      <span className="text-[22px] text-red-600 rounded-lg border border-red-600 p-1  "><IoIosAdd /></span>
-                    </div>
-                    
+                     <div className="relative flex items-center">
+        <input
+          value={manualBid || currentBid}
+          onChange={(e) => setManualBid(Number(e.target.value))}
+          className="w-[120px] border border-gray-300 rounded-lg px-2 py-2 text-center"
+        />
+        <span 
+          onClick={handleReset}
+          className="cursor-pointer text-gray-500 hover:text-gray-700"
+        >
+          <MdRestartAlt size={20} />
+        </span>
+      </div>
+      <div className="flex items-center gap-1">
+        <span 
+          onClick={() => setManualBid(prev => prev - 100)} 
+          className="text-[22px] text-red-600 rounded-lg border border-red-600 p-1 cursor-pointer"
+        >
+          <IoIosRemove />
+        </span>  
+        <span 
+          onClick={() => setManualBid(prev => prev + 100)} 
+          className="text-[22px] text-red-600 rounded-lg border border-red-600 p-1 cursor-pointer"
+        >
+          <IoIosAdd />
+        </span>
+      </div>
                   </div>
               </div>
               <div className="col-span-4">
@@ -163,7 +216,7 @@ const BidDetails = () => {
                 <div className="mb-2 flex flex-wrap gap-1 text-[15px] font-medium">
                   {quickBids.map((amount) => (
                     <div
-                      onClick={() => setCurrentBid(currentBid + amount)}
+                      onClick={() => setManualBid(manualBid + amount)}
                       className="w-full flex items-center gap-1 justify-center px-2 py-1.5 bg-[#E8F9F9] text-[#15CAB8] hover:bg-[#D1F4F4] border border-[#15CAB8] rounded-lg cursor-pointer"
                     >
                       <span className=""><FaArrowTrendUp /></span>
@@ -174,6 +227,7 @@ const BidDetails = () => {
               </div>
             </div>
             <div
+                onClick={handlePlaceBid}
               className="w-full flex items-center justify-center gap-2 px-2 py-1.5 bg-[#DC2626] text-white hover:bg-[#B91C1C] border border-[#DC2626] rounded-lg cursor-pointer"
             >
               <FaBagShopping />
@@ -203,6 +257,11 @@ const BidDetails = () => {
                   { range: '40 - 100', increment: '10' },
                   { range: '100 - 1,000', increment: '25' },
                   { range: '1,000 - 5,000', increment: '50' },
+                  { range: '5,000 - 25,000', increment: '100' },
+                  { range: '25,000 - 50,000', increment: '250' },
+                  { range: '50,000 - 100,000', increment: '500' },
+                  { range: '100,000 - 9,999,999', increment: '1,000' },
+             
                 ]}
                   customStyles={{
                     color: '#fff',
@@ -213,14 +272,43 @@ const BidDetails = () => {
                   hoverComponent={<span className="cursor-pointer text-[20px]"><IoInformationCircleOutline /></span>}
                 />
         </div>
-              {/* <Typography variant="caption" color="text.secondary">
-                      This is a proxy bid when you aren't teavailable. Enter your
-                      max value cap
-                    </Typography> */}
+          
             </div>
           </Box>
         </div>
       </div>
+
+ 
+
+    <dialog id="place_live_bid" className="modal">
+    <div  className="modal-box dark:bg-white">
+        <h2 className="text-xl font-bold mb-4">Confirm Bid</h2>
+        <p className="mb-4">Are you sure you want to place a bid of ${manualBid}?</p>
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={() => document.getElementById("place_live_bid").close()}
+            className="px-4 py-2 bg-gray-200 rounded-lg"
+            disabled={loading}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleConfirmBid}
+            className="px-4 py-2 bg-[#DC2626] text-white rounded-lg flex items-center gap-2"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <div className="w-5 h-5 border-t-2 border-white rounded-full animate-spin"></div>
+                Processing...
+              </>
+            ) : (
+              "Confirm Bid"
+            )}
+          </button>
+        </div>
+      </div>
+      </dialog>
     </>
   );
 };
