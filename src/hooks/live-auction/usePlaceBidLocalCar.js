@@ -5,11 +5,13 @@ const usePlaceBidLocalCar = () => {
   const [bidData, setBidData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [placeBidSuccess, setPlaceBidSuccess] = useState(false);
   const handlePlaceBidLocalCar = async (localCarID, currentBid) => {
     setLoading(true);
     try {
       const response = await placeBidOnLocalCar(localCarID, currentBid);
       setBidData(response);
+      setPlaceBidSuccess(true);
     } catch (err) {
       if (err.response) {
         setError(`${err.response.data.message || 'No response from server'}`);
@@ -23,7 +25,7 @@ const usePlaceBidLocalCar = () => {
     }
   };
 
-  return { bidData, loading, error, handlePlaceBidLocalCar };
+  return { bidData, loading, error, handlePlaceBidLocalCar, placeBidSuccess };
 };
 
 export default usePlaceBidLocalCar;
