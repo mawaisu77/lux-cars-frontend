@@ -4,11 +4,40 @@ import PreviousBids from "./tables/PreviousBids";
 import BidDetails from "./BidDetails";
 import UpcomingBids from "./tables/UpcomingBids";
 import useGetLocalCar from "../../../hooks/live-auction/useGetLocalCar";
+import Pusher from "pusher-js";
 
 
 const LiveAuctionDetail = () => {
   const { id } = useParams();
   const { localCar, loading, error, fetchLocalCar } = useGetLocalCar();
+
+
+  // useEffect(() => {
+  //   // Initialize Pusher
+  //   const pusher = new Pusher("6d700b541b1d83879b18", {
+  //     cluster: "ap2",
+  //   });
+
+  //   // Subscribe to the car-bids channel
+  //   const channel = pusher.subscribe(`presence-car-${id}`);
+
+  //   // Listen for bid updates specific to the car
+  //   channel.bind(`car-notifications`, (data) => {
+  //     console.log("data === >", data.message.bid_price);
+
+  //     setLiveData({
+  //       currentBid: data.message.bid_price,
+  //       noOfBids: data.message.noOfBids,
+  //     });
+  //   });
+
+  //   return () => {
+  //     channel.unbind_all();
+  //     channel.unsubscribe();
+  //   };
+  // }, []);
+
+
 
   useEffect(() => {
     fetchLocalCar(id);
