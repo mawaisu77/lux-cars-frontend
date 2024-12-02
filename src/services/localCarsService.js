@@ -11,8 +11,7 @@ export const getLocalCarDetail = async (id) => {
 
   export async function placeBidOnLocalCar({ localCarID, currentBid }) {
     try {
-      const bidPlace = await baseService.post(`local-cars-bids/place-bid`, {
-        localCarID,
+      const bidPlace = await baseService.post(`local-cars-bids/place-bid?localCarID=${localCarID}`, {
         currentBid,
       });
       return bidPlace;
