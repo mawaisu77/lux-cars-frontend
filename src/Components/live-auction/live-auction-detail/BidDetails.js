@@ -96,6 +96,16 @@ const BidDetails = ({localCar}) => {
       setMemberCount(members.count);
     });
 
+    channel.bind("pusher:member_added", (member) => {
+      setMembers((prev) => [...prev, member.info]);
+      setMemberCount((prev) => prev + 1);
+    });
+
+    channel.bind("pusher:member_removed", (member) => {
+      setMembers((prev) => prev.filter((m) => m.id !== member.id));
+      setMemberCount((prev) => prev - 1);
+    });
+
  
     // Cleanup on unmount
     return () => {
