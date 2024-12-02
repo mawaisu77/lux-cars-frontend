@@ -76,7 +76,7 @@ const BidDetails = ({localCar}) => {
   useEffect(() => {
     // Initialize Pusher
     const pusher = new Pusher("6d700b541b1d83879b18", {
-      authEndpoint: "http://localhost:8000/api/v1/pusher/auth/live-bidding",
+      authEndpoint: `${process.env.REACT_APP_API_URL}/api/v1/pusher/auth/live-bidding`,
       cluster: "ap2",
       auth: {
         headers: {
