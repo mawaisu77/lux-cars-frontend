@@ -185,43 +185,44 @@ const Header = () => {
             <HiUsers />
           </Link>
 
-          {!user ? (
-            <div className="flex items-center gap-x-[0.3vw]">
-         
-              <Link to="/login">
-                <button
-                  className={` focus:outline-none text-white ${
-                    isHomePage ? "text-primary-gray" : "text-white"
-                  } ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
-                >
-                  Login
-                </button>
-              </Link>
-              <div
-                className={` text-white`}
-              >
-                /
-              </div>
-              <Link to="/signup">
-                <button
-                  className={` focus:outline-none text-white ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
-                >
-                  SignUp
-                </button>
-              </Link>
-            </div>
+          {user ? (
+             <div className="flex items-center ">
+              
+             <button
+               className={`focus:outline-none lg:text-18 text-white ${navbarColor === "transparent" ? "" : "text-white"}`}
+               onClick={handleLogoutModal}
+             >
+               logout
+             </button>
+             </div>
+           
           ) : (
             <>
-               <div className="flex items-center ">
               
-              <button
-                className={`focus:outline-none lg:text-18 text-white ${navbarColor === "transparent" ? "" : "text-white"}`}
-                onClick={handleLogoutModal}
-              >
-                logout
-              </button>
-              </div>
-
+              <div className="flex items-center gap-x-[0.3vw]">
+         
+         <Link to="/login">
+           <button
+             className={` focus:outline-none text-white ${
+               isHomePage ? "text-primary-gray" : "text-white"
+             } ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
+           >
+             Login
+           </button>
+         </Link>
+         <div
+           className={` text-white`}
+         >
+           /
+         </div>
+         <Link to="/signup">
+           <button
+             className={` focus:outline-none text-white ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
+           >
+             SignUp
+           </button>
+         </Link>
+       </div>
             </>
           )}
 

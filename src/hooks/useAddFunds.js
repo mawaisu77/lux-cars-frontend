@@ -13,11 +13,11 @@ const useAddFunds = () => {
     } catch (err) {
       console.log('Error adding funds', err);
       if (err.response) {
-        setError(`${err.response.data.message}`);
+        setError(`${err.response.data.message || 'Error: No response from server'}`);
       } else if (err.request) {
-        setError('Error: No response from server');
+        setError('No response from server');
       } else {
-        setError(`Error: ${err.message}`);
+        setError(`${err.message || 'No response from server'}`);
       }
     } finally {
       setLoading(false);

@@ -740,7 +740,7 @@ useEffect(() => {
     }
   
     const formattedFromDate = formatDate(fromDate);
-    const formattedToDate = formatDate(toDate);
+    const formattedToDate = formatDate(toDate, true);
   
     setAuctionDateFrom(formattedFromDate);
     setAuctionDateTo(formattedToDate);
@@ -784,14 +784,16 @@ useEffect(() => {
       return;
     }
   
-    // Keep dates in YYYY-MM-DD format
-    const formattedDate = value; // value is already in YYYY-MM-DD format from input
-  
-    if (type === 'from') {
-      setAuctionDateFrom(formattedDate);
-    } else {
-      setAuctionDateTo(formattedDate);
-    }
+ // Add time component to the date
+ const formattedDate = type === 'from' 
+ ? `${value}T00:00:00`
+ : `${value}T23:59:59`;
+
+if (type === 'from') {
+ setAuctionDateFrom(formattedDate);
+} else {
+ setAuctionDateTo(formattedDate);
+}
   
     // Only update URL if both dates are set
     if (type === 'from' ? auctionDateTo : auctionDateFrom) {

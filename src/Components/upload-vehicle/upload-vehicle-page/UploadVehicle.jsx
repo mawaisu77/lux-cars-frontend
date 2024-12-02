@@ -70,6 +70,19 @@ const UploadVehicle = () => {
     { value: "status_2", label: "status_2" },
     { value: "status_3", label: "status_3" },
   ];
+  const carTitledOptions = [
+    { value: "bahamas", label: "Bahamas" },
+    { value: "usa", label: "USA" }
+  ];
+  const bahamasStates = [
+    { value: "acklins", label: "Acklins" },
+    { value: "berry_islands", label: "Berry Islands" },
+    { value: "bimini", label: "Bimini" },
+    { value: "cat_island", label: "Cat Island" },
+    { value: "central_andros", label: "Central Andros" },
+    { value: "central_eleuthera", label: "Central Eleuthera" },
+    // Add more Bahamas states as needed
+  ];
   // const titleStatusOptions = [
   //   { value: "stationary", label: "Stationary" },
   //   { value: "run&drive", label: "Run & Drive" },
@@ -1179,22 +1192,52 @@ const UploadVehicle = () => {
           </h1>
 
           {/*dropdown --> Car titled AT -  */}
-          <div className="grid md:grid-cols-3 w-full">
+          <div className="grid gap-4 md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
               <label className="font-bold text-[18px]">
                 Where is the car titled?
               </label>
               <Select
-                value={option.find(
+                // value={option.find(
+                //   (opt) => opt.label === formData.carDetails.carTitledAt
+                // )}
+                value={carTitledOptions.find(
                   (opt) => opt.label === formData.carDetails.carTitledAt
                 )}
-                options={option}
+                options={carTitledOptions}
                 styles={customStyles}
                 onChange={carTiltledAtHandler}
                 className="w-full"
                 placeholder="Select country"
               />
             </div>
+
+            {formData.carDetails.carTitledAt === "Bahamas" && (
+    <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
+      <label className="font-bold text-[18px]">
+        Select State
+      </label>
+      <Select
+        value={bahamasStates.find(
+          (opt) => opt.label === formData.carDetails.bahamasState
+        )}
+        options={bahamasStates}
+        styles={customStyles}
+        onChange={(selectedOption) => {
+          setFormData((prevData) => ({
+            ...prevData,
+            carDetails: {
+              ...prevData.carDetails,
+              bahamasState: selectedOption ? selectedOption.label : "",
+            },
+          }));
+        }}
+        className="w-full"
+                  placeholder="Select state"
+                  />
+              </div>
+            )}
+
           </div>
 
           {/* Toggle => Vechicle titled info  */}

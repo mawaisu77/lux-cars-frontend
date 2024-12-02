@@ -11,15 +11,18 @@ import 'swiper/css/pagination';
 // import required modules
 import { Pagination } from 'swiper/modules';
 import { KeyboardArrowDown } from '@mui/icons-material';
-import image from '../../../../assets/Vehicle/IMG (50).png'
 
-export default function VerticleSwiper() {
+export default function VerticleSwiper({images}) {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const swiperRef = useRef(null);
     const handleNextSlide = () => {
         if (swiperRef.current && swiperRef.current.swiper) {
           swiperRef.current.swiper.slideNext();
         }
       };
+
+
   return (
     <div className=''>
       <Swiper
@@ -33,55 +36,17 @@ export default function VerticleSwiper() {
         pagination={{
           clickable: true,
         }}
-        breakpoints={{
-          // '@0.00': {
-          //   slidesPerView: 1,
-          //   spaceBetween: 10,
-          // },
-          // '@0.75': {
-          //   slidesPerView: 2,
-          //   spaceBetween: 20,
-          // },
-          // '@1.00': {
-          //   slidesPerView: 3,
-          //   spaceBetween: 40,
-          // },
-          // '@1.50': {
-          //   slidesPerView: 4,
-          //   spaceBetween: 50,
-          // },
-        }}
         modules={[Pagination]}
         className="mySwiper h-[500px] "
       >
+        { images && images.map((image, index) => (
         <SwiperSlide className='rounded-lg'>
           <div className='w-full h-[150px] bg-red-500 rounded-lg'>
-            <img src={image} alt="" className='w-full h-full object-cover rounded-lg' />
+            <img src={image} className='w-full h-full object-cover rounded-lg'  alt={`Vehicle_Image ${index + 1}`} />
           </div>
         </SwiperSlide>
+        ))}
    
-        <SwiperSlide className='rounded-lg'>
-          <div className='w-full h-[150px] bg-red-500 rounded-lg'>
-            <img src={image} alt="" className='w-full h-full object-cover rounded-lg' />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className='rounded-lg'>
-          <div className='w-full h-[150px] bg-red-500 rounded-lg'>
-            <img src={image} alt="" className='w-full h-full object-cover rounded-lg' />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className='rounded-lg'>
-          <div className='w-full h-[150px] bg-red-500 rounded-lg'>
-            <img src={image} alt="" className='w-full h-full object-cover rounded-lg' />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className='rounded-lg'>
-          <div className='w-full h-[150px] bg-red-500 rounded-lg'>
-            <img src={image} alt="" className='w-full h-full object-cover rounded-lg' />
-          </div>
-        </SwiperSlide>
-
-
       </Swiper>
       <div 
       className=' flex justify-center items-center '>
