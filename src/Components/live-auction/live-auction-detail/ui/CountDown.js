@@ -15,9 +15,9 @@ const CountDown = ({timeLeft}) => {
 
   return (
     <>
-          <div className="px-2 text-[26px] bg-secondary-gray rounded-xl flex items-center gap-2 py-1 rounded-20">
-              <span className="text-[16px]">Countdown:</span>
-              <span className="text-[18px]">{`${days}d ${hours}h ${minutes}m ${seconds}s`}</span>
+          <div className="px-2 md:text-26 text-[22px] bg-secondary-gray rounded-xl flex items-center gap-2 py-1 rounded-20">
+              <span className="md:text-16 text-[14px]">Countdown:</span>
+              <span className="md:text-18 text-[16px] ">{`${days}d ${hours}h ${minutes}m ${seconds}s`}</span>
             </div>
     </>
   )

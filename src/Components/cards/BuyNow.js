@@ -14,7 +14,7 @@ const BuyNow = () => {
   const navigate = useNavigate(); // Initialize navigate hook
 
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    `${process.env.REACT_APP_API_CARS_LIVE}?document=clean`
+    `${process.env.REACT_APP_API_CARS_LIVE}?document=clean&buy_now=false`
   );
   const { savedIds, loading, error } = useSavedCars();
 
