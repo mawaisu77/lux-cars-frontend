@@ -8,3 +8,12 @@ export const getBidHistoryByLotId = async (id) => {
       throw error;
     }
   };
+
+  export async function getAllLocalCarBids(id) {
+    try {
+      const response = await baseService.get(`local-cars-bids/get-all-bids?localCarID=${id}`);
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }

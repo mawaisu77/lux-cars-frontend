@@ -6,6 +6,12 @@ const usePlaceBidLocalCar = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [placeBidSuccess, setPlaceBidSuccess] = useState(false);
+
+  const resetBidState = () => {
+    setError(null);
+    setPlaceBidSuccess(false);
+  };
+
   const handlePlaceBidLocalCar = async (localCarID, currentBid) => {
     setLoading(true);
     try {
@@ -25,7 +31,7 @@ const usePlaceBidLocalCar = () => {
     }
   };
 
-  return { bidData, loading, error, handlePlaceBidLocalCar, placeBidSuccess };
+  return { bidData, loading, error, handlePlaceBidLocalCar, placeBidSuccess, resetBidState };
 };
 
 export default usePlaceBidLocalCar;

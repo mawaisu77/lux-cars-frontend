@@ -29,7 +29,7 @@ export default function VerticleSwiper({images}) {
           onSwiper={(swiper) => {
             swiperRef.current = { swiper };
           }}
-        slidesPerView={3}
+        slidesPerView={4}
         spaceBetween={20}
         loop={true}
         direction='vertical'
@@ -37,11 +37,11 @@ export default function VerticleSwiper({images}) {
           clickable: true,
         }}
         modules={[Pagination]}
-        className="mySwiper h-[500px] "
+        className="mySwiper h-[30vw] "
       >
         { images && images.map((image, index) => (
         <SwiperSlide className='rounded-lg'>
-          <div className='w-full h-[150px] bg-red-500 rounded-lg'>
+          <div className='w-full h-[6.823vw] bg-red-500 rounded-lg'>
             <img src={image} className='w-full h-full object-cover rounded-lg'  alt={`Vehicle_Image ${index + 1}`} />
           </div>
         </SwiperSlide>

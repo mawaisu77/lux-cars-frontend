@@ -1,55 +1,78 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import useGetAllBids from '../../../../hooks/live-auction/useGetAllBids';
 
-export default function PreviousBids() {
-  const bids = [
-    { id: '34L912', country: 'Iraq', price: 8700, status: 'Cancelled' },
-    { id: 'AN1370', country: 'Iraq', price: 8400, status: 'Cancelled' },
-    { id: 'KQ5601', country: 'Iraq', price: 8200, status: 'Completed' },
-    { id: '9832h6', country: 'Iraq', price: 8000, status: 'Cancelled' },
-    { id: '9832h6', country: 'Iraq', price: 8000, status: 'Cancelled' },
-    { id: '9832h6', country: 'Iraq', price: 8000, status: 'Cancelled' },
-    { id: '9832h6', country: 'Iraq', price: 8000, status: 'Cancelled' },
-  ];
+export default function PreviousBids({id, liveData, members, memberCount}) {
+  const { allBids, loading, error, fetchAllBids } = useGetAllBids();
+
+  useEffect(() => {
+    fetchAllBids(id);
+  }, [id, liveData]);
+
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md">
+    <div className="p-[1vw] bg-white rounded-lg shadow-md h-[21.615vw]">
       {/* Header Section */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">Previous Bids</h2>
-        <a href="#" className="text-sm text-gray-500 hover:text-blue-600">View All</a>
+      <div className="flex justify-between items-center mb-[0.625vw]">
+        <h2 className="text-16 font-semibold">Previous Bids</h2>
+        <Link to="/" className="text-16 text-gray-500 hover:text-blue-600">View All</Link>
       </div>
 
       {/* Table Container */}
-      <div className="max-h-64 no-scrollbar overflow-y-scroll">
+      <div className="h-[90%] no-scrollbar overflow-y-scroll ">
         <table className="w-full table-auto border-collapse border rounded-xl">
           {/* Table Header */}
-          <thead className="sticky top-0 bg-white">
+          <thead className="sticky  top-0 bg-white">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase border-b">BID ID</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase border-b">COUNTRY</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase border-b">PRICE</th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase border-b">STATUS</th>
+              <th className="px-[0.729vw] py-[0.625vw] text-left text-15 font-medium text-gray-500 uppercase border-b">USERNAME</th>
+              <th className="px-[0.729vw] py-[0.625vw] text-left text-15 font-medium text-gray-500 uppercase border-b">PRICE</th>
+              <th className="px-[0.729vw] py-[0.625vw] text-right text-15 font-medium text-gray-500 uppercase border-b">STATUS</th>
             </tr>
           </thead>
           {/* Table Body */}
           <tbody>
-            {bids.map((bid) => (
-              <tr key={bid.id} className="hover:bg-gray-50 w-full">
-                <td className="px-4 py-3 text-left text-sm text-blue-600 font-semibold border-b">#{bid.id}</td>
-                <td className="px-4 py-3 text-left text-sm text-gray-700 border-b">{bid.country}</td>
-                <td className="px-4 py-3 text-left text-sm text-gray-700 border-b">${bid.price.toLocaleString()}</td>
-                <td className="px-4 py-3 text-right text-sm border-b">
-                  <span
-                    className={`inline-block px-2 py-1 text-xs text-right rounded-lg ${
-                      bid.status === 'Cancelled' ? 'bg-red-100 text-red-500 border border-red-500' : 'bg-blue-100 text-blue-500 border border-blue-500'
-                    }`}
-                  >
-                    {bid.status}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+        {loading ? (
+          <tr className="w-full h-full">
+            <td colSpan="4" className="text-center py-[2vw]">
+              <div className="flex justify-center items-center gap-2">
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                <span className="text-gray-500">Loading bids...</span>
+              </div>
+            </td>
+          </tr>
+        ) : error ? (
+          <div className="w-full h-full flex justify-center items-center bg-yellow-400" >
+            <div className="text-center py-[2vw] w-full">
+              <div className="text-red-500">
+                <p className="font-semibold">Error loading bids</p>
+                <p className="text-14">{error.message}</p>
+              </div>
+            </div>
+          </div>
+        ) : allBids?.length === 0 ? (
+          <tr>
+            <td colSpan="4" className="text-center py-[2vw] text-gray-500">
+              No bids available
+            </td>
+          </tr>
+        ) : (
+          allBids?.map((bid) => (
+            <tr key={bid.id} className="hover:bg-gray-50 w-full">
+            <td className="px-[0.729vw] py-[0.625vw] text-left text-15 text-blue-600 font-semibold border-b">{bid?.userDetails?.username}</td>
+            <td className="px-[0.729vw] py-[0.625vw] text-left text-15 text-gray-700 border-b">${bid?.bid?.bidPrice || 0}</td>
+            <td className="px-[0.729vw] py-[0.625vw] text-right text-15 border-b">
+              <span
+                className={`inline-block px-[0.729vw] py-[0.26vw] text-15 text-right rounded-lg ${
+                  bid?.bid?.isValid ? ' bg-blue-100 text-blue-500 border border-blue-500' : 'bg-red-100 text-red-500 border border-red-500'
+                }`}
+              >
+                  {bid?.bid?.isValid ? 'Active' : 'Expired'}
+                </span>
+              </td>
+            </tr>
+            ))
+          )}
+        </tbody>
         </table>
       </div>
     </div>
