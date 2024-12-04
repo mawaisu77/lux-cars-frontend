@@ -65,6 +65,7 @@ const LiveAuctionDetail = () => {
       setLiveData({
         currentBid: data.message.bid_price,
         noOfBids: data.message.noOfBids,
+        userID: data.message.userID,
       });
     });
 

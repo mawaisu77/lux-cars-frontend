@@ -14,16 +14,130 @@ import usePlaceBidLocalCar from "../../../hooks/live-auction/usePlaceBidLocalCar
 import Modal from "../../vehicle/Vehicle-page/Modal360";
 import { showToast } from "../../../utils/Toast";
 import { MdRestartAlt } from "react-icons/md";
+import QuickBids from "./QuickBids";
+import BidInput from "./BidInput";
 
 const BidDetails = ({ localCar, liveData, members, memberCount }) => {
   const { car, user } = localCar;
   const [currentBid] = useState(liveData?.currentBid || car?.currentBid || 0);
-  const [manualBid, setManualBid] = useState(liveData?.currentBid || car?.currentBid || 0);
+  const [manualBid, setManualBid] = useState(
+    liveData?.currentBid || car?.currentBid || 0
+  );
+  // Update these state declarations
+  const [tempAutoBidAmount, setTempAutoBidAmount] = useState(() => {
+    const saved = localStorage.getItem(`autoBid_temp_${car?.id}`);
+    return saved || "";
+  });
 
-  const quickBids = [100, 200, 300, 400, 500, 1000];
+  const [autoBidAmount, setAutoBidAmount] = useState(() => {
+    const saved = localStorage.getItem(`autoBid_amount_${car?.id}`);
+    return Number(saved) || 0;
+  });
 
-  const { bidData, loading, error, handlePlaceBidLocalCar, placeBidSuccess, resetBidState } =
-    usePlaceBidLocalCar();
+  const [isAutoBidEnabled, setIsAutoBidEnabled] = useState(() => {
+    const saved = localStorage.getItem(`autoBid_enabled_${car?.id}`);
+    return saved === "true";
+  });
+
+  // Add effect to save to localStorage when values change
+  useEffect(() => {
+    if (car?.id) {
+      localStorage.setItem(`autoBid_temp_${car.id}`, tempAutoBidAmount);
+      localStorage.setItem(
+        `autoBid_amount_${car.id}`,
+        autoBidAmount.toString()
+      );
+      localStorage.setItem(
+        `autoBid_enabled_${car.id}`,
+        isAutoBidEnabled.toString()
+      );
+    }
+  }, [tempAutoBidAmount, autoBidAmount, isAutoBidEnabled, car?.id]);
+
+  // Add cleanup function when component unmounts or car changes
+  useEffect(() => {
+    return () => {
+      if (!isAutoBidEnabled && car?.id) {
+        // Clean up storage when auto-bid is disabled or component unmounts
+        localStorage.removeItem(`autoBid_temp_${car.id}`);
+        localStorage.removeItem(`autoBid_amount_${car.id}`);
+        localStorage.removeItem(`autoBid_enabled_${car.id}`);
+      }
+    };
+  }, [car?.id, isAutoBidEnabled]);
+
+  // Add effect to monitor live bids and place auto-bids
+  useEffect(() => {
+    if (!isAutoBidEnabled || !liveData?.currentBid) return;
+
+    const currentBidAmount = liveData.currentBid;
+    const increment = getBidIncrement(currentBidAmount);
+    const nextBid = currentBidAmount + increment;
+
+    console.log("liveData -- >", liveData);
+    // Check if we should place an auto-bid
+    if (nextBid <= autoBidAmount && liveData.userID !== user?.id) {
+      handlePlaceBidLocalCar(car?.id, nextBid);
+    }
+
+    // Disable auto-bid if we've reached the maximum amount
+    if (currentBidAmount >= autoBidAmount) {
+      setIsAutoBidEnabled(false);
+      showToast("Auto-bid maximum amount reached", "info");
+    }
+  }, [liveData?.currentBid, liveData?.userID]);
+
+
+  // Add function to calculate bid increment based on price range
+  const getBidIncrement = (amount) => {
+    if (amount <= 5) return 1;
+    if (amount <= 40) return 5;
+    if (amount <= 100) return 10;
+    if (amount <= 1000) return 25;
+    if (amount <= 5000) return 50;
+    if (amount <= 25000) return 100;
+    if (amount <= 50000) return 250;
+    if (amount <= 100000) return 500;
+    return 1000;
+  };
+
+  // Handle auto-bid setup
+  const handleAutoBidSetup = () => {
+    if (tempAutoBidAmount) {
+      document.getElementById("confirm_auto_bid").showModal();
+    }
+  };
+
+  // Update the handleConfirmAutoBid function
+  const handleConfirmAutoBid = () => {
+    const amount = Number(tempAutoBidAmount);
+    setAutoBidAmount(amount);
+    setIsAutoBidEnabled(true);
+    setTempAutoBidAmount(""); 
+    showToast("Auto-bid has been enabled", "success");
+    document.getElementById("confirm_auto_bid").close();
+  };
+
+  // Add a function to disable auto-bid
+  const handleDisableAutoBid = () => {
+    setIsAutoBidEnabled(false);
+    setAutoBidAmount(0);
+    setTempAutoBidAmount("");
+    // Clean up storage
+    localStorage.removeItem(`autoBid_temp_${car?.id}`);
+    localStorage.removeItem(`autoBid_amount_${car?.id}`);
+    localStorage.removeItem(`autoBid_enabled_${car?.id}`);
+    showToast("Auto-bid has been disabled", "info");
+  };
+
+  const {
+    bidData,
+    loading,
+    error,
+    handlePlaceBidLocalCar,
+    placeBidSuccess,
+    resetBidState,
+  } = usePlaceBidLocalCar();
 
   const handlePlaceBid = () => {
     document.getElementById("place_live_bid").showModal();
@@ -53,22 +167,26 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
 
   const handleConfirmBid = async (id, bid) => {
     await handlePlaceBidLocalCar(id, bid);
-    
   };
-
 
   return (
     <>
       <div className="p-3 max-w-[100%] mx-auto">
         <div className="flex justify-between items-center mb-3">
-          <span className="text-30 font-medium">
-            {`${car?.make} ${car?.model} ${car?.year}`}
+          <span
+            className="text-30 font-medium text-nowrap"
+            title={`${car?.make} ${car?.model} ${car?.year}`}
+          >
+            {`${car?.make} ${car?.model} ${car?.year}`.length > 20
+              ? `${`${car?.make} ${car?.model} ${car?.year}`.substring(
+                  0,
+                  20
+                )}...`
+              : `${car?.make} ${car?.model} ${car?.year}`}
           </span>
 
           <div className="flex items-center gap-2 ">
-            <span className="text-16 font-medium">
-              Active Bid:
-            </span>
+            <span className="text-16 font-medium">Active Bid:</span>
             <span className="text-16 font-medium bg-green-700/30 px-2 py-0.5 rounded-lg">
               ${liveData.currentBid ? liveData.currentBid : car?.currentBid}
             </span>
@@ -77,7 +195,10 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
           <CountDown timeLeft={car?.auction_date} />
 
           <div className="flex gap-4">
-            <div className="flex  items-center  px-2 py-1 gap-1 bg-secondary-gray rounded-3xl">
+            <div
+              className="flex  items-center  px-2 py-1 gap-1 bg-secondary-gray rounded-3xl"
+              title={`${memberCount || 0} people have joined the live auction`}
+            >
               <MdPeopleAlt className="text-20" />
               <span className="text-18">{memberCount || 0}</span>
             </div>
@@ -103,75 +224,19 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
 
             <div className="relative mb-[0.625vw] grid grid-cols-12 p-[0.625vw] rounded-md shadow-md">
               <div className="col-span-5">
-                <div className="mb-[0.625vw] flex flex-col items-center">
-                  <div className="flex flex-col col-span-8 items-center relative mb-[0.625vw]">
-                    <span className="text-16 mb-[0.625vw] font-medium">
-                      Active Bid:
-                    </span>
-                   <span className="text-16 mb-[0.625vw]">IRAQ</span>
-                    <div className="relative flex items-center justify-center">
-                      <CircularProgress timeLeft={car?.auction_date}/>
-                    </div>
-                    <span className="text-16 mt-[0.625vw]">
-                      Highest BID!
-                    </span>
-                    <span className="text-16 text-gray-500">
-                      All Bids in USD!
-                    </span>
-                  </div>
-
-                  <div className=" flex mb-[0.625vw]  gap-2">
-                  <div className="relative flex items-center">
-                    <input
-                      value={manualBid || currentBid}
-                      onChange={(e) => setManualBid(Number(e.target.value))}
-                      className="w-[6.615vw] border text-16 border-gray-300 rounded-[0.625vw] py-[0.417vw] text-center"
-                    />
-                    <span
-                      onClick={handleReset}
-                      className="cursor-pointer text-gray-500 hover:text-gray-700"
-                    >
-                      <MdRestartAlt size={20} />
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span
-                      onClick={() => setManualBid((prev) => prev - 100)}
-                      className="text-20 text-red-600 rounded-[0.417vw] border border-red-600 p-[0.417vw] cursor-pointer"
-                    >
-                      <IoIosRemove />
-                    </span>
-                    <span
-                      onClick={() => setManualBid((prev) => prev + 100)}
-                      className="text-20 text-red-600 rounded-[0.417vw] border border-red-600 p-[0.417vw] cursor-pointer"
-                    >
-                      <IoIosAdd />
-                    </span>
-                  </div>
-                </div>
-                </div>
-             
+              <BidInput
+                car={car}
+                manualBid={manualBid}
+                setManualBid={setManualBid}
+                currentBid={currentBid}
+                handleReset={handleReset}
+              />
               </div>
               <div className="col-span-7 flex justify-end items-center">
-                <div className="flex flex-col justify-around h-full items-center w-[7.396vw] ">
-                <h1 className="text-16 mb-2 font-medium">
-                  Quick Bid Increase
-                </h1>
-                <div className="mb-2 flex flex-wrap gap-2 text-[15px] font-medium">
-                  {quickBids.map((amount) => (
-                    <div
-                      onClick={() => setManualBid(manualBid + amount)}
-                      className="w-full text-16 flex items-center gap-1 justify-center px-2 py-1 bg-[#E8F9F9] text-[#15CAB8] hover:bg-[#D1F4F4] border border-[#15CAB8] rounded-[0.625vw] cursor-pointer"
-                    >
-                      <span className="">
-                        <FaArrowTrendUp />
-                      </span>
-                      <span className="">${amount}</span>
-                    </div>
-                  ))}
-                </div>
-                </div>
-
+                 <QuickBids
+                  manualBid={manualBid}
+                  setManualBid={setManualBid}
+                 />
               </div>
             </div>
             <div
@@ -186,13 +251,18 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
               <span className=" text-18 font-medium">Auto Bid For Me</span>
               <div className="flex items-center border rounded-lg px-3 py-2 bg-white w-full">
                 {/* Dollar Prefix */}
-                <span className="mr-[0.625vw] text-16 text-gray-500">$</span>
-
+                {isAutoBidEnabled && (
+                  <span className="text-green-600 text-14 px-2 py-1 bg-green-100 rounded-full">
+                    Active:${autoBidAmount}{" "}
+                  </span>
+                )}
                 {/* Input Field */}
                 <input
-                  type="text"
-                  placeholder="Enter amount"
-                  className=" focus:outline-none text-16 py-[0.317vw] text-gray-700 w-full"
+                  type="number"
+                  placeholder="Enter maximum amount"
+                  value={tempAutoBidAmount} // Changed from autoBidAmount
+                  onChange={(e) => setTempAutoBidAmount(e.target.value)} // Changed from handleAutoBidSetup
+                  className="focus:outline-none text-16 py-[0.317vw] text-gray-700 w-full"
                 />
                 <TooltipGlobal
                   title="Dynamic Bidding Guide"
@@ -220,6 +290,30 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
                     </span>
                   }
                 />
+              </div>
+              <div className="flex gap-2">
+                {/* Enable Auto-Bid Button */}
+                <button
+                  onClick={handleAutoBidSetup}
+                  disabled={!tempAutoBidAmount || isAutoBidEnabled}
+                  className={`px-2 py-1 rounded-lg text-14  ${
+                    !tempAutoBidAmount || isAutoBidEnabled
+                      ? "bg-gray-300 cursor-not-allowed"
+                      : "bg-[#DC2626] text-white hover:bg-[#B91C1C]"
+                  }`}
+                >
+                  Enable Auto-Bid
+                </button>
+
+                {/* Disable Auto-Bid Button */}
+                {isAutoBidEnabled && (
+                  <button
+                    onClick={handleDisableAutoBid}
+                    className="px-2 py-1 rounded-lg text-14 bg-gray-600 text-white hover:bg-gray-700"
+                  >
+                    Disable Auto-Bid
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -253,6 +347,38 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
               ) : (
                 "Confirm Bid"
               )}
+            </button>
+          </div>
+        </div>
+      </dialog>
+
+      {/* Add confirmation dialog */}
+      <dialog id="confirm_auto_bid" className="modal">
+        <div className="modal-box dark:bg-white">
+          <h2 className="text-xl font-bold mb-4">Confirm Auto-Bid</h2>
+          <p className="mb-4">
+            Are you sure you want to enable auto-bidding up to $
+            {tempAutoBidAmount}?
+          </p>
+          <p className="mb-4 text-gray-600 text-sm">
+            The system will automatically place bids on your behalf when others
+            bid, following the increment rules, until reaching your maximum
+            amount.
+          </p>
+          <div className="flex justify-end gap-3">
+            <button
+              onClick={() =>
+                document.getElementById("confirm_auto_bid").close()
+              }
+              className="px-4 py-2 bg-gray-200 rounded-lg"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleConfirmAutoBid}
+              className="px-4 py-2 bg-[#DC2626] text-white rounded-lg"
+            >
+              Confirm Auto-Bid
             </button>
           </div>
         </div>

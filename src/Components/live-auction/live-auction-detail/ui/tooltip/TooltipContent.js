@@ -7,14 +7,14 @@ const TooltipContent = styled('div')(({ customStyles }) => ({
   color: customStyles.color || 'white',
   ...customStyles,
   '& h2': {
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: 500,
     marginBottom: '4px',
     ...customStyles.headerStyles,
   },
   '& p': {
-    fontSize: '16px',
-    marginBottom: '24px',
+    fontSize: '12px',
+    marginBottom: '16px',
     opacity: 0.9,
     ...customStyles.paragraphStyles,
   },
@@ -24,16 +24,17 @@ const TooltipContent = styled('div')(({ customStyles }) => ({
   },
   '& th': {
     textAlign: 'left',
-    fontSize: '16px',
+    fontSize: '12px',
     paddingBottom: '8px',
     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
   },
   '& td': {
-    padding: '6px 0',
-    fontSize: '16px',
+    padding: '4px 0',
+    fontSize: '12px',
     borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
   },
 }));
+
 const TooltipContentComponent = ({ title, description, tableData, customStyles }) => (
     <TooltipContent customStyles={customStyles}>
       {title && <h2>{title}</h2>}

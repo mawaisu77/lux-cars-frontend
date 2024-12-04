@@ -7,10 +7,19 @@ import useGetAllLiveCars from '../../../hooks/live-auction/useGetAllLiveCars';
 
 const List = () => {
 
- const { liveCars, loading, error, fetchLiveCars } = useGetAllLiveCars();
+  const { liveCars, loading: initialLoading, error, fetchLiveCars } = useGetAllLiveCars();
  useEffect(() => {
-     fetchLiveCars();
- }, []);
+  // Initial fetch
+  fetchLiveCars();
+  
+  // Set up auto-refresh every 10 seconds (changed from 100000ms to 10000ms for better UX)
+  const intervalId = setInterval(() => {
+    // Silent refresh - won't show loading state
+    fetchLiveCars({ silent: true });
+  }, 10000);
+
+  return () => clearInterval(intervalId);
+}, []);
 
  console.log("liveCars", liveCars);
 
@@ -44,10 +53,10 @@ const List = () => {
         <div className="flex items-center space-x-4">
         <button
               onClick={fetchLiveCars}
-              disabled={loading}
+              disabled={initialLoading}
               className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-all duration-300 disabled:opacity-50"
             >
-              <FaSync className={`${loading ? 'animate-spin' : ''}`} />
+              <FaSync className={`${initialLoading ? 'animate-spin' : ''}`} />
               Refresh
             </button>
             {/* <span className="text-sm text-gray-600">Date: 2/29 - 3/6/2024</span>
@@ -67,24 +76,24 @@ const List = () => {
       </div>
 
       {error ? (
-        <div className="text-center py-8">
-          <p className="text-red-500">Error loading cars. Please try again later.</p>
-        </div>
-      ) : loading ? (
-        <div className="text-center py-8">
-          <p className="text-gray-500">Loading...</p>
-        </div>
-      ) : liveCars && liveCars?.cars?.length > 0 ? (
-        liveCars?.cars?.map((car, index) => (
-          <div className='my-2' key={index}>
-            <Item car={car} />
-          </div>
-        ))
-      ) : (
-        <div className="text-center py-8">
-          <p className="text-gray-500">No cars available at this time.</p>
-        </div>
-      )}
+    <div className="text-center py-8">
+      <p className="text-red-500">Error loading cars. Please try again later.</p>
+    </div>
+  ) : initialLoading  ? ( 
+    <div className="text-center py-8">
+      <p className="text-gray-500">Checking For Live Cars</p>
+    </div>
+  ) : liveCars && liveCars?.cars?.length > 0 ? (
+    liveCars?.cars?.map((car, index) => (
+      <div className='my-2' key={index}>
+        <Item car={car} />
+      </div>
+    ))
+  ) : (
+    <div className="text-center py-8">
+      <p className="text-gray-500">No cars available at this time.</p>
+    </div>
+  )}
     </div>
     </>
   );
