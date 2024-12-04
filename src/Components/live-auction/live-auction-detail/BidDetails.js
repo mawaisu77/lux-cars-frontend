@@ -16,8 +16,11 @@ import { showToast } from "../../../utils/Toast";
 import { MdRestartAlt } from "react-icons/md";
 import QuickBids from "./QuickBids";
 import BidInput from "./BidInput";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
 const BidDetails = ({ localCar, liveData, members, memberCount }) => {
+  const { user: loggedInUser } = useAuthContext();
+
   const { car, user } = localCar;
   const [currentBid] = useState(liveData?.currentBid || car?.currentBid || 0);
   const [manualBid, setManualBid] = useState(
@@ -74,9 +77,14 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
     const increment = getBidIncrement(currentBidAmount);
     const nextBid = currentBidAmount + increment;
 
-    console.log("liveData -- >", liveData);
-    // Check if we should place an auto-bid
-    if (nextBid <= autoBidAmount && liveData.userID !== user?.id) {
+      // Only place auto-bid if:
+    // 1. Next bid is within our maximum amount
+    // 2. Current highest bid is not from us
+    // 3. There is another user's bid to respond to
+
+    console.log("++++++ TESTING ++++++", liveData.userID, loggedInUser?.id);
+
+    if (nextBid <= autoBidAmount && liveData.userID !== loggedInUser?.id ) {
       handlePlaceBidLocalCar(car?.id, nextBid);
     }
 
