@@ -1,6 +1,8 @@
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import React from 'react'
 
+
+
 const CircularProgress = ({timeLeft}) => {
   const getRemainingSeconds = (auctionDate) => {
     const now = new Date();

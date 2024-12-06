@@ -77,7 +77,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
     const increment = getBidIncrement(currentBidAmount);
     const nextBid = currentBidAmount + increment;
 
-      // Only place auto-bid if:
+    // Only place auto-bid if:
     // 1. Next bid is within our maximum amount
     // 2. Current highest bid is not from us
     // 3. There is another user's bid to respond to
