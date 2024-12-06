@@ -40,7 +40,7 @@ const List = () => {
           </div>
         </div>
       </div>
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 md:mt-0 mt-6">
       <div className="flex justify-between items-center mb-6">
         <div className="relative">
           <input
@@ -66,14 +66,14 @@ const List = () => {
         </div>
       </div>
 
-      <div className="bg-gray-100 grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] gap-4 py-2 px-4 font-semibold text-sm uppercase">
-        <div>Image</div>
-        <div>Lot Info</div>
-        <div>Vehicle Info</div>
-        <div>Condition</div>
-        <div>Sale Info</div>
-        <div>Bids</div>
-      </div>
+      <div className="hidden md:grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] gap-4 py-2 px-4 font-semibold text-sm uppercase bg-gray-100">
+          <div>Image</div>
+          <div>Lot Info</div>
+          <div>Vehicle Info</div>
+          <div>Condition</div>
+          <div>Sale Info</div>
+          <div>Bids</div>
+        </div>
 
       {error ? (
     <div className="text-center py-8">

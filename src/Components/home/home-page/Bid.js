@@ -247,7 +247,7 @@ const Bid = () => {
             </AnchorLink> */}
           </div>
 
-          <div className="md:my-[2.24vw] my-8  bg-indigo-900 relative w-[80%] md:w-[70vw] text-black">
+          <div className="md:my-[2.24vw] my-8 relative w-[80%] md:w-[70vw] text-black">
             <div className="w-[100%] grid md:grid-cols-6 md:mt-[3.5vh] md:px-[1.2vw] md:py-[2vh] py-4 px-4 items-center right-0 bg-[#ffffff] md:rounded-[1.25vw] rounded-[10px] ">
               <div className="flex flex-col justify-center px-[1vw] text-left">
                 <p
