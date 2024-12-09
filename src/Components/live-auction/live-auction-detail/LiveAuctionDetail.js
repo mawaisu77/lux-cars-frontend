@@ -97,6 +97,7 @@ const LiveAuctionDetail = () => {
   }, [localCar?.car?.id, ]);
 
  
+  console.log("live data here ==== >>>>", liveData)
 
   return (
     <>
