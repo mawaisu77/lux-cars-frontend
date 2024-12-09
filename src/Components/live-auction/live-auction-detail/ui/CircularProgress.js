@@ -21,7 +21,7 @@ const CircularProgress = ({timeLeft, liveTimeLeft}) => {
   
   return (
     <>
-    <>{`: ${totalSeconds} :`}</>
+    {/* <>{`: ${totalSeconds} :`}</> */}
     <CountdownCircleTimer
         isPlaying
         size={120}
