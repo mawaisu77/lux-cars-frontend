@@ -1,26 +1,31 @@
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 
 
 
-const CircularProgress = memo(({timeLeft, liveTimeLeft}) => {
+const CircularProgress = ({timeLeft, liveTimeLeft}) => {
+  const [durationInSeconds, setDurationInSeconds] = useState(0); // Added state for durationInSeconds
 
   const targetTime = liveTimeLeft || timeLeft;
-  // Get the initial duration only once when the component mounts or when targetTime changes
-  const durationInSeconds = Math.max(
-    Math.floor((new Date(targetTime) - new Date()) / 1000),
-    0
-  );
-  
-  console.log(durationInSeconds, "durationInSeconds")
+
+  const getRemainingSeconds = (auctionDate) => {
+    const now = new Date();
+    const auction = new Date(auctionDate);
+    const diffInSeconds = Math.floor((auction - now) / 1000);
+    return diffInSeconds > 0 ? diffInSeconds : 0;
+  };
+
+  useEffect(() => { 
+    setDurationInSeconds(getRemainingSeconds(targetTime));
+  }, [targetTime]); 
+
   
   return (
     <>
-    <p className='text-xl text-black'>durationInSeconds {durationInSeconds}</p>
+    <>{`: ${durationInSeconds} :`}</>
     <CountdownCircleTimer
         isPlaying
         size={120}
-        // initialRemainingTime={durationInSeconds} // Use initialRemainingTime instead of duration
         duration={durationInSeconds}
         colors={['#004777', '#F7B801', '#A30000', '#A30000']}
         colorsTime={[7, 5, 2, 0]}
@@ -29,6 +34,6 @@ const CircularProgress = memo(({timeLeft, liveTimeLeft}) => {
       </CountdownCircleTimer>
     </>
   )
-});
+}
 
 export default CircularProgress
