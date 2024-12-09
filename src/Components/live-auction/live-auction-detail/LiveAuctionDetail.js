@@ -138,7 +138,7 @@ const LiveAuctionDetail = () => {
           )}
         </div>
         <div className="max-w-[73vw] mx-auto">
-                <VehicleDetails />
+            <VehicleDetails />
        </div>
       </div>
 

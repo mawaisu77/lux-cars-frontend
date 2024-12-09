@@ -18,10 +18,10 @@ const CircularProgress = ({timeLeft, liveTimeLeft}) => {
   // Calculate total seconds from minutes and seconds
   const totalSeconds = useMemo(() => (minutes * 60) + seconds, [minutes, seconds]);
 
-  
+  // 
   return (
     <>
-    <>{`: ${totalSeconds} :`}</>
+    {/* <>{`: ${totalSeconds} :`}</> */}
     <CountdownCircleTimer
         isPlaying
         size={120}
