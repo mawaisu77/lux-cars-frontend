@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react'
 import useTimer from '../../../../hooks/useTimer';
 
-const CountDown = ({timeLeft}) => {
+const CountDown = ({timeLeft, liveTimeLeft}) => {
      // Memoize the targetTime to prevent unnecessary recalculations
-  const targetTime = useMemo(
-    () => (timeLeft ? new Date(timeLeft) : null),
-    [timeLeft]
-  );
+     const targetTime = useMemo(
+      () => (liveTimeLeft ? new Date(liveTimeLeft) : timeLeft ? new Date(timeLeft) : null),
+      [liveTimeLeft, timeLeft]
+    );
+
+
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
   // Determine if the auction date is in the future or null

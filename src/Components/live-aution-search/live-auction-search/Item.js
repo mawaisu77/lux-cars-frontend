@@ -1,42 +1,115 @@
-import React from 'react'
-import { FaHeart } from 'react-icons/fa6'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { FaHeart } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
-const Item = ({car}) => {
+const Item = ({ car }) => {
   return (
-<div className="grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] gap-4 items-center py-4 shadow-md rounded-md hover:shadow-lg transition-all duration-300 px-2">
-    <div className="w-24 h-16 bg-gray-200 rounded-md flex items-center justify-center">
-      <img src={car.carImages[0]} alt={`${car.year} ${car.make} ${car.model}`} className="w-full h-full object-cover" />
-    </div>
-    <div>
-      <Link to={`/live-auction/${car.id}`}>
-      <h3 className="font-semibold hover:text-blue-600 hover:underline">{car.year} {car.make} {car.model}</h3>
-      </Link>
-      <p className="text-sm text-gray-500">Vin: {car.vin}</p>
-      {/* <button className="text-sm text-red-600 font-semibold mt-1 flex items-center">
-        <FaHeart className="mr-1" /> Watch
-      </button> */}
-    </div>
-    <div>
-      <p className="text-sm">Odometer: {car.mileage} mi</p>
-      <p className="text-sm">Estimated Retail Value: ${car.minPrice}</p>
-    </div>
-    <div>
-      <p className="text-sm">{car.significantFlaws}</p>
-      {/* <p className="text-sm">Keys: Available</p> */}
-    </div>
-    <div>
-      <p className="text-sm">{car.location}</p>
-      <p className="text-sm text-green-600 font-semibold">Live Now</p>
-    </div>
-    <div className="text-right">
-      <p className="font-semibold text-lg">${car.currentBid}</p>
-      <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-semibold mt-2">
-        Join Auction
-      </button>
-    </div>
-  </div>
-  )
-}
+    <>
+      {/* Mobile View - Card Layout */}
+      <div className="md:hidden bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
+        <div className="p-4 space-y-4">
+          {/* Image Section */}
+          <div className="w-full h-48 bg-gray-200 rounded-md overflow-hidden">
+            <img
+              src={car.carImages[0]}
+              alt={`${car.year} ${car.make} ${car.model}`}
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-export default Item
+          {/* Car Info Section */}
+          <div className="space-y-2">
+            <Link to={`/live-auction/${car.id}`}>
+              <h3 className="text-xl font-semibold hover:text-blue-600 hover:underline">
+                {car.year} {car.make} {car.model}
+              </h3>
+            </Link>
+            <p className="text-sm text-gray-500">VIN: {car.vin}</p>
+          </div>
+
+          {/* Vehicle Details */}
+          <div className="space-y-1">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Odometer:</span>
+              <span className="text-sm font-medium">{car.mileage} mi</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Estimated Value:</span>
+              <span className="text-sm font-medium">${car.minPrice}</span>
+            </div>
+          </div>
+
+          {/* Condition */}
+          <div className="space-y-1 text-left">
+            <h4 className="text-sm font-semibold">Condition Notes:</h4>
+            <p className="text-sm text-gray-600">{car.significantFlaws}</p>
+          </div>
+
+          {/* Location and Status */}
+          <div className="space-y-1">
+            <p className="text-sm text-gray-600">{car.location}</p>
+            <p className="text-sm text-green-600 font-semibold">Live Now</p>
+          </div>
+
+          {/* Bid Section */}
+          <div className="space-y-2">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-600">Current Bid:</span>
+              <span className="text-lg font-semibold">${car.currentBid}</span>
+            </div>
+            <button className="w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-green-700 transition-colors">
+              Join Auction
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop View - Table Layout */}
+      <div className="hidden md:grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] gap-4 items-center py-4 shadow-md rounded-md hover:shadow-lg transition-all duration-300 px-2 bg-white">
+        {/* Image */}
+        <div className="w-24 h-16 bg-gray-200 rounded-md flex items-center justify-center overflow-hidden">
+          <img
+            src={car.carImages[0]}
+            alt={`${car.year} ${car.make} ${car.model}`}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <Link to={`/live-auction/${car.id}`}>
+            <h3 className="font-semibold hover:text-blue-600 hover:underline">
+              {car.year} {car.make} {car.model}
+            </h3>
+          </Link>
+          <p className="text-sm text-gray-500">VIN: {car.vin}</p>
+        </div>
+
+        {/* Vehicle Info */}
+        <div>
+          <p className="text-sm">Odometer: {car.mileage} mi</p>
+          <p className="text-sm">Estimated Retail Value: ${car.minPrice}</p>
+        </div>
+
+        {/* Condition */}
+        <div>
+          <p className="text-sm">{car.significantFlaws}</p>
+        </div>
+
+        {/* Sale Info */}
+        <div>
+          <p className="text-sm">{car.location}</p>
+          <p className="text-sm text-green-600 font-semibold">Live Now</p>
+        </div>
+
+        {/* Bids */}
+        <div className="text-right">
+          <p className="font-semibold text-lg">${car.currentBid}</p>
+          <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-semibold mt-2 hover:bg-green-700 transition-colors">
+            Join Auction
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Item;

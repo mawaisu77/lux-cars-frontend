@@ -31,7 +31,20 @@ const UpcomingBids = () => {
       onReserve: true
     },
     {
-      id: 3,
+      id: 9,
+      image: OnReserve,
+      year: "2012",
+      make: "Ford",
+      model: "F150 Super",
+      status: "In Progress",
+      price: 400,
+      lot: "155536378",
+      certificate: "CT Certificate of Title",
+      odo: "10833",
+      onReserve: true
+    },
+    {
+      id: 6,
       image: OnReserve,
       year: "2012",
       make: "Ford",
@@ -57,20 +70,7 @@ const UpcomingBids = () => {
       onReserve: true
     },
     {
-      id: 3,
-      image: OnReserve,
-      year: "2012",
-      make: "Ford",
-      model: "F150 Super",
-      status: "In Progress",
-      price: 400,
-      lot: "155536378",
-      certificate: "CT Certificate of Title",
-      odo: "10833",
-      onReserve: true
-    },
-    {
-      id: 3,
+      id: 4,
       image: OnReserve,
       year: "2012",
       make: "Ford",

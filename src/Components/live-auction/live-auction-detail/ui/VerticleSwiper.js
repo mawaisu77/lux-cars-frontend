@@ -13,8 +13,7 @@ import { Pagination } from 'swiper/modules';
 import { KeyboardArrowDown } from '@mui/icons-material';
 
 export default function VerticleSwiper({images}) {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
     const swiperRef = useRef(null);
     const handleNextSlide = () => {
         if (swiperRef.current && swiperRef.current.swiper) {
@@ -39,8 +38,8 @@ export default function VerticleSwiper({images}) {
         modules={[Pagination]}
         className="mySwiper h-[30vw] "
       >
-        { images && images.map((image, index) => (
-        <SwiperSlide className='rounded-lg'>
+       {images && images.map((image, index) => (
+        <SwiperSlide className='rounded-lg' key={index}>
           <div className='w-full h-[6.823vw] bg-red-500 rounded-lg'>
             <img src={image} className='w-full h-full object-cover rounded-lg'  alt={`Vehicle_Image ${index + 1}`} />
           </div>

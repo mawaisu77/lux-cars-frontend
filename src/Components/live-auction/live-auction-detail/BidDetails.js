@@ -77,7 +77,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
     const increment = getBidIncrement(currentBidAmount);
     const nextBid = currentBidAmount + increment;
 
-      // Only place auto-bid if:
+    // Only place auto-bid if:
     // 1. Next bid is within our maximum amount
     // 2. Current highest bid is not from us
     // 3. There is another user's bid to respond to
@@ -93,7 +93,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
       setIsAutoBidEnabled(false);
       showToast("Auto-bid maximum amount reached", "info");
     }
-  }, [liveData?.currentBid, liveData?.userID]);
+  }, [liveData?.currentBid, liveData?.userID, liveData.auction_date]);
 
 
   // Add function to calculate bid increment based on price range
@@ -175,7 +175,9 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
 
   const handleConfirmBid = async (id, bid) => {
     await handlePlaceBidLocalCar(id, bid);
+
   };
+
 
   return (
     <>
@@ -200,7 +202,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
             </span>
           </div>
 
-          <CountDown timeLeft={car?.auction_date} />
+          <CountDown timeLeft={car?.auction_date} liveTimeLeft={liveData?.auction_date} />
 
           <div className="flex gap-4">
             <div
@@ -238,6 +240,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
                 setManualBid={setManualBid}
                 currentBid={currentBid}
                 handleReset={handleReset}
+                liveTimeLeft={liveData?.auction_date}
               />
               </div>
               <div className="col-span-7 flex justify-end items-center">

@@ -107,24 +107,28 @@ const Bid = () => {
       ...base,
       fontSize: "1.25vw",
       borderRadius: "0.74v",
+      "@media (max-width: 768px)": {
+        fontSize: "16px",
+        borderRadius: "8px",
+      },
       backgroundColor: "transparent",
       border: "1px solid transparent",
       boxShadow: "none",
       zIndex: 100,
       cursor: "pointer",
       position: "relative",
-      paddingRight: "10px", // Add padding to avoid overlap with the line
+      paddingRight: "10px", 
       "::after": {
         content: '""',
         position: "absolute",
         right: 0,
         top: "10%",
-        height: "80%", // Vertical line height set to 80%
-        width: "1px", // Line width
-        backgroundColor: "#ccc", // Line color
+        height: "80%", 
+        width: "1px", 
+        backgroundColor: "#ccc", 
       },
       "&:hover": {
-        borderColor: "transparent", // Keeps the border color the same on hover
+        borderColor: "transparent", 
       },
     }),
     valueContainer: (base) => ({
@@ -139,6 +143,9 @@ const Bid = () => {
     placeholder: (base) => ({
       fontSize: "0.9vw",
       ...base,
+      "@media (max-width: 768px)": {
+        fontSize: "14px",
+      },
       color: "#8a8aa0",
     }),
     singleValue: (base) => ({
@@ -157,6 +164,9 @@ const Bid = () => {
     dropdownIndicator: (base) => ({
       ...base,
       padding: "0.208vw",
+    "@media (max-width: 768px)": {
+      padding: "4px",
+    },
       svg: {
         width: "0.833vw",
         height: "0.833vw",
@@ -165,6 +175,9 @@ const Bid = () => {
     clearIndicator: (base) => ({
       ...base,
       padding: "0.208vw",
+      "@media (max-width: 768px)": {
+        padding: "4px",
+      },
       svg: {
         width: "0.833vw",
         height: "0.833vw",
@@ -184,7 +197,7 @@ const Bid = () => {
 
   return (
     <>
-      <div class="relative h-screen text-white overflow-hidden">
+      <div class="relative md:h-screen text-white overflow-hidden">
         <div class="absolute inset-0">
           <img
             src={bgImage}
@@ -194,23 +207,23 @@ const Bid = () => {
           <div class="absolute inset-0 bg-black opacity-50"></div>
         </div>
 
-        <div class="relative sm:mt-[40px] z-10 flex flex-col justify-center items-center h-full text-center">
+        <div class="relative mt-24 md::mt-[40px] z-10 flex flex-col justify-center items-center h-full text-center">
           <div className="mx-auto">
 
           </div>
-          <h1 class="text-56  font-bold font-urbanist leading-tight mb-[2vh]">
+          <h1 class="md:text-56 text-[32px] font-bold font-urbanist leading-tight mb-[2vh]">
             Bid, Buy, Drive
           </h1>
-          <div className="flex text-56 font-bold font-urbanist gap-x-[0.5vw]">
+          <div className="flex md:flex-row flex-col md:text-56 text-[30px] font-bold font-urbanist md:gap-x-[0.5vw]">
             <span className="animated-text"> Online Car Auctions </span>
             <span className=""> With Home Delivery!</span>
           </div>
-          <p class="text-20 text-gray-300 my-[2.5vh]">
+          <p class="md:text-20 text-[20px] text-gray-300 my-[2.5vh]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmo
           </p>
-          <div className="flex gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
-            <div className="flex items-center py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border border-white hover:bg-white hover:text-black duration-200 rounded-full">
+          <div className="flex gap-x-2 md:gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
+            <div className="flex items-center md:py-[1.2vh] py-2 md:text-16 text-[16px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border border-white hover:bg-white hover:text-black duration-200 rounded-full">
               <FaRocket />
               <Link to="/upload-car">
               <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
@@ -218,7 +231,7 @@ const Bid = () => {
               </button>
               </Link>
             </div>
-            <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 py-[1.2vh] text-16 px-[1.3vw] gap-x-[0.5vw] border  rounded-full">
+            <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 md:py-[1.2vh] py-2 md:text-16 text-[16px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border  rounded-full">
               <FaHandHoldingUsd />
               <AnchorLink href="#startBidding">
               <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
@@ -234,11 +247,11 @@ const Bid = () => {
             </AnchorLink> */}
           </div>
 
-          <div className="mt-[2.24vw]  relative w-[70vw] text-black">
-            <div className="w-[100%] grid grid-cols-6 mt-[3.5vh] px-[1.2vw] py-[2vh] items-center right-0 bg-[#ffffff] rounded-[1.25vw] ">
+          <div className="md:my-[2.24vw] my-8 relative w-[80%] md:w-[70vw] text-black">
+            <div className="w-[100%] grid md:grid-cols-6 md:mt-[3.5vh] md:px-[1.2vw] md:py-[2vh] py-4 px-4 items-center right-0 bg-[#ffffff] md:rounded-[1.25vw] rounded-[10px] ">
               <div className="flex flex-col justify-center px-[1vw] text-left">
                 <p
-                  className={`text-left text-18 font-urbanist font-semibold ${
+                  className={`text-left md:text-18 text-[14px] font-urbanist font-semibold ${
                     error ? "hidden" : "block"
                   }`}
                 >
@@ -272,7 +285,7 @@ const Bid = () => {
 
               {/* Dropdown for Models (Car Models) */}
               <div className="flex flex-col justify-center   px-[1vw]   text-left">
-                <p className="text-left text-18 font-urbanist font-semibold">
+                <p className="text-left md:text-18 text-[14px] font-urbanist font-semibold">
                   Models
                 </p>
                 {loading && selectedMake && !modelOptions.length ? (
@@ -304,7 +317,7 @@ const Bid = () => {
 
               {/* Dropdown for Partners */}
               <div className="flex flex-col justify-center  px-[0.5vw] text-left">
-                <p className="text-left text-18 font-urbanist font-semibold">
+                <p className="text-left md:text-18 text-[14px] font-urbanist font-semibold">
                   Partners
                 </p>
                 <ReactSelect
@@ -324,7 +337,7 @@ const Bid = () => {
 
               {/* Dropdown for Year From */}
               <div className="flex flex-col justify-center px-[0.5vw] text-left">
-                <p className="text-left text-18 font-urbanist font-semibold">
+                <p className="text-left md:text-18 text-[14px]font-urbanist font-semibold">
                   From Year
                 </p>
                 <ReactSelect
@@ -345,7 +358,7 @@ const Bid = () => {
 
               {/* Dropdown for Year To */}
               <div className="flex flex-col justify-center px-[0.5vw] h-full text-left">
-                <p className="text-left text-18 font-urbanist font-semibold">
+                <p className="text-left md:text-18 text-[14px] font-urbanist font-semibold">
                   To Year
                 </p>
                 <ReactSelect
@@ -365,17 +378,17 @@ const Bid = () => {
               </div>
 
               <div className="flex flex-col px-2">
-                <p className="text-left text-18 font-urbanist font-semibold">
+                <p className="text-left md:text-18 text-[14px] font-urbanist font-semibold">
                   Find
                 </p>
                 <div
                   onClick={handleSearch}
-                  className=" text-white gap-x-[0.25vw] text-16 cursor-pointer group flex px-[0.25vw]  py-[1vh] justify-center items-center bg-[#ca0000] rounded-[0.5vw]"
+                  className=" text-white md:gap-x-[0.25vw] gap-x-2  md:text-16 cursor-pointer group flex px-[0.25vw]  py-[1vh] justify-center items-center bg-[#ca0000] rounded-[0.5vw]"
                 >
-                  <p className=" text-16">Search</p>
+                  <p className=" sm:text-16 text-[14px] font-urbanist font-semibold">Search</p>
 
                   <GoSearch
-                    className="cursor-pointer text-white duration-150"
+                    className="cursor-pointer text-white duration-150 md:text-16 text-[14px] group-hover:scale-125"
                   />
                 </div>
               </div>

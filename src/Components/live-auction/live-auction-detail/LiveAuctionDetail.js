@@ -7,6 +7,7 @@ import useGetLocalCar from "../../../hooks/live-auction/useGetLocalCar";
 import Pusher from "pusher-js";
 import BidDetailMobileView from "./BidDetailMobileView";
 import { getToken } from "../../../utils/storageUtils";
+import VehicleDetails from "./tables/VehicleDetails";
 
 const LiveAuctionDetail = () => {
   const { id } = useParams();
@@ -16,6 +17,7 @@ const LiveAuctionDetail = () => {
   const [liveData, setLiveData] = useState({
     currentBid: null,
     noOfBids: null,
+    auction_date: null,  
   });
   // useEffect(() => {
   //   // Initialize Pusher
@@ -66,6 +68,7 @@ const LiveAuctionDetail = () => {
         currentBid: data.message.bid_price,
         noOfBids: data.message.noOfBids,
         userID: data.message.userID,
+        auction_date: data.message.auction_date
       });
     });
 
@@ -91,7 +94,7 @@ const LiveAuctionDetail = () => {
       channel.unsubscribe();
       pusher.disconnect();
     };
-  }, [localCar?.car?.id]);
+  }, [localCar?.car?.id, ]);
 
  
 
@@ -128,10 +131,14 @@ const LiveAuctionDetail = () => {
               <div className="flex flex-col gap-[0.625vw] col-span-5 w-full">
                 <PreviousBids id={id} liveData={liveData} />
                 <UpcomingBids />
-              </div>
+              </div>  
             </>
+           
           )}
         </div>
+        <div className="max-w-[73vw] mx-auto">
+                <VehicleDetails />
+       </div>
       </div>
 
       <div className="md:hidden block w-[100vw] py-[40px]">
