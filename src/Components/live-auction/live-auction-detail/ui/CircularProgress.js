@@ -16,7 +16,7 @@ const CircularProgress = memo(({timeLeft, liveTimeLeft}) => {
   
   return (
     <>
-    <p className='text-xl text-black'>durationInSeconds</p>
+    <p className='text-xl text-black'>durationInSeconds {durationInSeconds}</p>
     <CountdownCircleTimer
         isPlaying
         size={120}
