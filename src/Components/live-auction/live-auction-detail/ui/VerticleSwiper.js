@@ -13,8 +13,7 @@ import { Pagination } from 'swiper/modules';
 import { KeyboardArrowDown } from '@mui/icons-material';
 
 export default function VerticleSwiper({images}) {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
     const swiperRef = useRef(null);
     const handleNextSlide = () => {
         if (swiperRef.current && swiperRef.current.swiper) {
