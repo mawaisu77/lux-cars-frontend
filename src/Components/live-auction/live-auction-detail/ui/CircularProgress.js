@@ -1,32 +1,29 @@
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import React, { memo, useEffect, useState } from 'react'
+import useTimer from '../../../../hooks/useTimer';
 
 
 
 const CircularProgress = ({timeLeft, liveTimeLeft}) => {
   const [durationInSeconds, setDurationInSeconds] = useState(0); // Added state for durationInSeconds
 
-  const targetTime = liveTimeLeft || timeLeft;
+  
+  const targetTime = useMemo(
+    () => (liveTimeLeft ? new Date(liveTimeLeft) : timeLeft ? new Date(timeLeft) : null),
+    [liveTimeLeft, timeLeft]
+  );
 
-  const getRemainingSeconds = (auctionDate) => {
-    const now = new Date();
-    const auction = new Date(auctionDate);
-    const diffInSeconds = Math.floor((auction - now) / 1000);
-    return diffInSeconds > 0 ? diffInSeconds : 0;
-  };
+  const { days, hours, minutes, seconds } = useTimer(targetTime);
 
-  useEffect(() => { 
-    setDurationInSeconds(getRemainingSeconds(targetTime));
-  }, [targetTime]); 
 
   
   return (
     <>
-    <>{`: ${durationInSeconds} :`}</>
+    <>{`: ${seconds} :`}</>
     <CountdownCircleTimer
         isPlaying
         size={120}
-        duration={durationInSeconds}
+        duration={seconds}
         colors={['#004777', '#F7B801', '#A30000', '#A30000']}
         colorsTime={[7, 5, 2, 0]}
       >
