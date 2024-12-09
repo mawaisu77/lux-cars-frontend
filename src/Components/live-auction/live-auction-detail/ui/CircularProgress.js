@@ -15,15 +15,17 @@ const CircularProgress = ({timeLeft, liveTimeLeft}) => {
 
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
+  // Calculate total seconds from minutes and seconds
+  const totalSeconds = useMemo(() => (minutes * 60) + seconds, [minutes, seconds]);
 
   
   return (
     <>
-    <>{`: ${seconds} :`}</>
+    <>{`: ${totalSeconds} :`}</>
     <CountdownCircleTimer
         isPlaying
         size={120}
-        duration={seconds}
+        duration={totalSeconds}
         colors={['#004777', '#F7B801', '#A30000', '#A30000']}
         colorsTime={[7, 5, 2, 0]}
       >
