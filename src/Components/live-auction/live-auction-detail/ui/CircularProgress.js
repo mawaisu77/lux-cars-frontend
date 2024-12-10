@@ -1,38 +1,39 @@
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react';
 import useTimer from '../../../../hooks/useTimer';
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-
-
-const CircularProgress = ({timeLeft, liveTimeLeft}) => {
-  const [durationInSeconds, setDurationInSeconds] = useState(0); // Added state for durationInSeconds
-
-  
+const CircularProgress = ({ timeLeft, liveTimeLeft }) => {
   const targetTime = useMemo(
     () => (liveTimeLeft ? new Date(liveTimeLeft) : timeLeft ? new Date(timeLeft) : null),
     [liveTimeLeft, timeLeft]
   );
 
-  const { days, hours, minutes, seconds } = useTimer(targetTime);
+  const { minutes, seconds } = useTimer(targetTime);
 
-  // Calculate total seconds from minutes and seconds
-  const totalSeconds = useMemo(() => (minutes * 60) + seconds, [minutes, seconds]);
+  const totalSeconds = useMemo(() => Number(minutes * 60 + seconds), [minutes, seconds]);
 
-  // 
+  const [initialSeconds, setInitialSeconds] = useState(totalSeconds);
+
+  useEffect(() => {
+    // Only update initial seconds if the total seconds increase significantly
+    if (totalSeconds > initialSeconds) {
+      setInitialSeconds(totalSeconds);
+    }
+  }, [totalSeconds, initialSeconds]);
+
   return (
-    <>
-    {/* <>{`: ${totalSeconds} :`}</> */}
-    <CountdownCircleTimer
-        isPlaying
-        size={120}
-        duration={totalSeconds}
+    <div>
+      <CountdownCircleTimer
+        isPlaying={totalSeconds > 0} // Stop playing when time reaches 0
+        duration={initialSeconds} // Use initial duration for smoother animation
+        initialRemainingTime={totalSeconds} // Adjust remaining time dynamically
         colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-        colorsTime={[7, 5, 2, 0]}
+        colorsTime={[initialSeconds * 0.7, initialSeconds * 0.5, initialSeconds * 0.2, 0]}
       >
-        {({ remainingTime }) => remainingTime}
+        {({ remainingTime }) => remainingTime || 0}
       </CountdownCircleTimer>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default CircularProgress
+export default CircularProgress;

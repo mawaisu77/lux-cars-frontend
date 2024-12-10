@@ -1,32 +1,38 @@
-import React, { memo } from 'react'
-import { IoIosAdd, IoIosRemove } from 'react-icons/io'
-import { MdRestartAlt } from 'react-icons/md'
-import CircularProgress from './ui/CircularProgress'
+import React, { memo } from "react";
+import { IoIosAdd, IoIosRemove } from "react-icons/io";
+import { MdRestartAlt } from "react-icons/md";
+import CircularProgress from "./ui/CircularProgress";
 
-
-// Separate timer component to prevent re-renders
-const TimerSection = memo(({ car, liveTimeLeft }) => (
-  <div className="flex flex-col col-span-8 items-center relative mb-[0.625vw]">
-    <span className="text-16 mb-[0.625vw] font-medium">
-      Active Bid:
-    </span>
-    <span className="text-16 mb-[0.625vw]">IRAQ</span>
-    <div className="relative flex items-center justify-center">
-      <CircularProgress timeLeft={car?.auction_date} liveTimeLeft={liveTimeLeft} />
+const TimerSection = memo(({ timeLeft, liveTimeLeft }) => (
+  <div className="flex flex-col col-span-8 items-center bg-blue-200 w-full relative ">
+    <span className="text-16 mb-[0.625vw] font-medium">Active Bid:</span>
+    <div className="relative flex items-center justify-center ">
+      <CircularProgress timeLeft={timeLeft} liveTimeLeft={liveTimeLeft} />
     </div>
     <span className="text-16 mt-[0.625vw]">Highest BID!</span>
-    <span className="text-16 text-gray-500">
-      All Bids in USD!
-    </span>
+    <span className="text-16 text-gray-500">All Bids in USD!</span>
   </div>
 ));
 
-
-const BidInput = ({car, manualBid, setManualBid, currentBid, handleReset,liveTimeLeft }) => {
+const BidInput = ({
+  car,
+  manualBid,
+  setManualBid,
+  currentBid,
+  handleReset,
+  liveTimeLeft,
+  timeLeft,
+}) => {
   return (
     <>
-  <div className="mb-[0.625vw] flex flex-col items-center">
-        <TimerSection car={car} liveTimeLeft={liveTimeLeft} />
+      <div className="mb-[0.625vw] flex flex-col items-center">
+        <div className="bg-orange-400 w-full flex justify-center items-center">
+          <TimerSection
+            car={car}
+            timeLeft={timeLeft}
+            liveTimeLeft={liveTimeLeft}
+          />
+        </div>
 
         <div className="flex mb-[0.625vw] gap-2">
           <div className="relative flex items-center">
@@ -59,7 +65,7 @@ const BidInput = ({car, manualBid, setManualBid, currentBid, handleReset,liveTim
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default BidInput
+export default BidInput;

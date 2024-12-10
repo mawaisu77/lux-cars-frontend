@@ -19,30 +19,6 @@ const LiveAuctionDetail = () => {
     noOfBids: null,
     auction_date: null,  
   });
-  // useEffect(() => {
-  //   // Initialize Pusher
-  //   const pusher = new Pusher("6d700b541b1d83879b18", {
-  //     cluster: "ap2",
-  //   });
-
-  //   // Subscribe to the car-bids channel
-  //   const channel = pusher.subscribe(`presence-car-${id}`);
-
-  //   // Listen for bid updates specific to the car
-  //   channel.bind(`car-notifications`, (data) => {
-  //     console.log("data === >", data.message.bid_price);
-
-  //     setLiveData({
-  //       currentBid: data.message.bid_price,
-  //       noOfBids: data.message.noOfBids,
-  //     });
-  //   });
-
-  //   return () => {
-  //     channel.unbind_all();
-  //     channel.unsubscribe();
-  //   };
-  // }, []);
 
   useEffect(() => {
     fetchLocalCar(id);
@@ -94,10 +70,8 @@ const LiveAuctionDetail = () => {
       channel.unsubscribe();
       pusher.disconnect();
     };
-  }, [localCar?.car?.id, ]);
+  }, [localCar?.car?.id]);
 
- 
-  console.log("live data here ==== >>>>", liveData)
 
   return (
     <>
@@ -142,23 +116,6 @@ const LiveAuctionDetail = () => {
        </div>
       </div>
 
-      <div className="md:hidden block w-[100vw] py-[40px]">
-        <div className="max-w-[90vw] grid grid-cols-12 mx-auto">
-          {loading && <div>Loading...</div>}
-          {error && <div>{error}</div>}
-          {!loading && !error && localCar && (
-            <> 
-              <div className="col-span-12">
-                <BidDetailMobileView localCar={localCar} />
-              </div>
-              {/* <div className="flex flex-col gap-[0.625vw] col-span-5 w-full">
-                <PreviousBids />
-                <UpcomingBids />
-              </div> */}
-            </>
-          )}
-        </div>
-      </div>
 
     </>
   );

@@ -23,9 +23,8 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
 
   const { car, user } = localCar;
   const [currentBid] = useState(liveData?.currentBid || car?.currentBid || 0);
-  const [manualBid, setManualBid] = useState(
-    liveData?.currentBid || car?.currentBid || 0
-  );
+  const [manualBid, setManualBid] = useState(() => liveData?.currentBid ?? car?.currentBid ?? 0);
+
   // Update these state declarations
   const [tempAutoBidAmount, setTempAutoBidAmount] = useState(() => {
     const saved = localStorage.getItem(`autoBid_temp_${car?.id}`);
@@ -82,7 +81,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
     // 2. Current highest bid is not from us
     // 3. There is another user's bid to respond to
 
-    console.log("++++++ TESTING ++++++", liveData.userID, loggedInUser?.id);
+    // console.log("++++++ TESTING ++++++", liveData.userID, loggedInUser?.id);
 
     if (nextBid <= autoBidAmount && liveData.userID !== loggedInUser?.id ) {
       handlePlaceBidLocalCar(car?.id, nextBid);
@@ -178,7 +177,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
 
   };
 
-
+// console.log("=+++++=",localCar)
   return (
     <>
       <div className="p-3 max-w-[100%] mx-auto">
@@ -240,6 +239,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
                 setManualBid={setManualBid}
                 currentBid={currentBid}
                 handleReset={handleReset}
+                timeLeft={localCar?.car?.auction_date}
                 liveTimeLeft={liveData?.auction_date}
               />
               </div>
