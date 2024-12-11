@@ -177,7 +177,6 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
 
   };
 
-// console.log("=+++++=",localCar)
   return (
     <>
       <div className="p-3 max-w-[100%] mx-auto">
@@ -243,7 +242,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
                 liveTimeLeft={liveData?.auction_date}
               />
               </div>
-              <div className="col-span-7 flex justify-end items-center">
+              <div className="col-span-7 flex justify-end items-start">
                  <QuickBids
                   manualBid={manualBid}
                   setManualBid={setManualBid}

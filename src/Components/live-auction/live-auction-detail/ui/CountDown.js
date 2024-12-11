@@ -8,12 +8,8 @@ const CountDown = ({timeLeft, liveTimeLeft}) => {
       [liveTimeLeft, timeLeft]
     );
 
-
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
-  // Determine if the auction date is in the future or null
-  const ValidDate =
-    targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
   return (
     <>
