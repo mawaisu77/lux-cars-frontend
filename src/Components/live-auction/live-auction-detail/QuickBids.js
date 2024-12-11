@@ -25,7 +25,7 @@ const QuickBids = ({ manualBid, setManualBid }) => {
         />
       </div> 
 
-      <div className="mb-y md:my-[0.625vw] flex flex-wrap gap-2 text-[15px] font-medium">
+      <div className="mb-y md:my-[0.625vw] flex flex-wrap gap-2 md:gap-[0.425vw] text-[15px] font-medium">
         {quickBids.map((amount, index) => (
           <div
             key={index}

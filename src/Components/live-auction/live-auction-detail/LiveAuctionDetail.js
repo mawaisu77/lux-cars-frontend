@@ -75,26 +75,30 @@ const LiveAuctionDetail = () => {
 
   return (
     <>
-      <div className="md:block hidden bg-vehicle">
+      <div className="md:block hidden bg-live-vehicle">
         <div className="w-[15.5] flex flex-col pt-[12.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">
-            Vehicle Detail
+            Live Bidding
           </div>
-          <div className=" text-white flex gap-3 justify-center text-[1vw] font-urbanist">
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
-              <button className="hover:text-white hover:text-[1.1vw]">
+            <button className="hover:text-white hover:scale-110 duration-150">
                 Home
               </button>
             </Link>
             /
-            <button className="hover:text-white hover:text-[1.1vw]">
-              Live Auction
+            <button className="hover:text-white hover:scale-110 duration-150">
+              Live Bidding
+            </button>
+            /
+            <button className="hover:text-white hover:scale-110 duration-150">
+              {localCar?.car?.make} {localCar?.car?.model} {localCar?.car?.year}
             </button>
           </div>
         </div>
       </div>
 
-      <div className="md:block hidden w-[100vw] py-[40px]">
+      <div className="md:block hidden w-[100vw] py-[40px] md:py-[1.25vw]">
         <div className="max-w-[73vw] grid grid-cols-12 mx-auto">
           {loading && <div>Loading...</div>}
           {error && <div>{error}</div>}

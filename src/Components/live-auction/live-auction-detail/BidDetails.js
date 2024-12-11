@@ -179,8 +179,8 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
 
   return (
     <>
-      <div className="p-3 max-w-[100%] mx-auto">
-        <div className="flex justify-between items-center mb-3">
+      <div className="p-3 md:p-[0.625vw] max-w-[100%] mx-auto">
+        <div className="flex justify-between items-center mb-3 md:mb-[0.625vw]">
           <span
             className="text-30 font-medium text-nowrap"
             title={`${car?.make} ${car?.model} ${car?.year}`}
@@ -193,18 +193,18 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
               : `${car?.make} ${car?.model} ${car?.year}`}
           </span>
 
-          <div className="flex items-center gap-2 ">
+          {/* <div className="flex items-center gap-2 ">
             <span className="text-16 font-medium">Active Bid:</span>
             <span className="text-16 font-medium bg-green-700/30 px-2 py-0.5 rounded-lg">
               ${liveData.currentBid ? liveData.currentBid : car?.currentBid}
             </span>
-          </div>
+          </div> */}
 
           <CountDown timeLeft={car?.auction_date} liveTimeLeft={liveData?.auction_date} />
 
           <div className="flex gap-4">
             <div
-              className="flex  items-center  px-2 py-1 gap-1 bg-secondary-gray rounded-3xl"
+              className="flex items-center px-2 py-1 md:px-[0.625vw] md:py-[0.417vw] gap-1 md:gap-[0.425vw] bg-secondary-gray rounded-3xl md:rounded-[0.625vw]"
               title={`${memberCount || 0} people have joined the live auction`}
             >
               <MdPeopleAlt className="text-20" />
@@ -213,7 +213,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
           </div>
         </div>
 
-        <div className="flex gap-x-4 ">
+        <div className="flex gap-x-4 md:gap-[0.625vw] ">
           {/* Left side - Image gallery */}
           {car?.carImages && (
             <div className="w-[25%]">
@@ -237,6 +237,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
                 manualBid={manualBid}
                 setManualBid={setManualBid}
                 currentBid={currentBid}
+                activeBid={liveData?.currentBid || currentBid}
                 handleReset={handleReset}
                 timeLeft={localCar?.car?.auction_date}
                 liveTimeLeft={liveData?.auction_date}
@@ -301,7 +302,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
                   }
                 />
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 mt-2">
                 {/* Enable Auto-Bid Button */}
                 <button
                   onClick={handleAutoBidSetup}
