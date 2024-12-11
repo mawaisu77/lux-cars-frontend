@@ -111,7 +111,7 @@ const LiveAuctionDetail = () => {
               </div>
               <div className="flex flex-col gap-y-[1.625vw] col-span-5 w-full">
                 <PreviousBids id={id} liveData={liveData} />
-                <UpcomingBids />
+                <UpcomingBids/>
               </div>  
             </>
            

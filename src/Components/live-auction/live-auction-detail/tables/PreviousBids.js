@@ -15,7 +15,7 @@ export default function PreviousBids({id, liveData, members, memberCount}) {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-[0.625vw]">
         <h2 className="text-16 font-semibold">Previous Bids</h2>
-        <Link to="/" className="text-16 text-gray-500 hover:text-blue-600"> <strong>Total Bids: {allBids?.length || 0}</strong></Link>
+        <button className="text-16 text-gray-500 hover:text-blue-600"> <strong>Total Bids: {allBids?.length || 0}</strong></button>
       </div>
 
       {/* Table Container */}
