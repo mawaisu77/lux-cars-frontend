@@ -21,26 +21,29 @@ const List = () => {
   return () => clearInterval(intervalId);
 }, []);
 
- console.log("liveCars", liveCars);
 
   return (
     <>
-      <div className="Backgroundimage-Privicy-loan-terms">
-        <div className="hidden lg:block">
-          <div className="w-[15.5] flex flex-col pt-[12.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">
-              Live Auction Search
-            </div>
-            <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
-              <Link to="/">
-                <button className="hover:text-white hover:text-[1.1vw]">Home</button>
-              </Link>
-              /<button className="hover:text-white hover:text-[1.1vw]">Live Auction Search</button>
-            </div>
+      <div className="md:block hidden bg-live-vehicle">
+        <div className="w-[15.5] flex flex-col pt-[12.5vh]">
+          <div className="text-[2.6vw] font-semibold text-white">
+            Live Bidding
+          </div>
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
+            <button className="hover:text-white hover:scale-110 duration-150">
+                Home
+              </button>
+            </Link>
+            /
+            <button className="hover:text-white hover:scale-110 duration-150">
+              Live Bidding
+            </button>
+          
           </div>
         </div>
       </div>
-    <div className="container mx-auto px-4 py-8 md:mt-0 mt-6">
+    <div className="max-w-[73vw] mx-auto px-4 py-8 md:mt-0 mt-6">
       <div className="flex justify-between items-center mb-6">
         <div className="relative">
           <input
@@ -66,21 +69,21 @@ const List = () => {
         </div>
       </div>
 
-      <div className="hidden md:grid grid-cols-6 gap-4 py-2 px-4 font-semibold text-sm text-left uppercase bg-gray-100">
+      <div className="hidden md:grid grid-cols-6 gap-4 py-2 px-4 md:px-[1.625vw] md:py-[0.625vw] font-semibold text-sm md:text-[1vw] text-left uppercase bg-gray-100">
           <div >Image</div>
           <div >Lot Info</div>
           <div >Vehicle Info</div>
           <div >Condition</div>
           <div >Sale Info</div>
-          <div >Bids</div>
+          <div className=''>Bids</div>
         </div>
 
       {error ? (
-    <div className="text-center py-8">
+    <div className="text-center py-8 md:py-[2.625vw]">
       <p className="text-red-500">Error loading cars. Please try again later.</p>
     </div>
   ) : initialLoading  ? ( 
-    <div className="text-center py-8">
+    <div className="text-center py-8 md:py-[2.625vw]">
       <p className="text-gray-500">Checking For Live Cars</p>
     </div>
   ) : liveCars && liveCars?.cars?.length > 0 ? (
@@ -90,7 +93,7 @@ const List = () => {
       </div>
     ))
   ) : (
-    <div className="text-center py-8">
+    <div className="text-center py-8 md:py-[2.625vw]">
       <p className="text-gray-500">No cars available at this time.</p>
     </div>
   )}

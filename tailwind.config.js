@@ -39,6 +39,8 @@ module.exports = {
       },
       boxShadow: {
         'inner-lg': 'inset 0px 0px 20px 3px rgba(0, 0, 0, 0.3)', // Custom inset shadow
+        'custom': 'rgba(211, 211, 211, 0.2) 0px 0px 0px 2px, rgba(211, 211, 211, 0.4) 0px 4px 6px -1px, rgba(255, 255, 255, 0.1) 0px 1px 0px inset',
+
       },
     },
   },

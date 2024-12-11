@@ -179,7 +179,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
 
   return (
     <>
-      <div className="p-3 md:p-[0.625vw] max-w-[100%] mx-auto">
+      <div className="p-3 md:py-[0.625vw] md:px-[1.625vw] max-w-[100%] mx-auto">
         <div className="flex justify-between items-center mb-3 md:mb-[0.625vw]">
           <span
             className="text-30 font-medium text-nowrap"
@@ -213,7 +213,7 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
           </div>
         </div>
 
-        <div className="flex gap-x-4 md:gap-[0.625vw] ">
+        <div className="flex gap-x-4 md:gap-[2.625vw] ">
           {/* Left side - Image gallery */}
           {car?.carImages && (
             <div className="w-[25%]">

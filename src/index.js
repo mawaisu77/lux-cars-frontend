@@ -7,7 +7,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import 'react-toastify/dist/ReactToastify.css';
 import './i18n'; // Import the i18n configuration
 import { CustomToast } from './utils/Toast';
-import "./instrument";
+// import "./instrument";
 import { SavedCarsProvider } from "./context/SavedCarIdsContext";
 
 

@@ -9,4 +9,13 @@ export const getLiveCars = async () => {
     }
  };
 
+ export const getUpcomingBids = async (id) => {
+  try {
+    const response = await baseService.get(`local-cars/get-all-local-cars?type=admin`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
  
