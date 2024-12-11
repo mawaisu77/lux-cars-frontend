@@ -66,13 +66,13 @@ const List = () => {
         </div>
       </div>
 
-      <div className="hidden md:grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] gap-4 py-2 px-4 font-semibold text-sm uppercase bg-gray-100">
-          <div>Image</div>
-          <div>Lot Info</div>
-          <div>Vehicle Info</div>
-          <div>Condition</div>
-          <div>Sale Info</div>
-          <div>Bids</div>
+      <div className="hidden md:grid grid-cols-6 gap-4 py-2 px-4 font-semibold text-sm text-left uppercase bg-gray-100">
+          <div >Image</div>
+          <div >Lot Info</div>
+          <div >Vehicle Info</div>
+          <div >Condition</div>
+          <div >Sale Info</div>
+          <div >Bids</div>
         </div>
 
       {error ? (

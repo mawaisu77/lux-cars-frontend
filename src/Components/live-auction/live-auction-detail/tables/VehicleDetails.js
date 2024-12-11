@@ -44,18 +44,18 @@ export default function VehicleDetails({vehicle}) {
           </div>
         )}
         {vehicle?.modification && (
-          <div className="mb-6 md:mb-[1.267vw] text-left">
+          <div className="mb-6 md:mb-[1vw] text-left">
             <h2 className="text-xl md:text-24 font-bold mb-2 md:mb-[0.4vw]">Modifications</h2>
             <p className="text-gray-700 text-sm md:text-18">{vehicle.modification}</p>
           </div>
         )}
   {/* Array of Strings */}
   {vehicle?.isCarForSale?.length > 0 && (
-        <div className="mt-4 md:mt-[1.667vw] bg-white  text-left ">
+        <div className="mt-4 md:mt-[1vw] bg-white text-left ">
           <h2 className="text-xl md:text-24 font-bold mb-2 md:mb-[0.4vw]">Cars for Sale</h2>
           <ul className="list-disc text-gray-700 pl-4 md:pl-[1.25vw]">
             {vehicle.isCarForSale.map((item, index) => (
-              <li key={index}>{item}</li>
+              <li key={index} className="md:text-18">{item} </li>
             ))}
           </ul>
         </div>

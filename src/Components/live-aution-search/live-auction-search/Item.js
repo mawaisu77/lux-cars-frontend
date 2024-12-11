@@ -18,9 +18,9 @@ const Item = ({ car }) => {
           </div>
 
           {/* Car Info Section */}
-          <div className="space-y-2">
+          <div className="space-y-2 ">
             <Link to={`/live-auction/${car.id}`}>
-              <h3 className="text-xl font-semibold hover:text-blue-600 hover:underline">
+              <h3 className="text-xl text-left font-semibold hover:text-blue-600 hover:underline">
                 {car.year} {car.make} {car.model}
               </h3>
             </Link>
@@ -65,7 +65,7 @@ const Item = ({ car }) => {
       </div>
 
       {/* Desktop View - Table Layout */}
-      <div className="hidden md:grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] gap-4 items-center py-4 shadow-md rounded-md hover:shadow-lg transition-all duration-300 px-2 bg-white">
+      <div className="hidden md:grid grid-cols-6 gap-4 items-center py-4 shadow-md rounded-md hover:shadow-lg transition-all duration-300 px-2 bg-white">
         {/* Image */}
         <div className="w-24 h-16 bg-gray-200 rounded-md flex items-center justify-center overflow-hidden">
           <img
@@ -76,32 +76,32 @@ const Item = ({ car }) => {
         </div>
         <div>
           <Link to={`/live-auction/${car.id}`}>
-            <h3 className="font-semibold hover:text-blue-600 hover:underline">
+            <h3 className="font-semibold text-left hover:text-blue-600 hover:underline">
               {car.year} {car.make} {car.model}
             </h3>
           </Link>
-          <p className="text-sm text-gray-500">VIN: {car.vin}</p>
+          <p className="text-sm text-left text-gray-500">VIN: {car.vin}</p>
         </div>
 
         {/* Vehicle Info */}
         <div>
-          <p className="text-sm">Odometer: {car.mileage} mi</p>
-          <p className="text-sm">Estimated Retail Value: ${car.minPrice}</p>
+          <p className="text-sm text-left">Odometer: {car.mileage} mi</p>
+          <p className="text-sm text-left">Estimated Retail Value: ${car.minPrice}</p>
         </div>
 
         {/* Condition */}
         <div>
-          <p className="text-sm">{car.significantFlaws}</p>
+          <p className="text-sm text-left">{car.significantFlaws}</p>
         </div>
 
         {/* Sale Info */}
         <div>
-          <p className="text-sm">{car.location}</p>
-          <p className="text-sm text-green-600 font-semibold">Live Now</p>
+          <p className="text-sm text-left">{car.location}</p>
+          <p className="text-sm text-left text-green-600 font-semibold">Live Now</p>
         </div>
 
         {/* Bids */}
-        <div className="text-right">
+        <div className="text-left">
           <p className="font-semibold text-lg">${car.currentBid}</p>
           <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-semibold mt-2 hover:bg-green-700 transition-colors">
             Join Auction
