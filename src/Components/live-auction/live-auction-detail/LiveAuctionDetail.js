@@ -17,7 +17,7 @@ const LiveAuctionDetail = () => {
   const [liveData, setLiveData] = useState({
     currentBid: null,
     noOfBids: null,
-    auction_date: null,  
+    auction_date: localCar?.car?.auction_date,  
   });
 
   useEffect(() => {
@@ -111,9 +111,15 @@ const LiveAuctionDetail = () => {
            
           )}
         </div>
-        <div className="max-w-[73vw] mx-auto">
-            <VehicleDetails />
-       </div>
+
+          {
+            !loading && !error && ( 
+            <div className="max-w-[73vw] mx-auto">
+            <VehicleDetails vehicle={localCar?.car} />
+            </div>
+            )
+          }
+       
       </div>
 
 
