@@ -87,9 +87,11 @@ const LiveAuctionDetail = () => {
               </button>
             </Link>
             /
+            <Link to="/live-auction-search">
             <button className="hover:text-white hover:scale-110 duration-150">
               Live Bidding
             </button>
+            </Link>
             /
             <button className="hover:text-white hover:scale-110 duration-150">
               {localCar?.car?.make} {localCar?.car?.model} {localCar?.car?.year}
@@ -104,10 +106,10 @@ const LiveAuctionDetail = () => {
           {error && <div>{error}</div>}
           {!loading && !error && localCar && (
             <> 
-              <div className=" col-span-7">
+              <div className="col-span-7">
                 <BidDetails localCar={localCar} liveData={liveData} members={members} memberCount={memberCount} />
               </div>
-              <div className="flex flex-col gap-[0.625vw] col-span-5 w-full">
+              <div className="flex flex-col gap-y-[1.625vw] col-span-5 w-full">
                 <PreviousBids id={id} liveData={liveData} />
                 <UpcomingBids />
               </div>  

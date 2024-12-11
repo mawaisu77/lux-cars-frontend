@@ -85,7 +85,7 @@ const UpcomingBids = () => {
   ];
 
   return (
-    <div className=" bg-white h-[21.615vw] shadow-md rounded-lg p-[1vw] w-full">
+    <div className=" bg-white h-[21.615vw] shadow-custom rounded-lg p-[1vw] w-full">
       <div className="flex justify-between items-center mb-[0.625vw]">
         <h2 className="text-16 font-semibold">Upcoming Bids</h2>
         <button className="text-gray-500 text-14 hover:text-gray-700">

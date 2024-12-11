@@ -11,7 +11,7 @@ export default function PreviousBids({id, liveData, members, memberCount}) {
 
 
   return (
-    <div className="p-[1vw] bg-white rounded-lg shadow-md h-[21.615vw]">
+    <div className="p-[1vw] bg-white rounded-lg shadow-custom h-[21.615vw]">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-[0.625vw]">
         <h2 className="text-16 font-semibold">Previous Bids</h2>
