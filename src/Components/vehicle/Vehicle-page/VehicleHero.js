@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import React, { useEffect, useMemo, useState } from "react";
-import Header from "../../header/Header/Header";
 import { Link, useParams } from "react-router-dom";
 // import logo from "../../../assets/Vehicle/Rectangle 767.png";
 import { IoDocumentTextOutline } from "react-icons/io5";
@@ -130,6 +129,7 @@ const VehicleHero = () => {
     }
   }, [placebidLoading, placeBidSuccess, placeBiderror]);
 
+  console.log("live data", liveData)
 
   return (
     <>
@@ -270,6 +270,7 @@ const VehicleHero = () => {
                               {carDetailData?.data?.model}
                             </p>
                           </div>
+
                         </div>
                         <div className="flex flex-col  lg:w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
                           <div className="flex flex-col bg-[#f8f8f8] px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
@@ -669,7 +670,7 @@ const VehicleHero = () => {
                             Lot:
                           </p>
                           <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                            {carDetailData?.data?.lot_id}
+                            {carDetailData?.data?.lot_id || "N/A"}
                           </p>
                         </div>
                         <div className="flex items-center">
@@ -677,7 +678,7 @@ const VehicleHero = () => {
                             VIN :
                           </p>
                           <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                            {carDetailData?.data?.vin}
+                            {carDetailData?.data?.vin || "N/A"}
                           </p>
                         </div>
                         <div className="flex items-center">
@@ -695,7 +696,15 @@ const VehicleHero = () => {
                             Model:
                           </p>
                           <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
-                            {carDetailData?.data?.model}
+                            {carDetailData?.data?.model || "N/A"}
+                          </p>
+                        </div>
+                        <div className="flex items-center">
+                          <p className="font-urbanist text-[#7a798a] text-sm lg:text-[0.85vw] ml-2">
+                            Current Bid from: {carDetailData?.data?.base_site || "N/A" }
+                          </p>
+                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
+                            {`$${carDetailData?.data?.current_bid || "N/A"}`}
                           </p>
                         </div>
                       </div>

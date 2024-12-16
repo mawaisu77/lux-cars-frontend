@@ -240,6 +240,9 @@ const UploadVehicle = () => {
     e.preventDefault();
     setMainLoading(true); // Start loading
 
+    console.log("Form Data Submitted:", formData);
+
+
     const newErrors = uploadCarValidation(formData);
     const dealerFormErrors = registerDealerValidations(formData);
     // if (Object.keys(newErrors).length <= 4) {
