@@ -259,8 +259,8 @@ function LoanApplication() {
         </div>
       </div>
 
-      <div className="w-[90vw] md:w-[55vw] lg:w-[42.708vw] mx-auto rounded-[2.083vw] my-[7.813vh] boxShadow shadow">
-        <div className="px-[14px] md:px-[3vw] lg:px-[3.8vw] py-[30px] md:py-[8.333vh] text-left">
+      <div className="pt-18  mx-auto w-[100vw] my-10  ">
+        <div className="px-[14px] max-w-[1000px] rounded-md shadow-[0px_4px_5px_6px_rgba(0,_0,_0,_0.1)] mx-auto md:px-[3vw] lg:px-[3.8vw] py-[30px] md:py-[8.333vh] text-left">
           <div>
             <h1 className="text-center md:text-left text-[36px] md:text-[1.854vw] font-semibold text-[#1F1F2C] mb-[30px] md:mb-[5.208vh]">
               Personal Information
