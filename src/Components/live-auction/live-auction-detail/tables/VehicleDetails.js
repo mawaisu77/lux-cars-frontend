@@ -10,27 +10,23 @@ export default function VehicleDetails({vehicle}) {
         <div className="grid w-full grid-cols-12 gap-6">
             <div className="bg-white col-span-6 rounded-lg md:rounded-[0.938vw] shadow-md p-6 md:p-[1.25vw]">
               <div className="space-y-3 md:space-y-[0.925vw]">
-                <DetailRow label="Lot" value={vehicle?.make || "N/A"} />
-                <DetailRow label="VIN" value={vehicle?.model || "N/A"} />
-                <DetailRow label="Year/Make/Model" value={vehicle?.year || "N/A"} />
-                <DetailRow label="Odometer" value={vehicle?.vin || "N/A"} />
-                <DetailRow label="Color" value={vehicle?.mileage || "N/A"} />
-                <DetailRow label="Engine Type" value={vehicle?.trasmission  || "N/A"} />
-                <DetailRow label="Condition" value={vehicle?.status || "N/A"} />
-                <DetailRow label="Transmission" value={vehicle?.zip || "N/A"} />
-                <DetailRow label="Fuel" value={vehicle?.minPrice} />
+                <DetailRow label="VIN" value={vehicle?.vin || "N/A"} />
+
+                <DetailRow label="Make/Model/Year" value={vehicle?.make + " " + vehicle?.model + " " + vehicle?.year} />
+                <DetailRow label="Odometer" value={vehicle?.mileage + " miles" || "N/A"} />
+                <DetailRow label="Status" value={vehicle?.status || "N/A"} />
+                <DetailRow label="Transmission" value={vehicle?.transmission || "N/A"} />
+                <DetailRow label="Title Status" value={vehicle?.titlesStatus || "N/A"} />
+                <DetailRow label="Zip Code" value={vehicle?.zipcode || "N/A"} />
               </div>
             </div>
             <div className="bg-white col-span-6 rounded-lg md:rounded-[0.938vw] shadow-md p-6 md:p-[1.25vw]">
               <div className="space-y-3 md:space-y-[0.925vw]">
-                <DetailRow label="Lot" value={vehicle?.currentBid || "N/A"} />
-                <DetailRow label="VIN" value={vehicle?.noOfBids || "N/A"} />
-                <DetailRow label="Year/Make/Model" value={vehicle?.carLocation || "N/A"} />
-                <DetailRow label="Odometer" value={vehicle?.carState || "N/A"} />
-                <DetailRow label="Color" value={vehicle?.carTitledAt || "N/A"} />
-                <DetailRow label="Engine Type" value={vehicle?.carTitledInfo  || "N/A"} />
-                <DetailRow label="Condition" value={vehicle?.titlesStatus || "N/A"} />
-                <DetailRow label="Transmission" value={vehicle?.referral || "N/A"} />
+                <DetailRow label="Car Location" value={vehicle?.carLocation || "N/A"} />
+                <DetailRow label="Car State" value={vehicle?.carState || "N/A"} />
+                <DetailRow label="Car Titled At" value={vehicle?.carTitledAt || "N/A"} />
+                <DetailRow label="Car Titled Info" value={vehicle?.carTitledInfo  || "N/A"} />
+                <DetailRow label="Auction Date" value={vehicle?.auction_date || "N/A"} />
               </div>
             </div>
         </div>

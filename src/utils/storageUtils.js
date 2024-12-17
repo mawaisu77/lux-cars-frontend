@@ -10,7 +10,10 @@ export const getUser = () => {
 };
 
 export const removeUser = () => {
+  // console.log("getUser 1", getUser())
   localStorage.removeItem(USER_KEY);
+  // console.log("getUser 2", getUser())
+
 };
 
 export const saveToken = (token) => {
