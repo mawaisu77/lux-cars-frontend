@@ -19,10 +19,11 @@ const ProtectedRoute = ({ children, allowedRoles = ['admin'] }) => {
 
 
     // If token is expired, remove it and redirect to login
-    if (storedToken && isTokenExpired(storedToken)) {
+    if (isTokenExpired(storedToken)) {
       removeToken();
       removeUser()
       dispatch({type:'LOGOUT'})
+      console.log('token expired')
       return <Navigate to="/login" state={{ from: location }} />;
     }
 
