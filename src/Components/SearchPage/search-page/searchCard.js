@@ -53,6 +53,8 @@ function Card({ card }) {
     );
   };
 
+  console.log("card 000-", card)
+
   return (
     <div className="flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
       <div className="flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  ">
@@ -149,9 +151,9 @@ function Card({ card }) {
               <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Millage: </span>
                 <span className="text-nowrap">
-                    {window.innerWidth >= 1024 && card.mileage?.length > 10   
-                    ? `${card?.mileage?.slice(0, 10)}...`
-                    : card?.mileage || "Not specified"}
+                    {window.innerWidth >= 1024 && card.odometer?.length > 10   
+                    ? `${card?.odometer?.slice(0, 10)}...`
+                    : card?.odometer || "Not specified"}
                 </span>
               </p>
               <p className="w-full flex gap-x-2">
@@ -163,11 +165,11 @@ function Card({ card }) {
                 </span>
               </p>
               <p className="w-full flex gap-x-2">
-                <span className="font-semibold">Engine Type: </span>
+                <span className="font-semibold">Engine: </span>
                 <span className="text-nowrap">
-                  {window.innerWidth >= 1024 && card?.engine_type?.length > 10
-                    ? `${card?.engine_type?.slice(0, 10)}...`
-                    : card?.engine_type || "Not specified"}
+                  {window.innerWidth >= 1024 && card?.engine?.length > 10
+                    ? `${card?.engine?.slice(0, 10)}...`
+                    : card?.engine || "Not specified"}
                 </span>
               </p>
               <p className="w-full flex gap-x-2">
