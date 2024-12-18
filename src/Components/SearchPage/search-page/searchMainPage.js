@@ -96,7 +96,66 @@ function SearchMainPage({
               {`${totalResults} Available Vehicles`}
             </h2>
           </div>
-          <div className="flex flex-col s
+          <div className="flex flex-col lg:flex-row   relative text-left text-sm lg:text-base">
+            
+            <div className="flex justify-between items-center">
+       
+              <div>
+                {showFilterMob ? (
+                  <button
+                    className="lg:hidden px-4 py-2  mt-[2vh]  flex justify-center items-center mx-auto border transition-all rounded-lg duration-300"
+                    onClick={handleFilters} 
+                  >
+                    Hide Filters
+                    <RiArrowDropDownLine
+                      size={20}
+                      className="ml-1 cursor-pointer rotate-180"
+                    />
+                  </button>
+                ) : (
+                  <button
+                    className="lg:hidden flex justify-center items-center mt-[2vh] px-4 py-2   border w-[150px] mx-auto rounded-lg hover:w-[160px] transition-all duration-300"
+                    onClick={handleFilters} // Correctly showing the filters
+                  >
+                    Show Filters
+                    <RiArrowDropDownLine
+                      size={20}
+                      className="ml-1 cursor-pointer"
+                    />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+        
+        {/* Conditionally render based on loading, error, or cards data */}
+        <div className="">
+          <div className="">
+            {cards.length > 0 && <SearchCard data={cards} />}
+          </div>
+
+          {!loading && !error && cards.length === 0 && (
+            <div className="flex flex-col items-center my-10">
+              <div>No vehicles found.</div>
+              <button
+                onClick={resetFilters}
+                className="p-2 bg-gray-500 w-1/4 hover:bg-gray-600 text-white rounded-lg mt-4"
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
+
+          {loading && (
+            <div className="flex justify-center items-center my-10">
+              <ClipLoader size={50} color={"#123abc"} loading={loading} />
+            </div>
+          )}
+
+          {error && (
             <div className="h-96 flex flex-col justify-center items-center gap-y-4">
               <div className="font-bold text-red-600 text-3xl">{error}</div>
               <Link to={"/"}>
