@@ -1209,6 +1209,7 @@ const Sidebar = () => {
                 </div>
               )}
             </div>
+            
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
               <div className="flex items-center justify-between cursor-pointer">
                 <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
@@ -1233,9 +1234,23 @@ const Sidebar = () => {
                   </svg>
                 )}
               </div>
-              <div className="flex gap-[1vw]">
+              <div className="flex gap-[0.5vw] w-full">
                 <Select
                   placeholder="From"
+                  styles={{
+                    indicatorSeparator: (base) => ({
+                      ...base,
+                      display: "none",
+                    }),
+                
+                      container: (base) => ({
+                        ...base,
+                        padding: "0px",
+                        margin: "0px",
+                        fontSize: "12px",
+                        
+                      }),
+                  }}
                   options={getFromYearOptions()}
                   value={
                     selectedFilters.year_from
@@ -1249,11 +1264,25 @@ const Sidebar = () => {
                     handleFilterChange("year_from", option ? option.value : "");
                   }}
                   isClearable
-                  className="text-[10px]"
-                  classNamePrefix="select"
+                  className="text-[10px] w-1/2"
+                  // classNamePrefix="select"
                 />
                 <Select
                   placeholder="To"
+                  styles={{
+                    indicatorSeparator: (base) => ({
+                      ...base,
+                      display: "none",
+                    }),
+                
+                      container: (base) => ({
+                        ...base,
+                        padding: "0px",
+                        margin: "0px",
+                        fontSize: "12px",
+                        
+                      }),
+                  }}
                   options={getToYearOptions()}
                   value={
                     selectedFilters.year_to
@@ -1267,7 +1296,7 @@ const Sidebar = () => {
                     handleFilterChange("year_to", option ? option.value : "");
                   }}
                   isClearable
-                  className="text-[10px]"
+                  className="text-[10px] w-1/2 "
                   classNamePrefix="select"
                 />
               </div>
@@ -1276,7 +1305,7 @@ const Sidebar = () => {
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
               <div className="flex flex-col gap-[1vw]">
                 <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
-                  Odometer{" "}
+                  Odometer
                   <span className="text-[10px] text-gray-500">(miles)</span>
                 </h1>
                 <Slider
