@@ -31,7 +31,7 @@ import {
 import TooltipInfo from "../../common/TooltipInfo";
 import { BsInfoCircle } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
-
+import Slider from "@mui/material/Slider";
 import {
   vehicleTypeAPIKey,
   vehicleTypeLabel,
@@ -75,7 +75,7 @@ import {
   transmissionAPIKey,
   transmissionOptions,
 } from "../../../utils/filtersData/transmissionOptions";
-import Select from 'react-select';
+import Select from "react-select";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -209,102 +209,85 @@ const Sidebar = () => {
     vehicle_type: initialVehicleTyoe || "",
     odometer_from: initialFromOdometer || "",
     odometer_to: initialToOdometer || "",
-    auction_date_from: auctionDateFromParam, 
-    auction_date_to: auctionDateToParam, 
+    auction_date_from: auctionDateFromParam,
+    auction_date_to: auctionDateToParam,
     document_old: initialDocumentOld,
     cyclinders: initialCyclinders,
     document: initialDocument,
     odobrand: initialOdobrand,
   });
-  
 
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const [filteredModels, setFilteredModels] = useState([]);
   const { carData } = useCarMakesModels();
 
-    // Add a debounce function
-    const debounce = (func, delay) => {
-      let timeoutId;
-      return (...args) => {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-          func(...args);
-        }, delay);
-      };
-    };
+  // Add these new states and functions
+  const currentYear = new Date().getFullYear();
+  const [yearOptions] = useState(() => {
+    const years = [];
+    for (let year = currentYear; year >= 1985; year--) {
+      years.push({ value: year.toString(), label: year.toString() });
+    }
+    return years;
+  });
 
-  
-    // Add these new states and functions
-    const currentYear = new Date().getFullYear();
-    const [yearOptions] = useState(() => {
-      const years = [];
-      for (let year = currentYear; year >= 1985; year--) {
-        years.push({ value: year.toString(), label: year.toString() });
-      }
-      return years;
-    });
-
-
-      // Function to get filtered "to year" options based on selected "from year"
+  // Function to get filtered "to year" options based on selected "from year"
   const getToYearOptions = () => {
     const fromYear = parseInt(selectedFilters.year_from) || 1985;
-    return yearOptions.filter(option => parseInt(option.value) >= fromYear);
+    return yearOptions.filter((option) => parseInt(option.value) >= fromYear);
   };
 
   // Function to get filtered "from year" options based on selected "to year"
   const getFromYearOptions = () => {
     const toYear = parseInt(selectedFilters.year_to) || currentYear;
-    return yearOptions.filter(option => parseInt(option.value) <= toYear);
+    return yearOptions.filter((option) => parseInt(option.value) <= toYear);
   };
-  
-    // Create a separate function for URL updates
-    const updateURL = (newFilters) => {
-      const currentScroll = window.scrollY;
-      setScrollPosition(currentScroll);
-  
-      const params = new URLSearchParams();
-      Object.keys(newFilters).forEach((key) => {
-        if (newFilters[key] && newFilters[key].length > 0) {
-          if (Array.isArray(newFilters[key])) {
-            newFilters[key].forEach((val) => {
-              params.append(key, val);
-            });
-          } else {
-            params.set(key, newFilters[key]);
-          }
-        }
-      });
-  
-      // Add auction dates if they exist
-      if (auctionDateFrom) params.set("auction_date_from", auctionDateFrom);
-      if (auctionDateTo) params.set("auction_date_to", auctionDateTo);
-  
-      // Use replace instead of push to prevent adding to browser history
-      navigate(
-        {
-          pathname: location.pathname,
-          search: params.toString(),
-        },
-        { replace: true }
-      );
 
-        // Restore scroll position after a short delay
+  // Create a separate function for URL updates
+  const updateURL = (newFilters) => {
+    const currentScroll = window.scrollY;
+    setScrollPosition(currentScroll);
+    console.log("new filetsr", newFilters);
+
+    const params = new URLSearchParams();
+    Object.keys(newFilters).forEach((key) => {
+      if (newFilters[key] && newFilters[key].length > 0) {
+        if (Array.isArray(newFilters[key])) {
+          newFilters[key].forEach((val) => {
+            params.append(key, val);
+          });
+        } else {
+          params.set(key, newFilters[key]);
+        }
+      }
+    });
+
+    // Add auction dates if they exist
+    if (auctionDateFrom) params.set("auction_date_from", auctionDateFrom);
+    if (auctionDateTo) params.set("auction_date_to", auctionDateTo);
+
+    // Use replace instead of push to prevent adding to browser history
+    navigate(
+      {
+        pathname: location.pathname,
+        search: params.toString(),
+      },
+      { replace: true }
+    );
+
+    // Restore scroll position after a short delay
     requestAnimationFrame(() => {
       window.scrollTo(0, currentScroll);
     });
-    };
+  };
 
-      // Add useEffect to handle scroll restoration
+  // Add useEffect to handle scroll restoration
   useEffect(() => {
     if (scrollPosition > 0) {
       window.scrollTo(0, scrollPosition);
     }
-  }, [location.search]);
-
-  // Debounced version of updateURL for numeric inputs
-  const debouncedUpdateURL = debounce(updateURL, 1000);
-
+  }, [location.search, scrollPosition]);
 
   useEffect(() => {
     if (selectedMake) {
@@ -360,7 +343,7 @@ const Sidebar = () => {
         year_to: initialToYear,
         odometer_from: initialFromOdometer,
         odometer_to: initialToOdometer,
-        auction_date_from: auctionDateFromParam, 
+        auction_date_from: auctionDateFromParam,
         auction_date_to: auctionDateToParam,
         document_old: initialDocumentOld,
         cyclinders: initialCyclinders,
@@ -386,45 +369,13 @@ const Sidebar = () => {
     initialSecondaryDamage,
     initialFromOdometer,
     initialToOdometer,
-    auctionDateFromParam, 
+    auctionDateFromParam,
     auctionDateToParam,
     initialDocumentOld,
     initialCyclinders,
     initialDocument,
     initialOdobrand,
   ]);
-
-  // Apply filters and update query parameters
-  const applyFilters = () => {
-    setAppliedFilters({
-      ...selectedFilters,
-      auction_date_from: auctionDateFrom,
-      auction_date_to: auctionDateTo,
-    });
-
-    const params = new URLSearchParams();
-
-    Object.keys(selectedFilters).forEach((key) => {
-      if (selectedFilters[key] && selectedFilters[key].length > 0) {
-        if (Array.isArray(selectedFilters[key])) {
-          selectedFilters[key].forEach((val) => {
-            params.append(key, val);
-          });
-        } else {
-          params.set(key, selectedFilters[key]);
-        }
-      }
-    });
-
-    // Add auction dates to the query parameters
-    if (auctionDateFrom) params.set("auction_date_from", auctionDateFrom);
-    if (auctionDateTo) params.set("auction_date_to", auctionDateTo);
-
-    navigate({
-      pathname: location.pathname,
-      search: params.toString(),
-    });
-  };
 
   const resetFilters = () => {
     setSelectedFilters({
@@ -535,19 +486,21 @@ const Sidebar = () => {
       filterCategory === "odometer_from" ||
       filterCategory === "odometer_to"
     ) {
+      console.log("filterValue filterCategory", filterValue, filterCategory);
       newFilters = {
         ...newFilters,
         [filterCategory]: filterValue,
       };
       // Update state immediately
       setSelectedFilters(newFilters);
-      setAppliedFilters({
-        ...newFilters,
-        auction_date_from: auctionDateFrom,
-        auction_date_to: auctionDateTo,
-      });
+      // setAppliedFilters({
+      //   ...newFilters,
+      //   auction_date_from: auctionDateFrom,
+      //   auction_date_to: auctionDateTo,
+      // });
       // Use debounced URL update for numeric inputs
-      debouncedUpdateURL(newFilters);
+      // debouncedUpdateURL(newFilters);
+      updateURL(newFilters);
       return;
     } else if (filterCategory === "vehicle_type") {
       newFilters = {
@@ -576,87 +529,85 @@ const Sidebar = () => {
     updateURL(newFilters);
   };
 
-
-// Modify the useEffect for resize handling
-useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth >= 1024) {
-      // For desktop screens (lg and above)
-      setShowFiltersMob(true); // Filters open by default
-    }
-    // Remove the automatic hiding for mobile screens
-  };
-
-  // Set the initial state based on the current window size
-  handleResize();
-
-  // Add an event listener to handle window resize
-  window.addEventListener("resize", handleResize);
-
-  // Cleanup the event listener on component unmount
-  return () => {
-    window.removeEventListener("resize", handleResize);
-  };
-}, []);
-
-
-// Update the useEffect that handles initial date detection
-useEffect(() => {
-  if (auctionDateFromParam && auctionDateToParam) {
-    const normalizeDate = (dateStr) => {
-      const date = new Date(dateStr);
-      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  // Modify the useEffect for resize handling
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        // For desktop screens (lg and above)
+        setShowFiltersMob(true); // Filters open by default
+      }
+      // Remove the automatic hiding for mobile screens
     };
 
-    const fromDate = normalizeDate(auctionDateFromParam);
-    const toDate = normalizeDate(auctionDateToParam);
+    // Set the initial state based on the current window size
+    handleResize();
 
-    setAuctionDateFrom(fromDate);
-    setAuctionDateTo(toDate);
+    // Add an event listener to handle window resize
+    window.addEventListener("resize", handleResize);
 
-    const today = new Date();
-    const normalizedToday = normalizeDate(today);
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-    // Get dates for comparison
-    const startOfWeek = new Date(today);
-    startOfWeek.setDate(today.getDate() - today.getDay());
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6);
+  // Update the useEffect that handles initial date detection
+  useEffect(() => {
+    if (auctionDateFromParam && auctionDateToParam) {
+      const normalizeDate = (dateStr) => {
+        const date = new Date(dateStr);
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      };
 
-    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      const fromDate = normalizeDate(auctionDateFromParam);
+      const toDate = normalizeDate(auctionDateToParam);
 
-    // Check which period matches
-    if (fromDate === normalizedToday && toDate === normalizedToday) {
-      setSelectedOption('today');
-      setCustomDatesVisible(false);
-    } else if (
-      fromDate === normalizeDate(startOfWeek) && 
-      toDate === normalizeDate(endOfWeek)
-    ) {
-      setSelectedOption('thisWeek');
-      setCustomDatesVisible(false);
-    } else if (
-      fromDate === normalizeDate(startOfMonth) && 
-      toDate === normalizeDate(endOfMonth)
-    ) {
-      setSelectedOption('thisMonth');
-      setCustomDatesVisible(false);
+      setAuctionDateFrom(fromDate);
+      setAuctionDateTo(toDate);
+
+      const today = new Date();
+      const normalizedToday = normalizeDate(today);
+
+      // Get dates for comparison
+      const startOfWeek = new Date(today);
+      startOfWeek.setDate(today.getDate() - today.getDay());
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+      // Check which period matches
+      if (fromDate === normalizedToday && toDate === normalizedToday) {
+        setSelectedOption("today");
+        setCustomDatesVisible(false);
+      } else if (
+        fromDate === normalizeDate(startOfWeek) &&
+        toDate === normalizeDate(endOfWeek)
+      ) {
+        setSelectedOption("thisWeek");
+        setCustomDatesVisible(false);
+      } else if (
+        fromDate === normalizeDate(startOfMonth) &&
+        toDate === normalizeDate(endOfMonth)
+      ) {
+        setSelectedOption("thisMonth");
+        setCustomDatesVisible(false);
+      } else {
+        setSelectedOption("custom");
+        setCustomDatesVisible(true);
+      }
     } else {
-      setSelectedOption('custom');
-      setCustomDatesVisible(true);
+      setAuctionDateFrom("");
+      setAuctionDateTo("");
+      setSelectedOption("");
+      setCustomDatesVisible(false);
     }
-  } else {
-    setAuctionDateFrom('');
-    setAuctionDateTo('');
-    setSelectedOption('');
-    setCustomDatesVisible(false);
-  }
-}, [auctionDateFromParam, auctionDateToParam]);
+  }, [auctionDateFromParam, auctionDateToParam]);
 
   // Function to toggle filters only on smaller screens
   const handleFilters = () => {
-      setShowFiltersMob(!showFilterMob);
+    setShowFiltersMob(!showFilterMob);
   };
 
   const filterDisplayNames = {
@@ -685,141 +636,143 @@ useEffect(() => {
     }));
   };
 
-
-
   const handleAuctionDateFilter = (option) => {
     // Stop if clicking the same option
-    if (selectedOption === option && option !== 'custom') {
+    if (selectedOption === option && option !== "custom") {
       return;
     }
-  
+
     setSelectedOption(option);
-    
+
     if (option === "custom") {
       setCustomDatesVisible(true);
       setAuctionDateFrom("");
       setAuctionDateTo("");
       return;
     }
-  
+
     const now = new Date();
     let fromDate, toDate;
-  
+
     // Helper function to format date consistently
     const formatDate = (date, isEndTime = false) => {
       const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const time = isEndTime ? '23:59:59' : '00:00:00';
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const time = isEndTime ? "23:59:59" : "00:00:00";
 
       return `${year}-${month}-${day}T${time}`;
     };
-  
+
     switch (option) {
       case "today":
         fromDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         toDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         break;
-  
+
       case "thisWeek":
         fromDate = new Date(now);
         fromDate.setDate(now.getDate() - now.getDay());
         fromDate.setHours(0, 0, 0, 0);
-        
+
         toDate = new Date(fromDate);
         toDate.setDate(fromDate.getDate() + 6);
         break;
-  
+
       case "thisMonth":
         fromDate = new Date(now.getFullYear(), now.getMonth(), 1);
         toDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
         break;
-  
+
       default:
         return;
     }
-  
+
     const formattedFromDate = formatDate(fromDate);
     const formattedToDate = formatDate(toDate, true);
-  
+
     setAuctionDateFrom(formattedFromDate);
     setAuctionDateTo(formattedToDate);
     setCustomDatesVisible(false);
-  
+
     // Update URL and filters
     const params = new URLSearchParams(location.search);
-    params.set('auction_date_from', formattedFromDate);
-    params.set('auction_date_to', formattedToDate);
-  
+    params.set("auction_date_from", formattedFromDate);
+    params.set("auction_date_to", formattedToDate);
+
     const newFilters = {
       ...selectedFilters,
       auction_date_from: formattedFromDate,
       auction_date_to: formattedToDate,
     };
-  
+
     setSelectedFilters(newFilters);
-    setAppliedFilters(prev => ({
+    setAppliedFilters((prev) => ({
       ...prev,
       auction_date_from: formattedFromDate,
       auction_date_to: formattedToDate,
     }));
-  
-    navigate({
-      pathname: location.pathname,
-      search: params.toString(),
-    }, { replace: true });
+
+    navigate(
+      {
+        pathname: location.pathname,
+        search: params.toString(),
+      },
+      { replace: true }
+    );
   };
-  
-  
+
   // Update handleCustomDateChange to use consistent date format
   const handleCustomDateChange = (type, value) => {
     const currentScroll = window.scrollY;
-    
+
     if (!value) {
-      if (type === 'from') {
+      if (type === "from") {
         setAuctionDateFrom("");
       } else {
         setAuctionDateTo("");
       }
       return;
     }
-  
- // Add time component to the date
- const formattedDate = type === 'from' 
- ? `${value}T00:00:00`
- : `${value}T23:59:59`;
 
-if (type === 'from') {
- setAuctionDateFrom(formattedDate);
-} else {
- setAuctionDateTo(formattedDate);
-}
-  
+    // Add time component to the date
+    const formattedDate =
+      type === "from" ? `${value}T00:00:00` : `${value}T23:59:59`;
+
+    if (type === "from") {
+      setAuctionDateFrom(formattedDate);
+    } else {
+      setAuctionDateTo(formattedDate);
+    }
+
     // Only update URL if both dates are set
-    if (type === 'from' ? auctionDateTo : auctionDateFrom) {
+    if (type === "from" ? auctionDateTo : auctionDateFrom) {
       const newFilters = {
         ...selectedFilters,
-        auction_date_from: type === 'from' ? formattedDate : auctionDateFrom,
-        auction_date_to: type === 'to' ? formattedDate : auctionDateTo,
+        auction_date_from: type === "from" ? formattedDate : auctionDateFrom,
+        auction_date_to: type === "to" ? formattedDate : auctionDateTo,
       };
-  
-      setAppliedFilters(prev => ({
+
+      setAppliedFilters((prev) => ({
         ...prev,
-        auction_date_from: type === 'from' ? formattedDate : auctionDateFrom,
-        auction_date_to: type === 'to' ? formattedDate : auctionDateTo,
+        auction_date_from: type === "from" ? formattedDate : auctionDateFrom,
+        auction_date_to: type === "to" ? formattedDate : auctionDateTo,
       }));
-  
+
       // Update URL
       const params = new URLSearchParams(location.search);
-      params.set('auction_date_from', newFilters.auction_date_from);
-      params.set('auction_date_to', newFilters.auction_date_to);
-  
-      navigate({
-        pathname: location.pathname,
-        search: params.toString(),
-      }, { replace: true });
+      params.set("auction_date_from", newFilters.auction_date_from);
+      params.set("auction_date_to", newFilters.auction_date_to);
+
+      navigate(
+        {
+          pathname: location.pathname,
+          search: params.toString(),
+        },
+        { replace: true }
+      );
     }
-  
+
     // Restore scroll position
     requestAnimationFrame(() => {
       window.scrollTo(0, currentScroll);
@@ -935,16 +888,16 @@ if (type === 'from') {
                             : "Auction Date To:"
                         } ${new Date(values).toLocaleDateString()}`
                       : Array.isArray(values)
-                      ? values
-                          .map(
-                            (id) =>
-                              dropdownData[key]?.find(
-                                ({ id: itemId }) => itemId === id
-                              )?.label
-                          )
-                          .join(", ")
-                      : dropdownData[key]?.find(({ id }) => id === values)
-                          ?.label || values}
+                        ? values
+                            .map(
+                              (id) =>
+                                dropdownData[key]?.find(
+                                  ({ id: itemId }) => itemId === id
+                                )?.label
+                            )
+                            .join(", ")
+                        : dropdownData[key]?.find(({ id }) => id === values)
+                            ?.label || values}
                   </span>
 
                   <IoClose
@@ -1072,8 +1025,8 @@ if (type === 'from') {
                                 dropdownKey === "make"
                                   ? selectedMake === id
                                   : dropdownKey === "model"
-                                  ? selectedModel === id
-                                  : selectedFilters[dropdownKey].includes(id)
+                                    ? selectedModel === id
+                                    : selectedFilters[dropdownKey].includes(id)
                               }
                             />
 
@@ -1173,7 +1126,6 @@ if (type === 'from') {
                       checked={selectedOption === "today"}
                       onChange={() => handleAuctionDateFilter("today")}
                       onClick={(e) => e.stopPropagation()}
-
                     />
                     <label className="ml-[0.5vw] text-[16px] text-left lg:text-[0.8vw] font-medium">
                       Today
@@ -1187,7 +1139,6 @@ if (type === 'from') {
                       checked={selectedOption === "thisWeek"}
                       onChange={() => handleAuctionDateFilter("thisWeek")}
                       onClick={(e) => e.stopPropagation()}
-
                     />
                     <label className="ml-[0.5vw] text-[16px] text-left lg:text-[0.8vw] font-medium">
                       This Week
@@ -1201,7 +1152,6 @@ if (type === 'from') {
                       checked={selectedOption === "thisMonth"}
                       onChange={() => handleAuctionDateFilter("thisMonth")}
                       onClick={(e) => e.stopPropagation()}
-
                     />
                     <label className="ml-[0.5vw] text-[16px] text-left lg:text-[0.8vw] font-medium">
                       This Month
@@ -1215,7 +1165,6 @@ if (type === 'from') {
                       checked={selectedOption === "custom"}
                       onChange={() => handleAuctionDateFilter("custom")}
                       onClick={(e) => e.stopPropagation()}
-
                     />
                     <label className="ml-[0.5vw] text-[16px] text-left lg:text-[0.8vw] font-medium">
                       Custom Dates
@@ -1230,22 +1179,30 @@ if (type === 'from') {
                           From:
                         </label>
                         <input
-              type="date"
-              value={auctionDateFrom ? auctionDateFrom.split('T')[0] : ''}
-              onChange={(e) => handleCustomDateChange('from', e.target.value)}
-              className="border border-gray-300 rounded-md p-1 text-[10px] focus:border-red-500 focus:outline-none"
-            />
+                          type="date"
+                          value={
+                            auctionDateFrom ? auctionDateFrom.split("T")[0] : ""
+                          }
+                          onChange={(e) =>
+                            handleCustomDateChange("from", e.target.value)
+                          }
+                          className="border border-gray-300 rounded-md p-1 text-[10px] focus:border-red-500 focus:outline-none"
+                        />
                       </div>
                       <div className="grid grid-cols-2 items-center w-full gap-x-2">
                         <label className="ml-[0.5vw] text-[16px] text-left lg:text-[1vw] font-medium">
                           To:
                         </label>
                         <input
-              type="date"
-              value={auctionDateTo ? auctionDateTo.split('T')[0] : ''}
-              onChange={(e) => handleCustomDateChange('to', e.target.value)}
-              className="border border-gray-300 rounded-md p-1 text-[10px] focus:border-red-500 focus:outline-none"
-            />
+                          type="date"
+                          value={
+                            auctionDateTo ? auctionDateTo.split("T")[0] : ""
+                          }
+                          onChange={(e) =>
+                            handleCustomDateChange("to", e.target.value)
+                          }
+                          className="border border-gray-300 rounded-md p-1 text-[10px] focus:border-red-500 focus:outline-none"
+                        />
                       </div>
                     </div>
                   )}
@@ -1253,102 +1210,146 @@ if (type === 'from') {
               )}
             </div>
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
-  <div className="flex items-center justify-between cursor-pointer">
-    <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
-      Year
-    </h1>
-    {/* Close Icon */}
-    {(selectedFilters.year_from || selectedFilters.year_to) && (
-      <svg
-        onClick={handleCloseYearFilter}
-        className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M6 18L18 6M6 6l12 12"
-        ></path>
-      </svg>
-    )}
-  </div>
-  <div className="flex flex-col gap-[1vw]">
-    <Select
-      placeholder="From Year"
-      options={getFromYearOptions()}
-      value={selectedFilters.year_from ? { 
-        value: selectedFilters.year_from, 
-        label: selectedFilters.year_from 
-      } : null}
-      onChange={(option) => {
-        handleFilterChange("year_from", option ? option.value : "");
-      }}
-      isClearable
-      className="text-sm"
-      classNamePrefix="select"
-    />
-    <Select
-      placeholder="To Year"
-      options={getToYearOptions()}
-      value={selectedFilters.year_to ? { 
-        value: selectedFilters.year_to, 
-        label: selectedFilters.year_to 
-      } : null}
-      onChange={(option) => {
-        handleFilterChange("year_to", option ? option.value : "");
-      }}
-      isClearable
-      className="text-sm"
-      classNamePrefix="select"
-    />
-  </div>
-</div>
-            <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
               <div className="flex items-center justify-between cursor-pointer">
                 <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
-                  Odometer
+                  Year
                 </h1>
+                {/* Close Icon */}
+                {(selectedFilters.year_from || selectedFilters.year_to) && (
+                  <svg
+                    onClick={handleCloseYearFilter}
+                    className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                )}
               </div>
               <div className="flex gap-[1vw]">
-                <input
-                  id="odometer_from"
-                  name="odometer_from"
-                  type="number"
-                  maxLength={4}
-                  min={0}
+                <Select
                   placeholder="From"
-                  className="form-input w-full px-2 border rounded-md py-1.5 text-xs"
-                  value={selectedFilters.odometer_from}
-                  onChange={(e) =>
-                    handleFilterChange("odometer_from", e.target.value)
+                  options={getFromYearOptions()}
+                  value={
+                    selectedFilters.year_from
+                      ? {
+                          value: selectedFilters.year_from,
+                          label: selectedFilters.year_from,
+                        }
+                      : null
                   }
+                  onChange={(option) => {
+                    handleFilterChange("year_from", option ? option.value : "");
+                  }}
+                  isClearable
+                  className="text-[10px]"
+                  classNamePrefix="select"
                 />
-                <input
-                  id="odometer_to"
-                  name="odometer_to"
-                  type="number"
-                  min={0}
+                <Select
                   placeholder="To"
-                  className="form-input w-full border px-2 rounded-md py-1.5 text-xs"
-                  value={selectedFilters.odometer_to}
-                  onChange={(e) =>
-                    handleFilterChange("odometer_to", e.target.value)
+                  options={getToYearOptions()}
+                  value={
+                    selectedFilters.year_to
+                      ? {
+                          value: selectedFilters.year_to,
+                          label: selectedFilters.year_to,
+                        }
+                      : null
                   }
+                  onChange={(option) => {
+                    handleFilterChange("year_to", option ? option.value : "");
+                  }}
+                  isClearable
+                  className="text-[10px]"
+                  classNamePrefix="select"
                 />
               </div>
             </div>
 
+            <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
+              <div className="flex flex-col gap-[1vw]">
+                <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
+                  Odometer{" "}
+                  <span className="text-[10px] text-gray-500">(miles)</span>
+                </h1>
+                <Slider
+                  value={[
+                    parseInt(selectedFilters.odometer_from) || 0, // Ensure this is a number
+                    parseInt(selectedFilters.odometer_to) || 100000, // Ensure this is a number
+                  ]}
+                  onChange={(e, newValue) => {
+                    console.log("newValue", newValue); // Debugging output
+                    // Update the state for odometer_from and odometer_to
+                    setSelectedFilters((prev) => ({
+                      ...prev,
+                      odometer_from: newValue[0].toString(), // Update odometer_from
+                      odometer_to: newValue[1].toString(), // Update odometer_to
+                    }));
+                    // Call updateURL to reflect changes in the URL
+                    updateURL({
+                      ...selectedFilters,
+                      odometer_from: newValue[0].toString(),
+                      odometer_to: newValue[1].toString(),
+                    });
+                  }}
+                  min={0}
+                  max={100000}
+                  valueLabelDisplay="auto"
+                  className="w-full"
+                  valueLabelFormat={(value) => `${value}`} // Optional: format the label
+                />
+
+                {/* Input fields for odometer values */}
+                <div className="flex gap-[1vw]">
+                  <input
+                    type="number"
+                    value={selectedFilters.odometer_from || ""}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setSelectedFilters((prev) => ({
+                        ...prev,
+                        odometer_from: value,
+                      }));
+                      // Update the slider value
+                      updateURL({
+                        ...selectedFilters,
+                        odometer_from: value,
+                        odometer_to: selectedFilters.odometer_to,
+                      });
+                    }}
+                    className="border w-1/2 border-gray-300 rounded-md p-1 text-sm focus:border-red-500 focus:outline-none"
+                    placeholder="From"
+                  />
+                  <input
+                    type="number"
+                    value={selectedFilters.odometer_to || ""}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setSelectedFilters((prev) => ({
+                        ...prev,
+                        odometer_to: value,
+                      }));
+                      // Update the slider value
+                      updateURL({
+                        ...selectedFilters,
+                        odometer_from: selectedFilters.odometer_from,
+                        odometer_to: value,
+                      });
+                    }}
+                    className="border w-1/2 border-gray-300 rounded-md p-1 text-sm focus:border-red-500 focus:outline-none"
+                    placeholder="To"
+                  />
+                </div>
+              </div>
+            </div>
             <div className="flex text-xs flex-col lg:flex-row justify-center items-center my-5 gap-y-2 gap-x-1.5 lg:gap-y-4">
-              <button
-                onClick={applyFilters}
-                className="px-1 py-2 bg-[#CA0000] w-full md:w-1/2 hover:bg-[#b30f0f] text-white rounded-lg"
-              >
-                Apply Filters
-              </button>
               <button
                 onClick={resetFilters}
                 className="px-2 py-2 bg-gray-500 w-full md:w-1/2 hover:bg-gray-600 text-white rounded-lg"

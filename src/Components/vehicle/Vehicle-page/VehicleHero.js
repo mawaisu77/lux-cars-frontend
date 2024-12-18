@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // import logo from "../../../assets/Vehicle/Rectangle 767.png";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import { BsDownload } from "react-icons/bs";
+import { BsDownload, BsInfoCircle } from "react-icons/bs";
 import { PiUsersFill } from "react-icons/pi";
 import { CgFileDocument } from "react-icons/cg";
 import { TiLockClosed } from "react-icons/ti";
@@ -25,11 +25,15 @@ import BidHistory from "./BidHistory";
 import CarReportViewer from "./Report";
 import Pusher from "pusher-js";
 import ErrorComponent from "./ErrorPage";
+import TooltipGlobal from "../../live-auction/live-auction-detail/ui/tooltip/TooltipGlobal";
+import TooltipInfo from "../../common/TooltipInfo";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
   const [shouldRefetch, setShouldRefetch] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const { user } = useAuthContext();
+
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
@@ -43,6 +47,11 @@ const VehicleHero = () => {
     currentBid: null,
     noOfBids: null,
   });
+
+  const currentBidValue = (carDetailData?.data?.currentBid || 0) > (carDetailData?.data?.current_bid || 0)
+  ? carDetailData?.data?.currentBid
+  : carDetailData?.data?.current_bid || 0;
+
 
   useEffect(() => {
     // Initialize Pusher
@@ -70,7 +79,11 @@ const VehicleHero = () => {
   }, []);
 
   const handlePlaceBid = () => {
-    document.getElementById("my_modal_2").showModal();
+    if (!user) {
+      document.getElementById("sign_in_modal").showModal(); // Show sign-in modal if not authenticated
+    } else {
+      document.getElementById("my_modal_2").showModal(); 
+    }
   };
 
   const handleCloseModal2 = () => {
@@ -101,10 +114,10 @@ const VehicleHero = () => {
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
   useEffect(() => {
-    if (carDetailData?.data?.currentBid) {
-      setPlaceBidAmount(carDetailData?.data?.currentBid);
+    if (currentBidValue) {
+      setPlaceBidAmount(currentBidValue);
     }
-  }, [carDetailData?.data?.currentBid]);
+  }, [currentBidValue]);
 
   useEffect(() => {
     fetchCarDetail();
@@ -129,7 +142,6 @@ const VehicleHero = () => {
     }
   }, [placebidLoading, placeBidSuccess, placeBiderror]);
 
-  console.log("live data", liveData)
 
   return (
     <>
@@ -606,6 +618,8 @@ const VehicleHero = () => {
                   </div>
                 </div>
 
+
+{/* web view */}
                 <div className=" hidden lg:block  w-full lg:w-[33vw]  ">
                   <div>
                     <div className="flex justify-between lg:mb-[3vh]">
@@ -699,14 +713,23 @@ const VehicleHero = () => {
                             {carDetailData?.data?.model || "N/A"}
                           </p>
                         </div>
+                        {/* estimated cost */}
                         <div className="flex items-center">
+                          <p className="font-urbanist text-[#7a798a] text-sm lg:text-[0.85vw] ml-2">
+                            Estimated Cost:
+                          </p>
+                          <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
+                            {`$${carDetailData?.data?.cost_priced || "N/A"}`}
+                          </p>
+                        </div>
+                        {/* <div className="flex items-center">
                           <p className="font-urbanist text-[#7a798a] text-sm lg:text-[0.85vw] ml-2">
                             Current Bid from: {carDetailData?.data?.base_site || "N/A" }
                           </p>
                           <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
                             {`$${carDetailData?.data?.current_bid || "N/A"}`}
                           </p>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="flex flex-col  lg:w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
                         <div className="flex flex-col bg-[#f8f8f8] px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
@@ -719,7 +742,7 @@ const VehicleHero = () => {
                               $
                               {liveData.currentBid
                                 ? liveData.currentBid
-                                : carDetailData?.data?.currentBid}
+                                : currentBidValue}
                             </p>
                           </div>
                           <div className="flex items-center">
@@ -770,17 +793,17 @@ const VehicleHero = () => {
                       value={
                         placeBidAmount
                           ? placeBidAmount
-                          : carDetailData?.data?.currentBid
+                          : currentBidValue
                       }
                       onValueChange={(value) => setPlaceBidAmount(value)}
                     />
                   </div>
 
                   <button
-                    onClick={() =>
-                      document.getElementById("my_modal_2").showModal()
-                    }
-                    className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
+                    onClick={handlePlaceBid}
+                    className={`flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full ${placeBidAmount <= currentBidValue ? "bg-gray-200 cursor-not-allowed" : ""}`}
+                    disabled={placeBidAmount <= currentBidValue} 
+
                   >
                     {placebidLoading ? (
                       <ClipLoader color="#ffffff" size={20} />
@@ -790,8 +813,18 @@ const VehicleHero = () => {
                         <span className="text-md lg:text-[1.1vw]">
                           PlACE MAX BID
                         </span>
+                        
+                      
                       </>
                     )}
+                  {placeBidAmount <= currentBidValue && (
+                    <TooltipInfo content="please place higher than current bid">
+                    <BsInfoCircle
+                      size={15}
+                      className="hover:text-blue-800 duration-200"
+                    />
+                  </TooltipInfo>
+                  )}
                   </button>
 
                   <div className="">
@@ -896,6 +929,27 @@ const VehicleHero = () => {
             >
               Cancel
             </button>
+          </div>
+        </div>
+      </dialog>
+      <dialog id="sign_in_modal" className="modal">
+        <div className="modal-box dark:bg-white">
+          <h3 className="font-bold text-lg">Sign In Required</h3>
+          <p className="py-4">
+            Please sign in to place a bid on this vehicle.
+          </p>
+          <div className="flex gap-x-4 justify-center items-center">
+            <button
+              className="btn text-red-600 dark:bg-white"
+              onClick={() => document.getElementById("sign_in_modal").close()}
+            >
+              Close
+            </button>
+            <Link to="/login">
+              <button className="btn text-green-600 dark:bg-white">
+                Sign In
+              </button>
+            </Link>
           </div>
         </div>
       </dialog>
