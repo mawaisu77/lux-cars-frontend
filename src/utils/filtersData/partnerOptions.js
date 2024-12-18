@@ -7,7 +7,7 @@ const partnerOptions = [
   const partnerAPIKey = "site"; 
   
   // Label
-  const partnerLabel = "Partner"; 
+  const partnerLabel = "Auction Type"; 
   
   export { partnerOptions, partnerAPIKey, partnerLabel };
   

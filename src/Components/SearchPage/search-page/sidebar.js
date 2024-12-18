@@ -69,6 +69,7 @@ import {
 } from "../../../utils/filtersData/driveOptions";
 import {
   statusAPIKey,
+  statusLabel,
   statusOptions,
 } from "../../../utils/filtersData/statusOptions";
 import {
@@ -621,6 +622,7 @@ const Sidebar = () => {
     [odoBrandAPIKey]: odoBrandLabel,
     [partnerAPIKey]: partnerLabel,
     [driveAPIKey]: driveLabel,
+    [statusAPIKey]: statusLabel,
   };
 
   // Function to update search terms for a specific dropdown filter
@@ -1037,7 +1039,7 @@ const Sidebar = () => {
                               {label}
                             </label>
 
-                            {dropdownKey === "color" ? (
+                            {dropdownKey === "color" || dropdownKey === "status" ? (
                               <div className=" self-end right-0 absolute top-0">
                                 <div style={getColorStyle(hex)} className=" " />
                               </div>
@@ -1242,6 +1244,10 @@ const Sidebar = () => {
                       ...base,
                       display: "none",
                     }),
+                    clearIndicator: (base) => ({
+                      ...base,
+                      display: "none",
+                    }),
                 
                       container: (base) => ({
                         ...base,
@@ -1282,6 +1288,10 @@ const Sidebar = () => {
                         fontSize: "12px",
                         
                       }),
+                      clearIndicator: (base) => ({
+                        ...base,
+                        display: "none",
+                      }),
                   }}
                   options={getToYearOptions()}
                   value={
@@ -1303,10 +1313,10 @@ const Sidebar = () => {
             </div>
 
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
-              <div className="flex flex-col gap-[1vw]">
-                <h1 className="text-[18px] lg:text-[1.1vw] text-left font-bold mb-[0.729vw]">
-                  Odometer
-                  <span className="text-[10px] text-gray-500">(miles)</span>
+              <div className="flex flex-col gap-[0.5vw]">
+                <h1 className="text-[18px] space-x-2 lg:text-[1.1vw] text-left font-bold ">
+                  Odometer 
+                  <span className="text-[10px] text-gray-500"> (miles)</span>
                 </h1>
                 <Slider
                   value={[
