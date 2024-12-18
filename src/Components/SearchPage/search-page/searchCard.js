@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useTimer from "../../../hooks/useTimer";
 import { Link } from "react-router-dom";
-import { BsFire } from "react-icons/bs";
+import { BsFire, BsHeart, BsHeartFill } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,6 +10,11 @@ import "swiper/css";
 
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
+import useSaveCar from "../../../hooks/useSaveCar";
+import useDeleteSaveCar from "../../../hooks/useDeleteSaveCar";
+import { useSavedCars } from "../../../context/SavedCarIdsContext";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import LoginModal from "../../modals/LoginModal";
 
 function SearchCard({ data }) {
   return (
@@ -23,6 +28,20 @@ function SearchCard({ data }) {
 function Card({ card }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const { user } = useAuthContext();
+  const { handleSaveCar } = useSaveCar();
+  const { deleteSavedCar } = useDeleteSaveCar();
+  const { savedIds, loading, error, refetchSavedIds } = useSavedCars();
+  const [isCarSaved, setIsCarSaved] = useState(false);
+
+  
+  // Set initial saved state on mount or when savedIds change
+  useEffect(() => {
+    setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(card?.lot_id)));
+  }, [savedIds, card?.lot_id]);
+
+
   const targetTime = useMemo(
     () => (card?.auction_date ? new Date(card?.auction_date) : null),
     [card?.auction_date]
@@ -31,6 +50,7 @@ function Card({ card }) {
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
+    
   // Open modal with selected image
   const openModal = (index) => {
     setCurrentImageIndex(index);
@@ -53,11 +73,65 @@ function Card({ card }) {
     );
   };
 
-  console.log("card 000-", card)
+  const handleSaveClick = (lot_id) => {
+    // Convert lot_id to string
+    const stringLotId = String(lot_id);
 
+    if (!user) {  
+      setLoginModalOpen(true);
+      return;
+    }
+  
+    if (isCarSaved) {
+      // Optimistically update UI to unsave
+      setIsCarSaved(false);
+  
+      // Perform the unsave operation in the background with string lot_id
+      deleteSavedCar(stringLotId)
+        .then(() => {
+          refetchSavedIds(); 
+          alert("Car unsaved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(true);
+          alert("Failed to unsave car. Please try again.");
+        });
+    } else {
+      setIsCarSaved(true);
+
+      handleSaveCar(stringLotId)
+        .then(() => {
+          refetchSavedIds(); 
+          alert("Car saved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(false);
+          alert("Failed to save car. Please try again.");
+        });
+    }
+  };
+  const closeLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+  
   return (
     <div className="flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
       <div className="flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  ">
+      {isCarSaved ? (
+              <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
+                <BsHeartFill
+                  onClick={() => handleSaveClick(card.lot_id)}
+                  className=" cursor-pointer text-red-600"
+                />
+              </div>
+            ) : (
+              <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.3vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
+                <BsHeart
+                  onClick={() => handleSaveClick(card.lot_id)}
+                  className=" cursor-pointer text-white hover:text-red-600"
+                />
+              </div>
+            )}
         <Swiper
           className="relative w-full lg:w-[14vw] md:h-[250px] lg:h-[180px] mx-auto rounded-md "
           autoplay={{
@@ -229,6 +303,10 @@ function Card({ card }) {
           </div>
         </div>
       </div>
+      <LoginModal
+        isOpen={isLoginModalOpen && !user} 
+        onClose={closeLoginModal} 
+      />
     </div>
   );
 }

@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
-import { BsFire, BsHeart, BsHeartFill } from "react-icons/bs";
+import {  BsFire, BsHeart, BsHeartFill } from "react-icons/bs";
+import { RxCopy } from "react-icons/rx";
+
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa";
 import { useState } from "react";
@@ -24,12 +26,13 @@ import "./swiperCard.css";
 import SwiperCore from "swiper";
 import useDeleteSaveCar from "../../hooks/useDeleteSaveCar";
 import { useSavedCars } from "../../context/SavedCarIdsContext";
+import { toast } from "react-toastify";
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 const CarCard = ({ card, isBuy = false }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const { handleSaveCar } = useSaveCar();
@@ -241,9 +244,18 @@ const CarCard = ({ card, isBuy = false }) => {
                       ”
                     </div>
                   </Link>
-                  <div className="flex gap-x-[0.8vw] pt-[2vh] text-[12px] lg:text-14">
+                  <div className="flex gap-x-[0.8vw] pt-[2vh] text-[12px] lg:text-14 items-center">
                     <p className="py-[0.1vh]">Lot:</p>
+                    <div className="flex gap-x-[0.4vw] items-center">
                     <p className="py-[0.1vh]">{card.lot_id}</p>
+                    <RxCopy
+                        className="cursor-pointer py-[0.1vh] text-[14px] text-gray-600 hover:text-gray-800" 
+                        onClick={() => {
+                          navigator.clipboard.writeText(card.lot_id);
+                          toast.success("Copied to clipboard!");
+                        }} 
+                      />
+                      </div>
                   </div>
                   <div className="flex gap-x-[0.8vw] text-[12px] lg:text-14">
                     <p className="py-[0.1vh]">Status:</p>

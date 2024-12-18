@@ -226,7 +226,7 @@ const Dropdown = ({ bidAmount, data }) => {
 
 
   return (
-    <div className="relative w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
+    <div className="relative bg-white w-full mx-auto mt-[5.4vh] font-urbanist shadow-lg rounded-[0.5vw] p-[1.5vw]">
       <h2 className="text-sm lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
         Calculations (testing...)
       </h2>
@@ -275,7 +275,7 @@ const Dropdown = ({ bidAmount, data }) => {
         />
       </div>
 
-      <div className="mt-[3.2vh] p-[1.5vw]   rounded-[0.5vw] shadow-xl leading-[4vh] border border-gray-200">
+      <div className="mt-[3.2vh] p-[1.5vw]  rounded-[0.5vw] shadow-sm leading-[4vh] border border-gray-200">
         <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh]">
           Fees & Calculations
         </h3>
