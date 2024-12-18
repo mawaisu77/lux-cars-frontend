@@ -157,8 +157,8 @@ const Sidebar = () => {
     () => queryParams.getAll("odobrand") || [],
     [queryParams]
   );
-  const initialFromOdometer = queryParams.get("odometer_from") || "";
-  const initialToOdometer = queryParams.get("odometer_to") || "";
+  const initialFromOdometer = queryParams.get("odometer_min") || "";
+  const initialToOdometer = queryParams.get("odometer_max") || "";
   // Extract auction date filters
   const auctionDateFromParam = queryParams.get("auction_date_from") || "";
   const auctionDateToParam = queryParams.get("auction_date_to") || "";
@@ -181,8 +181,8 @@ const Sidebar = () => {
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
     vehicle_type: initialVehicleTyoe || "",
-    odometer_from: initialFromOdometer || "",
-    odometer_to: initialToOdometer || "",
+    odometer_min: initialFromOdometer || "",
+    odometer_max: initialToOdometer || "",
     auction_date_from: auctionDateFromParam, // Include auction date filters
     auction_date_to: auctionDateToParam, // Include auction date filters
     document_old: initialDocumentOld,
@@ -207,8 +207,8 @@ const Sidebar = () => {
     year_from: initialFromYear || "",
     year_to: initialToYear || "",
     vehicle_type: initialVehicleTyoe || "",
-    odometer_from: initialFromOdometer || "",
-    odometer_to: initialToOdometer || "",
+    odometer_min: initialFromOdometer || "",
+    odometer_max: initialToOdometer || "",
     auction_date_from: auctionDateFromParam,
     auction_date_to: auctionDateToParam,
     document_old: initialDocumentOld,
@@ -341,8 +341,8 @@ const Sidebar = () => {
         damage_sec: initialSecondaryDamage,
         year_from: initialFromYear,
         year_to: initialToYear,
-        odometer_from: initialFromOdometer,
-        odometer_to: initialToOdometer,
+        odometer_min: initialFromOdometer,
+        odometer_max: initialToOdometer,
         auction_date_from: auctionDateFromParam,
         auction_date_to: auctionDateToParam,
         document_old: initialDocumentOld,
@@ -394,8 +394,8 @@ const Sidebar = () => {
       damage_sec: [],
       year_from: "",
       year_to: "",
-      odometer_from: "",
-      odometer_to: "",
+      odometer_min: "",
+      odometer_max: "",  
       document_old: [],
       odobrand: [],
       initialCyclinders: [],
@@ -483,8 +483,8 @@ const Sidebar = () => {
     } else if (
       filterCategory === "year_from" ||
       filterCategory === "year_to" ||
-      filterCategory === "odometer_from" ||
-      filterCategory === "odometer_to"
+      filterCategory === "odometer_min" ||
+      filterCategory === "odometer_max"
     ) {
       console.log("filterValue filterCategory", filterValue, filterCategory);
       newFilters = {
@@ -1281,22 +1281,22 @@ const Sidebar = () => {
                 </h1>
                 <Slider
                   value={[
-                    parseInt(selectedFilters.odometer_from) || 0, // Ensure this is a number
-                    parseInt(selectedFilters.odometer_to) || 100000, // Ensure this is a number
+                    parseInt(selectedFilters.odometer_min) || 0, // Ensure this is a number
+                    parseInt(selectedFilters.odometer_max) || 100000, // Ensure this is a number
                   ]}
                   onChange={(e, newValue) => {
                     console.log("newValue", newValue); // Debugging output
                     // Update the state for odometer_from and odometer_to
                     setSelectedFilters((prev) => ({
                       ...prev,
-                      odometer_from: newValue[0].toString(), // Update odometer_from
-                      odometer_to: newValue[1].toString(), // Update odometer_to
+                      odometer_min: newValue[0].toString(), // Update odometer_from
+                      odometer_max: newValue[1].toString(), // Update odometer_to
                     }));
                     // Call updateURL to reflect changes in the URL
                     updateURL({
                       ...selectedFilters,
-                      odometer_from: newValue[0].toString(),
-                      odometer_to: newValue[1].toString(),
+                      odometer_min: newValue[0].toString(),
+                      odometer_max: newValue[1].toString(),
                     });
                   }}
                   min={0}
@@ -1310,18 +1310,18 @@ const Sidebar = () => {
                 <div className="flex gap-[1vw]">
                   <input
                     type="number"
-                    value={selectedFilters.odometer_from || ""}
+                    value={selectedFilters.odometer_min || ""}
                     onChange={(e) => {
                       const value = e.target.value;
                       setSelectedFilters((prev) => ({
                         ...prev,
-                        odometer_from: value,
+                        odometer_min: value,
                       }));
                       // Update the slider value
                       updateURL({
                         ...selectedFilters,
-                        odometer_from: value,
-                        odometer_to: selectedFilters.odometer_to,
+                        odometer_min: value,
+                        odometer_max: selectedFilters.odometer_max,
                       });
                     }}
                     className="border w-1/2 border-gray-300 rounded-md p-1 text-sm focus:border-red-500 focus:outline-none"
@@ -1329,18 +1329,18 @@ const Sidebar = () => {
                   />
                   <input
                     type="number"
-                    value={selectedFilters.odometer_to || ""}
+                    value={selectedFilters.odometer_max || ""}
                     onChange={(e) => {
                       const value = e.target.value;
                       setSelectedFilters((prev) => ({
                         ...prev,
-                        odometer_to: value,
+                        odometer_max: value,
                       }));
                       // Update the slider value
                       updateURL({
                         ...selectedFilters,
-                        odometer_from: selectedFilters.odometer_from,
-                        odometer_to: value,
+                        odometer_min: selectedFilters.odometer_min,
+                        odometer_max: value,
                       });
                     }}
                     className="border w-1/2 border-gray-300 rounded-md p-1 text-sm focus:border-red-500 focus:outline-none"
