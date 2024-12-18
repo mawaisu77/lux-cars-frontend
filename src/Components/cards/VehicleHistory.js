@@ -1,9 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import { ClipLoader } from "react-spinners";
-import CarCard from "./CarCard";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import useVehicleHistory from "../../hooks/useVehicleHistory";
 import HistoryCard from "./historyCard";
 
@@ -25,7 +21,7 @@ const VehicleHistory = React.memo(({ carData }) => {
         </div>
       ) : (
         <div
-          className="max-w-[85vw] sm:max-w-[73.229vw] mx-auto"
+          className="max-w-[85vw] bg-white sm:max-w-[73.229vw] mx-auto"
           id="startBidding"
         >
           <div className="flex justify-center items-center ">

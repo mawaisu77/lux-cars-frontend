@@ -3,7 +3,7 @@ import { BsInfoCircle } from 'react-icons/bs';
 import TooltipInfo from '../../common/TooltipInfo';
 
 const TimeLeftCounter = ({ days, hours, minutes, seconds }) => (
-  <div className="bg-[#f8f8f8] p-2 mt-2 rounded-lg">
+  <div className="bg-white p-2 mt-2 rounded-lg">
     <div className='flex gap-x-2 justify-center items-center '>
       <span className="text-md lg:text-[1vw] text-center font-bold">
       Time Left
