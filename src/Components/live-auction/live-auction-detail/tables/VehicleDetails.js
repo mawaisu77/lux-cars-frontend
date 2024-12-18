@@ -1,7 +1,6 @@
 export default function VehicleDetails({vehicle}) {
 
 
-  console.log("1111111111111111",vehicle)
     return (
       <div className="max-w-[73.229vw] mx-auto px-4 py-8">
         <h1 className="text-2xl md:text-30 bg-gray-100 p-2 rounded-lg font-bold text-center mb-8 md:mb-[0.5vw]">Vehicle Details</h1>

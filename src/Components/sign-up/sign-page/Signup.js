@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ClipLoader } from 'react-spinners'; // Optional spinner library
 import { showToast } from "../../../utils/Toast";
+import BenefitsSection from "./BenefitsSection";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false); 
@@ -166,11 +167,12 @@ const Signup = () => {
           </button>
         </form>
         <div className="text-[14px] lg:text-[0.7vw] font-urbanist mt-[5vh]">
-          Already have an account?{" "}
+          Already have an account?
           <Link to="/login">
             <span className="text-[#ca0000] cursor-pointer">Sign in</span>
           </Link>
         </div>
+        <BenefitsSection />
       </div>
     </>
   );

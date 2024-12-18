@@ -26,15 +26,14 @@ function SearchMainPage({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const initialFetchDone = useRef(false);
-
   const apiEndpoint =  localStorage.getItem("apiEndpoint") || "cars/get-all-cars/testing"
 
 
 
   useEffect(() => {
-    setPage(1); // Reset to first page
-    setCards([]); // Clear previous cards
-    fetchCards(1); // Fetch for the first page only once
+    setPage(1); 
+    setCards([]); 
+    fetchCards(1); 
   }, [triggerFetch]);
 
   useEffect(() => {
