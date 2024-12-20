@@ -15,6 +15,9 @@ import useDeleteSaveCar from "../../../hooks/useDeleteSaveCar";
 import { useSavedCars } from "../../../context/SavedCarIdsContext";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import LoginModal from "../../modals/LoginModal";
+import { RxCopy } from "react-icons/rx";
+import { toast } from "react-toastify";
+import { statusOptions } from "../../../utils/filtersData/statusOptions";
 
 function SearchCard({ data }) {
   return (
@@ -113,19 +116,21 @@ function Card({ card }) {
   const closeLoginModal = () => {
     setLoginModalOpen(false);
   };
+
+  const currentStatus = statusOptions.find(option => option.id === card?.status);
   
   return (
     <div className="flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
-      <div className="flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  ">
+      <div className=" flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  ">
       {isCarSaved ? (
-              <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
+              <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
                 <BsHeartFill
                   onClick={() => handleSaveClick(card.lot_id)}
                   className=" cursor-pointer text-red-600"
                 />
               </div>
             ) : (
-              <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.3vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
+              <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
                 <BsHeart
                   onClick={() => handleSaveClick(card.lot_id)}
                   className=" cursor-pointer text-white hover:text-red-600"
@@ -133,7 +138,7 @@ function Card({ card }) {
               </div>
             )}
         <Swiper
-          className="relative w-full lg:w-[14vw] md:h-[250px] lg:h-[180px] mx-auto rounded-md "
+          className="relative w-full lg:w-[14vw] md:h-[250px] lg:h-[9vw] mx-auto rounded-md "
           autoplay={{
             delay: 2000,
             disableOnInteraction: false,
@@ -197,26 +202,39 @@ function Card({ card }) {
                   ? `${card?.vin?.slice(0, 10)}...`
                   : card?.vin}
               </span>
+              <RxCopy
+                 className="cursor-pointer py-[0.1vh] text-[14px] text-gray-600 hover:text-gray-800" 
+                 onClick={() => {
+                   navigator.clipboard.writeText(card?.vin);
+                   toast.success("Copied to clipboard!");
+                 }} 
+               />
+              
               </p>
               <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Lot: </span>
                 <span>
                   {card?.lot_id || "Not specified"}
                 </span>
+                <RxCopy
+                 className="cursor-pointer py-[0.1vh] text-[14px] text-gray-600 hover:text-gray-800" 
+                 onClick={() => {
+                   navigator.clipboard.writeText(card?.lot_id);
+                   toast.success("Copied to clipboard!");
+                 }} 
+               />
               </p>
               <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Status: </span>
-                <span className="text-nowrap">
-                  {window.innerWidth >= 1024 && card?.status?.length > 10
-                    ? `${card?.status?.slice(0, 10)}...`
-                    : card?.status}
+                <span className="text-nowrap font-bold" style={{ color: currentStatus?.hex }}>
+                  {card?.status}
                 </span>
               </p>
               <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Location: </span>
                 <span className="text-nowrap">
-                  {window.innerWidth >= 1024 && card?.location?.length > 10
-                    ? `${card?.location?.slice(0, 10)}...`
+                  {window.innerWidth >= 1024 && card?.location?.length > 15
+                    ? `${card?.location?.slice(0, 15)}...`
                   : card?.location}
                 </span>
               </p>
@@ -233,16 +251,16 @@ function Card({ card }) {
               <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Damage: </span>
                 <span className="text-nowrap">
-                  {window.innerWidth >= 1024 && card.damage?.length > 10
-                    ? `${card?.damage?.slice(0, 10)}...`
+                  {window.innerWidth >= 1024 && card.damage?.length > 15
+                    ? `${card?.damage?.slice(0, 15)}...`
                     : card?.damage || "None"}
                 </span>
               </p>
               <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Engine: </span>
                 <span className="text-nowrap">
-                  {window.innerWidth >= 1024 && card?.engine?.length > 10
-                    ? `${card?.engine?.slice(0, 10)}...`
+                  {window.innerWidth >= 1024 && card?.engine?.length > 20
+                    ? `${card?.engine?.slice(0, 20)}...`
                     : card?.engine || "Not specified"}
                 </span>
               </p>
@@ -257,22 +275,23 @@ function Card({ card }) {
             </div>
           </div>
         </div>
-        <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row mr-2 w-full justify-center items-center  mx-auto">
-          <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw] w-full text-center sm:text-left">
+        <div className="flex  w-full h-full justify-center items-center  mx-auto">
+
+          <div className=" bg-gray-100 shadow-md rounded-[0.5vw] w-full text-center sm:text-left">
             <p className="text-sm text-gray-600">{card?.Price}</p>
             <p className="text-xl font-bold text-red-600">{card?.amount}</p>
             <div className="flex flex-col-reverse w-full gap-[1vw] p-[1vw] rounded-lg ">
               {/* BID NOW Button Section */}
-              <div className="flex justify-center items-center w-full lg:mt-2 sm:mt-0">
+              <div className="flex justify-center items-center w-full lg:mt-2 ">
                 <Link to={`/vehicle-detail/${card?.lot_id}`} className="w-full">
-                  <button className="h-auto py-2 rounded-[8px] w-full text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+                  <button className="h-full py-2 md:py-[0.5vw] rounded-[8px] md:rounded-[0.5vw] w-full text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
                     BID NOW
                   </button>
                 </Link>
               </div>
 
               {/* Auction Date & Timer Section */}
-              <div className="w-full h-auto py-2  bg-white rounded-lg flex justify-center items-center shadow-sm">
+              <div className="w-full h-auto py-2 md:py-[0.5vw]  bg-white rounded-lg flex justify-center items-center shadow-sm">
                 <div className="flex items-center text-nowrap gap-[0.75vw] ">
                   {/* Icon Section */}
                   <div className="flex justify-center items-center">
@@ -289,7 +308,7 @@ function Card({ card }) {
 
                   {/* Timer or Status Section */}
                   <div className="flex flex-col justify-center items-start ">
-                    <p className="text-gray-800 text-sm sm::text-[0.875vw] font-medium">
+                    <p className="text-gray-800 text-sm sm:text-[0.875vw] font-medium">
                       {card?.auction_date
                         ? ValidDate
                           ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
@@ -301,6 +320,7 @@ function Card({ card }) {
               </div>
             </div>
           </div>
+
         </div>
       </div>
       <LoginModal
