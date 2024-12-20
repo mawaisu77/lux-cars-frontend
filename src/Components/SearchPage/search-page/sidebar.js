@@ -1002,7 +1002,7 @@ const Sidebar = () => {
                             )
                         )
                         .slice(0, showAllFilters[dropdownKey] ? undefined : 5) // Show first 5 options unless "See All" is toggled
-                        .map(({ id, label, hex }) => (
+                        .map(({ id, label, hex, letter }) => (
                           <div
                             key={id}
                             className="flex items-center w-full mb-[0.833vw] relative"
@@ -1039,11 +1039,20 @@ const Sidebar = () => {
                               {label}
                             </label>
 
-                            {dropdownKey === "color" || dropdownKey === "status" ? (
+                            {dropdownKey === "color"  ? (
                               <div className=" self-end right-0 absolute top-0">
                                 <div style={getColorStyle(hex)} className=" " />
                               </div>
                             ) : null}
+                            {
+                              dropdownKey === "status" ? (
+                                <div className="self-end right-0 absolute top-0 ">
+                                  <div style={getColorStyle(hex)} className="flex rounded-full bg-red-200 w-full h-full items-center">
+                                    <span className="text-white font-bold">{letter}</span> 
+                                  </div>
+                                </div>
+                              ) : null
+                            }
                           </div>
                         ))}
                       <div className=" w-full">

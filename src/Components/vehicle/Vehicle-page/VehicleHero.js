@@ -30,6 +30,8 @@ import TooltipInfo from "../../common/TooltipInfo";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { FaLink } from "react-icons/fa";
 import { RxCopy } from "react-icons/rx";
+import { statusOptions } from "../../../utils/filtersData/statusOptions";
+import { documentTypeOptions } from "../../../utils/filtersData/documentTypeOptions";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -66,7 +68,6 @@ const VehicleHero = () => {
 
     // Listen for bid updates specific to the car
     channel.bind(`car-notifications`, (data) => {
-      console.log("data === >", data.message.bid_price);
 
       setLiveData({
         currentBid: data.message.bid_price,
@@ -101,7 +102,6 @@ const VehicleHero = () => {
 
   };
 
-  // console.log("main placebidloading", placeBidloading);
 
   const targetTime = useMemo(
     () =>
@@ -144,6 +144,8 @@ const VehicleHero = () => {
     }
   }, [placebidLoading, placeBidSuccess, placeBiderror]);
 
+  const currentStatus = statusOptions.find(option => option.id === carDetailData?.data?.status);
+  const currentDocumentType = documentTypeOptions.find(option => option.id.toLowerCase() === carDetailData?.data?.document?.toLowerCase());
 
   return (
     <div className="bg-gray-100">
@@ -190,15 +192,6 @@ const VehicleHero = () => {
                 </div>
               )}
 
-{/* <div className="flex justify-between bg-white p-2 lg:mb-[3vh] mx-auto max-w-[90vw] sm:max-w-[74vw] mt-[80px]">
-                      <div className="flex justify-center items-start flex-col">
-                          
-                        <p className="lg:text-[1.7vw] font-urbanist font-semibold ">
-                          {carDetailData?.data?.title}
-                        </p>
-                      
-                      </div>
-                    </div> */}
 
               <div className="flex flex-col lg:flex-row  justify-between mx-auto max-w-[90vw] sm:max-w-[74vw] mt-[50px]">
                 
@@ -251,7 +244,7 @@ const VehicleHero = () => {
                             <p className="lg:text-[0.7vw] text-[#7a798a]">
                               Sale Document
                             </p>
-                            <p className="lg:text-[0.9vw] font-urbanist font-semibold">
+                            <p className={`lg:text-[0.9vw] font-urbanist font-semibold`} style={{color: currentDocumentType?.hex || ''}}>
                               {carDetailData?.data?.document_old
                                 ? carDetailData?.data?.document_old
                                 : carDetailData?.data?.document}
@@ -634,14 +627,25 @@ const VehicleHero = () => {
 
             
 {/* web view */}
-                <div className=" hidden lg:block  w-full lg:w-[33vw]  ">
+                <div className=" hidden lg:block  w-full lg:w-[35vw]  ">
                   <div>
                   <div className="flex justify-between bg-white p-2 lg:mb-[2vh]">
-                      <div className="flex justify-center items-start flex-col">
-                      <p className="lg:text-[1.7vw] font-urbanist font-semibold ">
+                      <div className="flex justify-center items-center gap-1">
+                      {currentStatus && (
+                        <div
+                          className="w-4 h-4 lg:w-[1.5vw] lg:h-[1.5vw] rounded-full"
+                          style={{ backgroundColor: currentStatus.hex }}
+                        >
+                          <span title={currentStatus.id} className="text-white w-full h-full text-16 font-bold flex items-center justify-center">
+                            {currentStatus.letter}
+                          </span>
+                        </div>
+                      )}
+                        <p className="lg:text-[1.3vw] font-urbanist font-semibold ">
                           {carDetailData?.data?.title}
                         </p>        
                       </div>
+             
                     </div>
                     <div className="flex justify-between bg-white p-2 lg:mb-[2vh]">
                       <div className="flex justify-between w-full  items-center ">
@@ -657,6 +661,7 @@ const VehicleHero = () => {
                         </div>
                         {/* New Copy Button */}
                         <button 
+                        title="Copy URL"
                           onClick={() => document.getElementById("copy_url_modal").showModal()} 
                           className=" bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg"
                         >
@@ -666,34 +671,35 @@ const VehicleHero = () => {
                     </div>
                    
                     <div className="flex gap-2 flex-col lg:flex-row justify-between  mb-[3vh]">
-                      <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] rounded-[0.5vw] bg-white">
-                        <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] bg-[#CA0000]">
+                      <div className="flex flex-1 px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] rounded-[0.5vw] bg-white">
+                        <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2  bg-[#CA0000]">
                           <PiUsersFill
                             color="white"
-                            className="lg:w-[1.2vw] lg:h-[1.2vw]"
+                            className=""
                           />
                         </div>
-                        <div className="text-left">
-                          <p className="lg:text-[0.7vw] text-[#7a798a]">
+                        <div className="text-left p-2 md:p-[0.3vw]">
+                          <p className="lg:text-[0.7vw] text-[#7a798a]"> 
+
                             Owned by
                           </p>
-                          <p className="lg:text-[0.9vw] font-urbanist font-semibold">
+                          <p className={`lg:text-[0.9vw] font-urbanist font-semibold ${carDetailData?.data?.seller && carDetailData?.data?.seller !== 'Unknown' ? 'text-green-600 bg-green-500/30 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]' : 'text-red-600 bg-red-500/20 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]'}`} >
                             {carDetailData?.data?.seller || "Unknown"}
                           </p>
                         </div>
                       </div>
-                      <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]  items-center lg:w-[16vw]  rounded-[0.5vw] bg-white">
-                        <div className="flex justify-center items-center p-2 rounded-[0.5vw] lg:w-[2.5vw]  bg-[#CA0000]">
+                      <div className="flex flex-1 px-[0.5vw] gap-2 lg:gap-[0.5vw]  items-center  rounded-[0.5vw] bg-white">
+                        <div className="flex justify-center items-center p-2 md:p-[0.5vw]  rounded-[0.5vw]  bg-[#CA0000] ">
                           <CgFileDocument
                             color="white"
-                            className="lg:w-[1.2vw] lg:h-[1.2vw]"
+                            className=""
                           />
                         </div>
-                        <div className="text-left">
+                        <div className="text-left p-2 md:p-[0.3vw]">
                           <p className="lg:text-[0.7vw] text-[#7a798a]">
-                            Sale Document
+                            Sale Documents
                           </p>
-                          <p className="lg:text-[0.8vw] font-urbanist font-semibold">
+                          <p className="lg:text-[0.7vw] font-urbanist font-semibold" style={{color: currentDocumentType?.hex || '', backgroundColor: currentDocumentType?.hexLight || '',  padding: currentDocumentType ? '0.2vw' : '0', borderRadius: currentDocumentType ? '0.2vw' : '0'}}>
                             {carDetailData?.data?.document_old
                               ? carDetailData?.data?.document_old
                               : carDetailData?.data?.document}
@@ -712,6 +718,7 @@ const VehicleHero = () => {
                             {carDetailData?.data?.lot_id || "N/A"}
                           </p>
                           <RxCopy
+                        title="Copy Lot ID"
                         className="cursor-pointer py-[0.1vh] text-[14px] text-gray-600 hover:text-gray-800" 
                         onClick={() => {
                           navigator.clipboard.writeText(carDetailData?.data?.lot_id);
@@ -728,6 +735,7 @@ const VehicleHero = () => {
                             {carDetailData?.data?.vin || "N/A"}
                           </p>
                           <RxCopy
+                        title="Copy VIN"
                         className="cursor-pointer py-[0.1vh] text-[14px] text-gray-600 hover:text-gray-800" 
                         onClick={() => {
                           navigator.clipboard.writeText(carDetailData?.data?.vin);

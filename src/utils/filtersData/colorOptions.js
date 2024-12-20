@@ -32,10 +32,14 @@ const colorOptions = [
   const getColorStyle = (hex) => {
     return {
       backgroundColor: hex,
-      width: '14px',
-      height: '14px',
-      borderRadius: '10%', 
-      display: 'inline-block',
+      width: '20px',
+      height: '20px',
+
+      // borderRadius: '10%', 
+      // display: 'inline-block',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
       marginRight: '8px',
     };
   };

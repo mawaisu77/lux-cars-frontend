@@ -1,9 +1,9 @@
 const statusOptions = [
-      { id: "Stationary", label: "Stationary", hex: "#808080" }, // Gray
-      { id: "Run & Drive", label: "Run & Drive", hex: "#008000" }, // Green
-      { id: "Starts", label: "Starts", hex: "#FFFF00" }, // Yellow
-      { id: "Can't test", label: "Can't test", hex: "#FF0000" }, // Red
-      { id: "Unknown", label: "Unknown", hex: "#0000FF" }, // Blue
+      { id: "Stationary", label: "Stationary", hex: "#F8AB53",hexLight: "#f8ab5347", letter: "S" }, 
+      { id: "Run & Drive", label: "Run & Drive", hex: "#00CC52",hexLight: "#00CC52", letter: "R" }, 
+      { id: "Starts", label: "Starts", hex: "#219AF3",hexLight: "#219AF3", letter: "S" }, 
+      { id: "Can't test", label: "Can't test", hex: "#DF4949",hexLight: "#DF4949", letter: "C" }, 
+      { id: "Unknown", label: "Unknown", hex: "#000000",hexLight: "#000000", letter: "U" }, 
 ];
 
   // API key
