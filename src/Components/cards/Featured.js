@@ -29,7 +29,7 @@ const BuyNow = () => {
   }
 
   const handleViewAllClick = () => {
-    localStorage.setItem("apiEndpoint", process.env.REACT_APP_API_CARS_LIVE);
+    localStorage.setItem("apiEndpoint", `${process.env.REACT_APP_API_CARS_LIVE}?buy_now=true`);
     navigate("/search-page");
   };
 
