@@ -47,7 +47,7 @@ import LocalCars from "./Components/user-page/user-pages/LocalCars.js";
 import FooterSec from "./Components/Footer/index.js";
 import LiveAuction from "./Components/live-auction/index.js";
 import List from "./Components/live-aution-search/live-auction-search/List.js";
-
+import DynamicForm from "./Components/prac/DyanmicForm.jsx";
 function App() {
   
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -277,6 +277,7 @@ function App() {
             <Route path="/Successfull-login" element={<Successfull_Login />} />
             <Route path="/vehicle-detail/:lotID" element={<Vehicle />} />
             <Route path="/local-vehicle-detail/:id" element={<LocalVehicle />} />
+            <Route path="/test" element={<DynamicForm />} />
             <Route
               path="/search-local-cars"
               element={<LocalCarsSearchPage />}
