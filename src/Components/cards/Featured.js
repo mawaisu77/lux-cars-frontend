@@ -9,7 +9,7 @@ const BuyNow = () => {
   const navigate = useNavigate();
   
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    `${process.env.REACT_APP_API_CARS_LIVE}&document=clean&buy_now=true`
+    `${process.env.REACT_APP_API_CARS_LIVE}?document=clean&buy_now=true`
   );
   if (carLoading) {
     return <Shimmer />;
@@ -29,10 +29,11 @@ const BuyNow = () => {
   }
 
   const handleViewAllClick = () => {
-    localStorage.setItem("apiEndpoint", `${process.env.REACT_APP_API_CARS_LIVE}&buy_now=true`);
+    localStorage.setItem("apiEndpoint", `${process.env.REACT_APP_API_CARS_LIVE}?buy_now=true`);
     navigate("/search-page");
   };
 
+  console.log("---------process.env.REACT_APP_API_CARS_LIVE-----------------", process.env.REACT_APP_API_CARS_LIVE)
   return (
     <>
       <div className="bg-secondary-gray relative w-[100vw] mx-auto py-[30px] sm:py-[4.167vw] ">
