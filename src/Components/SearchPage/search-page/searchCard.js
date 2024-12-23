@@ -32,10 +32,10 @@ import { driveOptions } from "../../../utils/filtersData/driveOptions";
 function SearchCard({ data }) {
   console.log("--------------------------", data)
   return (
-    <div className=" md:w-full lg:w-full mx-auto mt-10 bg-red-500">
+    <div className=" md:w-full lg:w-full mx-auto mt-10">
       <div className=" w-[100%] md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => <Card key={index} card={card} />)}
-        
+
       </div>
     </div>
   );
@@ -139,8 +139,7 @@ function Card({ card }) {
     (option) => option.id === card?.drive
   );
 
-
-  console.log("--------------------------", card)
+  console.log("--------------------------", card?.keys)
 
   return (
     <div className="h-[250px] md:h-[13.021vw] flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
@@ -179,7 +178,7 @@ function Card({ card }) {
                   {(card?.currentBid === "" ||
                     card?.currentBid === null ||
                     card?.currentBid == 0) && (
-                    <div className="absolute w-full bg-red-400 lg:w-[16vw] sm:h-[1vh]  bottom-0 "></div>
+                    <div className="absolute w-full lg:w-[16vw] sm:h-[1vh]  bottom-0 "></div>
                   )}
                   <img
                     className="h-full w-full lg:w-[14vw] rounded-[0.5vw] object-cover"
@@ -318,41 +317,41 @@ function Card({ card }) {
           <div className="flex w-full leading-[3vh] md:leading-[2vh] py-2 md:py-[0.3vw] bg-gray-100">  
             <div className="flex flex-1 gap-x-2 md:gap-x-[0.5vw] items-center">
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <IoKeySharp data-tooltip-id="vehicle-keys-tooltip" className={`text-18 ${card?.keys === "yes" ? "text-yellow-600" : "text-red-600"}`} />
+                    <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className={`text-18 ${card?.keys === 'Yes' ? "text-yellow-600" : "text-red-600"}`} />
                     <ReactTooltip
-                    id="vehicle-keys-tooltip"
+                    id={`vehicle-keys-tooltip-${card?.lot_id}`}
                     place="bottom"
                     content={card?.keys === "yes" ? "Keys Included" : "Keys Not Included"}
                     style={{zIndex: 9999}}
                   />
                </span>
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <BsFillFuelPumpFill data-tooltip-id="vehicle-fuel-tooltip" className={`text-18`} />
+                    <BsFillFuelPumpFill data-tooltip-id={`vehicle-fuel-tooltip-${card?.lot_id}`} className={`text-18`} />
                     <ReactTooltip
-                    id="vehicle-fuel-tooltip"
+                    id={`vehicle-fuel-tooltip-${card?.lot_id}`}
                     place="bottom"
                     content={card?.fuel ? `${card?.fuel}` : "Not specified"}
                     style={{zIndex: 9999}}
                   />
                </span>
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <PiCylinderFill data-tooltip-id="vehicle-cylinder-tooltip" className={`text-18 ${card?.cylinder ? "" : "text-red-600"}`} />
+                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18 ${card?.cylinders ? "" : "text-red-600"}`} />
                     <ReactTooltip
-                    id="vehicle-cylinder-tooltip"
+                    id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
                     place="bottom"
-                    content={`${card?.cylinder ? `${card?.cylinder} Cyl` : "Not specified"}`}
+                    content={`${card?.cylinders ? `${card?.cylinders} Cyl` : "Not specified"}`}
                     style={{zIndex: 9999}}
                   />
                </span>
             
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <span data-tooltip-id="vehicle-drive-tooltip" className={`text-18 ${card?.drive ? "tracking-wide font-semibold" : "text-red-600"}`} >
+                    <span data-tooltip-id={`vehicle-drive-tooltip-${card?.lot_id}`} className={`text-18 ${currentDrive?.id ? "tracking-wide font-semibold" : "text-red-600"}`} >
                       {currentDrive?.letter}
                     </span>
                     <ReactTooltip
-                    id="vehicle-drive-tooltip"
+                    id={`vehicle-drive-tooltip-${card?.lot_id}`}
                     place="bottom"
-                    content={`${card?.drive ? `${currentDrive?.label}` : "Not specified"}`}
+                    content={currentDrive?.label} 
                     style={{zIndex: 9999}}
                   />
                </span>
