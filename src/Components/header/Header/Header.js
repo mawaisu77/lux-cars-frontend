@@ -13,8 +13,8 @@ const Header = () => {
   const { logout } = useLogout();
   const [searchQuery, setSearchQuery] = useState(""); 
   const [searchResults, setSearchResults] = useState([]); 
-  const [isFocused, setIsFocused] = useState(false); // For input focus/overlay
-  const dropdownRef = useRef(null); // Ref for detecting outside clicks
+  const [isFocused, setIsFocused] = useState(false); 
+  const dropdownRef = useRef(null); 
 
   const handleLogoutModal = () => {
     document.getElementById("my_logout_modal").showModal();
@@ -128,8 +128,7 @@ const Header = () => {
                     className="w-full p-2 md:p-[0.6vw] rounded-full bg-white text-sm md:text-18"
                     value={searchQuery} 
                     onChange={(e) => setSearchQuery(e.target.value)} 
-                    onFocus={() => setIsFocused(true)} // Show overlay
-
+                    onFocus={() => setIsFocused(true)} 
                     onKeyDown={handleKeyDown}/>
 
                   <button className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
