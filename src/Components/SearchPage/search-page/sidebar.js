@@ -94,7 +94,7 @@ const Sidebar = () => {
     () => new URLSearchParams(location.search),
     [location.search]
   );
-
+  const searchQuery = queryParams.get('search') || '';
   const initialMake = queryParams.get("make") || "";
   const initialModel = queryParams.get("model") || "";
   const initialFromYear = queryParams.get("year_from") || "";
@@ -378,6 +378,19 @@ const Sidebar = () => {
     initialOdobrand,
   ]);
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const searchQuery = queryParams.get('search') || '';
+
+    // Update filters with the search query
+    if (searchQuery) {
+      setAppliedFilters((prevFilters) => ({
+        ...prevFilters,
+        search: searchQuery, // Add search query to filters
+      }));
+    }
+  }, [location.search, setAppliedFilters]);
+
   const resetFilters = () => {
     setSelectedFilters({
       site: "",
@@ -470,6 +483,7 @@ const Sidebar = () => {
     if (filterCategory === "make") {
       newFilters = {
         ...newFilters,
+        search: searchQuery,
         make: filterValue,
         model: "",
       };
@@ -478,6 +492,7 @@ const Sidebar = () => {
     } else if (filterCategory === "model") {
       newFilters = {
         ...newFilters,
+        search: searchQuery,
         model: filterValue,
       };
       setSelectedModel(filterValue);
@@ -490,6 +505,7 @@ const Sidebar = () => {
       console.log("filterValue filterCategory", filterValue, filterCategory);
       newFilters = {
         ...newFilters,
+        search: searchQuery,
         [filterCategory]: filterValue,
       };
       // Update state immediately
@@ -506,12 +522,14 @@ const Sidebar = () => {
     } else if (filterCategory === "vehicle_type") {
       newFilters = {
         ...newFilters,
+        search: searchQuery,
         [filterCategory]: [filterValue],
       };
     } else {
       const currentValues = newFilters[filterCategory];
       newFilters = {
         ...newFilters,
+        search: searchQuery,
         [filterCategory]: currentValues.includes(filterValue)
           ? currentValues.filter((val) => val !== filterValue)
           : [...currentValues, filterValue],
@@ -704,13 +722,16 @@ const Sidebar = () => {
 
     const newFilters = {
       ...selectedFilters,
+      search: searchQuery,
       auction_date_from: formattedFromDate,
       auction_date_to: formattedToDate,
     };
 
+
     setSelectedFilters(newFilters);
     setAppliedFilters((prev) => ({
       ...prev,
+      search: searchQuery,
       auction_date_from: formattedFromDate,
       auction_date_to: formattedToDate,
     }));
@@ -785,6 +806,7 @@ const Sidebar = () => {
     // Clear the filter from selectedFilters state
     setSelectedFilters((prev) => ({
       ...prev,
+
       [filterKey]: [],
     }));
 

@@ -1,33 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import img1 from "../../../assets/Logo/Horizontal0 1.png";
-import { FaTimes, FaBars } from "react-icons/fa";
-import { IoGlobeSharp } from "react-icons/io5";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { HiUsers } from "react-icons/hi2";
-import { useTranslation } from "react-i18next";
-import { changeLanguage } from "i18next";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useLogout } from "../../../hooks/useLogout";
-import NotificationDropdown from "../../ui/dropdowns/NotificationDropdown";
+import { BsSearch } from "react-icons/bs";
+import { searchSuggestedData  } from "./searchSuggestedData";
+
 
 const Header = () => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useAuthContext();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [navbarColor, setNavbarColor] = useState("transparent");
-  const [windowWidth, setWindowWidth] = useState();
-
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
-
   const { logout } = useLogout();
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchResults, setSearchResults] = useState([]); 
+  const [isFocused, setIsFocused] = useState(false); // For input focus/overlay
+  const dropdownRef = useRef(null); // Ref for detecting outside clicks
 
   const handleLogoutModal = () => {
     document.getElementById("my_logout_modal").showModal();
@@ -39,262 +26,167 @@ const Header = () => {
     document.getElementById("my_logout_modal").close();
   };
 
+  const fetchSearchResults = (query) => {
+    if (query) {
+      const queryParts = query.toLowerCase().split(" "); // Split the query into words
+      const [makeQuery, ...modelQueries] = queryParts; // First part as make, rest as model queries
+  
+      const filteredResults = searchSuggestedData.filter(car => {
+        // Check if the make matches
+        const isMakeMatch = car.make.toLowerCase().includes(makeQuery);
+  
+        // Check if any models match the remaining query parts
+        const matchedModels = car.models.filter(model => 
+          modelQueries.some(modelQuery => 
+            model.toLowerCase().includes(modelQuery)
+          )
+        );
+  
+        // Ensure both make and model(s) are matched
+        return isMakeMatch && (matchedModels.length > 0 || modelQueries.length === 0);
+      });
+  
+      // Construct the results
+      const results = filteredResults.map(car => {
+        const matchedModels = car.models.filter(model => 
+          modelQueries.some(modelQuery =>
+            model.toLowerCase().includes(modelQuery)
+          )
+        );
+  
+        return {
+          make: car.make,
+          models: matchedModels.length > 0 ? matchedModels : car.models, // Show matched models or all if no specific match
+        };
+      });
+  
+      setSearchResults(results);
+    } else {
+      setSearchResults([]); 
+    }
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setNavbarColor("#000000bb");
-      } else {
-        setNavbarColor("transparent");
-      }
-    };
+    fetchSearchResults(searchQuery); 
+  }, [searchQuery]);
 
-    window.addEventListener("scroll", handleScroll);
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      navigate(`/search-page?search=${encodeURIComponent(searchQuery)}`); 
+    }
+  };
 
+  const handleDropdownItemClick = (make, model) => {
+    const query = `${make} ${model}`; 
+    setSearchQuery(query);
+    navigate(`/search-page?search=${encodeURIComponent(query)}`); 
+  };
+
+  const handleOutsideClick = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setIsFocused(false); // Close overlay and dropdown if clicking outside
+      setSearchResults([]); // Clear dropdown results
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleOutsideClick);
     };
   }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-
-      if (window.innerWidth < 768) {
-        setNavbarColor("#333333");
-      }
-    };
-
-    // Add the resize event listener
-    window.addEventListener("resize", handleResize);
-
-    // Call the function initially to set the correct color based on current width
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  // console.log("navbarColor", navbarColor)
-  // console.log("windowWidth", windowWidth)
 
   return (
     <>
-    <div
-      className="fixed top-0 border-b border-primary-gray z-50 w-[100vw] sm:p-[0.625vw] p-[10px]"
+     {isFocused && (
+        <div className="fixed top-0 inset-0 bg-black bg-opacity-50 z-40"></div>
+      )}
+      <div
+      className="fixed top-0 border-b border-primary-gray z-50 w-[100vw] "
       style={{
-        backgroundColor: windowWidth < 768 ? "#333333" : navbarColor,
         transition: "background-color 0.5s ease-in-out",
         zIndex: 1000,
       }}
     >
-      <div className="flex justify-between mx-auto items-center sm:max-w-[73.229vw] max-w-[85vw]">
-        <div className="flex gap-[1.953125vw] items-center ">
-          {/* {( navbarColor === "transparent" && windowWidth > 768) ||
-          windowWidth < !768 ? (
-            <Link to="/">
-              <img
-                className="w-[142px] lg:w-[12.578125vw] 2xl:w-[17.578125vw] h-auto"
-                src={img1}
-                alt="Logo"
-              />
-            </Link>
-          ) : ( */}
-            <Link to="/">
-              <img
-                src={
-                  "https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"
-                }
-                className="w-[142px] lg:w-[11.767vw] h-auto"
-                alt={`Logo`}
-              />
+  <header className="bg-black">
+      <div className="w-full sm:max-w-[90vw] max-w-[85vw] mx-auto px-4 md:px-[1.5vw]">
+        <div className="flex items-center h-20 md:h-[4.5vw] gap-4 md:gap-[1.5vw]">
+          <Link to="/">
+            <img
+              src={
+                "https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"
+              }
+              className="w-[142px] lg:w-[11.767vw] h-auto"
+              alt={`Logo`}
+            />
           </Link>
-          {/* )} */}
+          <div className="flex-1 max-w-3xl md:max-w-full ml-4 md:ml-0">
+          <div className="relative" ref={dropdownRef}>
+                  <input
+                    type="text"
+                    placeholder="Search for vehicle by Make, Model, Lot or VIN..."
+                    className="w-full p-2 md:p-[0.6vw] rounded-full bg-white text-sm md:text-18"
+                    value={searchQuery} 
+                    onChange={(e) => setSearchQuery(e.target.value)} 
+                    onFocus={() => setIsFocused(true)} // Show overlay
 
-          <div className="hidden lg:flex">
-            <ul
-              className={`flex gap-[1.5vw] font-urbanist font-bold text-18 mx-auto text-white  ${navbarColor === "transparent" ? "" : "text-white"}`}
-            >
-              <Link to="/how-works" className=" hover:text-primary-red duration-200">
-                <li className="">How it works</li>
-              </Link>
-              <Link to="/Fees" className=" hover:text-primary-red duration-200">
-                <li className="flex items-center">
-                  Fees
-                  {/* Delivery Time <TiArrowSortedDown /> */}
-                </li>
-              </Link>
+                    onKeyDown={handleKeyDown}/>
 
-              <Link to="/about" className=" hover:text-primary-red duration-200">
-                <li>{t("navbar.about")}</li>
-              </Link>
-              <Link to="/help" className=" hover:text-primary-red duration-200">
-                <li>{t("navbar.help")}</li>
-              </Link>
-              <Link to="/contact-us" className=" hover:text-primary-red duration-200">
-                <li>{t("navbar.contact")}</li>
-              </Link>
-              <Link to={"/upload-car"} className=" hover:text-primary-red duration-200">
-                <li>Sell Car</li>
-              </Link>
-              <Link to={"/loan-application"} className=" hover:text-primary-red duration-200">
-                <li>Loan Application</li>
-              </Link>
-            </ul>
-          </div>
-        </div>
-
-       
-        
-        <div className="hidden lg:flex items-center gap-2 lg:gap-[0.677vw] font-urbanist font-bold text-[1rem] lg:text-18 text-[#7a798a]">
-          <NotificationDropdown className=""/>
-
-          <div className="relative inline-block text-left">
-            <div className="flex justify-center items-center">
-              <IoGlobeSharp
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className={`cursor-pointer text-white  ${
-                  navbarColor === "transparent" ? "" : "text-white"
-                } w-[1.3vw] h-[2.7vh] hover:text-primary-red duration-200`}
-              />
-            </div>
-            {dropdownOpen && (
-              <div className="origin-top-right absolute z-50 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="py-1">
-                  <button
-                    onClick={() => changeLanguage("en")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
-                    English
+                  <button className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                    <BsSearch className="h-5 md:h-[0.2vw] w-5 md:w-[0.2vw]" />
                   </button>
-                  <button
-                    onClick={() => changeLanguage("fr")}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
-                    French
-                  </button>
+                  {searchResults.length > 0 && ( // Render dropdown if there are results
+                   <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-60 overflow-y-auto">
+                     {searchResults.map((car) => (
+                       <div key={car.make} className=" flex justify-between items-center w-full">
+                         <div className=" text-left w-full">
+                           {car.models.map((model) => (
+                             <div key={model} className="pl-4 py-2 hover:bg-gray-200 cursor-pointer " onClick={() => handleDropdownItemClick(car.make, model)}>
+                                {car.make} {model} 
+                             </div>
+                           ))}
+                         </div>
+                       </div>
+                     ))}
+                   </div>
+                 )}
                 </div>
-              </div>
-            )}
-
           </div>
-          <Link
-            to="/user/profile"
-            className={` text-white ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
-          >
-            <HiUsers />
-          </Link>
 
           {user ? (
-             <div className="flex items-center ">
-              
-             <button
-               className={`focus:outline-none lg:text-18 text-white ${navbarColor === "transparent" ? "" : "text-white"}`}
-               onClick={handleLogoutModal}
-             >
-               logout
-             </button>
-             </div>
-           
-          ) : (
-            <>
-              
-              <div className="flex items-center gap-x-[0.3vw]">
-         
-         <Link to="/login">
-           <button
-             className={` focus:outline-none text-white ${
-               isHomePage ? "text-primary-gray" : "text-white"
-             } ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
-           >
-             Login
-           </button>
-         </Link>
-         <div
-           className={` text-white`}
-         >
-           /
-         </div>
-         <Link to="/signup">
-           <button
-             className={` focus:outline-none text-white ${navbarColor === "transparent" ? "" : "text-white"} lg:text-18 hover:text-primary-red duration-200`}
-           >
-             SignUp
-           </button>
-         </Link>
-       </div>
-            </>
-          )}
-
-          <button onClick={() => navigate("/Successfull-login")} className="px-[1.719vw] py-[0.625vw] bg-primary-red text-white rounded-full lg:text-14 focus:outline-none">
-            Try Demo
-          </button>
-        </div>
-
-        <div className="lg:hidden flex items-center">
-          <button onClick={toggleMenu} className="focus:outline-none">
-            {isMenuOpen ? <FaTimes size={24} color="white"/> : <FaBars size={24} color="white"/>}
-          </button>
-        </div>
-      </div>
-
-      {isMenuOpen && (
-        <div className="lg:hidden">
-          <ul
-            className={`flex flex-col items-center gap-4 my-4 font-urbanist font-bold text-[1rem] text-primary-gray ${
-              isHomePage ? "text-primary-gray" : "text-white"
-            } ${navbarColor === "transparent" ? "" : "text-white"}`}
-          >
-            <Link
-              to="/how-works"
-              className="hover:text-primary-red"
-              onClick={toggleMenu}
-            >
-              <li>How it works</li>
-            </Link>
-            <Link to="/fees">Fees</Link>
-            <Link
-              to="/about"
-              className="hover:text-primary-red"
-              onClick={toggleMenu}
-            >
-              <li>About</li>
-            </Link>
-            <Link
-              to="/help"
-              className="hover:text-primary-red"
-              onClick={toggleMenu}
-            >
-              <li>Help</li>
-            </Link>
-            <Link
-              to="/contact-us"
-              className="hover:text-primary-red"
-              onClick={toggleMenu}
-            >
-              <li>Contact</li>
-            </Link>
-            <Link
-              to="/upload-car"
-              className="hover:text-primary-red"
-              onClick={toggleMenu}
-            >
-              <li>Upload Vehicle</li>
-            </Link>
-            <div className="flex flex-col items-center gap-4">
-              <Link to="/login" onClick={toggleMenu}>
-                <button className="focus:outline-none">login</button>
-              </Link>
-              <Link to="/signup" onClick={toggleMenu}>
-                <button className="focus:outline-none">sign-up</button>
-              </Link>
-              <button className="w-[132px] lg:w-[7.333333333333334vw]  h-[32px] lg:h-[5.23vh] bg-[#ca0000] text-white rounded-full lg:text-14 focus:outline-none">
-                Try Demo
+            <div className="flex items-center ">
+              <button
+                className={`focus:outline-none lg:text-18 text-white`}
+                onClick={handleLogoutModal}
+              >
+                logout
               </button>
             </div>
-          </ul>
+          ) : (
+            <>
+              <div className="flex items-center gap-4 md:gap-[1.5vw] text-sm md:text-18">
+                <Link to="/login">
+                  <button
+                    className={` focus:outline-none text-white  lg:text-18 hover:text-white/80 duration-200`}
+                  >
+                    Log In
+                  </button>
+                </Link>
+
+                <Link to="/signup">
+                  <button
+                    className={` focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-6 md:px-[1.5vw] py-2 md:py-[0.2vw] rounded-full text-white lg:text-18  duration-200`}
+                  >
+                  
+                    Sign Up
+                  </button>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
-      )}
+      </div>
+    </header>  
       <dialog id="my_logout_modal" className="modal">
         <div className="modal-box dark:bg-white">
           <h3 className="font-bold text-lg my-4">

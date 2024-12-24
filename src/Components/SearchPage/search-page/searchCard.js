@@ -30,12 +30,10 @@ import { driveOptions } from "../../../utils/filtersData/driveOptions";
 
 
 function SearchCard({ data }) {
-  console.log("--------------------------", data)
   return (
     <div className=" md:w-full lg:w-full mx-auto mt-10">
       <div className=" w-[100%] md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => <Card key={index} card={card} />)}
-
       </div>
     </div>
   );
@@ -219,12 +217,12 @@ function Card({ card }) {
             </Link>
             <div>
               {card?.base_site === "iaai" && (
-                <button className="bg-[#0E5DB8] hover:bg-[#0E5DB8]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
+                <button className="bg-[#D91E1E] hover:bg-[#D91E1E]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
                   IAAI
                 </button>
               )}
               {card?.base_site === "copart" && (
-                <button className="bg-[#D91E1E] hover:bg-[#D91E1E]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
+                <button className="bg-[#0E5DB8] hover:bg-[#0E5DB8]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
                   Copart
                 </button>
               )}
@@ -317,13 +315,27 @@ function Card({ card }) {
           <div className="flex w-full leading-[3vh] md:leading-[2vh] py-2 md:py-[0.3vw] bg-gray-100">  
             <div className="flex flex-1 gap-x-2 md:gap-x-[0.5vw] items-center">
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className={`text-18 ${card?.keys === 'Yes' ? "text-yellow-600" : "text-red-600"}`} />
-                    <ReactTooltip
-                    id={`vehicle-keys-tooltip-${card?.lot_id}`}
-                    place="bottom"
-                    content={card?.keys === "yes" ? "Keys Included" : "Keys Not Included"}
-                    style={{zIndex: 9999}}
-                  />
+                    {card?.keys === 'Yes' ? (
+                      <>
+                        <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className="text-18 text-yellow-600" />
+                        <ReactTooltip
+                          id={`vehicle-keys-tooltip-${card?.lot_id}`}
+                          place="bottom"
+                          content="Keys Included"
+                          style={{zIndex: 9999}}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className="text-18 text-red-600" />
+                        <ReactTooltip
+                          id={`vehicle-keys-tooltip-${card?.lot_id}`}
+                          place="bottom"
+                          content="Keys Not Included"
+                          style={{zIndex: 9999}}
+                        />
+                      </>
+                    )}
                </span>
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                     <BsFillFuelPumpFill data-tooltip-id={`vehicle-fuel-tooltip-${card?.lot_id}`} className={`text-18`} />
@@ -334,8 +346,9 @@ function Card({ card }) {
                     style={{zIndex: 9999}}
                   />
                </span>
+               {card?.cylinders ? (
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18 ${card?.cylinders ? "" : "text-red-600"}`} />
+                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18`} />
                     <ReactTooltip
                     id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
                     place="bottom"
@@ -343,6 +356,17 @@ function Card({ card }) {
                     style={{zIndex: 9999}}
                   />
                </span>
+               ) : (
+                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
+                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18 text-red-600`} />
+                    <ReactTooltip
+                    id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
+                    place="bottom"
+                    content="Not specified"
+                    style={{zIndex: 9999}}
+                  />
+               </span>
+               )}
             
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                     <span data-tooltip-id={`vehicle-drive-tooltip-${card?.lot_id}`} className={`text-18 ${currentDrive?.id ? "tracking-wide font-semibold" : "text-red-600"}`} >
