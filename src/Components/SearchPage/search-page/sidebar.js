@@ -167,6 +167,7 @@ const Sidebar = () => {
   const [selectedModel, setSelectedModel] = useState(initialModel);
   const [selectedMake, setSelectedMake] = useState(initialMake);
   const [selectedFilters, setSelectedFilters] = useState({
+    search: searchQuery,
     site: initialPartner,
     make: initialMake,
     model: initialModel,
@@ -193,6 +194,7 @@ const Sidebar = () => {
   });
 
   const [appliedFilters, setAppliedFilters] = useState({
+    search: searchQuery,
     site: initialPartner,
     make: initialMake,
     model: initialModel,
