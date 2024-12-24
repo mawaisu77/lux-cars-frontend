@@ -302,6 +302,7 @@ const Sidebar = () => {
   // Load initial data based on query params
   useEffect(() => {
     if (
+      searchQuery ||
       initialPartner.length > 0 ||
       initialMake ||
       initialModel ||
@@ -328,6 +329,7 @@ const Sidebar = () => {
     ) {
       setAppliedFilters({
         site: initialPartner,
+        search: searchQuery,
         make: initialMake,
         model: initialModel,
         vehicle_type: initialVehicleTyoe,
@@ -353,6 +355,7 @@ const Sidebar = () => {
       });
     }
   }, [
+    searchQuery,
     initialPartner,
     initialMake,
     initialModel,
@@ -389,7 +392,7 @@ const Sidebar = () => {
         search: searchQuery, // Add search query to filters
       }));
     }
-  }, [location.search, setAppliedFilters]);
+  }, [location.search, setAppliedFilters, searchQuery]);
 
   const resetFilters = () => {
     setSelectedFilters({
