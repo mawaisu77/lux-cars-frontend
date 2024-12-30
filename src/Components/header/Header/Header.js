@@ -190,7 +190,7 @@ const Header = () => {
               {user ? (
                 <div className="flex items-center ">
                   <button
-                        className={` focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-6 md:px-[1.5vw] py-2 md:py-[0.4vw] rounded-full text-white lg:text-18  duration-200`}
+                        className={`focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-6 md:px-[1.5vw] py-2 md:py-[0.4vw] rounded-full text-white lg:text-18  duration-200`}
                         onClick={handleLogoutModal}
                   >
                     logout
@@ -279,7 +279,7 @@ const Header = () => {
                                         onClick={() =>
                                           handleNavigationFilter(
                                             item.query,
-                                            item.label
+                                            item.value
                                           )
                                         } // Pass the key and item
                                       >
