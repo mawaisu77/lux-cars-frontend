@@ -145,8 +145,8 @@ const Bid = () => {
             </div>
           </div>
 
-          <div className="mx-auto p-2 md:p-[1.5vw] bg-white/80 rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">
-            <div className="mb-2 md:mb-[1.5vw]">
+          <div className="mx-auto p-2 md:p-[1vw] bg-white/80 rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">
+            <div className="mb-2 md:mb-[0.5vw]">
               <div className="flex border-b">
                 <button
                   className={`px-4 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 font-medium transition-colors duration-300 ${
@@ -172,7 +172,7 @@ const Bid = () => {
             </div>
 
             <div
-              className="mt-4 md:mt-[1.5vw] flex flex-col justify-center items-center space-y-4"
+              className="mt-4 md:mt-[1vw] flex flex-col justify-center items-center space-y-4"
               style={{ minHeight: "120px" }}
             >
               <div className="relative w-full">

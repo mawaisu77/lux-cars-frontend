@@ -8,6 +8,7 @@ import { searchSuggestedData } from "./searchSuggestedData";
 import { BiChevronDown } from "react-icons/bi";
 import { Phone } from "@mui/icons-material";
 import { menuData } from "./MenuData";
+import AccountMenu from "./ProfileDropdown";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -33,31 +34,24 @@ const Header = () => {
   const fetchSearchResults = (query) => {
     if (query) {
       const queryParts = query.toLowerCase().split(" "); // Split the query into words
-      const [makeQuery, ...modelQueries] = queryParts; // First part as make, rest as model queries
 
       const filteredResults = searchSuggestedData.filter((car) => {
         // Check if the make matches
-        const isMakeMatch = car.make.toLowerCase().includes(makeQuery);
+        const isMakeMatch = car.make.toLowerCase().includes(query.toLowerCase());
 
-        // Check if any models match the remaining query parts
+        // Check if any models match the query
         const matchedModels = car.models.filter((model) =>
-          modelQueries.some((modelQuery) =>
-            model.toLowerCase().includes(modelQuery)
-          )
+          model.toLowerCase().includes(query.toLowerCase())
         );
 
-        // Ensure both make and model(s) are matched
-        return (
-          isMakeMatch && (matchedModels.length > 0 || modelQueries.length === 0)
-        );
+        // Ensure either make or model(s) are matched
+        return isMakeMatch || matchedModels.length > 0;
       });
 
       // Construct the results
       const results = filteredResults.map((car) => {
         const matchedModels = car.models.filter((model) =>
-          modelQueries.some((modelQuery) =>
-            model.toLowerCase().includes(modelQuery)
-          )
+          model.toLowerCase().includes(query.toLowerCase())
         );
 
         return {
@@ -139,7 +133,7 @@ const Header = () => {
           zIndex: 1000,
         }}
       >
-        <header className="bg-black">
+        <header className="bg-black/90">
           <div className="w-full sm:max-w-[90vw] max-w-[85vw] mx-auto px-4 md:px-[1.5vw]">
             <div className="flex items-center h-20 md:h-[5vw] gap-4 md:gap-[1.5vw]">
               <Link to="/">
@@ -196,8 +190,8 @@ const Header = () => {
               {user ? (
                 <div className="flex items-center ">
                   <button
-                    className={`focus:outline-none lg:text-18 text-white`}
-                    onClick={handleLogoutModal}
+                        className={` focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-6 md:px-[1.5vw] py-2 md:py-[0.4vw] rounded-full text-white lg:text-18  duration-200`}
+                        onClick={handleLogoutModal}
                   >
                     logout
                   </button>
@@ -323,10 +317,11 @@ const Header = () => {
               ))}
 
               <div className="ml-auto flex items-center gap-4">
-                <div className="flex items-center text-white">
+                <AccountMenu />
+                {/* <div className="flex items-center text-white">
                   <Phone className="h-4 w-4 mr-2" />
                   +11 111 111 111
-                </div>
+                </div> */}
               </div>
             </nav>
           </div>

@@ -204,7 +204,7 @@ function App() {
               }
             />
             <Route
-              path="/user/profile"
+              path="/user/account/profile"
               element={
                 <ProtectedRoute>
                   <UserLayout>
