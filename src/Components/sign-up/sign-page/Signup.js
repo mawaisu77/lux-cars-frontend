@@ -156,7 +156,7 @@ const Signup = () => {
                 onChange={() => setShowPassword(!showPassword)} 
                 className="form-checkbox text-[14px] flex"
               />
-              SHow Password 
+              Show Password 
             </div>
             {/* <div className="font-urbanist text-[14px] lg:text-[0.8vw] font-semibold">
               Forget password?
