@@ -343,7 +343,7 @@ const VehicleHero = () => {
 {/* web view */}
                 <div className=" hidden lg:block  w-full lg:w-[35vw]  ">
                   <div>
-                  <div className="flex justify-between bg-white p-2 lg:mb-[2vh]">
+                  <div className="flex justify-between items-center bg-white p-2 lg:mb-[2vh]">
                       <div className="flex justify-center items-center gap-1">
                       {currentStatus && (
                         <div
@@ -357,7 +357,19 @@ const VehicleHero = () => {
                       )}
                         <p className="lg:text-[1.3vw] font-urbanist font-semibold ">
                           {carDetailData?.data?.title}
-                        </p>        
+                        </p>   
+                        <div className="flex justify-center items-center">
+                        {carDetailData?.data?.base_site === "iaai" && (
+                          <button className="bg-[#D91E1E] hover:bg-[#D91E1E]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
+                            IAAI
+                          </button>
+                        )}
+                        {carDetailData?.data?.base_site === "copart" && (
+                          <button className="bg-[#0E5DB8] hover:bg-[#0E5DB8]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
+                            Copart
+                          </button>
+                        )}
+                      </div>     
                       </div>
              
                     </div>

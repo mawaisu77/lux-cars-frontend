@@ -150,7 +150,7 @@ const Header = () => {
                   <input
                     type="text"
                     placeholder="Search for vehicle by Make, Model, Lot or VIN..."
-                    className="w-full p-2 md:p-[0.6vw] rounded-full bg-white text-sm md:text-18"
+                    className="w-full p-2 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-white text-sm md:text-18"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}
@@ -158,7 +158,7 @@ const Header = () => {
                   />
 
                   <button className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                    <BsSearch className="h-5 md:h-[0.2vw] w-5 md:w-[0.2vw]" />
+                    <BsSearch className="h-5 md:h-[1vw] w-5 md:w-[1vw]" />
                   </button>
                   {searchResults.length > 0 && ( // Render dropdown if there are results
                     <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-60 overflow-y-auto">
@@ -171,7 +171,7 @@ const Header = () => {
                             {car.models.map((model) => (
                               <div
                                 key={model}
-                                className="pl-4 py-2 hover:bg-gray-200 cursor-pointer "
+                                className="pl-4 py-2 md:py-[0.4vw] text-sm md:text-18 hover:bg-gray-200 cursor-pointer "
                                 onClick={() =>
                                   handleDropdownItemClick(car.make, model)
                                 }
@@ -219,7 +219,8 @@ const Header = () => {
               )}
             </div>
 
-            <nav className="relative flex items-center h-14  text-gray-300">
+
+            <nav className="relative flex items-center h-14 md:h-[4vw] text-gray-300">
               {Object.entries(menuData).map(([menuItem, menuItemData]) => (
                 <div
                   key={menuItem}
@@ -229,13 +230,13 @@ const Header = () => {
                 >
                   <Link
                     to={menuItemData.link}
-                    className="px-4 py-2 flex items-center gap-2 hover:text-white"
+                    className="px-4 py-2 md:px-[1.5vw] md:py-[0.4vw] text-sm md:text-18 flex items-center gap-2 hover:text-white"
                   >
                     {" "}
                     {/* Updated Link */}
                     {menuItem}
                     {menuItemData.items && (
-                      <BiChevronDown className="h-4 w-4" />
+                      <BiChevronDown className="h-4 w-4 md:h-[0.2vw] md:w-[0.2vw]" />
                     )}
                   </Link>
 
