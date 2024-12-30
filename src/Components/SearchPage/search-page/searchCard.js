@@ -137,8 +137,6 @@ function Card({ card }) {
     (option) => option.id === card?.drive
   );
 
-  console.log("--------------------------", card?.keys)
-
   return (
     <div className="h-[250px] md:h-[13.021vw] flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
       <div className="h-full flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  ">

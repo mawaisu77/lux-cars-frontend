@@ -146,10 +146,10 @@ function App() {
             />
 
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/how-works" element={<HowWorks />} />
+            <Route path="/how-it-works" element={<HowWorks />} />
             <Route path="/Fees" element={<Fees />} />
             <Route path="/help" element={<Help />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about-us" element={<About />} />
             <Route path="/privacy-policies" element={<Privacy />} />
             <Route path="/terms&conditions" element={<Term />} />
 

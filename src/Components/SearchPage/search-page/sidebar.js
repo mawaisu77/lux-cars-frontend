@@ -384,17 +384,21 @@ const Sidebar = () => {
   ]);
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const searchQuery = queryParams.get('search') || '';
-
+    console.log("searchQuery", searchQuery)
     // Update filters with the search query
     if (searchQuery) {
-      setAppliedFilters((prevFilters) => ({
+      const newFilters = {
+        ...appliedFilters,
+        search: searchQuery
+      };
+      setAppliedFilters(newFilters);
+      setSelectedFilters((prevFilters) => ({
         ...prevFilters,
-        search: searchQuery, // Add search query to filters
+        search: searchQuery
       }));
+      updateURL(newFilters);
     }
-  }, [location.search, setAppliedFilters, searchQuery]);
+  }, [location.search, setAppliedFilters, searchQuery, setSelectedFilters]);
 
   const resetFilters = () => {
     setSelectedFilters({
@@ -488,7 +492,7 @@ const Sidebar = () => {
     if (filterCategory === "make") {
       newFilters = {
         ...newFilters,
-        search: searchQuery,
+        search: "",
         make: filterValue,
         model: "",
       };
@@ -497,7 +501,7 @@ const Sidebar = () => {
     } else if (filterCategory === "model") {
       newFilters = {
         ...newFilters,
-        search: searchQuery,
+        search: "",
         model: filterValue,
       };
       setSelectedModel(filterValue);
@@ -507,21 +511,12 @@ const Sidebar = () => {
       filterCategory === "odometer_min" ||
       filterCategory === "odometer_max"
     ) {
-      console.log("filterValue filterCategory", filterValue, filterCategory);
       newFilters = {
         ...newFilters,
         search: searchQuery,
         [filterCategory]: filterValue,
       };
-      // Update state immediately
       setSelectedFilters(newFilters);
-      // setAppliedFilters({
-      //   ...newFilters,
-      //   auction_date_from: auctionDateFrom,
-      //   auction_date_to: auctionDateTo,
-      // });
-      // Use debounced URL update for numeric inputs
-      // debouncedUpdateURL(newFilters);
       updateURL(newFilters);
       return;
     } else if (filterCategory === "vehicle_type") {
@@ -548,8 +543,6 @@ const Sidebar = () => {
       auction_date_from: auctionDateFrom,
       auction_date_to: auctionDateTo,
     });
-
-    // Update URL immediately for non-numeric inputs
     updateURL(newFilters);
   };
 
@@ -874,6 +867,14 @@ const Sidebar = () => {
     }
   };
 
+  const handleCloseOdometerFilter = () => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      odometer_min: "",
+      odometer_max: "",
+    }));
+  };
+
   const handleCloseAuctionDateDropdown = () => {
     setIsOpen(false); // Close the auction date dropdown
     setSelectedOption(""); // Clear the selected auction date option
@@ -893,7 +894,6 @@ const Sidebar = () => {
     });
   };
 
-  // console.log("show filetsr == >", showFilterMob)
 
   return (
     <>
@@ -1350,10 +1350,32 @@ const Sidebar = () => {
 
             <div className="py-[2vh] px-[1vw] border-b-[2px] border-grey-200">
               <div className="flex flex-col gap-[0.5vw]">
+              <div className="flex items-center justify-between cursor-pointer">
+
                 <h1 className="text-[18px] space-x-2 lg:text-[1.1vw] text-left font-bold ">
                   Odometer 
                   <span className="text-[10px] text-gray-500"> (miles)</span>
                 </h1>
+                {
+                  (selectedFilters.odometer_min || selectedFilters.odometer_max) && (
+                    <svg
+                    onClick={handleCloseOdometerFilter}
+                    className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                  )
+                }
+                </div>
                 <Slider
                   value={[
                     parseInt(selectedFilters.odometer_min) || 0, // Ensure this is a number
