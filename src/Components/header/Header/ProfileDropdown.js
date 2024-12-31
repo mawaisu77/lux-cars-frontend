@@ -12,9 +12,13 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useLogout } from '../../../hooks/useLogout';
 
 export default function ProfileDropdown() {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -24,6 +28,18 @@ export default function ProfileDropdown() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogoutModal = () => {
+    document.getElementById("my_logout_modal").showModal();
+  };
+
+  const handleLogoout = () => {
+    logout();
+    navigate("/");
+    document.getElementById("my_logout_modal").close();
+  };
+
+
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -98,13 +114,37 @@ export default function ProfileDropdown() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogoutModal}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
       </Menu>
+      <dialog id="my_logout_modal" className="modal">
+          <div className="modal-box dark:bg-white">
+            <h3 className="text-gray-600 font-bold text-lg my-2">
+              Do you want to logout your account?
+            </h3>
+
+            <div className="flex gap-x-2 justify-center  mt-6">
+              <button
+                className=" text-green-600 w-[70px] py-1 border border-green-600 dark:bg-white rounded-md dark:hover:bg-green-600/80 hover:text-white duration-200"
+                onClick={handleLogoout}
+              >
+                Confirm
+              </button>
+              <button
+                className=" text-red-600 w-[70px] py-1 border border-red-600 dark:bg-white rounded-md dark:hover:bg-red-600/80 hover:text-white duration-200"
+                onClick={() =>
+                  document.getElementById("my_logout_modal").close()
+                }
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </dialog>
     </React.Fragment>
   );
 }
