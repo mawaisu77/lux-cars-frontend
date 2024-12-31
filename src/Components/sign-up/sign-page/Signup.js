@@ -148,6 +148,12 @@ const Signup = () => {
             onBlur={signupFormik.handleBlur}
             value={signupFormik.values.confirmPassword}
           />
+          <div>
+            {signupFormik.touched.confirmPassword &&
+            signupFormik.errors.confirmPassword ? (
+              <p className="text-[14px] text-red-700 text-left">Password did not match</p>
+            ) : null}
+          </div>
           <div className="w-[343px] lg:w-[34vw] flex justify-between">
             <div className="flex justify-between items-center gap-[0.5vw] text-[14px] lg:text-[0.8vw]">
               <input
@@ -169,7 +175,7 @@ const Signup = () => {
         <div className="text-[14px] lg:text-[0.7vw] font-urbanist mt-[5vh]">
           Already have an account?
           <Link to="/login">
-            <span className="text-[#ca0000] cursor-pointer">Sign in</span>
+            <span className="text-[#ca0000] cursor-pointer"> Sign in</span>
           </Link>
         </div>
         <BenefitsSection />

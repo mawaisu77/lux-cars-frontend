@@ -160,7 +160,7 @@ const LocalSearchSidebar = () => {
                   <input
                     type="text"
                     placeholder="Search Make"
-                    className="input input-bordered w-full mb-2"
+                    className="input input-bordered w-full mb-2 bg-white"
                     value={selectedFilters.make}
                     onChange={(e) => handleFilterChange("make", e.target.value)}
                   />
@@ -181,7 +181,7 @@ const LocalSearchSidebar = () => {
                   <input
                     type="text"
                     placeholder="Search Model"
-                    className="input input-bordered w-full mb-2"
+                    className="input input-bordered w-full mb-2 bg-white"
                     value={selectedFilters.model}
                     onChange={(e) =>
                       handleFilterChange("model", e.target.value)
@@ -204,7 +204,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex flex-col mt-2 pb-4">
                     <label className="text-lg text-left py-1">Year From</label>
                     <select
-                      className="input input-bordered w-full mb-2"
+                      className="input input-bordered w-full mb-2 bg-white"
                       value={selectedFilters.yearFrom}
                       onChange={(e) =>
                         handleFilterChange("yearFrom", e.target.value)
@@ -224,7 +224,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex flex-col mt-2 pb-4">
                     <label className="text-lg text-left py-1">Year To</label>
                     <select
-                      className="input input-bordered w-full mb-2"
+                      className="input input-bordered w-full mb-2 bg-white"
                       value={selectedFilters.yearTo}
                       onChange={(e) =>
                         handleFilterChange("yearTo", e.target.value)
@@ -269,7 +269,7 @@ const LocalSearchSidebar = () => {
                     <input
                       type="number"
                       placeholder="Enter Milage From"
-                      className="input input-bordered w-full mb-2"
+                      className="input input-bordered w-full mb-2 bg-white"
                       value={selectedFilters.milageFrom}
                       onChange={(e) =>
                         handleFilterChange("milageFrom", e.target.value)
@@ -280,7 +280,7 @@ const LocalSearchSidebar = () => {
                     <input
                       type="number"
                       placeholder="Enter Milage To"
-                      className={`input input-bordered w-full mb-2 ${
+                      className={`input input-bordered w-full mb-2 bg-white ${
                         milageError ? "border-red-500" : ""
                       }`}
                       value={selectedFilters.milageTo}
@@ -367,7 +367,7 @@ const LocalSearchSidebar = () => {
                         country={selectedFilters.carLocation}
                         value={selectedFilters.carState}
                         onChange={(e) => handleFilterChange("carState", e)}
-                        className="input input-bordered w-full mb-2"
+                        className="input input-bordered w-full mb-2 bg-white"
                         placeholder="Select state"
                       />
                     </div>
