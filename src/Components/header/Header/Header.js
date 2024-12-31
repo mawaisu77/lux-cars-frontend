@@ -150,7 +150,7 @@ const Header = () => {
                   <input
                     type="text"
                     placeholder="Search for vehicle by Make, Model, Lot or VIN..."
-                    className="w-full p-2 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-white text-sm md:text-18"
+                    className="w-full p-2 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-gray-100 text-sm md:text-18"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}
@@ -236,7 +236,7 @@ const Header = () => {
                     {/* Updated Link */}
                     {menuItem}
                     {menuItemData.items && (
-                      <BiChevronDown className="h-4 w-4 md:h-[0.2vw] md:w-[0.2vw]" />
+                      <BiChevronDown className="h-4 w-4 md:h-[1vw] md:w-[1vw]" />
                     )}
                   </Link>
 
