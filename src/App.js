@@ -65,8 +65,7 @@ function App() {
             localStorage.setItem(`loginTime_${user.email}`, now);
           } else {
             const elapsed = now - loginTime;
-            if (elapsed >= 10000) {
-              // For testing purpose time is set to 10 seconds
+            if (elapsed >= 7200000) {
               setShowReviewPopup(true);
             }
           }
