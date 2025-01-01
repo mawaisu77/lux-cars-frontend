@@ -213,7 +213,7 @@ const Header = () => {
                   <input
                     type="text"
                     placeholder={`${isMobile ? "Search here..." : "Search for vehicle by Make, Model, Lot or VIN..."}`}
-                    className="w-full p-1 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-gray-100 text-xs md:text-18"
+                    className="w-full p-1 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-gray-100/95 text-xs md:text-18"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}

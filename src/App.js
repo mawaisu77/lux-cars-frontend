@@ -152,13 +152,13 @@ function App() {
             <Route path="/privacy-policies" element={<Privacy />} />
             <Route path="/terms&conditions" element={<Term />} />
 
-            <Route path="/loan-application" element={
+            <Route path="/apply-for-loan" element={
               <ProtectedRoute>
               <Loan />
               </ProtectedRoute>
               } />
             <Route
-              path="/upload-car"
+              path="/upload-local-car"
               element={
                 <ProtectedRoute>
                   <UploadVehiclePage />
