@@ -10,11 +10,17 @@ import useTimer from "../../../hooks/useTimer";
 import TimeLeftCounter from "../../vehicle/Vehicle-page/TimeLeftCounter";
 import CurrencyInput from "react-currency-input-field";
 import { TiLockClosed } from "react-icons/ti";
+import { statusOptions } from "../../../utils/filtersData/statusOptions";
+import { RxCopy } from "react-icons/rx";
+import { toast } from "react-toastify";
+import CopyURLModal from "./CopyURLModal";
 import TimeAgo from "react-timeago";
+import { FaLink } from "react-icons/fa";
 import {
   placeBidOnLocalCar,
   getAllBidsLocalCar,
 } from "../../../hooks/useGetAllBidsOnLocalCars";
+import SimilarCars from "./similarCars";
 
 const LocalVehicleDetail = () => {
   const { id } = useParams();
@@ -78,6 +84,10 @@ const LocalVehicleDetail = () => {
     fetchData();
   }, [carDetailData]);
 
+  const currentStatus = statusOptions.find(
+    (option) => option.id === carDetailData?.data?.car?.titlesStatus
+  );
+
   return (
     <>
       <div className="lg:block hidden bg-vehicle">
@@ -114,8 +124,8 @@ const LocalVehicleDetail = () => {
       )}
 
       {carDetailData && (
-        <>
-          <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[74vw] mt-[100px] mb-[20px]">
+        <div className="bg-gray-100">
+          <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[74vw] pt-[100px] pb-[20px]">
             <div className="w-full lg:w-[36vw] ">
               {carDetailData?.data?.car?.carImages ? (
                 <div>
@@ -201,16 +211,51 @@ const LocalVehicleDetail = () => {
 
             <div className="w-full lg:w-[33vw]">
               <div>
-                <div className="flex   justify-between mt-[50px] lg:mb-[3vh]">
-                  <div className="flex   justify-center items-center gap-2">
+                <div className="flex justify-between mt-[50px] lg:mb-[3vh]">
+                  <div className="flex w-full justify-left items-center gap-2 rounded-[0.5vw] bg-white">
+                    {currentStatus && (
+                      <div
+                        className="w-4 h-4 lg:w-[1.5vw] lg:h-[1.5vw] rounded-full ml-3"
+                        style={{ backgroundColor: currentStatus.hex }}
+                      >
+                        <span
+                          title={currentStatus.id}
+                          className="text-white w-full h-full text-16 font-bold flex items-center justify-center"
+                        >
+                          {currentStatus.letter}
+                        </span>
+                      </div>
+                    )}
                     <p className="lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
                       {carDetailData?.data?.car?.make}{" "}
                       {carDetailData?.data?.car?.model}
                     </p>
                   </div>
                 </div>
+                <div className="flex justify-between bg-white rounded-[0.5vw] p-2 lg:mb-[2vh]">
+                  <div className="flex justify-between w-full  items-center ">
+                    <div className="font-urbanist bg-yellow-500/30 px-[1vw] py-[0.2vw] rounded-[0.5vw] font-semibold flex gap-x-2">
+                      <span className=" text-black">Buy now price</span>
+                      <span className="text-green-600 font-semibold">
+                        {carDetailData?.data?.car?.buyNowPrice &&
+                        carDetailData?.data?.car?.buyNowPrice === 0
+                          ? `$${carDetailData?.data?.car?.buyNowPrice}`
+                          : "Not Available"}
+                      </span>
+                    </div>
+                    <button
+                      title="Copy URL"
+                      onClick={() =>
+                        document.getElementById("copy_url_modal").showModal()
+                      }
+                      className=" bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg"
+                    >
+                      <FaLink className="text-20" />
+                    </button>
+                  </div>
+                </div>
                 <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
-                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
+                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
                       <PiUsersFill
                         color="white"
@@ -219,12 +264,12 @@ const LocalVehicleDetail = () => {
                     </div>
                     <div className="text-left">
                       <p className="lg:text-[0.7vw] text-[#7a798a]">Owned by</p>
-                      <p className="lg:text-[0.9vw] font-urbanist font-semibold">
+                      <p className="lg:text-[0.9vw] font-urbanist font-semibold text-green-600 bg-green-500/30 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]">
                         {carDetailData?.data?.user?.username}
                       </p>
                     </div>
                   </div>
-                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-[#f8f8f8]">
+                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center p-2 rounded-[0.5vw] lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
                       <CgFileDocument
                         color="white"
@@ -235,22 +280,32 @@ const LocalVehicleDetail = () => {
                       <p className="lg:text-[0.7vw] text-[#7a798a]">
                         Sale Platforms
                       </p>
-                      <p className="lg:text-[0.9vw] font-urbanist font-semibold">
-                        {carDetailData?.data?.car?.isCarForSale}
+                      <p className="lg:text-[0.9vw] font-urbanist font-semibold text-green-600 bg-green-500/30 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]">
+                        Lux Cars
                       </p>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex   flex-col lg:flex-row gap-2 justify-between">
-                  <div className="bg-[#f8f8f8] flex flex-col justify-evenly w-full lg:w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
+                  <div className="bg-white flex flex-col justify-evenly w-full lg:w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
                     <div className="flex items-center">
                       <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
                         VIN :
                       </p>
-                      <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">
+                      <p className="font-urbanist font-bold lg:text-[0.97vw] mx-2">
                         {carDetailData?.data?.car?.vin}
                       </p>
+                      <RxCopy
+                        title="Copy VIN"
+                        className="cursor-pointer py-[0.1vh] text-[14px] text-gray-600 hover:text-gray-800"
+                        onClick={() => {
+                          navigator.clipboard.writeText(
+                            carDetailData?.data?.car?.vin
+                          );
+                          toast.success("Copied to clipboard!");
+                        }}
+                      />
                     </div>
                     <div className="flex items-center">
                       <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
@@ -272,7 +327,7 @@ const LocalVehicleDetail = () => {
                     </div>
                   </div>
                   <div className="flex flex-col  lg:w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
-                    <div className="flex flex-col bg-[#f8f8f8] px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
+                    <div className="flex flex-col bg-white px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
                       <div className="flex items-center">
                         <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
                           Current Bid:
@@ -319,7 +374,7 @@ const LocalVehicleDetail = () => {
                       name="minPrice"
                       placeholder="enter your bid ammount in usd"
                       prefix="$"
-                      className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
+                      className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh] bg-white`}
                       defaultValue={0}
                       decimalsLimit={2}
                       value={bidAmount}
@@ -344,7 +399,7 @@ const LocalVehicleDetail = () => {
                       Bid History
                     </h2>
                   </div>
-                  <div className="h-[400px] w-full overflow-auto shadow-md p-[1.5vw] ">
+                  <div className="h-[400px] w-full overflow-auto shadow-md p-[1.5vw] bg-white">
                     <div className="">
                       {allBids?.data?.data && allBids?.data?.data.length ? (
                         allBids?.data?.data
@@ -412,7 +467,19 @@ const LocalVehicleDetail = () => {
               </div>
             </div>
           </div>
-        </>
+          <div>
+            <SimilarCars
+              make={carDetailData?.data?.car?.make}
+              model={carDetailData?.data?.car?.model}
+              transmission={carDetailData?.data?.car?.transmission}
+              carLocation={carDetailData?.data?.car?.carLocation}
+              carState={carDetailData?.data?.car?.carState}
+            />
+          </div>
+          <CopyURLModal
+            closeModal={() => document.getElementById("copy_url_modal").close()}
+          />
+        </div>
       )}
     </>
   );

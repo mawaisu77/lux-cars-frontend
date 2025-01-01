@@ -9,6 +9,9 @@ import "swiper/css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
+import { RxCopy } from "react-icons/rx";
+import { toast } from "react-toastify";
+import { statusOptions } from "../../../utils/filtersData/statusOptions";
 
 function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   const [totalPages, setTotalPages] = useState([]);
@@ -60,7 +63,7 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
       <div className="flex items-center space-x-2 mx-auto my-8">
         <button onClick={handlePrev}>&lt;&lt;</button>
 
-        {totalPages && 
+        {totalPages &&
           totalPages
             .slice(currentPageRange.start - 1, currentPageRange.end)
             .map((page) => (
@@ -120,6 +123,9 @@ function Card({ vehicle }) {
       prevIndex === 0 ? vehicle.carImages.length - 1 : prevIndex - 1
     );
   };
+  const currentStatus = statusOptions.find(
+    (option) => option.id === vehicle?.titlesStatus
+  );
   return (
     <div className="flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4">
       <Swiper
@@ -173,9 +179,16 @@ function Card({ vehicle }) {
 
           <div className="flex flex-col md:flex-row lg:flex-row w-[26.195vw] justify-between leading-[3vh]">
             <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[13px] lg:text-[0.875vw] py-1">
-              <p className="w-full">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">VIN: </span>
                 {vehicle.vin}
+                <RxCopy
+                  className="cursor-pointer py-[0.1vh] text-[14px] md:text-18 text-gray-600 hover:text-gray-800"
+                  onClick={() => {
+                    navigator.clipboard.writeText(vehicle?.vin);
+                    toast.success("Copied to clipboard!");
+                  }}
+                />
               </p>
               <p className="w-full">
                 <span className="font-semibold">Year: </span>
@@ -195,9 +208,21 @@ function Card({ vehicle }) {
                 <span className="font-semibold">Engine Type: </span>
                 {vehicle.transmission || "Not specified"}
               </p>
-              <p className="w-full">
+              <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Status: </span>
-                {vehicle.status || "Not specified"}
+                <span
+                  className="text-nowrap font-bold"
+                  style={{ color: currentStatus?.hex }}
+                >
+                  {vehicle?.titlesStatus}
+                </span>
+                <span
+                  title={currentStatus.id}
+                  style={{ backgroundColor: currentStatus?.hex }}
+                  className="text-white w-5 h-5 flex items-center justify-center text-14 font-bold  rounded-full"
+                >
+                  {currentStatus.letter}
+                </span>
               </p>
             </div>
           </div>

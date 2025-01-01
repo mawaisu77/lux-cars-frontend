@@ -150,7 +150,7 @@ const LocalCarsCard = ({ card }) => {
               </div>
             </div>
           </div>
-          <Link to={`local-vehicle-detail/${card.id}`}>
+          <Link to={`/local-vehicle-detail/${card.id}`}>
           <button className="w-full text-[14px] sm:text-16 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] sm:mt-[1.5vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
            { "Bid Now"}
             </button>
