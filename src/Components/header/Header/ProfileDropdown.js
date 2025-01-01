@@ -11,7 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -105,13 +105,15 @@ export default function ProfileDropdown({user}) {
           {user?.username.charAt(0)}
         </Avatar>
       }  
-      <div className='flex flex-col'>
+     { user ? <div className='flex flex-col'>
         {user?.username}
         {/* Added user email below the username */}
         <Typography variant="body2" color="text.secondary">
           {user?.email}
         </Typography>
         </div>
+        : <Link to="/login" className='text-gray-600'>{`Please login to continue`}</Link>
+        }
       </MenuItem>
 
         <Divider />
