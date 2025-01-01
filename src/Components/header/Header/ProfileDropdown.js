@@ -11,13 +11,14 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-export default function ProfileDropdown() {
+
+export default function ProfileDropdown({user}) {
   const navigate = useNavigate(); 
-  const { user } = useAuthContext();
   const { logout } = useLogout();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -44,7 +45,7 @@ export default function ProfileDropdown() {
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
 
-        <Tooltip title="Implementing Soon">
+        <Tooltip title="My Account">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -53,7 +54,9 @@ export default function ProfileDropdown() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }}>
+            {user ? user.username.charAt(0) : 'X'} 
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -95,18 +98,30 @@ export default function ProfileDropdown() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={() => { handleClose(); navigate('/user/account/profile'); }}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={() => { handleClose(); navigate('/user/account/profile'); }}>
-          <Avatar /> My account
-        </MenuItem>
+ 
+   <MenuItem >
+      {
+        user?.profilePicture ? <Avatar src={user?.profilePicture || ''} /> : <Avatar sx={{ width: 32, height: 32 }}>
+          {user?.username.charAt(0)}
+        </Avatar>
+      }  
+     { user ? <div className='flex flex-col'>
+        {user?.username}
+        {/* Added user email below the username */}
+        <Typography variant="body2" color="text.secondary">
+          {user?.email}
+        </Typography>
+        </div>
+        : <Link to="/login" className='text-gray-600'>{`Please login to continue`}</Link>
+        }
+      </MenuItem>
+
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { handleClose(); navigate('/user/account/profile'); }}>
           <ListItemIcon>
-            <PersonAdd fontSize="small" />
+            <AccountCircleIcon fontSize="small"  />
           </ListItemIcon>
-          Add another account
+          My Account
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>

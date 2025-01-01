@@ -218,8 +218,6 @@ const Header = () => {
                 </>
               )}
             </div>
-
-
             <nav className="relative flex items-center h-14 md:h-[4vw] text-gray-300">
               {Object.entries(menuData).map(([menuItem, menuItemData]) => (
                 <div
@@ -318,11 +316,7 @@ const Header = () => {
               ))}
 
               <div className="ml-auto flex items-center gap-4">
-                <AccountMenu />
-                {/* <div className="flex items-center text-white">
-                  <Phone className="h-4 w-4 mr-2" />
-                  +11 111 111 111
-                </div> */}
+                <AccountMenu user={user} />
               </div>
             </nav>
           </div>
