@@ -197,7 +197,7 @@ const Header = () => {
         }}
       >
         <header className="bg-black/90">
-          <div className="w-full sm:max-w-[95vw] max-w-[85vw] mx-auto md:px-[1.5vw]">
+          <div className="w-[100vw] max-w-[85vw] mx-auto md:px-[1.5vw]">
             <div className="flex w-full items-center justify-between h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
               <Link to="/">
                 <img
@@ -212,7 +212,7 @@ const Header = () => {
                 <div className="relative" ref={dropdownRef}>
                   <input
                     type="text"
-                    placeholder="Search for vehicle by Make, Model, Lot or VIN..."
+                    placeholder={`${isMobile ? "Search here..." : "Search for vehicle by Make, Model, Lot or VIN..."}`}
                     className="w-full p-1 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-gray-100 text-xs md:text-18"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -264,7 +264,7 @@ const Header = () => {
                   <div className="flex items-center gap-4 md:gap-[1.5vw] text-sm md:text-18">
                     <Link to="/login">
                       <button
-                        className={` focus:outline-none text-white  lg:text-18 hover:text-white/80 duration-200`}
+                        className={` focus:outline-none text-white text-xs md:text-18 hover:text-white/80 duration-200`}
                       >
                         Log In
                       </button>
@@ -272,7 +272,7 @@ const Header = () => {
 
                     <Link to="/signup">
                       <button
-                        className={` focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-6 md:px-[1.5vw] py-2 md:py-[0.4vw] rounded-full text-white lg:text-18  duration-200`}
+                        className={` focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18  duration-200`}
                       >
                         Sign Up
                       </button>
