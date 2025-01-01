@@ -17,6 +17,7 @@ import { FaTag } from "react-icons/fa";
 import { HiUserGroup } from "react-icons/hi";
 import registerDealerValidations from "../../../utils/validations/register-dealer-validations";
 import { RegionDropdown } from "react-country-region-selector";
+import { titleStatusOptions } from "../data/titleStatusOptions";
 
 const UploadVehicle = () => {
   const { dealerData, dealerLoading, dealerError } = useGetCarDealer(
@@ -65,11 +66,6 @@ const UploadVehicle = () => {
 
   const transmissionOptions = ["Automatic", "Manual"];
 
-  const titleStatusOptions = [
-    { value: "status_1", label: "status_1" },
-    { value: "status_2", label: "status_2" },
-    { value: "status_3", label: "status_3" },
-  ];
   const carTitledOptions = [
     { value: "bahamas", label: "Bahamas" },
     { value: "usa", label: "USA" }
@@ -83,11 +79,7 @@ const UploadVehicle = () => {
     { value: "central_eleuthera", label: "Central Eleuthera" },
     // Add more Bahamas states as needed
   ];
-  // const titleStatusOptions = [
-  //   { value: "stationary", label: "Stationary" },
-  //   { value: "run&drive", label: "Run & Drive" },
-  //   { value: "starts", label: "Starts" },
-  // ];
+
 
   const customStyles = {
     control: (defaultStyles) => ({

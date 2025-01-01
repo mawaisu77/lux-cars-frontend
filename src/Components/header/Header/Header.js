@@ -197,7 +197,7 @@ const Header = () => {
         }}
       >
         <header className="bg-black/90">
-          <div className="w-full sm:max-w-[95vw] max-w-[85vw] mx-auto md:px-[1.5vw]">
+          <div className="w-[100vw] max-w-[85vw] mx-auto md:px-[1.5vw]">
             <div className="flex w-full items-center justify-between h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
               <Link to="/">
                 <img
