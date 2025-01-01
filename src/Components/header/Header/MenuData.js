@@ -50,5 +50,3 @@ export const menuData = {
     'About Us': { link: '/about-us' }, 
     'Contact': { link: '/contact-us' } 
   }
-
-
