@@ -11,6 +11,9 @@ import AccountMenu from "./ProfileDropdown";
 import { AppBar, Toolbar, IconButton, Drawer } from '@mui/material'; // Import MUI components
 import MenuIcon from '@mui/icons-material/Menu'; // Import Menu icon
 import { useMediaQuery } from '@mui/material'; // Import useMediaQuery from MUI
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'; // Import Accordion components
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; // Import ExpandMore icon
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -129,19 +132,59 @@ const Header = () => {
     window.location.href = url; // Use window.location.href for navigation
   };
 
+
   return (
     <>
-      {/* Sidebar for mobile view */}
-      <Drawer anchor="left" open={sidebarOpen} onClose={toggleSidebar}>
-        <div className="w-[200px] p-4">
-          {/* Added separate links for the specified pages */}
-          <Link to="/how-it-works" className="block py-2 text-gray-800">How It Works</Link>
-          <Link to="/help" className="block py-2 text-gray-800">Help</Link>
-          <Link to="/contact-us" className="block py-2 text-gray-800">Contact Us</Link>
-          <Link to="/about-us" className="block py-2 text-gray-800">About</Link>
-        </div>
-      </Drawer>
-     
+<Drawer anchor="left" open={sidebarOpen} onClose={toggleSidebar}>
+  <div className="w-[200px] p-4">
+    {/* Accordion for "Search & Bid" */}
+    <Accordion sx={{ boxShadow: 'none', padding: 0, margin: 0 }}>
+    <AccordionSummary 
+        expandIcon={<ExpandMoreIcon />} 
+        sx={{ padding: '0', minHeight: '0', height: 'auto' }} // Remove padding and set height to auto
+      >        <span className="block py-2 text-gray-800">Search & Bid</span>
+      </AccordionSummary>
+      <AccordionDetails sx={{ padding: 0 }}>
+        {menuData['Search & Bid'].items.map((item) => (
+          <Accordion key={item.key}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <span className="block py-1 text-gray-600">{item.name}</span>
+            </AccordionSummary>
+            <AccordionDetails>
+              {Object.entries(item.submenu).map(([submenuTitle, submenuItems]) => (
+                <div key={submenuTitle}>
+                  <h5 className="text-gray-400 my-0.5">{submenuTitle}</h5>
+                  {submenuItems.map((submenuItem, index) => (
+                    <Link
+                      key={index}
+                      to="#"
+                      className="block py-1 text-gray-600 pl-4 hover:text-blue-500"
+                      onClick={() => handleNavigationFilter(item.key, submenuItem.value)} // Adjust as needed
+                    >
+                      {submenuItem.label}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </AccordionDetails>
+    </Accordion>
+
+    {/* Simple Links for Other Menu Items */}
+    {Object.entries(menuData).map(([menuItem, menuItemData]) => {
+      if (menuItem !== 'Search & Bid') {
+        return (
+          <Link key={menuItem} to={menuItemData.link} className="block py-4 text-gray-800">
+            {menuItem}
+          </Link>
+        );
+      }
+      return null; // Skip "Search & Bid" since it's already handled
+    })}
+  </div>
+</Drawer>
 
       {isFocused && (
         <div className="fixed top-0 inset-0 bg-black bg-opacity-50 z-40"></div>
