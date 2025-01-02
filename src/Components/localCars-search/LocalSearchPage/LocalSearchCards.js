@@ -217,11 +217,11 @@ function Card({ vehicle }) {
                   {vehicle?.titlesStatus}
                 </span>
                 <span
-                  title={currentStatus.id}
+                  title={currentStatus?.id}
                   style={{ backgroundColor: currentStatus?.hex }}
                   className="text-white w-5 h-5 flex items-center justify-center text-14 font-bold  rounded-full"
                 >
-                  {currentStatus.letter}
+                  {currentStatus?.letter}
                 </span>
               </p>
             </div>
@@ -231,7 +231,7 @@ function Card({ vehicle }) {
           <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw]  text-center sm:text-left">
             <div className="flex flex-col  w-full  gap-[1vw] p-[1vw]  rounded-lg ">
               <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
-                <a onClick={() => handleBidNow(vehicle.id)} className="w-full">
+                <a onClick={() => handleBidNow(vehicle?.id)} className="w-full">
                   <button className=" w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
                     BID NOW
                   </button>
