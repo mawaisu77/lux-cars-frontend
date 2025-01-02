@@ -117,7 +117,7 @@ const HistoryCard = ({ card, isBuy = false }) => {
           <div className="pt-[1vw]">
             <div className="flex">
               <div className="flex justify-between items-center w-full">
-                <div className="flex flex-col gap-y-[0.2vw] lg:text-18 ">
+                <div className="flex flex-col gap-y-[0.2vw] lg:text-18 w-full">
                   {/* <Link to={`vehicle-detail/${card.lot_id}`}> */}
                   <div className="flex justify-between  font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
                     "
@@ -128,12 +128,6 @@ const HistoryCard = ({ card, isBuy = false }) => {
                   </div>
                   {/* </Link> */}
 
-                  <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-14">
-                    <p className="py-[0.1vh] font-semibold">Purchase Price:</p>
-                    <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">
-                      ${card?.sale_history[0]?.purchase_price}
-                    </p>
-                  </div>
                   <div className="flex gap-x-[0.8vw] text-[12px] lg:text-14">
                     <p className="py-[0.1vh]">Status:</p>
                     <p
@@ -152,7 +146,7 @@ const HistoryCard = ({ card, isBuy = false }) => {
                       )}
                     </p>
                   </div>
-                  {card.currentBid && (
+                  {/* {card.currentBid && (
                     <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-14">
                       <p className="py-[0.1vh] font-semibold">Current Bid:</p>
                       <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">
@@ -164,7 +158,13 @@ const HistoryCard = ({ card, isBuy = false }) => {
                           : null}
                       </p>
                     </div>
-                  )}
+                  )} */}
+                   <div className="w-full flex flex-col justify-center items-center bg-red-500/5  my-[0.2vw] py-[0.2vw] text-[12px] lg:text-15 rounded-md">
+                    <p className=" font-semibold">Final Bid</p>
+                    <p className=" font-semibold text-red-600">
+                      ${card?.sale_history[0]?.purchase_price}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
