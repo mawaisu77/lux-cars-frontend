@@ -1323,7 +1323,7 @@ const UploadVehicle = () => {
           <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
               <label className="font-bold text-[18px] text-left">
-                Where is the title's status?
+                What is the title's status?
               </label>
               <Select
                 value={titleStatusOptions.find(
