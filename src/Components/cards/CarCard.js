@@ -174,6 +174,16 @@ const CarCard = ({ card, isBuy = false }) => {
                 />
               </div>
             )}
+            {card?.base_site === "iaai" && (
+              <button className="bg-[#D91E1E] absolute top-[0.2vw] left-[0.8vw] hover:bg-[#D91E1E]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
+                IAAI
+              </button>
+            )}
+            {card?.base_site === "copart" && (
+              <button className="bg-[#0E5DB8] absolute top-[0.2vw] left-[0.8vw] hover:bg-[#0E5DB8]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
+                Copart
+              </button>
+            )}
 
             <Swiper
             

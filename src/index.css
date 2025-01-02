@@ -136,7 +136,7 @@ body {
 /* Apply styles to the animated text */
 .animated-text {
   color: transparent;
-  -webkit-text-stroke: 2px white;
+  -webkit-text-stroke: 1px white;
   /* animation: strokeColorChange 5s infinite; */
   /* transition: transform 1s ease; */
   cursor: pointer;

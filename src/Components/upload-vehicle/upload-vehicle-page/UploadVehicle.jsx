@@ -57,10 +57,12 @@ const UploadVehicle = () => {
   const [transmissionIsOpen, setTransmissionIsOpen] = useState(false);
 
   const [imagePreview, setImagePreview] = useState(null);
-  const fileInputRef = useRef(null);
-
-  const filesInputRef = useRef(null);
   const [imagePreviews, setImagePreviews] = useState([]);
+  const [imageCarDocuments, setImageCarDocuments] = useState([]);
+
+  const fileInputRef = useRef(null);
+  const filesInputRef = useRef(null);
+  const filesCarDocumentsRef = useRef(null);
 
   const options = ["Less than 10", "10-50", "50-100", "More than 100"];
 
@@ -148,6 +150,7 @@ const UploadVehicle = () => {
 
     dealershipLicense: null,
     carImages: [],
+    carDocuments: [],
   });
 
   const handleOptionClick = (option) => {
@@ -204,6 +207,7 @@ const UploadVehicle = () => {
       },
     }));
   };
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -457,6 +461,10 @@ const UploadVehicle = () => {
     filesInputRef.current.click();
   };
 
+  const handleUploadClicksCarDocuments = () => {
+    filesCarDocumentsRef.current.click();
+  };
+
   const handleFileChanges = (e) => {
     const files = Array.from(e.target.files);
     const newFiles = files.map((file) => ({
@@ -474,12 +482,39 @@ const UploadVehicle = () => {
     ]);
   };
 
+  const handleFileChangesCarDocuments = (e) => {
+    const files = Array.from(e.target.files);
+    const newFiles = files.map((file) => ({
+      file,
+      preview: URL.createObjectURL(file),
+    }));
+
+    setFormData((prevData) => ({
+      ...prevData,
+      carDocuments: [...prevData.carDocuments, ...files],
+    }));
+    setImageCarDocuments((prevPreviews) => [
+      ...prevPreviews,
+      ...newFiles.map((f) => f.preview),
+    ]);
+  };
+
   const handleCancelImages = (index) => {
     setFormData((prevData) => ({
       ...prevData,
       carImages: prevData.carImages.filter((_, i) => i !== index),
     }));
     setImagePreviews((prevPreviews) =>
+      prevPreviews.filter((_, i) => i !== index)
+    );
+  };
+
+  const handleCancelCarDocuments = (index) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      carDocuments: prevData.carDocuments.filter((_, i) => i !== index),
+    }));
+    setImageCarDocuments((prevPreviews) =>
       prevPreviews.filter((_, i) => i !== index)
     );
   };
@@ -1288,7 +1323,7 @@ const UploadVehicle = () => {
           <div className="grid md:grid-cols-3 w-full">
             <div className="flex flex-col items-start gap-y-2 mt-2 w-full">
               <label className="font-bold text-[18px] text-left">
-                Where is the title's status?
+                What is the title's status?
               </label>
               <Select
                 value={titleStatusOptions.find(
@@ -1409,6 +1444,64 @@ const UploadVehicle = () => {
               <button
                 type="button"
                 onClick={handleUploadClicks}
+                className="border rounded-full bg-[#EEECFF] font-bold text-[#CA0000]  py-2 px-4"
+              >
+                Upload files
+              </button>
+            </label>
+          </div>
+
+          {/* Documents images */}
+          
+          <div className="flex flex-col items-start gap-y-4">
+            <label className="font-bold text-[18px]">
+              Please upload at maximum 6 photos of Your documents.
+            </label>
+            <h5 className="text-gray-500 text-left">
+              *To learn more check our photo guide.
+            </h5>
+          </div>
+          <div className="flex items-center justify-center w-full flex-wrap gap-4">
+            {imageCarDocuments.map((preview, index) => (
+              <div key={index} className="relative">
+                <img
+                  src={preview}
+                  alt={`Uploaded preview ${index + 1}`}
+                  style={{ width: "auto", height: "70px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => handleCancelCarDocuments(index)}
+                  className="absolute text-xs top-0 right-0 border rounded-full bg-red-180 font-bold text-[#CA0000]  py-0.5 px-1.5 mt-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-center w-full ">
+            <label
+              htmlFor="dropzone-files-car-documents"
+              className="flex items-center justify-between w-full py-8 px-6 border-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100 "
+            >
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-gray-500">
+                  PNG, JPG, JPEG or WEBP. Max 180mb.
+                </p>
+              </div>
+              <input
+                id="dropzone-files-car-documents"
+                name="carImages"
+                type="file"
+                multiple
+                className="hidden"
+                onChange={handleFileChangesCarDocuments}
+                ref={filesCarDocumentsRef}
+              />
+              <button
+                type="button"
+                onClick={handleUploadClicksCarDocuments}
                 className="border rounded-full bg-[#EEECFF] font-bold text-[#CA0000]  py-2 px-4"
               >
                 Upload files
