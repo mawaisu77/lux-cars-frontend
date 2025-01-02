@@ -71,6 +71,33 @@ export const getProfile = async () => {
     }
   };
 
+  export const getSavedLocalCarsIds = async () => {
+    try {
+      const response = await baseService.get('saved-cars/get-user-saved-local-cars-ids');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const saveUserLocalCars = async (id) => {
+    try {
+      const response = await baseService.post('saved-cars/save-local-car', {localCarsID:id});
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const deleteSavedLocalCar = async (id) => {
+    try {
+      const response = await baseService.put(`saved-cars/delete-local-car`, {localCarsID:id});
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   export const getAllLocalBids = async () => {
     try {
       const response = await baseService.get('local-cars-bids/get-user-all-bids');
