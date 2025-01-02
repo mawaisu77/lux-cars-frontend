@@ -146,6 +146,7 @@ const UploadVehicle = () => {
       referral: "",
       carLocation: "",
       carState: "",
+      minPrice: "",
     },
 
     dealershipLicense: null,

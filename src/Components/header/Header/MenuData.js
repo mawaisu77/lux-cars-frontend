@@ -49,6 +49,6 @@ export const menuData = {
     'Help': { link: '/help' }, 
     'About Us': { link: '/about-us' }, 
     'Contact': { link: '/contact-us' }, 
-    'Upload Car': { link: '/upload-local-car' }, 
+    'Sell Your Car': { link: '/upload-local-car' }, 
     'Apply for loan': { link: '/apply-for-loan' } 
   }

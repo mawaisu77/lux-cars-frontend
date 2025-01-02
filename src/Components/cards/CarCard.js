@@ -10,9 +10,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import {
-  FreeMode,
   Navigation,
-  Thumbs,
   Autoplay,
   Pagination,
 } from "swiper/modules";
@@ -34,7 +32,7 @@ const CarCard = ({ card, isBuy = false }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const { user } = useAuthContext();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { handleSaveCar } = useSaveCar();
   const { deleteSavedCar } = useDeleteSaveCar();
   const { savedIds, loading, error, refetchSavedIds } = useSavedCars();
