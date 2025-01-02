@@ -113,16 +113,16 @@ const Bid = () => {
           <div class="absolute inset-0 bg-black opacity-50"></div>
         </div>
 
-        <div class="relative mt-24 md:mt-[130px] z-10 flex flex-col justify-center items-center h-full text-center">
-          <div className="mx-auto"></div>
-          <h1 class="md:text-56 text-[32px] font-bold font-urbanist leading-tight mb-[2vh]">
-            Bid, Buy, Drive
-          </h1>
-          <div className="flex md:flex-row flex-col md:text-56 text-[30px] font-bold font-urbanist md:gap-x-[0.5vw]">
+        <div class="relative mt-24 md:mt-[13vw] z-10 flex flex-col justify-center items-center h-full text-center">
+      
+          <div className="flex md:flex-row flex-col md:text-52 text-[30px] font-bold font-urbanist md:gap-x-[0.5vw]">
             <span className="animated-text"> Online Car Auctions </span>
             <span className=""> With Home Delivery!</span>
           </div>
-          <p class="md:text-20 text-[20px] text-gray-300 my-[2.5vh]">
+          <h1 class="md:text-52 text-[32px] font-bold font-urbanist leading-tight mb-[2vh]">
+            Bid, Buy, Drive
+          </h1>
+          <p class="md:text-20 text-[20px] text-gray-300 my-[1vw] ">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmo
           </p>
