@@ -51,6 +51,7 @@ const UploadVehicle = () => {
     isCarForSale: false,
     carTitledInfo: false,
     minPrice: false,
+    buyNowPrice: false,
   });
 
   const [isOpen, setIsOpen] = useState(false);
@@ -147,6 +148,7 @@ const UploadVehicle = () => {
       carLocation: "",
       carState: "",
       minPrice: "",
+      buyNowPrice: "",
     },
 
     dealershipLicense: null,
@@ -208,7 +210,6 @@ const UploadVehicle = () => {
       },
     }));
   };
-
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -279,6 +280,7 @@ const UploadVehicle = () => {
     CarDetails.append("carTitledInfo", formData.carDetails.carTitledInfo);
     CarDetails.append("titlesStatus", formData.carDetails.titlesStatus);
     CarDetails.append("minPrice", formData.carDetails.minPrice);
+    CarDetails.append("buyNowPrice", formData.carDetails.buyNowPrice);
     CarDetails.append("referral", formData.carDetails.referral);
 
     // array fields
@@ -287,6 +289,9 @@ const UploadVehicle = () => {
     });
     formData.carImages.forEach((image, index) => {
       CarDetails.append(`carImages`, image);
+    });
+    formData.carDocuments.forEach((image, index) => {
+      CarDetails.append(`carDocuments`, image);
     });
 
     // =====================================================================================
@@ -454,6 +459,15 @@ const UploadVehicle = () => {
       carDetails: {
         ...prevData.carDetails,
         minPrice: value,
+      },
+    }));
+  };
+  const handleBuyNowPriceChange = (value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      carDetails: {
+        ...prevData.carDetails,
+        buyNowPrice: value,
       },
     }));
   };
@@ -1387,6 +1401,54 @@ const UploadVehicle = () => {
                   required={selectedOptions.minPrice ? true : false}
                   value={formData.carDetails.minPrice}
                   onValueChange={(value) => handleMinPriceChange(value)}
+                />
+              </div>
+            </div>
+          )}
+
+             {/*=========================== Buy Now Price ===========================*/}
+             <h1 className="text-3xl font-bold text-left mt-8 text-[30px]">
+            Buy Now Price
+          </h1>
+
+          {/* Toggle => Buy Now Price  */}
+          <div className="grid grid-cols-1 w-full  ">
+            <div className="flex flex-col gap-y-4">
+              <label className="text-left font-bold text-[18px]">
+                Do you want to set a buy now price for your vehicle?
+              </label>
+              <div className="flex gap-x-3">
+                <input
+                  type="checkbox"
+                  className={`toggle  ${
+                    selectedOptions.buyNowPrice
+                      ? "[--tglbg:#CA0000] bg-white hover:bg-white"
+                      : "[--tglbg:white] bg-[#EEECFF] hover:bg-[#EEECFF]"
+                  }`}
+                  checked={selectedOptions.buyNowPrice}
+                  onChange={() => handleToggleChange("buyNowPrice")}
+                />
+                {selectedOptions.buyNowPrice ? "Yes" : "No"}
+              </div>
+            </div>
+          </div>
+          {selectedOptions.buyNowPrice && (
+            <div className="grid md:grid-cols-3 w-full">
+              <div className="flex flex-col gap-y-4 items-start ">
+                <label className="font-bold text-[18px] text-left">
+                  What buy now price would you like?
+                </label>
+                <CurrencyInput
+                  id="input-example"
+                  name="buyNowPrice"
+                  // placeholder="Price in USD"
+                  prefix="$"
+                  className={`border py-2 px-4 rounded-lg w-full `}
+                  defaultValue={0}
+                  decimalsLimit={2}
+                  required={selectedOptions.buyNowPrice ? true : false}
+                  value={formData.carDetails.buyNowPrice}
+                  onValueChange={(value) => handleBuyNowPriceChange(value)}
                 />
               </div>
             </div>
