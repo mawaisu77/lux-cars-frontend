@@ -8,11 +8,11 @@ import { BiChevronDown } from "react-icons/bi";
 import { Phone } from "@mui/icons-material";
 import { menuData } from "./MenuData";
 import AccountMenu from "./ProfileDropdown";
-import { AppBar, Toolbar, IconButton, Drawer } from '@mui/material'; // Import MUI components
-import MenuIcon from '@mui/icons-material/Menu'; // Import Menu icon
-import { useMediaQuery } from '@mui/material'; // Import useMediaQuery from MUI
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'; // Import Accordion components
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; // Import ExpandMore icon
+import { AppBar, Toolbar, IconButton, Drawer } from '@mui/material'; 
+import MenuIcon from '@mui/icons-material/Menu'; 
+import { useMediaQuery } from '@mui/material'; 
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'; 
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; 
 
 
 const Header = () => {
@@ -25,11 +25,11 @@ const Header = () => {
   const dropdownRef = useRef(null);
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   const [activeSubMenuItem, setActiveSubMenuItem] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(false); // State for sidebar open/close
-  const isMobile = useMediaQuery('(max-width:600px)'); // Check if the view is mobile
+  const [sidebarOpen, setSidebarOpen] = useState(false); 
+  const isMobile = useMediaQuery('(max-width:600px)'); 
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen); // Toggle sidebar state
+    setSidebarOpen(!sidebarOpen); 
   };
 
   const handleLogoutModal = () => {

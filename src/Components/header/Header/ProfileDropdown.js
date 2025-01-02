@@ -54,7 +54,7 @@ export default function ProfileDropdown({user}) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>
+            <Avatar  sx={{ width: 32, height: 32, backgroundColor: user ? '#ca0000' : '' }}>
             {user ? user.username.charAt(0) : 'X'} 
             </Avatar>
           </IconButton>
@@ -129,9 +129,9 @@ export default function ProfileDropdown({user}) {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleLogoutModal}>
+        <MenuItem sx={{ color: '#ca0000' }} onClick={handleLogoutModal}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize="small" sx={{ color: '#ca0000' }} />
           </ListItemIcon>
           Logout
         </MenuItem>
