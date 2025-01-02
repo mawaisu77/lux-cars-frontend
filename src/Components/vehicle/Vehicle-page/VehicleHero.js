@@ -299,8 +299,6 @@ const VehicleHero = () => {
                   </div>
                 </div>
               </div>
-
-              {/* <VehicleTab data={carDetailData?.data} /> */}
             </>
           )}
         </>

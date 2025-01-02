@@ -263,7 +263,7 @@ const Bid = () => {
                             type="checkbox"
                             className={`toggle  ${
                               isCopart
-                                ? "[--tglbg:#CA0000] bg-white hover:bg-white"
+                                ? "[--tglbg:#0E5DB8] bg-white hover:bg-white"
                                 : "[--tglbg:white] bg-[#EEECFF] hover:bg-[#EEECFF]"
                             }`}
                             checked={isCopart}

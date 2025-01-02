@@ -210,10 +210,10 @@ const Navbar = () => {
                 PARTS
               </p>
             </Link>
-            <Link to="/user/profile">
+            <Link to="/user/account/profile">
               <p
                 className={`cursor-pointer whitespace-nowrap ${getLinkStyle(
-                  "/user/profile"
+                  "/user/account/profile"
                 )}`}
               >
                 MY PROFILE

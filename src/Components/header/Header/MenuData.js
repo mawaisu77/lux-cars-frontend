@@ -48,7 +48,7 @@ export const menuData = {
     'How it works': { link: '/how-it-works' }, 
     'Help': { link: '/help' }, 
     'About Us': { link: '/about-us' }, 
-    'Contact': { link: '/contact-us' } 
+    'Contact': { link: '/contact-us' }, 
+    'Upload Car': { link: '/upload-local-car' }, 
+    'Apply for loan': { link: '/apply-for-loan' } 
   }
-
-

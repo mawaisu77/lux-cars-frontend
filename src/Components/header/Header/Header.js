@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useLogout } from "../../../hooks/useLogout";
 import { BsSearch } from "react-icons/bs";
@@ -9,6 +8,12 @@ import { BiChevronDown } from "react-icons/bi";
 import { Phone } from "@mui/icons-material";
 import { menuData } from "./MenuData";
 import AccountMenu from "./ProfileDropdown";
+import { AppBar, Toolbar, IconButton, Drawer } from '@mui/material'; // Import MUI components
+import MenuIcon from '@mui/icons-material/Menu'; // Import Menu icon
+import { useMediaQuery } from '@mui/material'; // Import useMediaQuery from MUI
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'; // Import Accordion components
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; // Import ExpandMore icon
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,6 +25,12 @@ const Header = () => {
   const dropdownRef = useRef(null);
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   const [activeSubMenuItem, setActiveSubMenuItem] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // State for sidebar open/close
+  const isMobile = useMediaQuery('(max-width:600px)'); // Check if the view is mobile
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen); // Toggle sidebar state
+  };
 
   const handleLogoutModal = () => {
     document.getElementById("my_logout_modal").showModal();
@@ -121,8 +132,60 @@ const Header = () => {
     window.location.href = url; // Use window.location.href for navigation
   };
 
+
   return (
     <>
+<Drawer anchor="left" open={sidebarOpen} onClose={toggleSidebar}>
+  <div className="w-[200px] p-4">
+    {/* Accordion for "Search & Bid" */}
+    <Accordion sx={{ boxShadow: 'none', padding: 0, margin: 0 }}>
+    <AccordionSummary 
+        expandIcon={<ExpandMoreIcon />} 
+        sx={{ padding: '0', minHeight: '0', height: 'auto' }} // Remove padding and set height to auto
+      >        <span className="block py-2 text-gray-800">Search & Bid</span>
+      </AccordionSummary>
+      <AccordionDetails sx={{ padding: 0 }}>
+        {menuData['Search & Bid'].items.map((item) => (
+          <Accordion key={item.key}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <span className="block py-1 text-gray-600">{item.name}</span>
+            </AccordionSummary>
+            <AccordionDetails>
+              {Object.entries(item.submenu).map(([submenuTitle, submenuItems]) => (
+                <div key={submenuTitle}>
+                  <h5 className="text-gray-400 my-0.5">{submenuTitle}</h5>
+                  {submenuItems.map((submenuItem, index) => (
+                    <Link
+                      key={index}
+                      to="#"
+                      className="block py-1 text-gray-600 pl-4 hover:text-blue-500"
+                      onClick={() => handleNavigationFilter(item.key, submenuItem.value)} // Adjust as needed
+                    >
+                      {submenuItem.label}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </AccordionDetails>
+    </Accordion>
+
+    {/* Simple Links for Other Menu Items */}
+    {Object.entries(menuData).map(([menuItem, menuItemData]) => {
+      if (menuItem !== 'Search & Bid') {
+        return (
+          <Link key={menuItem} to={menuItemData.link} className="block py-4 text-gray-800">
+            {menuItem}
+          </Link>
+        );
+      }
+      return null; // Skip "Search & Bid" since it's already handled
+    })}
+  </div>
+</Drawer>
+
       {isFocused && (
         <div className="fixed top-0 inset-0 bg-black bg-opacity-50 z-40"></div>
       )}
@@ -134,23 +197,23 @@ const Header = () => {
         }}
       >
         <header className="bg-black/90">
-          <div className="w-full sm:max-w-[90vw] max-w-[85vw] mx-auto px-4 md:px-[1.5vw]">
-            <div className="flex items-center h-20 md:h-[5vw] gap-4 md:gap-[1.5vw]">
+          <div className="w-[100vw] max-w-[85vw] mx-auto md:px-[1.5vw]">
+            <div className="flex w-full items-center justify-between h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
               <Link to="/">
                 <img
                   src={
                     "https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"
                   }
-                  className="w-[142px] lg:w-[11.767vw] h-auto"
+                  className="w-[80px] sm:w-[11.767vw] h-auto"
                   alt={`Logo`}
                 />
               </Link>
-              <div className="flex-1 max-w-3xl md:max-w-full ml-4 md:ml-0">
+              <div className="flex-1 w-full md:max-w-full ml-2 md:ml-0">
                 <div className="relative" ref={dropdownRef}>
                   <input
                     type="text"
-                    placeholder="Search for vehicle by Make, Model, Lot or VIN..."
-                    className="w-full p-2 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-gray-100 text-sm md:text-18"
+                    placeholder={`${isMobile ? "Search here..." : "Search for vehicle by Make, Model, Lot or VIN..."}`}
+                    className="w-full p-1 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-gray-100/95 text-xs md:text-18"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}
@@ -158,7 +221,7 @@ const Header = () => {
                   />
 
                   <button className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                    <BsSearch className="h-5 md:h-[1vw] w-5 md:w-[1vw]" />
+                    <BsSearch className="h-2 md:h-[1vw] w-2 md:w-[1vw]" />
                   </button>
                   {searchResults.length > 0 && ( // Render dropdown if there are results
                     <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-60 overflow-y-auto">
@@ -190,8 +253,8 @@ const Header = () => {
               {user ? (
                 <div className="flex items-center ">
                   <button
-                        className={`focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-6 md:px-[1.5vw] py-2 md:py-[0.4vw] rounded-full text-white lg:text-18  duration-200`}
-                        onClick={handleLogoutModal}
+                    className={`focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18  duration-200`}
+                    onClick={handleLogoutModal}
                   >
                     logout
                   </button>
@@ -201,7 +264,7 @@ const Header = () => {
                   <div className="flex items-center gap-4 md:gap-[1.5vw] text-sm md:text-18">
                     <Link to="/login">
                       <button
-                        className={` focus:outline-none text-white  lg:text-18 hover:text-white/80 duration-200`}
+                        className={` focus:outline-none text-white text-xs md:text-18 hover:text-white/80 duration-200`}
                       >
                         Log In
                       </button>
@@ -209,7 +272,7 @@ const Header = () => {
 
                     <Link to="/signup">
                       <button
-                        className={` focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-6 md:px-[1.5vw] py-2 md:py-[0.4vw] rounded-full text-white lg:text-18  duration-200`}
+                        className={` focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18  duration-200`}
                       >
                         Sign Up
                       </button>
@@ -218,8 +281,10 @@ const Header = () => {
                 </>
               )}
             </div>
+
             <nav className="relative flex items-center h-14 md:h-[4vw] text-gray-300">
-              {Object.entries(menuData).map(([menuItem, menuItemData]) => (
+              {/* Hide links on mobile view */}
+              {!isMobile && Object.entries(menuData).map(([menuItem, menuItemData]) => (
                 <div
                   key={menuItem}
                   className="relative"
@@ -230,8 +295,6 @@ const Header = () => {
                     to={menuItemData.link}
                     className="px-4 py-2 md:px-[1.5vw] md:py-[0.4vw] text-sm md:text-18 flex items-center gap-2 hover:text-white"
                   >
-                    {" "}
-                    {/* Updated Link */}
                     {menuItem}
                     {menuItemData.items && (
                       <BiChevronDown className="h-4 w-4 md:h-[1vw] md:w-[1vw]" />
@@ -314,6 +377,13 @@ const Header = () => {
                   )}
                 </div>
               ))}
+
+               {/* Button to open sidebar on mobile */}
+                {isMobile && (
+                  <IconButton onClick={toggleSidebar} className="text-white z-50">
+                    <MenuIcon className="text-white" color="inherit" />
+                  </IconButton>
+                )} 
 
               <div className="ml-auto flex items-center gap-4">
                 <AccountMenu user={user} />
