@@ -3,14 +3,22 @@ import baseService from "../../../services/baseService";
 import { showToast } from "../../../utils/Toast";
 import LocalCarsCard from "../../cards/LocalCarsCard";
 
-function SimilarCars({ make, model, transmission, carLocation, carState }) {
+function SimilarCars({ make, model, year }) {
   const [vehicles, setVehicles] = useState(null);
+
+  console.log("YEAR ---> ", year);
+
+  const yearFrom = year - 2;
+  const yearTo = year + 2;
+
+  console.log("YEAR FROM ---> ", yearFrom);
+  console.log("YEAR TO ---> ", yearTo);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await baseService.get(
-          `/local-cars/get-all-local-cars?status=Approved&make=${make}&model=${model}&transmission=${transmission}&carLocation=${carLocation}&carState=${carState}`
+          `/local-cars/get-all-local-cars?status=Approved&make=${make}&model=${model}&yearFrom=${yearFrom}&yearTo=${yearTo}`
         );
         console.log(response?.data?.data?.cars);
         setVehicles(response?.data?.data?.cars);
@@ -34,9 +42,9 @@ function SimilarCars({ make, model, transmission, carLocation, carState }) {
         </div>
         <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
           {vehicles &&
-            vehicles.map((card, index) => (
-              <LocalCarsCard key={index} card={card} />
-            ))}
+            vehicles
+              .slice(0, -2)
+              .map((card, index) => <LocalCarsCard key={index} card={card} />)}
         </div>
       </div>
     </div>

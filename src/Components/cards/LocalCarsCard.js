@@ -109,7 +109,7 @@ const LocalCarsCard = ({ card }) => {
       <div className="rounded-[10px] sm:rounded-[1.042vw] shadow-md sm:p-[1.042vw] p-[8px] w-full bg-white">
         <div className=" relative w-full">
           <div className="w-full relative text-16 z-10">
-            {isCarSaved ? (
+            {isCarSaved && user ? (
               <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
                 <BsHeartFill
                   onClick={() => handleSaveClick(card.id)}

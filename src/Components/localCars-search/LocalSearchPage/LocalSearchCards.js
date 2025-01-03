@@ -12,6 +12,9 @@ import { LuxLogoWhite } from "../../../utils/constant";
 import { RxCopy } from "react-icons/rx";
 import { toast } from "react-toastify";
 import { statusOptions } from "../../../utils/filtersData/statusOptions";
+import { BsCalendarEventFill } from "react-icons/bs";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import moment from "moment-timezone";
 
 function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   const [totalPages, setTotalPages] = useState([]);
@@ -127,7 +130,7 @@ function Card({ vehicle }) {
     (option) => option.id === vehicle?.titlesStatus
   );
   return (
-    <div className="flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4">
+    <div className="h-[250px] md:h-[13.021vw] flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4">
       <Swiper
         className="relative w-full lg:w-[20vw] mx-auto h-full rounded-md "
         autoplay={{
@@ -226,10 +229,30 @@ function Card({ vehicle }) {
               </p>
             </div>
           </div>
+          <div className="w-1/2 bg-gray-100 p-1 m-1 rounded">
+            <div className="flex gap-x-2 md:gap-x-[0.5vw] items-center ml-2">
+              <BsCalendarEventFill
+                data-tooltip-id="auction-date-tooltip"
+                className="text-gray-600 text-18"
+              />
+              <span className="text-gray-600 text-18">
+                {vehicle?.auction_date
+                  ? moment(vehicle.auction_date)
+                      .tz("America/New_York")
+                      .format("ddd DD MMM, HH:mm [EST]")
+                  : "Not specified"}
+              </span>
+              <ReactTooltip
+                id="auction-date-tooltip"
+                place="bottom"
+                content="Auction Date"
+              />
+            </div>
+          </div>
         </div>
         <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row   w-full justify-center items-center   mx-auto">
           <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw]  text-center sm:text-left">
-            <div className="flex flex-col  w-full  gap-[1vw] p-[1vw]  rounded-lg ">
+            <div className="flex flex-col  w-full p-[1vw]  rounded-lg ">
               <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
                 <a onClick={() => handleBidNow(vehicle?.id)} className="w-full">
                   <button className=" w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
@@ -237,6 +260,19 @@ function Card({ vehicle }) {
                   </button>
                 </a>
               </div>
+
+              {vehicle?.buyNowPrice ? (
+                <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
+                  <a
+                    onClick={() => handleBidNow(vehicle?.id)}
+                    className="w-full"
+                  >
+                    <button className="w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+                      Buy Now $ {vehicle?.buyNowPrice}
+                    </button>
+                  </a>
+                </div>
+              ) : null}
 
               <div className="w-full  lg:w-[11.1vw] h-auto  py-1  mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center  shadow-sm">
                 <div className="flex items-center text-nowrap gap-[0.75vw] ">

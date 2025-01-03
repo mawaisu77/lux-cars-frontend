@@ -52,6 +52,15 @@ export const getProfile = async () => {
     }
   };
 
+  export const getUserSavedLocalCars = async () => {
+    try {
+      const response = await baseService.get('saved-cars/get-user-saved-local-cars');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   export const getSavedIds = async () => {
     try {
       const response = await baseService.get('saved-cars/get-user-saved-cars-ids');
