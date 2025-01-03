@@ -157,7 +157,7 @@ const CarCard = ({ card, isBuy = false }) => {
       >
         <div className=" relative w-full ">
           <div className="w-full relative sm:text-24 md:text-16 z-10">
-            {isCarSaved ? (
+            {isCarSaved && user ? (
               <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.8vw] top-[0.8vh]">
                 <BsHeartFill
                   onClick={() => handleSaveClick(card.lot_id)}
