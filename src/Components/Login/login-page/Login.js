@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../header/Header/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLogin } from "../../../hooks/useLogin";
 import { ClipLoader } from "react-spinners";
 import { useFormik } from "formik";
@@ -14,6 +14,10 @@ const Login = () => {
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
+
+  const location = useLocation(); // Get the current location
+  const from = location.state?.from || "/"; // Determine where to redirect after login
+
 
   const navigate = useNavigate();
   const { login, isLoading } = useLogin();
@@ -38,6 +42,8 @@ const Login = () => {
         //   } else {
         //   navigate("/Successfull-login")
         // }
+        navigate(from); // Redirect to the previous page or default to "/"
+
       } else {
         showToast(message, "error");
         // toast.error(message);
