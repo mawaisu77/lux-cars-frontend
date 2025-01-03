@@ -52,6 +52,15 @@ export const getProfile = async () => {
     }
   };
 
+  export const getUserSavedLocalCars = async () => {
+    try {
+      const response = await baseService.get('saved-cars/get-user-saved-local-cars');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   export const getSavedIds = async () => {
     try {
       const response = await baseService.get('saved-cars/get-user-saved-cars-ids');
@@ -65,6 +74,33 @@ export const getProfile = async () => {
     console.log("id", id)
     try {
       const response = await baseService.put(`saved-cars/delete-car`, {lot_id:id});
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const getSavedLocalCarsIds = async () => {
+    try {
+      const response = await baseService.get('saved-cars/get-user-saved-local-cars-ids');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const saveUserLocalCars = async (id) => {
+    try {
+      const response = await baseService.post('saved-cars/save-local-car', {localCarsID:id});
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  export const deleteSavedLocalCar = async (id) => {
+    try {
+      const response = await baseService.put(`saved-cars/delete-local-car`, {localCarsID:id});
       return response.data;
     } catch (error) {
       throw error;

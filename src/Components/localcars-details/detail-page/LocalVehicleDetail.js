@@ -237,8 +237,7 @@ const LocalVehicleDetail = () => {
                     <div className="font-urbanist bg-yellow-500/30 px-[1vw] py-[0.2vw] rounded-[0.5vw] font-semibold flex gap-x-2">
                       <span className=" text-black">Buy now price</span>
                       <span className="text-green-600 font-semibold">
-                        {carDetailData?.data?.car?.buyNowPrice &&
-                        carDetailData?.data?.car?.buyNowPrice === 0
+                        {carDetailData?.data?.car?.buyNowPrice
                           ? `$${carDetailData?.data?.car?.buyNowPrice}`
                           : "Not Available"}
                       </span>
@@ -471,9 +470,7 @@ const LocalVehicleDetail = () => {
             <SimilarCars
               make={carDetailData?.data?.car?.make}
               model={carDetailData?.data?.car?.model}
-              transmission={carDetailData?.data?.car?.transmission}
-              carLocation={carDetailData?.data?.car?.carLocation}
-              carState={carDetailData?.data?.car?.carState}
+              year={carDetailData?.data?.car?.year}
             />
           </div>
           <CopyURLModal
