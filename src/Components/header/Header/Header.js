@@ -5,14 +5,15 @@ import { useLogout } from "../../../hooks/useLogout";
 import { BsSearch } from "react-icons/bs";
 import { searchSuggestedData } from "./searchSuggestedData";
 import { BiChevronDown } from "react-icons/bi";
-import { Phone } from "@mui/icons-material";
 import { menuData } from "./MenuData";
 import AccountMenu from "./ProfileDropdown";
-import { AppBar, Toolbar, IconButton, Drawer } from '@mui/material'; 
+import {  IconButton, Drawer } from '@mui/material'; 
 import MenuIcon from '@mui/icons-material/Menu'; 
 import { useMediaQuery } from '@mui/material'; 
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'; 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; 
+import { FiLogOut } from "react-icons/fi";
+import { BsLightningCharge } from "react-icons/bs";
 
 
 const Header = () => {
@@ -198,7 +199,8 @@ const Header = () => {
       >
         <header className="bg-black/90">
           <div className="w-[100vw] max-w-[85vw] mx-auto md:px-[1.5vw]">
-            <div className="flex w-full items-center justify-between h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
+            <div className="flex w-full items-center justify-center h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
+              <div className=" w-full flex justify-start items-center gap-x-4">
               <Link to="/">
                 <img
                   src={
@@ -208,7 +210,7 @@ const Header = () => {
                   alt={`Logo`}
                 />
               </Link>
-              <div className="flex-1 w-full md:max-w-full ml-2 md:ml-0">
+              <div className="w-[50%] ml-2 md:ml-0">
                 <div className="relative" ref={dropdownRef}>
                   <input
                     type="text"
@@ -249,22 +251,34 @@ const Header = () => {
                   )}
                 </div>
               </div>
-
+              </div>
+            
               {user ? (
-                <div className="flex items-center ">
+                  <div className="flex items-center gap-x-4">
+                       <div className="flex items-center">
                   <button
-                    className={`focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18  duration-200`}
+                    className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18 duration-200`}
                     onClick={handleLogoutModal}
                   >
-                    logout
+                    <span className="text-white text-nowrap">0%/0$</span> {/* Text on the left */}
+                    <BsLightningCharge className="text-white" /> {/* Icon on the right */}
                   </button>
+                 </div>
+                  <button
+                    className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18 duration-200`}
+                    onClick={handleLogoutModal}
+                  >
+                    <span className="text-white text-nowrap">Log out</span> {/* Text on the left */}
+                    <FiLogOut className="text-white" /> {/* Icon on the right */}
+                  </button>
+               
                 </div>
               ) : (
                 <>
-                  <div className="flex items-center gap-4 md:gap-[1.5vw] text-sm md:text-18">
+                  <div className="flex  items-center gap-4 md:gap-[1.5vw] text-sm md:text-18">
                     <Link to="/login">
                       <button
-                        className={` focus:outline-none text-white text-xs md:text-18 hover:text-white/80 duration-200`}
+                        className={`text-nowrap focus:outline-none text-white text-xs md:text-18 hover:text-white/80 duration-200`}
                       >
                         Log In
                       </button>
@@ -272,14 +286,20 @@ const Header = () => {
 
                     <Link to="/signup">
                       <button
-                        className={` focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18  duration-200`}
+                        className={`text-nowrap focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18  duration-200`}
                       >
                         Sign Up
                       </button>
                     </Link>
                   </div>
+               
                 </>
               )}
+
+             <div className=" flex items-center ">
+                <AccountMenu user={user} />
+              </div>
+     
             </div>
 
             <nav className="relative flex items-center h-14 md:h-[4vw] text-gray-300">
@@ -385,9 +405,7 @@ const Header = () => {
                   </IconButton>
                 )} 
 
-              <div className="ml-auto flex items-center gap-4">
-                <AccountMenu user={user} />
-              </div>
+        
             </nav>
           </div>
         </header>

@@ -15,7 +15,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
+import PaymentsIcon from '@mui/icons-material/Payments';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import StarsIcon from '@mui/icons-material/Stars';
+import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
 
 export default function ProfileDropdown({user}) {
   const navigate = useNavigate(); 
@@ -125,9 +132,57 @@ export default function ProfileDropdown({user}) {
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <PaymentsIcon fontSize="small" />
           </ListItemIcon>
-          Settings
+          Apply For Loan
+        </MenuItem>
+        <Divider />
+
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <DirectionsCarIcon fontSize="small" />
+          </ListItemIcon>
+          My Vehicles
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <BookmarkIcon fontSize="small" />
+          </ListItemIcon>
+          Saved Cars
+        </MenuItem>
+        <Divider />
+
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <MonetizationOnIcon fontSize="small" />
+          </ListItemIcon>
+           My Deposit
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <AddCardIcon fontSize="small" />
+          </ListItemIcon>
+          Add Deposits
+        </MenuItem>
+        <Divider />
+
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <LocalOfferIcon fontSize="small" />
+          </ListItemIcon>
+          My Bids
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <StarsIcon fontSize="small" />
+          </ListItemIcon>
+          Won Bids
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <DoDisturbAltIcon fontSize="small" />
+          </ListItemIcon>
+          Lost Bids
         </MenuItem>
         <MenuItem sx={{ color: '#ca0000' }} onClick={handleLogoutModal}>
           <ListItemIcon>

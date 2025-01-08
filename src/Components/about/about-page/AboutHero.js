@@ -25,19 +25,15 @@ const AboutHero = () => {
       <div className="  mb-[5.5vh] lg:mb-0">
         <div className="w-[74vw] mx-auto flex  flex-col-reverse lg:flex-row justify-between mt-[100px] lg:mt-[8.8vh]">
           <div className="text-left w-full lg:w-[38vw] p-[1.5vw]">
-            <p className="text-[20px] lg:text-20 font-urbanist text-[#7a798a] font-semibold">
-              OUR STORY
-            </p>
+      
             <p className="text-[35px] lg:text-40 font-urbanist font-bold py-[5vh]">
-            Welcome to LUX First Choice Cars
+            About BidCaribbean, a Lux First Choice Car Division
             </p>
             <p className="text-[18px] lg:text-18 font-urbanist text-[#7a798a]">
-            At LUX First Choice Cars, we believe that buying a car should be a seamless and enjoyable experience. As a proudly Bahamian-owned business,
-            </p>
+            BidCaribbean is the leading online car auction platform in the Caribbean. Our mission is to simplify car buying and selling, offering a safe auction platform, affordable rates, and reliable regional home delivery.            </p>
             <br></br>
             <p className="text-[18px] lg:text-18 font-urbanist text-[#7a798a]">
-            we are dedicated to serving our community with top-quality vehicles and exceptional customer service. Here’s a little more about who we are and what drives us.
-            </p>
+            By prioritizing transparency, convenience, and outstanding service, we enable you to buy or sell vehicles swiftly and effortlessly, ensuring a seamless experience at every step.            </p>
              
             <p className="text-[35px] lg:text-40 font-urbanist font-bold py-[5vh]">
            Our Mission
@@ -45,9 +41,7 @@ const AboutHero = () => {
             <p className="text-[18px] lg:text-18 font-urbanist text-[#7a798a]">
             Our mission is to provide our clients with the highest quality cars, transparent pricing, and reliable service. We strive to make the car buying process effortless and satisfying, ensuring that every client drives away with a smile.
             </p>
-            {/* <button className="border border-[#df4949]   rounded-full text-[#df4949] font-semibold px-[1vw] py-[1.5vh] text-[0.8vw] my-[3vh]">
-              Search Products
-            </button> */}
+
           </div>
 
           <div>

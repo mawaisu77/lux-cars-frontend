@@ -353,23 +353,23 @@ export const categories = [
 export const values = [
   {
     icon: <FaMedal size={25} color="white" />,
-    heading: "Quality",
-    para: "We handpick each vehicle to ensure it meets our high standards. From sleek sedans to robust SUVs, we offer a diverse range of cars to suit every need and preference.",
+    heading: "Quality You Can Trust",
+    para: "Each vehicle is handpicked to meet our rigorous standards. From luxury sedans to durable SUVs, we offer a curated selection to suit every lifestyle and need.",
   },
   {
     icon: <FaLock size={25} color="white" />,
-    heading: "Transperacy",
-    para: "We believe in clear, upfront pricing with no hidden fees. Our open contracts and detailed breakdowns of all costs help our clients make informed decisions.",
+    heading: "Transparent Pricing, No Surprises",
+    para: "We believe in 100% clarity. Enjoy upfront pricing with no hidden fees, detailed cost breakdowns, and contracts to give you complete peace of mind.",
   },
   {
     icon: <BsEyeFill size={25} color="white" />,
-    heading: "Reliability",
-    para: "We pride ourselves on our excellent communication and service. From the moment you contact us to the delivery of your vehicle, we are committed to keeping you informed and satisfied.",
+    heading: "Reliable, Personalized Service",
+    para: "We’re with you every step of the way. From the moment you contact us to the delivery of your vehicle, our dedicated team ensures clear communication and your total satisfaction.",
   },
   {
     icon: <FaPeopleLine size={25} color="white" />,
-    heading: "Community",
-    para: "As a Bahamian-owned business, we are deeply rooted in our local community. We are committed to supporting local initiatives and fostering a sense of trust and reliability among our clients.",
+    heading: "Rooted in Our Community",
+    para: "As a Bahamian-owned business, we proudly support local initiatives and foster trust within our community. At BidCaribean, a LUX First Choice Cars division, you’re more than just a client—you’re family.",
   },
 ];
 export const choices = [
@@ -381,8 +381,8 @@ export const choices = [
         className="absolute m-auto inset-0 "
       />
     ),
-    heading: "Expertise",
-    para: "With extensive experience in both the Bahamas and the United States, our team brings a wealth of knowledge and expertise to the table. Our partnerships with top freight brokers and industry professionals ensure that we provide the best service possible.",
+    heading: "Safe and Secured Auctions",
+    para: "Our auctions are conducted in a secure and transparent environment, ensuring the safety of your investment. We use state-of-the-art technology to monitor and protect your assets, providing peace of mind for every transaction.",
   },
   {
     icon: (
@@ -392,8 +392,8 @@ export const choices = [
         className="absolute m-auto inset-0 "
       />
     ),
-    heading: "Comprehensive Service",
-    para: "  From vehicle selection to customs clearance, we handle every aspect of the car buying process. Our 100% hands-off paperwork process means you can sit back and relax while we take care of everything.",
+    heading: "Verified Vehicles You Can Trust",
+    para: "We meticulously verify each vehicle to ensure its authenticity and quality. Our rigorous inspection process includes a comprehensive history check, ensuring that the vehicle is free from any issues and meets our high standards.",
   },
   {
     icon: (
@@ -403,8 +403,30 @@ export const choices = [
         className="absolute m-auto inset-0   "
       />
     ),
-    heading: "Customer Focus",
-    para: "Our clients are at the heart of everything we do. We prioritize top-tier communication, offering updates and support every step of the way. Your satisfaction is our ultimate goal.",
+    heading: "Unbeatable Savings of 30-50%",
+    para: "We offer vehicles at significantly lower prices than traditional dealerships, providing you with exceptional value and the opportunity to save big on your next car purchase.",
+  },
+  {
+    icon: (
+      <BsShieldFillCheck
+        size={25}
+        color="white"
+        className="absolute m-auto inset-0   "
+      />
+    ),
+    heading: "VIP Support At Every Step",
+    para: "Our dedicated team is here to assist you every step of the way. From pre-auction preparation to post-delivery support, we ensure your experience is seamless and stress-free.",
+  },
+  {
+    icon: (
+      <BsShieldFillCheck
+        size={25}
+        color="white"
+        className="absolute m-auto inset-0   "
+      />
+    ),
+    heading: "Wide Selection of Over 140,000 Cars",
+    para: "We offer a wide range of vehicles, from luxury sedans to rugged SUVs, ensuring you find the perfect fit for your needs.",
   },
 ];
 
