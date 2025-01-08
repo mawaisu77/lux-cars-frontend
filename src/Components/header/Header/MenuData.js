@@ -45,10 +45,10 @@ export const menuData = {
         }
       ]
     },
-    'How it works': { link: '/how-it-works' }, 
-    'Help': { link: '/help' }, 
-    'About Us': { link: '/about-us' }, 
-    'Contact': { link: '/contact-us' }, 
-    'Sell Your Car': { link: '/upload-local-car' }, 
-    'Apply for loan': { link: '/apply-for-loan' } 
+    'How to Bid': { link: '/how-it-works' }, 
+    'Rates': { link: '/fees' }, 
+    'Sell Car': { link: '/upload-local-car' }, 
+    'Pro Bidding Tips': { link: '/pro-bidding-tips' },
+    'About Us': { link: '/about-us' },
+    'Contact Us': { link: '/contact-us' }
   }

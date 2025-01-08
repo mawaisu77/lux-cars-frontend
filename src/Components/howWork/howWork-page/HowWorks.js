@@ -1,16 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../../header/Header/Header";
-import icon1 from "../../../assets/Icon (2).svg";
-import icon2 from "../../../assets/Icon (3).svg";
-import icon3 from "../../../assets/Icon (4).svg";
-import icon4 from "../../../assets/Icon (5).svg";
-import icon5 from "../../../assets/Order_history.svg";
-import { PiHandTapLight } from "react-icons/pi";
-import { PiSteeringWheelLight } from "react-icons/pi";
-import { CiTimer } from "react-icons/ci";
-import { PiPoliceCarLight } from "react-icons/pi";
-import { PiHandDepositLight } from "react-icons/pi";
+
+
+import { PiShippingContainerBold } from "react-icons/pi";
+import { MdOutlineVerifiedUser } from "react-icons/md";
+
 
 import { useState } from "react";
 import {
@@ -25,28 +19,34 @@ const HowWorks = () => {
 
   const steps = [
     {
-      title: "Registration",
+      title: "Register & Verify Your Account",
       description:
-        "Users must register to start bidding. The registration process is straightforward and requires providing official identification documents for verification.",
-      icon: FaMousePointer,
+        "Create your BidCaribbean account in minutes! Provide basic details and upload valid identification documents for a secure verification process. Your safety and trust are our top priorities.",
+      icon: MdOutlineVerifiedUser,
     },
     {
-      title: "Bid Power",
+      title: "Set Your Bid Power",
       description:
-        "Upon registration, users can set their bid power, determining the maximum amount they can bid on any lot. Bid power is secured with a refundable deposit, payable via various methods.",
+        "Gain bidding power by making a refundable deposit, which sets your maximum bidding limit. Choose from flexible payment options and confidently bid within your secured budget.",
       icon: FaHandHoldingUsd,
     },
     {
-      title: "Vehicle Search",
+      title: "Search Verified Vehicles",
       description:
-        "Users can utilize advanced filters and online search functionality to find specific lots. Detailed lot information is provided to assist in making informed choices.",
+        "Use our advanced search filters to explore over 145,000 verified cars. Narrow your options by make, model, price, or damage type (e.g., minor dents, repossessions, or hail damage). Each listing includes detailed information, ensuring transparency and trust.",
       icon: FaCar,
     },
     {
-      title: "Bidding and Buying",
+      title: "Bid with Confidence",
       description:
-        "Place bids on desired vehicles and track your activity in real-time. Successful bidders will be guided through the purchase and delivery process.",
+        "Place your bids on your chosen vehicles easily. Monitor bidding activity in real-time and let our system ensure you stay on top without exceeding your set limits. With our secure platform, every transaction is fully protected.",
       icon: FaGavel,
+    },
+    {
+      title: "Seal the Deal & Arrange Delivery",
+      description:
+        "Win your auction? Congratulations! Our trusted team will guide you through secure payment and arrange home delivery for your new vehicle. It’s fast, safe, and secure.",
+      icon: PiShippingContainerBold,
     },
   ];
   return (
@@ -75,12 +75,10 @@ const HowWorks = () => {
       <div className=" max-w-[85vw] sm:max-w-[73.229vw] mx-auto my-[80px] sm:my-[4.175vw] ">
         <div className="flex flex-col mx-auto max-w-lg ">
           <p className="  text-[36px] sm:text-36  font-bold font-urbanist">
-            Step-by-Step Guide for Users
+          Step-by-Step Guide: How to Bid with BidCaribbean
           </p>
-          <p className="text-[16px] lg:text-16 text-[#7a798a] ">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum
-            obcaecati dignissimos quae quo ad iste ipsum officiis deleniti
-            asperiores sit.
+          <p className="text-[16px] lg:text-18 text-[#7a798a] ">
+          Buying your next car through BidCaribbean is simple, secure, and hassle-free. Follow these easy 5 steps to start bidding and drive home your dream car!
           </p>
         </div>
         <div className="container mx-auto px-4 py-12">

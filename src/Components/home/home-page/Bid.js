@@ -11,6 +11,7 @@ import { Search } from "@mui/icons-material";
 
 const Bid = () => {
   const [activeTab, setActiveTab] = useState("regular");
+  const [activeTab2, setActiveTab2] = useState("quick");
   const [isCopart, setIsCopart] = useState(true);
   const [isIAAI, setIsIAAI] = useState(true);
   const regularSearchRef = useRef(null);
@@ -122,10 +123,7 @@ const Bid = () => {
           <h1 class="md:text-52 text-[32px] font-bold font-urbanist leading-tight mb-[2vh]">
             Bid, Buy, Drive
           </h1>
-          <p class="md:text-20 text-[20px] text-gray-300 my-[1vw] ">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmo
-          </p>
+
           <div className="flex gap-x-2 md:gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
             <div className="flex items-center md:py-[1.2vh] py-2 md:text-16 text-[16px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border border-white hover:bg-white hover:text-black duration-200 rounded-full">
               <FaRocket />
@@ -146,10 +144,58 @@ const Bid = () => {
           </div>
 
           <div className="mx-auto p-2 md:p-[1vw] bg-white/80 rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">
-            <div className="mb-2 md:mb-[0.5vw]">
+         
+          <div className="my-2 md:my-[0.5vw]">
               <div className="flex border-b">
                 <button
-                  className={`px-4 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 font-medium transition-colors duration-300 ${
+                  className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 transition-colors duration-300 ${
+                    activeTab2 === "quick"
+                      ? "text-blue-500 border-b-2 border-blue-500"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
+                  onClick={() => setActiveTab2("quick")}
+                >
+                  Quick Searches
+                </button>
+                <button
+                  className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 transition-colors duration-300 ${
+                    activeTab2 === "popular"
+                      ? "text-blue-500 border-b-2 border-blue-500"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
+                  onClick={() => setActiveTab2("popular")}
+                >
+                  Popular Searches
+                </button>
+              </div>
+            </div>
+           <div className="rounded-md grid grid-cols-6 gap-x-2 bg-white/80 font-semibold text-blue-500 mt-4 md:mt-[1vw]">
+            {activeTab2 === "quick" && (
+              <>
+                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Automobiles</span>
+                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">ATVs</span>
+                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Boats</span>
+                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Buses</span>
+                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Trucks</span>
+                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Motorcycles</span>
+              </>
+            )}
+            {activeTab2 === "popular" && (
+              <>
+                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Honda Civic</span>
+                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Toyota Camry</span>
+                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Ford F-150</span>
+                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Chevrolet Silverado</span>
+                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Toyota Tacoma</span>
+                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Toyota Tacoma</span>
+              </>
+            )}
+           </div>
+
+            <div className="my-2 md:my-[0.8vw]">
+              <div className="flex border-b">
+                <button
+                  className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 transition-colors duration-300 ${
                     activeTab === "regular"
                       ? "text-blue-500 border-b-2 border-blue-500"
                       : "text-gray-500 hover:text-gray-700"
@@ -159,14 +205,14 @@ const Bid = () => {
                   Regular Search
                 </button>
                 <button
-                  className={`px-4 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 font-medium transition-colors duration-300 ${
+                  className={`px-4 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 font-bold transition-colors duration-300 ${
                     activeTab === "vin"
                       ? "text-blue-500 border-b-2 border-blue-500"
                       : "text-gray-500 hover:text-gray-700"
                   }`}
                   onClick={() => setActiveTab("vin")}
                 >
-                  VIN Search
+                  {`VIN / Lot No. Search`}
                 </button>
               </div>
             </div>
@@ -317,13 +363,13 @@ const Bid = () => {
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   </div>
                   <div className="flex justify-end items-center mt-4">
-                    <button
-                      onClick={handleVinSearch}
-                      className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors"
-                    >
-                      Search
-                    </button>
-                  </div>
+                      <button
+                        onClick={handleVinSearch}
+                        className="bg-blue-500 text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 rounded-md hover:bg-blue-600 transition-colors"
+                      >
+                        Search vehicle
+                      </button>
+                    </div>
                 </div>
               </div>
             </div>
