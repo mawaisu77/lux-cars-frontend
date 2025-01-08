@@ -130,7 +130,7 @@ export default function ProfileDropdown({user}) {
           </ListItemIcon>
           My Account
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { handleClose(); navigate('/apply-for-loan'); }}>
           <ListItemIcon>
             <PaymentsIcon fontSize="small" />
           </ListItemIcon>
@@ -138,13 +138,13 @@ export default function ProfileDropdown({user}) {
         </MenuItem>
         <Divider />
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { handleClose(); navigate('/user/account/local-cars'); }}>
           <ListItemIcon>
             <DirectionsCarIcon fontSize="small" />
           </ListItemIcon>
           My Vehicles
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { handleClose(); navigate('/user/account/saved-cars'); }}>
           <ListItemIcon>
             <BookmarkIcon fontSize="small" />
           </ListItemIcon>
@@ -152,13 +152,13 @@ export default function ProfileDropdown({user}) {
         </MenuItem>
         <Divider />
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { handleClose(); navigate('/user/account/funds'); }}>
           <ListItemIcon>
             <MonetizationOnIcon fontSize="small" />
           </ListItemIcon>
            My Deposit
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { handleClose(); navigate('/user/account/funds'); }}> 
           <ListItemIcon>
             <AddCardIcon fontSize="small" />
           </ListItemIcon>
@@ -166,7 +166,7 @@ export default function ProfileDropdown({user}) {
         </MenuItem>
         <Divider />
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => { handleClose(); navigate('/user/account/all-bids'); }}>
           <ListItemIcon>
             <LocalOfferIcon fontSize="small" />
           </ListItemIcon>

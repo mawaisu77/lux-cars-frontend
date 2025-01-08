@@ -6,21 +6,21 @@ import ContactForm from "./ContactForm";
 const ContactUs = () => {
   return (
     <>
-      <div className="back-image w-full absolute">
-        <div className="hidden lg:block">
-          <div className=" w-full flex flex-col justify-center items-center mt-[12.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">
-              Contact Us
-            </div>
-            <div className='text-white flex gap-3 justify-center text-[1vw] font-urbanist'>
+   <div className="back-image">
+        <div className="w-[15.5] flex flex-col pt-[20vh]">
+          <div className="text-[2.6vw] font-semibold text-white">
+            Vehicle Detail
+          </div>
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
-              <button className='hover:text-white hover:scale-110 duration-150'>Home</button>
+              <button className="hover:text-white hover:scale-110 duration-150">
+                Home
+              </button>
             </Link>
             /
-              <button className="hover:text-white hover:scale-110 duration-150">
-                Contact Us
-              </button>
-            </div>
+            <button className="hover:text-white hover:scale-110 duration-150">
+              Vehicle Detail
+            </button>
           </div>
         </div>
       </div>
