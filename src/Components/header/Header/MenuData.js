@@ -1,5 +1,7 @@
 import { makeData } from "../../../utils/header-filters-data/make-data";
 import { modelData } from "../../../utils/header-filters-data/model-data";
+import { stateData } from "../../../utils/header-filters-data/state-data";
+import { vehicleTypeOptions } from "../../../utils/header-filters-data/vehicle-type-data";
 
 export const menuData = {
     'Search & Bid': {
@@ -19,30 +21,20 @@ export const menuData = {
           }
         },
         {
-          name: 'Engine size',
-          key: 'engine-size',
+          name: 'Vehicle Type',
+          key: 'vehicle-type',
           submenu: {
-            'Engine Size': ['4 Cylinder', '6 Cylinder', '8 Cylinder'],
+            'Vehicle Type': vehicleTypeOptions
           }
         },
         {
-          name: 'Engine size, type, horsepower',
-          key: 'engine-size-type-horsepower',
+          name: 'State',
+          key: 'state',
           submenu: {
-            'Engine Size': ['4 Cylinder', '6 Cylinder', '8 Cylinder', 'Electric'],
-            'Horsepower': ['100-200 HP', '200-300 HP', '300-400 HP', '400+ HP'],
-            'Transmission': ['Automatic', 'Manual', 'CVT']
+            'State': stateData
           }
         },
-        {
-          name: 'Body style',
-          key: 'body-style',
-          submenu: {
-            'Car Types': ['Sedan', 'Coupe', 'Hatchback', 'Wagon'],
-            'Truck Types': ['Pickup', 'Van', 'SUV', 'Crossover'],
-            'Special Types': ['Convertible', 'Sports Car', 'Luxury', 'Off-road']
-          }
-        }
+    
       ]
     },
     'How to Bid': { link: '/how-it-works' }, 

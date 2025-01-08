@@ -358,7 +358,7 @@ const Header = () => {
                                       <Link
                                         key={index}
                                         href="#"
-                                        className="block py-1 text-gray-300 hover:text-white"
+                                        className="block py-1 bg-red-500 text-gray-300 hover:text-white"
                                         onClick={() =>
                                           handleNavigationFilter(
                                             item.query,

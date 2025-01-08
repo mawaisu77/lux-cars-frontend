@@ -9,7 +9,7 @@ const ContactUs = () => {
    <div className="back-image">
         <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
-            Vehicle Detail
+            Contact Us
           </div>
           <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
@@ -24,7 +24,7 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-      <div className="py-20  sm:py-[15.3vh] ">
+      <div className=" ">
         <ContactForm />
       </div>
     </>
