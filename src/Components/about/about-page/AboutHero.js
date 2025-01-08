@@ -7,7 +7,7 @@ const AboutHero = () => {
     <>
       <div className="Backgroundimage-About">
       <div className='hidden lg:block'>
-        <div className='w-[15.5] flex flex-col pt-[12.5vh]'>
+        <div className='w-[15.5] flex flex-col pt-[20vh]'>
           <div className='text-[2.6vw] font-semibold text-white'>
             About Us
           </div>

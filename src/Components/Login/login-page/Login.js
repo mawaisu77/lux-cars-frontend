@@ -58,7 +58,7 @@ const Login = () => {
     <>
       <div className="Backgroundimage-LogIN ">
         <div className="hidden lg:block">
-          <div className=" w-[15.5] flex flex-col  pt-[14.5vh]">
+          <div className=" w-[15.5] flex flex-col  pt-[20vh]">
             <div className="text-[2.6vw] font-semibold text-white">Log In</div>
             <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
               <Link to="/">

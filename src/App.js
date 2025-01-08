@@ -10,7 +10,7 @@ import {
 import Home from "./Components/home/index.js";
 import Login from "./Components/Login/login-page/Login.js";
 import Signup from "./Components/sign-up/index.js";
-import ContactUs from "./Components/Contact/Cantact-page/ContactUs.js";
+import Contact from "./Components/Contact/index.js";
 import HowWorks from "./Components/howWork/howWork-page/HowWorks.js";
 import Help from "./Components/help/help-page/Help.js";
 import About from "./Components/about/index.js";
@@ -144,7 +144,7 @@ function App() {
               }
             />
 
-            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/contact-us" element={<Contact />} />
             <Route path="/how-it-works" element={<HowWorks />} />
             <Route path="/fees" element={<Fees />} />
             <Route path="/help" element={<Help />} />

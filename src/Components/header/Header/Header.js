@@ -198,8 +198,8 @@ const Header = () => {
         }}
       >
         <header className="bg-black/90">
-          <div className="w-[100vw] max-w-[85vw] mx-auto md:px-[1.5vw]">
-            <div className="flex w-full items-center justify-center h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
+          <div className="w-[100vw] mx-auto ">
+            <div className="flex max-w-[85vw] mx-auto w-full items-center justify-center h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
               <div className=" w-full flex justify-start items-center gap-x-4">
               <Link to="/">
                 <img
@@ -302,8 +302,9 @@ const Header = () => {
      
             </div>
 
-            <nav className="relative flex items-center h-14 md:h-[4vw] text-gray-300">
-              {/* Hide links on mobile view */}
+            <nav className="bg-gray-950/50">
+              <div className="max-w-[85vw] mx-auto w-full relative flex items-center h-14 md:h-[3.2vw] text-gray-300">
+                  {/* Hide links on mobile view */}
               {!isMobile && Object.entries(menuData).map(([menuItem, menuItemData]) => (
                 <div
                   key={menuItem}
@@ -406,6 +407,8 @@ const Header = () => {
                 )} 
 
         
+              </div>
+            
             </nav>
           </div>
         </header>

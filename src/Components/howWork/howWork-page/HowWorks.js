@@ -53,7 +53,7 @@ const HowWorks = () => {
     <>
       <div className="Backgroundimage-How relative">
         <div className="hidden lg:block">
-          <div className="w-[15.5] flex flex-col pt-[12.5vh]">
+          <div className="w-[15.5] flex flex-col pt-[20.5vh]">
             <div className="text-[2.6vw] font-semibold text-white">
               How It Works
             </div>

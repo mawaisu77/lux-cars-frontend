@@ -4,25 +4,24 @@ import { Link } from "react-router-dom";
 const PrivacyPage = () => {
   return (
     <>
-<div className="Backgroundimage-Privicy-loan-terms">
-        <div className="back-image w-full absolute">
-        <div className="hidden  lg:block">
-          <div className="  w-[15.5] flex flex-col  mt-[12.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">
+  <div className="Backgroundimage-Privicy-loan-terms">
+        <div className="w-[15.5] flex flex-col pt-[20vh]">
+          <div className="text-[2.6vw] font-semibold text-white">
             Privacy policy
-            </div>
-            <div className="text-[#8A8AA0] flex gap-3 justify-center text-[1vw] font-urbanist ">
-              <Link to="/">
-                {" "}
-                <button className="hover:text-white  ">Home</button>
-              </Link>
-              /<button className="hover:text-white">Privacy policy</button>
-            </div>
+          </div>
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
+              <button className="hover:text-white hover:scale-110 duration-150">
+                Home
+              </button>
+            </Link>
+            /
+            <button className="hover:text-white hover:scale-110 duration-150">
+              Privacy policy
+            </button>
           </div>
         </div>
       </div>
-      </div>
-
 
     
       <div className="w-auto md:w-[50vw] lg:w-[44.115vw]  h-auto mx-auto pt-[6vh] pb-[6vh] text-left">

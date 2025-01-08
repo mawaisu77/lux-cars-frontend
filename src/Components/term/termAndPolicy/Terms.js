@@ -4,27 +4,25 @@ import { Link } from "react-router-dom";
 const Terms = () => {
   return (
     <>
-     <div className="Backgroundimage-Privicy-loan-terms">
-     <div className="back-image w-full absolute">
-        <div className="hidden lg:block">
-          <div className="  w-[15.5] flex flex-col  mt-[4vh]">
-            <div className="text-[2.6vw] font-semibold text-white">
+    <div className="Backgroundimage-Privicy-loan-terms">
+        <div className="w-[15.5] flex flex-col pt-[20vh]">
+          <div className="text-[2.6vw] font-semibold text-white">
             Terms & Conditions
-            </div>
-            <div className="text-[#8A8AA0] flex gap-3 justify-center text-[1vw] font-urbanist ">
-              <Link to="/">
-                {" "}
-                <button className="hover:text-white  ">Home</button>
-              </Link>
-              /<button className="hover:text-white">Terms</button>
-            </div>
+          </div>
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
+              <button className="hover:text-white hover:scale-110 duration-150">
+                Home
+              </button>
+            </Link>
+            /
+            <button className="hover:text-white hover:scale-110 duration-150">
+              Terms & Conditions
+            </button>
           </div>
         </div>
-      </div>
-      </div>
-
-     
-
+    </div>
+    
       <div className="w-auto md:w-[50vw] lg:w-[44.115vw]  h-auto mx-auto pt-[6vh] pb-[6vh] text-left">
         <div className="text-left  ml-[16px] md:ml-[0vw] mr-[16px] md:mr-[1.5vw] mb-[15px] md:mb-[1vh] ">
           <h1 className="text-[30px] md:text-[1.875vw] mt-10 md:mt-0 font-bold font-urbanist text-[#1F1F2C] mb-[10px] md:mb-[0.6vh]  ">
