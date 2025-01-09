@@ -1,23 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./context/AuthContext";
-import 'react-toastify/dist/ReactToastify.css';
-import './i18n'; // Import the i18n configuration
-import { CustomToast } from './utils/Toast';
+import "react-toastify/dist/ReactToastify.css";
+import "./i18n"; // Import the i18n configuration
+import { CustomToast } from "./utils/Toast";
 // import "./instrument";
 import { SavedCarsProvider } from "./context/SavedCarIdsContext";
+import { SavedLocalCarsProvider } from "./context/SavedLocalCarsIdscontext";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <SavedCarsProvider>
-       <CustomToast />
-       <App />
+        <SavedLocalCarsProvider>
+          <CustomToast />
+          <App />
+        </SavedLocalCarsProvider>
       </SavedCarsProvider>
     </AuthContextProvider>
   </React.StrictMode>
