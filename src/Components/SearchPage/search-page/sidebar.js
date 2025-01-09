@@ -384,7 +384,6 @@ const Sidebar = () => {
   ]);
 
   useEffect(() => {
-    console.log("searchQuery", searchQuery)
     // Update filters with the search query
     if (searchQuery) {
       const newFilters = {
@@ -475,6 +474,7 @@ const Sidebar = () => {
     transmission: !!initialTransmission,
     status: !!initialStatus,
     fuelType: !!initialFuel,
+
     // odobrand: !!initialOdobrand,
   });
 

@@ -346,9 +346,9 @@ const Header = () => {
                             ).submenu
                           ).map(([submenuTitle, submenuItems]) => (
                             <div key={submenuTitle}>
-                              <h4 className="text-gray-400 my-0.5 text-left">
+                              {/* <h4 className="text-gray-400 my-0.5 text-left">
                                 {submenuTitle}
-                              </h4>
+                              </h4> */}
                               <div
                                 className={`w-full ${activeSubMenuItem === "Makes" || activeSubMenuItem === "Models" ? "grid grid-cols-3 gap-6" : "grid grid-cols-3 gap-2"}`}
                               >
@@ -358,7 +358,7 @@ const Header = () => {
                                       <Link
                                         key={index}
                                         href="#"
-                                        className="block py-1 bg-red-500 text-gray-300 hover:text-white"
+                                        className="block py-1 text-left text-gray-300 hover:text-white"
                                         onClick={() =>
                                           handleNavigationFilter(
                                             item.query,
@@ -376,7 +376,7 @@ const Header = () => {
                                       <Link
                                         key={index}
                                         href="#"
-                                        className="block py-1 text-gray-300 hover:text-white"
+                                        className="block py-1 text-left text-gray-300 hover:text-white"
                                         onClick={() =>
                                           handleNavigationFilter(
                                             item.query,
