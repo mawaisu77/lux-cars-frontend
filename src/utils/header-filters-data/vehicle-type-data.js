@@ -1,0 +1,15 @@
+export const vehicleTypeOptions = [
+    { label: "Automobile", value: "automobile", query: "vehicle_type" },
+    { label: "Motorcycle", value: "motorcycle", query: "vehicle_type" },
+    { label: "ATV", value: "atv", query: "vehicle_type" },
+    { label: "Watercraft", value: "watercraft", query: "vehicle_type" },
+    { label: "Jet Sky", value: "jet_sky", query: "vehicle_type" },
+    { label: "Boat", value: "boat", query: "vehicle_type" },
+    { label: "Trailers", value: "trailers", query: "vehicle_type" },
+    { label: "Mobile Home", value: "mobile_home", query: "vehicle_type" },
+    { label: "Emergency Equipment", value: "emergency_equipment", query: "vehicle_type" },
+    { label: "Industrial Equipment", value: "industrial_equipment", query: "vehicle_type" },
+    { label: "Truck", value: "truck", query: "vehicle_type" },
+    { label: "Bus", value: "bus", query: "vehicle_type" },
+    { label: "Other", value: "other", query: "vehicle_type" },
+  ]

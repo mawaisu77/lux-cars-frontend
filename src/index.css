@@ -64,7 +64,7 @@ body {
       background-image: url("../src/assets/Vehicle/IMG\ \(55\).png"); /* Update the image path as necessary */
       background-size: cover;
       background-repeat: no-repeat;
-      height: 32.5vh;
+      height: 40vh;
     }
 
     .back-image-search-page::before {

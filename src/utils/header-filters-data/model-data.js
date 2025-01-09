@@ -1162,3 +1162,4 @@ export const modelData = [
   { "label": "Volvo XC90 Recharge", "value": "XC90 Recharge", "query": "model" }
 
   ]
+
