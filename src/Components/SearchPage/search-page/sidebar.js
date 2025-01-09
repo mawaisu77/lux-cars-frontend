@@ -99,7 +99,6 @@ const Sidebar = () => {
   const initialModel = queryParams.get("model") || "";
   const initialFromYear = queryParams.get("year_from") || "";
   const initialToYear = queryParams.get("year_to") || "";
-  // const initialPartner = queryParams.get("partner") || "";
   const initialVehicleTyoe = queryParams.get("vehicle_type") || "";
 
   const initialPartner = useMemo(
@@ -187,33 +186,6 @@ const Sidebar = () => {
     odometer_max: initialToOdometer || "",
     auction_date_from: auctionDateFromParam, // Include auction date filters
     auction_date_to: auctionDateToParam, // Include auction date filters
-    document_old: initialDocumentOld,
-    cyclinders: initialCyclinders,
-    document: initialDocument,
-    odobrand: initialOdobrand,
-  });
-
-  const [appliedFilters, setAppliedFilters] = useState({
-    search: searchQuery,
-    site: initialPartner,
-    make: initialMake,
-    model: initialModel,
-    transmission: initialTransmission,
-    status: initialStatus,
-    fuel: initialFuel,
-    drive: initialDrive,
-    state: initialState,
-    location: initialLocation,
-    color: initialColor,
-    damage_pr: initialDamage,
-    damage_sec: initialSecondaryDamage,
-    year_from: initialFromYear || "",
-    year_to: initialToYear || "",
-    vehicle_type: initialVehicleTyoe || "",
-    odometer_min: initialFromOdometer || "",
-    odometer_max: initialToOdometer || "",
-    auction_date_from: auctionDateFromParam,
-    auction_date_to: auctionDateToParam,
     document_old: initialDocumentOld,
     cyclinders: initialCyclinders,
     document: initialDocument,
@@ -329,7 +301,7 @@ const Sidebar = () => {
       initialDocument.length > 0 ||
       initialOdobrand.length > 0
     ) {
-      setAppliedFilters({
+      setSelectedFilters({
         site: initialPartner,
         search: searchQuery,
         make: initialMake,
@@ -387,17 +359,17 @@ const Sidebar = () => {
     // Update filters with the search query
     if (searchQuery) {
       const newFilters = {
-        ...appliedFilters,
+        ...selectedFilters,
         search: searchQuery
       };
-      setAppliedFilters(newFilters);
+      setSelectedFilters(newFilters);
       setSelectedFilters((prevFilters) => ({
         ...prevFilters,
         search: searchQuery
       }));
       updateURL(newFilters);
     }
-  }, [location.search, setAppliedFilters, searchQuery, setSelectedFilters]);
+  }, [location.search, searchQuery, setSelectedFilters]);
 
   const resetFilters = () => {
     setSelectedFilters({
@@ -424,7 +396,7 @@ const Sidebar = () => {
       initialDocument: [],
       initialOdobrand: [],
     });
-    setAppliedFilters({});
+    // setAppliedFilters({});
     // setAppliedFilters({});
     setSelectedMake("");
     setSelectedModel("");
@@ -516,9 +488,9 @@ const Sidebar = () => {
         search: searchQuery,
         [filterCategory]: filterValue,
       };
-      setSelectedFilters(newFilters);
-      updateURL(newFilters);
-      return;
+      // setSelectedFilters(newFilters);
+      // updateURL(newFilters);
+      // return;
     } else if (filterCategory === "vehicle_type") {
       newFilters = {
         ...newFilters,
@@ -538,11 +510,11 @@ const Sidebar = () => {
 
     // Update state
     setSelectedFilters(newFilters);
-    setAppliedFilters({
-      ...newFilters,
-      auction_date_from: auctionDateFrom,
-      auction_date_to: auctionDateTo,
-    });
+    // setAppliedFilters({
+    //   ...newFilters,
+    //   auction_date_from: auctionDateFrom,
+    //   auction_date_to: auctionDateTo,
+    // });
     updateURL(newFilters);
   };
 
@@ -727,12 +699,12 @@ const Sidebar = () => {
 
 
     setSelectedFilters(newFilters);
-    setAppliedFilters((prev) => ({
-      ...prev,
-      search: searchQuery,
-      auction_date_from: formattedFromDate,
-      auction_date_to: formattedToDate,
-    }));
+    // setAppliedFilters((prev) => ({
+    //   ...prev,
+    //   search: searchQuery,
+    //   auction_date_from: formattedFromDate,
+    //   auction_date_to: formattedToDate,
+    // }));
 
     navigate(
       {
@@ -774,11 +746,11 @@ const Sidebar = () => {
         auction_date_to: type === "to" ? formattedDate : auctionDateTo,
       };
 
-      setAppliedFilters((prev) => ({
-        ...prev,
-        auction_date_from: type === "from" ? formattedDate : auctionDateFrom,
-        auction_date_to: type === "to" ? formattedDate : auctionDateTo,
-      }));
+      // setAppliedFilters((prev) => ({
+      //   ...prev,
+      //   auction_date_from: type === "from" ? formattedDate : auctionDateFrom,
+      //   auction_date_to: type === "to" ? formattedDate : auctionDateTo,
+      // }));
 
       // Update URL
       const params = new URLSearchParams(location.search);
@@ -809,10 +781,10 @@ const Sidebar = () => {
     }));
 
     // Reset the applied filters for the cleared filter
-    setAppliedFilters((prev) => ({
-      ...prev,
-      [filterKey]: [],
-    }));
+    // setAppliedFilters((prev) => ({
+    //   ...prev,
+    //   [filterKey]: [],
+    // }));
 
     // Additional condition to clear 'make' state specifically
     if (filterKey === "make") {
@@ -898,11 +870,11 @@ const Sidebar = () => {
   return (
     <>
       <div className="flex mt-20 sm:mt-5 gap-2 bg-gray-100  w-[95vw] sm:w-[80vw] p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
-        {Object.entries(appliedFilters).some(([, values]) =>
+        {Object.entries(selectedFilters).some(([, values]) =>
           Array.isArray(values) ? values.length > 0 : values
         ) && (
           <div className="flex w-[80vw] gap-2">
-            {Object.entries(appliedFilters).map(([key, values]) =>
+            {Object.entries(selectedFilters).map(([key, values]) =>
               values && (Array.isArray(values) ? values.length > 0 : true) ? (
                 <div
                   key={key}
@@ -1459,8 +1431,8 @@ const Sidebar = () => {
         <div className="w-[76vw]lg:w-[60vw] xl:w-[58.5vw] 2xl:w-[58.5vw] flex justify-center h-full flex-col items-center">
           <SearchMainPage
             resetFilters={resetFilters}
-            appliedFilters={appliedFilters}
-            triggerFetch={appliedFilters}
+            appliedFilters={selectedFilters}
+            triggerFetch={selectedFilters} 
             setShowFiltersMob={setShowFiltersMob}
             showFilterMob={showFilterMob}
             handleFilters={handleFilters}
