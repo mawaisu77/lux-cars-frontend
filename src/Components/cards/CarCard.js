@@ -244,8 +244,8 @@ const CarCard = ({ card, isBuy = false }) => {
                       </div>
                   </div>
                   <div className="flex gap-x-[0.2vw] text-[12px] md:text-16 w-full" title="Status Code">
-                    <p style={{ backgroundColor: currentStatus?.hex}} className="text-white font-bold rounded-full w-[1.3vw] h-[1.3vw] flex items-center justify-center">{currentStatus?.letter}</p>
-                    <p style={{color: currentStatus?.hex}} className="font-bold rounded-md px-[0.4vw]">{currentStatus?.label}</p>
+                    <p  className={`${currentStatus?.bgHex} text-white font-bold rounded-full w-[1.3vw] h-[1.3vw] flex items-center justify-center`}>{currentStatus?.letter}</p>
+                    <p className={`${currentStatus?.hex}   font-bold rounded-md px-[0.4vw]`}>{currentStatus?.label}</p>
                   </div>
                   <div className="flex items-center gap-x-[0.4vw] text-[12px] md:text-16 ">
                     <PiTimerBold className="text-[14px] md:text-20 " />

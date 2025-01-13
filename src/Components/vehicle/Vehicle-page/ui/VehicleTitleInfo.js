@@ -6,10 +6,9 @@ const VehicleTitleInfo = ({currentStatus, title, baseSite}) => {
     <div className="flex justify-center items-center gap-1">
     {currentStatus && (
       <div
-        className="w-4 h-4 lg:w-[1.5vw] lg:h-[1.5vw] rounded-full"
-        style={{ backgroundColor: currentStatus.hex }}
+        className={`w-4 h-4 lg:w-[1.5vw] lg:h-[1.5vw] rounded-full ${currentStatus.bgHex} `}
       >
-        <span title={currentStatus.id} className="text-white w-full h-full text-16 font-bold flex items-center justify-center">
+        <span title={currentStatus.id} className={ " text-white w-full h-full text-16 font-bold flex items-center justify-center"}>
           {currentStatus.letter}
         </span>
       </div>
