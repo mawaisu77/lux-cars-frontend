@@ -202,7 +202,7 @@ const VehicleHero = () => {
                     </div>
                     <BsDownload className="cursor-pointer" />
                   </div>
-                <VehicleDetailInfo data={carDetailData?.data} />
+                <VehicleDetailInfo data={carDetailData?.data} currentStatus={currentStatus} />
                   
                 </div>
 

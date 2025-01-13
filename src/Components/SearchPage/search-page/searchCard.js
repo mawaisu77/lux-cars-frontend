@@ -251,12 +251,11 @@ function Card({ card }) {
               <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">Status: </span>
                 <span
-                  className="text-nowrap font-bold"
-                  style={{ color: currentStatus?.hex }}
+                  className={`text-nowrap font-bold ${currentStatus?.hex}`}
                 >
                   {card?.status}
                 </span>
-                <span title={currentStatus.id} style={{backgroundColor: currentStatus?.hex}} className="text-white w-5 h-5 flex items-center justify-center text-14 font-bold  rounded-full">
+                <span title={currentStatus.id} className={`${currentStatus?.bgHex} text-white w-4 h-4 flex items-center justify-center text-14 font-bold  rounded-full`}>
                         {currentStatus.letter}
                   </span>
               </p>
@@ -458,7 +457,7 @@ function Card({ card }) {
 
 export default SearchCard;
 
-const formatMileageMiles = (mileage) => {
+export const formatMileageMiles = (mileage) => {
   const miles = parseFloat(mileage);
   if (miles >= 1000) {
     return `${(miles / 1000).toFixed(1)}k miles`; // Convert to 'k' format for both miles and kilometers
