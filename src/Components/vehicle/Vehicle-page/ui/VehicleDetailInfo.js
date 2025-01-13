@@ -2,11 +2,13 @@ import React from 'react'
 import BidHistory from '../BidHistory'
 import InfoRow from './InfoRow'
 import { getDamageColorClass } from '../DamageColorCodes';
+import { getOdometerColorClass } from '../OdometerColor';
+import { formatMileageMiles } from '../../../SearchPage/search-page/searchCard';
 
 const VehicleDetailInfo = ({data, currentStatus}) => {
   const damageColorClass = getDamageColorClass(data?.damage_pr);
+  const odometerColorClass = getOdometerColorClass(data?.odometer);
 
-  
   return (
     <div className="grid  gap-6">
     {/* Vehicle Info */}
@@ -30,6 +32,11 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
         <InfoRow
           label="Drivetrain"
           value={data?.drive || "N/A"}
+        />
+        <InfoRow
+          label="Mileage"
+          value={formatMileageMiles(data?.odometer) || "N/A"}
+          className={odometerColorClass}
         />
         <InfoRow
           label="Transmission"

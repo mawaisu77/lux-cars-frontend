@@ -457,7 +457,7 @@ function Card({ card }) {
 
 export default SearchCard;
 
-const formatMileageMiles = (mileage) => {
+export const formatMileageMiles = (mileage) => {
   const miles = parseFloat(mileage);
   if (miles >= 1000) {
     return `${(miles / 1000).toFixed(1)}k miles`; // Convert to 'k' format for both miles and kilometers
