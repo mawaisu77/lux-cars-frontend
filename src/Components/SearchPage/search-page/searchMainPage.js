@@ -91,11 +91,14 @@ function SearchMainPage({
     <div className="w-full">
       <div className=" w-full mx-auto  font-urbanist flex flex-col">
         <div className="flex flex-col border-b-2  w-full lg:flex-row justify-between items-center  ">
-          <div className="flex mb-4 lg:mb-0 mx-auto">
+          {
+            totalResults > 0 &&  <div className="flex mb-4 lg:mb-0 mx-auto">
             <h2 className="text-[24px] lg:text-[1.2vw] font-urbanist font-semibold">
               {`${totalResults} Available Vehicles`}
             </h2>
           </div>
+          }
+         
           <div className="flex flex-col lg:flex-row   relative text-left text-sm lg:text-base">
             
             <div className="flex justify-between items-center">

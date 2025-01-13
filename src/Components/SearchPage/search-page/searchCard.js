@@ -185,13 +185,7 @@ function Card({ card }) {
                 </div>
               </SwiperSlide>
             ))}
-          <div className="absolute z-50 py-0.5 bottom-0 w-full bg-blue-500/90 text-white flex justify-center items-center gap-x-2 rounded-b-md">
-            <span>Current Bid</span>
-            <span className="text-yellow-300 font-bold">
-              {`
-                    $${card?.currentBid ? card?.currentBid : "0"}`}
-            </span>
-          </div>
+       
         </Swiper>
       </div>
       <ImageModal
@@ -228,7 +222,7 @@ function Card({ card }) {
           </div>
           <div className="flex flex-col md:flex-row lg:flex-row justify-between leading-[3vh]">
             <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[14px] md:text-[0.875vw] py-1">
-              <p className="w-full flex gap-x-2">
+              <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">VIN: </span>
                 <span>
                   {window.innerWidth >= 1024 && card?.vin?.length > 10
@@ -236,25 +230,25 @@ function Card({ card }) {
                     : card?.vin}
                 </span>
                 <RxCopy
-                  className="cursor-pointer py-[0.1vh] text-[14px] md:text-18 text-gray-600 hover:text-gray-800"
+                  className="cursor-pointer py-[0.1vh] text-[14px] md:text-20 text-gray-600 hover:text-gray-800"
                   onClick={() => {
                     navigator.clipboard.writeText(card?.vin);
                     toast.success("Copied to clipboard!");
                   }}
                 />
               </p>
-              <p className="w-full flex gap-x-2">
+              <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">Lot: </span>
                 <span>{card?.lot_id || "Not specified"}</span>
                 <RxCopy
-                  className="cursor-pointer py-[0.1vh] text-[14px] md:text-18 text-gray-600 hover:text-gray-800"
+                  className="cursor-pointer py-[0.1vh] text-[14px] md:text-20 text-gray-600 hover:text-gray-800"
                   onClick={() => {
                     navigator.clipboard.writeText(card?.lot_id);
                     toast.success("Copied to clipboard!");
                   }}
                 />
               </p>
-              <p className="w-full flex gap-x-2">
+              <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">Status: </span>
                 <span
                   className="text-nowrap font-bold"
@@ -266,7 +260,7 @@ function Card({ card }) {
                         {currentStatus.letter}
                   </span>
               </p>
-              <p className="w-full flex gap-x-2">
+              <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">Location: </span>
                 <span className="text-nowrap">
                   {window.innerWidth >= 1024 && card?.location?.length > 15
@@ -276,15 +270,15 @@ function Card({ card }) {
               </p>
             </div>
             <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] md:text-[0.875vw] py-1">
-              <p className="w-full flex gap-x-2">
+              <p className="w-full flex items-center gap-x-2" title={formatMileageKm(card?.odometer)}>
                 <span className="font-semibold">Millage: </span>
                 <span className="text-nowrap">
                   {window.innerWidth >= 1024 && card.odometer
-                    ? formatMileage(card.odometer)
+                    ? formatMileageMiles(card.odometer)
                     : "Not specified"}
                 </span>
               </p>
-              <p className="w-full flex gap-x-2">
+              <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">Damage: </span>
                 <span className="text-nowrap">
                   {window.innerWidth >= 1024 && card.damage?.length > 15
@@ -292,7 +286,7 @@ function Card({ card }) {
                     : card?.damage || "None"}
                 </span>
               </p>
-              <p className="w-full flex gap-x-2">
+              <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">Engine: </span>
                 <span className="text-nowrap">
                   {window.innerWidth >= 1024 && card?.engine?.length > 20
@@ -300,7 +294,7 @@ function Card({ card }) {
                     : card?.engine || "Not specified"}
                 </span>
               </p>
-              <p className="w-full flex gap-x-2">
+              <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">Color: </span>
                 <span className="text-nowrap">
                   {window.innerWidth >= 1024 && card?.color?.length > 10
@@ -400,8 +394,10 @@ function Card({ card }) {
               <div className="flex justify-center items-center w-full lg:mt-2 ">
                 <Link to={`/vehicle-detail/${card?.lot_id}`} className="w-full">
                   <button className="h-full py-2 md:py-[0.5vw] rounded-[8px] md:rounded-[0.5vw] w-full text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
-                    BID NOW
+                    Current Bid: {`$${card?.currentBid ? card?.currentBid : "0"}`}
+
                   </button>
+
                 </Link>
               </div>
 
@@ -462,11 +458,20 @@ function Card({ card }) {
 
 export default SearchCard;
 
-const formatMileage = (mileage) => {
+const formatMileageMiles = (mileage) => {
+  const miles = parseFloat(mileage);
+  if (miles >= 1000) {
+    return `${(miles / 1000).toFixed(1)}k miles`; // Convert to 'k' format for both miles and kilometers
+  }
+  return `${miles} miles`; // Return in miles and km if less than 1000
+};
+
+const formatMileageKm = (mileage) => {
   const miles = parseFloat(mileage);
   const kilometers = (miles * 1.60934).toFixed(1); // Convert miles to kilometers
   if (miles >= 1000) {
-    return `${(miles / 1000).toFixed(1)}k miles (${(kilometers / 1000).toFixed(1)}k km)`; // Convert to 'k' format for both miles and kilometers
+    return `${(kilometers / 1000).toFixed(1)}k km`; // Convert to 'k' format for both miles and kilometers
   }
-  return `${miles} miles / (${kilometers} km)`; // Return in miles and km if less than 1000
+  return `${kilometers} km`; // Return in miles and km if less than 1000
 };
+
