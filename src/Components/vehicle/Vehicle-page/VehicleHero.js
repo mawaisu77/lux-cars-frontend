@@ -287,6 +287,23 @@ const VehicleHero = () => {
                   )}
                   </button>
 
+
+{carDetailData?.data?.is_buynow && (
+                  <button
+                    className={`flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full`}
+                  >
+                   
+                      <>
+                        <span className="text-md lg:text-[1.1vw]">
+                          Buy Now 
+                        </span>
+                                  
+                      </>
+               
+                  </button>
+                  )}
+
+
                   <div className="">
                     <VehicleCostCalculator
                       data={carDetailData?.data}

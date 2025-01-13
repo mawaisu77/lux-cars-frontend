@@ -53,17 +53,17 @@ const FundsCard = ({fund}) => {
   ];
 
   return (
-    <div className='w-full max-w-[1370px] lg:max-w-[74vw] mx-auto flex justify-between gap-4 mt-[30px] overflow-x-auto no-scrollbar px-4'>
+    <div className='w-full max-w-[1370px] lg:max-w-[74vw] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 mt-[30px] px-4'>
       {FundsC.map((item, index) => (
-        <div key={index} className='relative w-[343px]  lg:w-[17vw] h-[270px] lg:h-[27vh] border shadow-xl rounded-xl flex-shrink-0'>
-          <div className='flex items-center gap-4 p-4'>
+        <div key={index} className=' relative w-full h-[270px] lg:h-[27vh] border shadow-md rounded-xl flex-shrink-0'>
+          <div className='flex items-center gap-2 p-4'>
             <div
-              className='flex justify-center items-center w-[55px] lg:w-[2.8vw] h-[55px] lg:h-[5.9vh] rounded-full'
+              className='flex justify-center items-center p-2 rounded-full'
               style={{ backgroundColor: item.bgColor }}
             >
               {item.icon}
             </div>
-            <p className='text-[21px] lg:text-[1.3vw] font-urbanist text-nowrap font-semibold'>
+            <p className='text-[21px] overflow-hidden text-ellipsis lg:text-[1.3vw] font-urbanist text-nowrap font-semibold'>
               {item.States}
             </p>
           </div>
@@ -72,7 +72,7 @@ const FundsCard = ({fund}) => {
               {item.Amount}
             </p>
           </div>
-          <img src={item.image} className='w-full absolute bottom-0' />
+          <img alt='chart' src={item.image} className='w-full absolute bottom-0' />
         </div>
       ))}
     </div>

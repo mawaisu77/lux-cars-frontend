@@ -125,6 +125,14 @@ const Bid = () => {
           </h1>
 
           <div className="flex gap-x-2 md:gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
+          <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 md:py-[1.2vh] py-2 md:text-16 text-[16px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border  rounded-full">
+              <FaHandHoldingUsd />
+              <AnchorLink href="#startBidding">
+                <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
+                  Start Bidding
+                </button>
+              </AnchorLink>
+            </div>
             <div className="flex items-center md:py-[1.2vh] py-2 md:text-16 text-[16px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border border-white hover:bg-white hover:text-black duration-200 rounded-full">
               <FaRocket />
               <Link to="/upload-car">
@@ -133,51 +141,44 @@ const Bid = () => {
                 </button>
               </Link>
             </div>
-            <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 md:py-[1.2vh] py-2 md:text-16 text-[16px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border  rounded-full">
-              <FaHandHoldingUsd />
-              <AnchorLink href="#startBidding">
-                <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
-                  Start Bidding
-                </button>
-              </AnchorLink>
-            </div>
+          
           </div>
 
-          <div className="mx-auto p-2 md:p-[1vw] bg-white/80 rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">
+          <div className="mx-auto p-2 md:p-[1vw] bg-white rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">
          
-          <div className="my-2 md:my-[0.5vw]">
-              <div className="flex border-b">
+          {/* <div className="py-2 md:my-[0.5vw] bg-gray-100">
+              <div className="flex gap-x-2">
                 <button
-                  className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 transition-colors duration-300 ${
+                  className={`px-4 font-bold py-2 md:py-[0.3vw] md:px-[0.5vw] text-[16px] md:text-16 transition-colors duration-300 ${
                     activeTab2 === "quick"
-                      ? "text-blue-500 border-b-2 border-blue-500"
-                      : "text-gray-500 hover:text-gray-700"
+                      ? "text-red-600 border-2 rounded-full border-red-600"
+                      : "text-gray-500 hover:text-gray-700 border-2 rounded-full border-gray-500"
                   }`}
                   onClick={() => setActiveTab2("quick")}
                 >
                   Quick Searches
                 </button>
                 <button
-                  className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 transition-colors duration-300 ${
+                  className={`px-4 font-bold py-2 md:py-[0.3vw] md:px-[0.5vw] text-[16px] md:text-16 transition-colors duration-300 ${
                     activeTab2 === "popular"
-                      ? "text-blue-500 border-b-2 border-blue-500"
-                      : "text-gray-500 hover:text-gray-700"
+                       ? "text-red-600 border-2 rounded-full border-red-600"
+                      : "text-gray-500 hover:text-gray-700 border-2 rounded-full border-gray-500"
                   }`}
                   onClick={() => setActiveTab2("popular")}
                 >
                   Popular Searches
                 </button>
               </div>
-            </div>
-           <div className="rounded-md grid grid-cols-6 gap-x-2 bg-white/80 font-semibold text-blue-500 mt-4 md:mt-[1vw]">
+            </div> */}
+           <div className="rounded-md grid grid-cols-6 gap-x-2 font-semibold text-primary-red mt-4 md:mt-[1vw]">
             {activeTab2 === "quick" && (
               <>
-                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Automobiles</span>
-                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">ATVs</span>
-                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Boats</span>
-                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Buses</span>
-                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Trucks</span>
-                <span className=" p-1.5 cursor-pointer text-xs text-center hover:bg-gray-200">Motorcycles</span>
+                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Automobiles</span>
+                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">ATVs</span>
+                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Boats</span>
+                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Buses</span>
+                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Trucks</span>
+                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Motorcycles</span>
               </>
             )}
             {activeTab2 === "popular" && (
@@ -193,11 +194,11 @@ const Bid = () => {
            </div>
 
             <div className="my-2 md:my-[0.8vw]">
-              <div className="flex border-b">
+              <div className="flex">
                 <button
                   className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 transition-colors duration-300 ${
                     activeTab === "regular"
-                      ? "text-blue-500 border-b-2 border-blue-500"
+                      ? "text-primary-red border-b-2 border-primary-red rounded-md shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
                   }`}
                   onClick={() => setActiveTab("regular")}
@@ -207,7 +208,7 @@ const Bid = () => {
                 <button
                   className={`px-4 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 font-bold transition-colors duration-300 ${
                     activeTab === "vin"
-                      ? "text-blue-500 border-b-2 border-blue-500"
+                      ? "text-primary-red border-b-2 rounded-md border-primary-red shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
                   }`}
                   onClick={() => setActiveTab("vin")}
@@ -338,7 +339,7 @@ const Bid = () => {
                     <div className="flex justify-end items-center">
                       <button
                         onClick={handleSearch}
-                        className="bg-blue-500 text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 rounded-md hover:bg-blue-600 transition-colors"
+                        className="bg-primary-red text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 rounded-full hover:bg-primary-red transition-colors"
                       >
                         Search vehicles
                       </button>
@@ -365,7 +366,7 @@ const Bid = () => {
                   <div className="flex justify-end items-center mt-4">
                       <button
                         onClick={handleVinSearch}
-                        className="bg-blue-500 text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 rounded-md hover:bg-blue-600 transition-colors"
+                        className="bg-primary-red text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 rounded-full hover:bg-primary-red transition-colors"
                       >
                         Search vehicle
                       </button>

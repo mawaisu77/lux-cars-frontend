@@ -199,8 +199,8 @@ const Header = () => {
       >
         <header className="bg-black/90">
           <div className="w-[100vw] mx-auto ">
-            <div className="flex max-w-[85vw] mx-auto w-full items-center justify-center h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
-              <div className=" w-full flex justify-start items-center gap-x-4">
+            <div className="flex max-w-[85vw] mx-auto w-full items-center justify-between h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
+              {/* <div className=" w-full flex justify-between items-center gap-x-4"> */}
               <Link to="/">
                 <img
                   src={
@@ -251,7 +251,7 @@ const Header = () => {
                   )}
                 </div>
               </div>
-              </div>
+              {/* </div> */}
             
               {user ? (
                   <div className="flex items-center gap-x-4">
