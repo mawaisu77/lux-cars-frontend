@@ -13,7 +13,7 @@ const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType }
         <div className="text-left p-2 md:p-[0.3vw]">
           <p className="lg:text-[0.7vw] text-[#7a798a]">Owned by</p>
           <p
-                className={`lg:text-[0.9vw] font-urbanist font-semibold ${seller && seller !== "Unknown" ? "text-green-600 bg-green-500/30 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]" : "text-red-600 bg-red-500/20 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]"}`}
+            className={`lg:text-[0.9vw] font-urbanist font-semibold ${seller && seller !== "Unknown" ? "text-green-600 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]" : "text-red-600 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]"}`}
           >
             {seller || "Unknown"}
           </p>
@@ -25,7 +25,7 @@ const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType }
         </div>
         <div className="text-left p-2 md:p-[0.3vw]">
           <p className="lg:text-[0.7vw] text-[#7a798a]">Sale Documents</p>
-          <p className="lg:text-[0.7vw] font-urbanist font-semibold" style={{ color: currentDocumentType?.hex || '', backgroundColor: currentDocumentType?.hexLight || '', padding: currentDocumentType ? '0.2vw' : '0', borderRadius: currentDocumentType ? '0.2vw' : '0' }}>
+          <p className="lg:text-[0.7vw] font-urbanist font-semibold" style={{ color: currentDocumentType?.hex || '', padding: currentDocumentType ? '0.2vw' : '0', borderRadius: currentDocumentType ? '0.2vw' : '0' }}>
             {documentOld ? documentOld : document}
           </p>
         </div>

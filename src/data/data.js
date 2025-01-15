@@ -269,7 +269,6 @@ export const BUY = [
     button: "Buy Now In 6,000$",
   },
 ];
-
 export const live = [
   {
     img1: image111,
@@ -337,7 +336,6 @@ export const live = [
     Price: "$750",
   },
 ];
-
 export const categories = [
   { img: image1, category: "Automobiles",id:'Automobile' },
   { img: image2, category: "Super Car",id:'super-car' },
@@ -349,7 +347,6 @@ export const categories = [
   { img: image8, category: "Mobile Home",id:'Mobile Home' },
   { img: boat, category: "Boat",id:'Boat' },
 ];
-
 export const values = [
   {
     icon: <FaMedal size={25} color="white" />,
@@ -429,7 +426,6 @@ export const choices = [
     para: "We offer a wide range of vehicles, from luxury sedans to rugged SUVs, ensuring you find the perfect fit for your needs.",
   },
 ];
-
 export const process = [
   {
     heading: "Handpicked Selection",
@@ -452,7 +448,6 @@ export const process = [
     p: "",
   },
 ];
-
 export const team = [
   {
     img: mem1,
@@ -467,7 +462,6 @@ export const team = [
     name: "Myrlene Paul",
   },
 ];
-
 export const logos = [
   { logo: logo1 },
   { logo: logo2 },
@@ -479,7 +473,6 @@ export const logos = [
   { logo: logo8 },
   { logo: logo9 },
 ];
-
 export const testi = [
   {
     para: "Augue Sed viverra nulla Interdum mia bibendum velit sapien scelerisqu ictum quam tincidunt nec feugiat augue tincidunt. Etiam pretium diam rhoncus. gida turpis cursus. Nuncsed fringilla tortor iaculis eget",
@@ -518,7 +511,6 @@ export const testi = [
     image: client2,
   },
 ];
-
 export const feesLeftCard = [
   {
     heading: "no dealer license required",
@@ -541,7 +533,6 @@ export const feesLeftCard = [
     icon: <BsCartFill size={25} className="mx-auto" />,
   },
 ];
-
 export const feesRightCard = [
   {
     heading: "requirement for a dealer/broker license",
@@ -568,7 +559,6 @@ export const feesRightCard = [
     icon: <TiCreditCard size={25} className="mx-auto" />,
   },
 ];
-
 export const BuyerFeesListCardList = [
   { range: "$0.01 - $49.99", standard: "$25.00" },
   { range: "$50.00 - $99.99", standard: "$45.00" },
@@ -640,8 +630,6 @@ export const  IAAIdatalist = [
   { range: "$15000+", standard: "7.50% of sale price " },
  
 ];
-
-
 export const VirtualBidFeeCardList = [
   { range: "$0.00 - $99.99", PreBidFee:'-',standard: "-" },
   { range: "$100.00 - $499.99", PreBidFee:'$45.00',standard: "$55.00" },
@@ -654,7 +642,6 @@ export const VirtualBidFeeCardList = [
   { range: "$8000.00$+", PreBidFee:'$150.00',standard: "$165.00" },
 
 ];
-
 export const internetFeeList = [
   { range: "$0.00 - $99.99", PreBidFee:'$0',standard: "$0" },
   { range: "$100.00 - $499.99", PreBidFee:'$39.00',standard: "$49.00" },
@@ -668,7 +655,7 @@ export const internetFeeList = [
   { range: "$8000.00+", PreBidFee:'$129.00',standard: "$149.00" },
   
 ];
-  export const UserOrder = [
+export const UserOrder = [
   {
     // image: car1,
     Gmt: "Chverolet gMT 400",
@@ -710,3 +697,5 @@ export const internetFeeList = [
     Status: ":Completed",
   },
 ];
+
+

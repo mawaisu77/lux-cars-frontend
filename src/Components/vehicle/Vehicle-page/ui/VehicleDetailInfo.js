@@ -7,6 +7,7 @@ import { formatMileageMiles } from '../../../SearchPage/search-page/searchCard';
 
 const VehicleDetailInfo = ({data, currentStatus}) => {
   const damageColorClass = getDamageColorClass(data?.damage_pr);
+  const damageColorClass2 = getDamageColorClass(data?.damage_sec);
   const odometerColorClass = getOdometerColorClass(data?.odometer);
 
   return (
@@ -16,7 +17,7 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
       <h2 className="text-sm lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
         Vehicle Info
       </h2>
-      <div className="space-y-[2vh] text-sm lg:text-[0.875vw]">
+      <div className="space-y-[2vh] text-sm md:text-18 font-medium tracking-wide">
         <InfoRow
           label="Title"
           value={data?.title || "N/A"}
@@ -50,7 +51,7 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
         <InfoRow
           label="Damage Secondary"
           value={data?.damage_sec || "N/A"}
-          className={damageColorClass}
+          className={damageColorClass2}
         />
         <InfoRow
           label="Start Code"
@@ -65,7 +66,7 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
       <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
         Location
       </h2>
-      <div className="space-y-[2vh] text-sm lg:text-[0.875vw]">
+      <div className="space-y-[2vh] text-sm md:text-18 font-medium tracking-wide">
         <InfoRow
           label="Location"
           value={data?.location || "N/A"}
@@ -99,8 +100,8 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
         <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
           Specifications
         </h2>
-        <div className=" space-y-[2vh] text-sm lg:text-[0.875vw]">
-          <InfoRow
+        <div className="space-y-[2vh] text-sm md:text-18 font-medium tracking-wide">
+        <InfoRow
             label="Vehicle Type"
             value={data?.vehicle_type || "N/A"}
           />
