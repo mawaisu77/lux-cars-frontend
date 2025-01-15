@@ -23,6 +23,8 @@ import AddCardIcon from '@mui/icons-material/AddCard';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import StarsIcon from '@mui/icons-material/Stars';
 import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
+import { TbReportSearch } from "react-icons/tb";
+
 
 export default function ProfileDropdown({user}) {
   const navigate = useNavigate(); 

@@ -1,0 +1,57 @@
+export const customCalculatorDropdownStyles = {
+    control: (provided) => ({
+      ...provided,
+      padding: "0 2px",
+      boxShadow: "none",
+      paddingTop: "0",
+      marginTop: "0",
+      height: "20px",
+      minHeight: "20px",
+    }),
+    indicatorSeparator: (provided) => ({
+      ...provided,
+      display: "none",
+    }),
+    indicatorsContainer: (provided) => ({
+      ...provided,
+        padding: "0",
+        margin: "0",
+        marginTop: "0",
+        fontWeight: "normal",
+        fontSize: "8px",
+        height: "20px",
+        minHeight: "10px",
+    }),
+    dropdownIndicator: (provided) => ({
+        ...provided,
+        padding: "0",
+        margin: "0",
+        marginTop: "0",
+        paddingTop: "0",
+        height: "12px", 
+        width: "12px", 
+        fontSize: "12px", 
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }),
+    singleValue: (provided) => ({
+      ...provided,
+      padding: "0",
+      margin: "0",
+      height: "20px",
+      fontSize: "12px",
+      minHeight: "0px",
+    }),
+    valueContainer: (provided) => ({
+        ...provided,
+        padding: "0",
+        margin: "0",
+        marginTop: "0",
+        paddingTop: "0",
+        height: "20px",
+        fontSize: "10px", // {{ edit_1 }}: Adjust the font size to reduce the cursor size
+        minHeight: "0px",
+      }),
+  };
+  

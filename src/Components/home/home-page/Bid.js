@@ -102,6 +102,17 @@ const Bid = () => {
       }
     };
 
+
+     const heroCategories = [
+      {category: "Automobiles",id:'Automobile' },
+      {category: "Motor Cycles",id:'Motorcycle' },
+      {category: "ATVs",id:'ATV' },
+      {category: "Buses",id:'Bus' },
+      {category: "Truck",id:'Truck' },
+      {category: "Boat",id:'Boat' },
+    ];
+    
+
   return (
     <>
       <div class="relative md:h-full text-white overflow-hidden">
@@ -141,56 +152,21 @@ const Bid = () => {
                 </button>
               </Link>
             </div>
-          
           </div>
 
-          <div className="mx-auto p-2 md:p-[1vw] bg-white rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">
-         
-          {/* <div className="py-2 md:my-[0.5vw] bg-gray-100">
-              <div className="flex gap-x-2">
-                <button
-                  className={`px-4 font-bold py-2 md:py-[0.3vw] md:px-[0.5vw] text-[16px] md:text-16 transition-colors duration-300 ${
-                    activeTab2 === "quick"
-                      ? "text-red-600 border-2 rounded-full border-red-600"
-                      : "text-gray-500 hover:text-gray-700 border-2 rounded-full border-gray-500"
-                  }`}
-                  onClick={() => setActiveTab2("quick")}
-                >
-                  Quick Searches
-                </button>
-                <button
-                  className={`px-4 font-bold py-2 md:py-[0.3vw] md:px-[0.5vw] text-[16px] md:text-16 transition-colors duration-300 ${
-                    activeTab2 === "popular"
-                       ? "text-red-600 border-2 rounded-full border-red-600"
-                      : "text-gray-500 hover:text-gray-700 border-2 rounded-full border-gray-500"
-                  }`}
-                  onClick={() => setActiveTab2("popular")}
-                >
-                  Popular Searches
-                </button>
-              </div>
-            </div> */}
+          <div className="mx-auto p-2 md:p-[1vw] bg-white rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">      
            <div className="rounded-md grid grid-cols-6 gap-x-2 font-semibold text-primary-red mt-4 md:mt-[1vw]">
-            {activeTab2 === "quick" && (
+         
+          {heroCategories.map((item,index)=>(
               <>
-                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Automobiles</span>
-                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">ATVs</span>
-                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Boats</span>
-                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Buses</span>
-                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Trucks</span>
-                <span className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">Motorcycles</span>
+                <span onClick={()=>{
+                  localStorage.setItem("apiEndpoint", process.env.REACT_APP_API_CARS_LIVE);
+                  navigate(`/search-page?vehicle_type=${item.id.toLowerCase().replace(/\s+/g, "_")}`
+                  );
+                }}
+                 className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">{item.category}</span>
               </>
-            )}
-            {activeTab2 === "popular" && (
-              <>
-                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Honda Civic</span>
-                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Toyota Camry</span>
-                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Ford F-150</span>
-                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Chevrolet Silverado</span>
-                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Toyota Tacoma</span>
-                <span className="text-nowrap text-ellipsis overflow-hidden text-xs p-1.5 cursor-pointer text-center hover:bg-gray-200">Toyota Tacoma</span>
-              </>
-            )}
+           ))}
            </div>
 
             <div className="my-2 md:my-[0.8vw]">
