@@ -18,8 +18,11 @@ const useTimer = (targetTime) => {
     // console.log("Timer effect initialized");
 
     const updateTimer = () => {
+  
       const now = new Date();
-      const distance = targetTimeRef.current - now.getTime();
+      const adjustedTargetTime = targetTimeRef.current - (1000 * 60 * 60); 
+      const distance = adjustedTargetTime - now.getTime();
+    
 
       if (distance < 0) {
         setTimeLeft({
