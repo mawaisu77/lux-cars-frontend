@@ -108,6 +108,10 @@ const LocalSearchSidebar = () => {
     }
   };
 
+  useEffect(() => {
+    handleApplyFilters();
+  }, [selectedFilters]);
+
   const handleResetFilters = async () => {
     const data = await fetchVehiclesData();
     setVehicles(data?.cars);
@@ -376,12 +380,12 @@ const LocalSearchSidebar = () => {
               )}
             </div>
             <div className="w-full flex justify-evenly mt-10">
-              <button
+              {/* <button
                 onClick={handleApplyFilters}
                 className="text-white bg-red-600 w-[45%] p-[0.4rem] rounded-lg"
               >
                 Apply Filters
-              </button>
+              </button> */}
               <button
                 onClick={handleResetFilters}
                 className="text-black bg-gray-200 w-[45%] p-[0.4rem] rounded-lg"
