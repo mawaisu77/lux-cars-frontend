@@ -7,10 +7,7 @@ import {
   suvData,
   heavyMachineryData,
 } from "../../../utils/carCategoriesData";
-import {
-  stateAbbreviations,
-  statesAndProvinces,
-} from "../../../utils/CountryState";
+
 import { CopartBuyerFeeCalculator } from "./copart-bid-calculations/BuyerFeeCalculations";
 import {
   copartEnvironmentalFee,
@@ -40,6 +37,13 @@ const categoryOptions = [
 ];
 
 const Dropdown = ({ bidAmount, data }) => {
+
+  const [vatPercentage, setVatPercentage] = useState(10); // State for VAT percentage
+  const [processingFee, setProcessingFee] = useState(0.01); // State for processing fee
+  const [levyFee, setLevyFee] = useState(250); // State for levy fee
+  const [selectedLocation, setSelectedLocation] = useState("Bahamas"); // State for location selection
+
+
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [transportationOptions, setTransportationOptions] = useState([]);
   const [selectedTransportation, setSelectedTransportation] = useState(null);
@@ -49,19 +53,21 @@ const Dropdown = ({ bidAmount, data }) => {
   const [finalBid, setFinalBid] = useState(0); // Store the final bid in state
   const [showApprovalMessage, setShowApprovalMessage] = useState(false); // State to show the approval message
 
+  const calculateProcessingFee = () => (parseFloat(finalBid) || 0) * processingFee; // Use state for processing fee
+  const calculateLevyFee = () => (selectedLocation === "Turks" ? 0 : levyFee); // Conditional levy fee
+
   const shippingRates = {
-    Sedan: { Diesel: 1100, Gasoline: 1100, Electric: 1300 },
-    SUV: { Diesel: 1300, Gasoline: 1300, Electric: 1700 },
-    Trucks: { Diesel: 1600, Gasoline: 1600, Electric: 1700 },
-    HM: { Diesel: 2500, Gasoline: 2500, Electric: 2500 },
-    Boats: { Diesel: 2500, Gasoline: 2500, Electric: 2500 },
-    ATV: { Diesel: 1100, Gasoline: 1100, Electric: 1300 },
+    Sedan: { Diesel: 1100, Gasoline: 1100, Electric: 1300, Hybrid: 1300, "Flexible Fuel": 1300, Unknown: 1300, "Other": 1300 },
+    SUV: { Diesel: 1300, Gasoline: 1300, Electric: 1700, Hybrid: 1700, "Flexible Fuel": 1700, Unknown: 1700, "Other": 1700 },
+    Trucks: { Diesel: 1600, Gasoline: 1600, Electric: 1700, Hybrid: 1700, "Flexible Fuel": 1700, Unknown: 1700, "Other": 1700 },
+    "Heavy Machinery": { Diesel: 2500, Gasoline: 2500, Electric: 2500, Hybrid: 2500, "Flexible Fuel": 2500, Unknown: 2500, "Other": 2500 }, 
+    Boats: { Diesel: 2500, Gasoline: 2500, Electric: 2500, Hybrid: 2500, "Flexible Fuel": 2500, Unknown: 2500, "Other": 2500 },
+    ATV: { Diesel: 1100, Gasoline: 1100, Electric: 1100, Hybrid: 1100, "Flexible Fuel": 1100, Unknown: 1100, "Other": 1100 },
   };
 
   const calculateShippingCost = () => {
     const category = selectedCategory?.value;
     const fuelType = data?.fuel;
-
     if (category && fuelType && shippingRates[category]) {
       return shippingRates[category][fuelType] || 0;
     }
@@ -84,6 +90,7 @@ const Dropdown = ({ bidAmount, data }) => {
       const copartBuyerFee = CopartBuyerFeeCalculator(bid);
       const copartVirtualFee = CopartVirtualBidFeeCalculator(bid);
       const copartBankFee = calculateBankTransferFee(bid);
+      // console.log("parseFloat(bid) ", parseFloat(bid), "copartBuyerFee ", copartBuyerFee, "copartVirtualFee ", copartVirtualFee, "copartBankFee ", copartBankFee, "copartGateFee ", copartGateFee, "copartTitlePickupFee ", copartTitlePickupFee, "copartEnvironmentalFee ", copartEnvironmentalFee)
       total =
         parseFloat(bid) +
         copartBuyerFee +
@@ -110,22 +117,47 @@ const Dropdown = ({ bidAmount, data }) => {
 
   const calculateCustomsDuty = () => {
     const bid = parseFloat(finalBid) || 0;
-    const rate = selectedFuelType.value === "Hybrid" ? 0.1 : 0.65;
-    return bid * rate;
-  };
+    const engineSize = data?.engine_size;
+    const fuelType = data?.fuel;
+    
+    if (selectedLocation === "Turks") {
+        // Check for Hybrid/Electric
+        if (fuelType === "Hybrid" || fuelType === "Electric") {
+            return bid * 0.10
+        }
+        // Calculate duty based on engine size and bid amount
+        if (engineSize < 2) {
+            return bid < 20000 ? bid * 0.2625 : bid * 0.30; // 26.25% or 30%
+        } else if (engineSize < 4) {
+            return bid < 30000 ? bid * 0.3375 : bid * 0.375; // 33.75% or 37.50%
+        } else if (engineSize >= 4) {
+            return bid < 40000 ? bid * 0.4125 : bid * 0.45; // 41.25% or 45%
+        }
+    } else if (selectedLocation === "Bahamas") {
+        // For Bahamas, check fuel type
+        if (fuelType === "Hybrid" || fuelType === "Electric") {
+            return bid * 0.10; // 10% for Hybrid/Electric
+        } else {
+            return bid * 0.65; // 65% for Diesel
+        }
+    }
 
-  const calculateProcessingFee = () => (parseFloat(finalBid) || 0) * 0.01;
-  const calculateLevyFee = () => 250;
+    return 0; // Default case if no conditions are met
+};
   const calculateInspectionCost = () => (includeInspection === "Yes" ? 500 : 0);
   const calculateCustomsClearence = () => 350;
 
   const calculateVATBase = () => {
     const bid = parseFloat(finalBid) || 0;
     const customsDuty = calculateCustomsDuty();
-    const boatShipping = 1500;
+    const boatShipping = calculateShippingCost();
     const processingFee = calculateProcessingFee();
     const levyFee = calculateLevyFee();
-    return (bid + customsDuty + boatShipping + processingFee + levyFee) * 0.1;
+    const vatRate = selectedLocation === "Turks" ? 0.05 : 0.10;
+    console.log("vatRate ", vatRate)
+    const vat = (bid + customsDuty + boatShipping + processingFee + levyFee) * vatRate;
+    console.log("vat ", vat)
+    return vat;
   };
 
   // New function to calculate the total due to customs
@@ -144,13 +176,13 @@ const Dropdown = ({ bidAmount, data }) => {
     return baseFee + additionalFee;
   };
 
-  const calculateAuctionFee = () => {
-    const auctionFee = finalBid;
+  const calculateAuctionFee = (bid) => {
+    const auctionFee = bid;
     return auctionFee;
   };
 
-  const calculateBankTransferFee = () => {
-    const bankFee = calculateAuctionFee() * 0.05;
+  const calculateBankTransferFee = (bid) => {
+    const bankFee = calculateAuctionFee(bid) * 0.05;
     return bankFee;
   };
 
@@ -158,9 +190,9 @@ const Dropdown = ({ bidAmount, data }) => {
     const AdminFee = calculateAdminFee();
     const InspectionCost = calculateInspectionCost();
     const customClearance = calculateCustomsClearence();
-    const bankFee = calculateBankTransferFee();
+    const bankFee = calculateBankTransferFee(finalBid);
     const transportationRate = selectedTransportation?.rate || 0;
-    const boatShipping = 1500;
+    const boatShipping = calculateShippingCost();
     return (
       AdminFee +
         InspectionCost +
@@ -180,7 +212,6 @@ const Dropdown = ({ bidAmount, data }) => {
 
   const handleCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
-
     switch (selectedOption.value) {
       case "SUV":
         setTransportationOptions(suvData);
@@ -191,10 +222,18 @@ const Dropdown = ({ bidAmount, data }) => {
       case "Heavy Machinery":
         setTransportationOptions(heavyMachineryData);
         break;
+      case "Boats":
+        setTransportationOptions(heavyMachineryData);
+        break;
+      case "Sedan":
+        setTransportationOptions(atvData);
+        break;
+      case "Trucks":
+        setTransportationOptions(suvData);
+        break;
       default:
         setTransportationOptions([]);
     }
-
     setSelectedTransportation(null); // Reset transportation selection
   };
 
@@ -221,6 +260,15 @@ const Dropdown = ({ bidAmount, data }) => {
           break;
         case "Heavy Machinery":
           categoryData = heavyMachineryData;
+          break;
+        case "Boats":
+          categoryData = heavyMachineryData;
+          break;
+        case "Sedan":
+          categoryData = atvData;
+          break;
+        case "Trucks":
+          categoryData = suvData;
           break;
         default:
           categoryData = [];
@@ -269,6 +317,14 @@ const Dropdown = ({ bidAmount, data }) => {
               <span className="text-md md:text-20 text-gray-700">
                 Your Final Bid:
               </span>
+              <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
+                  <TooltipInfo content="You bid amount + Auction Fee + 5% Bank Fee">
+                    <BsInfoCircle
+                      size={15}
+                      className="hover:text-blue-800 duration-200"
+                    />
+                  </TooltipInfo>
+                </div>
             </div>
             <span className="text-sm md:text-20 font-medium text-gray-800">
               ${calculateFinalBid(bidAmount, data?.base_site)}
@@ -284,6 +340,12 @@ const Dropdown = ({ bidAmount, data }) => {
               <span className="text-sm md:text-20 text-gray-700">
                 Admin Fee:
               </span>
+              <TooltipInfo content="$1,500 if final price over 30000 then it will be additional 4% of final price and the 1500">
+                  <BsInfoCircle
+                    size={15}
+                    className="hover:text-blue-800 duration-200"
+                  />
+                </TooltipInfo>
             </div>
             
             <span className="text-sm md:text-20 font-medium text-gray-800">
@@ -301,12 +363,15 @@ const Dropdown = ({ bidAmount, data }) => {
               <span className="text-sm md:text-20 text-left text-gray-700">
                 US Inland Transport:
               </span>
+              {/* <p className="text-sm md:text-20 text-gray-700">
+                ${selectedTransportation?.rate || 0}
+              </p> */}
               </div>
               <Select
                 styles={customCalculatorDropdownStyles}
                 options={categoryOptions}
                 value={selectedCategory}
-                onChange={handleCategoryChange}
+                onChange={handleCategoryChange} 
                 placeholder="Select Transportation"
                 className="text-sm lg:text-[0.875vw] text-right font-medium text-gray-800"
               />
@@ -380,18 +445,50 @@ const Dropdown = ({ bidAmount, data }) => {
       </div>
 
       <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
-        <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
+        <div className="flex justify-between items-center mb-[2.1vh]">
+        <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900  flex items-center gap-x-2">
           <RiBankFill className="w-5 h-5" />
           Customs 
         </h3>
-        <div className="space-y-3 md:space-y-[1.5vw]">
-          
-          {/*6 Duty rate  */}
-          <div className="flex justify-between">
-            <div className="flex gap-x-1.5 justify-center items-center">
+        <div className="flex gap-x-1.5 justify-center items-center">
               <span className="text-sm md:text-20 text-gray-700">
-                Duty Rate:
-                {selectedFuelType.value === "Gasoline" ? "65%" : "10%"}
+                Select Location:
+              </span>
+              <Select
+                options={[
+                  { label: "Bahamas", value: "Bahamas" },
+                  { label: "Turks", value: "Turks" },
+                ]}
+                styles={customCalculatorDropdownStyles}
+                value={{ label: selectedLocation, value: selectedLocation }}
+                onChange={(option) => {
+                  setSelectedLocation(option.value);
+                  // Reset processing, levy fee if Turks is selected
+                  if (option.value === "Turks") {
+                    setProcessingFee(0);
+                    setLevyFee(0);
+                  } else {
+                    setProcessingFee(0.01); // for Bahamas
+                    setLevyFee(250); // for Bahamas
+                  }
+
+                }}
+                placeholder="Select Location"
+                className="text-sm md:text-20 text-right font-medium text-gray-800"
+              />
+         </div>
+        </div>
+        
+        <div className="space-y-3 md:space-y-[1.5vw]">
+          {/*6 Duty rate  */}
+      
+          <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
+            <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">6</span>
+              </div>
+              <span className="text-sm md:text-20 text-gray-700">
+              Duty Rate:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
                 <TooltipInfo content="Customs Duty 65% if gasoline / 10% if hybrid">
@@ -403,14 +500,18 @@ const Dropdown = ({ bidAmount, data }) => {
               </div>
             </div>
             <span className="text-sm md:text-20 font-medium text-gray-800">
-              ${calculateCustomsDuty().toFixed(2)}
+            ${calculateCustomsDuty().toFixed(2)}
             </span>
           </div>
+
           {/*7 Processing Fee  */}
-          <div className="flex justify-between">
+          <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">7</span>
+              </div>
               <span className="text-sm md:text-20 text-gray-700">
-                Processing Fee: 1%
+                Processing Fee:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
                 <TooltipInfo content="1% of final bid">
@@ -426,8 +527,11 @@ const Dropdown = ({ bidAmount, data }) => {
             </span>
           </div>
           {/*8 Environmental Levy Fee */}
-          <div className="flex justify-between">
+          <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">8</span>
+              </div>
               <span className="text-sm md:text-20 text-gray-700">
                 Environmental Levy Fee: (flat)
               </span>
@@ -460,8 +564,11 @@ const Dropdown = ({ bidAmount, data }) => {
             </span>
           </div>
           {/*9 VAT  */}
-          <div className="flex justify-between">
+          <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">9</span>
+              </div>
               <span className="text-sm md:text-20 text-gray-700">
                 VAT:
               </span>
@@ -480,8 +587,11 @@ const Dropdown = ({ bidAmount, data }) => {
           </div>
           
           {/*10 Customs Clearence and Delivery Fee */}
-          <div className="flex justify-between">
+          <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">10</span>
+              </div>
               <span className="text-sm md:text-20 text-gray-700">
                 Customs Clearence and Delivery Fee
               </span>
@@ -512,6 +622,9 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*11 Total Landed Cost Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">11</span>
+              </div>
               <span className="text-sm md:text-20 text-left font-semibold text-gray-900">
                 Total Landed Cost:
               </span>
@@ -537,6 +650,9 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*12 Total Due to Customs Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">12</span>
+              </div>
               <span className="text-sm md:text-20 font-semibold text-gray-900">
                 Total Due to Custom:
               </span>
@@ -558,6 +674,9 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*13 Final Price Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">13</span>
+              </div>
               <span className="text-sm md:text-20 font-semibold text-gray-900">
                 Final Price: 
               </span>
