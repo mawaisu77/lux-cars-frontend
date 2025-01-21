@@ -350,23 +350,23 @@ export const categories = [
 export const values = [
   {
     icon: <FaMedal size={25} color="white" />,
-    heading: "Quality You Can Trust",
-    para: "Each vehicle is handpicked to meet our rigorous standards. From luxury sedans to durable SUVs, we offer a curated selection to suit every lifestyle and need.",
+    heading: "Customer-First Philosophy",
+    para: "At BidCaribbean, a Lux First Choice Car Division, we are committed to understanding and fulfilling our customers' unique needs. From personalized solutions to hassle-free logistics, your satisfaction is our top priority.",
   },
   {
     icon: <FaLock size={25} color="white" />,
-    heading: "Transparent Pricing, No Surprises",
-    para: "We believe in 100% clarity. Enjoy upfront pricing with no hidden fees, detailed cost breakdowns, and contracts to give you complete peace of mind.",
+    heading: "Integrity in Every Interaction",
+    para: "Transparency is the cornerstone of our business. With open, honest communication, we keep you informed every step of the way, ensuring complete confidence in every decision.",
   },
   {
     icon: <BsEyeFill size={25} color="white" />,
-    heading: "Reliable, Personalized Service",
-    para: "We’re with you every step of the way. From the moment you contact us to the delivery of your vehicle, our dedicated team ensures clear communication and your total satisfaction.",
+    heading: "Unmatched Value and Expertise",
+    para: "At BidCaribbean, a Lux First Choice Car Division, we combine affordability with excellence, delivering tailored solutions to maximize quality and efficiency for every client. Whether you're looking for a luxury car or a practical solution, we’ve got you covered.",
   },
   {
     icon: <FaPeopleLine size={25} color="white" />,
-    heading: "Rooted in Our Community",
-    para: "As a Bahamian-owned business, we proudly support local initiatives and foster trust within our community. At BidCaribean, a LUX First Choice Cars division, you’re more than just a client—you’re family.",
+    heading: "Innovative Growth and Excellence",
+    para: "By embracing cutting-edge technologies and continuously refining our practices, we enhance your experience and set new industry standards.",
   },
 ];
 export const choices = [

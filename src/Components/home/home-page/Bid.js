@@ -128,8 +128,8 @@ const Bid = () => {
         <div class="relative mt-24 md:mt-[13vw] z-10 flex flex-col justify-center items-center h-full text-center">
       
           <div className="flex md:flex-row flex-col md:text-52 text-[30px] font-bold font-urbanist md:gap-x-[0.5vw]">
-            <span className="animated-text"> Online Car Auctions </span>
-            <span className=""> With Home Delivery!</span>
+            {/* <span className="animated-text"> Online Car Auctions </span> */}
+            <span className="">Safe Online Car Auctions with Convenient Home Delivery</span>
           </div>
           <h1 class="md:text-52 text-[32px] font-bold font-urbanist leading-tight mb-[2vh]">
             Bid, Buy, Drive

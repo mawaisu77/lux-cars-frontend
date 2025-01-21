@@ -27,7 +27,6 @@ const About = () => {
     
       <AboutFeartured/> */}
       <Abouttest/>
-      <Aboutdest/>
       <AboutFoot/>
   
     </div>

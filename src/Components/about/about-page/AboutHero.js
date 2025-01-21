@@ -26,16 +26,18 @@ const AboutHero = () => {
         <div className="w-[74vw] mx-auto flex  flex-col-reverse lg:flex-row justify-between mt-[100px] lg:mt-[8.8vh]">
           <div className="text-left w-full lg:w-[38vw] p-[1.5vw]">
       
-            <p className="text-[35px] lg:text-40 font-urbanist font-bold py-[5vh]">
-            About BidCaribbean, a Lux First Choice Car Division
+            <p className="text-[35px] lg:text-40 font-urbanist font-bold py-[3vh]">
+            BidCaribbean, a Lux First Choice Car Division 
             </p>
             <p className="text-[18px] lg:text-18 font-urbanist text-[#7a798a]">
-            BidCaribbean is the leading online car auction platform in the Caribbean. Our mission is to simplify car buying and selling, offering a safe auction platform, affordable rates, and reliable regional home delivery.            </p>
+            BidCaribbean is the leading online car auction platform in the Caribbean. Our mission is to simplify car buying and selling, offering a safe auction platform at affordable rates, and reliable regional home delivery. 
+             </p>
             <br></br>
             <p className="text-[18px] lg:text-18 font-urbanist text-[#7a798a]">
-            By prioritizing transparency, convenience, and outstanding service, we enable you to buy or sell vehicles swiftly and effortlessly, ensuring a seamless experience at every step.            </p>
+            By prioritizing transparency, convenience, and outstanding service, we enable you to buy or sell vehicles quickly and effortlessly, ensuring a seamless experience at every step.
+         </p>
              
-            <p className="text-[35px] lg:text-40 font-urbanist font-bold py-[5vh]">
+            <p className="text-[35px] lg:text-40 font-urbanist font-bold py-[3vh]">
            Our Mission
             </p>
             <p className="text-[18px] lg:text-18 font-urbanist text-[#7a798a]">
