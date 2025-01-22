@@ -23,7 +23,7 @@ const ContactUs = () => {
             </button>
           </div>
         </div>
-      </div>
+   </div>
       <div className=" ">
         <ContactForm />
       </div>

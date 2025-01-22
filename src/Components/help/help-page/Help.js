@@ -1,347 +1,130 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { GoSearch } from "react-icons/go";
 import FAQsAccordion from "./FAQsAccordion";
 import ContactForm from "../../Contact/Cantact-page/ContactForm";
-import { BiSolidFolderPlus } from "react-icons/bi";
-import { FaSquareArrowUpRight } from "react-icons/fa6";
-import { MdContactPhone } from "react-icons/md";
-import { FaMoneyCheckDollar } from "react-icons/fa6";
-import { FaCar } from "react-icons/fa";
-import { BiSolidDetail } from "react-icons/bi";
-import { BiDollar } from "react-icons/bi";
-import { GrMoney } from "react-icons/gr";
+import HelpGettingStarted from "./HelpGettingStarted";
+import HelpHeader from "./HelpHeader";
+import luxImage from "../../../assets/Pattern.png";
+import { PiUsersFill } from "react-icons/pi";
 
 
 const Help = () => {
   return (
     <>
-      <div className="back-image-Help">
-        <div className="hidden lg:block">
-          <div className="w-[15.5] flex flex-col pt-[12.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">Help</div>
-            <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
-              <Link to="/">
-                <button className="hover:text-white hover:scale-110 duration-150">
-                  Home
-                </button>
-              </Link>
-              /
+       <div className="back-image-Help">
+        <div className="w-[15.5] flex flex-col pt-[20vh]">
+          <div className="text-[2.6vw] font-semibold text-white">
+            Contact Us
+          </div>
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
               <button className="hover:text-white hover:scale-110 duration-150">
-                Help
+                Home
+              </button>
+            </Link>
+            /
+            <button className="hover:text-white hover:scale-110 duration-150">
+              Vehicle Detail
+            </button>
+          </div>
+        </div>
+   </div>
+
+      <div className=" w-[342px] md:w-[74vw] mx-auto sm:py-[2vw] py-[40px]">
+        <HelpHeader/>
+
+        <div className=" mx-auto flex flex-col md:flex-row gap-8 sm:gap-[2vw] max-w-[85vw] sm:max-w-[53.917vw] ">
+          {/* COPART/IAAI Card */}
+          <div className="flex-1 relative border-2 border-blue-400 rounded-2xl p-[1.9vw]">
+            <div className="h-[40px] w-[40px] sm:h-[2.917vw] sm:w-[2.917vw] bg-[#DC2626] rounded-2xl sm:rounded-[1vw] flex items-center justify-center mb-4 sm:mb-[1.5vw]">
+              <PiUsersFill className="w-[30px] h-[30px] sm:w-[1.5vw] sm:h-[1.5vw] text-white" />
+            </div>
+
+            <h2 className="text-[28px] text-left sm:text-38 font-semibold sm:mb-[1.25vw]">
+              Bidding At COPART / IAAI
+            </h2>
+            <p className="text-lux-black text-left mb-4 sm:mb-[1.5vw] sm:text-20">
+              Drawbacks of bidding directly at Copart/IAAI auctions
+            </p>
+
+            <div className="space-y-3 text-[18px] sm:space-y-[0.625vw] sm:text-24 text-left">
+              {[
+                "Dealer / Broker License Required",
+                "Annual Membership Fee At Both Sites",
+                "Separate Deposits For Each Auction",
+                "Shorter Vehicle Descriptions And Details",
+                "Increased Risk Of Purchasing Staged Vehicles",
+                "Higher Public Fees Available",
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-[0.521vw] text-[18px] sm:text-20"
+                >
+                  <span className="text-primary-red leading-none ">-</span>
+                  <span className="text-lux-black ">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* LUX Card */}
+          <div className="flex-1 relative border-2 border-blue-400 rounded-2xl p-[1.9vw]">
+            <div
+              className="absolute inset-0 z-0"
+              style={{
+                backgroundImage: `url(${luxImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            <div className="relative z-10">
+            <div className="h-[40px] w-[40px] sm:h-[2.917vw] sm:w-[2.917vw] bg-[#DC2626] rounded-2xl sm:rounded-[1vw] flex items-center justify-center mb-4 sm:mb-[1.5vw]">
+                <PiUsersFill className="w-[30px] h-[30px] sm:w-[1.5vw] sm:h-[1.5vw] text-white" />
+              </div>
+
+              <div className="flex items-center gap-[1vw] mb-[1.25vw]">
+                <h2 className="text-[28px] text-left sm:text-38 font-semibold  ">
+                  Bidding At LUX
+                </h2>
+                <span className=" text-white text-nowrap bg-transparent border-2 sm:border-[0.052vw] border-white px-[10px] py-[5px] sm:px-[0.521vw] sm:py-[0.26vw] rounded-[8px] sm:rounded-[0.417vw] text-[16px] sm:text-18">
+                  Best Choice
+                </span>
+              </div>
+
+              <p className="text-lux-black text-left mb-4 sm:mb-[1.5vw] sm:text-20">
+              Advantages of bidding through Lux First Choice Cars
+              </p>
+
+              <div className="space-y-3 text-[18px] sm:space-y-[0.625vw] sm:text-24 text-left">
+              {[
+                  "No Dealer License Required",
+                  "No Annual Membership Fee",
+                  "Ability To Search Two Auctions",
+                  "Availability Of Full Vehicle Descriptions And Details",
+                  "Helps Buyers Avoid Purchasing Staged Cars",
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-[0.521vw] text-[20px] sm:text-20"
+                  >
+                    <span className="text-primary-red leading-none ">✓</span>
+                    <span className="text-lux-black ">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <button className="mt-[10px] sm:mt-[2.292vw] w-full bg-[#DC0000] hover:bg-[#B00000] text-white text-[16px] sm:text-20 font-medium py-[8px] sm:py-[1.146vw] rounded-[8px] sm:rounded-[0.625vw] transition duration-300">
+                Get Started
               </button>
             </div>
           </div>
+          
         </div>
-      </div>
-      <div className=" w-[342px] lg:w-[74vw] mx-auto sm:py-[2vw] py-[40px]">
-        <div className="flex flex-col mx-auto  my-[50px] lg:my-[4vw] w-[342px] md:w-full lg:w-[33vw]">
-          <p className=" text-[30px] lg:text-30 font-bold font-urbanist">
-            How Can We Help You?
-          </p>
-          <p className="text-[18px] lg:text-18 text-[#7a798a]">
-           At BidCaribean, we strive to provide a secure, transparent, and simple platform, offering unparalleled value compared to competitors. Let’s see how we stack up:
-          </p>
-        
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* 1. Getting Started */}
-          <div className="text-left border shadow-md w-full flex flex-col justify-start items-start rounded-xl p-4">
-            <div className="flex justify-center items-center p-1 rounded-lg bg-red-500 ">
-              <FaSquareArrowUpRight size={25} color="white" />
-            </div>
-            <h1 className="mt-2 text-[20px] lg:text-30 font-urbanist font-semibold">
-              {"1. Getting Started"}
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold mt-2">
-              Registeration Process
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Welcome to BidCaribbean, a LUX First Choice Cars division. To
-              start bidding:
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Click “Register” on the homepage.</li>
-              <li>
-                Fill in your details, including name, contact info, and email.
-              </li>
-              <li>Upload a valid ID for verification.</li>
-              <li>Set a refundable deposit to unlock your bidding power.</li>
-            </ol>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              Once verified, you can bid on top-quality vehicles at unbeatable
-              prices.
-            </h1>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              Understanding Bid Power
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Bid power determines the maximum amount you can bid. For instance:
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>A $500 deposit unlocks $5,000 bid power.</li>
-              <li>A $1,000 deposit unlocks $10,000 bid power.</li>
-            </ol>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Deposits are refundable if you don’t win an auction, ensuring a
-              risk-free bidding experience.
-            </h1>
+        <div className="text-[18px] md:text-20 text-lux-black font-urbanist text-center px-6 my-10">
+          BidCaribeean, a Lux First Choice Car Division, is a leading online auction platform providing trustworthy services, reliable support, and an uncomplicated buying experience, making us the first choice for the Caribbean.
           </div>
 
-          {/* 2. Bidding and Buying*/}
-          <div className=" text-left border shadow-md w-full flex flex-col justify-start items-start rounded-xl p-4">
-            <div className="flex justify-center items-center p-1 rounded-lg bg-red-500 ">
-              <GrMoney size={25} color="white" />
-            </div>
-            <h1 className="mt-2 text-[20px] lg:text-30 font-urbanist font-semibold">
-              {"2. Bidding and Buying"}
-            </h1>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              How to Bid
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Browse our extensive inventory using advanced filters.</li>
-              <li>
-                Click on a vehicle to view details, including condition and
-                history.
-              </li>
-              <li>
-                Place your bid or enter the maximum amount you’re willing to
-                pay.
-              </li>
-              <li>
-                Our system automatically increments your bid to keep you on top
-                until your maximum is reached.
-              </li>
-            </ol>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Safe Bidding Practices by BidCaribbean
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Only bid on vehicles with verified reports.</li>
-              <li>
-                Review the vehicle’s condition, including images and
-                descriptions.
-              </li>
-              <li>Never share your account credentials.</li>
-            </ol>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Your security is our priority.
-            </h1>
-          </div>
-
-          {/* 3. Pricing and Payment */}
-          <div className=" text-left border shadow-md w-full flex flex-col justify-start items-start rounded-xl p-4">
-            <div className="flex justify-center items-center p-1 rounded-lg bg-red-500 ">
-              <BiDollar size={25} color="white" />
-            </div>
-            <h1 className="mt-2 text-[20px] lg:text-30 font-urbanist font-semibold">
-              {"3. Pricing and Payment"}
-            </h1>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              Fee Transparency
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              At BidCaribbean, we believe in transparent and upfront pricing.
-              Here’s what’s included:
-            </h1>
-
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Winning Bid Amount: The final amount you bid.</li>
-              <li>
-                Buyer’s Premium: A percentage of the winning bid (displayed
-                upfront).
-              </li>
-              <li>Taxes and Fees: Based on local regulations.</li>
-            </ol>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              No hidden fees—just honest, transparent transactions!
-            </h1>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Payment Methods We accept
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Credit/Debit Cards</li>
-              <li>Bank Transfers</li>
-              <li>Secure Payment Gateways</li>
-            </ol>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Our team will guide you through the payment process after you win.
-            </h1>
-          </div>
-
-          {/* 4. Vehicle Details */}
-          <div className=" text-left border shadow-md w-full flex flex-col justify-start items-start rounded-xl p-4">
-            <div className="flex justify-center items-center p-1 rounded-lg bg-red-500 ">
-              <BiSolidDetail size={25} color="white" />
-            </div>
-            <h1 className="mt-2 text-[20px] lg:text-30 font-urbanist font-semibold">
-              {"4. Vehicle Details"}
-            </h1>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              Inspection Reports
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Every vehicle listing includes:
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Verified vehicle history reports.</li>
-              <li>
-                Details on damages (e.g., hail, theft recovery, minor dents).
-              </li>
-              <li>High-resolution photos.</li>
-            </ol>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Damage Descriptions
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Look for detailed tags like:
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>{`“Cosmetic Damage”: Minor scratches or dents.`}</li>
-              <li>{`“Hail Damage”: Damage caused by storms.`}</li>
-              <li>{`“Repossessed”: Vehicles reclaimed by lenders.`}</li>
-            </ol>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              These descriptions help you make informed choices.
-            </h1>
-          </div>
-
-          {/* 5. Post-Auction Process*/}
-          <div className=" text-left border shadow-md w-full flex flex-col justify-start items-start rounded-xl p-4">
-            <div className="flex justify-center items-center p-1 rounded-lg bg-red-500 ">
-              <BiSolidFolderPlus size={25} color="white" />
-            </div>
-            <h1 className="mt-2 text-[20px] lg:text-30 font-urbanist font-semibold">
-              {"5. Post-Auction Process"}
-            </h1>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              Winning and Next Steps
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              After winning an auction:
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Receive a confirmation email with payment instructions.</li>
-              <li>Complete payment within 48 hours.</li>
-              <li>Choose pickup or delivery options.</li>
-            </ol>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Our team will keep you updated every step of the way.
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Delivery Options
-            </h1>
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Enjoy seamless delivery services:
-            </h1>
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>{`“Local Pickup: Available at select locations.`}</li>
-              <li>{`“Home Delivery: Convenient shipping to your doorstep.`}</li>
-              <li>{`International Shipping: Options available for customers outside the Bahamas.`}</li>
-            </ol>
-          </div>
-
-          {/* 6. Selling Your Car*/}
-          <div className=" text-left border shadow-md w-full flex flex-col justify-start items-start rounded-xl p-4">
-            <div className="flex justify-center items-center p-1 rounded-lg bg-red-500 ">
-              <FaCar size={25} color="white" />
-            </div>
-            <h1 className="mt-2 text-[20px] lg:text-30 font-urbanist font-semibold">
-              {"6. Selling Your Car"}
-            </h1>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              Listing Process
-            </h1>
-
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Register as a seller and create your listing.</li>
-              <li>
-                Upload photos vehicle descriptions, and set a reserve price.
-              </li>
-              <li>Approve bids that meet or exceed your reserve.</li>
-            </ol>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Maximizing Your Sale
-            </h1>
-
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>{`Use professional photos to highlight your vehicle’s features.`}</li>
-              <li>{`Provide honest descriptions for better buyer trust.`}</li>
-              <li>{`Set a competitive reserve price to attract more bids.`}</li>
-            </ol>
-          </div>
-
-          {/* 7. Financing and Loans */}
-          <div className=" text-left border shadow-md w-full flex flex-col justify-start items-start rounded-xl p-4">
-            <div className="flex justify-center items-center p-1 rounded-lg bg-red-500 ">
-              <FaMoneyCheckDollar size={25} color="white" />
-            </div>
-            <h1 className="mt-2 text-[20px] lg:text-30 font-urbanist font-semibold">
-              {"7. Financing and Loans"}
-            </h1>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              Need financial assistance? Apply for a loan in 3 simple steps:
-            </h1>
-
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>
-                Complete the application form in the “Financing / Loan
-                Application” section.
-              </li>
-              <li>
-                Provide required documents, including proof of income and ID.
-              </li>
-              <li>Receive a loan approval within 48 hours.</li>
-            </ol>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Approved Financial Partners
-            </h1>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              We partner with trusted institutions to offer flexible plans. Our
-              team will connect you with the right lender for your budget and
-              needs.
-            </h1>
-          </div>
-
-          {/* 8. Contact Support*/}
-          <div className=" text-left border shadow-md w-full flex flex-col justify-start items-start rounded-xl p-4">
-            <div className="flex justify-center items-center p-1 rounded-lg bg-red-500 ">
-              <MdContactPhone size={25} color="white" />
-            </div>
-            <h1 className="mt-2 text-[20px] lg:text-30 font-urbanist font-semibold">
-              {"8. Contact Support"}
-            </h1>
-            <h1 className="text-[20px] mt-2 lg:text-22 font-urbanist font-semibold">
-              Have questions or need assistance? Our support team is here to
-              help:
-            </h1>
-
-            <ol className="text-left list-decimal list-inside text-[14px] lg:text-18 font-urbanist text-[#6d6d74]">
-              <li>Email: support@luxfirstchoicecars.com</li>
-              <li>Phone: +1 242-555-1234</li>
-            </ol>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              Approved Financial Partners
-            </h1>
-
-            <h1 className="text-[20px] lg:text-22 font-urbanist font-semibold">
-              We partner with trusted institutions to offer flexible plans. Our
-              team will connect you with the right lender for your budget and
-              needs.
-            </h1>
-          </div>
-        </div>
+        <HelpGettingStarted/>
         <FAQsAccordion />
         <ContactForm />
       </div>

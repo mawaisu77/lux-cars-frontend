@@ -303,8 +303,10 @@ const Header = () => {
             </div>
 
             <nav className="bg-gray-950/50">
-              <div className="max-w-[85vw] mx-auto w-full relative flex items-center h-14 md:h-[3.2vw] text-gray-300">
+              <div className="max-w-[85vw] mx-auto w-full relative flex items-center justify-between h-14 md:h-[3.2vw] text-gray-300">
                   {/* Hide links on mobile view */}
+                
+<div className="flex items-center">
               {!isMobile && Object.entries(menuData).map(([menuItem, menuItemData]) => (
                 <div
                   key={menuItem}
@@ -390,14 +392,25 @@ const Header = () => {
                                   </>
                                 )}
                               </div>
+                           
                             </div>
                           ))}
                         </div>
                       )}
                     </div>
-                  )}
+                  )}        
                 </div>
               ))}
+</div>
+              <div className="w-[20%] flex gap-x-6 justify-end items-center">
+              <Link to="/contact-us" className="text-sm md:text-18 hover:text-white"> 
+                {"Contact"}
+                </Link>
+                <Link to="/help" className="text-sm md:text-18 hover:text-white">
+                  {"Help"}
+                </Link>       
+              </div>
+
 
                {/* Button to open sidebar on mobile */}
                 {isMobile && (

@@ -43,6 +43,5 @@ export const menuData = {
     'Sell Your Car': { link: '/upload-local-car' }, 
     'Apply for Loan': { link: '/apply-for-loan' },
     'About Us': { link: '/about-us' },
-    'Contact': { link: '/contact-us' },
-    'Help': { link: '/help' }
+   
   }

@@ -7,7 +7,7 @@ import useGetLocalCar from "../../../hooks/live-auction/useGetLocalCar";
 import Pusher from "pusher-js";
 import BidDetailMobileView from "./BidDetailMobileView";
 import { getToken } from "../../../utils/storageUtils";
-import VehicleDetails from "./tables/VehicleDetails";
+import VehicleDetails from "./tables/VehicleDetails"; 
 
 const LiveAuctionDetail = () => {
   const { id } = useParams();

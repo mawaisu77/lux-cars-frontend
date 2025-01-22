@@ -514,12 +514,21 @@ const Dropdown = ({ bidAmount, data }) => {
                 Processing Fee:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
-                <TooltipInfo content="1% of final bid">
-                  <BsInfoCircle
-                    size={15}
+                {selectedLocation === "Turks" ? (
+                  <TooltipInfo content="N/A">
+                    <BsInfoCircle
+                      size={15}
                     className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
+                ) : (
+                  <TooltipInfo content="1% of final bid">
+                    <BsInfoCircle
+                      size={15}
+                    className={` hover:text-blue-800 duration-200`}
+                  />
+                </TooltipInfo>
+                )}
               </div>
             </div>
             <span className="text-sm md:text-20 font-medium text-gray-800">
@@ -536,7 +545,16 @@ const Dropdown = ({ bidAmount, data }) => {
                 Environmental Levy Fee: (flat)
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
-                <TooltipInfo
+                {
+                  selectedLocation === "Turks" ? (    
+                    <TooltipInfo content="N/A">
+                      <BsInfoCircle
+                        size={15}
+                      className={` hover:text-blue-800 duration-200`}
+                    />
+                  </TooltipInfo>
+                ) : (
+                  <TooltipInfo
                   content={` ${
                     showApprovalMessage
                       ? "Approval is needed from the Ministry for cars older than 10 years."
@@ -550,8 +568,10 @@ const Dropdown = ({ bidAmount, data }) => {
                     } hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
+
+                )}
               </div>
-              {showApprovalMessage && (
+              { selectedLocation === "Bahamas" && showApprovalMessage && (
                 <div className="">
                   <span className="text-red-600 text-[10px] px-[8px] py-[4px] bg-red-600/10 rounded-lg">
                     Approval needed
@@ -573,12 +593,21 @@ const Dropdown = ({ bidAmount, data }) => {
                 VAT:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
-                <TooltipInfo content="VAT = 10% of (final bid +  levy fee + custom duty + boatship + processing fee)">
-                  <BsInfoCircle
-                    size={15}
+                {selectedLocation === "Turks" ? (
+                  <TooltipInfo content="VAT = 5% of (final bid + custom duty + boatship)">
+                    <BsInfoCircle
+                      size={15}
+                    className={` hover:text-blue-800 duration-200`}
+                  />
+                </TooltipInfo>
+                ) : (
+                  <TooltipInfo content="VAT = 10% of (final bid +  levy fee + custom duty + boatship + processing fee)">
+                    <BsInfoCircle
+                      size={15}
                     className="hover:text-blue-800 duration-200"
                   />
                 </TooltipInfo>
+                )}
               </div>
             </div>
             <span className="text-sm md:text-20 font-medium text-gray-800">

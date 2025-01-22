@@ -268,7 +268,7 @@ body {
     background-image: url("../src/assets/BG-Img/IMG\ \(30\).png"); /* Update the image path as necessary */
     background-size: cover;
     background-repeat: no-repeat;
-    height: 32.5vh;
+    height: 40vh;
   }
 
   .back-image-Help::before {

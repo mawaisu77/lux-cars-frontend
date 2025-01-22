@@ -698,4 +698,47 @@ export const UserOrder = [
   },
 ];
 
+export const keyFeatures = [
+  {
+    icon: <FaMedal size={25} color="white" />,
+    heading: "Quality You Can Trust:",
+    para: " Our team of experts handpick each vehicle to meet our rigorous standards. We ensure that every vehicle, from luxury sedans to durable SUVs, is of the highest quality and meets our customers' needs. We offer a curated selection to suit every lifestyle and need.",
+  },
+  {
+    icon: <FaLock size={25} color="white" />,
+    heading: "Transparent Pricing, No Surprises:",
+    para: "Enjoy 100% upfront pricing with no hidden fees, detailed cost breakdowns, and transparent contracts for complete peace of mind.",
+  },
+  {
+    icon: <BsEyeFill size={25} color="white" />,
+    heading: "Effortless Self-Service Platform:",
+    para: "Our online auction platform is designed for minimal interaction, empowering you with all the necessary information to bid confidently and secure the right vehicle. From browsing to delivery, the process is seamless, efficient, and tailored to put you in control.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Rooted in Our Community:",
+    para: "As a Bahamian-owned business, we take pride in supporting local initiatives and building trust within our community. At BidCaribbean, a Lux First Choice Car Division, you’re not just a client—you’re family.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Seamless Bidding Experience",
+    para: " Our user-friendly platform allows you to browse, bid, and buy confidently. Verified and secure, it’s designed to make the process effortless and stress-free.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Comprehensive Vehicle Selection:",
+    para: "With access to 300,000+ curated vehicles, we provide options for every budget and requirement, from compact cars to high-performance vehicles.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Flexible Delivery Services:",
+    para: "Enjoy the convenience of home delivery or pickup from a designated location, ensuring you get your vehicle on your terms.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Exceptional Customer Support:",
+    para: "Our VIP bidding support team is available to guide you through every step of the process, ensuring a seamless and enjoyable experience.",
+  },
+];
+
 

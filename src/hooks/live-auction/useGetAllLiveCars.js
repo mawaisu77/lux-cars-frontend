@@ -6,11 +6,9 @@ const useGetAllLiveCars = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-
-  const fetchLiveCars = async ({ silent = false } = {}) => {
-    if (!silent) {
-      setLoading(true);
-    }    try {
+  const fetchLiveCars = async () => {
+    setLoading(true);
+    try {
       const response = await getLiveCars();
       setLiveCars(response.data);
     } catch (err) {
@@ -22,9 +20,8 @@ const useGetAllLiveCars = () => {
         setError(`${err.message || 'An error occurred.'}`);
       }
     } finally {
-      if (!silent) {
         setLoading(false);
-      }    }
+    }
   };
 
     return { liveCars, loading, error, fetchLiveCars };

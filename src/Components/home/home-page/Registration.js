@@ -112,7 +112,7 @@ const Registration = () => {
               </div>
               
             </div>
-            <h2 className="text-[35px] text-left md:text-34 font-urbanist font-bold">
+            <h2 className="text-[30px] text-left md:text-30 font-urbanist font-bold">
             Start bidding today with BidCaribbean and drive your dream car for less! 
                 </h2>
           </div>
