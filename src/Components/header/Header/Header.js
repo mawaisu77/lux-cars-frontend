@@ -14,6 +14,8 @@ import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; 
 import { FiLogOut } from "react-icons/fi";
 import { BsLightningCharge } from "react-icons/bs";
+import BidCaribbeanLogo from "../../../assets/lux-logo/bidcaribbean-logo.png"
+import LuxCarsLogo from "../../../assets/lux-logo/lux-logo-new.png"
 
 
 const Header = () => {
@@ -201,16 +203,23 @@ const Header = () => {
           <div className="w-[100vw] mx-auto ">
             <div className="flex max-w-[85vw] mx-auto w-full items-center justify-between h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
               {/* <div className=" w-full flex justify-between items-center gap-x-4"> */}
-              <Link to="/">
+              <div className="flex items-center justify-start">
+              <Link to="/" className="">
                 <img
-                  src={
-                    "https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"
-                  }
-                  className="w-[80px] sm:w-[11.767vw] h-auto"
+                  src={BidCaribbeanLogo}
+                  className="w-[80px] sm:w-[17vw] h-auto"
                   alt={`Logo`}
                 />
               </Link>
-              <div className="w-[50%] ml-2 md:ml-0">
+              <Link to="/" className="">
+                <img
+                  src={LuxCarsLogo}
+                  className="w-[80px] sm:w-[10vw] h-auto"
+                  alt={`Logo`}
+                />
+              </Link>
+              </div>
+              <div className="w-[35%] ml-2 md:ml-0">
                 <div className="relative" ref={dropdownRef}>
                   <input
                     type="text"

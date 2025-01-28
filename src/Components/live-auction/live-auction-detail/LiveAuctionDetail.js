@@ -3,31 +3,35 @@ import { Link, useParams } from "react-router-dom";
 import PreviousBids from "./tables/PreviousBids";
 import BidDetails from "./BidDetails";
 import UpcomingBids from "./tables/UpcomingBids";
-import useGetLocalCar from "../../../hooks/live-auction/useGetLocalCar";
+import useGetLiveCar from "../../../hooks/live-auction/useGetLiveCar";
 import Pusher from "pusher-js";
-import BidDetailMobileView from "./BidDetailMobileView";
 import { getToken } from "../../../utils/storageUtils";
-import VehicleDetails from "./tables/VehicleDetails"; 
+import VehicleDetails from "./tables/VehicleDetails";
+import bidSound from "../../../assets/audios/bidsound.mp3"
 
 const LiveAuctionDetail = () => {
-  const { id } = useParams();
-  const { localCar, loading, error, fetchLocalCar } = useGetLocalCar();
+
+  const newBidSound = new Audio(bidSound);
+  const { liveCar, loading, error, fetchLiveCar } = useGetLiveCar();
   const [members, setMembers] = useState([]);
   const [memberCount, setMemberCount] = useState(0);
   const [liveData, setLiveData] = useState({
-    currentBid: null,
-    noOfBids: null,
-    auction_date: localCar?.car?.auction_date,  
+    currentBid: 0,
+    noOfBids: 0,
   });
+  const [resetTimer, setResetTimer] = useState(false); 
+  const [bonusTime, setBonusTime] = useState(false);
+
 
   useEffect(() => {
-    fetchLocalCar(id);
-  }, [id]);
+    fetchLiveCar();
+    
+  }, []);
   
   useEffect(() => {
-    // Initialize Pusher
-    const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_ID, {
-      cluster: process.env.REACT_APP_PUSHER_CLUSTER,
+
+    const pusher = new Pusher("6d700b541b1d83879b18", {
+      cluster: "ap2",
       authEndpoint: `${process.env.REACT_APP_API_BASE_URL}pusher/auth/live-bidding`,
       auth: {
         headers: {
@@ -37,16 +41,38 @@ const LiveAuctionDetail = () => {
     });
 
     // Subscribe to the presence channel
-    const channel = pusher.subscribe(`presence-car-${localCar?.car?.id}`);
-
-    channel.bind("car-notifications", (data) => {
+    const channel = pusher.subscribe(`presence-live-auction`);
+    channel.bind("new-bid", (data) => {
+      newBidSound.play();
       setLiveData({
         currentBid: data.message.bid_price,
         noOfBids: data.message.noOfBids,
         userID: data.message.userID,
-        auction_date: data.message.auction_date
       });
+      setBonusTime(false);
+      setResetTimer(true); // Reset timer on new bid
+      console.log("new-bid noofbid", data);
+
     });
+
+    channel.bind("bonus-time", (data) => {
+      console.log("bonus-time -- -- -- -", data);
+      setBonusTime(true);
+      setResetTimer(true); 
+
+    });
+
+    channel.bind("end-auction", (data) => {
+      console.log("end-auction - -- - ", data);
+      setResetTimer(false);
+      setBonusTime(false);
+      fetchLiveCar(); // Refetch live car when auction ends
+
+    });
+
+    // channel.bind("all-auction-end", (data) => {
+    // });
+
 
     // Track initial subscription success
     channel.bind("pusher:subscription_succeeded", (members) => {
@@ -70,7 +96,7 @@ const LiveAuctionDetail = () => {
       channel.unsubscribe();
       pusher.disconnect();
     };
-  }, [localCar?.car?.id]);
+  }, []);
 
 
   return (
@@ -94,25 +120,24 @@ const LiveAuctionDetail = () => {
             </Link>
             /
             <button className="hover:text-white hover:scale-110 duration-150">
-              {localCar?.car?.make} {localCar?.car?.model} {localCar?.car?.year}
+              {liveCar?.car?.make} {liveCar?.car?.model} {liveCar?.car?.year}
             </button>
           </div>
         </div>
       </div>
 
+      {error && <div>{error}</div>}
+
+
       <div className="md:block hidden w-[100vw] py-[40px] md:py-[1.25vw]">
         <div className="max-w-[73vw] grid grid-cols-12 mx-auto">
           {loading && <div>Loading...</div>}
-          {error && <div>{error}</div>}
-          {!loading && !error && localCar && (
+          {!loading && !error && liveCar && (
             <> 
-              <div className="col-span-7">
-                <BidDetails localCar={localCar} liveData={liveData} members={members} memberCount={memberCount} />
+              <div className="col-span-8">
+                <BidDetails liveCar={liveCar} liveData={liveData} members={members} memberCount={memberCount} resetTimer={resetTimer} setResetTimer={setResetTimer} bonusTime={bonusTime} setBonusTime={setBonusTime} />
               </div>
-              <div className="flex flex-col gap-y-[1.625vw] col-span-5 w-full">
-                <PreviousBids id={id} liveData={liveData} />
-                <UpcomingBids/>
-              </div>  
+             
             </>
            
           )}
@@ -121,7 +146,7 @@ const LiveAuctionDetail = () => {
           {
             !loading && !error && ( 
             <div className="max-w-[73vw] mx-auto">
-            <VehicleDetails vehicle={localCar?.car} />
+              <VehicleDetails vehicle={liveCar?.car} />
             </div>
             )
           }

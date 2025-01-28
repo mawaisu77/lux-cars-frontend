@@ -2,26 +2,19 @@ import React, { useState, useEffect } from "react";
 import { MdPeopleAlt } from "react-icons/md";
 // IMAGES path
 import VerticleSwiper from "./ui/VerticleSwiper";
-import CircularProgress from "./ui/CircularProgress";
-import { FaArrowTrendUp } from "react-icons/fa6";
-import { IoIosAdd } from "react-icons/io";
-import { IoIosRemove } from "react-icons/io";
 import { FaBagShopping } from "react-icons/fa6";
 import TooltipGlobal from "./ui/tooltip/TooltipGlobal";
 import { IoInformationCircleOutline } from "react-icons/io5";
-import CountDown from "./ui/CountDown";
 import usePlaceBidLocalCar from "../../../hooks/live-auction/usePlaceBidLocalCar";
-import Modal from "../../vehicle/Vehicle-page/Modal360";
 import { showToast } from "../../../utils/Toast";
-import { MdRestartAlt } from "react-icons/md";
 import QuickBids from "./QuickBids";
 import BidInput from "./BidInput";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 
-const BidDetails = ({ localCar, liveData, members, memberCount }) => {
+const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setResetTimer, bonusTime, setBonusTime }) => {
   const { user: loggedInUser } = useAuthContext();
 
-  const { car, user } = localCar;
+  const { car, user } = liveCar;
   const [currentBid] = useState(liveData?.currentBid || car?.currentBid || 0);
   const [manualBid, setManualBid] = useState(() => liveData?.currentBid ?? car?.currentBid ?? 0);
 
@@ -199,8 +192,8 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
               ${liveData.currentBid ? liveData.currentBid : car?.currentBid}
             </span>
           </div> */}
+          {/* <CountDown timeLeft={car?.auction_date} liveTimeLeft={liveData?.auction_date} /> */}
 
-          <CountDown timeLeft={car?.auction_date} liveTimeLeft={liveData?.auction_date} />
 
           <div className="flex gap-4">
             <div
@@ -238,9 +231,13 @@ const BidDetails = ({ localCar, liveData, members, memberCount }) => {
                 setManualBid={setManualBid}
                 currentBid={currentBid}
                 activeBid={liveData?.currentBid || currentBid}
-                handleReset={handleReset}
-                timeLeft={localCar?.car?.auction_date}
-                liveTimeLeft={liveData?.auction_date}
+                // handleReset={handleReset}
+                resetTimer={resetTimer} 
+                setResetTimer={setResetTimer}
+                bonusTime={bonusTime}
+                setBonusTime={setBonusTime}
+
+
               />
               </div>
               <div className="col-span-7 flex justify-end items-start">

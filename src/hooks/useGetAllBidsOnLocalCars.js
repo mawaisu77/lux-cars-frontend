@@ -2,10 +2,10 @@ import baseService from "../services/baseService";
 
 export async function placeBidOnLocalCar({ localCarID, currentBid }) {
   try {
-    const bidPlace = await baseService.post(`local-cars-bids/place-bid`, {
-      localCarID,
-      currentBid,
-    });
+    const bidPlace = await baseService.post(
+      `local-cars-bids/place-bid?localCarID=${localCarID}`,
+      { currentBid }
+    );
     return bidPlace;
   } catch (err) {
     return err;

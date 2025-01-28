@@ -6,13 +6,10 @@ import LocalCarsCard from "../../cards/LocalCarsCard";
 function SimilarCars({ make, model, year }) {
   const [vehicles, setVehicles] = useState(null);
 
-  console.log("YEAR ---> ", year);
 
   const yearFrom = year - 2;
   const yearTo = year + 2;
 
-  console.log("YEAR FROM ---> ", yearFrom);
-  console.log("YEAR TO ---> ", yearTo);
 
   useEffect(() => {
     const fetchData = async () => {

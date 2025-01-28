@@ -243,21 +243,24 @@ function LoanApplication() {
 
   return (
     <>
-      <div className="Backgroundimage-Privicy-loan-terms">
-        <div className="hidden lg:block">
-          <div className="w-[15.5] flex flex-col pt-[12.5vh]">
-            <div className="text-[2.6vw] font-semibold text-white">
+       <div className="back-image-Help">
+        <div className="w-[15.5] flex flex-col pt-[20vh]">
+          <div className="text-[2.6vw] font-semibold text-white">
+            Loan Application
+          </div>
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
+            <Link to="/">
+              <button className="hover:text-white hover:scale-110 duration-150">
+                Home
+              </button>
+            </Link>
+            /
+            <button className="hover:text-white hover:scale-110 duration-150">
               Loan Application
-            </div>
-            <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
-              <Link to="/">
-                <button className="hover:text-white hover:text-[1.1vw]">Home</button>
-              </Link>
-              /<button className="hover:text-white hover:text-[1.1vw]">Loan</button>
-            </div>
+            </button>
           </div>
         </div>
-      </div>
+   </div>
 
       <div className="pt-18  mx-auto w-[100vw] my-10  ">
         <div className="px-[14px] max-w-[1000px] rounded-md shadow-[0px_4px_5px_6px_rgba(0,_0,_0,_0.1)] mx-auto md:px-[3vw] lg:px-[3.8vw] py-[30px] md:py-[8.333vh] text-left">

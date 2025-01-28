@@ -1,18 +1,52 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Item from './Item';
 import { Link } from 'react-router-dom';
 import useGetAllLiveCars from '../../../hooks/live-auction/useGetAllLiveCars';
 import moment from 'moment-timezone';
+import Pusher from "pusher-js";
+
 
 
 const List = () => {
-  const { liveCars, loading: initialLoading, error, fetchLiveCars } = useGetAllLiveCars();
+
+  const { liveCars, setLiveCars, loading: initialLoading, error, fetchLiveCars } = useGetAllLiveCars(); // Destructure setLiveCars from the hook
+
   useEffect(() => {
-    fetchLiveCars();
-  }, []);
+    fetchLiveCars(); // Fetch live cars on mount
 
+    // Pusher setup
+   const pusher = new Pusher("6d700b541b1d83879b18", {
+      cluster: "ap2",
+    });
 
-  console.log("liveCars", Object.keys(liveCars).length)
+    const channel = pusher.subscribe('car-list-channel');
+
+    channel.bind('updateCar', (data) => {
+      const { id, currentBid, status } = data.message;
+  
+      // Update the specific car in the state object
+      setLiveCars((prevCars) => {
+        const updatedCars = { ...prevCars }; // Shallow copy to prevent mutation
+        console.log("prevCars",prevCars)
+        console.log("updatedCars",updatedCars)
+        // Iterate over the dates to find and update the relevant car
+        Object.keys(updatedCars).forEach((date) => {
+          updatedCars[date] = updatedCars[date].map((car) =>
+            car.id === id ? { ...car, currentBid, status } : car
+          );
+        });
+  
+        return updatedCars;
+      });
+    });
+
+    return () => {
+      channel.unbind_all(); 
+      channel.unsubscribe();
+    };
+  }, [setLiveCars]); 
+
+  console.log("sbjsdjksnkjnskdnjs", liveCars)
 
   return (
     <>

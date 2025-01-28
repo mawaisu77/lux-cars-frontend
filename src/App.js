@@ -175,7 +175,7 @@ function App() {
               }
             />
                <Route
-              path="/live-auction/:id"
+              path="/live-auction-portal"
               element={
                 <ProtectedRoute>
                   <LiveAuction/>

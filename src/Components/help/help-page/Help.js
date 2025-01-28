@@ -14,7 +14,7 @@ const Help = () => {
        <div className="back-image-Help">
         <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
-            Contact Us
+            Help
           </div>
           <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
@@ -24,7 +24,7 @@ const Help = () => {
             </Link>
             /
             <button className="hover:text-white hover:scale-110 duration-150">
-              Vehicle Detail
+              Help
             </button>
           </div>
         </div>
