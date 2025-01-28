@@ -11,6 +11,7 @@ import { changeLanguage } from "i18next";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useLogout } from "../../../hooks/useLogout";
 import NotificationDropdown from "../../ui/dropdowns/NotificationDropdown";
+import luxCar from "../../../assets/lux-logo/lux-logo-new.png"
 
 const HeaderNew = () => {
   const { t } = useTranslation();
@@ -80,9 +81,7 @@ const HeaderNew = () => {
         <div className="flex items-center h-20 md:h-[4.5vw] gap-4 md:gap-[1.5vw]">
           <Link to="/">
             <img
-              src={
-                "https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"
-              }
+              src={luxCar}
               className="w-[142px] lg:w-[11.767vw] h-auto"
               alt={`Logo`}
             />

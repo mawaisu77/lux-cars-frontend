@@ -12,7 +12,6 @@ import Login from "./Components/Login/login-page/Login.js";
 import Signup from "./Components/sign-up/index.js";
 import Contact from "./Components/Contact/index.js";
 import HowWorks from "./Components/howWork/howWork-page/HowWorks.js";
-import Help from "./Components/help/help-page/Help.js";
 import About from "./Components/about/index.js";
 import Header from "./Components/header/Header/Header.js";
 import UserAccount from "./Components/user-page/index.js";
@@ -49,6 +48,7 @@ import LiveAuction from "./Components/live-auction/index.js";
 import List from "./Components/live-aution-search/live-auction-search/List.js";
 import DynamicForm from "./Components/prac/DyanmicForm.jsx";
 import Test from "./Components/prac/Test.jsx";
+import Helpsec from "./Components/help/index.js";
 function App() {
   
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -148,7 +148,7 @@ function App() {
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/how-it-works" element={<HowWorks />} />
             <Route path="/fees" element={<Fees />} />
-            <Route path="/help" element={<Help />} />
+            <Route path="/help" element={<Helpsec />} />
             <Route path="/about-us" element={<About />} />
             <Route path="/privacy-policies" element={<Privacy />} />
             <Route path="/terms&conditions" element={<Term />} />
@@ -175,7 +175,7 @@ function App() {
               }
             />
                <Route
-              path="/live-auction/:id"
+              path="/live-auction-portal"
               element={
                 <ProtectedRoute>
                   <LiveAuction/>

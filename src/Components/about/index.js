@@ -11,6 +11,7 @@ import Abouttest from "./about-page/Abouttest.js";
 import Aboutdest from "./about-page/Aboutdest.js";
 import AboutFoot from "./about-page/AboutFoot.js";
 import AboutHero from "./about-page/AboutHero.js";
+import KeyFeatures from "./about-page/KeyFeatures.js";
 
 
  
@@ -21,13 +22,13 @@ const About = () => {
     
       <AboutHero/>
       <AboutValue/>
+      <KeyFeatures/>
       <AbouTeam/>
       <AboutChoice/>
       {/* <AboutProcess/>
     
       <AboutFeartured/> */}
       <Abouttest/>
-      <Aboutdest/>
       <AboutFoot/>
   
     </div>

@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { getLiveCars } from '../../services/liveCarsService'; 
+import { getLiveCarDetail } from '../../services/liveCarsService'; 
 
-const useGetAllLiveCars = () => {
-  const [liveCars, setLiveCars] = useState([]);
+const useGetLiveCar = () => {
+  const [liveCar, setLiveCar] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchLiveCars = async () => {
+
+  const fetchLiveCar = async () => {
     setLoading(true);
     try {
-      const response = await getLiveCars();
-      setLiveCars(response.data);
+        const response = await getLiveCarDetail();
+        console.log("---------", response);
+        setLiveCar(response.data);
     } catch (err) {
       if (err.response) {
         setError(`${err.response.data.message || 'An error occurred.'}`);
@@ -20,11 +22,11 @@ const useGetAllLiveCars = () => {
         setError(`${err.message || 'An error occurred.'}`);
       }
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
-    return { liveCars, setLiveCars, loading, error, fetchLiveCars };
+    return { liveCar, loading, error, fetchLiveCar };
 };
 
-export default useGetAllLiveCars;
+export default useGetLiveCar;

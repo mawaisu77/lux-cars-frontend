@@ -50,22 +50,21 @@ const Registration = () => {
 
   return (
     <div className="bg-[#f8f8f8] w-[100vw]">
-      <div className="mx-auto py-10 sm:py-[2.083vw] max-w-[85vw] sm:max-w-[73.438vw] ">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <div className="mx-auto py-10 sm:py-[2.083vw] max-w-[85vw] sm:max-w-[80vw] ">
+        <div className="grid md:grid-cols-2 gap-12 items-center">    
           {/* Left Column - Features */}
           <div className=" flex flex-col gap-[1.25vw]">
+          <h1 className="text-[35px] md:text-34 font-urbanist font-bold">
+          Secure, Affordable, and Hassle-Free Car Buying
+          </h1>
             <div className="flex gap-2 text-24 ">
               <div className="text-[20px] sm:text-24 pt-1">
                 <IoIosCheckmarkCircleOutline />
               </div>
               <div className="">
-                <h3 className="font-semibold text-left text-[22px] sm:text-24">Affordable Prices</h3>
+                <h3 className="font-semibold text-left text-[22px] sm:text-24">Save 30-50% off:</h3>
                 <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">
-                  One of the main benefits of buying cars at auctions is the
-                  potential for BIG savings. Cars at auctions can be purchased
-                  for as little as 30-50% of their retail value. This makes it a
-                  very profitable option compared to buying from a dealership,
-                  where prices are often much higher
+                Get 30-50% off retail prices through BidCaribbean’s trusted online auctions. From everyday vehicles to luxury cars, enjoy unbeatable deals without the extra costs of dealership markups.
                 </p>
               </div>
             </div>
@@ -75,12 +74,9 @@ const Registration = () => {
                 <IoIosCheckmarkCircleOutline />
               </div>
               <div className="">
-                <h3 className="font-semibold text-left text-[22px] sm:text-24 ">Wide Selection</h3>
-                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">                  We have more than 145,808 vehicles available, including cars
-                  with minor damage or no damage at all. If you want to find
-                  cars with minimal damage, look for those with descriptions
-                  such as hail, theft recovery, vandalism, repossession,
-                  rejected repair, minor dents and scratches, or replaced VIN.
+                <h3 className="font-semibold text-left text-[22px] sm:text-24 ">Over 300,000 Verified Vehicles:</h3>
+                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">   
+                Choose from over 300,000 verified cars, including like-new options or cars with minor issues such as hail damage, theft recovery, or repossession. Every listing is carefully reviewed, ensuring you can bid with confidence.
                 </p>
               </div>
             </div>
@@ -91,12 +87,11 @@ const Registration = () => {
               </div>
               <div className="">
                 <h3 className="font-semibold text-left text-[22px] sm:text-24">
-                  Easy bidding process
+                Hassle-Free Bidding
+
                 </h3>
-                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">                  Our easy to use platform makes the bidding process
-                  straightforward. Simply place your max bid during preliminary
-                  bidding, and we’ll take care of the rest. We’ll only raise
-                  your bid by one increment to keep you on top.
+                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">       
+                Our platform simplifies bidding, making it easy and stress-free. Just enter your maximum bid, and we'll take care of everything, ensuring the security of your transactions at every step.       
                 </p>
               </div>
             </div>
@@ -107,22 +102,26 @@ const Registration = () => {
               </div>
               <div className="">
                 <h3 className="font-semibold text-left text-[22px] sm:text-24">
-                  Comprehensive Support
+                VIP Support at Every Step
                 </h3>
-                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">                  From registration to final delivery, we offer comprehensive
-                  support throughout the entire auction process. Our VIP car
-                  bidding assistance ensures you have all the help you need to
-                  make informed decisions and secure the best deals.
+                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]"> 
+                           
+                From registration to delivery, we’ve got you covered. Our expert assistance ensures you make informed decisions and secure the best deals—fast, safe, and seamless.
+
                 </p>
               </div>
+              
             </div>
+            <h2 className="text-[30px] text-left md:text-30 font-urbanist font-bold">
+            Start bidding today with BidCaribbean and drive your dream car for less! 
+                </h2>
           </div>
 
           {/* Right Column - Registration Form */}
           <div className="">
             <div className="space-y-6">
               <div className="text-center space-y-2">
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-[35px] md:text-34 font-urbanist font-bold">
                   Register A New Account For Free
                 </h2>
               </div>

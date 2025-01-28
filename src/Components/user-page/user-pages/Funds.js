@@ -129,7 +129,7 @@ const Funds = () => {
       </div>
 
 
-    {/* <BiddingLimit /> */}
+    <BiddingLimit />
 
 
       <div>

@@ -21,19 +21,19 @@ const HowWorks = () => {
     {
       title: "Register & Verify Your Account",
       description:
-        "Create your BidCaribbean account in minutes! Provide basic details and upload valid identification documents for a secure verification process. Your safety and trust are our top priorities.",
+        "You can create your BidCaribbean account in minutes! Provide basic details and upload valid identification documents for a secure verification process. Your safety and trust are our top priorities.",
       icon: MdOutlineVerifiedUser,
     },
     {
       title: "Set Your Bid Power",
       description:
-        "Gain bidding power by making a refundable deposit, which sets your maximum bidding limit. Choose from flexible payment options and confidently bid within your secured budget.",
+        "Make a refundable deposit to gain bidding power. This deposit sets your maximum bidding limit. Choose from flexible payment options and confidently bid within your secured budget.",
       icon: FaHandHoldingUsd,
     },
     {
       title: "Search Verified Vehicles",
       description:
-        "Use our advanced search filters to explore over 145,000 verified cars. Narrow your options by make, model, price, or damage type (e.g., minor dents, repossessions, or hail damage). Each listing includes detailed information, ensuring transparency and trust.",
+        "Use our advanced search filters to explore over 300,000 verified cars. Narrow your options by make, model, price, or damage type (e.g., minor dents, repossessions, or hail damage). Each listing will have all the information to guide you in making an informed decision and ensuring transparency and trust.",
       icon: FaCar,
     },
     {
@@ -45,7 +45,7 @@ const HowWorks = () => {
     {
       title: "Seal the Deal & Arrange Delivery",
       description:
-        "Win your auction? Congratulations! Our trusted team will guide you through secure payment and arrange home delivery for your new vehicle. It’s fast, safe, and secure.",
+        "Won your auction? Congratulations! Our trusted team will guide you through secure payment and arrange home delivery for your new vehicle. It’s fast, safe, and secure.",
       icon: PiShippingContainerBold,
     },
   ];
@@ -78,8 +78,12 @@ const HowWorks = () => {
           Step-by-Step Guide: How to Bid with BidCaribbean
           </p>
           <p className="text-[16px] lg:text-18 text-[#7a798a] ">
-          Buying your next car through BidCaribbean is simple, secure, and hassle-free. Follow these easy 5 steps to start bidding and drive home your dream car!
+          Buying your next car through BidCaribbean is secure, affordable and hassle-free. 
           </p>
+          <p className="text-[16px] lg:text-18 text-[#747675] ">
+          Follow these 5 steps & get your dream car!
+          </p>
+
         </div>
         <div className="container mx-auto px-4 py-12">
           {/* Timeline Section */}

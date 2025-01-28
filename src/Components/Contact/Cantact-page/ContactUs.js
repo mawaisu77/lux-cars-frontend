@@ -19,11 +19,11 @@ const ContactUs = () => {
             </Link>
             /
             <button className="hover:text-white hover:scale-110 duration-150">
-              Vehicle Detail
+              Contact Us
             </button>
           </div>
         </div>
-      </div>
+   </div>
       <div className=" ">
         <ContactForm />
       </div>

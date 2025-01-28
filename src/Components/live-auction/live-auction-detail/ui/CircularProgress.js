@@ -1,62 +1,70 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import useTimer from '../../../../hooks/useTimer';
+import React, { useEffect, useState } from "react";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-const CircularProgress = ({ timeLeft, liveTimeLeft }) => {
-  const targetTime = useMemo(
-    () => (liveTimeLeft ? new Date(liveTimeLeft) : timeLeft ? new Date(timeLeft) : null),
-    [liveTimeLeft, timeLeft]
-  );
+const CircularProgress = ({
+  activeBid,
+  bonusTime,
+  setBonusTime,
+  resetTimer, // Add resetTimer prop
+  currentBid,
+}) => {
+  const [displayText, setDisplayText] = useState("Getting Started"); // Default to "Getting Started"
+  const [key, setKey] = useState(0); // Timer reset trigger
+  const [isTimerActive, setIsTimerActive] = useState(false); // Timer active state
 
-  const { minutes, seconds } = useTimer(targetTime);
-
-  const totalSeconds = useMemo(() => Number(minutes * 60 + seconds), [minutes, seconds]);
-
-  const [initialSeconds, setInitialSeconds] = useState(null);
-
-  // Initialize the countdown with the total time only once.
+  // Update display text and timer state when `bonusTime` or `activeBid` changes
   useEffect(() => {
-    if (initialSeconds === null && totalSeconds > 0) {
-      setInitialSeconds(totalSeconds);
-    }
-  }, [totalSeconds, initialSeconds]);
+    if (bonusTime) {
+      console.log("bonus time")
+      setDisplayText("BONUS TIME");
+      setIsTimerActive(true); // Keep the timer active during bonus time
+      setKey((prevKey) => prevKey + 1); // Reset timer
+    } else if (activeBid) {
+      console.log("active bud")
+      setDisplayText(`$${activeBid}`);
+      setIsTimerActive(true); // Start the timer when a new active bid comes
+      setKey((prevKey) => prevKey + 1); // Reset timer
 
-  // Calculate progress percentage.
-  const progress = useMemo(() => {
-    return initialSeconds > 0 ? (totalSeconds / initialSeconds) * 100 : 0;
-  }, [initialSeconds, totalSeconds]);
+    } else {
+      setIsTimerActive(false); // Stop the timer if no active bid or bonus time
+    }
+  }, [bonusTime, activeBid]);
+
+  // Handle resetTimer prop changes
+  useEffect(() => {
+    if (resetTimer) {
+      setKey((prevKey) => prevKey + 1); // Reset the timer by updating the key
+      setIsTimerActive(true); // Activate the timer
+    } else {
+      setIsTimerActive(false); // Deactivate the timer
+    }
+  }, [resetTimer]);
+
+  // Stop bonus time effect when countdown completes
+  const handleBonusComplete = () => {
+    setBonusTime(false);
+    return { shouldRepeat: false }; // Timer won't repeat automatically
+  };
 
   return (
-    <div className="relative w-40 h-40 md:w-[9.208vw] md:h-[9.208vw]">
-      <svg className="w-full h-full" viewBox="0 0 100 100">
-        {/* Background circle */}
-        <circle
-          className="text-gray-200 stroke-current"
-          strokeWidth="10"
-          cx="50"
-          cy="50"
-          r="40"
-          fill="transparent"
-        ></circle>
-        {/* Progress circle */}
-        <circle
-          className="text-red-600 stroke-current"
-          strokeWidth="10"
-          strokeLinecap="round"
-          cx="50"
-          cy="50"
-          r="40"
-          fill="transparent"
-          strokeDasharray="251.2"
-          strokeDashoffset={251.2 * (1 - progress / 100)}
-          transform="rotate(-90 50 50)"
-        ></circle>
-      </svg>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <div className="text-32 md:text-30 font-bold text-red-600">
-          {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
-        </div>
-        <div className="text-sm md:text-16 text-gray-500">remaining</div>
-      </div>
+    <div className="relative ">
+      <CountdownCircleTimer
+        key={key}
+        isPlaying={isTimerActive} // Start timer only when active
+        duration={30}
+        size={125}
+        colors={["#10B981", "#F59E0B", "#F97316", "#EF4444"]}
+        colorsTime={[7, 5, 3, 0]}
+        onComplete={bonusTime ? handleBonusComplete : undefined}
+      >
+        {() => (
+          <div className="absolute text-center">
+            <div className={`text-32 md:text-30 font-bold ${bonusTime ? "text-orange-600" : "text-green-600"}`}>
+              {displayText}
+            </div>
+          </div>
+        )}
+      </CountdownCircleTimer>
     </div>
   );
 };

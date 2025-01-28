@@ -350,23 +350,23 @@ export const categories = [
 export const values = [
   {
     icon: <FaMedal size={25} color="white" />,
-    heading: "Quality You Can Trust",
-    para: "Each vehicle is handpicked to meet our rigorous standards. From luxury sedans to durable SUVs, we offer a curated selection to suit every lifestyle and need.",
+    heading: "Customer-First Philosophy",
+    para: "At BidCaribbean, a Lux First Choice Car Division, we are committed to understanding and fulfilling our customers' unique needs. From personalized solutions to hassle-free logistics, your satisfaction is our top priority.",
   },
   {
     icon: <FaLock size={25} color="white" />,
-    heading: "Transparent Pricing, No Surprises",
-    para: "We believe in 100% clarity. Enjoy upfront pricing with no hidden fees, detailed cost breakdowns, and contracts to give you complete peace of mind.",
+    heading: "Integrity in Every Interaction",
+    para: "Transparency is the cornerstone of our business. With open, honest communication, we keep you informed every step of the way, ensuring complete confidence in every decision.",
   },
   {
     icon: <BsEyeFill size={25} color="white" />,
-    heading: "Reliable, Personalized Service",
-    para: "We’re with you every step of the way. From the moment you contact us to the delivery of your vehicle, our dedicated team ensures clear communication and your total satisfaction.",
+    heading: "Unmatched Value and Expertise",
+    para: "At BidCaribbean, a Lux First Choice Car Division, we combine affordability with excellence, delivering tailored solutions to maximize quality and efficiency for every client. Whether you're looking for a luxury car or a practical solution, we’ve got you covered.",
   },
   {
     icon: <FaPeopleLine size={25} color="white" />,
-    heading: "Rooted in Our Community",
-    para: "As a Bahamian-owned business, we proudly support local initiatives and foster trust within our community. At BidCaribean, a LUX First Choice Cars division, you’re more than just a client—you’re family.",
+    heading: "Innovative Growth and Excellence",
+    para: "By embracing cutting-edge technologies and continuously refining our practices, we enhance your experience and set new industry standards.",
   },
 ];
 export const choices = [
@@ -695,6 +695,49 @@ export const UserOrder = [
     price: "paid:700$",
     date: "Date: 13-03-2024",
     Status: ":Completed",
+  },
+];
+
+export const keyFeatures = [
+  {
+    icon: <FaMedal size={25} color="white" />,
+    heading: "Quality You Can Trust:",
+    para: " Our team of experts handpick each vehicle to meet our rigorous standards. We ensure that every vehicle, from luxury sedans to durable SUVs, is of the highest quality and meets our customers' needs. We offer a curated selection to suit every lifestyle and need.",
+  },
+  {
+    icon: <FaLock size={25} color="white" />,
+    heading: "Transparent Pricing, No Surprises:",
+    para: "Enjoy 100% upfront pricing with no hidden fees, detailed cost breakdowns, and transparent contracts for complete peace of mind.",
+  },
+  {
+    icon: <BsEyeFill size={25} color="white" />,
+    heading: "Effortless Self-Service Platform:",
+    para: "Our online auction platform is designed for minimal interaction, empowering you with all the necessary information to bid confidently and secure the right vehicle. From browsing to delivery, the process is seamless, efficient, and tailored to put you in control.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Rooted in Our Community:",
+    para: "As a Bahamian-owned business, we take pride in supporting local initiatives and building trust within our community. At BidCaribbean, a Lux First Choice Car Division, you’re not just a client—you’re family.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Seamless Bidding Experience",
+    para: " Our user-friendly platform allows you to browse, bid, and buy confidently. Verified and secure, it’s designed to make the process effortless and stress-free.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Comprehensive Vehicle Selection:",
+    para: "With access to 300,000+ curated vehicles, we provide options for every budget and requirement, from compact cars to high-performance vehicles.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Flexible Delivery Services:",
+    para: "Enjoy the convenience of home delivery or pickup from a designated location, ensuring you get your vehicle on your terms.",
+  },
+  {
+    icon: <FaPeopleLine size={25} color="white" />,
+    heading: "Exceptional Customer Support:",
+    para: "Our VIP bidding support team is available to guide you through every step of the process, ensuring a seamless and enjoyable experience.",
   },
 ];
 

@@ -11,12 +11,12 @@ const FAQsAccordion = () => {
     {
       id: 'panel1',
       question: 'How does online car auction bidding work?',
-      answer: 'Online car auctions allow buyers to bid on vehicles in real-time. Simply browse our inventory, select a vehicle, and place your bid. The highest bidder wins and secures the car at the end of the auction.'
+      answer: ' Online car auctions allow buyers to bid on vehicles in real-time. Simply browse our inventory, select a vehicle, and place your bid. At the end of the auction, the highest bidder wins and secures the car.'
     },
     {
       id: 'panel2',
       question: 'Is the bidding process safe and secure?',
-      answer: 'Yes, our platform is encrypted and monitored to ensure every transaction is secure. We also verify all vehicles and sellers to give you peace of mind.'
+      answer: 'Our platform is encrypted and monitored to ensure the security of every transaction. We also verify all vehicles and sellers to give you peace of mind.'
     },
     {
       id: 'panel2',
@@ -31,32 +31,32 @@ const FAQsAccordion = () => {
     {
       id: 'panel2',
       question: 'What is bid power, and how is it calculated?',
-      answer: ' Bid power represents the maximum amount you can bid, determined by the refundable deposit you’ve set. For example, a $500 deposit unlocks $5,000 in bid power.'
+      answer: 'Bid power represents the maximum amount you can bid, determined by the refundable deposit you’ve made. For example, a $750 deposit unlocks $7,500 in bid power.'
     },
     {
       id: 'panel2',
       question: 'Can I inspect vehicles before bidding?',
-      answer: 'We provide detailed descriptions, high-quality images, and verified reports for each vehicle. In-person inspections may be arranged for select vehicles where available.'
+      answer: 'We provide detailed descriptions, high-quality images, and verified reports for each vehicle. Where available, we can arrange in-person inspections for select vehicles.'
     },
     {
       id: 'panel2',
       question: 'What happens if I win an auction?',
-      answer: 'Congratulations! Once you win, our team will guide you through the payment and delivery process. You can choose to pick up the car or have it delivered to your location.'
+      answer: 'Congratulations! Once you win, our team will guide you through the payment and the delivery process. You can pick up the car or have it delivered to your location.'
     },
     {
       id: 'panel2',
       question: 'Can I sell my car through BidCaribbean?',
-      answer: 'Absolutely! Selling is simple. List your vehicle on our platform, set your minimum price, and let buyers compete for the best offer.'
+      answer: ' Absolutely! Selling is simple. List your vehicle on our platform, set your reserved price, and let buyers compete for the best offer.'
     },
     {
       id: 'panel2',
       question: 'How do I apply for a loan to purchase a car?',
-      answer: ' We partner with trusted financial institutions (list) to offer quick and easy financing options. Complete our online loan application form, and we’ll help you secure a plan that fits your budget.'
+      answer: 'We partner with trusted financial institutions (list) to offer quick and easy financing options. Complete our online loan application form, and we’ll help you secure a plan that fits your budget.'
     },
     {
       id: 'panel2',
       question: 'Who do I contact for assistance?',
-      answer: 'Our dedicated support team is here to help! You can reach us via email, or phone for any inquiries or troubleshooting needs.'
+      answer: 'Our dedicated support team is here to help! You can reach us via live chat (AI integration), email, or phone for inquiries or troubleshooting needs.'
     },
   ]
   return (
