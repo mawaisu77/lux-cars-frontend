@@ -3,19 +3,13 @@ import useGetUpcomingBids from '../../../../hooks/live-auction/useGetUpcomingBid
 import UpcomingCountDown from '../ui/UpcomingCountDown';
 import { Link } from 'react-router-dom';
 
-const UpcomingBids = () => {
-  const { upcomingBids, loading, error, fetchUpcomingBids } = useGetUpcomingBids();
+const UpcomingBids = ({upcomingBids}) => {
 
-  useEffect(() => {
-    fetchUpcomingBids();
-  }, []);
-
-  console.log("upcomingBids",upcomingBids)
 
   return (
     <div className="bg-white h-[21.615vw] shadow-custom rounded-lg p-[1vw] w-full">
       <div className="flex justify-between items-center mb-[0.625vw]">
-        <h2 className="text-16 font-semibold">Upcoming Bids</h2>
+        <h2 className="text-16 font-semibold">Upcoming Lots</h2>
         <button className="text-16 text-gray-500 hover:text-blue-600"> <strong>Total Bids: {upcomingBids?.cars?.length || 0}</strong></button>
       </div>
 
@@ -27,19 +21,19 @@ const UpcomingBids = () => {
 
       {/* Scrollable Section */}
       <div className="h-[75%] no-scrollbar overflow-y-scroll w-full">
-        {loading && (
+        {/* {loading && (
           <div className="text-center text-gray-500 py-4">Loading...</div>
         )}
 
         {error && (
           <div className="text-center text-red-500 py-4">Error loading bids. Please try again later.</div>
-        )}
+        )} */}
 
-        {!loading && !error && upcomingBids?.cars?.length === 0 && (
+        { upcomingBids?.length === 0 && (
           <div className="text-center text-gray-500 py-4">No upcoming bids available.</div>
         )}
 
-        {!loading && !error && upcomingBids?.cars?.map((bid) => (
+        {upcomingBids?.map((bid) => (
           <div
             key={bid.id}
             className="grid grid-cols-12 p-[0.625vw] border-b border-l border-r border-gray-200 gap-x-[0.625vw] w-full"

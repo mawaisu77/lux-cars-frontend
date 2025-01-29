@@ -28,4 +28,13 @@ export const getLiveCarDetail = async () => {
   }
 };
 
+export const getUpcomingLiveBids = async (id) => {
+  try {
+    const response = await baseService.get(`live-auction/car-list`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
  

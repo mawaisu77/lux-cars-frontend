@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getUpcomingBids } from "../../services/liveCarsService";
+import { getUpcomingLiveBids } from "../../services/liveCarsService";
 
 const useGetUpcomingBids = () => {
   const [upcomingBids, setUpcomingBids] = useState([]);
@@ -9,7 +9,7 @@ const useGetUpcomingBids = () => {
   const fetchUpcomingBids = async () => {
     setLoading(true);
     try {
-      const response = await getUpcomingBids();
+      const response = await getUpcomingLiveBids();
       setUpcomingBids(response.data);
     } catch (err) {
       if (err.response) {
