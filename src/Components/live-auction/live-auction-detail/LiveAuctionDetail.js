@@ -71,10 +71,11 @@ const LiveAuctionDetail = () => {
 
     channel.bind("end-auction", (data) => {
       console.log("end-auction - -- - ", data);
-      setResetTimer(false);
-      setBonusTime(false);
+  
       fetchLiveCar(); 
       fetchUpcomingBids();
+      setResetTimer(false);
+      setBonusTime(false);
 
 
     });
@@ -111,30 +112,24 @@ const LiveAuctionDetail = () => {
 
   return (
     <>
-      <div className="md:block hidden bg-live-vehicle">
-        <div className="w-[15.5] flex flex-col pt-[12.5vh]">
+     <div className="bg-live-vehicle">
+        <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
-            Live Bidding
+            Live Auction Portal
           </div>
           <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
-            <button className="hover:text-white hover:scale-110 duration-150">
+              <button className="hover:text-white hover:scale-110 duration-150">
                 Home
               </button>
             </Link>
             /
-            <Link to="/live-auction-search">
             <button className="hover:text-white hover:scale-110 duration-150">
-              Live Bidding
-            </button>
-            </Link>
-            /
-            <button className="hover:text-white hover:scale-110 duration-150">
-              {liveCar?.car?.make} {liveCar?.car?.model} {liveCar?.car?.year}
+              Live Auction
             </button>
           </div>
         </div>
-      </div>
+   </div>
 
       {error && <div>{error}</div>}
 

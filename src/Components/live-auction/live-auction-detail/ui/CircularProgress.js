@@ -51,7 +51,7 @@ const CircularProgress = ({
       <CountdownCircleTimer
         key={key}
         isPlaying={isTimerActive} // Start timer only when active
-        duration={10}
+        duration={30}
         size={125}
         colors={["#10B981", "#F59E0B", "#F97316", "#EF4444"]}
         colorsTime={[7, 5, 3, 0]}
