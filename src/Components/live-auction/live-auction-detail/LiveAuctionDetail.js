@@ -8,11 +8,14 @@ import Pusher from "pusher-js";
 import { getToken } from "../../../utils/storageUtils";
 import VehicleDetails from "./tables/VehicleDetails";
 import bidSound from "../../../assets/audios/bidsound.mp3"
+import useGetUpcomingBids from "../../../hooks/live-auction/useGetUpcomingBids";
 
 const LiveAuctionDetail = () => {
 
   const newBidSound = new Audio(bidSound);
   const { liveCar, loading, error, fetchLiveCar } = useGetLiveCar();
+  const { upcomingBids , loading : upcomingLoading , error : upcommingError, fetchUpcomingBids } = useGetUpcomingBids();
+
   const [members, setMembers] = useState([]);
   const [memberCount, setMemberCount] = useState(0);
   const [liveData, setLiveData] = useState({
@@ -25,8 +28,12 @@ const LiveAuctionDetail = () => {
 
   useEffect(() => {
     fetchLiveCar();
-    
   }, []);
+
+  useEffect(() => {
+    fetchUpcomingBids();
+  }, []);
+
   
   useEffect(() => {
 
@@ -50,7 +57,7 @@ const LiveAuctionDetail = () => {
         userID: data.message.userID,
       });
       setBonusTime(false);
-      setResetTimer(true); // Reset timer on new bid
+      setResetTimer(true); 
       console.log("new-bid noofbid", data);
 
     });
@@ -66,7 +73,9 @@ const LiveAuctionDetail = () => {
       console.log("end-auction - -- - ", data);
       setResetTimer(false);
       setBonusTime(false);
-      fetchLiveCar(); // Refetch live car when auction ends
+      fetchLiveCar(); 
+      fetchUpcomingBids();
+
 
     });
 
@@ -98,6 +107,7 @@ const LiveAuctionDetail = () => {
     };
   }, []);
 
+ 
 
   return (
     <>
@@ -134,9 +144,19 @@ const LiveAuctionDetail = () => {
           {loading && <div>Loading...</div>}
           {!loading && !error && liveCar && (
             <> 
-              <div className="col-span-8">
+
+              <div className="col-span-7">
                 <BidDetails liveCar={liveCar} liveData={liveData} members={members} memberCount={memberCount} resetTimer={resetTimer} setResetTimer={setResetTimer} bonusTime={bonusTime} setBonusTime={setBonusTime} />
               </div>
+
+        {
+          !upcomingLoading && !upcommingError && upcomingBids && (
+            <div className="flex flex-col gap-y-[1.625vw] col-span-5 w-full">
+            <UpcomingBids upcomingBids={upcomingBids}  />
+          </div> 
+          )
+        }
+              
              
             </>
            
