@@ -11,7 +11,7 @@ const QuickBids = ({ manualBid, setManualBid }) => {
     <div className="flex flex-col justify-start h-full items-center w-[55%] ">
 
       <div className="flex items-center justify-center gap-[0.425vw]">
-        <h1 className="text-16 font-medium">Quick Bid Increase:</h1>
+        <h1 className="text-18 font-medium">Quick Bid Increase:</h1>
         <TooltipGlobal
           title="Quick Bid Increase"
 

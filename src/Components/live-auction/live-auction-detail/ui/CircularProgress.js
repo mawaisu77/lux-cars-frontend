@@ -33,8 +33,8 @@ const CircularProgress = ({
   // Handle resetTimer prop changes
   useEffect(() => {
     if (resetTimer) {
-      setKey((prevKey) => prevKey + 1); // Reset the timer by updating the key
       setIsTimerActive(true); // Activate the timer
+      setKey((prevKey) => prevKey + 1); // Reset the timer by updating the key
     } else {
       setIsTimerActive(false); // Deactivate the timer
     }
@@ -51,17 +51,20 @@ const CircularProgress = ({
       <CountdownCircleTimer
         key={key}
         isPlaying={isTimerActive} // Start timer only when active
-        duration={30}
-        size={125}
+        duration={20}
+        size={140}
         colors={["#10B981", "#F59E0B", "#F97316", "#EF4444"]}
         colorsTime={[7, 5, 3, 0]}
         onComplete={bonusTime ? handleBonusComplete : undefined}
       >
         {() => (
           <div className="absolute text-center">
-            <div className={`text-32 md:text-30 font-bold ${bonusTime ? "text-orange-600" : "text-green-600"}`}>
+            <div className={`text-32 md:text-28 font-bold ${bonusTime ? "text-orange-600" : "text-green-600"}`}>
               {displayText}
             </div>
+            {/* <div className={`text-32 md:text-28 font-bold ${bonusTime ? "text-orange-600" : "text-green-600"}`}>
+              {"Bahamas"}
+            </div> */}
           </div>
         )}
       </CountdownCircleTimer>

@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useGetUpcomingBids from '../../../../hooks/live-auction/useGetUpcomingBids';
-import UpcomingCountDown from '../ui/UpcomingCountDown';
-import { Link } from 'react-router-dom';
 
 const UpcomingBids = ({upcomingBids}) => {
 
@@ -10,25 +8,18 @@ const UpcomingBids = ({upcomingBids}) => {
     <div className="bg-white h-[21.615vw] shadow-custom rounded-lg p-[1vw] w-full">
       <div className="flex justify-between items-center mb-[0.625vw]">
         <h2 className="text-16 font-semibold">Upcoming Lots</h2>
-        <button className="text-16 text-gray-500 hover:text-blue-600"> <strong>Total Bids: {upcomingBids?.cars?.length || 0}</strong></button>
+        <button className="text-16 text-gray-500 hover:text-blue-600"> <strong>Total Remaining Lots: {upcomingBids?.length || 0}</strong></button>
       </div>
 
       <div className="grid grid-cols-12 border p-[0.625vw] border-gray-200 gap-x-[10px] mb-[0.625vw] text-14 text-left text-gray-500 w-full">
         <div className="col-span-7 text-15 font-medium text-gray-500 uppercase">VEHICLE INFO</div>
         <div className="col-span-2 text-left text-15 font-medium text-gray-500 uppercase">Current</div>
-        <div className="col-span-3 text-right text-15 font-medium text-gray-500 uppercase">Live In</div>
+        <div className="col-span-3 text-right text-15 font-medium text-gray-500 uppercase">Status</div>
       </div>
 
       {/* Scrollable Section */}
       <div className="h-[75%] no-scrollbar overflow-y-scroll w-full">
-        {/* {loading && (
-          <div className="text-center text-gray-500 py-4">Loading...</div>
-        )}
-
-        {error && (
-          <div className="text-center text-red-500 py-4">Error loading bids. Please try again later.</div>
-        )} */}
-
+      
         { upcomingBids?.length === 0 && (
           <div className="text-center text-gray-500 py-4">No upcoming bids available.</div>
         )}
@@ -64,7 +55,9 @@ const UpcomingBids = ({upcomingBids}) => {
 
             <div className="col-span-2 text-left font-medium text-15">${bid.currentBid || 0}</div>
             <div className="col-span-3 text-right">
-               <UpcomingCountDown auctionEndTime={bid?.auction_date} />
+            <span className="text-16 font-medium bg-green-700/20 border border-green-700/20 px-2 py-0.5 rounded-lg">
+              {`pending`}
+            </span>
             </div>
           </div>
         ))}
