@@ -35,7 +35,7 @@ const Item = ({ car }) => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600">Estimated Value:</span>
-              <span className="text-sm font-medium">${car.minPrice}</span>
+              <span className="text-sm font-medium">{car?.minPrice ? `$${car.minPrice}` : "N/A"}</span>
             </div>
           </div>
 
@@ -47,7 +47,7 @@ const Item = ({ car }) => {
 
           {/* Location and Status */}
           <div className="space-y-1">
-            <p className="text-sm text-gray-600">{car.location}</p>
+            <p className="text-sm text-gray-600">{car.location || "N/A"}</p>
             <p className="text-sm text-green-600 font-semibold">Live Now</p>
           </div>
 
@@ -55,7 +55,7 @@ const Item = ({ car }) => {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600">Current Bid:</span>
-              <span className="text-lg font-semibold">${car.currentBid}</span>
+              <span className="text-lg font-semibold">{car.currentBid ? `$${car.currentBid}` : "N/A"}</span>
             </div>
             <button className="w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-green-700 transition-colors">
               Join Auction
@@ -86,18 +86,19 @@ const Item = ({ car }) => {
         {/* Vehicle Info */}
         <div>
           <p className="text-sm md:text-16 text-left text-[#7A798A]"> <strong className="text-[#7A798A]">Odometer:</strong> {car.mileage} mi</p>
-          <p className="text-sm md:text-16 text-left text-[#7A798A]"> <strong className="text-[#7A798A]">Minimum Price:</strong> ${car.minPrice}</p>
+          <p className="text-sm md:text-16 text-left text-[#7A798A]"> <strong className="text-[#7A798A]">Minimum Price: </strong>{car.minPrice ? `$${car.minPrice}` : "N/A"}</p>
         </div>
 
         {/* Condition */}
         <div>
-          <p className="text-sm md:text-16 text-left text-[#7A798A]">{car.significantFlaws}</p>
+        <p className="text-sm md:text-16 text-left text-[#7A798A]"> <strong className="text-[#7A798A]">Status Code:</strong> {car.titlesStatus || "N/A"} </p>
+        <p className="text-sm md:text-16 text-left text-[#7A798A]"> <strong className="text-[#7A798A]">Transmission:</strong> {car.transmission || "N/A"} </p>
         </div>
 
-        {/* Sale Info */}
-        <div>
-          <p className="text-sm md:text-16 text-left text-[#7A798A]">{car.location}</p>
-          <p className="text-sm md:text-16 text-left text-green-600 font-semibold">Live Now</p>
+       {/* Location */}
+       <div>
+        <p className="text-sm md:text-16 text-left text-[#7A798A]"> <strong className="text-[#7A798A]">Car Titled At:</strong> {car.carTitledAt || "N/A"} </p>
+        <p className="text-sm md:text-16 text-left text-[#7A798A]"> <strong className="text-[#7A798A]">Car Location:</strong> {car.carLocation || "N/A"} </p>
         </div>
 
         {/* Bids */}
