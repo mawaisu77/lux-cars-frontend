@@ -2,7 +2,7 @@ import React from "react";
 import { FaHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-const Item = ({ car }) => {
+const Item = ({ car, isToday=false }) => {
   return (
     <>
       {/* Mobile View - Card Layout */}
@@ -106,11 +106,11 @@ const Item = ({ car }) => {
           {/* add current bid heading */}
           <p className="text-sm md:text-16 text-left text-[#7A798A]">Current Bid: <span className="text-red-600 text-18 font-semibold">${car.currentBid}</span></p>
           
-          <Link to={`/live-auction/${car.id}`}> 
+         { isToday && <Link to={`/live-auction/${car.id}`}> 
           <button className="bg-green-600 text-white px-4 py-2 md:py-[0.3vw] md:px-[1vw] rounded-md text-sm md:text-16 font-semibold mt-2 md:mt-[0.625vw] hover:bg-green-700 transition-colors">
             Join Auction
             </button>
-          </Link>
+          </Link>}
         </div>
       </div>
     </>
