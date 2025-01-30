@@ -3,7 +3,8 @@ import baseService from './baseService';
 
 export const getLiveCars = async () => {
     try {
-      const response = await axios.get(`local-cars/get-future-auction-local-cars`);
+      const response = await baseService.get(`local-cars/get-future-auction-local-cars`);
+      console.log("response. future car....", response)
       return response.data;
     } catch (error) {
       throw error;

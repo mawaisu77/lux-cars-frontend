@@ -70,7 +70,7 @@ const List = () => {
       </div>
 
 
-    <div className="max-w-[73vw] mx-auto px-4 py-8 md:mt-0 mt-6">
+    <div className="max-w-[85vw] mx-auto px-4 py-8 md:mt-0 mt-6">
     
       <div className="hidden md:grid grid-cols-6 gap-4 py-2 px-4 md:px-[1.625vw] md:py-[0.625vw] font-semibold text-sm md:text-[1vw] text-left uppercase bg-gray-100">
           <div >Image</div>
