@@ -9,6 +9,11 @@ import { getToken } from "../../../utils/storageUtils";
 import VehicleDetails from "./tables/VehicleDetails";
 import bidSound from "../../../assets/audios/bidsound.mp3"
 import useGetUpcomingBids from "../../../hooks/live-auction/useGetUpcomingBids";
+import { FiAlertTriangle } from "react-icons/fi"; 
+import { BiRefresh, BiArrowBack } from "react-icons/bi"; 
+import { useNavigate } from "react-router-dom"; 
+import { FaRegCalendarTimes } from "react-icons/fa";
+import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 
 const LiveAuctionDetail = () => {
 
@@ -24,7 +29,11 @@ const LiveAuctionDetail = () => {
   });
   const [resetTimer, setResetTimer] = useState(false); 
   const [bonusTime, setBonusTime] = useState(false);
+  const navigate = useNavigate();
 
+  const handleRetry = () => {
+    window.location.reload(); 
+  };
 
   useEffect(() => {
     fetchLiveCar();
@@ -71,16 +80,15 @@ const LiveAuctionDetail = () => {
 
     channel.bind("end-auction", (data) => {
       console.log("end-auction - -- - ", data);
-  
       fetchLiveCar(); 
       fetchUpcomingBids();
-      setResetTimer(false);
+      setResetTimer(true);
       setBonusTime(false);
-
 
     });
 
-    // channel.bind("all-auction-end", (data) => {
+    // channel.bind("auctionCompleted", (data) => {
+    //   console.log("dataaaaaaaaaa", data)
     // });
 
 
@@ -131,28 +139,70 @@ const LiveAuctionDetail = () => {
         </div>
    </div>
 
-      {error && <div>{error}</div>}
+      {error && <div>
+        <div className="flex justify-center items-center h-[80vh]">
+        <div className="flex flex-col w-[80vw] items-center justify-center p-8 bg-gray-50  rounded-lg text-center space-y-6">
+      {/* Error Icon and Title */}
+      <div className="flex items-center gap-3 text-gray-600">
+        <FaRegCalendarTimes size={48} className="animate-pulse" />
+        <h1 className="text-3xl font-bold">{error || "Something went wrong. Please try again or go back."}</h1>
+      </div>
+
+      {/* Error Message */}
+      <p className="text-lg text-gray-700">
+         live Auction event will occur on next wednesday
+      </p>
+
+      {/* Actions */}
+      <div className="flex gap-4">
+
+         {/* Back Button */}
+             <button
+          onClick={() => navigate(-1)} // Navigates back to the previous page
+          className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg shadow-md hover:bg-gray-300 transition-all"
+        >
+          <FaArrowLeftLong size={20} />
+          Go Back
+        </button>
+        {/* Retry Button */}
+        <button
+          onClick={handleRetry}
+          className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all"
+        >
+          <BiRefresh size={20} />
+          Retry
+        </button>
+        <button
+          onClick={() => navigate("/live-auction-search")} // Navigates back to the previous page
+          className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg shadow-md hover:bg-gray-300 transition-all"
+        >
+          Upcomming Auctions
+          <FaArrowRightLong size={20} />
+        </button>
+
+   
+      </div>
+    </div>
+        </div>
+        </div>}
 
 
       <div className="md:block hidden w-[100vw] py-[40px] md:py-[1.25vw]">
-        <div className="max-w-[73vw] grid grid-cols-12 mx-auto">
-          {loading && <div>Loading...</div>}
-          {!loading && !error && liveCar && (
+        <div className="max-w-[85vw] grid grid-cols-12 mx-auto">
+          {!error && liveCar && !loading && (
             <> 
 
               <div className="col-span-7">
                 <BidDetails liveCar={liveCar} liveData={liveData} members={members} memberCount={memberCount} resetTimer={resetTimer} setResetTimer={setResetTimer} bonusTime={bonusTime} setBonusTime={setBonusTime} />
               </div>
 
-        {
-          !upcomingLoading && !upcommingError && upcomingBids && (
-            <div className="flex flex-col gap-y-[1.625vw] col-span-5 w-full">
-            <UpcomingBids upcomingBids={upcomingBids}  />
-          </div> 
-          )
-        }
-              
-             
+              {
+                !upcomingLoading && !upcommingError && upcomingBids && (
+                  <div className="flex flex-col gap-y-[1.625vw] col-span-5 w-full">
+                  <UpcomingBids upcomingBids={upcomingBids}  />
+                </div> 
+                )
+              }          
             </>
            
           )}
@@ -160,7 +210,7 @@ const LiveAuctionDetail = () => {
 
           {
             !loading && !error && ( 
-            <div className="max-w-[73vw] mx-auto">
+            <div className="max-w-[85vw] mx-auto">
               <VehicleDetails vehicle={liveCar?.car} />
             </div>
             )

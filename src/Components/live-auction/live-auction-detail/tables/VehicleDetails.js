@@ -2,7 +2,7 @@ export default function VehicleDetails({vehicle}) {
 
 
     return (
-      <div className="max-w-[73.229vw] mx-auto px-4 py-8">
+      <div className="max-w-[85vw] mx-auto px-4 py-8">
         <h1 className="text-2xl md:text-30 bg-gray-100 p-2 rounded-lg font-bold text-center mb-8 md:mb-[0.5vw]">Vehicle Details</h1>
 
           {/* Grid Section */}

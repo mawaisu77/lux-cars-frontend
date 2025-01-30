@@ -195,7 +195,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
           {/* <CountDown timeLeft={car?.auction_date} liveTimeLeft={liveData?.auction_date} /> */}
 
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 bg-red-200">
             <div
               className="flex items-center px-2 py-1 md:px-[0.625vw] md:py-[0.417vw] gap-1 md:gap-[0.425vw] bg-secondary-gray rounded-3xl md:rounded-[0.625vw]"
               title={`${memberCount || 0} people have joined the live auction`}
@@ -216,12 +216,12 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
 
           {/* Right side - Bidding interface */}
           <div className="w-[75%]">
-            <div className="mb-[0.625vw] text-14 text-gray-500 text-left">
+            {/* <div className="mb-[0.625vw] text-18 text-gray-500 text-left">
               Habitant sollicitudin faucibus cursus lectus pulvinar dolor non
               ultrices eget. Facilisi lacerat morbi fringilla urna amet sed
               ipsum vitae malesuada. Habitant sollicitudin faucibus cursus
               lectus pulvinar dolor non ultrices eget.
-            </div>
+            </div> */}
 
             <div className="relative mb-[0.625vw] grid grid-cols-12 p-[0.625vw] rounded-md shadow-md">
               <div className="col-span-5">
