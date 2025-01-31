@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import React from 'react';
-import useGetUpcomingBids from '../../../../hooks/live-auction/useGetUpcomingBids';
+import { useSavedLocalCars } from '../../../../context/SavedLocalCarsIdscontext';
 
 const UpcomingBids = ({upcomingBids}) => {
+  const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
 
+
+  console.log("save car ids", savedIds)
 
   return (
     <div className="bg-white h-[21.615vw] shadow-custom rounded-lg p-[1vw] w-full">
@@ -24,10 +28,14 @@ const UpcomingBids = ({upcomingBids}) => {
           <div className="text-center text-gray-500 py-4">No upcoming bids available.</div>
         )}
 
-        {upcomingBids?.map((bid) => (
-          <div
+        {upcomingBids?.map((bid) => { 
+      const isSaved = savedIds?.data?.includes(bid.id); // Check if the bid is saved
+
+          return (
+            <div
             key={bid.id}
-            className="grid grid-cols-12 p-[0.625vw] border-b border-l border-r border-gray-200 gap-x-[0.625vw] w-full"
+            className={`grid grid-cols-12 p-[0.625vw] border-b border-l border-r border-gray-200 gap-x-[0.625vw] w-full
+            ${isSaved ? "bg-yellow-200" : ""}`} // Apply yellow background if saved
           >
             <div className="col-span-7 w-full">
               <div className="flex gap-[0.625vw]">
@@ -60,7 +68,8 @@ const UpcomingBids = ({upcomingBids}) => {
             </span>
             </div>
           </div>
-        ))}
+
+          )})}
       </div>
     </div>
   );
