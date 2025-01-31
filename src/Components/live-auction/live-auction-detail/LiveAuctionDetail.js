@@ -80,11 +80,12 @@ const LiveAuctionDetail = () => {
 
     channel.bind("end-auction", (data) => {
       console.log("end-auction - -- - ", data);
-      fetchLiveCar(); 
+      fetchLiveCar().then(() => {
+        setResetTimer(true);
+        setBonusTime(false);
+      });
       fetchUpcomingBids();
-      setResetTimer(true);
-      setBonusTime(false);
-
+      
     });
 
     // channel.bind("auctionCompleted", (data) => {
