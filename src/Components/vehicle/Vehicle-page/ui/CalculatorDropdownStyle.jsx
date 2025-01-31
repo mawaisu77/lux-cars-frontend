@@ -9,6 +9,7 @@ export const customCalculatorDropdownStyles = {
     minHeight: "20px",
     fontSize: "10px",
     textAlign: "center",
+    width: "100%",
   }),
   indicatorSeparator: (provided) => ({
     ...provided,
@@ -85,8 +86,19 @@ export const customCalculatorDropdownStyles = {
     height: "20px", // Matches control height for proper alignment
     fontSize: "10px",
   }),
+  option: (provided) => ({
+    ...provided,
+    padding: "0px",
+    margin: "0px",
+  }),
   menu: (provided) => ({
     ...provided,
+    padding: "2px",
     zIndex: 1000,
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    padding: "2px",
+    margin: "0px",
   }),
 };

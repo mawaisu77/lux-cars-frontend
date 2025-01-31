@@ -305,7 +305,7 @@ const Dropdown = ({ bidAmount, data }) => {
       <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
         <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
           <BiCalculator className="w-5 h-5" />
-          Final Price Calculator
+          Fees and Calculations (Estimated)
         </h3>
         <div className="space-y-3 md:space-y-[1.5vw]">
           {/* 1 Final Bid */}
@@ -373,7 +373,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 value={selectedCategory}
                 onChange={handleCategoryChange} 
                 placeholder="Select Transportation"
-                className="text-sm lg:text-[0.875vw] text-right font-medium text-gray-800"
+                className="text-sm lg:text-[0.875vw] w-[120px] text-right font-medium text-gray-800"
               />
             </div>
           </div>
@@ -400,7 +400,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 }
                 onChange={(option) => setIncludeInspection(option.value)} // Update state on selection
                 placeholder="Select"
-                className="text-sm md:text-20 text-right font-medium text-gray-800"
+                className="text-sm md:text-20 w-[50px] text-right font-medium text-gray-800"
               />
               <div className="text-sm md:text-20 text-gray-700 flex">
                 <TooltipInfo content="Inspection report to understand the repairs needed before shipping the vehicle to the Bahamas">
@@ -474,7 +474,7 @@ const Dropdown = ({ bidAmount, data }) => {
 
                 }}
                 placeholder="Select Location"
-                className="text-sm md:text-20 text-right font-medium text-gray-800"
+                className="text-sm md:text-20 w-[120px] text-right font-medium text-gray-800"
               />
          </div>
         </div>

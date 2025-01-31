@@ -106,7 +106,7 @@ const Item = ({ car, isToday=false }) => {
           {/* add current bid heading */}
           <p className="text-sm md:text-16 text-left text-[#7A798A]">Current Bid: <span className="text-red-600 text-18 font-semibold">${car.currentBid}</span></p>
           
-         { isToday && <Link to={`/live-auction/${car.id}`}> 
+         { isToday && <Link to={`/live-auction-portal`}> 
           <button className="bg-green-600 text-white px-4 py-2 md:py-[0.3vw] md:px-[1vw] rounded-md text-sm md:text-16 font-semibold mt-2 md:mt-[0.625vw] hover:bg-green-700 transition-colors">
             Join Auction
             </button>
