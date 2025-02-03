@@ -223,7 +223,7 @@ const CarCard = ({ card, isBuy = false }) => {
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-col gap-y-[0.2vw] lg:text-18 ">
                   <Link to={`/vehicle-detail/${card.lot_id}`}  >
-                    <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
+                    <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline   lg:text-18 font-bold  lg:leading-[2vh] text-left">
                       "
                       {card.title.length > 25
                         ? `${card.title.slice(0, 25)}...`

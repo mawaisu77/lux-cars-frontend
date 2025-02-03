@@ -188,7 +188,7 @@ const LiveAuctionDetail = () => {
         </div>}
 
 
-      <div className="md:block hidden w-[100vw] py-[40px] md:py-[1.25vw]">
+      <div className="md:block hidden w-[100vw] py-[40px] md:py-[1.25vw] bg-gray-100">
         <div className="max-w-[85vw] grid grid-cols-12 mx-auto">
           {!error && liveCar && !loading && (
             <> 
@@ -199,7 +199,10 @@ const LiveAuctionDetail = () => {
 
               {
                 !upcomingLoading && !upcommingError && upcomingBids && (
+                  
                   <div className="flex flex-col gap-y-[1.625vw] col-span-5 w-full">
+                  <VehicleDetails vehicle={liveCar?.car} />
+
                   <UpcomingBids upcomingBids={upcomingBids}  />
                 </div> 
                 )
@@ -209,13 +212,13 @@ const LiveAuctionDetail = () => {
           )}
         </div>
 
-          {
+          {/* {
             !loading && !error && ( 
             <div className="max-w-[85vw] mx-auto">
               <VehicleDetails vehicle={liveCar?.car} />
             </div>
             )
-          }
+          } */}
        
       </div>
 
