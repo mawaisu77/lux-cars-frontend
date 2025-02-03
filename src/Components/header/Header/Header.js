@@ -214,7 +214,7 @@ const Header = () => {
               <Link to="/" className="">
                 <img
                   src={LuxCarsLogo}
-                  className="w-[80px] sm:w-[10vw] h-auto"
+                  className="w-[80px] sm:w-[8vw] h-auto"
                   alt={`Logo`}
                 />
               </Link>

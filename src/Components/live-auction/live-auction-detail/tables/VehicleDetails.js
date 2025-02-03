@@ -1,16 +1,13 @@
 export default function VehicleDetails({vehicle}) {
 
-
     return (
-      <div className="max-w-[85vw] mx-auto px-4 py-8">
-        <h1 className="text-2xl md:text-30 bg-gray-100 p-2 rounded-lg font-bold text-center mb-8 md:mb-[0.5vw]">Vehicle Details</h1>
-
+      <div className="w-full mx-auto ">
+        <h1 className="text-2xl md:text-30 bg-white p-2 rounded-lg font-bold text-center md:mb-[0.2vw]">Vehicle Details</h1>
           {/* Grid Section */}
-        <div className="grid w-full grid-cols-12 gap-6">
-            <div className="bg-white col-span-6 rounded-lg md:rounded-[0.938vw] shadow-md p-6 md:p-[1.25vw]">
+        <div className="grid w-full grid-cols-12 gap-[0.2vw]">
+            <div className="bg-white col-span-12 rounded-lg md:rounded-[0.938vw] shadow-sm p-6 md:p-[1.25vw]">
               <div className="space-y-3 md:space-y-[0.925vw]">
                 <DetailRow label="VIN" value={vehicle?.vin || "N/A"} />
-
                 <DetailRow label="Make/Model/Year" value={vehicle?.make + " " + vehicle?.model + " " + vehicle?.year} />
                 <DetailRow label="Odometer" value={vehicle?.mileage + " miles" || "N/A"} />
                 <DetailRow label="Status" value={vehicle?.status || "N/A"} />
@@ -19,7 +16,7 @@ export default function VehicleDetails({vehicle}) {
                 <DetailRow label="Zip Code" value={vehicle?.zipcode || "N/A"} />
               </div>
             </div>
-            <div className="bg-white col-span-6 rounded-lg md:rounded-[0.938vw] shadow-md p-6 md:p-[1.25vw]">
+            <div className="bg-white col-span-12 rounded-lg md:rounded-[0.938vw] shadow-sm p-6 md:p-[1.25vw]">
               <div className="space-y-3 md:space-y-[0.925vw]">
                 <DetailRow label="Car Location" value={vehicle?.carLocation || "N/A"} />
                 <DetailRow label="Car State" value={vehicle?.carState || "N/A"} />
@@ -31,7 +28,7 @@ export default function VehicleDetails({vehicle}) {
         </div>
 
         {/* Description and Modifications */}
-        <div className="mt-8 md:mt-[1.667vw] bg-white rounded-lg shadow-md p-6 md:p-[1.25vw]">
+        {/* <div className="mt-8 md:mt-[1.667vw] bg-white rounded-lg shadow-md p-6 md:p-[1.25vw]">
         {vehicle?.description && (
           <div className="mb-6 md:mb-[1.267vw] text-left">
             <h2 className="text-xl md:text-24 font-bold mb-2 md:mb-[0.4vw]">Description</h2>
@@ -45,7 +42,7 @@ export default function VehicleDetails({vehicle}) {
           </div>
         )}
 
-      </div>
+      </div> */}
 
       </div>
     );

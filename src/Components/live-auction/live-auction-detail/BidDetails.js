@@ -10,9 +10,11 @@ import { showToast } from "../../../utils/Toast";
 import QuickBids from "./QuickBids";
 import BidInput from "./BidInput";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useSavedLocalCars } from "../../../context/SavedLocalCarsIdscontext";
 
 const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setResetTimer, bonusTime, setBonusTime }) => {
   const { user: loggedInUser } = useAuthContext();
+  const { savedIds } = useSavedLocalCars();
 
   const { car, user } = liveCar;
   const [currentBid] = useState(liveData?.currentBid || car?.currentBid || 0);
@@ -170,20 +172,18 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
 
   };
 
+  const isCarSaved = savedIds?.data?.includes(liveCar?.car?.id);
+  console.log("os car save", liveCar?.car?.id  );
+
   return (
     <>
-      <div className="p-3 md:py-[0.625vw] md:px-[1.625vw] max-w-[100%] mx-auto">
+      <div className={`${isCarSaved ? "bg-yellow-200" : ""} p-3 md:py-[0.625vw] md:px-[1.625vw] max-w-[100%] mx-auto`}>
         <div className="flex justify-between items-center mb-3 md:mb-[0.625vw]">
           <span
             className="text-30 font-medium text-nowrap"
             title={`${car?.make} ${car?.model} ${car?.year}`}
           >
-            {`${car?.make} ${car?.model} ${car?.year}`.length > 20
-              ? `${`${car?.make} ${car?.model} ${car?.year}`.substring(
-                  0,
-                  20
-                )}...`
-              : `${car?.make} ${car?.model} ${car?.year}`}
+            {`${car?.make} ${car?.model} ${car?.year}`}
           </span>
 
           {/* <div className="flex items-center gap-2 ">
@@ -195,7 +195,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
           {/* <CountDown timeLeft={car?.auction_date} liveTimeLeft={liveData?.auction_date} /> */}
 
 
-          <div className="flex gap-4 bg-red-200">
+          <div className="flex gap-4 ">
             <div
               className="flex items-center px-2 py-1 md:px-[0.625vw] md:py-[0.417vw] gap-1 md:gap-[0.425vw] bg-secondary-gray rounded-3xl md:rounded-[0.625vw]"
               title={`${memberCount || 0} people have joined the live auction`}
@@ -223,7 +223,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
               lectus pulvinar dolor non ultrices eget.
             </div> */}
 
-            <div className="relative mb-[0.625vw] grid grid-cols-12 p-[0.625vw] rounded-md shadow-md">
+            <div className="relative mb-[0.625vw] grid grid-cols-12 p-[0.625vw] rounded-md shadow-md bg-white">
               <div className="col-span-5">
               <BidInput
                 car={car}
@@ -245,7 +245,9 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
                   manualBid={manualBid}
                   setManualBid={setManualBid}
                  />
+
               </div>
+
             </div>
             <div
               onClick={handlePlaceBid}
@@ -324,6 +326,24 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
                 )}
               </div>
             </div>
+
+                   {/* Description and Modifications */}
+        <div className="mt-8 md:mt-[1.667vw] bg-white rounded-lg shadow-md p-6 md:p-[1.25vw]">
+        {/* {vehicle?.description && ( */}
+          <div className="mb-6 md:mb-[1.267vw] text-left">
+            <h2 className="text-xl md:text-24 font-bold mb-2 md:mb-[0.4vw]">Description</h2>
+            <p className="text-gray-700 text-sm md:text-18">{"vehicle.description"}</p>
+          </div>
+        {/* // )} */}
+        {/* {vehicle?.modification && ( */}
+          <div className="mb-6 md:mb-[1vw] text-left">
+            <h2 className="text-xl md:text-24 font-bold mb-2 md:mb-[0.4vw]">Modifications</h2>
+            <p className="text-gray-700 text-sm md:text-18">{"vehicle.modification"}</p>
+          </div>
+        {/* )} */}
+
+      </div>
+
           </div>
         </div>
       </div>
