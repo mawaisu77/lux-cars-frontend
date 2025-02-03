@@ -52,7 +52,7 @@ export default function ProfileDropdown({user}) {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', mt: { xs: 1, md: 0 } }}>
 
         <Tooltip title="My Account">
           <IconButton
@@ -63,9 +63,15 @@ export default function ProfileDropdown({user}) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar  sx={{ width: 32, height: 32, backgroundColor: user ? '#ca0000' : '' }}>
-            {user ? user.username.charAt(0) : 'X'} 
-            </Avatar>
+           <Avatar
+  sx={{
+    width: { xs: 26, md: 32 },
+    height: { xs: 26, md: 32 },
+    backgroundColor: user ? '#ca0000' : '',
+  }}
+>
+  {user ? user.username.charAt(0) : 'X'}
+</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
