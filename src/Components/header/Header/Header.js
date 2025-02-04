@@ -364,7 +364,7 @@ const Header = () => {
                     </Link>
                     <Link to="/signup">
                       <button
-                        className={`text-nowrap focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18  duration-200`}
+                        className={`text-nowrap focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.5vw] rounded-full text-white text-16 md:text-18  duration-200`}
                       >
                         Sign Up
                       </button>

@@ -50,11 +50,11 @@ const Registration = () => {
 
   return (
     <div className="bg-[#f8f8f8] w-[100vw]">
-      <div className="mx-auto py-10 sm:py-[2.083vw] max-w-[85vw] sm:max-w-[80vw] ">
+      <div className="mx-auto py-10   sm:py-[2.083vw] max-w-[85vw] sm:max-w-[80vw] ">
         <div className="grid md:grid-cols-2 gap-12 items-center">    
           {/* Left Column - Features */}
           <div className=" flex flex-col gap-[1.25vw]">
-          <h1 className="text-[35px] md:text-34 font-urbanist font-bold">
+          <h1 className="text-[22px] md:text-34 font-urbanist font-bold">
           Secure, Affordable, and Hassle-Free Car Buying
           </h1>
             <div className="flex gap-2 text-24 ">
@@ -112,7 +112,7 @@ const Registration = () => {
               </div>
               
             </div>
-            <h2 className="text-[30px] text-left md:text-30 font-urbanist font-bold">
+            <h2 className="text-[22px] text-left md:text-30 font-urbanist font-bold">
             Start bidding today with BidCaribbean and drive your dream car for less! 
                 </h2>
           </div>
@@ -121,7 +121,7 @@ const Registration = () => {
           <div className="">
             <div className="space-y-6">
               <div className="text-center space-y-2">
-                <h2 className="text-[35px] md:text-34 font-urbanist font-bold">
+                <h2 className="text-[22x] md:text-34 font-urbanist font-bold">
                   Register A New Account For Free
                 </h2>
               </div>
@@ -209,15 +209,15 @@ const Registration = () => {
                 </div>
               </div>
 
-              <div className="flex justify-start items-center gap-x-1.5 sm:gap-2">
+              <div className="flex justify-start  md:items-center gap-x-1.5 sm:gap-2">
                 <input
                   type="checkbox"
                   id="terms"
-                  className="rounded border-gray-300  w-[14px] h-[14px] sm:w-[1vw] sm:h-[1vw]"
+                  className="rounded border-gray-300 mt-1 md:mt-0 w-[14px] h-[14px] sm:w-[1vw] sm:h-[1vw]"
                   onChange={(e) => setIsTermsChecked(e.target.checked)}
 
                 />
-                <label htmlFor="terms" className="text-[14px] sm:text-18 text-gray-600">
+                <label htmlFor="terms" className="text-[14px] text-left sm:text-18 text-gray-600">
                   I Agree with the
                   <Link href="/terms-and-conditions" className="text-black font-semibold hover:underline">
                     Terms & Conditions

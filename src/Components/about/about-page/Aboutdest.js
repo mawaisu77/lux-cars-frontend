@@ -17,23 +17,23 @@ const Aboutdest = () => {
   };
 
   return (
-    <div className="bg-white w-[100vw] py-[30px] sm:py-[4.167vw]">
-      <div className="max-w-[85vw] sm:max-w-[73.229vw] mx-auto">
+    <div className=" w-[100vw] py-[30px] sm:py-[4.167vw]">
+      <div className="max-w-[85vw]  sm:max-w-[73.229vw] mx-auto">
         <div className="text-lux-black text-[22px] text-left sm:text-36  font-urbanist font-semibold ">
         Welcome to BidCaribbean: Your Caribbean Online Car Auction Platform
         </div>
-        <div className="flex gap-3 flex-col lg:flex-row lg:justify-between items-center w-full mx-auto mt-4">
-          <p className="w-[70%] text-left text-[18px] lg:text-18 text-lux-black">
+        <div className="flex gap-3 flex-col lg:flex-row  lg:justify-between items-center w-full mx-0 md:mx-auto mt-4">
+          <p className="w-[100%] md:w-[70%] text-left text-[14px] lg:text-18 text-lux-black">
           Find your dream car through verified online car auctions and enjoy delivery straight to your doorsteps
            in the Caribbean. With BidCaribbean, bidding is easy, rates are competitive, and the process is secured. 
           </p>
          
-          <button onClick={() => navigate('/how-it-works')} className="text-[18px] lg:text-[0.8vw] text-primary-red border border-primary-red rounded-full text-nowrap px-4 py-2">
+          <button onClick={() => navigate('/how-it-works')} className="text-[14px] lg:text-[0.8vw] text-primary-red border border-primary-red rounded-full text-nowrap px-4 py-1 md:py-2">
             How to Bid?
           </button>
         </div>
         <div className="flex gap-3 flex-col lg:flex-row lg:justify-between items-center w-full mx-auto mt-4">
-          <p className="w-[70%] text-left text-[18px] lg:text-18 text-lux-black">
+          <p className="w-[100%] md:w-[70%] text-left text-[14px] lg:text-18 text-lux-black">
           BidCaribbean offers a secure car-buying experience across different islands of the Caribbean. We provide seamless online car auctions and convenient home delivery right to your doorstep. Our services give you access to vehicles from the US without the hassle of traditional dealerships. 
           </p>
         </div>

@@ -127,16 +127,16 @@ const Bid = () => {
 
         <div class="relative mt-24 md:mt-[13vw] z-10 flex flex-col justify-center items-center h-full text-center">
       
-          <div className="flex md:flex-row flex-col md:text-52 text-[30px] font-bold font-urbanist md:gap-x-[0.5vw]">
+          <div className="flex md:flex-row flex-col md:text-38 mt-[20px] text-[22px] font-bold font-urbanist md:gap-x-[0.5vw]">
             {/* <span className="animated-text"> Online Car Auctions </span> */}
             <span className="">Safe Online Car Auctions with Convenient Home Delivery</span>
           </div>
-          <h1 class="md:text-52 text-[32px] font-bold font-urbanist leading-tight mb-[2vh]">
+          <h1 class="md:text-38 text-[22px] font-bold font-urbanist leading-tight mb-[2vh]">
             Bid, Buy, Drive
           </h1>
 
-          <div className="flex gap-x-2 md:gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
-          <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 md:py-[1.2vh] py-2 md:text-16 text-[16px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border  rounded-full">
+          <div className="flex  gap-x-2 md:gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
+          <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 md:py-[1.2vh] py-1 md:text-16 text-[12px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border  rounded-full">
               <FaHandHoldingUsd />
               <AnchorLink href="#startBidding">
                 <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
@@ -144,7 +144,7 @@ const Bid = () => {
                 </button>
               </AnchorLink>
             </div>
-            <div className="flex items-center md:py-[1.2vh] py-2 md:text-16 text-[16px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border border-white hover:bg-white hover:text-black duration-200 rounded-full">
+            <div className="flex items-center md:py-[1.2vh] py-1 md:text-16 text-[12px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border border-white hover:bg-white hover:text-black duration-200 rounded-full">
               <FaRocket />
               <Link to="/upload-car">
                 <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
@@ -155,26 +155,30 @@ const Bid = () => {
           </div>
 
           <div className="mx-auto p-2 md:p-[1vw] bg-white rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">      
-           <div className="rounded-md grid grid-cols-6 gap-x-2 font-semibold text-primary-red mt-4 md:mt-[1vw]">
          
-          {heroCategories.map((item,index)=>(
-              <>
-                <span onClick={()=>{
-                  localStorage.setItem("apiEndpoint", process.env.REACT_APP_API_CARS_LIVE);
-                  navigate(`/search-page?vehicle_type=${item.id.toLowerCase().replace(/\s+/g, "_")}`
-                  );
-                }}
-                 className=" p-1.5 border rounded-full border-primary-red cursor-pointer text-xs text-center hover:bg-gray-100 duration-300 hover:shadow-md">{item.category}</span>
-              </>
-           ))}
-           </div>
+       <div className="  overflow-x-scroll md:overflow-hidden pb-2" >
+       <div className="rounded-md grid w-[650px] md:w-auto grid-cols-6 gap-x-2 font-semibold text-primary-red mt-4 md:mt-[1vw] ">
+         
+         {heroCategories.map((item,index)=>(
+             <>
+               <span onClick={()=>{
+                 localStorage.setItem("apiEndpoint", process.env.REACT_APP_API_CARS_LIVE);
+                 navigate(`/search-page?vehicle_type=${item.id.toLowerCase().replace(/\s+/g, "_")}`
+                 );
+               }}
+                className=" p-1.5 md:p-[0.5vw] border rounded-full border-primary-red cursor-pointer text-xs md:text-16 text-center hover:bg-gray-100 duration-300 hover:shadow-md">{item.category}</span>
+             </>
+          ))}
+          </div>
+       </div>
+          
 
             <div className="my-2 md:my-[0.8vw]">
-              <div className="flex">
+              <div className="flex md:flex-row flex-col gap-2">
                 <button
-                  className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 transition-colors duration-300 ${
+                  className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[12px] md:text-18 transition-colors duration-300 ${
                     activeTab === "regular"
-                      ? "text-primary-red border-b-2 border-primary-red rounded-md shadow-sm"
+                      ? "text-primary-red border-b-2 md:border-b-[0.1vw] border-primary-red rounded-md shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
                   }`}
                   onClick={() => setActiveTab("regular")}
@@ -182,7 +186,7 @@ const Bid = () => {
                   Regular Search
                 </button>
                 <button
-                  className={`px-4 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 font-bold transition-colors duration-300 ${
+                  className={`px-4 py-2 md:py-[.5vw] md:px-[1vw] text-[12px] md:text-18 font-bold transition-colors duration-300 ${
                     activeTab === "vin"
                       ? "text-primary-red border-b-2 rounded-md border-primary-red shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
@@ -224,7 +228,7 @@ const Bid = () => {
                         options={carOptions}
                         isClearable
                         placeholder="Select Makes"
-                        className={`${error ? "hidden" : "block"} md:text-18 text-[16px] w-full`}
+                        className={`${error ? "hidden" : "block"} md:text-18 text-[12px] w-full`}
                       />
                     )}
                     {loading && selectedMake && !modelOptions.length ? (
@@ -244,7 +248,7 @@ const Bid = () => {
                         isClearable
                         placeholder="Select Models"
                         isDisabled={!selectedMake}
-                        className="md:text-18 text-[16px] w-full"
+                        className="md:text-18 text-[12px] w-full"
                       />
                     )}
                   </div>
@@ -261,7 +265,7 @@ const Bid = () => {
                         options={yearOptions}
                         isClearable={false}
                         placeholder="YYYY"
-                        className="md:text-18 text-[16px] w-full"
+                        className="md:text-18 text-[12px] w-full"
                         // className={`${error ? "hidden" : "block"} w-[100px]`}
                       />
                       <Select
@@ -274,13 +278,13 @@ const Bid = () => {
                         options={filteredYearToOptions}
                         isClearable={false}
                         placeholder="YYYY"
-                        className="md:text-18 text-[16px] w-full"
+                        className="md:text-18 text-[12px] w-full"
                         // className={`${error ? "hidden" : "block"} w-[100px]`}
                       />
                     </div>
 
                     <div className="flex items-center justify-center space-x-6 md:space-x-[1vw]">
-                      <label className="flex items-center space-x-2 md:text-18 text-[16px] cursor-pointer">
+                      <label className="flex items-center space-x-2 md:text-18 text-[12px] cursor-pointer">
                         <div className="relative">
                           <input
                             type="checkbox"
@@ -295,7 +299,7 @@ const Bid = () => {
                         </div>
                         <span className="text-gray-700">Copart</span>
                       </label>
-                      <label className="flex items-center space-x-2 md:text-18 text-[16px] cursor-pointer">
+                      <label className="flex items-center space-x-2 md:text-18 text-[12px] cursor-pointer">
                         <div className="relative">
                           <input
                             type="checkbox"
@@ -312,10 +316,10 @@ const Bid = () => {
                       </label>
                     </div>
 
-                    <div className="flex justify-end items-center">
+                    <div className="flex justify-center items-center">
                       <button
                         onClick={handleSearch}
-                        className="bg-primary-red text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 rounded-full hover:bg-primary-red transition-colors"
+                        className="bg-primary-red text-white px-4 py-1 md:py-[.5vw] md:px-[1vw] text-[12px] md:text-18 rounded-full hover:bg-primary-red transition-colors"
                       >
                         Search vehicles
                       </button>
@@ -339,10 +343,10 @@ const Bid = () => {
                     />
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   </div>
-                  <div className="flex justify-end items-center mt-4">
+                  <div className="flex justify-center items-center mt-4">
                       <button
                         onClick={handleVinSearch}
-                        className="bg-primary-red text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[16px] md:text-18 rounded-full hover:bg-primary-red transition-colors"
+                        className="bg-primary-red text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[12px] md:text-18 rounded-full hover:bg-primary-red transition-colors"
                       >
                         Search vehicle
                       </button>
