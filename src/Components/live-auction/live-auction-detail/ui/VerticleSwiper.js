@@ -39,9 +39,9 @@ export default function VerticleSwiper({images}) {
         className="mySwiper h-[30vw] "
       >
        {images && images.map((image, index) => (
-        <SwiperSlide className='rounded-lg' key={index}>
-          <div className='w-full h-[6.823vw] bg-red-500 rounded-lg'>
-            <img src={image} className='w-full h-full object-cover rounded-lg'  alt={`Vehicle_Image ${index + 1}`} />
+        <SwiperSlide className='rounded-md md:rounded-[0.5vw]' key={index}>
+          <div className='w-full h-[6.823vw] rounded-md md:rounded-[0.5vw]'>
+            <img src={image} className='w-full h-full object-cover rounded-md md:rounded-[0.5vw]'  alt={`Vehicle_Image ${index + 1}`} />
           </div>
         </SwiperSlide>
         ))}

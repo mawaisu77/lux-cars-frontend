@@ -1,24 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import FundsCard from "../../cards/FundsCard";
-import { FiMinusCircle } from "react-icons/fi";
-import { FiPlusCircle } from "react-icons/fi";
-import { FaCar } from "react-icons/fa6";
-import { GoQuestion } from "react-icons/go";
-import slider from '../../../assets/User-pics/Slider.png'
-import { LuCalendarDays } from "react-icons/lu";
-import { IoSettingsOutline } from "react-icons/io5";
-import FundsTable from "../../cards/FundsTable";
 import useGetFunds from "../../../hooks/useGetFunds"; 
 import useAddFunds from "../../../hooks/useAddFunds"; 
 import { ClipLoader } from "react-spinners";
-import PackageModal from "./funds/PackageModal.jsx"
-import { showToast } from '../../../utils/Toast';
 import BiddingLimit from "./funds/BiddingLimit.jsx";
 
 const Funds = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
 
   const { handleAddFunds, loading: addingFundsLoading, error: addingFundsError } = useAddFunds();
   const { funds, loading, error, fetchFunds } = useGetFunds();
@@ -27,34 +14,7 @@ const Funds = () => {
     fetchFunds();
   }, []);
 
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleSelectPackage = async (packageType) => {
-    console.log(`Selected package: ${packageType}`);
-    try {
-      await handleAddFunds(packageType);
-      console.log("Funds bef", funds);
-      showToast("Funds added successfully", 'success')
-      fetchFunds(); 
-      console.log("Funds after", funds);
-    } catch (error) {
-      console.error("Failed to add funds", error);
-    } finally {
-      handleCloseModal();
-    }
-  };
-
+ 
 
   return (
     <>
@@ -63,7 +23,7 @@ const Funds = () => {
           <p className="text-[36px] lg:text-[2.3vw] font-urbanist font-bold">My Funds</p>
           <div className="flex gap-3 relative">
        
-            <button onClick={handleOpenModal} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red text-white text-[15px] lg:text-[1vw] font-urbanist">
+            <button onClick={""} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red text-white text-[15px] lg:text-[1vw] font-urbanist">
               Add Deposite
             </button>
           </div>
@@ -91,7 +51,7 @@ const Funds = () => {
             </p>
             <button
               className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg"
-              onClick={handleOpenModal}
+              onClick={""}
               >
               Deposit Funds
             </button>
@@ -120,7 +80,7 @@ const Funds = () => {
             <p className="text-[16px] lg:text-[1vw] font-urbanist text-red-600">Error: {addingFundsError}</p>
             <button
               className="mt-2 px-3 py-1 bg-red-600 text-white rounded-lg"
-              onClick={handleOpenModal}
+              onClick={""}
             >
               Retry Adding Funds
             </button>
@@ -129,15 +89,9 @@ const Funds = () => {
       </div>
 
 
-    <BiddingLimit />
+     <BiddingLimit />
 
 
-      <div>
-      {/* <button onClick={handleOpenModal}>Choose Package</button> */}
-      {isModalOpen && (
-        <PackageModal onClose={handleCloseModal} onSelectPackage={handleSelectPackage} />
-      )}
-    </div>
     </>
   );
 };

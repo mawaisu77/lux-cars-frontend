@@ -5,11 +5,8 @@ import { useSavedLocalCars } from '../../../../context/SavedLocalCarsIdscontext'
 const UpcomingBids = ({upcomingBids}) => {
   const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
 
-
-  console.log("save car ids", savedIds)
-
   return (
-    <div className="bg-white h-[21.615vw] shadow-custom rounded-lg p-[1vw] w-full">
+    <div className="bg-white h-[21.615vw] shadow-sm rounded-lg p-[1vw] w-full mt-[0.4vw]">
       <div className="flex justify-between items-center mb-[0.625vw]">
         <h2 className="text-16 font-semibold">Upcoming Lots</h2>
         <button className="text-16 text-gray-500 hover:text-blue-600"> <strong>Total Remaining Lots: {upcomingBids?.length || 0}</strong></button>

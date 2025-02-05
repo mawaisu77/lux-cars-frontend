@@ -31,7 +31,7 @@ const CarReportViewer = ({ vin }) => {
 
 
   return (
-    <div className=" mt-[2vh] shadow-md rounded-[0.375vw] w-full   bg-white p-[1.5vw]">
+    <div className=" mt-[2vh] shadow-sm rounded-[0.375vw] w-full  bg-white p-[1.5vw]">
       <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
          Report
        </h2>

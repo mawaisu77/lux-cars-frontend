@@ -5,7 +5,7 @@ import { CgFileDocument } from "react-icons/cg";
 
 const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType }) => {
   return (
-    <div className="flex gap-2 flex-col lg:flex-row justify-between  mb-[3vh]">
+    <div className="flex gap-2 flex-col lg:flex-row justify-between">
       <div className="flex flex-1 px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] rounded-[0.5vw] bg-white">
         <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2  bg-[#CA0000]">
           <PiUsersFill color="white" className="" />

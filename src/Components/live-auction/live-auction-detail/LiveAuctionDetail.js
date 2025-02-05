@@ -203,7 +203,7 @@ const LiveAuctionDetail = () => {
               </div>
 
               {!upcomingLoading && !upcommingError && upcomingBids && (
-                <div className="flex flex-col gap-y-[1.625vw] col-span-5 w-full">
+                <div className="flex flex-col col-span-5 w-full">
                   <VehicleDetails vehicle={liveCar?.car} />
                   <UpcomingBids upcomingBids={upcomingBids} />
                 </div>
