@@ -11,14 +11,28 @@ import QuickBids from "./QuickBids";
 import BidInput from "./BidInput";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useSavedLocalCars } from "../../../context/SavedLocalCarsIdscontext";
+import { FaMapLocationDot } from "react-icons/fa6";
+import { CiLocationOn } from "react-icons/ci";
+import PreviousBids from "./tables/PreviousBids";
 
-const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setResetTimer, bonusTime, setBonusTime }) => {
+const BidDetails = ({
+  liveCar,
+  liveData,
+  members,
+  memberCount,
+  resetTimer,
+  setResetTimer,
+  bonusTime,
+  setBonusTime,
+}) => {
   const { user: loggedInUser } = useAuthContext();
   const { savedIds } = useSavedLocalCars();
 
   const { car, user } = liveCar;
   const [currentBid] = useState(liveData?.currentBid || car?.currentBid || 0);
-  const [manualBid, setManualBid] = useState(() => liveData?.currentBid ?? car?.currentBid ?? 0);
+  const [manualBid, setManualBid] = useState(
+    () => liveData?.currentBid ?? car?.currentBid ?? 0
+  );
 
   // Update these state declarations
   const [tempAutoBidAmount, setTempAutoBidAmount] = useState(() => {
@@ -78,7 +92,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
 
     // console.log("++++++ TESTING ++++++", liveData.userID, loggedInUser?.id);
 
-    if (nextBid <= autoBidAmount && liveData.userID !== loggedInUser?.id ) {
+    if (nextBid <= autoBidAmount && liveData.userID !== loggedInUser?.id) {
       handlePlaceBidLocalCar(car?.id, nextBid);
     }
 
@@ -88,7 +102,6 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
       showToast("Auto-bid maximum amount reached", "info");
     }
   }, [liveData?.currentBid, liveData?.userID, liveData.auction_date]);
-
 
   // Add function to calculate bid increment based on price range
   const getBidIncrement = (amount) => {
@@ -115,7 +128,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
     const amount = Number(tempAutoBidAmount);
     setAutoBidAmount(amount);
     setIsAutoBidEnabled(true);
-    setTempAutoBidAmount(""); 
+    setTempAutoBidAmount("");
     showToast("Auto-bid has been enabled", "success");
     document.getElementById("confirm_auto_bid").close();
   };
@@ -142,7 +155,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
   } = usePlaceBidLocalCar();
 
   const handlePlaceBid = () => {
-    document.getElementById("place_live_bid").showModal();
+    // document.getElementById("place_live_bid").showModal();
   };
 
   // Add reset handler
@@ -169,16 +182,17 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
 
   const handleConfirmBid = async (id, bid) => {
     await handlePlaceBidLocalCar(id, bid);
-
   };
 
   const isCarSaved = savedIds?.data?.includes(liveCar?.car?.id);
-  console.log("os car save", liveCar?.car?.id  );
+  console.log("os car save", liveCar?.car?.id);
 
   return (
     <>
-      <div className={`${isCarSaved ? "bg-yellow-200" : ""} p-3 md:py-[0.625vw] md:px-[1.625vw] max-w-[100%] mx-auto`}>
-        <div className="flex justify-between items-center mb-3 md:mb-[0.625vw]">
+      <div
+        className={`${isCarSaved ? "bg-yellow-200" : ""} px-2 md:px-[0.6vw] max-w-[100%] mx-auto`}
+      >
+        <div className="flex justify-between bg-white p-2 items-center mb-3 md:mb-[0.2vw] rounded-md md:rounded-[0.5vw]">
           <span
             className="text-30 font-medium text-nowrap"
             title={`${car?.make} ${car?.model} ${car?.year}`}
@@ -186,18 +200,17 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
             {`${car?.make} ${car?.model} ${car?.year}`}
           </span>
 
-          {/* <div className="flex items-center gap-2 ">
-            <span className="text-16 font-medium">Active Bid:</span>
-            <span className="text-16 font-medium bg-green-700/30 px-2 py-0.5 rounded-lg">
-              ${liveData.currentBid ? liveData.currentBid : car?.currentBid}
+          <div className="flex items-center gap-x-1 py-1 px-2 rounded-md md:rounded-[0.5vw] bg-yellow-400/30  justify-center">
+            <CiLocationOn />
+            <span className="tracking-wide">
+              {car?.carState} {car?.carLocation}
             </span>
-          </div> */}
-          {/* <CountDown timeLeft={car?.auction_date} liveTimeLeft={liveData?.auction_date} /> */}
+          </div>
 
 
           <div className="flex gap-4 ">
             <div
-              className="flex items-center px-2 py-1 md:px-[0.625vw] md:py-[0.417vw] gap-1 md:gap-[0.425vw] bg-secondary-gray rounded-3xl md:rounded-[0.625vw]"
+              className="flex items-center px-2 py-1 md:px-[0.625vw] md:py-[0.417vw] gap-1 md:gap-[0.425vw] bg-secondary-gray rounded-md md:rounded-[0.5vw]"
               title={`${memberCount || 0} people have joined the live auction`}
             >
               <MdPeopleAlt className="text-20" />
@@ -206,7 +219,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
           </div>
         </div>
 
-        <div className="flex gap-x-4 md:gap-[2.625vw] ">
+        <div className="flex gap-x-4 md:gap-[0.6vw] ">
           {/* Left side - Image gallery */}
           {car?.carImages && (
             <div className="w-[25%]">
@@ -216,50 +229,36 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
 
           {/* Right side - Bidding interface */}
           <div className="w-[75%]">
-            {/* <div className="mb-[0.625vw] text-18 text-gray-500 text-left">
-              Habitant sollicitudin faucibus cursus lectus pulvinar dolor non
-              ultrices eget. Facilisi lacerat morbi fringilla urna amet sed
-              ipsum vitae malesuada. Habitant sollicitudin faucibus cursus
-              lectus pulvinar dolor non ultrices eget.
-            </div> */}
-
-            <div className="relative mb-[0.625vw] grid grid-cols-12 p-[0.625vw] rounded-md shadow-md bg-white">
+            <div className="relative mb-[0.625vw] grid grid-cols-12 p-[0.625vw] rounded-md md:rounded-[0.5vw] shadow-sm bg-white">
               <div className="col-span-5">
-              <BidInput
-                car={car}
-                manualBid={manualBid}
-                setManualBid={setManualBid}
-                currentBid={currentBid}
-                activeBid={liveData?.currentBid || currentBid}
-                // handleReset={handleReset}
-                resetTimer={resetTimer} 
-                setResetTimer={setResetTimer}
-                bonusTime={bonusTime}
-                setBonusTime={setBonusTime}
-
-
-              />
-              </div>
-              <div className="col-span-7 flex justify-end items-start">
-                 <QuickBids
+                <BidInput
+                  car={car}
                   manualBid={manualBid}
                   setManualBid={setManualBid}
-                 />
-
+                  currentBid={currentBid}
+                  activeBid={liveData?.currentBid || currentBid}
+                  // handleReset={handleReset}
+                  resetTimer={resetTimer}
+                  setResetTimer={setResetTimer}
+                  bonusTime={bonusTime}
+                  setBonusTime={setBonusTime}
+                />
               </div>
-
+              <div className="col-span-7 flex justify-end items-start">
+                <QuickBids manualBid={manualBid} setManualBid={setManualBid} />
+              </div>
             </div>
             <div
-              onClick={handlePlaceBid}
-              className="w-full text-18 flex items-center justify-center gap-2 py-[0.677vw] bg-[#DC2626] text-white hover:bg-[#B91C1C] border border-[#DC2626] rounded-[0.625vw] cursor-pointer"
+              onClick={() => handleConfirmBid(car?.id, manualBid)}
+              className="w-full text-18 flex items-center justify-center gap-2 py-[0.677vw] bg-[#DC2626] text-white hover:bg-[#B91C1C] border border-[#DC2626] rounded-md md:rounded-[0.5vw] cursor-pointer"
             >
               <FaBagShopping />
               <span>Place Bid</span>
             </div>
 
-            <div className="w-full mt-[0.625vw] text-left">
+            <div className="w-full mt-[0.4vw] text-left">
               <span className=" text-18 font-medium">Auto Bid For Me</span>
-              <div className="flex items-center border rounded-lg px-3 py-2 bg-white w-full">
+              <div className="flex items-center border rounded-md md:rounded-[0.5vw] px-3 py-2 bg-white w-full">
                 {/* Dollar Prefix */}
                 {isAutoBidEnabled && (
                   <span className="text-green-600 text-14 px-2 py-1 bg-green-100 rounded-full">
@@ -306,7 +305,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
                 <button
                   onClick={handleAutoBidSetup}
                   disabled={!tempAutoBidAmount || isAutoBidEnabled}
-                  className={`px-2 py-1 rounded-lg text-14  ${
+                  className={`px-2 py-1 rounded-md md:rounded-[0.5vw] text-14  ${
                     !tempAutoBidAmount || isAutoBidEnabled
                       ? "bg-gray-300 cursor-not-allowed"
                       : "bg-[#DC2626] text-white hover:bg-[#B91C1C]"
@@ -319,7 +318,7 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
                 {isAutoBidEnabled && (
                   <button
                     onClick={handleDisableAutoBid}
-                    className="px-2 py-1 rounded-lg text-14 bg-gray-600 text-white hover:bg-gray-700"
+                    className="px-2 py-1 rounded-md md:rounded-[0.5vw] text-14 bg-gray-600 text-white hover:bg-gray-700"
                   >
                     Disable Auto-Bid
                   </button>
@@ -327,58 +326,16 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
               </div>
             </div>
 
-                   {/* Description and Modifications */}
-        <div className="mt-8 md:mt-[1.667vw] bg-white rounded-lg shadow-md p-6 md:p-[1.25vw]">
-        {/* {vehicle?.description && ( */}
-          <div className="mb-6 md:mb-[1.267vw] text-left">
-            <h2 className="text-xl md:text-24 font-bold mb-2 md:mb-[0.4vw]">Description</h2>
-            <p className="text-gray-700 text-sm md:text-18">{"vehicle.description"}</p>
-          </div>
-        {/* // )} */}
-        {/* {vehicle?.modification && ( */}
-          <div className="mb-6 md:mb-[1vw] text-left">
-            <h2 className="text-xl md:text-24 font-bold mb-2 md:mb-[0.4vw]">Modifications</h2>
-            <p className="text-gray-700 text-sm md:text-18">{"vehicle.modification"}</p>
-          </div>
-        {/* )} */}
-
-      </div>
+          
 
           </div>
         </div>
-      </div>
 
-      <dialog id="place_live_bid" className="modal">
-        <div className="modal-box dark:bg-white">
-          <h2 className="text-xl font-bold mb-4">Confirm Bid</h2>
-          <p className="mb-4">
-            Are you sure you want to place a bid of ${manualBid}?
-          </p>
-          <div className="flex justify-end gap-3">
-            <button
-              onClick={() => document.getElementById("place_live_bid").close()}
-              className="px-4 py-2 bg-gray-200 rounded-lg"
-              disabled={loading}
-            >
-              Cancel
-            </button>
-            <button
-              onClick={() => handleConfirmBid(car?.id, manualBid)}
-              className="px-4 py-2 bg-[#DC2626] text-white rounded-lg flex items-center gap-2"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <div className="w-5 h-5 border-t-2 border-white rounded-full animate-spin"></div>
-                  Processing...
-                </>
-              ) : (
-                "Confirm Bid"
-              )}
-            </button>
-          </div>
+        <div>
+        <PreviousBids id={liveCar?.car?.id} liveData={liveData}  />
         </div>
-      </dialog>
+
+      </div>
 
       {/* Add confirmation dialog */}
       <dialog id="confirm_auto_bid" className="modal">
@@ -398,13 +355,13 @@ const BidDetails = ({ liveCar, liveData, members, memberCount, resetTimer, setRe
               onClick={() =>
                 document.getElementById("confirm_auto_bid").close()
               }
-              className="px-4 py-2 bg-gray-200 rounded-lg"
+              className="px-4 py-2 bg-gray-200 rounded-md md:rounded-[0.5vw]"
             >
               Cancel
             </button>
             <button
               onClick={handleConfirmAutoBid}
-              className="px-4 py-2 bg-[#DC2626] text-white rounded-lg"
+              className="px-4 py-2 bg-[#DC2626] text-white rounded-md md:rounded-[0.5vw]"
             >
               Confirm Auto-Bid
             </button>

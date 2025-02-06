@@ -40,7 +40,6 @@ const VehicleHero = () => {
   const [shouldRefetch, setShouldRefetch] = useState(false);
   const { user } = useAuthContext();
 
-
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
 
@@ -54,10 +53,11 @@ const VehicleHero = () => {
     noOfBids: null,
   });
 
-  const currentBidValue = (carDetailData?.data?.currentBid || 0) > (carDetailData?.data?.current_bid || 0)
-  ? carDetailData?.data?.currentBid
-  : carDetailData?.data?.current_bid || 0;
-
+  const currentBidValue =
+    (carDetailData?.data?.currentBid || 0) >
+    (carDetailData?.data?.current_bid || 0)
+      ? carDetailData?.data?.currentBid
+      : carDetailData?.data?.current_bid || 0;
 
   useEffect(() => {
     // Initialize Pusher
@@ -70,7 +70,6 @@ const VehicleHero = () => {
 
     // Listen for bid updates specific to the car
     channel.bind(`car-notifications`, (data) => {
-
       setLiveData({
         currentBid: data.message.bid_price,
         noOfBids: data.message.noOfBids,
@@ -87,7 +86,7 @@ const VehicleHero = () => {
     if (!user) {
       document.getElementById("sign_in_modal").showModal(); // Show sign-in modal if not authenticated
     } else {
-      document.getElementById("my_modal_2").showModal(); 
+      document.getElementById("my_modal_2").showModal();
     }
   };
 
@@ -101,9 +100,7 @@ const VehicleHero = () => {
     const placeBidAmountConvert = parseInt(placeBidAmount, 10);
     await placeBid({ lot_id: lotID, currentBid: placeBidAmountConvert });
     // document.getElementById("my_modal_2").close();
-
   };
-
 
   const targetTime = useMemo(
     () =>
@@ -146,8 +143,13 @@ const VehicleHero = () => {
     }
   }, [placebidLoading, placeBidSuccess, placeBiderror]);
 
-  const currentStatus = statusOptions.find(option => option.id === carDetailData?.data?.status);
-  const currentDocumentType = documentTypeOptions.find(option => option.id.toLowerCase() === carDetailData?.data?.document?.toLowerCase());
+  const currentStatus = statusOptions.find(
+    (option) => option.id === carDetailData?.data?.status
+  );
+  const currentDocumentType = documentTypeOptions.find(
+    (option) =>
+      option.id.toLowerCase() === carDetailData?.data?.document?.toLowerCase()
+  );
 
   return (
     <div className="bg-gray-100">
@@ -170,7 +172,6 @@ const VehicleHero = () => {
         </div>
       </div>
 
-
       {carDetailLoading ? (
         <div className="w-[100vw] h-[100vh] flex justify-center items-center">
           <FadeLoader />
@@ -189,55 +190,56 @@ const VehicleHero = () => {
                 <AuctionDateNotDecidedMessage />
               )}
 
-              <div className="flex flex-col lg:flex-row  justify-between mx-auto max-w-[90vw] sm:max-w-[74vw] mt-[50px]">
-                <div className="w-full lg:w-[36vw] ">
+              <div className="flex flex-col md:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[50px]">
+                <div className="w-full md:w-[40%]">
                   <SwiperGallery
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
                   />
-                  <div className="flex justify-between sm:mt-[1vh]  px-2 items-center w-full border text-primary-red border-primary-red lg:text-[1.04vw] h-[4.7vh] rounded-lg">
+                  <div className="flex justify-between  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1">
                       <IoDocumentTextOutline />
                       <p>Get Report</p>
                     </div>
                     <BsDownload className="cursor-pointer" />
                   </div>
-                <VehicleDetailInfo data={carDetailData?.data} currentStatus={currentStatus} />
-                  
+                  <VehicleDetailInfo
+                    data={carDetailData?.data}
+                    currentStatus={currentStatus}
+                  />
                 </div>
 
-            
-             {/* web view */}
-                <div className=" hidden lg:block  w-full lg:w-[35vw]  ">
+                {/* web view */}
+                <div className=" hidden lg:block  w-[55%]   ">
                   <div>
-                 
-                   {/* Title Info */}
-                  <VehicleTitleInfo
-                    currentStatus={currentStatus} 
-                    title={carDetailData?.data?.title} 
-                    baseSite={carDetailData?.data?.base_site} 
-                  />
+                    {/* Title Info */}
+                    <VehicleTitleInfo
+                      currentStatus={currentStatus}
+                      title={carDetailData?.data?.title}
+                      baseSite={carDetailData?.data?.base_site}
+                      priceNew={carDetailData?.data?.price_new}
+                    />
 
-                   {/* Buy Now Section */}
-                   <BuyNowSection priceNew={carDetailData?.data?.price_new} />
-          
+                    {/* Buy Now Section */}
+                    {/* <BuyNowSection priceNew={carDetailData?.data?.price_new} /> */}
+
                     <VehcileSellerInfo
-                      seller={carDetailData?.data?.seller} 
-                      documentOld={carDetailData?.data?.document_old} 
-                      document={carDetailData?.data?.document} 
-                      currentDocumentType={currentDocumentType} 
+                      seller={carDetailData?.data?.seller}
+                      documentOld={carDetailData?.data?.document_old}
+                      document={carDetailData?.data?.document}
+                      currentDocumentType={currentDocumentType}
                     />
-                    <VehicleInfoUpperBody 
-                      carDetailData={carDetailData} 
-                      liveData={liveData} 
-                      currentBidValue={currentBidValue} 
-                      days={days} 
-                      hours={hours} 
-                      minutes={minutes} 
-                      seconds={seconds} 
-                      ValidDate={ValidDate} 
+                    <VehicleInfoUpperBody
+                      carDetailData={carDetailData}
+                      liveData={liveData}
+                      currentBidValue={currentBidValue}
+                      days={days}
+                      hours={hours}
+                      minutes={minutes}
+                      seconds={seconds}
+                      ValidDate={ValidDate}
                     />
-                 </div>
+                  </div>
 
                   <div className="mt-6">
                     <label className="block  lg:text-[0.875vw] font-medium text-gray-900 mb-[1vh]">
@@ -251,11 +253,7 @@ const VehicleHero = () => {
                       className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
                       defaultValue={0}
                       decimalsLimit={2}
-                      value={
-                        placeBidAmount
-                          ? placeBidAmount
-                          : currentBidValue
-                      }
+                      value={placeBidAmount ? placeBidAmount : currentBidValue}
                       onValueChange={(value) => setPlaceBidAmount(value)}
                     />
                   </div>
@@ -263,8 +261,7 @@ const VehicleHero = () => {
                   <button
                     onClick={handlePlaceBid}
                     className={`flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full ${placeBidAmount <= currentBidValue ? "bg-gray-200 cursor-not-allowed" : ""}`}
-                    disabled={placeBidAmount <= currentBidValue} 
-
+                    disabled={placeBidAmount <= currentBidValue}
                   >
                     {placebidLoading ? (
                       <ClipLoader color="#ffffff" size={20} />
@@ -274,35 +271,28 @@ const VehicleHero = () => {
                         <span className="text-md lg:text-[1.1vw]">
                           PlACE MAX BID
                         </span>
-                                  
                       </>
                     )}
-                  {placeBidAmount <= currentBidValue && (
-                    <TooltipInfo content="please place higher than current bid">
-                    <BsInfoCircle
-                      size={15}
-                      className="hover:text-blue-800 duration-200"
-                    />
-                  </TooltipInfo>
-                  )}
+                    {placeBidAmount <= currentBidValue && (
+                      <TooltipInfo content="please place higher than current bid">
+                        <BsInfoCircle
+                          size={15}
+                          className="hover:text-blue-800 duration-200"
+                        />
+                      </TooltipInfo>
+                    )}
                   </button>
 
-
-{carDetailData?.data?.is_buynow && (
-                  <button
-                    className={`flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full`}
-                  >
-                   
+                  {carDetailData?.data?.is_buynow && (
+                    <button
+                      className={`flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full`}
+                    >
                       <>
-                        <span className="text-md lg:text-[1.1vw]">
-                          Buy Now 
-                        </span>
-                                  
+                        <span className="text-md lg:text-[1.1vw]">BUY NOW IN</span>
+                        <span className="text-md lg:text-[1.1vw]">${carDetailData?.data?.price_new}</span>
                       </>
-               
-                  </button>
+                    </button>
                   )}
-
 
                   <div className="">
                     <VehicleCostCalculator
@@ -339,19 +329,20 @@ const VehicleHero = () => {
         </div>
       )}
 
-      <SignInModal closeModal={() => document.getElementById("sign_in_modal").close()} />
-      <CopyURLModal closeModal={() => document.getElementById("copy_url_modal").close()} />
+      <SignInModal
+        closeModal={() => document.getElementById("sign_in_modal").close()}
+      />
+      <CopyURLModal
+        closeModal={() => document.getElementById("copy_url_modal").close()}
+      />
       <BidModal
         isLoading={placebidLoading}
         onBidPlace={handleBidPlace}
         onClose={handleCloseModal2}
         placeBidAmount={placeBidAmount}
       />
-
-
     </div>
   );
 };
-
 
 export default VehicleHero;

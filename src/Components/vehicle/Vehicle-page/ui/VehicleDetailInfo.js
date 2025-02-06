@@ -13,7 +13,7 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
   return (
     <div className="grid  gap-6">
     {/* Vehicle Info */}
-    <section className="hidden lg:block  bg-white w-full p-6 rounded-lg shadow-md mt-5">
+    <section className="hidden lg:block  bg-white w-full p-6 rounded-lg shadow-sm mt-5">
       <h2 className="text-sm lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
         Vehicle Info
       </h2>
@@ -62,7 +62,7 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
     </section>
 
     {/* Location */}
-    <section className="hidden lg:block bg-white p-6 rounded-lg shadow-md">
+    <section className="hidden lg:block bg-white p-6 rounded-lg shadow-sm">
       <h2 className="text-lg lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
         Location
       </h2>
@@ -96,7 +96,7 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
 
       {/* Specifications */}
     <div className="flex flex-col justify-center gap-y-[2.1vh]">
-      <section className=" hidden lg:block bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
+      <section className=" hidden lg:block bg-white p-[1.5vw] my-4 rounded-lg shadow-sm">
         <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
           Specifications
         </h2>

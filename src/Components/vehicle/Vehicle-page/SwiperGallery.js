@@ -170,7 +170,7 @@ const SwiperGallery = ({ images, carData }) => {
                 <div className="relative">
                   <img
                     src={image}
-                    className="my-2 rounded-lg shadow-img cursor-pointer"
+                    className=" rounded-lg shadow-img cursor-pointer"
                     alt={`Vehicle_Image ${index + 1}`}
                     onClick={() => openModalImg(index)} // Open modal on image click
                   />
