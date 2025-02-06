@@ -46,7 +46,7 @@ const Footer = () => {
               src={img1}
               alt="Logo"
             />
-            <p className="text-[14px] sm:text-16 font-urbanist text-left md:text-left py-4 sm:py-[2vh]">
+            <p className="text-[14px] lg:text-16 font-urbanist text-left md:text-left py-4 sm:py-[2vh]">
               Trust in the Lord with all your heart, And lean not on your own
               understanding; In all your ways acknowledge Him, And He shall direct
               your paths. ~ Proverbs 3:5-6
@@ -65,19 +65,19 @@ const Footer = () => {
                 key={index}
                 className="font-urbanist flex flex-col gap-4 text-left lg:gap-[0.8vw] md:text-left w-full lg:w-auto"
               >
-                <p className="text-[22px] sm:text-18 font-bold">
+                <p className="text-[22px] lg:text-18 font-bold">
                   {section.heading}
                 </p>
                 {section.items.map((item, idx) =>
                   typeof item === "string" ? (
-                    <p key={idx} className="text-[14px] sm:text-16">
+                    <p key={idx} className="text-[14px] lg:text-16">
                       {item}
                     </p>
                   ) : (
                     <Link
                       key={idx}
                       to={item.link}
-                      className="text-[14px] sm:text-16"
+                      className="text-[14px] lg:text-16"
                     >
                       {item.text}
                     </Link>
@@ -88,10 +88,10 @@ const Footer = () => {
           </div>
 
           <div className="font-urbanist w-full lg:w-[20vw] flex flex-col gap-4 lg:gap-[0.8vw]">
-            <p className="text-[22px] sm:text-18 font-bold">
+            <p className="text-[22px] lg:text-18 font-bold">
               Subscribe
             </p>
-            <p className="text-[14px] sm:text-16 w-[70%] lg:w-[12.5vw] text-left md:text-left">
+            <p className="text-[14px] lg:text-16 w-[70%] lg:w-[12.5vw] text-left md:text-left">
               Wilczak 20B/40 61-623 Poznań Tax no.: 499-06-50-123
             </p>
             <form className="space-y-4">
@@ -100,7 +100,7 @@ const Footer = () => {
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full h-[7vh] lg:h-[5.23vh] rounded-xl pl-2 text-[14px] sm:text-16"
+                  className="w-full h-[7vh] lg:h-[5.23vh] rounded-xl pl-2 text-[14px] lg:text-16"
                   placeholder="Info@yourgmail.com"
                 />
                 <div className="flex h-[7vh] lg:h-[5.23vh] w-[50px] lg:w-[2vw] justify-center items-center rounded-r-xl bg-red-700">
@@ -111,7 +111,7 @@ const Footer = () => {
           </div>  
         </div>
       </div>
-      <div className="border-t py-[15px] sm:py-[1.563vw] text-[#1F1F2C] text-[14px] sm:text-14">
+      <div className="border-t py-[15px] sm:py-[1.563vw] text-[#1F1F2C] text-[14px] lg:text-14">
         <p className="text-center font-urbanist">
           ©2024 LUX® First Choice Cars. All right reserved.
         </p>

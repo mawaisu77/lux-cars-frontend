@@ -17,36 +17,36 @@ const Aboutdest = () => {
   };
 
   return (
-    <div className="bg-white w-[100vw] py-[30px] sm:py-[4.167vw]">
-      <div className="max-w-[85vw] sm:max-w-[73.229vw] mx-auto">
-        <div className="text-lux-black text-[22px] text-left sm:text-36  font-urbanist font-semibold ">
+    <div className=" w-[100vw] py-[30px] sm:py-[4.167vw]">
+      <div className="max-w-[85vw]  sm:max-w-[73.229vw] mx-auto">
+        <div className="text-lux-black text-[22px] text-left lg:text-36  font-urbanist font-semibold ">
         Welcome to BidCaribbean: Your Caribbean Online Car Auction Platform
         </div>
-        <div className="flex gap-3 flex-col lg:flex-row lg:justify-between items-center w-full mx-auto mt-4">
-          <p className="w-[70%] text-left text-[18px] lg:text-18 text-lux-black">
+        <div className="flex gap-3 flex-col lg:flex-row  lg:justify-between items-center w-full mx-0 lg:mx-auto mt-4">
+          <p className="w-[100%] lg:w-[70%] text-left text-[14px] lg:text-18 text-lux-black">
           Find your dream car through verified online car auctions and enjoy delivery straight to your doorsteps
            in the Caribbean. With BidCaribbean, bidding is easy, rates are competitive, and the process is secured. 
           </p>
          
-          <button onClick={() => navigate('/how-it-works')} className="text-[18px] lg:text-[0.8vw] text-primary-red border border-primary-red rounded-full text-nowrap px-4 py-2">
+          <button onClick={() => navigate('/how-it-works')} className="text-[14px] lg:text-[0.8vw] text-primary-red border border-primary-red rounded-full text-nowrap px-4 py-1 lg:py-2">
             How to Bid?
           </button>
         </div>
         <div className="flex gap-3 flex-col lg:flex-row lg:justify-between items-center w-full mx-auto mt-4">
-          <p className="w-[70%] text-left text-[18px] lg:text-18 text-lux-black">
+          <p className="w-[100%] lg:w-[70%] text-left text-[14px] lg:text-18 text-lux-black">
           BidCaribbean offers a secure car-buying experience across different islands of the Caribbean. We provide seamless online car auctions and convenient home delivery right to your doorstep. Our services give you access to vehicles from the US without the hassle of traditional dealerships. 
           </p>
         </div>
 
-        <div className="w-full h-[500px] sm:h-[23.646vw] rounded-[1.042vw] shadow-lg mx-auto mt-[30px] sm:mt-[8vh] relative">
-            <div className=" sm:p-[1.042vw] w-full h-full">
+        <div className="w-full h-[500px]    rounded-[1.042vw] shadow-lg mx-auto mt-[30px] sm:mt-[8vh] relative">
+            <div className=" sm:p-[1.042vw] w-full h-[500px] lg:h-full">
             <div
             className="relative w-full h-[500px] lg:h-full rounded-[1.042vw] bg-cover bg-center"
             style={{ backgroundImage: `url(${backgroundImage})` }}
           >
             {/* Removed img tag and replaced with background image */}
 
-            <div className="absolute bottom-0 rounded-[1.042vw]  w-full hidden md:block">
+            <div className="absolute bottom-0 rounded-[1.042vw]  w-full hidden lg:block">
               <Marquee
                 speed={100}
                 gradient={true}
@@ -70,7 +70,7 @@ const Aboutdest = () => {
               </Marquee>
             </div>
 
-            <div className="absolute w-full lg:top-[38vh] left-0 p-[1.042vw] top-10 md:hidden">
+            <div className="absolute w-full lg:top-[38vh] left-0 p-[1.042vw] top-10 lg:hidden">
               <Marquee
                 fade={true}
                 gradient={true}
