@@ -170,12 +170,10 @@ const BidDetails = ({
   useEffect(() => {
     if (placeBidSuccess) {
       showToast("Bid has been placed successfully", "success");
-      document.getElementById("place_live_bid").close();
       resetBidState();
     }
     if (error) {
       showToast(error, "error");
-      document.getElementById("place_live_bid").close();
       resetBidState();
     }
   }, [placeBidSuccess, error, resetBidState]);
