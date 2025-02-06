@@ -115,7 +115,7 @@ const Bid = () => {
 
   return (
     <>
-      <div class="relative md:h-full text-white overflow-hidden">
+      <div class="relative lg:h-full text-white overflow-hidden">
         <div class="absolute inset-0">
           <img
             src={bgImage}
@@ -125,18 +125,18 @@ const Bid = () => {
           <div class="absolute inset-0 bg-black opacity-50"></div>
         </div>
 
-        <div class="relative mt-24 md:mt-[13vw] z-10 flex flex-col justify-center items-center h-full text-center">
+        <div class="relative mt-24 lg:mt-[13vw] z-10 flex flex-col justify-center items-center h-full text-center">
       
-          <div className="flex md:flex-row flex-col md:text-38 mt-[20px] text-[22px] font-bold font-urbanist md:gap-x-[0.5vw]">
+          <div className="flex lg:flex-row flex-col lg:text-38 mt-[20px] text-[22px] font-bold font-urbanist lg:gap-x-[0.5vw]">
             {/* <span className="animated-text"> Online Car Auctions </span> */}
             <span className="">Safe Online Car Auctions with Convenient Home Delivery</span>
           </div>
-          <h1 class="md:text-38 text-[22px] font-bold font-urbanist leading-tight mb-[2vh]">
+          <h1 class="lg:text-38 text-[22px] font-bold font-urbanist leading-tight mb-[2vh]">
             Bid, Buy, Drive
           </h1>
 
-          <div className="flex  gap-x-2 md:gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
-          <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 md:py-[1.2vh] py-1 md:text-16 text-[12px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border  rounded-full">
+          <div className="flex  gap-x-2 lg:gap-x-[1.25vw] font-urbanist font-semibold relative z-50 justify-center items-center">
+          <div className="flex items-center text-primary-red  border-primary-red bg-white hover:bg-primary-red hover:text-white duration-200 lg:py-[1.2vh] py-1 lg:text-16 text-[12px] lg:px-[1.3vw] px-4 lg:gap-x-[0.5vw] gap-x-1 border  rounded-full">
               <FaHandHoldingUsd />
               <AnchorLink href="#startBidding">
                 <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
@@ -144,7 +144,7 @@ const Bid = () => {
                 </button>
               </AnchorLink>
             </div>
-            <div className="flex items-center md:py-[1.2vh] py-1 md:text-16 text-[12px] md:px-[1.3vw] px-4 md:gap-x-[0.5vw] gap-x-1 border border-white hover:bg-white hover:text-black duration-200 rounded-full">
+            <div className="flex items-center lg:py-[1.2vh] py-1 lg:text-16 text-[12px] lg:px-[1.3vw] px-4 lg:gap-x-[0.5vw] gap-x-1 border border-white hover:bg-white hover:text-black duration-200 rounded-full">
               <FaRocket />
               <Link to="/upload-car">
                 <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
@@ -154,10 +154,10 @@ const Bid = () => {
             </div>
           </div>
 
-          <div className="mx-auto p-2 md:p-[1vw] bg-white rounded-lg shadow-md my-10 w-[800px] max-w-[90%] md:max-w-[70vw] md:w-[50vw]">      
+          <div className="mx-auto p-2 lg:p-[1vw] bg-white rounded-lg shadow-lg my-10 w-[800px] max-w-[90%] lg:max-w-[70vw] lg:w-[50vw]">      
          
-       <div className="  overflow-x-scroll md:overflow-hidden pb-2" >
-       <div className="rounded-md grid w-[650px] md:w-auto grid-cols-6 gap-x-2 font-semibold text-primary-red mt-4 md:mt-[1vw] ">
+       <div className="  overflow-x-scroll lg:overflow-hidden pb-2" >
+       <div className="rounded-lg grid w-[650px] lg:w-auto grid-cols-6 gap-x-2 font-semibold text-primary-red mt-4 lg:mt-[1vw] ">
          
          {heroCategories.map((item,index)=>(
              <>
@@ -166,19 +166,19 @@ const Bid = () => {
                  navigate(`/search-page?vehicle_type=${item.id.toLowerCase().replace(/\s+/g, "_")}`
                  );
                }}
-                className=" p-1.5 md:p-[0.5vw] border rounded-full border-primary-red cursor-pointer text-xs md:text-16 text-center hover:bg-gray-100 duration-300 hover:shadow-md">{item.category}</span>
+                className=" p-1.5 lg:p-[0.5vw] border rounded-full border-primary-red cursor-pointer text-xs lg:text-16 text-center hover:bg-gray-100 duration-300 hover:shadow-lg">{item.category}</span>
              </>
           ))}
           </div>
        </div>
           
 
-            <div className="my-2 md:my-[0.8vw]">
-              <div className="flex md:flex-row flex-col gap-2">
+            <div className="my-2 lg:my-[0.8vw]">
+              <div className="flex lg:flex-row flex-col gap-2">
                 <button
-                  className={`px-4 font-bold py-2 md:py-[.5vw] md:px-[1vw] text-[12px] md:text-18 transition-colors duration-300 ${
+                  className={`px-4 font-bold py-2 lg:py-[.5vw] lg:px-[1vw] text-[12px] lg:text-18 transition-colors duration-300 ${
                     activeTab === "regular"
-                      ? "text-primary-red border-b-2 md:border-b-[0.1vw] border-primary-red rounded-md shadow-sm"
+                      ? "text-primary-red border-b-2 lg:border-b-[0.1vw] border-primary-red rounded-lg shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
                   }`}
                   onClick={() => setActiveTab("regular")}
@@ -186,9 +186,9 @@ const Bid = () => {
                   Regular Search
                 </button>
                 <button
-                  className={`px-4 py-2 md:py-[.5vw] md:px-[1vw] text-[12px] md:text-18 font-bold transition-colors duration-300 ${
+                  className={`px-4 py-2 lg:py-[.5vw] lg:px-[1vw] text-[12px] lg:text-18 font-bold transition-colors duration-300 ${
                     activeTab === "vin"
-                      ? "text-primary-red border-b-2 rounded-md border-primary-red shadow-sm"
+                      ? "text-primary-red border-b-2 rounded-lg border-primary-red shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
                   }`}
                   onClick={() => setActiveTab("vin")}
@@ -199,7 +199,7 @@ const Bid = () => {
             </div>
 
             <div
-              className="mt-4 md:mt-[1vw] flex flex-col justify-center items-center space-y-4"
+              className="mt-4 lg:mt-[1vw] flex flex-col justify-center items-center space-y-4"
               style={{ minHeight: "120px" }}
             >
               <div className="relative w-full">
@@ -211,7 +211,7 @@ const Bid = () => {
                       : "opacity-0 invisible absolute top-0 left-0"
                   }`}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                     {loading && !carData ? (
                       <div className="flex justify-center items-center  py-[1vh]">
                         <ClipLoader size={30} />
@@ -228,7 +228,7 @@ const Bid = () => {
                         options={carOptions}
                         isClearable
                         placeholder="Select Makes"
-                        className={`${error ? "hidden" : "block"} md:text-18 text-[12px] w-full`}
+                        className={`${error ? "hidden" : "block"} lg:text-18 text-[12px] w-full`}
                       />
                     )}
                     {loading && selectedMake && !modelOptions.length ? (
@@ -248,12 +248,12 @@ const Bid = () => {
                         isClearable
                         placeholder="Select Models"
                         isDisabled={!selectedMake}
-                        className="md:text-18 text-[12px] w-full"
+                        className="lg:text-18 text-[12px] w-full"
                       />
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-x-[1vw] gap-x-[1vw] mb-4 md:mb-[1vw]">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-x-[1vw] gap-x-[1vw] mb-4 lg:mb-[1vw]">
                     <div className="flex justify-start items-center gap-x-2">
                       <Select
                         styles={{
@@ -265,7 +265,7 @@ const Bid = () => {
                         options={yearOptions}
                         isClearable={false}
                         placeholder="YYYY"
-                        className="md:text-18 text-[12px] w-full"
+                        className="lg:text-18 text-[12px] w-full"
                         // className={`${error ? "hidden" : "block"} w-[100px]`}
                       />
                       <Select
@@ -278,13 +278,13 @@ const Bid = () => {
                         options={filteredYearToOptions}
                         isClearable={false}
                         placeholder="YYYY"
-                        className="md:text-18 text-[12px] w-full"
+                        className="lg:text-18 text-[12px] w-full"
                         // className={`${error ? "hidden" : "block"} w-[100px]`}
                       />
                     </div>
 
-                    <div className="flex items-center justify-center space-x-6 md:space-x-[1vw]">
-                      <label className="flex items-center space-x-2 md:text-18 text-[12px] cursor-pointer">
+                    <div className="flex items-center justify-center space-x-6 lg:space-x-[1vw]">
+                      <label className="flex items-center space-x-2 lg:text-18 text-[12px] cursor-pointer">
                         <div className="relative">
                           <input
                             type="checkbox"
@@ -299,7 +299,7 @@ const Bid = () => {
                         </div>
                         <span className="text-gray-700">Copart</span>
                       </label>
-                      <label className="flex items-center space-x-2 md:text-18 text-[12px] cursor-pointer">
+                      <label className="flex items-center space-x-2 lg:text-18 text-[12px] cursor-pointer">
                         <div className="relative">
                           <input
                             type="checkbox"
@@ -319,7 +319,7 @@ const Bid = () => {
                     <div className="flex justify-center items-center">
                       <button
                         onClick={handleSearch}
-                        className="bg-primary-red text-white px-4 py-1 md:py-[.5vw] md:px-[1vw] text-[12px] md:text-18 rounded-full hover:bg-primary-red transition-colors"
+                        className="bg-primary-red text-white px-4 py-1 lg:py-[.5vw] lg:px-[1vw] text-[12px] lg:text-18 rounded-full hover:bg-primary-red transition-colors"
                       >
                         Search vehicles
                       </button>
@@ -335,18 +335,18 @@ const Bid = () => {
                       : "opacity-0 invisible absolute top-0 left-0"
                   }`}
                 >
-                  <div className="relative max-w-md mx-auto">
+                  <div className="relative max-w-lg mx-auto">
                     <input
                       type="text"
                       placeholder="Search by VIN or lot number"
-                      className="w-full text-black pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="w-full text-black pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   </div>
                   <div className="flex justify-center items-center mt-4">
                       <button
                         onClick={handleVinSearch}
-                        className="bg-primary-red text-white px-6 py-2 md:py-[.5vw] md:px-[1vw] text-[12px] md:text-18 rounded-full hover:bg-primary-red transition-colors"
+                        className="bg-primary-red text-white px-6 py-2 lg:py-[.5vw] lg:px-[1vw] text-[12px] lg:text-18 rounded-full hover:bg-primary-red transition-colors"
                       >
                         Search vehicle
                       </button>

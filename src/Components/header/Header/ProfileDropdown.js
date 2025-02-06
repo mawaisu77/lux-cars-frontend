@@ -52,7 +52,7 @@ export default function ProfileDropdown({user}) {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', mt: { xs: 1, md: 0 } }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', mt: { xs: 1, lg: 0 } }}>
 
         <Tooltip title="My Account">
           <IconButton
@@ -65,8 +65,8 @@ export default function ProfileDropdown({user}) {
           >
            <Avatar
   sx={{
-    width: { xs: 26, md: 32 },
-    height: { xs: 26, md: 32 },
+    width: { xs: 26, lg: 32 },
+    height: { xs: 26, lg: 32 },
     backgroundColor: user ? '#ca0000' : '',
   }}
 >
@@ -207,13 +207,13 @@ export default function ProfileDropdown({user}) {
 
             <div className="flex gap-x-2 justify-center  mt-6">
               <button
-                className=" text-green-600 w-[70px] py-1 border border-green-600 dark:bg-white rounded-md dark:hover:bg-green-600/80 hover:text-white duration-200"
+                className=" text-green-600 w-[70px] py-1 border border-green-600 dark:bg-white rounded-lg dark:hover:bg-green-600/80 hover:text-white duration-200"
                 onClick={handleLogoout}
               >
                 Confirm
               </button>
               <button
-                className=" text-red-600 w-[70px] py-1 border border-red-600 dark:bg-white rounded-md dark:hover:bg-red-600/80 hover:text-white duration-200"
+                className=" text-red-600 w-[70px] py-1 border border-red-600 dark:bg-white rounded-lg dark:hover:bg-red-600/80 hover:text-white duration-200"
                 onClick={() =>
                   document.getElementById("my_logout_modal").close()
                 }

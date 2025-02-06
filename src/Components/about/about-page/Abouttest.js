@@ -26,9 +26,9 @@ const Abouttest = () => {
         </div> */}
 
       <div className="max-w-[85vw] sm:max-w-[73.292vw] mx-auto">
-        <div className="text-[22px] sm:text-36 font-urbanist font-semibold mb-[5vh]">
+        <div className="text-[22px] lg:text-36 font-urbanist font-semibold mb-[5vh]">
           Testimonials
-          <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red mt-[6px] sm:mt-[0.781vw] w-[30px] sm:w-[5vw] mx-auto" />
+          <hr className='h-1 w-16 lg:w-20 mx-auto bg-red-600' />
         </div>
         <Swiper
           slidesPerView={1}
@@ -47,21 +47,21 @@ const Abouttest = () => {
           navigation={false}
           pagination={{ clickable: true }}
           modules={[Navigation, Pagination]}
-          className="w-full h-[370px] sm:h-[24.938vw] flex justify-center items-center"
+          className="w-full h-[370px] lg:h-[24.938vw] flex justify-center items-center"
         >
           {testi.map((testimonial, index) => (
             <SwiperSlide key={index} className="relative cursor-pointer ">
-              <div className="flex bg-white h-[300px] sm:h-[20.938vw] flex-col justify-center items-center">
+              <div className="flex bg-white h-[300px] lg:h-[20.938vw] flex-col justify-center items-center">
                 <div className="h-full mx-auto rounded-lg shadow-md p-[1.667vw] ">
                   <div className="flex flex-col justify-center items-center text-[#062A3F]">
-                    <p className="text-[18px] lg:text-18 font-urbanist ">
+                    <p className="text-[14px] lg:text-18 font-urbanist ">
                       {testimonial.para}
                     </p>
                     <div className="flex flex-col justify-center items-center mt-[2.5vw]">
-                      <p className="text-[24px] lg:text-24 font-bold font-urbanist ">
+                      <p className="text-[22px] lg:text-24 font-bold font-urbanist ">
                         {testimonial.name}
                       </p>
-                      <p className="text-[14px] lg:text-14 font-urbanist text-primary-gray">
+                      <p className="text-[18px] lg:text-14 font-urbanist text-primary-gray">
                         {testimonial.designation}
                       </p>
                     </div>

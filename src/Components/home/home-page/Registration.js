@@ -51,60 +51,60 @@ const Registration = () => {
   return (
     <div className="bg-[#f8f8f8] w-[100vw]">
       <div className="mx-auto py-10   sm:py-[2.083vw] max-w-[85vw] sm:max-w-[80vw] ">
-        <div className="grid md:grid-cols-2 gap-12 items-center">    
+        <div className="grid lg:grid-cols-2 gap-12 items-center">    
           {/* Left Column - Features */}
           <div className=" flex flex-col gap-[1.25vw]">
           <h1 className="text-[22px] md:text-34 font-urbanist font-bold">
           Secure, Affordable, and Hassle-Free Car Buying
           </h1>
             <div className="flex gap-2 text-24 ">
-              <div className="text-[20px] sm:text-24 pt-1">
+              <div className="text-[20px] lg:text-24 pt-1">
                 <IoIosCheckmarkCircleOutline />
               </div>
               <div className="">
-                <h3 className="font-semibold text-left text-[22px] sm:text-24">Save 30-50% off:</h3>
-                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">
+                <h3 className="font-semibold text-left text-[22px] lg:text-24">Save 30-50% off:</h3>
+                <p className="text-gray-600 text-[16px] lg:text-18 leading-relaxed text-left mt-[0.833vw]">
                 Get 30-50% off retail prices through BidCaribbean’s trusted online auctions. From everyday vehicles to luxury cars, enjoy unbeatable deals without the extra costs of dealership markups.
                 </p>
               </div>
             </div>
 
             <div className="flex gap-2 text-24 ">
-              <div className="text-[20px] sm:text-24 pt-1">
+              <div className="text-[20px] lg:text-24 pt-1">
                 <IoIosCheckmarkCircleOutline />
               </div>
               <div className="">
-                <h3 className="font-semibold text-left text-[22px] sm:text-24 ">Over 300,000 Verified Vehicles:</h3>
-                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">   
+                <h3 className="font-semibold text-left text-[22px] lg:text-24 ">Over 300,000 Verified Vehicles:</h3>
+                <p className="text-gray-600 text-[16px] lg:text-18 leading-relaxed text-left mt-[0.833vw]">   
                 Choose from over 300,000 verified cars, including like-new options or cars with minor issues such as hail damage, theft recovery, or repossession. Every listing is carefully reviewed, ensuring you can bid with confidence.
                 </p>
               </div>
             </div>
 
             <div className="flex gap-2 text-24 ">
-              <div className="text-[20px] sm:text-24 pt-1">
+              <div className="text-[20px] lg:text-24 pt-1">
                 <IoIosCheckmarkCircleOutline />
               </div>
               <div className="">
-                <h3 className="font-semibold text-left text-[22px] sm:text-24">
+                <h3 className="font-semibold text-left text-[22px] lg:text-24">
                 Hassle-Free Bidding
 
                 </h3>
-                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]">       
+                <p className="text-gray-600 text-[16px] lg:text-18 leading-relaxed text-left mt-[0.833vw]">       
                 Our platform simplifies bidding, making it easy and stress-free. Just enter your maximum bid, and we'll take care of everything, ensuring the security of your transactions at every step.       
                 </p>
               </div>
             </div>
 
             <div className="flex gap-2 text-24 ">
-              <div className="text-[20px] sm:text-24 pt-1">
+              <div className="text-[20px] lg:text-24 pt-1">
                 <IoIosCheckmarkCircleOutline />
               </div>
               <div className="">
-                <h3 className="font-semibold text-left text-[22px] sm:text-24">
+                <h3 className="font-semibold text-left text-[22px] lg:text-24">
                 VIP Support at Every Step
                 </h3>
-                <p className="text-gray-600 text-[16px] sm:text-18 leading-relaxed text-left mt-[0.833vw]"> 
+                <p className="text-gray-600 text-[16px] lg:text-18 leading-relaxed text-left mt-[0.833vw]"> 
                            
                 From registration to delivery, we’ve got you covered. Our expert assistance ensures you make informed decisions and secure the best deals—fast, safe, and seamless.
 
@@ -137,7 +137,7 @@ const Registration = () => {
                           ? signupFormik.errors.username
                           : "Your Full Name*"
                       }     
-                      className={`w-full px-3 py-2 text-[14px] sm:text-14 border rounded-lg ${
+                      className={`w-full px-3 py-2 text-[14px] lg:text-14 border rounded-lg ${
                         signupFormik.touched.username && signupFormik.errors.username
                           ? "border-red-600 placeholder-red-500"
                           : "border-gray-300"
@@ -157,7 +157,7 @@ const Registration = () => {
                         ? signupFormik.errors.email
                         : "Your Email Address*"
                     }
-                    className={`w-full px-3 py-2 text-[14px] sm:text-14 border rounded-lg ${
+                    className={`w-full px-3 py-2 text-[14px] lg:text-14 border rounded-lg ${
                       signupFormik.touched.email && signupFormik.errors.email
                         ? "border-red-600 placeholder-red-500"
                         : "border-gray-300"
@@ -197,7 +197,7 @@ const Registration = () => {
                         ? signupFormik.errors.confirmPassword
                         : "Confirm Password*"
                     }
-                    className={`w-full px-3 py-2 text-[14px] sm:text-14 border rounded-lg ${
+                    className={`w-full px-3 py-2 text-[14px] lg:text-14 border rounded-lg ${
                       signupFormik.touched.confirmPassword && signupFormik.errors.confirmPassword
                         ? "border-red-600 placeholder-red-500"
                         : "border-gray-300"
@@ -213,11 +213,11 @@ const Registration = () => {
                 <input
                   type="checkbox"
                   id="terms"
-                  className="rounded border-gray-300 mt-1 md:mt-0 w-[14px] h-[14px] sm:w-[1vw] sm:h-[1vw]"
+                  className="rounded border-gray-300 mt-1 md:mt-0 w-[14px] h-[14px] lg:w-[1vw] sm:h-[1vw]"
                   onChange={(e) => setIsTermsChecked(e.target.checked)}
 
                 />
-                <label htmlFor="terms" className="text-[14px] text-left sm:text-18 text-gray-600">
+                <label htmlFor="terms" className="text-[14px] text-left lg:text-18 text-gray-600">
                   I Agree with the
                   <Link href="/terms-and-conditions" className="text-black font-semibold hover:underline">
                     Terms & Conditions
@@ -229,14 +229,14 @@ const Registration = () => {
                 </label>
               </div>
 
-             <button className={`w-full bg-red-100 text-red-600 font-medium text-[16px] sm:text-20 rounded-lg py-2.5 hover:bg-red-200 transition-colors ${!isTermsChecked || isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+             <button className={`w-full bg-red-100 text-red-600 font-medium text-[16px] lg:text-20 rounded-lg py-2.5 hover:bg-red-200 transition-colors ${!isTermsChecked || isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={signupFormik.handleSubmit}
               disabled={!isTermsChecked || isLoading}
               >
               {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Register Now"}
               </button>
 
-              <p className="text-center text-[16px] sm:text-18 text-gray-500">
+              <p className="text-center text-[16px] lg:text-18 text-gray-500">
                 Already have an account?
                 <a href="/login" className="text-red-600 hover:underline">
                   Login

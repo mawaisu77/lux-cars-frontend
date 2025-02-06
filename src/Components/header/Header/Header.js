@@ -28,7 +28,7 @@ const Header = () => {
   const [activeMenuItem, setActiveMenuItem] = useState(null);
   const [activeSubMenuItem, setActiveSubMenuItem] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:1024px)");
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -190,12 +190,12 @@ const Header = () => {
           
 
           {/* Simple Links for Other Menu Items */}
-          {Object.entries(menuData).map(([menuItem, menuItemData]) => {
+          {Object.entries(menuData).map(([menuItem, menuItelgata]) => {
             if (menuItem !== "Search & Bid") {
               return (
                 <Link
                   key={menuItem}
-                  to={menuItemData.link}
+                  to={menuItelgata.link}
                   className="block py-4 text-gray-800"
                 >
                   {menuItem}
@@ -217,7 +217,7 @@ const Header = () => {
             <div className="flex items-center gap-x-4">
               <div className="flex items-center">
                 <button
-                  className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18 duration-200`}
+                  className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
                   onClick={handleLogoutModal}
                 >
                   <span className="text-white text-nowrap">0%/0$</span>{" "}
@@ -227,7 +227,7 @@ const Header = () => {
                 </button>
               </div>
               <button
-                className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18 duration-200`}
+                className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
                 onClick={handleLogoutModal}
               >
                 <span className="text-white text-nowrap">Log out</span>{" "}
@@ -237,10 +237,10 @@ const Header = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-col w-[100%] items-center gap-4 md:gap-[1.5vw] text-sm md:text-18">
+              <div className="flex flex-col w-[100%] items-center gap-4 lg:gap-[1.5vw] text-sm lg:text-18">
                 <Link to="/login">
                   <button
-                    className={`w-[170px] text-nowrap font-semibold focus:outline-none bg-white hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-gray-800  md:text-18  duration-200 border border-solid border-black`}
+                    className={`w-[170px] text-nowrap font-semibold focus:outline-none bg-white hover:bg-[#ca0000e8] px-3 lg:px-[1.5vw] py-1 lg:py-[0.4vw] rounded-full text-gray-800  lg:text-18  duration-200 border border-solid border-black`}
                   >
                     Log In
                   </button>
@@ -248,7 +248,7 @@ const Header = () => {
 
                 <Link to="/signup">
                   <button
-                    className={`w-[170px] text-nowrap font-semibold focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.4vw] rounded-full text-white  md:text-18  duration-200`}
+                    className={`w-[170px] text-nowrap font-semibold focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 lg:px-[1.5vw] py-1 lg:py-[0.4vw] rounded-full text-white  lg:text-18  duration-200`}
                   >
                     Sign Up
                   </button>
@@ -270,8 +270,8 @@ const Header = () => {
         }}
       >
         <header className="bg-black/90">
-          <div className="hidden md:block w-[100vw] mx-auto  ">
-            <div className="flex max-w-[85vw] mx-auto w-full items-center justify-between h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
+          <div className="hidden lg:block w-[100vw] mx-auto  ">
+            <div className="flex max-w-[85vw] mx-auto w-full items-center justify-between h-12 lg:h-[5vw] gap-2 lg:gap-[1.5vw]">
               {/* <div className=" w-full flex justify-between items-center gap-x-4"> */}
               <div className="flex items-center justify-start">
                 <Link to="/" className="">
@@ -289,12 +289,12 @@ const Header = () => {
                   />
                 </Link>
               </div>
-              <div className="w-[35%] ml-2 md:ml-0">
-                <div className="relative" ref={dropdownRef}>
+              <div className="w-[35%] ml-2 lg:ml-0">
+                <div className="relative w-90%" ref={dropdownRef}>
                   <input
                     type="text"
                     placeholder={`${isMobile ? "Search here..." : "Search for vehicle by Make, Model, Lot or VIN..."}`}
-                    className="w-full p-1 md:py-[0.6vw] md:px-[1.5vw] rounded-full bg-gray-100/95 text-xs md:text-18"
+                    className="w-full p-1 lg:py-[0.6vw] lg:px-[1.5vw] rounded-full bg-gray-100/95 text-xs lg:text-18"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setIsFocused(true)}
@@ -302,11 +302,11 @@ const Header = () => {
                   />
 
                   <button className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                    <BsSearch className="h-2 md:h-[1vw] w-2 md:w-[1vw]" />
+                    <BsSearch className="h-2 lg:h-[1vw] w-2 lg:w-[1vw]" />
                   </button>
                   
                   {searchResults.length > 0 && ( // Render dropdown if there are results
-                    <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-60 overflow-y-auto">
+                    <div className="absolute z-10 bg-white border border-gray-300 rounded-lg mt-1 w-full max-h-60 overflow-y-auto">
                       {searchResults.map((car) => (
                         <div
                           key={car.make}
@@ -316,7 +316,7 @@ const Header = () => {
                             {car.models.map((model) => (
                               <div
                                 key={model}
-                                className="pl-4 py-2 md:py-[0.4vw] text-sm md:text-18 hover:bg-gray-200 cursor-pointer "
+                                className="pl-4 py-2 lg:py-[0.4vw] text-sm lg:text-18 hover:bg-gray-200 cursor-pointer "
                                 onClick={() =>
                                   handleDropdownItemClick(car.make, model)
                                 }
@@ -337,7 +337,7 @@ const Header = () => {
                   <div className="flex items-center gap-x-4">
                        <div className="flex items-center">
                   <button
-                    className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 md:px-[1vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18 duration-200`}
+                    className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
                     onClick={handleLogoutModal}
                   >
                     <span className="text-white text-nowrap">0%/0$</span> {/* Text on the left */}
@@ -345,7 +345,7 @@ const Header = () => {
                   </button>
                  </div>
                   <button
-                    className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 md:px-[1vw] py-1 md:py-[0.4vw] rounded-full text-white text-xs md:text-18 duration-200`}
+                    className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
                     onClick={handleLogoutModal}
                   >
                     <span className="text-white text-nowrap">Log out</span> {/* Text on the left */}
@@ -354,17 +354,17 @@ const Header = () => {
                 </div>
               ) : (
                 <>
-                  <div className="flex  items-center gap-4 md:gap-[1.5vw] text-sm md:text-18">
+                  <div className="flex  items-center gap-4 lg:gap-[1.5vw] text-sm lg:text-18">
                     <Link to="/login">
                       <button
-                        className={`text-nowrap focus:outline-none text-white text-xs md:text-18 hover:text-white/80 duration-200`}
+                        className={`text-nowrap focus:outline-none text-white text-xs lg:text-18 hover:text-white/80 duration-200`}
                       >
                         Log In
                       </button>
                     </Link>
                     <Link to="/signup">
                       <button
-                        className={`text-nowrap focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 md:px-[1.5vw] py-1 md:py-[0.5vw] rounded-full text-white text-16 md:text-18  duration-200`}
+                        className={`text-nowrap focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 lg:px-[1.5vw] py-1 lg:py-[0.5vw] rounded-full text-white text-16 lg:text-18  duration-200`}
                       >
                         Sign Up
                       </button>
@@ -379,12 +379,12 @@ const Header = () => {
             </div>
 
             <nav className="bg-gray-950/50">
-              <div className="max-w-[85vw] mx-auto w-full relative flex items-center justify-between  md:h-[3.2vw] text-gray-300">
+              <div className="max-w-[85vw] mx-auto w-full relative flex items-center justify-between  lg:h-[3.2vw] text-gray-300">
                 {/* Hide links on mobile view */}
 
                 <div className="flex items-center">
                   {!isMobile &&
-                    Object.entries(menuData).map(([menuItem, menuItemData]) => (
+                    Object.entries(menuData).map(([menuItem, menuItelgata]) => (
                       <div
                         key={menuItem}
                         className="relative"
@@ -392,19 +392,19 @@ const Header = () => {
                         onMouseLeave={handleMouseLeave}
                       >
                         <Link
-                          to={menuItemData.link}
-                          className="px-4 py-2 md:px-[1.5vw] md:py-[0.4vw] text-sm md:text-18 flex items-center gap-2 hover:text-white"
+                          to={menuItelgata.link}
+                          className="px-4 py-2 lg:px-[1.5vw] lg:py-[0.4vw] text-sm lg:text-18 flex items-center gap-2 hover:text-white"
                         >
                           {menuItem}
-                          {menuItemData.items && (
-                            <BiChevronDown className="h-4 w-4 md:h-[1vw] md:w-[1vw]" />
+                          {menuItelgata.items && (
+                            <BiChevronDown className="h-4 w-4 lg:h-[1vw] lg:w-[1vw]" />
                           )}
                         </Link>
 
-                        {activeMenuItem === menuItem && menuItemData.items && (
+                        {activeMenuItem === menuItem && menuItelgata.items && (
                           <div className="absolute top-full left-0 flex bg-black/95 shadow-xl">
                             <div className="w-64 py-2 border-r border-slate-700">
-                              {menuItemData.items.map((item, index) => (
+                              {menuItelgata.items.map((item, index) => (
                                 <button
                                   key={index}
                                   className="w-full px-4 py-2 text-left text-gray-300 hover:text-white hover:bg-slate-800"
@@ -421,7 +421,7 @@ const Header = () => {
                             {activeSubMenuItem && (
                               <div className="w-[600px] h-[400px] overflow-y-auto p-6 my-3">
                                 {Object.entries(
-                                  menuItemData.items.find(
+                                  menuItelgata.items.find(
                                     (item) => item.name === activeSubMenuItem
                                   ).submenu
                                 ).map(([submenuTitle, submenuItems]) => (
@@ -490,10 +490,10 @@ const Header = () => {
                   </IconButton>
                 )}
                 <div className="w-[20%] flex gap-x-6 justify-end items-center">
-              <Link to="/contact-us" className="text-sm md:text-18 hover:text-white">
+              <Link to="/contact-us" className="text-sm lg:text-18 hover:text-white">
                 {"Contact"}
                 </Link>
-                <Link to="/help" className="text-sm md:text-18 hover:text-white">
+                <Link to="/help" className="text-sm lg:text-18 hover:text-white">
                   {"Help"}
                 </Link>
               </div>
@@ -501,8 +501,8 @@ const Header = () => {
              
             </nav>
           </div>
-          <div className="block md:hidden w-[100vw] mx-auto  ">
-            <div className="flex  max-w-[85vw] mx-auto w-full items-start justify-between h-12 md:h-[5vw] gap-2 md:gap-[1.5vw]">
+          <div className="block lg:hidden w-[100vw] mx-auto  ">
+            <div className="flex  max-w-[85vw] mx-auto w-full items-start justify-between h-12 lg:h-[5vw] gap-2 lg:gap-[1.5vw]">
               {/* <div className=" w-full flex justify-between items-center gap-x-4"> */}
               <div className="flex items-center justify-start">
                 <Link to="/" className="">
@@ -528,11 +528,11 @@ const Header = () => {
               </div>
             </div>
             <div className="w-[85vw] mx-auto flex justify-between items-center     ">
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative w-[50%] md:w-[70%]" ref={dropdownRef}>
                 <input
                   type="text"
                   placeholder={`${isMobile ? "Search here..." : "Search for vehicle by Make, Model, Lot or VIN..."}`}
-                  className="w-[230px] mx-auto p-1 md:py-[0.6vw] md:px-[1.5vw] rounded-[5px] bg-gray-100/95 text-xs md:text-18"
+                  className="w-[100%] mx-auto p-1 lg:py-[0.6vw] lg:px-[1.5vw] rounded-full bg-gray-100/95 text-xs lg:text-18"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsFocused(true)}
@@ -540,10 +540,10 @@ const Header = () => {
                 />
 
                 <button className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                  <BsSearch className="h-2 md:h-[1vw] w-2 md:w-[1vw]" />
+                  <BsSearch className="h-2 lg:h-[1vw] w-2 lg:w-[1vw]" />
                 </button>
                 {searchResults.length > 0 && ( // Render dropdown if there are results
-                  <div className="absolute z-10 bg-white border border-gray-300 rounded-md mt-1 w-full max-h-60 overflow-y-auto">
+                  <div className="absolute z-10 bg-white border border-gray-300 rounded-lg mt-1 w-full max-h-60 overflow-y-auto">
                     {searchResults.map((car) => (
                       <div
                         key={car.make}
@@ -553,7 +553,7 @@ const Header = () => {
                           {car.models.map((model) => (
                             <div
                               key={model}
-                              className="pl-4 py-2 md:py-[0.4vw] text-sm md:text-18 hover:bg-gray-200 cursor-pointer "
+                              className="pl-4 py-2 lg:py-[0.4vw] text-sm lg:text-18 hover:bg-gray-200 cursor-pointer "
                               onClick={() =>
                                 handleDropdownItemClick(car.make, model)
                               }
@@ -567,12 +567,12 @@ const Header = () => {
                   </div>
                 )}
               </div>
-              <div className=" relative flex items-center justify-between  md:h-[3.2vw] text-gray-300">
+              <div className=" relative flex items-center justify-between  lg:h-[3.2vw] text-gray-300">
                 {/* Hide links on mobile view */}
 
                 <div className="flex items-center">
                   {!isMobile &&
-                    Object.entries(menuData).map(([menuItem, menuItemData]) => (
+                    Object.entries(menuData).map(([menuItem, menuItelgata]) => (
                       <div
                         key={menuItem}
                         className="relative"
@@ -580,19 +580,19 @@ const Header = () => {
                         onMouseLeave={handleMouseLeave}
                       >
                         <Link
-                          to={menuItemData.link}
-                          className="px-4 py-2 md:px-[1.5vw] md:py-[0.4vw] text-sm md:text-18 flex items-center gap-2 hover:text-white"
+                          to={menuItelgata.link}
+                          className="px-4 py-2 lg:px-[1.5vw] lg:py-[0.4vw] text-sm lg:text-18 flex items-center gap-2 hover:text-white"
                         >
                           {menuItem}
-                          {menuItemData.items && (
-                            <BiChevronDown className="h-4 w-4 md:h-[1vw] md:w-[1vw]" />
+                          {menuItelgata.items && (
+                            <BiChevronDown className="h-4 w-4 lg:h-[1vw] lg:w-[1vw]" />
                           )}
                         </Link>
 
-                        {activeMenuItem === menuItem && menuItemData.items && (
+                        {activeMenuItem === menuItem && menuItelgata.items && (
                           <div className="absolute top-full left-0 flex bg-black/95 shadow-xl">
                             <div className="w-64 py-2 border-r border-slate-700">
-                              {menuItemData.items.map((item, index) => (
+                              {menuItelgata.items.map((item, index) => (
                                 <button
                                   key={index}
                                   className="w-full px-4 py-2 text-left text-gray-300 hover:text-white hover:bg-slate-800"
@@ -608,7 +608,7 @@ const Header = () => {
                             {activeSubMenuItem && (
                               <div className="w-[600px] h-[400px] overflow-y-auto p-6 my-3">
                                 {Object.entries(
-                                  menuItemData.items.find(
+                                  menuItelgata.items.find(
                                     (item) => item.name === activeSubMenuItem
                                   ).submenu
                                 ).map(([submenuTitle, submenuItems]) => (
