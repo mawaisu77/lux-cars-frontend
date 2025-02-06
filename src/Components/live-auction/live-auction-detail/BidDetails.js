@@ -130,7 +130,7 @@ const BidDetails = ({
     setIsAutoBidEnabled(true);
     setTempAutoBidAmount("");
     showToast("Auto-bid has been enabled", "success");
-    document.getElementById("confirm_auto_bid").close();
+    // document.getElementById("confirm_auto_bid").close();
   };
 
   // Add a function to disable auto-bid
