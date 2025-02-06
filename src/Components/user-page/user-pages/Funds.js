@@ -7,14 +7,13 @@ import BiddingLimit from "./funds/BiddingLimit.jsx";
 
 const Funds = () => {
 
-  const { handleAddFunds, loading: addingFundsLoading, error: addingFundsError } = useAddFunds();
+  // const { handleAddFunds, loading: addingFundsLoading, error: addingFundsError } = useAddFunds();
   const { funds, loading, error, fetchFunds } = useGetFunds();
 
   useEffect(() => {
     fetchFunds();
   }, []);
 
- 
 
   return (
     <>
@@ -22,7 +21,7 @@ const Funds = () => {
         <div className="flex text-left flex-col lg:flex-row lg:justify-between">
           <p className="text-[36px] lg:text-[2.3vw] font-urbanist font-bold">My Funds</p>
           <div className="flex gap-3 relative">
-       
+      
             <button onClick={""} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red text-white text-[15px] lg:text-[1vw] font-urbanist">
               Add Deposite
             </button>
@@ -67,15 +66,15 @@ const Funds = () => {
         )}
 
          {/* Adding Funds Loading State */}
-         {addingFundsLoading && (
+         {/* {addingFundsLoading && (
           <div className="flex justify-center items-center min-h-[10vh] mt-4">
             <ClipLoader size={30} color={"#D0021B"} loading={addingFundsLoading} />
             <p className="ml-3 text-[16px] lg:text-[1vw] font-urbanist text-gray-500">Adding funds...</p>
           </div>
-        )}
+        )} */}
 
         {/* Adding Funds Error State */}
-        {addingFundsError && (
+        {/* {addingFundsError && (
           <div className="flex justify-center items-center flex-col min-h-[10vh] mt-4">
             <p className="text-[16px] lg:text-[1vw] font-urbanist text-red-600">Error: {addingFundsError}</p>
             <button
@@ -85,11 +84,11 @@ const Funds = () => {
               Retry Adding Funds
             </button>
           </div>
-        )}
+        )} */}
       </div>
 
 
-     <BiddingLimit />
+     <BiddingLimit fetchFunds={fetchFunds} />
 
 
     </>

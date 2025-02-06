@@ -1,7 +1,7 @@
 import React from "react";
 import InputMask from "react-input-mask";
 
-const PaymentForm = ({ paymentDetails, handleInputChange, errors, paymentPurpose,onSubmit, cardAmount }) => {
+const PaymentForm = ({ paymentDetails, handleInputChange, errors,onSubmit, cardAmount }) => {
   return (
     <form onSubmit={onSubmit}>
       {/* Cardholder Name */}
@@ -73,7 +73,7 @@ const PaymentForm = ({ paymentDetails, handleInputChange, errors, paymentPurpose
         <input
           type="number"
           name="card_amount"
-          value={cardAmount}
+          value={paymentDetails.card_amount}
           onChange={handleInputChange}
           placeholder="Enter deposit amount"
           className="border rounded p-2 w-full"
@@ -106,7 +106,7 @@ const PaymentForm = ({ paymentDetails, handleInputChange, errors, paymentPurpose
         <input
           type="text"
           name="payment_purpose"
-          value={paymentPurpose}
+          value={paymentDetails.paymentPurpose}
           disabled
           className="border rounded p-2 w-full bg-gray-200"
         />
