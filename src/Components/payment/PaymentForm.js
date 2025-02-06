@@ -73,7 +73,7 @@ const PaymentForm = ({ paymentDetails, handleInputChange, errors,onSubmit, cardA
         <input
           type="number"
           name="card_amount"
-          value={paymentDetails.card_amount}
+          value={paymentDetails.deposit>0?paymentDetails.deposit : cardAmount}
           onChange={handleInputChange}
           placeholder="Enter deposit amount"
           className="border rounded p-2 w-full"
