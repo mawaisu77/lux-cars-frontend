@@ -79,7 +79,6 @@ const Dropdown = ({ bidAmount, data }) => {
   // Check if the car year is older than 10 years
   const isOlderThanTenYears = () => {
     const carYear = data?.year || currentYear;
-    console.log(carYear, "car year +++");
     return currentYear - carYear > 10;
   };
 
@@ -90,7 +89,6 @@ const Dropdown = ({ bidAmount, data }) => {
       const copartBuyerFee = CopartBuyerFeeCalculator(bid);
       const copartVirtualFee = CopartVirtualBidFeeCalculator(bid);
       const copartBankFee = calculateBankTransferFee(bid);
-      // console.log("parseFloat(bid) ", parseFloat(bid), "copartBuyerFee ", copartBuyerFee, "copartVirtualFee ", copartVirtualFee, "copartBankFee ", copartBankFee, "copartGateFee ", copartGateFee, "copartTitlePickupFee ", copartTitlePickupFee, "copartEnvironmentalFee ", copartEnvironmentalFee)
       total =
         parseFloat(bid) +
         copartBuyerFee +
@@ -154,9 +152,7 @@ const Dropdown = ({ bidAmount, data }) => {
     const processingFee = calculateProcessingFee();
     const levyFee = calculateLevyFee();
     const vatRate = selectedLocation === "Turks" ? 0.05 : 0.10;
-    console.log("vatRate ", vatRate)
     const vat = (bid + customsDuty + boatShipping + processingFee + levyFee) * vatRate;
-    console.log("vat ", vat)
     return vat;
   };
 

@@ -71,7 +71,7 @@ const PaymentForm = ({ paymentDetails, handleInputChange, errors,onSubmit, cardA
       <div className="mb-4">
         <label className="block font-semibold" title="US Dollar">Deposit Amount (usd)</label>
         <input
-          type="number"
+          type="text"
           name="card_amount"
           value={paymentDetails.deposit>0?paymentDetails.deposit : cardAmount}
           onChange={handleInputChange}

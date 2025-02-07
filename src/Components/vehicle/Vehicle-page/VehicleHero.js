@@ -191,7 +191,7 @@ const VehicleHero = () => {
               )}
 
               <div className="flex flex-col md:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[50px]">
-                <div className="w-full md:w-[40%]">
+                <div className="w-full md:w-[45%]">
                   <SwiperGallery
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
@@ -210,7 +210,7 @@ const VehicleHero = () => {
                 </div>
 
                 {/* web view */}
-                <div className=" hidden lg:block  w-[55%]   ">
+                <div className=" hidden lg:block  w-[50%]   ">
                   <div>
                     {/* Title Info */}
                     <VehicleTitleInfo

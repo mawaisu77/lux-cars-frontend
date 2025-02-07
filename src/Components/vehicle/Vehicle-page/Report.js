@@ -1,18 +1,98 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useGetCarReport from "../../../hooks/useGetCarReport";
 import { Document, Page, pdfjs } from "react-pdf";
-import { FaSpinner } from "react-icons/fa6";
-
+import { FaCcMastercard, FaRegCreditCard, FaSpinner } from "react-icons/fa6";
+import { Modal } from "@mui/material";
+import logo from "../../../assets/lux-logo/bidcaribbeansBlueLogo.jpg";
+import { BsInfoCircle } from "react-icons/bs";
+import PaymentForm from "../../payment/PaymentForm";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import { validatePaymentDetails } from "../../payment/validatePayment";
+import { showToast } from "../../../utils/Toast";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css"; 
+import "react-pdf/dist/esm/Page/TextLayer.css"; 
+import baseService from "../../../services/baseService";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 const CarReportViewer = ({ vin }) => {
   const { carReport, loading, error, fetchCarReport } = useGetCarReport(vin);
 
-  const handleClick = () => {
-    document.getElementById("my_modal").showModal();
+
+ 
+  useEffect(() => {
+    fetchCarReport();
+  }, [vin]);
+
+
+  const [openModal, setOpenModal] = useState(false);
+  const [paymentDetails, setPaymentDetails] = useState({
+    card_name: "",
+    card_number: "",
+    card_cvv: "",
+    card_exp: "",
+    card_amount: 9.99,
+    email: "",
+    deposit: 9.99,
+    paymentPurpose: "Report Payment", 
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPaymentDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+      ...(name === "card_amount" ? { deposit: parseFloat(value) || 0 } : {}), // Update deposit as number when card_amount changes
+    }));
   };
 
+  const validateForm = () => {
+    const newErrors = validatePaymentDetails(paymentDetails);
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const [errors, setErrors] = useState({});
+
+  const handleOpenModal = () => setOpenModal(true);
+
   const handleCloseModal = () => {
-    document.getElementById("my_modal").close();
+    setOpenModal(false);
+    setPaymentDetails({ 
+      card_name: "",
+      card_number: "",
+      card_cvv: "",
+      card_exp: "",
+      card_amount: "",
+      email: "",
+      deposit: 0,
+      paymentPurpose: "Adding Funds",
+    });
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      const formattedPaymentDetails = {
+        ...paymentDetails,
+        card_number: paymentDetails.card_number.replace(/\s+/g, ""),
+      };     
+      try {
+        const response = await baseService.post('/process-payment', { ...formattedPaymentDetails });
+        if (response.status === 201) {
+          if (response.data.data === "success") {
+            handleCloseModal();
+            showToast("Payment Successful", "success");
+            handleDownload();
+        } 
+        
+        }
+      } catch (error) {
+        console.error("Payment error:", error);
+        handleCloseModal();
+
+      }
+
+    }
   };
 
   const handleDownload = () => {
@@ -21,13 +101,10 @@ const CarReportViewer = ({ vin }) => {
       link.href = carReport;
       link.download = `CarReport_${vin}.pdf`;
       link.click();
-      document.getElementById("my_modal").close();
+      alert("Report Downloaded Successfully");
     }
   };
 
-  useEffect(() => {
-    fetchCarReport();
-  }, [vin]);
 
 
   return (
@@ -57,7 +134,7 @@ const CarReportViewer = ({ vin }) => {
             </Document>
           </div>
 
-          <div  onClick={handleClick} className="absolute cursor-pointer inset-0 bg-white hover:bg-opacity-50 bg-opacity-70  duration-100 rounded-lg p-2 flex items-center justify-center">
+          <div  onClick={handleOpenModal} className="absolute cursor-pointer inset-0 bg-white hover:bg-opacity-50 bg-opacity-70  duration-100 rounded-lg p-2 flex items-center justify-center">
             {/* <p className="text-lg font-semibold">Get report</p> */}
           </div>
         </div>
@@ -65,7 +142,7 @@ const CarReportViewer = ({ vin }) => {
         <div className="mt-4">
             <button
               className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-              onClick={handleClick}
+              onClick={handleOpenModal}
             >
               View Full Report
             </button>
@@ -73,28 +150,64 @@ const CarReportViewer = ({ vin }) => {
       </div>
     )}
 
-<dialog id="my_modal" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Make Payment to get full report</h3>
-          <p className="py-4">
-            Once you make payment then you can access the full report and can download.
-          </p>
-          <div className="flex gap-x-2 justify-center">
-            <button
-              className="btn text-green-600 w-[120px]"
-              onClick={handleDownload}
-            >
-              Get Report
-            </button>
-            <button
-              className="btn text-red-600 w-[120px]"
-              onClick={handleCloseModal}
-            >
-              Cancel
-            </button>
+
+<Modal open={openModal} onClose={handleCloseModal}>
+        <div
+          className="bg-white p-6 rounded-lg shadow-lg"
+          style={{
+            width: "800px",
+            maxHeight: "90vh",
+            overflowY: "auto",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <div className="bg-[#008b98] rounded-lg w-full">
+            <img
+              src={logo}
+              alt="Company Logo"
+              className="w-[25%] h-auto mx-auto"
+            />
           </div>
-        </div>
-      </dialog>
+          <div className="flex gap-x-2 items-center justify-between mb-4 py-2">
+            <div className="flex gap-x-2 items-center">
+              <h2 className="text-xl font-bold ">Bidcaribbeans Payment</h2>
+
+              <BsInfoCircle
+                data-tooltip-id="payment-info-tooltip"
+                className="font-extrabold text-20 animate-pulse"
+              />
+              <ReactTooltip
+                id="payment-info-tooltip"
+                place="bottom"
+                content="Bidcaribbeans payment important information"
+              />
+            </div>
+            <div className="flex items-center gap-x-2">
+              <FaRegCreditCard
+                size={30}
+                className="text-yellow-500"
+                title="Credit card"
+              />
+              <FaCcMastercard
+                size={30}
+                className="text-blue-600"
+                title="Master card"
+              />
+            </div>
+          </div>
+
+          <PaymentForm
+            paymentDetails={paymentDetails}
+            handleInputChange={handleInputChange}
+            errors={errors}
+            onSubmit={handleSubmit}
+            cardAmount={9.99}
+          />
+        </div>  
+      </Modal>
   </div>
   );
 };

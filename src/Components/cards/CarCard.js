@@ -148,7 +148,6 @@ const CarCard = ({ card, isBuy = false }) => {
 
   const currentStatus = statusOptions.find(option => option.id === card?.status);
 
-  console.log(currentStatus?.hex)
 
   return (
     <>
