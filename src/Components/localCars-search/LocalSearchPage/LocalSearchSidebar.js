@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import LocalSearchCards from "./LocalSearchCards";
 import baseService from "../../../services/baseService";
 import countryList from "react-select-country-list";
 import Select from "react-select";
 import { RegionDropdown } from "react-country-region-selector";
 import { showToast } from "../../../utils/Toast";
+import Slider from "@mui/material/Slider";
 
 const LocalSearchSidebar = () => {
   const option = useMemo(() => countryList().getData(), []);
@@ -27,6 +28,8 @@ const LocalSearchSidebar = () => {
     transmission: [],
     carLocation: "",
     carState: "",
+    buyNowPrice: false, 
+    minPrice: false,  
   });
 
   const [pageNo, setPageNo] = useState(1);
@@ -46,12 +49,17 @@ const LocalSearchSidebar = () => {
         params.append("milageFrom", selectedFilters.milageFrom);
       if (selectedFilters.milageTo)
         params.append("milageTo", selectedFilters.milageTo);
-      if (selectedFilters.transmission.length > 0)
-        params.append("transmission", selectedFilters.transmission.join(","));
+      if (selectedFilters.transmission.length > 0) {
+        selectedFilters.transmission.forEach(transmission => {
+          params.append("transmission", transmission); // Append each transmission type separately
+        });
+      }
       if (selectedFilters.carLocation)
         params.append("carLocation", selectedFilters.carLocation);
       if (selectedFilters.carState)
         params.append("carState", selectedFilters.carState);
+      if (selectedFilters.buyNowPrice) params.append("buyNowPrice", selectedFilters.buyNowPrice);
+      if (selectedFilters.minPrice) params.append("minPrice", selectedFilters.minPrice);
     }
     try {
       const response = await baseService.get(
@@ -87,26 +95,53 @@ const LocalSearchSidebar = () => {
     });
   };
 
-  const [milageError, setMilageError] = useState("");
-  const handleApplyFilters = async () => {
-    if (
-      selectedFilters.milageFrom &&
-      selectedFilters.milageTo &&
-      parseInt(selectedFilters.milageTo) <= parseInt(selectedFilters.milageFrom)
-    ) {
-      setMilageError("Enter Large Milage To");
-      showToast("Your Milage To Is Less Than Milage From", "error");
-    } else {
-      setMilageError("");
-    }
+  const handleCheckboxChange = (filterName) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [filterName]: !prev[filterName],
+    }));
+  };
 
-    if (milageError === "") {
-      const data = await fetchVehiclesData(selectedFilters);
+  const [milageError, setMilageError] = useState("");
+
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return function (...args) {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+
+  const debouncedHandleApplyFilters = useCallback(
+    debounce(async (filters) => {
+      if (
+        filters.milageFrom &&
+        filters.milageTo &&
+        parseInt(filters.milageTo) <= parseInt(filters.milageFrom)
+      ) {
+        setMilageError("Enter a larger Mileage To value");
+        showToast("Mileage To must be greater than Mileage From", "error");
+        return;
+      } else {
+        setMilageError("");
+      }
+  
+      setPageNo(1); // Reset page before fetching
+  
+      const data = await fetchVehiclesData(filters);
       setVehicles(data?.cars);
       setTotalCars(data?.totalLength);
-      setPageNo(1);
-    }
-  };
+    }, 500),
+    []
+  );
+  
+  useEffect(() => {
+    debouncedHandleApplyFilters(selectedFilters);
+  }, [selectedFilters]);
 
   const handleResetFilters = async () => {
     const data = await fetchVehiclesData();
@@ -122,6 +157,8 @@ const LocalSearchSidebar = () => {
       transmission: [],
       carLocation: "",
       carState: "",
+      buyNowPrice: false,
+      minPrice: false
     });
     setShowLocation(false);
     setShowMake(false);
@@ -191,6 +228,7 @@ const LocalSearchSidebar = () => {
               )}
             </div>
 
+
             <div className="mb-4 border-b border-black">
               <div
                 className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
@@ -200,9 +238,9 @@ const LocalSearchSidebar = () => {
                 <span>{showYear ? "-" : "+"}</span>
               </div>
               {showYear && (
-                <>
-                  <div className="flex flex-col mt-2 pb-4">
-                    <label className="text-lg text-left py-1">Year From</label>
+                <div className="flex gap-x-2 items-center">
+                  <div className="flex-1 ">
+                    {/* <label className="text-lg text-left py-1">Year From</label> */}
                     <select
                       className="input input-bordered w-full mb-2 bg-white"
                       value={selectedFilters.yearFrom}
@@ -210,7 +248,7 @@ const LocalSearchSidebar = () => {
                         handleFilterChange("yearFrom", e.target.value)
                       }
                     >
-                      <option value="">Select Year</option>
+                      <option value="">From Year</option>
                       {Array.from(
                         { length: new Date().getFullYear() - 1950 + 1 },
                         (_, i) => 1950 + i
@@ -221,8 +259,8 @@ const LocalSearchSidebar = () => {
                       ))}
                     </select>
                   </div>
-                  <div className="flex flex-col mt-2 pb-4">
-                    <label className="text-lg text-left py-1">Year To</label>
+                  <div className="flex-1">
+                    {/* <label className="text-lg text-left py-1">Year To</label> */}
                     <select
                       className="input input-bordered w-full mb-2 bg-white"
                       value={selectedFilters.yearTo}
@@ -230,7 +268,7 @@ const LocalSearchSidebar = () => {
                         handleFilterChange("yearTo", e.target.value)
                       }
                     >
-                      <option value="">Select Year</option>
+                      <option value="">To Year</option>
                       {Array.from(
                         {
                           length:
@@ -251,7 +289,7 @@ const LocalSearchSidebar = () => {
                       ))}
                     </select>
                   </div>
-                </>
+                </div>
               )}
             </div>
 
@@ -263,35 +301,47 @@ const LocalSearchSidebar = () => {
                 <h3>Milage</h3>
                 <span>{showMilage ? "-" : "+"}</span>
               </div>
+
               {showMilage && (
                 <>
-                  <div className="mt-2 pb-4">
+                <div className="flex gap-x-2">    
+                  <div className="flex-1">
                     <input
                       type="number"
-                      placeholder="Enter Milage From"
+                      placeholder="0"
                       className="input input-bordered w-full mb-2 bg-white"
                       value={selectedFilters.milageFrom}
-                      onChange={(e) =>
-                        handleFilterChange("milageFrom", e.target.value)
-                      }
+                      onChange={(e) => handleFilterChange("milageFrom", e.target.value)}
                     />
                   </div>
-                  <div className="mt-2 pb-4">
+                  <div className="flex-1">
                     <input
                       type="number"
-                      placeholder="Enter Milage To"
-                      className={`input input-bordered w-full mb-2 bg-white ${
-                        milageError ? "border-red-500" : ""
-                      }`}
+                      placeholder="100000"
+                      className="input input-bordered w-full mb-2 bg-white"
                       value={selectedFilters.milageTo}
-                      onChange={(e) =>
-                        handleFilterChange("milageTo", e.target.value)
-                      }
+                      onChange={(e) => handleFilterChange("milageTo", e.target.value)}
                     />
-                    {milageError ? (
-                      <div className="text-red-500">{milageError}</div>
-                    ) : null}
                   </div>
+                </div>
+
+
+                  <div className="mt-2 pb-4">
+                    <label className="text-lg text-left py-1">Milage Range</label>
+                    <Slider
+                      value={[selectedFilters.milageFrom || 0, selectedFilters.milageTo || 100000]}
+                      onChange={(e, newValue) => {
+                        handleFilterChange("milageFrom", newValue[0]);
+                        handleFilterChange("milageTo", newValue[1]);
+                      }}
+                      valueLabelDisplay="auto"
+                      min={0}
+                      max={100000} // Adjust max value as needed
+                    />
+                  </div>
+                  {milageError ? (
+                    <div className="text-red-500">{milageError}</div>
+                  ) : null}
                 </>
               )}
             </div>
@@ -310,7 +360,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex items-center mb-1">
                     <input
                       type="checkbox"
-                      className="checkbox"
+                      className="form-checkbox"
                       checked={selectedFilters.transmission.includes(
                         "Automatic"
                       )}
@@ -323,7 +373,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex items-center mb-1">
                     <input
                       type="checkbox"
-                      className="checkbox"
+                      className="form-checkbox"
                       checked={selectedFilters.transmission.includes("Manual")}
                       onChange={() =>
                         handleFilterChange("transmission", "Manual")
@@ -375,13 +425,30 @@ const LocalSearchSidebar = () => {
                 </div>
               )}
             </div>
+            <div className="mb-4 border-b border-black">
+            <div className="flex items-center text-xl font-medium p-2">
+              <input
+                type="checkbox"
+                className="form-checkbox"
+                checked={selectedFilters.buyNowPrice}
+                onChange={() => handleCheckboxChange("buyNowPrice")}
+              />
+              <label className="ml-2">Buy Now</label>
+            </div>
+          </div>
+
+          <div className="mb-4 border-b border-black">
+          <div className="flex items-center text-xl font-medium p-2">
+              <input
+                type="checkbox"
+                className="form-checkbox"
+                checked={selectedFilters.minPrice}
+                onChange={() => handleCheckboxChange("minPrice")}
+              />
+              <label className="ml-2">Reserve Price</label>
+            </div>
+          </div>
             <div className="w-full flex justify-evenly mt-10">
-              <button
-                onClick={handleApplyFilters}
-                className="text-white bg-red-600 w-[45%] p-[0.4rem] rounded-lg"
-              >
-                Apply Filters
-              </button>
               <button
                 onClick={handleResetFilters}
                 className="text-black bg-gray-200 w-[45%] p-[0.4rem] rounded-lg"
