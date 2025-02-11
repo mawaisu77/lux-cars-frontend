@@ -30,10 +30,10 @@ const Home = () => {
 
   return (
     <>
-    {/* <Bid/> */}
+    <Bid/>
     <Top/>
     <BidCarsSection />
-    {/* <Makes/> */}
+    <Makes/>
      <BuyNow/>
     {/* <LocalOfferz/> */}
     <BidNow/>

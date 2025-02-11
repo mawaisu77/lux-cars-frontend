@@ -32,7 +32,7 @@ import reborn from "../../../assets/lux-logo/reborn.jpeg"
 
 function SearchCard({ data }) {
   return (
-    <div className=" md:w-full bg-slate-300 lg:w-full mx-auto mt-10">
+    <div className=" md:w-full lg:w-full mx-auto mt-10">
       <div className=" w-[100%] md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => <Card key={index} card={card} />)}
       </div>
@@ -178,7 +178,7 @@ function Card({ card }) {
                     <div className="absolute w-full lg:w-[16vw] sm:h-[1vh]  bottom-0 "></div>
                   )}
                   <img
-                    className="h-full lg:h-[150px] w-full lg:w-[14vw] rounded-[0.5vw] object-cover"
+                    className="h-full   w-full lg:w-[14vw] rounded-[0.5vw] object-cover"
                     src={image}
                     alt={`Vehicle_Image ${index + 1}`}
                     onClick={() => openModal(index)} // Open modal on image click
@@ -222,7 +222,7 @@ function Card({ card }) {
             </div>
           </div>
           <div className="flex flex-col md:flex-row lg:flex-row justify-between leading-[3vh]">
-            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[14px] lg:text-[0.875vw] py-1">
+            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap space-y-2 lg:space-y-0 font-urbanist text-[14px] lg:text-[0.875vw] py-1">
               <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">VIN: </span>
                 <span>
@@ -269,7 +269,7 @@ function Card({ card }) {
                 </span>
               </p>
             </div>
-            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-x-2  text-[14px] lg:text-20 py-1">
+            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap space-y-2 lg:space-y-0 gap-x-2   text-[14px] lg:text-[0.875vw] py-1">
               <p className="w-full flex items-center gap-x-2" title={formatMileageKm(card?.odometer)}>
                 <span className="font-semibold">Millage: </span>
                 <span className="text-nowrap">
