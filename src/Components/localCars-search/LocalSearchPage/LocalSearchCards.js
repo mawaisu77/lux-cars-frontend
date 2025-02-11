@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import useTimer from "../../../hooks/useTimer";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { BsFire } from "react-icons/bs";
+import { BsFire, BsHeart, BsHeartFill } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa6";
 import "swiper/css";
@@ -15,6 +15,11 @@ import { statusOptions } from "../../../utils/filtersData/statusOptions";
 import { BsCalendarEventFill } from "react-icons/bs";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import moment from "moment-timezone";
+import { useSavedLocalCars } from "../../../context/SavedLocalCarsIdscontext";
+import useDeleteSaveLocalCar from "../../../hooks/useDeleteSaveLocalCar";
+import useSaveLocalCar from "../../../hooks/useSaveLocalCar";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+
 
 function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   const [totalPages, setTotalPages] = useState([]);
@@ -88,9 +93,18 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
     </div>
   );
 }
+
+
 function Card({ vehicle }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const { user } = useAuthContext();
+  const { handleSaveLocalCar } = useSaveLocalCar();
+  const { deleteSavedLocalCar } = useDeleteSaveLocalCar();
+  const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
+  const [isCarSaved, setIsCarSaved] = useState(false);
+
   const targetTime = useMemo(
     () => (vehicle.auction_date ? new Date(vehicle.auction_date) : null),
     [vehicle.auction_date]
@@ -129,8 +143,50 @@ function Card({ vehicle }) {
   const currentStatus = statusOptions.find(
     (option) => option.id === vehicle?.titlesStatus
   );
+
+
+  useEffect(() => {
+    setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(vehicle?.id)));
+  }, [savedIds, vehicle?.id]);
+
+  const handleSaveClick = (id) => {
+    const stringLotId = String(id);
+
+    if (!user) {
+      setLoginModalOpen(true);
+      return;
+    }
+
+    if (isCarSaved) {
+      setIsCarSaved(false);
+
+      deleteSavedLocalCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          alert("Car unsaved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(true);
+          alert("Failed to unsave car. Please try again.");
+        });
+    } else {
+      setIsCarSaved(true);
+
+      handleSaveLocalCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          alert("Car saved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(false);
+          alert("Failed to save car. Please try again.");
+        });
+    }
+  };
+
   return (
     <div className="h-[250px] md:h-[13.021vw] flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4">
+     
       <Swiper
         className="relative w-full lg:w-[20vw] mx-auto h-full rounded-md "
         autoplay={{
@@ -140,6 +196,21 @@ function Card({ vehicle }) {
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         loop={true}
       >
+          {isCarSaved ? (
+          <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
+            <BsHeartFill
+              onClick={() => handleSaveClick(vehicle.lot_id)}
+              className=" cursor-pointer text-red-600"
+            />
+          </div>
+        ) : (
+          <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
+            <BsHeart
+              onClick={() => handleSaveClick(vehicle.lot_id)}
+              className=" cursor-pointer text-white hover:text-red-600"
+            />
+          </div>
+        )}
         {vehicle?.carImages &&
           vehicle?.carImages?.map((image, index) => (
             <SwiperSlide
@@ -155,13 +226,7 @@ function Card({ vehicle }) {
               />
             </SwiperSlide>
           ))}
-        <div className="absolute z-50 py-0.5 bottom-0 w-full bg-blue-500/90 text-white flex justify-center items-center gap-x-2 rounded-b-md">
-          <span>Current Bid</span>
-          <span className="text-yellow-300 font-bold">
-            {`
-                    $${vehicle.currentBid ? vehicle.currentBid : "0"}`}
-          </span>
-        </div>
+      
       </Swiper>
       <ImageModal
         isOpen={isModalOpen}
@@ -254,23 +319,23 @@ function Card({ vehicle }) {
           <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw]  text-center sm:text-left">
             <div className="flex flex-col  w-full p-[1vw]  rounded-lg ">
               <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
-                <a onClick={() => handleBidNow(vehicle?.id)} className="w-full">
+                <span onClick={() => handleBidNow(vehicle?.id)} className="w-full">
                   <button className=" w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
-                    BID NOW
+                  Current Bid {`$${vehicle.currentBid ? vehicle.currentBid : "0"}`}
                   </button>
-                </a>
+                </span>
               </div>
 
               {vehicle?.buyNowPrice ? (
                 <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
-                  <a
+                  <span
                     onClick={() => handleBidNow(vehicle?.id)}
                     className="w-full"
                   >
                     <button className="w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
-                      Buy Now $ {vehicle?.buyNowPrice}
+                      Buy Now ${vehicle?.buyNowPrice ? vehicle?.buyNowPrice : "0"}
                     </button>
-                  </a>
+                  </span>
                 </div>
               ) : null}
 

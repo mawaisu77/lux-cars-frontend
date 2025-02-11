@@ -18,6 +18,7 @@ const LocalSearchSidebar = () => {
   const [showTransmission, setShowTransmission] = useState(true);
   const [showLocation, setShowLocation] = useState(false);
   const [vehicles, setVehicles] = useState(null);
+  const [showtitlesStatus, setShowtitlesStatus] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({
     make: "",
     model: "",
@@ -26,6 +27,7 @@ const LocalSearchSidebar = () => {
     milageFrom: "",
     milageTo: "",
     transmission: [],
+    titlesStatus:[],
     carLocation: "",
     carState: "",
     buyNowPrice: false, 
@@ -60,6 +62,11 @@ const LocalSearchSidebar = () => {
         params.append("carState", selectedFilters.carState);
       if (selectedFilters.buyNowPrice) params.append("buyNowPrice", selectedFilters.buyNowPrice);
       if (selectedFilters.minPrice) params.append("minPrice", selectedFilters.minPrice);
+      if (selectedFilters.titlesStatus.length > 0) {
+        selectedFilters.titlesStatus.forEach(titlesStatus => {
+          params.append("titlesStatus", titlesStatus);
+        });
+      }
     }
     try {
       const response = await baseService.get(
@@ -155,6 +162,7 @@ const LocalSearchSidebar = () => {
       milageFrom: "",
       milageTo: "",
       transmission: [],
+      titlesStatus:[],
       carLocation: "",
       carState: "",
       buyNowPrice: false,
@@ -166,6 +174,7 @@ const LocalSearchSidebar = () => {
     setShowTransmission(true);
     setShowModel(false);
     setShowYear(false);
+    setShowtitlesStatus(false);
     setVehicles(data?.cars);
     setPageNo(1);
   };
@@ -384,6 +393,94 @@ const LocalSearchSidebar = () => {
                 </div>
               )}
             </div>
+
+
+            <div className="mb-4 border-b border-black">
+              <div
+                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
+                onClick={() => setShowtitlesStatus(!showtitlesStatus)}
+              >
+                <h3>Status Code</h3>
+                <span>{showtitlesStatus ? "-" : "+"}</span>
+              </div>
+
+              {showtitlesStatus && (
+                <div className="mt-2 pb-4">
+                  <div className="flex items-center mb-1">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox"
+                      checked={selectedFilters.titlesStatus.includes(
+                        "Stationary"
+                      )}
+                      onChange={() =>
+                        handleFilterChange("titlesStatus", "Stationary")
+                      }
+                    />
+                    <label className="ml-2">Stationary</label>
+                  </div>
+                  <div className="flex items-center mb-1">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox"
+                      checked={selectedFilters.titlesStatus.includes(
+                        "Run & Drive"
+                      )}
+                      onChange={() =>
+                        handleFilterChange("titlesStatus", "Run & Drive")
+                      }
+                    />
+                    <label className="ml-2">Run & Drive</label>
+                  </div>
+
+                  <div className="flex items-center mb-1">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox"
+                      checked={selectedFilters.titlesStatus.includes(
+                        "Starts"
+                      )}
+                      onChange={() =>
+                        handleFilterChange("titlesStatus", "Starts")
+                      }
+                    />
+                    <label className="ml-2">Starts</label>
+                  </div>
+
+                  <div className="flex items-center mb-1">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox"
+                      checked={selectedFilters.titlesStatus.includes(
+                        "Can't test"
+                      )}
+                      onChange={() =>
+                        handleFilterChange("titlesStatus", "Can't test")
+                      }
+                    />
+                    <label className="ml-2">Can't test</label>
+                  </div>
+
+                  <div className="flex items-center mb-1">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox"
+                      checked={selectedFilters.titlesStatus.includes(
+                        "Unknown"
+                      )}
+                      onChange={() =>
+                        handleFilterChange("titlesStatus", "Unknown")
+                      }
+                    />
+                    <label className="ml-2">Unknown</label>
+                  </div>
+                  
+                </div>
+              )}
+            </div>
+
+
+
             <div className="mb-4 border-b border-black">
               <div
                 className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"

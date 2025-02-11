@@ -20,12 +20,11 @@ import LoginModal from "../modals/LoginModal";
 const LocalCarsCard = ({ card }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const { user } = useAuthContext();
   const { handleSaveLocalCar } = useSaveLocalCar();
   const { deleteSavedLocalCar } = useDeleteSaveLocalCar();
-
+  const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
   const [isCarSaved, setIsCarSaved] = useState(false);
 
   useEffect(() => {
