@@ -10,8 +10,8 @@ import { FaTwitch } from "react-icons/fa6";
 const AboutFoot = () => {
   return (
    <>
-    <div className= 'w-[343px] md:w-[80%] lg:w-[72vw]    mx-auto '>
-        <div className='flex  flex-wrap    my-[50px] lg:h-auto gap-5 justify-between '>
+    <div className= 'w-[343px] md:w-[80%]      mx-auto '>
+        <div className='flex flex-wrap lg:flex-row   my-[50px] lg:h-auto gap-5 justify-between '>
         <div className='text-left mx-auto w-[343px] lg:w-[25vw]   lg:h-[20vh]'>
            <p className='text-[22px] lg:text-34 font-bold font-urbanist pb-[3vh]'> 
             Contact Us

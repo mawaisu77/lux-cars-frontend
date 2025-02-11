@@ -16,6 +16,7 @@ import { FiLogOut } from "react-icons/fi";
 import { BsLightningCharge } from "react-icons/bs";
 import BidCaribbeanLogo from "../../../assets/lux-logo/bidcaribbean-logo.png";
 import LuxCarsLogo from "../../../assets/lux-logo/lux-logo-new.png";
+import sideBarLogo from "../../../assets/lux-logo/bidcaribbeansBlueLogo (1).jpg"
 
 const Header = () => {
   const navigate = useNavigate();
@@ -139,6 +140,9 @@ const Header = () => {
   return (
     <>
       <Drawer anchor="left" open={sidebarOpen} onClose={toggleSidebar}>
+        <div className="w-[200px] bg-[#008b98]">
+        <img className="w-[150px] mx-auto" src={sideBarLogo} alt="sidebar_logo"/>
+        </div>
         <div className="w-[200px] p-4">
           {/* Accordion for "Search & Bid" */}
           <Accordion sx={{ boxShadow: "none", padding: 0, margin: 0 }}>
