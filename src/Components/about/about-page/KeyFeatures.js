@@ -13,7 +13,7 @@ const KeyFeatures = () => {
                 </div>
                 <div className='grid grid-cols-1  md:grid-cols-2  lg:grid-cols-4 gap-5 h-full  justify-center items-center mx-auto w-[90%] lg:w-[86vw]'>
                     {keyFeatures.map((item, index) => (
-                        <div key={index} className='flex flex-col gap-2 justify-start items-center p:2 lg:py-[2vw] h-full  border rounded-lg shadow-lg'>
+                        <div key={index} className='flex flex-col gap-2 justify-start items-center p:2 lg:py-[2vw] h-full  border rounded-lg shadow-md'>
                             <p className='text-[20px] lg:text-22 font-urbanist font-semibold'>
                                 {item.heading}
                             </p>

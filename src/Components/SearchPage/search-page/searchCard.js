@@ -24,6 +24,7 @@ import moment from 'moment-timezone';
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import { PiCylinderFill } from "react-icons/pi";
 import { driveOptions } from "../../../utils/filtersData/driveOptions";
+import reborn from "../../../assets/lux-logo/reborn.jpeg"
 
 
 
@@ -31,7 +32,7 @@ import { driveOptions } from "../../../utils/filtersData/driveOptions";
 
 function SearchCard({ data }) {
   return (
-    <div className=" md:w-full lg:w-full mx-auto mt-10">
+    <div className=" md:w-full bg-slate-300 lg:w-full mx-auto mt-10">
       <div className=" w-[100%] md:w-full lg:w-full mx-auto ">
         {data && data.map((card, index) => <Card key={index} card={card} />)}
       </div>
@@ -138,7 +139,7 @@ function Card({ card }) {
   );
 
   return (
-    <div className="h-[250px] md:h-[13.021vw] flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
+    <div className="h-fit flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
       <div className="h-full flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  ">
         {isCarSaved ? (
           <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
@@ -177,14 +178,14 @@ function Card({ card }) {
                     <div className="absolute w-full lg:w-[16vw] sm:h-[1vh]  bottom-0 "></div>
                   )}
                   <img
-                    className="h-full w-full lg:w-[14vw] rounded-[0.5vw] object-cover"
+                    className="h-full lg:h-[150px] w-full lg:w-[14vw] rounded-[0.5vw] object-cover"
                     src={image}
                     alt={`Vehicle_Image ${index + 1}`}
                     onClick={() => openModal(index)} // Open modal on image click
                   />
                 </div>
-              </SwiperSlide>
-            ))}
+              </SwiperSlide> 
+            ))} 
        
         </Swiper>
       </div>
@@ -201,7 +202,7 @@ function Card({ card }) {
         <div className="text-left flex items-start justify-start gap-y-2 md:gap-y-[0.1vw] flex-col px-[1vw] h-full font-urbanist">
           <div className="flex justify-start items-end gap-x-2 md:gap-x-[0.5vw]">
             <Link to={`/vehicle-detail/${card?.lot_id}`}>
-              <p className="font-semibold  hover:text-blue-800 text-[16px] md:text-[1vw] cursor-pointer hover:underline">
+              <p className="font-semibold  hover:text-blue-800 text-[16px] lg:text-[1vw] cursor-pointer hover:underline">
                 {card?.title?.length > 40
                   ? `${card?.title?.slice(0, 40)}...`
                   : card?.title}
@@ -209,19 +210,19 @@ function Card({ card }) {
             </Link>
             <div>
               {card?.base_site === "iaai" && (
-                <button className="bg-[#D91E1E] hover:bg-[#D91E1E]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
+                <button className="bg-[#D91E1E] hover:bg-[#D91E1E]/90 text-white text-[10px] lg:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
                   IAAI
                 </button>
               )}
               {card?.base_site === "copart" && (
-                <button className="bg-[#0E5DB8] hover:bg-[#0E5DB8]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
+                <button className="bg-[#0E5DB8] hover:bg-[#0E5DB8]/90 text-white text-[10px] lg:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
                   Copart
                 </button>
               )}
             </div>
           </div>
           <div className="flex flex-col md:flex-row lg:flex-row justify-between leading-[3vh]">
-            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[14px] md:text-[0.875vw] py-1">
+            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[14px] lg:text-[0.875vw] py-1">
               <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">VIN: </span>
                 <span>
@@ -230,7 +231,7 @@ function Card({ card }) {
                     : card?.vin}
                 </span>
                 <RxCopy
-                  className="cursor-pointer py-[0.1vh] text-[14px] md:text-20 text-gray-600 hover:text-gray-800"
+                  className="cursor-pointer py-[0.1vh] text-[14px] lg:text-20 text-gray-600 hover:text-gray-800"
                   onClick={() => {
                     navigator.clipboard.writeText(card?.vin);
                     toast.success("Copied to clipboard!");
@@ -241,7 +242,7 @@ function Card({ card }) {
                 <span className="font-semibold">Lot: </span>
                 <span>{card?.lot_id || "Not specified"}</span>
                 <RxCopy
-                  className="cursor-pointer py-[0.1vh] text-[14px] md:text-20 text-gray-600 hover:text-gray-800"
+                  className="cursor-pointer py-[0.1vh] text-[14px] lg:text-20 text-gray-600 hover:text-gray-800"
                   onClick={() => {
                     navigator.clipboard.writeText(card?.lot_id);
                     toast.success("Copied to clipboard!");
@@ -255,7 +256,7 @@ function Card({ card }) {
                 >
                   {card?.status}
                 </span>
-                <span title={currentStatus.id} className={`${currentStatus?.bgHex} text-white w-4 h-4 flex items-center justify-center text-14 font-bold  rounded-full`}>
+                <span title={currentStatus.id} className={`${currentStatus?.bgHex} text-white w-4 h-4 flex items-center justify-center  text-[14px] lg:text-20 font-bold  rounded-full`}>
                         {currentStatus.letter}
                   </span>
               </p>
@@ -268,7 +269,7 @@ function Card({ card }) {
                 </span>
               </p>
             </div>
-            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] md:text-[0.875vw] py-1">
+            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-x-2  text-[14px] lg:text-20 py-1">
               <p className="w-full flex items-center gap-x-2" title={formatMileageKm(card?.odometer)}>
                 <span className="font-semibold">Millage: </span>
                 <span className="text-nowrap">
@@ -308,17 +309,18 @@ function Card({ card }) {
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                     {card?.keys === 'Yes' ? (
                       <>
-                        <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className="text-18 text-yellow-600" />
+                        <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className="text-18 text-yellow-600 size={15}" />
                         <ReactTooltip
                           id={`vehicle-keys-tooltip-${card?.lot_id}`}
                           place="bottom"
                           content="Keys Included"
                           style={{zIndex: 9999}}
+                        
                         />
                       </>
                     ) : (
                       <>
-                        <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className="text-18 text-red-600" />
+                        <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className="text-18 text-red-600" size={15} />
                         <ReactTooltip
                           id={`vehicle-keys-tooltip-${card?.lot_id}`}
                           place="bottom"
@@ -329,7 +331,7 @@ function Card({ card }) {
                     )}
                </span>
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <BsFillFuelPumpFill data-tooltip-id={`vehicle-fuel-tooltip-${card?.lot_id}`} className={`text-18`} />
+                    <BsFillFuelPumpFill data-tooltip-id={`vehicle-fuel-tooltip-${card?.lot_id}`} className={`text-18`} size={15} />
                     <ReactTooltip
                     id={`vehicle-fuel-tooltip-${card?.lot_id}`}
                     place="bottom"
@@ -339,7 +341,7 @@ function Card({ card }) {
                </span>
                {card?.cylinders ? (
                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18`} />
+                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18`} size={15} />
                     <ReactTooltip
                     id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
                     place="bottom"
@@ -349,7 +351,7 @@ function Card({ card }) {
                </span>
                ) : (
                 <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18 text-red-600`} />
+                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18 text-red-600`} size={15} />
                     <ReactTooltip
                     id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
                     place="bottom"
@@ -372,8 +374,8 @@ function Card({ card }) {
                </span>
             </div>
             <div className="flex flex-1 gap-x-2 md:gap-x-[0.5vw] items-center">
-            <BsCalendarEventFill data-tooltip-id="auction-date-tooltip" className="text-gray-600 text-18 " />
-            <span className="text-gray-600 text-18">
+            <BsCalendarEventFill data-tooltip-id="auction-date-tooltip" className="text-gray-600 text-18   " size={15} />
+            <span className="text-gray-600 lg:text-18">
             {card?.auction_date ? moment(card.auction_date).tz('America/New_York').format('ddd DD MMM, HH:mm [EST]') : 'Not specified'} 
             </span>
             <ReactTooltip
@@ -386,9 +388,9 @@ function Card({ card }) {
           </div>
         </div>
 
-        <div className="flex w-full h-full justify-center items-center mx-auto  px-2">
+        <div className="flex  w-full h-full justify-center items-center mx-auto py-1  px-2">
           <div className=" bg-gray-100 shadow-md rounded-[0.5vw] w-full text-center sm:text-left">
-            <div className="flex flex-col-reverse w-full gap-[0.2vw] p-[1vw] rounded-lg ">
+            <div className="flex flex-col-reverse w-full gap-3 lg:gap-[0.2vw] p-[1vw] rounded-lg ">
               {/* BID NOW Button Section */}
               <div className="flex justify-center items-center w-full lg:mt-2 ">
                 <Link to={`/vehicle-detail/${card?.lot_id}`} className="w-full">
