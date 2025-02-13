@@ -49,6 +49,9 @@ import List from "./Components/live-aution-search/live-auction-search/List.js";
 import DynamicForm from "./Components/prac/DyanmicForm.jsx";
 import Test from "./Components/prac/Test.jsx";
 import Helpsec from "./Components/help/index.js";
+import Invoices from "./Components/invoices/index.js";
+
+
 function App() {
   
   const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -183,6 +186,17 @@ function App() {
               }
             />
 
+
+            <Route
+              path="/user/get-all-invoices"
+              element={
+                <>
+                  <ProtectedRoute>
+                    <Invoices />
+                  </ProtectedRoute>
+                </>
+              }
+            />
             <Route
               path="/user/account"
               element={

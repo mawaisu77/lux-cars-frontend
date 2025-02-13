@@ -8,11 +8,8 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PaymentsIcon from '@mui/icons-material/Payments';
@@ -23,8 +20,7 @@ import AddCardIcon from '@mui/icons-material/AddCard';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import StarsIcon from '@mui/icons-material/Stars';
 import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
-import { TbReportSearch } from "react-icons/tb";
-
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 export default function ProfileDropdown({user}) {
   const navigate = useNavigate(); 
@@ -171,6 +167,13 @@ export default function ProfileDropdown({user}) {
             <AddCardIcon fontSize="small" />
           </ListItemIcon>
           Add Deposits
+        </MenuItem>
+
+        <MenuItem onClick={() => { handleClose(); navigate('/user/get-all-invoices'); }}> 
+          <ListItemIcon>
+            <ReceiptLongIcon fontSize="small" />
+          </ListItemIcon>
+          Invoices
         </MenuItem>
         <Divider />
 
