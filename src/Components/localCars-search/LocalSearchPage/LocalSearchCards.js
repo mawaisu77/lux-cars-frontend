@@ -53,7 +53,7 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       {vehicles && vehicles?.length > 0 ? (
         vehicles.map((vehicle) => (
           <>
@@ -185,10 +185,10 @@ function Card({ vehicle }) {
   };
 
   return (
-    <div className="h-[250px] md:h-[13.021vw] flex flex-col md:flex-row bg-white shadow-md rounded-lg mb-6 p-4">
+    <div className="h-fit lg:h-auto flex flex-col lg:flex-row bg-white  shadow-md rounded-lg mb-6 p-4">
      
       <Swiper
-        className="relative w-full lg:w-[20vw] mx-auto h-full rounded-md "
+        className="relative w-full lg:w-[20vw] mx-auto h-auto rounded-md "
         autoplay={{
           delay: 2000,
           disableOnInteraction: false,
@@ -237,15 +237,15 @@ function Card({ vehicle }) {
         goToNextImage={goToNextImage}
         logo={LuxLogoWhite}
       />
-      <div className="flex flex-col md:justify-center w-full text-left md:items-center   lg:justify-between lg:flex-row">
-        <div className="text-left px-[1vw] text-[13px] lg:text-[0.875vw]   h-full border-b lg:border-b-0 font-urbanist">
+      <div className="flex flex-col  w-full text-left lg:items-center   lg:justify-between md:flex-row">
+        <div className="text-left px-[1vw] text-[13px] lg:text-[0.875vw]    h-full border-b lg:border-b-0 font-urbanist">
           <button onClick={() => handleBidNow(vehicle.id)}>
             <p className="font-semibold py-[1vh] hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
               {vehicle.make} {vehicle.model}
             </p>
           </button>
 
-          <div className="flex flex-col md:flex-row lg:flex-row w-[26.195vw] justify-between leading-[3vh]">
+          <div className="flex flex-col  md:flex-row   lg:w-[26.195vw] md:justify-between leading-[3vh]">
             <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[13px] lg:text-[0.875vw] py-1">
               <p className="w-full flex gap-x-2">
                 <span className="font-semibold">VIN: </span>
@@ -299,8 +299,9 @@ function Card({ vehicle }) {
               <BsCalendarEventFill
                 data-tooltip-id="auction-date-tooltip"
                 className="text-gray-600 text-18"
+                size={15}
               />
-              <span className="text-gray-600 text-18">
+              <span className="text-gray-600 md:text-18">
                 {vehicle?.auction_date
                   ? moment(vehicle.auction_date)
                       .tz("America/New_York")
@@ -315,12 +316,12 @@ function Card({ vehicle }) {
             </div>
           </div>
         </div>
-        <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row   w-full justify-center items-center   mx-auto">
-          <div className="py-1 bg-gray-100 shadow-md rounded-[0.5vw]  text-center sm:text-left">
+        <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row  py-2 lg:py-0   w-full justify-center items-center   mx-auto">
+          <div className="py-1 bg-gray-100 w-[100%] md:w-full shadow-md rounded-[0.5vw]  text-center sm:text-left">
             <div className="flex flex-col  w-full p-[1vw]  rounded-lg ">
               <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
                 <span onClick={() => handleBidNow(vehicle?.id)} className="w-full">
-                  <button className=" w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+                  <button className="w-[100%] md:w-full   py-[2vh] flex justify-center items-center h-[3vh]  rounded-[8px]   text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
                   Current Bid {`$${vehicle.currentBid ? vehicle.currentBid : "0"}`}
                   </button>
                 </span>
@@ -332,14 +333,14 @@ function Card({ vehicle }) {
                     onClick={() => handleBidNow(vehicle?.id)}
                     className="w-full"
                   >
-                    <button className="w-[11.1vw] h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+                    <button className=":w-full h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
                       Buy Now ${vehicle?.buyNowPrice ? vehicle?.buyNowPrice : "0"}
                     </button>
                   </span>
                 </div>
               ) : null}
 
-              <div className="w-full  lg:w-[11.1vw] h-auto  py-1  mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center  shadow-sm">
+              <div className="w-100%  lg:w-full h-auto  py-1  mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center  shadow-sm">
                 <div className="flex items-center text-nowrap gap-[0.75vw] ">
                   <div className="flex justify-center items-center">
                     {vehicle.auction_date ? (
@@ -354,7 +355,7 @@ function Card({ vehicle }) {
                   </div>
 
                   <div className="flex flex-col justify-center items-start ">
-                    <p className="text-gray-800 text-sm lg:text-[0.875vw] font-medium">
+                    <p className="text-gray-800 text-sm lg:text-[0.875vw] flex justify-center items-center h-[3vh] font-medium">
                       {vehicle.auction_date
                         ? ValidDate
                           ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`

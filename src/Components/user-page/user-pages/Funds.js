@@ -17,9 +17,9 @@ const Funds = () => {
 
   return (
     <>
-      <div className="w-[343px] md:w-[650px] lg:w-[74vw] mx-auto mt-[50px] ">
+      <div className="w-[90%] md:w-[650px] lg:w-[84vw] mx-auto mt-[50px] ">
         <div className="flex text-left flex-col lg:flex-row lg:justify-between">
-          <p className="text-[36px] lg:text-[2.3vw] font-urbanist font-bold">My Funds</p>
+          <p className="text-[28px] lg:text-[2.3vw] font-urbanist font-bold">My Funds</p>
           <div className="flex gap-3 relative">
       
             <button onClick={""} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red text-white text-[15px] lg:text-[1vw] font-urbanist">
@@ -40,7 +40,7 @@ const Funds = () => {
           <>
          <FundsCard className="font-semibold" />
 
-          <div className="flex justify-center items-center flex-col min-h-[30vh]">
+          <div className="flex justify-center items-center   flex-col min-h-[30vh]">
             <div className="flex flex-col items-center justify-center min-h-[50vh]">
             <p className="text-2xl font-bold text-gray-500">
             {error}

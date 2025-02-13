@@ -33,7 +33,7 @@ const Order = () => {
           </div>
 
           <div className="flex justify-between text-black lg:justify-center items-center  gap-5 mt-[30px] lg:mt-0 px-5 md:px-0 ">
-              <div className="flex justify-center items-center gap-2 w-[206px] lg:w-[13vw] h-[46px] lg:h-[6vh] bg-[#f8f8f8] rounded-lg">
+              <div className=" flex justify-center items-center gap-2 w-[206px] lg:w-[13vw] h-[46px] lg:h-[6vh] bg-[#f8f8f8] rounded-lg">
               <LuCalendarDays size={25} />
               <p className=" text-[15px] lg:text-[0.9vw]">
                 Dec 2023- jan 2024

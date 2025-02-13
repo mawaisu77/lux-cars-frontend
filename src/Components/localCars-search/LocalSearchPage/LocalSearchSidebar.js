@@ -182,12 +182,12 @@ const LocalSearchSidebar = () => {
   return (
     <div className="bg-gray-200 p-4 rounded-lg">
       <div className="flex flex-col lg:flex-row gap-5">
-        <aside className="w-full bg-white lg:w-1/4 shadow-lg rounded-lg p-4 transition-all duration-300">
-          <h2 className="font-semibold text-2xl mb-4 bg-gray-200 w-full rounded p-3">
+        <aside className="w-full bg-white lg:w-1/4 shadow-lg rounded-lg p-[1vw] transition-all duration-300">
+          <h2 className="font-semibold text-2xl mb-4 bg-gray-100 w-full rounded p-3">
             Filters
           </h2>
           <button
-            className="font-semibold text-2xl mb-4 w-full rounded p-3 text-white bg-blue-500 lg:hidden"
+            className="font-semibold text-[13px] lg:text-[1vw] mb-4 w-full rounded p-3 text-white bg-blue-500 lg:hidden"
             onClick={() => setShowFilters(!showFilters)}
           >
             {showFilters ? "Hide Filters" : "Show Filters"}
@@ -195,18 +195,18 @@ const LocalSearchSidebar = () => {
           <div className={`${showFilters ? "block" : "hidden lg:block"}`}>
             <div className="mb-4 border-b border-black">
               <div
-                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
                 onClick={() => setShowMake(!showMake)}
               >
                 <h3>Make</h3>
                 <span>{showMake ? "-" : "+"}</span>
               </div>
               {showMake && (
-                <div className="mt-2 pb-4">
+                <div className="mt-2 pb-[1vw]">
                   <input
                     type="text"
                     placeholder="Search Make"
-                    className="input input-bordered w-full mb-2 bg-white"
+                    className="input input-bordered w-full mb-[0.5vw] bg-white   text-[13px] lg:text-[1vw]"
                     value={selectedFilters.make}
                     onChange={(e) => handleFilterChange("make", e.target.value)}
                   />
@@ -216,18 +216,18 @@ const LocalSearchSidebar = () => {
 
             <div className="mb-4 border-b border-black">
               <div
-                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
                 onClick={() => setShowModel(!showModel)}
               >
                 <h3>Model</h3>
                 <span>{showModel ? "-" : "+"}</span>
               </div>
               {showModel && (
-                <div className="mt-2 pb-4">
+                <div className="mt-2 pb-[0.5vw]">
                   <input
                     type="text"
                     placeholder="Search Model"
-                    className="input input-bordered w-full mb-2 bg-white"
+                    className="input input-bordered w-full mb-[0.5vw] bg-white"
                     value={selectedFilters.model}
                     onChange={(e) =>
                       handleFilterChange("model", e.target.value)
@@ -240,7 +240,7 @@ const LocalSearchSidebar = () => {
 
             <div className="mb-4 border-b border-black">
               <div
-                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
                 onClick={() => setShowYear(!showYear)}
               >
                 <h3>Year</h3>
@@ -251,7 +251,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex-1 ">
                     {/* <label className="text-lg text-left py-1">Year From</label> */}
                     <select
-                      className="input input-bordered w-full mb-2 bg-white"
+                      className="input input-bordered w-full mb-[0.5vw] bg-white"
                       value={selectedFilters.yearFrom}
                       onChange={(e) =>
                         handleFilterChange("yearFrom", e.target.value)
@@ -271,7 +271,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex-1">
                     {/* <label className="text-lg text-left py-1">Year To</label> */}
                     <select
-                      className="input input-bordered w-full mb-2 bg-white"
+                      className="input input-bordered w-full mb-[0.5vw] bg-white"
                       value={selectedFilters.yearTo}
                       onChange={(e) =>
                         handleFilterChange("yearTo", e.target.value)
@@ -304,7 +304,7 @@ const LocalSearchSidebar = () => {
 
             <div className="mb-4 border-b border-black">
               <div
-                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
                 onClick={() => setShowMilage(!showMilage)}
               >
                 <h3>Milage</h3>
@@ -318,7 +318,7 @@ const LocalSearchSidebar = () => {
                     <input
                       type="number"
                       placeholder="0"
-                      className="input input-bordered w-full mb-2 bg-white"
+                      className="input input-bordered w-full mb-[0.5vw] bg-white"
                       value={selectedFilters.milageFrom}
                       onChange={(e) => handleFilterChange("milageFrom", e.target.value)}
                     />
@@ -327,7 +327,7 @@ const LocalSearchSidebar = () => {
                     <input
                       type="number"
                       placeholder="100000"
-                      className="input input-bordered w-full mb-2 bg-white"
+                      className="input input-bordered w-full mb-[0.5vw] bg-white"
                       value={selectedFilters.milageTo}
                       onChange={(e) => handleFilterChange("milageTo", e.target.value)}
                     />
@@ -335,7 +335,7 @@ const LocalSearchSidebar = () => {
                 </div>
 
 
-                  <div className="mt-2 pb-4">
+                  <div className="mt-2 pb-[1vw]">
                     <label className="text-lg text-left py-1">Milage Range</label>
                     <Slider
                       value={[selectedFilters.milageFrom || 0, selectedFilters.milageTo || 100000]}
@@ -357,7 +357,7 @@ const LocalSearchSidebar = () => {
 
             <div className="mb-4 border-b border-black">
               <div
-                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
                 onClick={() => setShowTransmission(!showTransmission)}
               >
                 <h3>Transmission</h3>
@@ -365,7 +365,7 @@ const LocalSearchSidebar = () => {
               </div>
 
               {showTransmission && (
-                <div className="mt-2 pb-4">
+                <div className="mt-2 pb-[1vw]">
                   <div className="flex items-center mb-1">
                     <input
                       type="checkbox"
@@ -397,7 +397,7 @@ const LocalSearchSidebar = () => {
 
             <div className="mb-4 border-b border-black">
               <div
-                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
                 onClick={() => setShowtitlesStatus(!showtitlesStatus)}
               >
                 <h3>Status Code</h3>
@@ -405,7 +405,7 @@ const LocalSearchSidebar = () => {
               </div>
 
               {showtitlesStatus && (
-                <div className="mt-2 pb-4">
+                <div className="mt-2 pb-[1vw]">
                   <div className="flex items-center mb-1">
                     <input
                       type="checkbox"
@@ -483,7 +483,7 @@ const LocalSearchSidebar = () => {
 
             <div className="mb-4 border-b border-black">
               <div
-                className="flex justify-between font-medium cursor-pointer text-xl p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
                 onClick={() => setShowLocation(!showLocation)}
               >
                 <h3>Location</h3>
@@ -491,7 +491,7 @@ const LocalSearchSidebar = () => {
               </div>
 
               {showLocation && (
-                <div className="mt-2 pb-4">
+                <div className="mt-2 pb-[1vw]">
                   <div className="mb-1">
                     <Select
                       className="text-left"
@@ -514,7 +514,7 @@ const LocalSearchSidebar = () => {
                         country={selectedFilters.carLocation}
                         value={selectedFilters.carState}
                         onChange={(e) => handleFilterChange("carState", e)}
-                        className="input input-bordered w-full mb-2 bg-white"
+                        className="input input-bordered w-full mb-[0.5vw] bg-white"
                         placeholder="Select state"
                       />
                     </div>
@@ -523,7 +523,7 @@ const LocalSearchSidebar = () => {
               )}
             </div>
             <div className="mb-4 border-b border-black">
-            <div className="flex items-center text-xl font-medium p-2">
+            <div className="flex items-center text-[13px] lg:text-[1vw] font-medium p-2">
               <input
                 type="checkbox"
                 className="form-checkbox"
@@ -535,7 +535,7 @@ const LocalSearchSidebar = () => {
           </div>
 
           <div className="mb-4 border-b border-black">
-          <div className="flex items-center text-xl font-medium p-2">
+          <div className="flex items-center text-[13px] lg:text-[1vw] font-medium p-2">
               <input
                 type="checkbox"
                 className="form-checkbox"

@@ -91,18 +91,18 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="w-[343px] md:w-[650px] lg:w-[74vw] h-auto lg:mt-[7vh] mx-auto mt-[100px] lg:h-[38vh] bg-[#f8f8f8] rounded-2xl">
+      <div className="w-[90%]   lg:w-[84vw] h-auto lg:mt-[7vh] mx-auto mt-[100px] lg:h-[38vh] bg-[#f8f8f8] rounded-2xl">
         <div className=" flex flex-col lg:flex-row justify-center lg:justify-between lg:h-[30vh]    bg-[#000000]/70 rounded-t-2xl">
           <div className="flex flex-col font-urbanist lg:flex-row mt-[4.6vh]   lg:ml-[2.2vw]     w-full lg:w-[48vw]">
             <div className="relative">
               <img
                 alt="profile"
                 src={profilePicture}
-                className="object-cover w-[274px] md:w-[400px] mx-auto lg:w-[15vw] h-[274px] md:h-[400px] lg:h-[30vh] left-[36px] top-[36px] rounded-xl"
+                className="object-cover w-[80%] md:w-[80%] mx-auto lg:w-[15vw] h-full md:h-full lg:h-[30vh] left-[36px] top-[36px] rounded-xl"
               />
               <label
                 htmlFor="imageUpload"
-                className="absolute top-2 right-2 cursor-pointer bg-white p-2 rounded-full"
+                className="absolute top-2 right-[5%] cursor-pointer bg-white p-2 rounded-full"
               >
                 <RiImageAddLine size={25} />
               </label>
@@ -119,7 +119,7 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <div className="text-left text-[white]  w-[274px] lg:w-[35vw]   mx-auto font-urbanist lg:ml-[2.2vw]">
+            <div className="text-left text-[white]   ml-[10%] md:ml-[10%]  w-[274px] md:w-[70%] lg:w-[35vw]   lg:mx-auto font-urbanist lg:ml-[2.2vw]">
               <h1 className="font-bold font-urbanist text-[36px]  lg:text-[2.3vw] leading- text-white">
                 {user}
               </h1>
@@ -129,7 +129,7 @@ const Navbar = () => {
                   {email}
                 </p>
               </div>
-              <p className="text-[12px] lg:text-[0.78vw] text-[#f8f8f8] py-5 lg:py-0">
+              <p className="text-[12px] md:text-[18px] lg:text-[0.78vw] text-[#f8f8f8] py-5 lg:py-0">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Laborum obcaecati dignissimos quae quo ad iste ipsum officiis
                 deleniti asperiores sit.
@@ -141,9 +141,9 @@ const Navbar = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row justify-center py-5  lg:w-[20vw] ml-9 lg:ml-0  mx-auto lg:items-center">
+            <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row   justify-start ml-7 md:ml-0 lg:justify-center py-5  lg:w-[20vw]      lg:items-center">
 
-              <div className="mx-auto flex flex-col gap-4 justify-center items-center ">
+              <div className="  flex flex-col gap-4 justify-start   md:justify-center w-[45%] ml-[4%] sm:ml-[5%] md:ml-[10%]   items-start     lg:items-center ">
 
                 {/* <button className="text-[14px] lg:text-[0.82vw] text-white w-[100px] lg:w-[6.3vw] h-[40px]  lg:h-[5.1vh] lg:mt-[2vh] lg:mr-[1.7vw] border border-white rounded-full">
                   Create Bid

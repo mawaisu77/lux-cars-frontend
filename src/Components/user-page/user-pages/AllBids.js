@@ -43,8 +43,8 @@ const AllBids = () => {
 
   return (
     <>
-      <div className="w-full lg:w-[74vw]  mx-auto  mt-[50px] text-black">
-      <h1 className="text-[36px] lg:text-[2.3vw] font-urbanist text-left font-bold">My Bids</h1>
+      <div className="w-full lg:w-[84vw]  mx-auto  mt-[50px] text-black">
+      <h1 className="text-[28px] lg:text-[2.3vw] font-urbanist left-[10%] lg:text-left font-bold">My Bids</h1>
 
               {/* Header with toggle buttons */}
       <div className="flex justify-center space-x-4 mb-6">
@@ -84,7 +84,7 @@ const AllBids = () => {
             </p>
           </div>
         ) : (
-          <div className=" overflow-x-auto">
+          <div className=" w-[90%] lg:w-[84vw] mx-auto overflow-x-auto">
           <table className="min-w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-100">

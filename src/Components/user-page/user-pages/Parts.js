@@ -122,7 +122,7 @@ const SearchPartsForm = () => {
 
   return (
     <div className="flex justify-center w-[100vw] items-center min-h-screen bg-white font-urbanist">
-      <div className="w-[70%]">
+      <div className="w-[90%] lg:w-[70%] mx-auto">
         <h2 className="text-[36px] text-left font-bold mt-4 mb-4">
           Search Parts
         </h2>

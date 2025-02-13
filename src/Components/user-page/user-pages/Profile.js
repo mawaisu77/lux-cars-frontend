@@ -87,7 +87,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="w-[344px] md:w-[650px]  lg:w-[74vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
+      <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
         <div className="text-left text-[36px] lg:text-[2.3vw] font-urbanist font-bold">
           Profile Info
         </div>
@@ -101,7 +101,7 @@ const Profile = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Full Name"
-                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh] rounded-lg p-2 border"
+                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh] rounded-lg p-2 border"
                   />
 
                   <input
@@ -110,10 +110,10 @@ const Profile = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
+                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
                   />
 
-                  <div className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]">
+                  <div className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]">
                     <PhoneInput
                       country={"us"}
                       countryCodeEditable={false}
@@ -133,13 +133,13 @@ const Profile = () => {
                   <input
                     name="address"
                     placeholder="Address"
-                    className="w-[344px] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border"
+                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
 
-                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[140px] sm:mt-0  border rounded-lg p-5 ">
+                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[140px]  lg:mt-0  border rounded-lg p-5 ">
                   <div className="flex gap-3 my-2">
                     <div className="flex relative justify-center items-center bg-red-600 w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] rounded-full">
                       <img src={image1} alt="image1" />
@@ -199,7 +199,7 @@ const Profile = () => {
               </div>
             </div>
 
-          <div className="border my-2 bg-secondary-gray p-1 border-gray-200 text-left text-22 font-urbanist font-semibold">
+          <div className="border my-2 bg-secondary-gray p-1 border-gray-200 text-left lg:text-22 font-urbanist font-semibold">
             Your Documents Status {documentVerification ? (
               <span className="text-green-500">(Verified)</span>
             ) : (
@@ -208,7 +208,7 @@ const Profile = () => {
           </div>
             <div className="flex">
               <div
-                className={`w-[10vw] h-[10vh] ${
+                className={`lg:w-[10vw] lg:h-[10vh] ${
                   images.length > 0 ? "flex gap-x-2" : "hidden"
                 }`}
               >

@@ -161,7 +161,7 @@ export default function BiddingLimit({ fetchFunds }) {
 
   return (
     <>
-      <div className="max-w-[74vw] mx-auto p-6 md:p-[1.25vw] font-sans">
+      <div className=" w-[90%] lg:max-w-[84vw] mx-auto p-6 md:p-[1.25vw] font-sans">
         <h1 className="text-2xl md:text-30 font-bold mb-4 md:mb-[0.833vw]">
           Increase My Bidding Limit
         </h1>
@@ -177,8 +177,8 @@ export default function BiddingLimit({ fetchFunds }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 md:gap-[1.25vw]">
-          <div className="border border-gray-300 rounded p-6 md:p-[1.25vw]">
+        <div className=" flex flex-wrap gap-y-2 justify-between md:gap-[1.25vw]">
+          <div className="border w-full lg:w-[45%] border-gray-300 rounded p-6 md:p-[1.25vw]">
             <div className="mb-8 md:mb-[1.25vw]">
               <input
                 type="range"
@@ -261,7 +261,7 @@ export default function BiddingLimit({ fetchFunds }) {
             </div>
           </div>
 
-          <div className="border border-gray-300 rounded p-6 md:p-[1.25vw]">
+          <div className="border w-full lg:w-[45%] border-gray-300 rounded p-6 md:p-[1.25vw]">
             <div className="mb-4 md:mb-[0.833vw]">
               <div className="flex justify-between items-center text-sm md:text-18">
                 <span>Bidding Limit:</span>
