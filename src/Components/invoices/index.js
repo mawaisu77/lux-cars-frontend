@@ -31,7 +31,7 @@ const Invoice = () => {
           </div>
         </div>
       </div>
-      {!error && invoices &&  <UserInvoices invoices={invoices} />} 
+      {!error && invoices &&  <UserInvoices invoices={invoices} fetchInvoices={fetchInvoices} />} 
       </>
   );
 };
