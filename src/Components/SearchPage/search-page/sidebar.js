@@ -867,6 +867,28 @@ const Sidebar = () => {
   };
 
 
+ const saveFiltersToLocalStorage = () => {
+    const params = new URLSearchParams(selectedFilters).toString(); // Create query string from selectedFilters
+    const savedFilters = JSON.parse(localStorage.getItem("savedFilters")) || []; // Retrieve existing saved filters
+
+    // Check if the current query string already exists
+    if (!savedFilters.includes(params)) {
+      // Add the new query string to the array
+      savedFilters.push(params);
+
+      // Limit to a maximum of 10 saved filters
+      if (savedFilters.length > 10) {
+        savedFilters.shift(); // Remove the oldest filter if over the limit
+      }
+
+      // Save the updated array back to local storage
+      localStorage.setItem("savedFilters", JSON.stringify(savedFilters));
+      alert("Filters saved successfully!"); // Notify the user
+    } else {
+      alert("This filter is already saved!"); // Notify if the filter already exists
+    }
+  };
+
   return (
     <>
       <div className="flex mt-20 sm:mt-5 gap-2 bg-gray-100  w-[95vw] sm:w-[80vw] p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
@@ -1425,6 +1447,12 @@ const Sidebar = () => {
               >
                 Reset Filters
               </button>
+              <button
+          onClick={saveFiltersToLocalStorage}
+          className="px-2 py-2 bg-blue-500 w-full md:w-1/2 hover:bg-blue-600 text-white rounded-lg"
+        >
+          Save Filters
+        </button>
             </div>
           </div>
         )}

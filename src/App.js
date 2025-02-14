@@ -50,6 +50,7 @@ import DynamicForm from "./Components/prac/DyanmicForm.jsx";
 import Test from "./Components/prac/Test.jsx";
 import Helpsec from "./Components/help/index.js";
 import Invoices from "./Components/invoices/index.js";
+import SavedSearchPage from "./Components/saved-searches/index.js";
 
 
 function App() {
@@ -288,6 +289,7 @@ function App() {
               }
             />
             <Route path="/search-page" element={<SearchPage />} />
+            <Route path="/saved-searches" element={<SavedSearchPage />} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
             <Route path="/vehicle-detail/:lotID" element={<Vehicle />} />
             <Route path="/local-vehicle-detail/:id" element={<LocalVehicle />} />

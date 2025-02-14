@@ -21,7 +21,7 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import StarsIcon from '@mui/icons-material/Stars';
 import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-
+import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
 export default function ProfileDropdown({user}) {
   const navigate = useNavigate(); 
   const { logout } = useLogout();
@@ -153,6 +153,13 @@ export default function ProfileDropdown({user}) {
             <BookmarkIcon fontSize="small" />
           </ListItemIcon>
           Saved Cars
+        </MenuItem>
+
+        <MenuItem onClick={() => { handleClose(); navigate('/saved-searches'); }}>
+          <ListItemIcon>
+            <ContentPasteSearchIcon fontSize="small" />
+          </ListItemIcon>
+          Saved Searches
         </MenuItem>
         <Divider />
 
