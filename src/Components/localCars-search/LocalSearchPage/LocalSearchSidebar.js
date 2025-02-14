@@ -179,6 +179,28 @@ const LocalSearchSidebar = () => {
     setPageNo(1);
   };
 
+  const saveFiltersToLocalStorage = () => {
+    const params = new URLSearchParams(selectedFilters).toString(); // Create query string from selectedFilters
+    const savedFilters = JSON.parse(localStorage.getItem("savedFiltersLocalCars")) || []; // Retrieve existing saved filters
+
+    // Check if the current query string already exists
+    if (!savedFilters.includes(params)) {
+      // Add the new query string to the array
+      savedFilters.push(params);
+
+      // Limit to a maximum of 10 saved filters
+      if (savedFilters.length > 10) {
+        savedFilters.shift(); // Remove the oldest filter if over the limit
+      }
+
+      // Save the updated array back to local storage
+      localStorage.setItem("savedFiltersLocalCars", JSON.stringify(savedFilters));
+      alert("Filters saved successfully!"); // Notify the user
+    } else {
+      alert("This filter is already saved!"); // Notify if the filter already exists
+    }
+  };
+
   return (
     <div className="bg-gray-200 p-4 rounded-lg">
       <div className="flex flex-col lg:flex-row gap-5">
@@ -552,6 +574,13 @@ const LocalSearchSidebar = () => {
               >
                 Reset Filters
               </button>
+
+              <button
+          onClick={saveFiltersToLocalStorage}
+          className="px-2 py-2 bg-blue-500 w-full md:w-1/2 hover:bg-blue-600 text-white rounded-lg"
+        >
+          Save Filters
+        </button>
             </div>
           </div>
         </aside>

@@ -1,0 +1,86 @@
+import React, { useEffect, useState } from "react";
+import { FaTrash } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+
+const LocalCars = () => {
+  const [savedFilters, setSavedFilters] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedFilters = localStorage.getItem("savedFiltersLocalCars");
+    if (storedFilters) {
+      const parsedFilters = JSON.parse(storedFilters);
+      setSavedFilters(parsedFilters);
+    }
+  }, []);
+
+  const extractValidFilters = (filterString) => {
+    return filterString
+      .split("&")
+      .filter((param) => {
+        const [key, value] = param.split("=");
+        return param.includes("=") && value !== "" && value !== "null" && value !== "false"; // Exclude null and false values
+      })
+      .flatMap((param) => {
+        const [key, value] = param.split("=");
+        const decodedValue = decodeURIComponent(value).replace(/\+&\+/g, "+%26+"); // Convert +&+ → +%26+
+        return decodedValue.includes(",")
+          ? decodedValue.split(",").map((v) => `${key}=${v}`)
+          : [`${key}=${decodedValue}`];
+      });
+  };
+
+  const handleSearchClick = (filterString) => {
+    const validFilters = extractValidFilters(filterString).join("&");
+    navigate(`/local-search-page?${validFilters}`);
+  };
+
+  const handleDeleteSearch = (index) => {
+    const updatedFilters = savedFilters.filter((_, i) => i !== index);
+    setSavedFilters(updatedFilters);
+    localStorage.setItem("savedFiltersLocalCars", JSON.stringify(updatedFilters));
+  };
+
+  const formatFilterForUI = (filterString) => {
+    return filterString
+      .replace(/\+/g, " ") // Replace + with space
+      .replace(/%27/g, "'") // Replace %27 with single quote
+      .replace(/%26/g, "&"); // Replace %26 with &
+  };
+
+  return (
+    <div className="max-w-[85vw] mx-auto mt-5 p-4 bg-white shadow-lg rounded-lg">
+    <h2 className="text-xl font-semibold mb-4">Saved Searches Bidcaribbeans</h2>
+    {savedFilters.length === 0 ? (
+      <p className="text-gray-500">No saved searches found.</p>
+    ) : (
+      <ul className="space-y-2">
+        {savedFilters.map((filter, index) => {
+          const validFilters = extractValidFilters(filter);
+          const rawTitle = validFilters.join(" | "); // For hover title
+          const formattedFilters = validFilters.map((f) => formatFilterForUI(f));
+
+          return validFilters.length ? (
+            <li
+              key={index}
+              className="flex items-center justify-between p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200 transition"
+            >
+              <span onClick={() => handleSearchClick(filter)} title={rawTitle}>
+                {formattedFilters.join(" | ")}
+              </span>
+              <button
+                className="text-red-500 hover:text-red-700 p-1"
+                onClick={() => handleDeleteSearch(index)}
+              >
+                <FaTrash />
+              </button>
+            </li>
+          ) : null;
+        })}
+      </ul>
+    )}
+  </div>
+  );
+};
+
+export default LocalCars;
