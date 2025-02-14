@@ -34,6 +34,8 @@ import VehicleTitleInfo from "./ui/VehicleTitleInfo";
 import BuyNowSection from "./ui/BuyNowSection";
 import VehcileSellerInfo from "./ui/VehcileSellerInfo";
 import VehicleInfoUpperBody from "./ui/VehicleInfoUpperBody";
+import SalesHistory from "./SalesHistory";
+import useGetCarHistory from "../../../hooks/car_history/useGetCarHistory";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -42,8 +44,14 @@ const VehicleHero = () => {
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
+    
+  const {history, loading, error, fetchHistory} = useGetCarHistory(lotID);
 
   const [placeBidAmount, setPlaceBidAmount] = useState(0);
+  const [showSalesHistory, setShowSalesHistory] = useState(false); // State to manage sales history visibility
+  const toggleSalesHistory = () => {
+    setShowSalesHistory((prev) => !prev); // Toggle sales history visibility
+  };
 
   const { placeBid, placebidLoading, placeBiderror, placeBidSuccess } =
     usePlaceBid();
@@ -125,6 +133,10 @@ const VehicleHero = () => {
   }, [lotID]);
 
   useEffect(() => {
+    fetchHistory();
+  }, [lotID]);
+
+  useEffect(() => {
     if (shouldRefetch) {
       fetchCarDetail();
       setShouldRefetch(false);
@@ -172,6 +184,8 @@ const VehicleHero = () => {
         </div>
       </div>
 
+  
+
       {carDetailLoading ? (
         <div className="w-[100vw] h-[100vh] flex justify-center items-center">
           <FadeLoader />
@@ -190,8 +204,20 @@ const VehicleHero = () => {
                 <AuctionDateNotDecidedMessage />
               )}
 
-              <div className="flex flex-col md:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[50px]">
-                <div className="w-full md:w-[45%]">
+          <div className="m-1 p-1 w-full mx-auto flex bg-white max-w-[85vw]">
+          <button onClick={toggleSalesHistory} className="py-2 px-3 border flex items-center justify-center gap-x-1">
+            <span>
+            {showSalesHistory ? "Sales History" : "Sales History"}
+            </span>
+            <span>{history?.data?.length}</span>
+          </button>
+          </div>
+                    
+             {showSalesHistory && <SalesHistory history={history?.data} />}
+
+     
+              <div className="flex flex-col md:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[10px]">
+                <div className="w-full md:w-[48%]">
                   <SwiperGallery
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
@@ -210,7 +236,7 @@ const VehicleHero = () => {
                 </div>
 
                 {/* web view */}
-                <div className=" hidden lg:block  w-[50%]   ">
+                <div className=" hidden lg:block w-[48%]   ">
                   <div>
                     {/* Title Info */}
                     <VehicleTitleInfo
@@ -288,8 +314,12 @@ const VehicleHero = () => {
                       className={`flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full`}
                     >
                       <>
-                        <span className="text-md lg:text-[1.1vw]">BUY NOW IN</span>
-                        <span className="text-md lg:text-[1.1vw]">${carDetailData?.data?.price_new}</span>
+                        <span className="text-md lg:text-[1.1vw]">
+                          BUY NOW IN
+                        </span>
+                        <span className="text-md lg:text-[1.1vw]">
+                          ${carDetailData?.data?.price_new}
+                        </span>
                       </>
                     </button>
                   )}

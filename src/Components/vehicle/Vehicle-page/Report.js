@@ -40,7 +40,7 @@ const CarReportViewer = ({ vin }) => {
     setPaymentDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
-      ...(name === "card_amount" ? { deposit: parseFloat(value) || 0 } : {}), // Update deposit as number when card_amount changes
+      ...(name === "card_amount" ? { deposit: parseFloat(value) || 0 } : {}), 
     }));
   };
 
