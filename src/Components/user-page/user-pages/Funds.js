@@ -19,8 +19,8 @@ const Funds = () => {
     <>
       <div className="w-[90%] md:w-[650px] lg:w-[84vw] mx-auto mt-[50px] ">
         <div className="flex text-left flex-col lg:flex-row lg:justify-between">
-          <p className="text-[28px] lg:text-[2.3vw] font-urbanist font-bold">My Funds</p>
-          <div className="flex gap-3 relative">
+          <p className="text-[28px] lg:text-[2.3vw] text-center lg:text-left font-urbanist font-bold">My Funds</p>
+          <div className="flex justify-center gap-3 relative">
       
             <button onClick={""} className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red text-white text-[15px] lg:text-[1vw] font-urbanist">
               Add Deposite
