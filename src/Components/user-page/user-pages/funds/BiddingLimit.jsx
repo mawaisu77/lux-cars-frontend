@@ -48,6 +48,10 @@ export default function BiddingLimit({ fetchFunds }) {
       biddingConfig.purchaseLimitThresholds
     );
     setPurchaseLimit(newPurchaseLimit);
+    setPaymentDetails((prevDetails) => ({
+      ...prevDetails,
+      card_amount: biddingConfig.depositPercentage * newBiddingLimit, 
+    }));
   };
 
   const handleBiddingIncrement = () => {
@@ -96,7 +100,7 @@ export default function BiddingLimit({ fetchFunds }) {
     card_number: "",
     card_cvv: "",
     card_exp: "",
-    card_amount: "",
+    card_amount: securityDeposit,
     email: "",
     deposit: 0,
     paymentPurpose: "Adding Funds",
@@ -146,9 +150,9 @@ export default function BiddingLimit({ fetchFunds }) {
         ...paymentDetails,
         card_number: paymentDetails.card_number.replace(/\s+/g, ""),
       };
+      console.log("-=-==-===-",paymentDetails)
       handleAddFunds(formattedPaymentDetails);
       fetchFunds();
-      handleCloseModal();
     }
   };
 
@@ -364,6 +368,7 @@ export default function BiddingLimit({ fetchFunds }) {
             errors={errors}
             onSubmit={handleSubmit}
             cardAmount={securityDeposit}
+            loading={addingFundsLoading}
           />
         </div>  
       </Modal>

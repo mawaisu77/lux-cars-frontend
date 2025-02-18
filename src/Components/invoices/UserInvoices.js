@@ -14,6 +14,8 @@ import { showToast } from "../../utils/Toast";
 
 export default function UserInvoices({invoices, fetchInvoices}) {
 
+  const [paymentLoading, setPaymentLoading] = useState(false); 
+
   const [openModal, setOpenModal] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState({
     card_name: "",
@@ -78,6 +80,7 @@ export default function UserInvoices({invoices, fetchInvoices}) {
         ...paymentDetails,
         card_number: paymentDetails.card_number.replace(/\s+/g, ""),
       };     
+      setPaymentLoading(true); 
       try {
         const response = await baseService.post(`/pay-invoice?invoiceID=${invoiceID}`, { ...formattedPaymentDetails });
         if (response.status === 200) {
@@ -88,6 +91,8 @@ export default function UserInvoices({invoices, fetchInvoices}) {
       } catch (error) {
         console.error("Payment error:", error);
         handleCloseModal();
+      } finally {
+        setPaymentLoading(false); 
       }
     }
   };
@@ -257,6 +262,7 @@ export default function UserInvoices({invoices, fetchInvoices}) {
             errors={errors}
             onSubmit={(e) => handleSubmit(e, paymentDetails.invoiceID)} 
             cardAmount={paymentDetails.deposit}
+            loading={paymentLoading}
           />
         </div>  
    </Modal>

@@ -1,7 +1,15 @@
 import React from "react";
 import InputMask from "react-input-mask";
+import { ClipLoader } from "react-spinners";
 
-const PaymentForm = ({ paymentDetails, handleInputChange, errors,onSubmit, cardAmount }) => {
+const PaymentForm = ({
+  paymentDetails,
+  handleInputChange,
+  errors,
+  onSubmit,
+  loading,
+  cardAmount,
+}) => {
   return (
     <form onSubmit={onSubmit}>
       {/* Cardholder Name */}
@@ -69,11 +77,13 @@ const PaymentForm = ({ paymentDetails, handleInputChange, errors,onSubmit, cardA
 
       {/* Deposit Amount */}
       <div className="mb-4">
-        <label className="block font-semibold" title="US Dollar">Deposit Amount (usd)</label>
+        <label className="block font-semibold" title="US Dollar">
+          Deposit Amount (usd)
+        </label>
         <input
           type="text"
           name="card_amount"
-          value={paymentDetails.deposit>0?paymentDetails.deposit : cardAmount}
+          value={paymentDetails.card_amount}
           onChange={handleInputChange}
           placeholder="Enter deposit amount"
           className="border rounded p-2 w-full"
@@ -95,9 +105,7 @@ const PaymentForm = ({ paymentDetails, handleInputChange, errors,onSubmit, cardA
           placeholder="Enter your email"
           className="border rounded p-2 w-full"
         />
-        {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email}</p>
-        )}
+        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
       </div>
 
       {/* Payment Purpose (Disabled) */}
@@ -116,8 +124,13 @@ const PaymentForm = ({ paymentDetails, handleInputChange, errors,onSubmit, cardA
       <button
         type="submit"
         className="w-full bg-primary-red text-white py-2 rounded font-semibold mt-4"
+        disabled={loading} // Disable button when loading
       >
-        Submit Payment
+        {loading ? (
+          <ClipLoader size={20} color={"#fff"} />
+        ) : (
+          "Submit Payment"
+        )}
       </button>
     </form>
   );

@@ -279,7 +279,7 @@ const VehicleHero = () => {
                       className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh]`}
                       defaultValue={0}
                       decimalsLimit={2}
-                      value={placeBidAmount ? placeBidAmount : currentBidValue}
+                      value={placeBidAmount}
                       onValueChange={(value) => setPlaceBidAmount(value)}
                     />
                   </div>
