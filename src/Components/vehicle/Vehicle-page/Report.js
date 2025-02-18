@@ -15,6 +15,7 @@ import baseService from "../../../services/baseService";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 const CarReportViewer = ({ vin }) => {
   const { carReport, loading, error, fetchCarReport } = useGetCarReport(vin);
+  const [paymentLoading, setPaymentLoading] = useState(false); // New loading state for payment
 
 
  
@@ -61,9 +62,9 @@ const CarReportViewer = ({ vin }) => {
       card_number: "",
       card_cvv: "",
       card_exp: "",
-      card_amount: "",
+      card_amount: 9.99,
       email: "",
-      deposit: 0,
+      deposit: 9.99,
       paymentPurpose: "Adding Funds",
     });
   };
@@ -76,11 +77,12 @@ const CarReportViewer = ({ vin }) => {
         ...paymentDetails,
         card_number: paymentDetails.card_number.replace(/\s+/g, ""),
       };     
+      setPaymentLoading(true); 
+
       try {
         const response = await baseService.post('/process-payment', { ...formattedPaymentDetails });
         if (response.status === 201) {
           if (response.data.data === "success") {
-            handleCloseModal();
             showToast("Payment Successful", "success");
             handleDownload();
         } 
@@ -90,6 +92,8 @@ const CarReportViewer = ({ vin }) => {
         console.error("Payment error:", error);
         handleCloseModal();
 
+      } finally {
+        setPaymentLoading(false); 
       }
 
     }
@@ -102,6 +106,8 @@ const CarReportViewer = ({ vin }) => {
       link.download = `CarReport_${vin}.pdf`;
       link.click();
       alert("Report Downloaded Successfully");
+      handleCloseModal();
+
     }
   };
 
@@ -204,6 +210,7 @@ const CarReportViewer = ({ vin }) => {
             handleInputChange={handleInputChange}
             errors={errors}
             onSubmit={handleSubmit}
+            loading={paymentLoading}
             cardAmount={9.99}
           />
         </div>  

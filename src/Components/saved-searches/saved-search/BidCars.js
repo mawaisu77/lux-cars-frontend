@@ -20,7 +20,7 @@ const BidCars = () => {
       .filter((param) => param.includes("=") && param.split("=")[1] !== "")
       .flatMap((param) => {
         const [key, value] = param.split("=");
-        const decodedValue = decodeURIComponent(value).replace(/\+&\+/g, "+%26+"); // Convert +&+ → +%26+
+        const decodedValue = decodeURIComponent(value).replace(/\+&\+/g, "+%26+");
         return decodedValue.includes(",")
           ? decodedValue.split(",").map((v) => `${key}=${v}`)
           : [`${key}=${decodedValue}`];
@@ -40,9 +40,9 @@ const BidCars = () => {
 
   const formatFilterForUI = (filterString) => {
     return filterString
-      .replace(/\+/g, " ") // Replace + with space
-      .replace(/%27/g, "'") // Replace %27 with single quote
-      .replace(/%26/g, "&"); // Replace %26 with &
+      .replace(/\+/g, " ") 
+      .replace(/%27/g, "'") 
+      .replace(/%26/g, "&"); 
   };
 
   return (
