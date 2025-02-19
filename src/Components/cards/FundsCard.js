@@ -53,7 +53,7 @@ const FundsCard = ({fund}) => {
   ];
 
   return (
-    <div className='w-full max-w-[1370px] lg:max-w-[84vw] mx-auto  flex flex-wrap gap-4 mt-[30px] px-4'>
+    <div className='w-full   max-w-[1370px]  justify-center lg:max-w-[84vw] mx-auto  flex flex-wrap gap-4 mt-[30px] px-4'>
       {FundsC.map((item, index) => (
         <div key={index} className=' relative w-full md:w-[300px] h-[270px] lg:h-[27vh] border shadow-md rounded-xl flex-shrink-0'>
           <div className='flex items-center gap-2 p-4'>

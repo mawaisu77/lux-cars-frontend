@@ -210,7 +210,7 @@ const VehicleHero = () => {
                 </div>
 
                 {/* web view */}
-                <div className=" hidden lg:block  w-[50%]   ">
+                <div className="     lg:w-[50%]   ">
                   <div>
                     {/* Title Info */}
                     <VehicleTitleInfo
