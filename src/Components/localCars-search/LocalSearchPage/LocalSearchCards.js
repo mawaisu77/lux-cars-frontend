@@ -219,7 +219,7 @@ function Card({ vehicle }) {
               style={{ height: "auto" }}
             >
               <img
-                className="h-full w-full lg:w-[15vw] rounded-[0.5vw] object-cover cursor-pointer"
+                className="h-full lg:h-[150px] w-full lg:w-[15vw] rounded-[0.5vw] object-cover cursor-pointer"
                 src={image}
                 alt={`Vehicle_Image ${index + 1}`}
                 onClick={() => openModal(index)}
