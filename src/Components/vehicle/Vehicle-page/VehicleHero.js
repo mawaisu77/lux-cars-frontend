@@ -14,14 +14,12 @@ import usePlaceBid from "../../../hooks/usePlaceBid";
 import useTimer from "../../../hooks/useTimer";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
-import TimeLeftCounter from "./TimeLeftCounter";
 import VehicleCostCalculator from "./VehicleCostCalculator";
 import CarReportViewer from "./Report";
 import Pusher from "pusher-js";
 import ErrorComponent from "./ErrorPage";
 import TooltipInfo from "../../common/TooltipInfo";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { RxCopy } from "react-icons/rx";
 import { statusOptions } from "../../../utils/filtersData/statusOptions";
 import { documentTypeOptions } from "../../../utils/filtersData/documentTypeOptions";
 import BiddingOverMessage from "./ui/BiddingOverMessage";
@@ -31,11 +29,11 @@ import SignInModal from "./modals/SignInModal";
 import BidModal from "./modals/BidModal";
 import CopyURLModal from "./modals/CopyURLModal";
 import VehicleTitleInfo from "./ui/VehicleTitleInfo";
-import BuyNowSection from "./ui/BuyNowSection";
 import VehcileSellerInfo from "./ui/VehcileSellerInfo";
 import VehicleInfoUpperBody from "./ui/VehicleInfoUpperBody";
 import SalesHistory from "./SalesHistory";
 import useGetCarHistory from "../../../hooks/car_history/useGetCarHistory";
+import { documentOldOption } from "../../../utils/filtersData/documentOld";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -163,6 +161,11 @@ const VehicleHero = () => {
       option.id.toLowerCase() === carDetailData?.data?.document?.toLowerCase()
   );
 
+  const currentDocumentOldType = documentOldOption.find(
+    (option) =>
+      option.id.toLowerCase() === carDetailData?.data?.document_old?.toLowerCase()
+  );
+
   return (
     <div className="bg-gray-100">
       <div className="lg:block hidden bg-vehicle">
@@ -253,6 +256,7 @@ const VehicleHero = () => {
                       seller={carDetailData?.data?.seller}
                       documentOld={carDetailData?.data?.document_old}
                       document={carDetailData?.data?.document}
+                      documentOldType={currentDocumentOldType}
                       currentDocumentType={currentDocumentType}
                     />
                     <VehicleInfoUpperBody
