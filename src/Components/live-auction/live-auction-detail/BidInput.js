@@ -10,15 +10,11 @@ const BidInput = ({
   setManualBid,
   currentBid,
   // handleReset,
-  liveTimeLeft,
-  timeLeft,
   activeBid,
   resetTimer,
   setResetTimer,
   bonusTime,
   setBonusTime
-
-
 
 }) => {
   return (

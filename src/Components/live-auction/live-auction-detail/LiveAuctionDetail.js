@@ -84,6 +84,11 @@ const LiveAuctionDetail = () => {
         setResetTimer(true);
         setBonusTime(false);
       });
+      setLiveData({
+        currentBid: "",
+        noOfBids: "",
+        userID: "",
+      });
       fetchUpcomingBids();
     });
 
