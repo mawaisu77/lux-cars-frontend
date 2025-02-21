@@ -98,33 +98,29 @@ export default function UserInvoices({invoices, fetchInvoices}) {
   };
   
   return (
-    <div className="w-full max-w-[85vw] mx-auto p-4">
+    <div className="w-full lg:w-[85vw] mx-auto p-4">
       <div className="flex items-center gap-2 mb-6">
         <FaRegFileAlt className="w-5 h-5 text-gray-600" />
         <h2 className="text-xl font-semibold text-gray-700">Invoices</h2>
       </div>
-
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
+  
+      <div className="overflow-x-auto mx-auto ">
+        <table className="min-w-[1000px] w-full border-collapse">
           <thead>
             <tr className="text-left border-b">
-              <th className="py-3  font-medium text-gray-600">
-                Invoice ID
-              </th>
-              <th className="py-3  font-medium text-gray-600">Type</th>
-              <th className="py-3  font-medium text-gray-600">price</th>
-              <th className="py-3  font-medium text-gray-600">Status</th>
-              <th className="py-3  font-medium text-gray-600">
-                Created At
-              </th>
-              <th className="py-3  font-medium text-gray-600">Image</th>
-              <th className="py-3  font-medium text-gray-600">Payment</th>
+              <th className="py-3 font-medium text-gray-600">Invoice ID</th>
+              <th className="py-3 font-medium text-gray-600">Type</th>
+              <th className="py-3 font-medium text-gray-600">Price</th>
+              <th className="py-3 font-medium text-gray-600">Status</th>
+              <th className="py-3 font-medium text-gray-600">Created At</th>
+              <th className="py-3 font-medium text-gray-600">Image</th>
+              <th className="py-3 font-medium text-gray-600">Payment</th>
             </tr>
           </thead>
           <tbody>
             {invoices?.data?.length === 0 ? (
               <tr>
-                <td colSpan="6" className="text-center py-4">
+                <td colSpan="7" className="text-center py-4">
                   No invoices found.
                 </td>
               </tr>
@@ -134,7 +130,7 @@ export default function UserInvoices({invoices, fetchInvoices}) {
                   key={invoice.id}
                   className="border-b hover:bg-gray-50 transition-colors"
                 >
-                  <td className="text-left py-3 ">
+                  <td className="text-left py-3">
                     <a
                       href={`${invoice.invoice}`}
                       target="_blank"
@@ -149,7 +145,9 @@ export default function UserInvoices({invoices, fetchInvoices}) {
                   </td>
                   <td className="text-left py-3">
                     <span
-                      className={`font-medium ${invoice?.price < 0 ? "text-red-600" : "text-gray-900"}`}
+                      className={`font-medium ${
+                        invoice?.price < 0 ? "text-red-600" : "text-gray-900"
+                      }`}
                     >
                       {invoice?.price < 0 ? "-" : ""}$
                       {Math.abs(invoice?.price).toLocaleString(undefined, {
@@ -160,7 +158,9 @@ export default function UserInvoices({invoices, fetchInvoices}) {
                   </td>
                   <td className="text-left py-3">
                     <span
-                      className={`px-3 py-1 rounded-full text-sm ${getStatusColor(invoice.status)}`}
+                      className={`px-3 py-1 rounded-full text-sm ${getStatusColor(
+                        invoice.status
+                      )}`}
                     >
                       {invoice.status}
                     </span>
@@ -183,32 +183,28 @@ export default function UserInvoices({invoices, fetchInvoices}) {
                         <IoEyeOutline className="w-4 h-4" />
                         View
                       </a>
-                    
                     </div>
                   </td>
                   <td className="text-left py-3">
                     <div className="flex items-center gap-2">
-                      {invoice.status === "Pending" ? (
+                      {invoice.status === "Pending" && (
                         <button
-                        onClick={() => handleOpenModal(invoice)} // Pass the clicked invoice
-                        className="inline-flex items-center gap-1 px-3 py-1 rounded-md bg-green-500 hover:bg-green-600 text-white transition-colors text-sm"
+                          onClick={() => handleOpenModal(invoice)}
+                          className="inline-flex items-center gap-1 px-3 py-1 rounded-md bg-green-500 hover:bg-green-600 text-white transition-colors text-sm"
                         >
                           Pay
                         </button>
-                      ) : (
-                        ""
                       )}
                     </div>
-                 </td>
+                  </td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
       </div>
-
-      
-   <Modal open={openModal} >
+  
+      <Modal open={openModal}>
         <div
           className="bg-white p-6 rounded-lg shadow-lg"
           style={{
@@ -230,8 +226,7 @@ export default function UserInvoices({invoices, fetchInvoices}) {
           </div>
           <div className="flex gap-x-2 items-center justify-between mb-4 py-2">
             <div className="flex gap-x-2 items-center">
-              <h2 className="text-xl font-bold ">Bidcaribbeans Payment</h2>
-
+              <h2 className="text-xl font-bold">Bidcaribbeans Payment</h2>
               <BsInfoCircle
                 data-tooltip-id="payment-info-tooltip"
                 className="font-extrabold text-20 animate-pulse"
@@ -255,17 +250,17 @@ export default function UserInvoices({invoices, fetchInvoices}) {
               />
             </div>
           </div>
-
+  
           <PaymentForm
             paymentDetails={paymentDetails}
             handleInputChange={handleInputChange}
             errors={errors}
-            onSubmit={(e) => handleSubmit(e, paymentDetails.invoiceID)} 
+            onSubmit={(e) => handleSubmit(e, paymentDetails.invoiceID)}
             cardAmount={paymentDetails.deposit}
             loading={paymentLoading}
           />
-        </div>  
-   </Modal>
+        </div>
+      </Modal>
     </div>
   );
-}
+}  
