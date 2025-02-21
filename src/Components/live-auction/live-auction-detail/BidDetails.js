@@ -29,9 +29,9 @@ const BidDetails = ({
   const { savedIds } = useSavedLocalCars();
 
   const { car, user } = liveCar;
-  const [currentBid] = useState(liveData?.currentBid || car?.currentBid || 0);
+  const [currentBid] = useState(car?.currentBid || liveData?.currentBid || 0);
   const [manualBid, setManualBid] = useState(
-    () => liveData?.currentBid ?? car?.currentBid ?? 0
+    () => car?.currentBid ?? liveData?.currentBid  ?? 0
   );
 
   // Update these state declarations
@@ -154,9 +154,6 @@ const BidDetails = ({
     resetBidState,
   } = usePlaceBidLocalCar();
 
-  const handlePlaceBid = () => {
-    // document.getElementById("place_live_bid").showModal();
-  };
 
   // Add reset handler
   const handleReset = () => {

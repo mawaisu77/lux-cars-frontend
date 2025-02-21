@@ -220,19 +220,19 @@ const CarCard = ({ card, isBuy = false }) => {
           <div className="pt-[0.8vw]">
             <div className="flex">
               <div className="flex justify-between items-center w-full">
-                <div className="flex flex-col gap-y-[0.2vw] lg:text-18 ">
+                <div className="flex flex-col gap-y-[0.2vw] ">
                   <Link to={`/vehicle-detail/${card.lot_id}`}  >
-                    <div className="flex justify-between hover:text-blue-800 cursor-pointer hover:underline   lg:text-18 font-bold  lg:leading-[2vh] text-left">
-                      "
+                    <div className="flex justify-between hover:text-blue-800 cursor-pointer tracking-wider hover:underline  lg:text-20 font-bold text-left">
+                      
                       {card.title.length > 25
                         ? `${card.title.slice(0, 25)}...`
                         : card.title}
-                      ”
+                      
                     </div>
                   </Link>
-                  <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] md:text-16 items-center">
+                  <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] md:text-18 items-center">
                     <div className="flex gap-x-[0.4vw] items-center">
-                    <p className="" title="Lot ID">{card.lot_id}</p>
+                    <p className="tracking-wider" title="Lot ID">{card.lot_id}</p>
                     <RxCopy
                         className="cursor-pointer text-[14px] text-gray-600 hover:text-blue-600" 
                         onClick={() => {
@@ -242,30 +242,30 @@ const CarCard = ({ card, isBuy = false }) => {
                       />
                       </div>
                   </div>
-                  <div className="flex gap-x-[0.2vw] text-[12px] md:text-16 w-full" title="Status Code">
-                    <p  className={`${currentStatus?.bgHex} text-white font-bold rounded-full w-[1.3vw] h-[1.3vw] flex items-center justify-center`}>{currentStatus?.letter}</p>
-                    <p className={`${currentStatus?.hex}   font-bold rounded-md px-[0.4vw]`}>{currentStatus?.label}</p>
+                  <div className="flex items-center gap-x-[0.4vw] text-[12px] md:text-18 w-full" title="Status Code">
+                    <p  className={`${currentStatus?.bgHex} text-white md:text-16 font-bold rounded-full w-[1.2vw] h-[1.2vw] flex items-center justify-center`}>{currentStatus?.letter}</p>
+                    <p className={`${currentStatus?.hex} tracking-wider font-bold rounded-md `}>{currentStatus?.label}</p>
                   </div>
                   <div className="flex items-center gap-x-[0.4vw] text-[12px] md:text-16 ">
-                    <PiTimerBold className="text-[14px] md:text-20 " />
-                    <p className=" text-nowrap text-[14px] md:text-16 ">
+                      <PiTimerBold className="text-[14px] md:text-22 " />
+                    <p className="tracking-wider text-nowrap text-[14px] md:text-18 ">
                         {card.auction_date
                           ? ValidDate
-                            ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
-                            : "Bidding Over"
+                          ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
+                          : "Bidding Over"
                           : "Future"}
                      </p>
                   </div>
 
                   {card.currentBid && (
-                    <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-14">
-                      <p className="py-[0.1vh] font-semibold">Current Bid:</p>
-                      <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">
+                    <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-16">
+                      <p className="py-[0.1vh] tracking-wider font-semibold">Current Bid:</p>
+                      <p className="py-[0.1vh] bg-green-500/20 font-bold text-green-600 rounded-md px-[0.4vw]">
                         {card.currentBid
                           ? card.currentBid.toLocaleString("en-US", {
-                              style: "currency",
-                              currency: "USD",
-                            })
+                            style: "currency",
+                            currency: "USD",
+                          })
                           : null}
                       </p>
                     </div>
@@ -274,9 +274,9 @@ const CarCard = ({ card, isBuy = false }) => {
               </div>
             </div>
             <Link to={`/vehicle-detail/${card.lot_id}`}>
-              <button className="w-full text-[14px] md:text-16 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] md:mt-[1vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
+              <button className="w-full tracking-wider uppercase font-bold text-[14px] md:text-18 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] md:mt-[1vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
                 {isBuy
-                  ? `Buy Now in ${card.price_new ? card.price_new : "Tbd"}`
+                  ? `Buy Now in ${card.price_new ? `$${card.price_new}` : "Tbd"}`
                   : "Bid Now"}
               </button>
             </Link>

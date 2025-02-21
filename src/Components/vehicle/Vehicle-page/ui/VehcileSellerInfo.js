@@ -7,6 +7,14 @@ import ColorDescriptionComponent from "./ColorDescriptionComponent";
 
 
 const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType, documentOldType }) => {
+  const colorCategoryMapping = {
+    "#008000": "Insurance",    
+    "#FF681F": "Non-Insurance", 
+    "#FF0000": "Ineligible",   
+    "#0000FF": "No Information", 
+  };
+  const documentCategory = colorCategoryMapping[documentOldType?.color] || "Unknown";
+
   const tooltipDescription = colorDescriptions[documentOldType?.color] || '';
 
   return (
@@ -16,9 +24,10 @@ const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType, 
           <PiUsersFill color="white" className="" />
         </div>
         <div className="text-left p-2 md:p-[0.3vw]">
-          <p className="lg:text-[0.8vw] text-[#7a798a]">Owned by</p>
+          <p className="lg:text-[0.8vw] text-[#6a6978] font-semibold tracking-wider">Owned by <span style={{color: documentOldType?.color || ''}}> ({documentCategory}) </span> </p>
           <p
-            className={`lg:text-[0.8vw] font-urbanist font-semibold ${seller && seller !== "Unknown" ? "text-green-600 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]" : "text-red-600 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]"}`}
+          style={{ color: documentOldType?.color || '', padding: documentOldType ? '0.2vw' : '0', borderRadius: documentOldType ? '0.2vw' : '0' }}
+            className={`lg:text-[0.8vw] font-urbanist font-semibold`}
           >
             {seller || "Unknown"}
           </p>
@@ -29,9 +38,9 @@ const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType, 
           <CgFileDocument color="white" className="" />
         </div>
         <div className="text-left p-2 md:p-[0.3vw] " data-tooltip-id={`document-${documentOldType?.label}`}>
-          <p className="lg:text-[0.8vw] text-[#7a798a]">Sale Documents</p>
+          <p className="lg:text-[0.8vw] text-[#6a6978] font-semibold tracking-wider">Sale Documents</p>
           <p 
-            className={`lg:text-[0.8vw] font-urbanist font-semibold text-[${documentOldType?.color}]`} style={{ color: documentOldType?.color || '', padding: documentOldType ? '0.2vw' : '0', borderRadius: documentOldType ? '0.2vw' : '0' }}>
+            className={`lg:text-[0.8vw] font-urbanist font-semibold  text-[${documentOldType?.color}]`} style={{ color: documentOldType?.color || '', padding: documentOldType ? '0.2vw' : '0', borderRadius: documentOldType ? '0.2vw' : '0' }}>
             {documentOldType?.label}
           </p>
         </div>

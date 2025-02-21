@@ -28,7 +28,7 @@ const CircularProgress = ({
     } else {
       setIsTimerActive(false); // Stop the timer if no active bid or bonus time
     }
-  }, [bonusTime, activeBid]);
+  }, [bonusTime, activeBid, currentBid]);
 
   // Handle resetTimer prop changes
   useEffect(() => {

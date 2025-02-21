@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import Shimmer from "../../utils/loaders/Shimmer";
 import "./swiperstyles.css";
-import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
+import { IoIosArrowDropright, IoIosArrowDropleft, IoIosArrowForward } from "react-icons/io";
 import CarCard from "./CarCard";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -54,14 +54,14 @@ const LocalCars = () => {
               <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[4vw] " />
             </div>
 
-            <div className="flex justify-center text-primary-red text-[16px] sm:text-24 items-center gap-x-[10px] sm:gap-x-[0.625vw]">
+            <div className="flex justify-center text-white px-2 py-1 sm:px-[0.52vw] sm:py-[0.26vw] rounded-full bg-primary-red hover:bg-primary-red/90 text-[16px] sm:text-20 items-center gap-x-[10px] sm:gap-x-[0.2vw]">
               <button
                 onClick={handleViewAllClick}
-                className="font-bold text-[16px] sm:text-24 hover:underline"
+                className=""
               >
-                View All
+                See All
               </button>
-              <FaExternalLinkAlt size={13} />
+              <IoIosArrowForward />
             </div>
           </div>
 
