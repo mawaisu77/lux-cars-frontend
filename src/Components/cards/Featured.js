@@ -4,6 +4,7 @@ import Shimmer from "../../utils/loaders/Shimmer";
 import CarCard from "./CarCard";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowForward } from "react-icons/io";
 
 const BuyNow = () => {
   const navigate = useNavigate();
@@ -46,14 +47,14 @@ const BuyNow = () => {
               <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[4vw] " />
             </div>
 
-            <div className="flex justify-center text-primary-red text-[16px] sm:text-24 items-center gap-x-[10px] sm:gap-x-[0.625vw]">
+            <div className="flex justify-center text-white px-2 py-1 sm:px-[0.52vw] sm:py-[0.26vw] rounded-full bg-primary-red hover:bg-primary-red/90 text-[16px] sm:text-20 items-center gap-x-[10px] sm:gap-x-[0.2vw]">
               <button
                 onClick={handleViewAllClick}
-                className="font-bold text-[16px] sm:text-24 hover:underline"
+                className=""
               >
-                View All
+                See All
               </button>
-              <FaExternalLinkAlt />
+              <IoIosArrowForward />
             </div>
           </div>
           <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">

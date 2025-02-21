@@ -8,9 +8,10 @@ import ColorDescriptionComponent from "./ColorDescriptionComponent";
 
 const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType, documentOldType }) => {
   const colorCategoryMapping = {
-    "#008000": "Insurance Company",    
-    "#FF681F": "Non-Insurance Company", 
-    "#FF0000": "Ineligible",    
+    "#008000": "Insurance",    
+    "#FF681F": "Non-Insurance", 
+    "#FF0000": "Ineligible",   
+    "#0000FF": "No Information", 
   };
   const documentCategory = colorCategoryMapping[documentOldType?.color] || "Unknown";
 

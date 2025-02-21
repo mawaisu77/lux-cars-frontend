@@ -122,7 +122,7 @@ const VehicleHero = () => {
 
   useEffect(() => {
     if (currentBidValue) {
-      setPlaceBidAmount(currentBidValue);
+      setPlaceBidAmount(currentBidValue + 500);
     }
   }, [currentBidValue]);
 

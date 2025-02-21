@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useNavigate } from "react-router-dom";
 import { useSavedCars } from "../../context/SavedCarIdsContext";
+import { IoIosArrowForward } from "react-icons/io";
 
 const BuyNow = () => {
   const navigate = useNavigate(); // Initialize navigate hook
@@ -54,14 +55,14 @@ const BuyNow = () => {
               <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[4vw] " />
             </div>
 
-            <div className="flex justify-center text-primary-red text-[16px] sm:text-24 items-center gap-x-[10px] sm:gap-x-[0.625vw]">
+            <div className="flex justify-center text-white px-2 py-1 sm:px-[0.52vw] sm:py-[0.26vw] rounded-full bg-primary-red hover:bg-primary-red/90 text-[16px] sm:text-20 items-center gap-x-[10px] sm:gap-x-[0.2vw]">
               <button
                 onClick={handleViewAllClick}
-                className="font-bold text-[16px] sm:text-24 hover:underline"
+                className=""
               >
-                View All
+                See All
               </button>
-              <FaExternalLinkAlt />
+              <IoIosArrowForward />
             </div>
           </div>
 
