@@ -1,12 +1,16 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import useTimer from "../../../hooks/useTimer";
 import { Link } from "react-router-dom";
-import { BsCalendarEventFill, BsFire, BsHeart, BsHeartFill } from "react-icons/bs";
+import {
+  BsCalendarEventFill,
+  BsFire,
+  BsHeart,
+  BsHeartFill,
+} from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa6";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
-import "swiper/css";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
@@ -20,15 +24,19 @@ import { toast } from "react-toastify";
 import { statusOptions } from "../../../utils/filtersData/statusOptions";
 import { IoKeySharp } from "react-icons/io5";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import moment from 'moment-timezone'; 
+import moment from "moment-timezone";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import { PiCylinderFill } from "react-icons/pi";
 import { driveOptions } from "../../../utils/filtersData/driveOptions";
-import reborn from "../../../assets/lux-logo/reborn.jpeg"
+import reborn from "../../../assets/lux-logo/reborn.jpeg";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
+import "../../cards/swiperCard.css";
+import SwiperCore from "swiper";
 
-
-
+SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 function SearchCard({ data }) {
   return (
@@ -40,10 +48,8 @@ function SearchCard({ data }) {
   );
 }
 
-
-
-
 function Card({ card }) {
+  const [isHovered, setIsHovered] = useState(false); 
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -134,13 +140,40 @@ function Card({ card }) {
   const currentStatus = statusOptions.find(
     (option) => option.id === card?.status
   );
-  const currentDrive = driveOptions.find(
-    (option) => option.id === card?.drive
-  );
+  const currentDrive = driveOptions.find((option) => option.id === card?.drive);
+
+  const swiperRefs = useRef([]);
+
+  const initializeSwiper = (swiper, index) => {
+    swiperRefs.current[index] = swiper;
+    swiper.autoplay.stop();
+  };
+
+  const handleMouseEnter = (index) => {
+    if (swiperRefs.current[index]) {
+      swiperRefs.current[index].autoplay.start();
+    }
+  };
+
+  const handleMouseLeave = (index) => {
+    if (swiperRefs.current[index]) {
+      swiperRefs.current[index].autoplay.stop();
+    }
+  };
 
   return (
     <div className="h-fit flex w-full bg-gray-50 flex-col md:flex-col items-center justify-center lg:flex-row my-5 mx-auto rounded-[1vw] shadow-md duration-300">
-      <div className="h-full flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  ">
+      <div
+         onMouseEnter={() => {
+          handleMouseEnter(card.id);
+          setIsHovered(true); // Set hover state to true
+        }}
+        onMouseLeave={() => {
+          handleMouseLeave(card.id);
+          setIsHovered(false); // Set hover state to false
+        }}
+        className="h-full flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  "
+      >
         {isCarSaved ? (
           <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
             <BsHeartFill
@@ -157,12 +190,14 @@ function Card({ card }) {
           </div>
         )}
         <Swiper
+          onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
           className="relative w-full lg:w-[14vw] h-full mx-auto rounded-md "
           autoplay={{
             delay: 2000,
             disableOnInteraction: false,
           }}
-          modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+          modules={[Navigation, Autoplay]}
+          navigation={isHovered} 
           loop={true}
         >
           {card?.images &&
@@ -184,9 +219,8 @@ function Card({ card }) {
                     onClick={() => openModal(index)} // Open modal on image click
                   />
                 </div>
-              </SwiperSlide> 
-            ))} 
-       
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
       <ImageModal
@@ -251,14 +285,15 @@ function Card({ card }) {
               </p>
               <p className="w-full tracking-wider flex items-center gap-x-2">
                 <span className="font-semibold">Status: </span>
-                <span
-                  className={`text-nowrap font-bold ${currentStatus?.hex}`}
-                >
+                <span className={`text-nowrap font-bold ${currentStatus?.hex}`}>
                   {card?.status}
                 </span>
-                <span title={currentStatus.id} className={`${currentStatus?.bgHex} text-white w-4 h-4 flex items-center justify-center  text-[14px] lg:text-20 font-bold  rounded-full`}>
-                        {currentStatus.letter}
-                  </span>
+                <span
+                  title={currentStatus.id}
+                  className={`${currentStatus?.bgHex} text-white w-4 h-4 flex items-center justify-center  text-[14px] lg:text-20 font-bold  rounded-full`}
+                >
+                  {currentStatus.letter}
+                </span>
               </p>
               <p className="w-full tracking-wider flex items-center gap-x-2">
                 <span className="font-semibold">Location: </span>
@@ -270,7 +305,10 @@ function Card({ card }) {
               </p>
             </div>
             <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap space-y-2 lg:space-y-0 gap-x-2   text-[14px] lg:text-[0.875vw] py-1">
-              <p className="w-full tracking-wider flex items-center gap-x-2" title={formatMileageKm(card?.odometer)}>
+              <p
+                className="w-full tracking-wider flex items-center gap-x-2"
+                title={formatMileageKm(card?.odometer)}
+              >
                 <span className="font-semibold">Millage: </span>
                 <span className="text-nowrap">
                   {window.innerWidth >= 1024 && card.odometer
@@ -304,87 +342,115 @@ function Card({ card }) {
               </p>
             </div>
           </div>
-          <div className="flex w-full leading-[3vh] md:leading-[2vh] py-2 md:py-[0.3vw] bg-gray-100">  
+          <div className="flex w-full leading-[3vh] md:leading-[2vh] py-2 md:py-[0.3vw] bg-gray-100">
             <div className="flex flex-1 gap-x-2 md:gap-x-[0.5vw] items-center">
-               <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    {card?.keys === 'Yes' ? (
-                      <>
-                        <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className="text-18 text-yellow-600 size={15}" />
-                        <ReactTooltip
-                          id={`vehicle-keys-tooltip-${card?.lot_id}`}
-                          place="bottom"
-                          content="Keys Included"
-                          style={{zIndex: 9999}}
-                        
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <IoKeySharp data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`} className="text-18 text-red-600" size={15} />
-                        <ReactTooltip
-                          id={`vehicle-keys-tooltip-${card?.lot_id}`}
-                          place="bottom"
-                          content="Keys Not Included"
-                          style={{zIndex: 9999}}
-                        />
-                      </>
-                    )}
-               </span>
-               <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <BsFillFuelPumpFill data-tooltip-id={`vehicle-fuel-tooltip-${card?.lot_id}`} className={`text-18`} size={15} />
+              <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
+                {card?.keys === "Yes" ? (
+                  <>
+                    <IoKeySharp
+                      data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`}
+                      className="text-18 text-yellow-600 size={15}"
+                    />
                     <ReactTooltip
-                    id={`vehicle-fuel-tooltip-${card?.lot_id}`}
-                    place="bottom"
-                    content={card?.fuel ? `${card?.fuel}` : "Not specified"}
-                    style={{zIndex: 9999}}
+                      id={`vehicle-keys-tooltip-${card?.lot_id}`}
+                      place="bottom"
+                      content="Keys Included"
+                      style={{ zIndex: 9999 }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <IoKeySharp
+                      data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`}
+                      className="text-18 text-red-600"
+                      size={15}
+                    />
+                    <ReactTooltip
+                      id={`vehicle-keys-tooltip-${card?.lot_id}`}
+                      place="bottom"
+                      content="Keys Not Included"
+                      style={{ zIndex: 9999 }}
+                    />
+                  </>
+                )}
+              </span>
+              <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
+                <BsFillFuelPumpFill
+                  data-tooltip-id={`vehicle-fuel-tooltip-${card?.lot_id}`}
+                  className={`text-18`}
+                  size={15}
+                />
+                <ReactTooltip
+                  id={`vehicle-fuel-tooltip-${card?.lot_id}`}
+                  place="bottom"
+                  content={card?.fuel ? `${card?.fuel}` : "Not specified"}
+                  style={{ zIndex: 9999 }}
+                />
+              </span>
+              {card?.cylinders ? (
+                <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
+                  <PiCylinderFill
+                    data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
+                    className={`text-18`}
+                    size={15}
                   />
-               </span>
-               {card?.cylinders ? (
-               <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18`} size={15} />
-                    <ReactTooltip
+                  <ReactTooltip
                     id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
                     place="bottom"
                     content={`${card?.cylinders ? `${card?.cylinders} Cyl` : "Not specified"}`}
-                    style={{zIndex: 9999}}
+                    style={{ zIndex: 9999 }}
                   />
-               </span>
-               ) : (
+                </span>
+              ) : (
                 <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <PiCylinderFill data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`} className={`text-18 text-red-600`} size={15} />
-                    <ReactTooltip
+                  <PiCylinderFill
+                    data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
+                    className={`text-18 text-red-600`}
+                    size={15}
+                  />
+                  <ReactTooltip
                     id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
                     place="bottom"
                     content="Not specified"
-                    style={{zIndex: 9999}}
+                    style={{ zIndex: 9999 }}
                   />
-               </span>
-               )}
-            
-               <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
-                    <span data-tooltip-id={`vehicle-drive-tooltip-${card?.lot_id}`} className={`text-18 ${currentDrive?.id ? "tracking-wide font-semibold" : "text-red-600"}`} >
-                      {currentDrive?.letter}
-                    </span>
-                    <ReactTooltip
-                    id={`vehicle-drive-tooltip-${card?.lot_id}`}
-                    place="bottom"
-                    content={currentDrive?.label} 
-                    style={{zIndex: 9999}}
-                  />
-               </span>
+                </span>
+              )}
+
+              <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
+                <span
+                  data-tooltip-id={`vehicle-drive-tooltip-${card?.lot_id}`}
+                  className={`text-18 ${currentDrive?.id ? "tracking-wide font-semibold" : "text-red-600"}`}
+                >
+                  {currentDrive?.letter}
+                </span>
+                <ReactTooltip
+                  id={`vehicle-drive-tooltip-${card?.lot_id}`}
+                  place="bottom"
+                  content={currentDrive?.label}
+                  style={{ zIndex: 9999 }}
+                />
+              </span>
             </div>
             <div className="flex flex-1 gap-x-2 md:gap-x-[0.5vw] items-center">
-            <BsCalendarEventFill data-tooltip-id="auction-date-tooltip" className="text-gray-600 text-18   " size={15} />
-            <span className="text-gray-600 lg:text-18">
-            {card?.auction_date ? moment(card.auction_date).tz('America/New_York').format('ddd DD MMM, HH:mm [EST]') : 'Not specified'} 
-            </span>
-            <ReactTooltip
-                  id="auction-date-tooltip"
-                  place="bottom"
-                  content="Auction Date"
-                />
+              <BsCalendarEventFill
+                data-tooltip-id="auction-date-tooltip"
+                className="text-gray-600 text-18   "
+                size={15}
+              />
+              <span className="text-gray-600 lg:text-18">
+                {card?.auction_date
+                  ? moment(card.auction_date)
+                      .tz("America/New_York")
+                      .format("ddd DD MMM, HH:mm [EST]")
+                  : "Not specified"}
+              </span>
+              <ReactTooltip
+                id="auction-date-tooltip"
+                place="bottom"
+                content="Auction Date"
+              />
             </div>
-            
           </div>
         </div>
 
@@ -395,10 +461,9 @@ function Card({ card }) {
               <div className="flex justify-center items-center w-full lg:mt-2 ">
                 <Link to={`/vehicle-detail/${card?.lot_id}`} className="w-full">
                   <button className="h-full py-2 md:py-[0.5vw] rounded-[8px] md:rounded-[0.5vw] w-full text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
-                    CURRENT BID: {`$${card?.currentBid ? card?.currentBid : "0"}`}
-
+                    CURRENT BID:{" "}
+                    {`$${card?.currentBid ? card?.currentBid : "0"}`}
                   </button>
-
                 </Link>
               </div>
 
@@ -475,4 +540,3 @@ const formatMileageKm = (mileage) => {
   }
   return `${kilometers} km`; // Return in miles and km if less than 1000
 };
-

@@ -1,11 +1,11 @@
 import React from "react";
 
-const ColorDescriptionComponent = ({ tooltipDescription, documentOldType="" }) => {
+const ColorDescriptionComponent = ({ tooltipDescription, documentOldType }) => {
   return (
     <div style={{ whiteSpace: "pre-line", maxWidth: "300px" }}>
       <p>{tooltipDescription}</p>
       <br />
-      { documentOldType && documentOldType?.label.includes("(P)") && (
+      {documentOldType?.label.includes("(P)") && (
         <p>
           Vehicles marked with (P) are awaiting further inspection to determine
           the full extent of damage and repair needs. This status also indicates
