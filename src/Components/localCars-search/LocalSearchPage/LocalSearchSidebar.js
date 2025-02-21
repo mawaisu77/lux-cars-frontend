@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import LocalSearchCards from "./LocalSearchCards";
 import baseService from "../../../services/baseService";
-import countryList from "react-select-country-list";
 import Select from "react-select";
 import { RegionDropdown } from "react-country-region-selector";
 import { showToast } from "../../../utils/Toast";
 import Slider from "@mui/material/Slider";
 
 const LocalSearchSidebar = () => {
-  const option = useMemo(() => countryList().getData(), []);
 
+  const option = useMemo(() => [
+    { value: 'US', label: 'United States' },
+    { value: 'BS', label: 'Bahamas' }
+  ], []);
+  console.log("countries list", option)
   const [showFilters, setShowFilters] = useState(true);
   const [showMake, setShowMake] = useState(false);
   const [showModel, setShowModel] = useState(false);

@@ -134,7 +134,7 @@ const SwiperGallery = ({ images, carData }) => {
            Video
          </button>}
          <div
-           className="absolute bg-black/50 px-2 py-1 z-10 bottom-5 w-28 text-sm left-0 rounded-lg"
+           className="absolute  z-10 bottom-5 w-28 text-sm left-0 rounded-lg"
          >
             <img
               src={"https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"}

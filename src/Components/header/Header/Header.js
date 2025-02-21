@@ -285,13 +285,13 @@ const Header = () => {
                     alt={`Logo`}
                   />
                 </Link>
-                <Link to="/" className="">
+                {/* <Link to="/" className="">
                   <img
                     src={LuxCarsLogo}
                     className="w-[80px] sm:w-[8vw] h-auto"
                     alt={`Logo`}
                   />
-                </Link>
+                </Link> */}
               </div>
               <div className="w-[35%] ml-2 lg:ml-0">
                 <div className="relative w-90%" ref={dropdownRef}>
