@@ -333,7 +333,7 @@ function Card({ vehicle }) {
                     onClick={() => handleBidNow(vehicle?.id)}
                     className="w-full"
                   >
-                    <button className=":w-full h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+                    <button className=":w-[100%] md:w-full h-auto py-[2vh]  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
                       Buy Now ${vehicle?.buyNowPrice ? vehicle?.buyNowPrice : "0"}
                     </button>
                   </span>

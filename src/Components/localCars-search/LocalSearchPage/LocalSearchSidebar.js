@@ -208,7 +208,7 @@ const LocalSearchSidebar = () => {
     <div className="bg-gray-200 p-4 rounded-lg">
       <div className="flex flex-col lg:flex-row gap-5">
         <aside className="w-full bg-white lg:w-1/4 shadow-lg rounded-lg p-[1vw] transition-all duration-300">
-          <h2 className="font-semibold text-2xl mb-4 bg-gray-100 w-full rounded p-3">
+          <h2 className="font-semibold text-xl mb-4 bg-gray-100 w-full rounded p-3">
             Filters
           </h2>
           <button
@@ -231,7 +231,7 @@ const LocalSearchSidebar = () => {
                   <input
                     type="text"
                     placeholder="Search Make"
-                    className="input input-bordered w-full mb-[0.5vw] bg-white   text-[13px] lg:text-[1vw]"
+                    className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
                     value={selectedFilters.make}
                     onChange={(e) => handleFilterChange("make", e.target.value)}
                   />
@@ -252,7 +252,7 @@ const LocalSearchSidebar = () => {
                   <input
                     type="text"
                     placeholder="Search Model"
-                    className="input input-bordered w-full mb-[0.5vw] bg-white"
+                   className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
                     value={selectedFilters.model}
                     onChange={(e) =>
                       handleFilterChange("model", e.target.value)
@@ -276,7 +276,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex-1 ">
                     {/* <label className="text-lg text-left py-1">Year From</label> */}
                     <select
-                      className="input input-bordered w-full mb-[0.5vw] bg-white"
+                     className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
                       value={selectedFilters.yearFrom}
                       onChange={(e) =>
                         handleFilterChange("yearFrom", e.target.value)
@@ -296,7 +296,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex-1">
                     {/* <label className="text-lg text-left py-1">Year To</label> */}
                     <select
-                      className="input input-bordered w-full mb-[0.5vw] bg-white"
+                    className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
                       value={selectedFilters.yearTo}
                       onChange={(e) =>
                         handleFilterChange("yearTo", e.target.value)
@@ -343,7 +343,7 @@ const LocalSearchSidebar = () => {
                     <input
                       type="number"
                       placeholder="0"
-                      className="input input-bordered w-full mb-[0.5vw] bg-white"
+                     className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
                       value={selectedFilters.milageFrom}
                       onChange={(e) => handleFilterChange("milageFrom", e.target.value)}
                     />
@@ -352,7 +352,7 @@ const LocalSearchSidebar = () => {
                     <input
                       type="number"
                       placeholder="100000"
-                      className="input input-bordered w-full mb-[0.5vw] bg-white"
+                      className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
                       value={selectedFilters.milageTo}
                       onChange={(e) => handleFilterChange("milageTo", e.target.value)}
                     />
@@ -361,7 +361,7 @@ const LocalSearchSidebar = () => {
 
 
                   <div className="mt-2 pb-[1vw]">
-                    <label className="text-lg text-left py-1">Milage Range</label>
+                    <label className="text-[0.8vw] text-left py-1">Milage Range</label>
                     <Slider
                       value={[selectedFilters.milageFrom || 0, selectedFilters.milageTo || 100000]}
                       onChange={(e, newValue) => {
@@ -374,7 +374,7 @@ const LocalSearchSidebar = () => {
                     />
                   </div>
                   {milageError ? (
-                    <div className="text-red-500">{milageError}</div>
+                    <div className="text-red-500 text-[12px] lg:text-[0.8vw]">{milageError}</div>
                   ) : null}
                 </>
               )}
@@ -391,7 +391,7 @@ const LocalSearchSidebar = () => {
 
               {showTransmission && (
                 <div className="mt-2 pb-[1vw]">
-                  <div className="flex items-center mb-1">
+                  <div className="flex items-center mb-1 text-[12px] lg:text-[0.8vw]">
                     <input
                       type="checkbox"
                       className="form-checkbox"
@@ -404,7 +404,7 @@ const LocalSearchSidebar = () => {
                     />
                     <label className="ml-2">Automatic</label>
                   </div>
-                  <div className="flex items-center mb-1">
+                  <div className="flex items-center mb-1 text-[12px] lg:text-[0.8vw]">
                     <input
                       type="checkbox"
                       className="form-checkbox"
@@ -434,7 +434,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex items-center mb-1">
                     <input
                       type="checkbox"
-                      className="form-checkbox"
+                      className="form-checkbox text-[12px] lg:text-[0.8vw]"
                       checked={selectedFilters.titlesStatus.includes(
                         "Stationary"
                       )}
@@ -442,12 +442,12 @@ const LocalSearchSidebar = () => {
                         handleFilterChange("titlesStatus", "Stationary")
                       }
                     />
-                    <label className="ml-2">Stationary</label>
+                    <label className="ml-2 text-[12px] lg:text-[0.8vw]">Stationary</label>
                   </div>
                   <div className="flex items-center mb-1">
                     <input
                       type="checkbox"
-                      className="form-checkbox"
+                      className="form-checkbox text-[12px] lg:text-[0.8vw]"
                       checked={selectedFilters.titlesStatus.includes(
                         "Run & Drive"
                       )}
@@ -455,13 +455,13 @@ const LocalSearchSidebar = () => {
                         handleFilterChange("titlesStatus", "Run & Drive")
                       }
                     />
-                    <label className="ml-2">Run & Drive</label>
+                    <label className="ml-2 text-[12px] lg:text-[0.8vw]">Run & Drive</label>
                   </div>
 
-                  <div className="flex items-center mb-1">
+                  <div className="flex items-center mb-1 text-[12px] lg:text-[0.8vw]">
                     <input
                       type="checkbox"
-                      className="form-checkbox"
+                      className="form-checkbox text-[12px] lg:text-[0.8vw]"
                       checked={selectedFilters.titlesStatus.includes(
                         "Starts"
                       )}
@@ -472,10 +472,10 @@ const LocalSearchSidebar = () => {
                     <label className="ml-2">Starts</label>
                   </div>
 
-                  <div className="flex items-center mb-1">
+                  <div className="flex items-center mb-1 text-[12px] lg:text-[0.8vw]">
                     <input
                       type="checkbox"
-                      className="form-checkbox"
+                      className="form-checkbox text-[12px] lg:text-[0.8vw]"
                       checked={selectedFilters.titlesStatus.includes(
                         "Can't test"
                       )}
@@ -486,10 +486,10 @@ const LocalSearchSidebar = () => {
                     <label className="ml-2">Can't test</label>
                   </div>
 
-                  <div className="flex items-center mb-1">
+                  <div className="flex items-center mb-1 text-[12px] lg:text-[0.8vw]">
                     <input
                       type="checkbox"
-                      className="form-checkbox"
+                      className="form-checkbox text-[12px] lg:text-[0.8vw]"
                       checked={selectedFilters.titlesStatus.includes(
                         "Unknown"
                       )}
@@ -516,7 +516,7 @@ const LocalSearchSidebar = () => {
               </div>
 
               {showLocation && (
-                <div className="mt-2 pb-[1vw]">
+                <div className="mt-2 pb-[1vw] text-[12px] lg:text-[0.8vw]">
                   <div className="mb-1">
                     <Select
                       className="text-left"
@@ -539,7 +539,7 @@ const LocalSearchSidebar = () => {
                         country={selectedFilters.carLocation}
                         value={selectedFilters.carState}
                         onChange={(e) => handleFilterChange("carState", e)}
-                        className="input input-bordered w-full mb-[0.5vw] bg-white"
+                        className="input input-bordered w-full mb-[0.5vw] bg-white text-[12px] lg:text-[0.8vw]"
                         placeholder="Select state"
                       />
                     </div>
@@ -551,7 +551,7 @@ const LocalSearchSidebar = () => {
             <div className="flex items-center text-[13px] lg:text-[1vw] font-medium p-2">
               <input
                 type="checkbox"
-                className="form-checkbox"
+                className="form-checkbox text-[12px] lg:text-[0.8vw]"
                 checked={selectedFilters.buyNowPrice}
                 onChange={() => handleCheckboxChange("buyNowPrice")}
               />
@@ -570,17 +570,17 @@ const LocalSearchSidebar = () => {
               <label className="ml-2">Reserve Price</label>
             </div>
           </div>
-            <div className="w-full flex justify-evenly mt-10">
+            <div className="w-full flex-col   gap-2  flex   justify-evenly mt-10">
               <button
                 onClick={handleResetFilters}
-                className="text-black bg-gray-200 w-[45%] p-[0.4rem] rounded-lg"
+                className="text-black bg-gray-200   p-[0.4rem] rounded-lg"
               >
                 Reset Filters
               </button>
 
               <button
           onClick={saveFiltersToLocalStorage}
-          className="px-2 py-2 bg-blue-500 w-full md:w-1/2 hover:bg-blue-600 text-white rounded-lg"
+          className="px-2 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 w-full    rounded-lg"
         >
           Save Filters
         </button>

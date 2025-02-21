@@ -516,13 +516,13 @@ const Header = () => {
                     alt={`Logo`}
                   />
                 </Link>
-                <Link to="/" className="">
+                {/* <Link to="/" className="">
                   <img
                     src={LuxCarsLogo}
                     className="w-[80px]   h-auto"
                     alt={`Logo`}
                   />
-                </Link>
+                </Link> */}
               </div>
 
               {/* </div> */}
