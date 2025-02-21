@@ -2,7 +2,7 @@ import React from 'react'
 import BidHistory from '../BidHistory'
 import InfoRow from './InfoRow'
 import { damageDescriptions, getDamageColorClass } from '../DamageColorCodes';
-import { getOdometerColorClass } from '../OdometerColor';
+import { getOdometerColorClass, odometerDescriptions } from '../OdometerColor';
 import { formatMileageMiles } from '../../../SearchPage/search-page/searchCard';
 
 
@@ -40,6 +40,7 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
           label="Mileage"
           value={formatMileageMiles(data?.odometer) || "N/A"}
           className={odometerColorClass}
+          description={odometerDescriptions[odometerColorClass] || ''} 
         />
         <InfoRow
           label="Transmission"
