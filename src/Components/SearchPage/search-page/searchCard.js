@@ -202,24 +202,16 @@ function Card({ card }) {
         >
           {card?.images &&
             card?.images?.map((image, index) => (
-              <SwiperSlide
-                key={index}
-                className="relative w-full h-full rounded-md"
-              >
-                <div className="cursor-pointer relative h-full rounded-md">
-                  {(card?.currentBid === "" ||
-                    card?.currentBid === null ||
-                    card?.currentBid == 0) && (
-                    <div className="absolute w-full lg:w-[16vw] sm:h-[1vh]  bottom-0 "></div>
-                  )}
-                  <img
-                    className="h-full   w-full lg:w-[14vw] rounded-[0.5vw] object-cover"
-                    src={image}
-                    alt={`Vehicle_Image ${index + 1}`}
-                    onClick={() => openModal(index)} // Open modal on image click
-                  />
-                </div>
-              </SwiperSlide>
+              <SwiperSlide key={index} className="relative w-full h-full">
+              <div className={`w-full h-full`}>
+                <img
+                  className="w-full h-full object-cover cursor-pointer -mb-[5px]"
+                  src={image}
+                  alt={`Vehicle_Image ${index + 1}`}
+                  onClick={() => openModal(index)}
+                />
+              </div>
+            </SwiperSlide>
             ))}
         </Swiper>
       </div>

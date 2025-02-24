@@ -101,7 +101,7 @@ const HistoryCard = ({ card, isBuy = false }) => {
                   <SwiperSlide key={index} className="relative w-full h-full">
                     <div className={`w-full h-full`}>
                       <img
-                        className="w-full h-full rounded-sm cursor-pointer  "
+                        className="w-full h-[calc(100%+5px)] object-cover rounded-sm cursor-pointer  "
                         src={image}
                         alt={`Vehicle_Image ${index + 1}`}
                         onClick={() => openModal(index)}
