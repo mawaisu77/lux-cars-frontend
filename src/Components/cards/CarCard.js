@@ -160,7 +160,7 @@ const CarCard = ({ card, isBuy = false }) => {
         handleMouseLeave(card.id);
         setIsHovered(false); // Set hover state to false
       }}
-        className="swiper-card rounded-[10px] shadow-md  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
+        className="swiper-card shadow-md  rounded-[10px]  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
       >
         <div className=" relative w-full ">
           <div className="w-full relative sm:text-24 md:text-16 z-10">
@@ -179,6 +179,8 @@ const CarCard = ({ card, isBuy = false }) => {
                 />
               </div>
             )}
+
+         
             {card?.base_site === "iaai" && (
               <button className="bg-[#D91E1E] z-50 absolute top-[0.2vw] left-[0.8vw] hover:bg-[#D91E1E]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
                 IAAI
@@ -205,12 +207,15 @@ const CarCard = ({ card, isBuy = false }) => {
               navigation={isHovered} 
               loop={true}
             >
+                 {/* <div style={{zIndex:999}} className="absolute bottom-0 w-full h-1 bg-white z-50 rounded-[10px]  sm:rounded-[0.1vw]">
+
+</div> */}
               {card.images &&
                 card.images.map((image, index) => (
                   <SwiperSlide key={index} className="relative w-full h-full">
-                    <div className={`w-full h-full`}>
+                    <div className={`w-full h-full `}>
                       <img
-                        className="w-full h-full rounded-sm cursor-pointer  "
+                        className="w-full h-[calc(100%+5px)] object-cover cursor-pointer"
                         src={image}
                         alt={`Vehicle_Image ${index + 1}`}
                         onClick={() => openModal(index)}
@@ -229,7 +234,7 @@ const CarCard = ({ card, isBuy = false }) => {
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-col gap-y-[0.2vw] ">
                   <Link to={`/vehicle-detail/${card.lot_id}`}  >
-                    <div className="flex justify-between hover:text-blue-800 cursor-pointer tracking-wider hover:underline  lg:text-20 font-bold text-left">
+                    <div className="flex justify-between hover:text-blue-800 cursor-pointer tracking-wider hover:underline  lg:text-18 font-bold text-left">
                       
                       {card.title.length > 25
                         ? `${card.title.slice(0, 25)}...`

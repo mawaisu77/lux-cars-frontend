@@ -33,9 +33,9 @@ const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType, 
           <PiUsersFill color="white" className="" />
         </div>
         <div data-tooltip-id={`seller-tooltip`} className="text-left p-2 md:p-[0.3vw]">
-          <p className="lg:text-[0.8vw] text-[#6a6978] font-semibold tracking-wider">Owned by <span style={{color: documentOldType?.color || ''}}> ({documentCategory}) </span> </p>
+          <p className="lg:text-[0.8vw] text-[#6a6978] font-semibold tracking-wider">Owned by <span style={{color: seller ?  documentOldType?.color : '#FF681F'}}> ( {seller ?  documentCategory : "Non-Insurance"}) </span> </p>
           <p
-          style={{ color: documentOldType?.color || '', padding: documentOldType ? '0.2vw' : '0', borderRadius: documentOldType ? '0.2vw' : '0' }}
+          style={{ color: seller ? documentOldType?.color : '#FF681F', padding: documentOldType ? '0.2vw' : '0', borderRadius: documentOldType ? '0.2vw' : '0' }}
             className={`lg:text-[0.8vw] font-urbanist font-semibold`}
           >
             {seller || "No Information"}
@@ -70,7 +70,7 @@ const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType, 
         place="top"
         content={
           <ColorDescriptionComponent
-            tooltipDescription={sellerTooltipDescription} 
+            tooltipDescription={seller ?  sellerTooltipDescription : "The seller has not been considered trustworthy by BidCaribbean, or detailed information is missing. Please exercise caution when making a purchase decision"} 
            />
           } 
         
