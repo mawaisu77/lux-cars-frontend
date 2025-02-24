@@ -1,3 +1,4 @@
+import { greenProtectonColor, orangeProtectonColor, redProtectonColor } from "../../../utils/ProtectionColorCodes";
 
 export const damageDescriptions = {
   "Minor Dent/Scratches": "Small cosmetic damage such as dents or scratches on the body of the vehicle.",
@@ -40,6 +41,7 @@ export const damageDescriptions = {
   "Biohazard/Chemical": "Contamination by hazardous materials, such as toxic chemicals or biological agents.",
   "Burn": "Fire damage to any part of the vehicle.",
   "Burn - Engine": "Damage to the engine due to fire or overheating.",
+  "Burn Engine":"Damage to the engine due to fire or overheating.",
   "Burn - Interior": "Damage to the interior of the vehicle from fire, including upholstery or dashboard.",
   "Mechanical": "Mechanical failure or damage affecting vehicle functionality.",
   "Missing/Altered VIN": "The VIN (Vehicle Identification Number) is missing or has been tampered with.",
@@ -75,17 +77,17 @@ export const damageDescriptions = {
 export const damageColorMap = {
     green: ["Minor Dent/Scratches","Hail", "Normal Wear", "Electrical", "Rear", "Repossession"], 
     orange: ["Damage History", "Rear End", "Partial Repair", "Replaced VIN", "Side", "Top/Roof", "Vandalism", "Theft", "Cash For Clunkers", "Charity","Front", "Front & Rear", "Front End", "Interior Damage", "Left & Right Side", "Left Front","Left Rear", "Left Side", "None", "Right Front", "Right Rear", "Right Side", "Roof", "Roof Damage", "Steering Column", "Storm Damage", "Strip", "Suspension", "Theft", "Vandalized"],                                                                           
-    red: ["Frame Damage", "Undercarriage Damage", "Biohazard/Chemical", "Burn", "Burn - Engine","Burn - Interior","Mechanical", "Missing/Altered VIN","Front End", "Rejected Repair", "Rollover", "Stripped", "Water/Flood", "Fire", "Collision", "Other", "All Over", "Bio Hazard", "Biohazard", "Engine", "Engine Burn", "Engine Damage", "Exterior Burn", "Flood", "Frame", "Fresh Water", "Interior Burn", "Mechanical", "Possible Mech", "Roll Over", "Rollover", "Salt Water", "Structural", "Total Burn", "Transmission Damage", "Undercarriage", "Unknown", "Water"], 
+    red: ["Frame Damage","Burn Engine" ,"Undercarriage Damage", "Biohazard/Chemical", "Burn", "Burn - Engine","Burn - Interior","Mechanical", "Missing/Altered VIN","Front End", "Rejected Repair", "Rollover", "Stripped", "Water/Flood", "Fire", "Collision", "Other", "All Over", "Bio Hazard", "Biohazard", "Engine", "Engine Burn", "Engine Damage", "Exterior Burn", "Flood", "Frame", "Fresh Water", "Interior Burn", "Mechanical", "Possible Mech", "Roll Over", "Rollover", "Salt Water", "Structural", "Total Burn", "Transmission Damage", "Undercarriage", "Unknown", "Water"], 
   };
   
   
   export const getDamageColorClass = (damageType) => {
     if (damageColorMap.green.includes(damageType)) {
-      return "text-green-600";
+      return greenProtectonColor;
     } else if (damageColorMap.orange.includes(damageType)) {
-      return "text-orange-600";
+      return orangeProtectonColor;
     } else if (damageColorMap.red.includes(damageType)) {
-      return "text-red-600";
+      return redProtectonColor;
     }
-    return "text-black"; 
+    return ""; 
   };

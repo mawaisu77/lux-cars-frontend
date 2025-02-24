@@ -28,7 +28,7 @@ function SimilarCars({ make, model, year }) {
 
   return (
     <div>
-      <div className="max-w-[85vw] sm:max-w-[73.229vw] mx-auto py-10">
+      <div className="max-w-[85vw] sm:max-w-[85vw] mx-auto py-10">
         <div className="flex justify-center items-center pb-4">
           <div className="flex flex-col gap-y-[6px] sm:gap-y-2">
             <div className="flex justify-center items-center font-urbanist text-[22px] sm:text-36 font-bold sm:leading-[2vw] sm:pt-[2vh]">

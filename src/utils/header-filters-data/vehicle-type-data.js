@@ -3,7 +3,7 @@ export const vehicleTypeOptions = [
     { label: "Motorcycle", value: "motorcycle", query: "vehicle_type" },
     { label: "ATV", value: "atv", query: "vehicle_type" },
     { label: "Watercraft", value: "watercraft", query: "vehicle_type" },
-    { label: "Jet Sky", value: "jet_sky", query: "vehicle_type" },
+    { label: "Jet Ski", value: "jet_sky", query: "vehicle_type" },
     { label: "Boat", value: "boat", query: "vehicle_type" },
     { label: "Trailers", value: "trailers", query: "vehicle_type" },
     { label: "Mobile Home", value: "mobile_home", query: "vehicle_type" },

@@ -34,6 +34,8 @@ import VehicleInfoUpperBody from "./ui/VehicleInfoUpperBody";
 import SalesHistory from "./SalesHistory";
 import useGetCarHistory from "../../../hooks/car_history/useGetCarHistory";
 import { documentOldOption } from "../../../utils/filtersData/documentOld";
+import AnchorLink from "react-anchor-link-smooth-scroll";
+import ProtectionNote from "./ui/ProtectionNote";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -166,6 +168,7 @@ const VehicleHero = () => {
       option.id.toLowerCase() === carDetailData?.data?.document_old?.toLowerCase()
   );
 
+
   return (
     <div className="bg-gray-100">
       <div className="lg:block hidden bg-vehicle">
@@ -223,6 +226,7 @@ const VehicleHero = () => {
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
                   />
+                  <AnchorLink href="#get_report">
                   <div className="flex justify-between  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1">
                       <IoDocumentTextOutline />
@@ -230,9 +234,12 @@ const VehicleHero = () => {
                     </div>
                     <BsDownload className="cursor-pointer" />
                   </div>
+                  </AnchorLink>
                   <VehicleDetailInfo
-                    data={carDetailData?.data}
+                    data={carDetailData?.data} 
                     currentStatus={currentStatus}
+                    currentDocumentOldType={currentDocumentOldType}
+                    salesHistoryCount={history?.data?.length}
                   />
                 </div>
 
@@ -333,7 +340,7 @@ const VehicleHero = () => {
                     />
                   </div>
 
-                  <div className="flex flex-col justify-center max-w-[700px] gap-y-4">
+                  <div  id="get_report" className="flex flex-col justify-center max-w-[700px] gap-y-4">
                     <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
                   </div>
                 </div>

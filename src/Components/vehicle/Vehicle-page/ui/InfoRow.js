@@ -23,7 +23,7 @@ const InfoRow = ({ label, value, className, description = "" }) => (
             } 
         />
       </span>
-      <span className={`text-black ${className}`}>{value}</span>
+      <span className={``} style={{color:`${className}`}}>{value}</span>
     </div>
   </div>
 );

@@ -152,7 +152,7 @@ const SwiperGallery = ({ images, carData }) => {
           }}
           loop={true}
           autoplay={{
-            delay: 2000,
+            delay: 4000,
             disableOnInteraction: false,
           }}
           spaceBetween={10}
@@ -217,7 +217,6 @@ const SwiperGallery = ({ images, carData }) => {
         {/* Modal for Video View */}
       <VideoModal isOpen={isVideoModalOpen} onClose={closeVideoModal}>
        <ReactPlayer url={carData?.video} controls={true} width={'90%'} height={'100%'}  config={{ file: { attributes: { preload: 'auto' } } }} 
-
        />
       </VideoModal>
 

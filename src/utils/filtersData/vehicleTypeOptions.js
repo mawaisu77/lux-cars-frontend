@@ -3,7 +3,7 @@ const vehicleTypeOptions = [
     { id: "motorcycle", label: "Motorcycle" },
     { id: "atv", label: "ATV" },
     { id: "watercraft", label: "Watercraft" },
-    { id: "jet_sky", label: "Jet Sky" },
+    { id: "jet_sky", label: "Jet Ski" },
     { id: "boat", label: "Boat" },
     { id: "trailers", label: "Trailers" },
     { id: "mobile_home", label: "Mobile Home" },
