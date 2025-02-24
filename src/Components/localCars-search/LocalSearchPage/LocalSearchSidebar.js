@@ -5,21 +5,25 @@ import Select from "react-select";
 import { RegionDropdown } from "react-country-region-selector";
 import { showToast } from "../../../utils/Toast";
 import Slider from "@mui/material/Slider";
+import { useLocation } from "react-router-dom";
 
 const LocalSearchSidebar = () => {
 
+  const location = useLocation(); // Get the current location
+  const { carLocationState, carLocationCountry } = location.state || {}; // Extract carLocation from state
+console.log("carLocasdsdsbdsvdnvsdnsbduntry", carLocationState, carLocationCountry)
   const option = useMemo(() => [
     { value: 'US', label: 'United States' },
     { value: 'BS', label: 'Bahamas' }
   ], []);
-  console.log("countries list", option)
+
   const [showFilters, setShowFilters] = useState(true);
   const [showMake, setShowMake] = useState(false);
   const [showModel, setShowModel] = useState(false);
   const [showYear, setShowYear] = useState(false);
   const [showMilage, setShowMilage] = useState(false);
   const [showTransmission, setShowTransmission] = useState(true);
-  const [showLocation, setShowLocation] = useState(false);
+  const [showLocation, setShowLocation] = useState(carLocationState !== null);
   const [vehicles, setVehicles] = useState(null);
   const [showtitlesStatus, setShowtitlesStatus] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({
@@ -31,8 +35,8 @@ const LocalSearchSidebar = () => {
     milageTo: "",
     transmission: [],
     titlesStatus:[],
-    carLocation: "",
-    carState: "",
+    carLocation: carLocationCountry,
+    carState: carLocationState,
     buyNowPrice: false, 
     minPrice: false,  
   });
@@ -181,6 +185,8 @@ const LocalSearchSidebar = () => {
     setVehicles(data?.cars);
     setPageNo(1);
   };
+
+  console.log("=====>", selectedFilters)
 
   const saveFiltersToLocalStorage = () => {
     const params = new URLSearchParams(selectedFilters).toString(); // Create query string from selectedFilters

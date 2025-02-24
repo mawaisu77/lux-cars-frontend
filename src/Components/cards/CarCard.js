@@ -31,6 +31,8 @@ import { statusOptions } from "../../utils/filtersData/statusOptions";
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 const CarCard = ({ card, isBuy = false }) => {
+  const [isHovered, setIsHovered] = useState(false); 
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -59,14 +61,12 @@ const CarCard = ({ card, isBuy = false }) => {
     if (swiperRefs.current[index]) {
       swiperRefs.current[index].autoplay.start();
     }
-
   };
 
   const handleMouseLeave = (index) => {
     if (swiperRefs.current[index]) {
       swiperRefs.current[index].autoplay.stop();
     }
-
   };
 
   // Memoize the targetTime to prevent unnecessary recalculations
@@ -152,8 +152,14 @@ const CarCard = ({ card, isBuy = false }) => {
   return (
     <>
       <div
-        onMouseEnter={() => handleMouseEnter(card.id)}
-        onMouseLeave={() => handleMouseLeave(card.id)}
+      onMouseEnter={() => {
+        handleMouseEnter(card.id);
+        setIsHovered(true); // Set hover state to true
+      }}
+      onMouseLeave={() => {
+        handleMouseLeave(card.id);
+        setIsHovered(false); // Set hover state to false
+      }}
         className="swiper-card rounded-[10px] shadow-md  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
       >
         <div className=" relative w-full ">
@@ -196,6 +202,7 @@ const CarCard = ({ card, isBuy = false }) => {
                 clickable: true,
                 dynamicBullets: true,
               }}
+              navigation={isHovered} 
               loop={true}
             >
               {card.images &&

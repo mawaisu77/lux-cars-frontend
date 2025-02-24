@@ -23,7 +23,7 @@ const VehicleHistory = React.memo(({ carData }) => {
         </div>
       ) : (
         <div
-          className="max-w-[85vw] bg-white sm:max-w-[73.229vw] mx-auto"
+          className="max-w-[85vw] sm:max-w-[85vw] mx-auto pb-[3vw]"
           id="startBidding"
         >
           <div className="flex justify-center items-center ">
@@ -37,21 +37,26 @@ const VehicleHistory = React.memo(({ carData }) => {
                 data-tooltip-id="vehicle-comp-info"
                 className="font-extrabold text-[20px] sm:text-24 animate-pulse cursor-pointer"
               />
-                <ReactTooltip
-                className="text-16 z-50"
-                id="vehicle-comp-info"
-                content="Information required..."
-              />
+               
               </div>
               <hr className="h-[2px] mx-auto sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[4vw] " />
             </div>
           </div>
-          <div className="relative my-[2vw] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          <div className="relative mt-[2vw] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
             {cars?.data &&
               cars?.data.map((card, index) => (
                 <HistoryCard key={index} card={card} />
               ))}
           </div>
+
+          <ReactTooltip
+                className="text-16 z-50"
+                id="vehicle-comp-info"
+                content="This section provides a comparison of similar vehicles' final bid prices to help you understand the competitive bidding landscape.
+                 It aids in helping you set a realistic maximum bid based on previous auction outcomes,
+                  ensuring you can confidently participate in the bidding process to win."
+                style={{ maxWidth: '300px', fontWeight:400 }}
+              />
         </div>
       )}
     </>

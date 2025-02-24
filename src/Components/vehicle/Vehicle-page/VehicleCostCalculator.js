@@ -38,7 +38,6 @@ const categoryOptions = [
 
 const Dropdown = ({ bidAmount, data }) => {
 
-  const [vatPercentage, setVatPercentage] = useState(10); // State for VAT percentage
   const [processingFee, setProcessingFee] = useState(0.01); // State for processing fee
   const [levyFee, setLevyFee] = useState(250); // State for levy fee
   const [selectedLocation, setSelectedLocation] = useState("Bahamas"); // State for location selection
@@ -47,7 +46,6 @@ const Dropdown = ({ bidAmount, data }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [transportationOptions, setTransportationOptions] = useState([]);
   const [selectedTransportation, setSelectedTransportation] = useState(null);
-  const [selectedFuelType, setSelectedFuelType] = useState("");
   const [includeInspection, setIncludeInspection] = useState(null); // New state for inspection selection
 
   const [finalBid, setFinalBid] = useState(0); // Store the final bid in state
@@ -74,7 +72,6 @@ const Dropdown = ({ bidAmount, data }) => {
     return 0;
   };
 
-  // const finalBid = bidAmount ? parseFloat(bidAmount).toFixed(2) : 0;
   const currentYear = new Date().getFullYear();
   // Check if the car year is older than 10 years
   const isOlderThanTenYears = () => {
@@ -143,7 +140,7 @@ const Dropdown = ({ bidAmount, data }) => {
     return 0; // Default case if no conditions are met
 };
   const calculateInspectionCost = () => (includeInspection === "Yes" ? 500 : 0);
-  const calculateCustomsClearence = () => 350;
+  const calculateCustomsClearence = () => selectedLocation==="Bahamas"?350:475;
 
   const calculateVATBase = () => {
     const bid = parseFloat(finalBid) || 0;
@@ -208,6 +205,7 @@ const Dropdown = ({ bidAmount, data }) => {
 
   const handleCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
+    console.log(">>>>>>>>",selectedOption)
     switch (selectedOption.value) {
       case "SUV":
         setTransportationOptions(suvData);
@@ -234,13 +232,22 @@ const Dropdown = ({ bidAmount, data }) => {
   };
 
   const extractState = (location, transportationOptions) => {
-    return (
-      transportationOptions.find(
-        (option) =>
-          location.includes(option.abbreviation) ||
-          location.includes(option.label)
-      ) || null
-    ); // Return null if no match is found
+    console.log("Extracting state from location:", location);
+    if (!location || !data?.state) {
+      console.log("Location or state is null, returning null");
+      return null;
+    }
+
+    // Use the state abbreviation directly
+    const stateCode = data?.state.toUpperCase();
+    console.log("State code to match:", stateCode);
+    
+    return transportationOptions.find(option => {
+      const upperAbbr = option.abbreviation.toUpperCase();
+      console.log("Checking option:", stateCode, upperAbbr);
+      // Do exact match on state abbreviation
+      return stateCode === upperAbbr;
+    });
   };
 
   useEffect(() => {
@@ -271,7 +278,7 @@ const Dropdown = ({ bidAmount, data }) => {
       }
 
       // Extract the matched transportation state based on the location
-      const matchedTransportation = extractState(data.location, categoryData);
+      const matchedTransportation = extractState(data?.state, categoryData);
       if (matchedTransportation) {
         // Set the matched transportation option if found
         setSelectedTransportation(matchedTransportation);
@@ -280,7 +287,7 @@ const Dropdown = ({ bidAmount, data }) => {
         setSelectedTransportation(null);
       }
     }
-  }, [selectedCategory, data.location]);
+  }, [selectedCategory, data?.location]);
 
   // Update final bid when bidAmount or base_site changes data?.base_site
   useEffect(() => {
@@ -297,7 +304,7 @@ const Dropdown = ({ bidAmount, data }) => {
   }, [data]);
 
   return (
-    <div className="relative space-y-2 bg-white w-full mx-auto mt-[5.4vh] font-urbanist shadow-sm rounded-[0.5vw] p-[1.5vw]">
+    <div className="relative tracking-wider space-y-2 bg-white w-full mx-auto mt-[5.4vh] font-urbanist shadow-sm rounded-[0.5vw] p-[1.5vw]">
       <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
         <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
           <BiCalculator className="w-5 h-5" />
@@ -359,18 +366,19 @@ const Dropdown = ({ bidAmount, data }) => {
               <span className="text-sm md:text-20 text-left text-gray-700">
                 US Inland Transport:
               </span>
-              {/* <p className="text-sm md:text-20 text-gray-700">
-                ${selectedTransportation?.rate || 0}
-              </p> */}
-              </div>
               <Select
                 styles={customCalculatorDropdownStyles}
                 options={categoryOptions}
                 value={selectedCategory}
                 onChange={handleCategoryChange} 
-                placeholder="Select Transportation"
+                placeholder="Select Island"
                 className="text-sm lg:text-[0.875vw] w-[120px] text-right font-medium text-gray-800"
               />
+              </div>
+             
+               <p className="text-sm md:text-20 text-gray-700">
+                {selectedTransportation?.rate ? `$${selectedTransportation.rate}` : "No information"}
+               </p>
             </div>
           </div>
 
@@ -478,6 +486,8 @@ const Dropdown = ({ bidAmount, data }) => {
         <div className="space-y-3 md:space-y-[1.5vw]">
           {/*6 Duty rate  */}
       
+        {
+          selectedLocation === "Bahamas" && 
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
             <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
@@ -499,12 +509,15 @@ const Dropdown = ({ bidAmount, data }) => {
             ${calculateCustomsDuty().toFixed(2)}
             </span>
           </div>
+        }  
 
           {/*7 Processing Fee  */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
             <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">7</span>
+                <span className="text-sm">
+                  {selectedLocation === "Turks"? "6":"7"}
+                </span>
               </div>
               <span className="text-sm md:text-20 text-gray-700">
                 Processing Fee:
@@ -531,17 +544,20 @@ const Dropdown = ({ bidAmount, data }) => {
               ${calculateProcessingFee().toFixed(2)}
             </span>
           </div>
+
           {/*8 Environmental Levy Fee */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
             <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">8</span>
+                <span className="text-sm">
+                {selectedLocation === "Turks"? "7":"8"}
+                </span>
               </div>
               <span className="text-sm md:text-20 text-gray-700">
                 Environmental Levy Fee: (flat)
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
-                {
+                {/* {
                   selectedLocation === "Turks" ? (    
                     <TooltipInfo content="N/A">
                       <BsInfoCircle
@@ -549,7 +565,7 @@ const Dropdown = ({ bidAmount, data }) => {
                       className={` hover:text-blue-800 duration-200`}
                     />
                   </TooltipInfo>
-                ) : (
+                ) : ( */}
                   <TooltipInfo
                   content={` ${
                     showApprovalMessage
@@ -565,9 +581,9 @@ const Dropdown = ({ bidAmount, data }) => {
                   />
                 </TooltipInfo>
 
-                )}
+                {/* )} */}
               </div>
-              { selectedLocation === "Bahamas" && showApprovalMessage && (
+              {  showApprovalMessage && (
                 <div className="">
                   <span className="text-red-600 text-[10px] px-[8px] py-[4px] bg-red-600/10 rounded-lg">
                     Approval needed
@@ -579,6 +595,33 @@ const Dropdown = ({ bidAmount, data }) => {
               ${calculateLevyFee().toFixed(2)}
             </span>
           </div>
+
+          
+        {
+          selectedLocation === "Turks" && 
+          <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
+            <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm">8</span>
+              </div>
+              <span className="text-sm md:text-20 text-gray-700">
+              Duty Rate:
+              </span>
+              <div className="text-sm md:text-20 text-gray-700 flex">
+                <TooltipInfo content="Customs Duty 65% if gasoline / 10% if hybrid">
+                  <BsInfoCircle
+                    size={15}
+                    className={` hover:text-blue-800 duration-200`}
+                  />
+                </TooltipInfo>
+              </div>
+            </div>
+            <span className="text-sm md:text-20 font-medium text-gray-800">
+            ${calculateCustomsDuty().toFixed(2)}
+            </span>
+          </div>
+        } 
+
           {/*9 VAT  */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
@@ -640,7 +683,7 @@ const Dropdown = ({ bidAmount, data }) => {
     <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
         <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
           <MdCalculate className="w-5 h-5" />
-          Total Price 
+          Total Price
         </h3>
         <div className="space-y-3 md:space-y-[1.5vw]">
 
@@ -703,7 +746,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 <span className="text-sm">13</span>
               </div>
               <span className="text-sm md:text-20 font-semibold text-gray-900">
-                Final Price: 
+                Final Price Estimation: 
               </span>
 
               <div className="">

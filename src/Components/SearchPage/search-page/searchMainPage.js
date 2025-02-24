@@ -35,6 +35,7 @@ function SearchMainPage({
     setCards([]); 
     fetchCards(1); 
   }, [triggerFetch]);
+    
 
   useEffect(() => {
     if (page > 1) fetchCards(page);
