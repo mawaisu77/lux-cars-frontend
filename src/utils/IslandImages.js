@@ -3,7 +3,6 @@ import abaco from "../assets/bahams-island/abaco.jpg";
 import andros from "../assets/bahams-island/andros.jpg";
 import bimini from "../assets/bahams-island/bimini.jpg";
 import catIsland from "../assets/bahams-island/catIsland.jpg";
-import eleuthera from "../assets/bahams-island/eleuthera.jpg";
 import exuma from "../assets/bahams-island/exuma.jpg";
 import raggedIsland from "../assets/bahams-island/raggedIsland.jpg";
 import sanSalvador from "../assets/bahams-island/sanSalvador.jpg";
@@ -37,40 +36,54 @@ import southEleuthera from "../assets/bahams-island/southEleuthera.jpg";
 
 // Create and export the islandImages object
 export const islandImages = {
-    "NORTH ABACO": northAbaco,
-    "ACKLINS ISLAND": acklins,
-    "ANDROS": andros,
-    "NICHOLLS TOWN AND BERRY ISLANDS": berryIsland,
-    "BIMINI": bimini,
-    "BLACK POINT": blackPoint,
-    "CENTRAL ABACO": abaco,
-    "CAT ISLAND": catIsland,
-    "CROOKED ISLAND AND LONG CAY": crookedIslandAndLongCay,
-    "ELEUTHERA": eleuthera,
-    "EAST GRAND BAHAMAS": eastGrandBahamas,
-    "EXUMA": exuma,
-    "FREE PORT": freePort,
-    "FRESH CREEK": freshCreek,
+    "Acklins Island": acklins,
+    // "Andros": andros,
+
+    "Bimimi": bimini,
+    "Berry Island": andros,
+    "Black Point": blackPoint,
+
+    "Central Abaco": abaco,
+    "Cat Island": catIsland,
+    "Crooked Island And Long Cay": crookedIslandAndLongCay,
+
+    // "ELEUTHERA": eleuthera,
+    "Eest Grand Bahamas": eastGrandBahamas,
+    "Exuma": exuma,
+
+    "Free Port": freePort,
+    "Fresh Creek": freshCreek,
+
     "Governor's Harbour": governorsHarbour,
-    "GREEN TURTLECAY": greenTurtleCay,
-    "HIGH ROCK": highRock,
-    "HARBOUR ISLAND": harbourIsland,
-    "INAGUA ISLANDS": inaguaIslands,
-    "KEMP'S BAY": kempsBay,
-    "LONG ISLAND": longIsland,
-    "MARSH HARBOUR": marshHarbour,
-    "MAYAGUANA": mayaguana,
-    "MOORE'S ISLAND": mooreIsland,
-    "NEW PROVIDENCE": newProvidemce,
-   
-    "NORTH ANDROS": northAndros,
-    "NORTH ELEUTHERA": northEleuthera,
-    "SAN SALVADOR AND RUM CAY": sanSalvador,
-    "SANDY POINT": sandyPoint,
-    "SOUTH ABACO": southAbaco,
-    "SOUTH ANDROS": southAndros,
-    "SOUTH ELEUTHERA": southEleuthera,
-    "RAGGED ISLAND": raggedIsland,
-    "ROCK SOUND": rockSound,
-    "WEST GRAND BAHAMAS": westGrandBahamas,
+    "Green Turtlecay": greenTurtleCay,
+
+    "High Rock": highRock,
+    "Harbour Island": harbourIsland,
+
+    "Inagua": inaguaIslands,
+
+    "Kemps Bay": kempsBay,
+
+    "Long Island": longIsland,
+
+    "March Harbour": marshHarbour,
+    "Mayaguana": mayaguana,
+    "Moore's Island": mooreIsland,
+
+    "New Providence": newProvidemce,
+    "Nichollstown and Berry Island": berryIsland,
+    "North Abaco": northAbaco,
+    "North Andros": northAndros,
+    "North Eleuthera": northEleuthera,
+
+    "Rock Sound": rockSound,
+    "Ragged Island": raggedIsland,
+
+    "San Salvador and Rum Cay": sanSalvador,
+    "Sandy Point": sandyPoint,
+    "South Abaco": southAbaco,
+    "South Andros": southAndros,
+    "South Eleuthera": southEleuthera,
+
+    "West Grand Bahamas": westGrandBahamas,
 };

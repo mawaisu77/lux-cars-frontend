@@ -1,13 +1,15 @@
 import React from 'react'
 import BidHistory from '../BidHistory'
 import InfoRow from './InfoRow'
-import { getDamageColorClass } from '../DamageColorCodes';
-import { getOdometerColorClass } from '../OdometerColor';
+import { damageDescriptions, getDamageColorClass } from '../DamageColorCodes';
+import { getOdometerColorClass, odometerDescriptions } from '../OdometerColor';
 import { formatMileageMiles } from '../../../SearchPage/search-page/searchCard';
+import ProtectionNote from './ProtectionNote';
 
-const VehicleDetailInfo = ({data, currentStatus}) => {
-  const damageColorClass = getDamageColorClass(data?.damage_pr);
-  const damageColorClass2 = getDamageColorClass(data?.damage_sec);
+
+const VehicleDetailInfo = ({data, currentStatus, currentDocumentOldType, salesHistoryCount}) => {
+  const damageColorCode = getDamageColorClass(data?.damage_pr);
+  const damageColorCode2 = getDamageColorClass(data?.damage_sec);
   const odometerColorClass = getOdometerColorClass(data?.odometer);
 
   return (
@@ -38,6 +40,7 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
           label="Mileage"
           value={formatMileageMiles(data?.odometer) || "N/A"}
           className={odometerColorClass}
+          description={odometerDescriptions[odometerColorClass] || ''} 
         />
         <InfoRow
           label="Transmission"
@@ -46,17 +49,22 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
         <InfoRow
           label="Damage Primary"
           value={data?.damage_pr || "N/A"}
-          className={damageColorClass}
+          className={damageColorCode}
+          description={damageDescriptions[data?.damage_pr] || ''}
+
         />
         <InfoRow
           label="Damage Secondary"
           value={data?.damage_sec || "N/A"}
-          className={damageColorClass2}
+          className={damageColorCode2}
+          description={damageDescriptions[data?.damage_sec] || ''} 
+
         />
         <InfoRow
           label="Start Code"
           value={data?.status || "N/A"}
-          className={currentStatus?.hex}
+          className={currentStatus?.hex_new}
+          description={currentStatus?.description}
         />
       </div>
     </section>
@@ -136,6 +144,8 @@ const VehicleDetailInfo = ({data, currentStatus}) => {
         </div>
       </section>
     </div>
+
+    <ProtectionNote currentDocumentOldType={currentDocumentOldType} damageColorCode={damageColorCode} damageType={data?.damage_pr} salesHistoryCount={salesHistoryCount} />
 
     {/* Bid history */}
     <div className="">

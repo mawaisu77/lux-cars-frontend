@@ -7,13 +7,15 @@ import { useNavigate } from "react-router-dom";
 const Aboutdest = () => {
   const navigate = useNavigate();
   const [backgroundImage, setBackgroundImage] = useState(
-    islandImages["NORTH ABACO"]
+    islandImages["North Abaco"]
   );
 
   const locations = Object.keys(islandImages);
 
   const handleButtonClick = (island) => {
     setBackgroundImage(islandImages[island]);
+    navigate('/search-local-cars', { state: { carLocationState: island, carLocationCountry: "Bahamas" } }); // Navigate to search page with selected location
+
   };
 
   return (

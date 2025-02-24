@@ -26,7 +26,7 @@ const VehicleCards = React.memo(({ carData }) => {
         </div>
       ) : (
         <div
-          className="max-w-[85vw] sm:max-w-[73.229vw] mx-auto"
+          className="max-w-[85vw] sm:max-w-[85vw] mx-auto"
           id="startBidding"
         >
           <div className="flex justify-center items-center ">

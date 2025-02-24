@@ -67,11 +67,11 @@ const HistoryCard = ({ card, isBuy = false }) => {
   };
 
   const statusColors = {
-    "Run & Drive": "bg-green-500/20 text-green-600",
-    Stationary: "bg-yellow-500/20 text-yellow-600",
-    Starts: "bg-red-500/20 text-red-600",
-    "Can't test": "bg-gray-500/20 text-gray-600",
-    Unknown: "bg-blue-500/20 text-blue-600",
+    "Run & Drive": "bg-green-500/10 text-green-600",
+    Stationary: "bg-yellow-500/10 text-yellow-600",
+    Starts: "bg-red-500/10 text-red-600",
+    "Can't test": "bg-gray-500/10 text-gray-600",
+    Unknown: "bg-blue-500/10 text-blue-600",
   };
 
   return (
@@ -79,7 +79,7 @@ const HistoryCard = ({ card, isBuy = false }) => {
       <div
         onMouseEnter={() => handleMouseEnter(card.id)}
         onMouseLeave={() => handleMouseLeave(card.id)}
-        className="swiper-card rounded-[10px] shadow-md  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
+        className="swiper-card rounded-[10px] shadow-sm  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
       >
         <div className=" relative w-full ">
           <div className="w-full relative sm:text-24 md:text-16 z-10">
@@ -117,18 +117,18 @@ const HistoryCard = ({ card, isBuy = false }) => {
           <div className="pt-[1vw]">
             <div className="flex">
               <div className="flex justify-between items-center w-full">
-                <div className="flex flex-col gap-y-[0.2vw] lg:text-18 w-full">
+                <div className="flex flex-col gap-y-[0.3vw] lg:text-18 w-full">
                   {/* <Link to={`vehicle-detail/${card.lot_id}`}> */}
-                  <div className="flex justify-between  font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
-                    "
+                  <div className="flex tracking-wider justify-between  font-urbanist  lg:text-18 font-bold  lg:leading-[2vh] text-left">
+                    
                     {card.title.length > 25
                       ? `${card.title.slice(0, 25)}...`
                       : card.title}
-                    ”
+                    
                   </div>
                   {/* </Link> */}
 
-                  <div className="flex gap-x-[0.8vw] text-[12px] lg:text-14">
+                  <div className="flex gap-x-[0.8vw] text-[12px] lg:text-16">
                     <p className="py-[0.1vh]">Status:</p>
                     <p
                       className={`py-[0.1vh] font-semibold rounded-md px-[0.4vw] ${
@@ -138,7 +138,7 @@ const HistoryCard = ({ card, isBuy = false }) => {
                       {card.status}
                     </p>{" "}
                   </div>
-                  <div className="flex gap-x-[0.8vw] text-[12px] lg:text-14">
+                  <div className="flex gap-x-[0.8vw] text-[12px] lg:text-16">
                     <p className="py-[0.1vh]">Sale Date:</p>
                     <p className="py-[0.1vh] text-nowrap">
                       {moment(card?.sale_history[0]?.sale_date).format(
@@ -146,20 +146,8 @@ const HistoryCard = ({ card, isBuy = false }) => {
                       )}
                     </p>
                   </div>
-                  {/* {card.currentBid && (
-                    <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-14">
-                      <p className="py-[0.1vh] font-semibold">Current Bid:</p>
-                      <p className="py-[0.1vh] bg-green-500/20 font-semibold text-green-600 rounded-md px-[0.4vw]">
-                        {card.currentBid
-                          ? card.currentBid.toLocaleString("en-US", {
-                              style: "currency",
-                              currency: "USD",
-                            })
-                          : null}
-                      </p>
-                    </div>
-                  )} */}
-                   <div className="w-full flex flex-col justify-center items-center bg-red-500/5  my-[0.2vw] py-[0.2vw] text-[12px] lg:text-15 rounded-md">
+               
+                   <div className="w-full flex flex-col justify-center items-center bg-red-500/5  my-[0.2vw] py-[0.2vw] text-[12px] lg:text-16 rounded-md">
                     <p className=" font-semibold">Final Bid</p>
                     <p className=" font-semibold text-red-600">
                       ${card?.sale_history[0]?.purchase_price}

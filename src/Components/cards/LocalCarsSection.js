@@ -45,7 +45,7 @@ const LocalCars = () => {
   return (
     <>
       <div className="relative w-[100vw] mx-auto py-[30px]  sm:py-[4.167vw] bg-secondary-gray">
-      <div className="max-w-[85vw] sm:max-w-[73.229vw]  mx-auto">
+      <div className="max-w-[85vw] sm:max-w-[85vw]  mx-auto">
       <div className="flex justify-between items-center ">
             <div className="flex flex-col gap-y-[6px] sm:gap-y-2">
             <div className="flex justify-start items-center font-urbanist text-[22px] sm:text-36 font-bold sm:leading-[2vw] sm:pt-[2vh]">
