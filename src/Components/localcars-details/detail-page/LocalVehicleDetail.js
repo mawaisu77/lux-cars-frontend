@@ -91,7 +91,7 @@ const LocalVehicleDetail = () => {
   return (
     <>
       <div className="lg:block hidden bg-vehicle">
-        <div className="w-[15.5] flex flex-col pt-[12.5vh]">
+        <div className="w-[15.5] flex items-center justify-center flex-col pt-[12.5vh]">
           <div className="text-[2.6vw] font-semibold text-white">
             Local Vehicle Detail
           </div>
@@ -113,20 +113,20 @@ const LocalVehicleDetail = () => {
         ValidDate ? (
           ``
         ) : (
-          <div className="bg-[#CA0000] text-md lg:text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
+          <div className="bg-[#CA0000] text-md lg:text-[1vw] shadow mt-[88px] lg:mt-0 tracking-wider text-white text-center p-[0.7vw] font-bold">
             Preliminary Bidding is Over for this vehicle
           </div>
         )
       ) : (
-        <div className="bg-[#217bf0]  text-md lg:text-[1vw] shadow tracking-wider text-white text-center p-[0.7vw] font-bold">
+        <div className="bg-[#217bf0]  text-md lg:text-[1vw] shadow mt-[88px] lg:mt-0 tracking-wider text-white text-center p-[0.7vw] font-bold">
           Auction date is not decided yet, Be one on the top of bidding list
         </div>
       )}
 
       {carDetailData && (
         <div className="bg-gray-100">
-          <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[74vw] pt-[100px] pb-[20px]">
-            <div className="w-full lg:w-[36vw] ">
+          <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[90%] lg:w-[84vw] lg:pt-[50px] pb-[20px]">
+            <div className="w-[100%]   lg:w-[48%] ">
               {carDetailData?.data?.car?.carImages ? (
                 <div>
                   <SwiperGallery
@@ -209,10 +209,10 @@ const LocalVehicleDetail = () => {
               </section>
             </div>
 
-            <div className="w-full lg:w-[33vw]">
+            <div className="w-full lg:w-[48%]">
               <div>
-                <div className="flex justify-between mt-[50px] lg:mb-[3vh]">
-                  <div className="flex w-full justify-left items-center gap-2 rounded-[0.5vw] bg-white">
+                <div className="flex  justify-between mt-[50px] lg:mt-2 lg:mb-[3vh]">
+                  <div className="flex w-full justify-between px-[0.5vw] items-center gap-2 rounded-[0.5vw] bg-white">
                     {currentStatus && (
                       <div
                         className="w-4 h-4 lg:w-[1.5vw] lg:h-[1.5vw] rounded-full ml-3"
@@ -224,15 +224,25 @@ const LocalVehicleDetail = () => {
                         >
                           {currentStatus.letter}
                         </span>
+                        
                       </div>
                     )}
                     <p className="lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
                       {carDetailData?.data?.car?.make}{" "}
                       {carDetailData?.data?.car?.model}
                     </p>
+                    <button
+                      title="Copy URL"
+                      onClick={() =>
+                        document.getElementById("copy_url_modal").showModal()
+                      }
+                      className=" bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg"
+                    >
+                      <FaLink className="lg:text-20" />
+                    </button>
                   </div>
                 </div>
-                <div className="flex justify-between bg-white rounded-[0.5vw] p-2 lg:mb-[2vh]">
+                {/* <div className="flex justify-between bg-black rounded-[0.5vw] p-2 lg:mb-[2vh]">
                   <div className="flex justify-between w-full  items-center ">
                     <div className="font-urbanist bg-yellow-500/30 px-[1vw] py-[0.2vw] rounded-[0.5vw] font-semibold flex gap-x-2">
                       <span className=" text-black">Buy now price</span>
@@ -242,17 +252,9 @@ const LocalVehicleDetail = () => {
                           : "Not Available"}
                       </span>
                     </div>
-                    <button
-                      title="Copy URL"
-                      onClick={() =>
-                        document.getElementById("copy_url_modal").showModal()
-                      }
-                      className=" bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg"
-                    >
-                      <FaLink className="text-20" />
-                    </button>
+                    
                   </div>
-                </div>
+                </div> */}
                 <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
                   <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
@@ -263,7 +265,7 @@ const LocalVehicleDetail = () => {
                     </div>
                     <div className="text-left">
                       <p className="lg:text-[0.7vw] text-[#7a798a]">Owned by</p>
-                      <p className="lg:text-[0.9vw] font-urbanist font-semibold text-green-600 bg-green-500/30 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]">
+                      <p className="lg:text-[0.9vw] font-urbanist font-semibold text-green-600   py-[0.1vw] px-[0.2vw] rounded-[0.2vw]">
                         {carDetailData?.data?.user?.username}
                       </p>
                     </div>
@@ -279,7 +281,7 @@ const LocalVehicleDetail = () => {
                       <p className="lg:text-[0.7vw] text-[#7a798a]">
                         Sale Platforms
                       </p>
-                      <p className="lg:text-[0.9vw] font-urbanist font-semibold text-green-600 bg-green-500/30 py-[0.1vw] px-[0.2vw] rounded-[0.2vw]">
+                      <p className="lg:text-[0.9vw] font-urbanist font-semibold text-green-600  py-[0.1vw] px-[0.2vw] rounded-[0.2vw]">
                         Lux Cars
                       </p>
                     </div>
@@ -389,6 +391,16 @@ const LocalVehicleDetail = () => {
                     <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
                     <span className="text-md lg:text-[1.1vw]">
                       PlACE MAX BID
+                    </span>
+                  </button>
+                  <button
+                    
+                    className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full"
+                   
+                  >
+                     
+                    <span className="text-md lg:text-[1.1vw]">
+                      Buy Now
                     </span>
                   </button>
                 </div>

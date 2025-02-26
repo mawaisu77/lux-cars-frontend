@@ -293,7 +293,7 @@ const Header = () => {
                   />
                 </Link> */}
               </div>
-              <div className="w-[35%] ml-2 lg:ml-0">
+              <div className="w-[55%] ml-2 lg:ml-0">
                 <div className="relative w-90%" ref={dropdownRef}>
                   <input
                     type="text"

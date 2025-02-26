@@ -24,6 +24,7 @@ export const validatePaymentDetails = (paymentDetails) => {
     ) {
       errors.card_amount = "Enter a valid deposit amount";
     }
+
   
     if (!paymentDetails.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       errors.email = "Invalid email format";

@@ -1,12 +1,9 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import useTimer from "../../../hooks/useTimer";
 import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { BsFire, BsHeart, BsHeartFill } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa6";
-import "swiper/css";
-import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
 import { RxCopy } from "react-icons/rx";
@@ -19,7 +16,13 @@ import { useSavedLocalCars } from "../../../context/SavedLocalCarsIdscontext";
 import useDeleteSaveLocalCar from "../../../hooks/useDeleteSaveLocalCar";
 import useSaveLocalCar from "../../../hooks/useSaveLocalCar";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import bidCaribbeansLogo from "../../../assets/lux-logo/logo-tag.png"
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
+import SwiperCore from "swiper";
 
+SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   const [totalPages, setTotalPages] = useState([]);
@@ -51,6 +54,9 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
       });
     }
   };
+
+  
+
 
   return (
     <div className="flex flex-col ">
@@ -96,6 +102,7 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
 
 
 function Card({ vehicle }) {
+  const [isHovered, setIsHovered] = useState(false); 
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -184,33 +191,72 @@ function Card({ vehicle }) {
     }
   };
 
+  
+  const swiperRefs = useRef([]);
+
+  const initializeSwiper = (swiper, index) => {
+    swiperRefs.current[index] = swiper;
+    swiper.autoplay.stop();
+  };
+
+  const handleMouseEnter = (index) => {
+    if (swiperRefs.current[index]) {
+      swiperRefs.current[index].autoplay.start();
+    }
+  };
+
+  const handleMouseLeave = (index) => {
+    if (swiperRefs.current[index]) {
+      swiperRefs.current[index].autoplay.stop();
+    }
+  };
+
   return (
-    <div className="h-fit lg:h-auto flex flex-col lg:flex-row bg-white  shadow-md rounded-lg mb-6 p-4">
+    <div 
+    onMouseEnter={() => {
+      handleMouseEnter(vehicle.id);
+      setIsHovered(true); // Set hover state to true
+    }}
+    onMouseLeave={() => {
+      handleMouseLeave(vehicle.id);
+      setIsHovered(false); // Set hover state to false
+    }}
+    className="h-fit lg:h-auto flex flex-col lg:flex-row bg-white  shadow-md rounded-lg mb-6 p-4">
      
+    
       <Swiper
+         onSwiper={(swiper) => initializeSwiper(swiper, vehicle.id)}
         className="relative w-full lg:w-[20vw] mx-auto h-auto rounded-md "
         autoplay={{
           delay: 2000,
           disableOnInteraction: false,
         }}
-        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+        modules={[Navigation, Autoplay]}
+        navigation={isHovered} 
         loop={true}
       >
           {isCarSaved ? (
           <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
             <BsHeartFill
-              onClick={() => handleSaveClick(vehicle.lot_id)}
+              onClick={() => handleSaveClick(vehicle.id)}
               className=" cursor-pointer text-red-600"
             />
           </div>
         ) : (
           <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
             <BsHeart
-              onClick={() => handleSaveClick(vehicle.lot_id)}
+              onClick={() => handleSaveClick(vehicle.id)}
               className=" cursor-pointer text-white hover:text-red-600"
             />
           </div>
         )}
+         <div className=" h-[15px] md:h-[2.3vw] z-50 absolute bottom-[0vw] -left-[1vw] ">
+                <img 
+                  src={bidCaribbeansLogo} 
+                  alt="bidcaribbeanslogo"
+                  className=" w-full h-full object-contain"
+                />
+              </div>
         {vehicle?.carImages &&
           vehicle?.carImages?.map((image, index) => (
             <SwiperSlide
@@ -333,7 +379,7 @@ function Card({ vehicle }) {
                     onClick={() => handleBidNow(vehicle?.id)}
                     className="w-full"
                   >
-                    <button className=":w-[100%] md:w-full h-auto py-[2vh]  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+                    <button className="w-[100%] md:w-full  h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
                       Buy Now ${vehicle?.buyNowPrice ? vehicle?.buyNowPrice : "0"}
                     </button>
                   </span>

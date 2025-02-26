@@ -12,6 +12,7 @@ import VideoModal from "./ModalVideo";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
 import { vehicleScoreColors } from "./VehicleScoreColor";
+import bidcaribbeansLogo from "../../../assets/lux-logo/logo-tag.png"
 
 const SwiperGallery = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -134,10 +135,10 @@ const SwiperGallery = ({ images, carData }) => {
            Video
          </button>}
          <div
-           className="absolute  z-10 bottom-5 w-28 text-sm left-0 rounded-lg"
+           className="absolute  z-10 bottom-2 w-52 text-sm left-0 rounded-lg"
          >
             <img
-              src={"https://res.cloudinary.com/dqe7trput/image/upload/v1724846628/Horizontal_-_White0_2_haq83u.svg"}
+              src={bidcaribbeansLogo}
               className="my-2 rounded-lg shadow-img cursor-pointer"
               alt={`Vehicle_Image`}
              />
@@ -227,7 +228,7 @@ const SwiperGallery = ({ images, carData }) => {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidcaribbeansLogo}
       />
     </div>
   )
