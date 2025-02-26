@@ -50,7 +50,7 @@ export default function BiddingLimit({ fetchFunds }) {
     setPurchaseLimit(newPurchaseLimit);
     setPaymentDetails((prevDetails) => ({
       ...prevDetails,
-      card_amount: biddingConfig.depositPercentage * newBiddingLimit, 
+      card_amount: biddingConfig.depositPercentage * newBiddingLimit,
     }));
   };
 
@@ -100,9 +100,9 @@ export default function BiddingLimit({ fetchFunds }) {
     card_number: "",
     card_cvv: "",
     card_exp: "",
-    card_amount: securityDeposit,
+    card_amount: String(securityDeposit),
     email: "",
-    deposit: 0,
+    deposit: String(securityDeposit),
     paymentPurpose: "Adding Funds",
   });
   const [errors, setErrors] = useState({});
@@ -110,16 +110,16 @@ export default function BiddingLimit({ fetchFunds }) {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => {
     setOpenModal(false);
-    setPaymentDetails({ 
-      card_name: "",
-      card_number: "",
-      card_cvv: "",
-      card_exp: "",
-      card_amount: "",
-      email: "",
-      deposit: 0,
-      paymentPurpose: "Adding Funds",
-    });
+    // setPaymentDetails({
+    //   card_name: "",
+    //   card_number: "",
+    //   card_cvv: "",
+    //   card_exp: "",
+    //   card_amount: securityDeposit,
+    //   email: "",
+    //   deposit: securityDeposit,
+    //   paymentPurpose: "Adding Funds",
+    // });
   };
 
   const handleInputChange = (e) => {
@@ -127,7 +127,7 @@ export default function BiddingLimit({ fetchFunds }) {
     setPaymentDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
-      ...(name === "card_amount" ? { deposit: parseInt(value, 10) || 0 } : {}), // Update deposit as integer when card_amount changes
+      ...(name === "card_amount" ? { deposit: value || 0 } : {}), // Update deposit as integer when card_amount changes
     }));
   };
 
@@ -150,7 +150,7 @@ export default function BiddingLimit({ fetchFunds }) {
         ...paymentDetails,
         card_number: paymentDetails.card_number.replace(/\s+/g, ""),
       };
-      console.log("-=-==-===-",paymentDetails)
+      console.log(formattedPaymentDetails);
       handleAddFunds(formattedPaymentDetails);
       fetchFunds();
     }
@@ -367,10 +367,9 @@ export default function BiddingLimit({ fetchFunds }) {
             handleInputChange={handleInputChange}
             errors={errors}
             onSubmit={handleSubmit}
-            cardAmount={securityDeposit}
             loading={addingFundsLoading}
           />
-        </div>  
+        </div>
       </Modal>
     </>
   );
