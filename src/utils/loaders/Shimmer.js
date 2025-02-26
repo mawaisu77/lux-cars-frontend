@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Shimmer = () => {
   return (
     <div className="text-gray-700 body-font w-[100vw]">
-      <div className="container px-2 py-8 mx-auto max-w-[85vw] sm:max-w-[73.229vw]">
+      <div className="container px-2 py-8 mx-auto max-w-[85vw] sm:max-w-[85vw]">
         <div className="flex flex-wrap justify-center">
           {/* Repeat the shimmer card for the desired number of times */}
           {[...Array(4)].map((_, index) => (

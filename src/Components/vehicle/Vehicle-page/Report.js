@@ -12,6 +12,7 @@ import { showToast } from "../../../utils/Toast";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css"; 
 import "react-pdf/dist/esm/Page/TextLayer.css"; 
 import baseService from "../../../services/baseService";
+import { reportPaymentValue } from "../../../utils/constant";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 const CarReportViewer = ({ vin }) => {
   const { carReport, loading, error, fetchCarReport } = useGetCarReport(vin);
@@ -30,9 +31,8 @@ const CarReportViewer = ({ vin }) => {
     card_number: "",
     card_cvv: "",
     card_exp: "",
-    card_amount: 9.99,
+    card_amount: reportPaymentValue,
     email: "",
-    deposit: 9.99,
     paymentPurpose: "Report Payment", 
   });
 
@@ -41,7 +41,6 @@ const CarReportViewer = ({ vin }) => {
     setPaymentDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
-      ...(name === "card_amount" ? { deposit: parseFloat(value) || 0 } : {}), 
     }));
   };
 
@@ -62,9 +61,8 @@ const CarReportViewer = ({ vin }) => {
       card_number: "",
       card_cvv: "",
       card_exp: "",
-      card_amount: 9.99,
+      card_amount: reportPaymentValue,
       email: "",
-      deposit: 9.99,
       paymentPurpose: "Adding Funds",
     });
   };
@@ -76,6 +74,7 @@ const CarReportViewer = ({ vin }) => {
       const formattedPaymentDetails = {
         ...paymentDetails,
         card_number: paymentDetails.card_number.replace(/\s+/g, ""),
+
       };     
       setPaymentLoading(true); 
 
@@ -211,7 +210,7 @@ const CarReportViewer = ({ vin }) => {
             errors={errors}
             onSubmit={handleSubmit}
             loading={paymentLoading}
-            cardAmount={9.99}
+            cardAmount={reportPaymentValue}
           />
         </div>  
       </Modal>

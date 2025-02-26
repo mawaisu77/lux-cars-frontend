@@ -85,6 +85,7 @@ const PaymentForm = ({
           name="card_amount"
           value={paymentDetails.card_amount}
           onChange={handleInputChange}
+          disabled={cardAmount}
           placeholder="Enter deposit amount"
           className="border rounded p-2 w-full"
           min="1"
