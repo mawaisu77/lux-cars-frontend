@@ -34,7 +34,6 @@ const BuyNow = () => {
     navigate("/search-page");
   };
 
-  console.log("---------process.env.REACT_APP_API_CARS_LIVE-----------------", process.env.REACT_APP_API_CARS_LIVE)
   return (
     <>
       <div className="bg-secondary-gray relative w-[100vw] mx-auto py-[30px] sm:py-[4.167vw] ">

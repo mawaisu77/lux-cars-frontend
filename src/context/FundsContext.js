@@ -11,13 +11,18 @@ export const FundsProvider = ({ children }) => {
   const {user} = useAuthContext();
   const [fundsData, setFundsData] = useState(funds);
 
+
+  console.log("userrrrrrrrrrrrrrrr", user)
+
   useEffect(() => {
-    fetchFunds();
-  }, []);
+    if (user) {
+      fetchFunds(); 
+    }
+  }, [user]); 
 
   useEffect(() => {
     setFundsData(funds);
-  }, [funds, user]);
+  }, [funds]);
 
   return (
     <FundsContext.Provider value={{ fundsData, loading, error, fetchFunds }}>
