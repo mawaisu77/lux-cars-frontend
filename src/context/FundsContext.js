@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import useGetFunds from "../hooks/useGetFunds";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 // Create a context
 const FundsContext = createContext();
@@ -7,6 +8,7 @@ const FundsContext = createContext();
 // Provider Component
 export const FundsProvider = ({ children }) => {
   const { funds, loading, error, fetchFunds } = useGetFunds();
+  const {user} = useAuthContext();
   const [fundsData, setFundsData] = useState(funds);
 
   useEffect(() => {
@@ -15,8 +17,7 @@ export const FundsProvider = ({ children }) => {
 
   useEffect(() => {
     setFundsData(funds);
-
-  }, [funds]);
+  }, [funds, user]);
 
   return (
     <FundsContext.Provider value={{ fundsData, loading, error, fetchFunds }}>
