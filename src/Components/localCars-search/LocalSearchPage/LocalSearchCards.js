@@ -281,7 +281,7 @@ function Card({ vehicle }) {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidCaribbeansLogo}
       />
       <div className="flex flex-col  w-full text-left lg:items-center   lg:justify-between md:flex-row">
         <div className="text-left px-[1vw] text-[13px] lg:text-[0.875vw]    h-full border-b lg:border-b-0 font-urbanist">

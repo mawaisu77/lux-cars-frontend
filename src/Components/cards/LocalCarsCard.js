@@ -21,6 +21,7 @@ import { RxCopy } from "react-icons/rx";
 import { toast } from "react-toastify";
 import { statusOptions } from "../../utils/filtersData/statusOptions";
 import { PiTimerBold } from "react-icons/pi";
+import bidcaribbeansLogo from  "../../assets/lux-logo/logo-tag.png" 
 
 const LocalCarsCard = ({ card }) => {
   const [isHovered, setIsHovered] = useState(false); 
@@ -401,7 +402,7 @@ const LocalCarsCard = ({ card }) => {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidcaribbeansLogo}
       />
       <LoginModal
         isOpen={isLoginModalOpen && !user}

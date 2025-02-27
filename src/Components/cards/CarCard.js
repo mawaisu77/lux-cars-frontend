@@ -296,7 +296,7 @@ const CarCard = ({ card, isBuy = false }) => {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidCaribbeansLogo}
       />
         {/* Login Modal */}
         <LoginModal 

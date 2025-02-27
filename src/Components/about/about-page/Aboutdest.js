@@ -47,10 +47,10 @@ const Aboutdest = () => {
         </div>
 
         {/* Animated Background Image Section */}
-        <div className="w-full h-[500px] rounded-[1.042vw] shadow-lg mx-auto mt-[30px] sm:mt-[8vh] relative">
-          <div className="sm:p-[1.042vw] w-full h-[500px] lg:h-full">
+        <div className="w-full h-[400px] rounded-[1.042vw] shadow-lg mx-auto mt-[30px] sm:mt-[8vh] relative">
+          <div className="sm:p-[1.042vw] w-full h-[400px] lg:h-full">
             <div
-              className="relative w-full h-[500px] lg:h-full rounded-[1.042vw] bg-cover bg-center transition-all duration-1000 ease-in-out"
+              className="relative w-full h-[400px] lg:h-full rounded-[1.042vw] bg-cover bg-center transition-all duration-1000 ease-in-out"
               style={{ backgroundImage: `url(${islandImages[locations[currentIndex]]})` }}
             >
               {/* Marquee Buttons */}

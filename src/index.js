@@ -10,17 +10,20 @@ import { CustomToast } from "./utils/Toast";
 // import "./instrument";
 import { SavedCarsProvider } from "./context/SavedCarIdsContext";
 import { SavedLocalCarsProvider } from "./context/SavedLocalCarsIdscontext";
+import { FundsProvider } from "./context/FundsContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
+    <FundsProvider>
       <SavedCarsProvider>
         <SavedLocalCarsProvider>
           <CustomToast />
           <App />
         </SavedLocalCarsProvider>
       </SavedCarsProvider>
+    </FundsProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
