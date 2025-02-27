@@ -11,6 +11,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import "./swiperCard.css";
 import SwiperCore from "swiper";
 import moment from "moment-timezone";
+import bidCaribbeansLogo from "../../assets/lux-logo/logo-tag.png"
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -83,6 +84,14 @@ const HistoryCard = ({ card, isBuy = false }) => {
       >
         <div className=" relative w-full ">
           <div className="w-full relative sm:text-24 md:text-16 z-10">
+          <div className=" h-[15px] md:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
+                <img 
+                  src={bidCaribbeansLogo} 
+                  alt="bidcaribbeanslogo"
+                  className=" w-full h-full object-contain"
+                />
+              </div>
+          
             <Swiper
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
               className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[240px] sm:h-[22vw] md:h-[12vw] "
@@ -167,7 +176,7 @@ const HistoryCard = ({ card, isBuy = false }) => {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidCaribbeansLogo}
       />
       {/* Login Modal */}
       <LoginModal

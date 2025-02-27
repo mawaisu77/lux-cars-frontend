@@ -41,11 +41,16 @@ const Footer = () => {
       <div className="max-w-[85vw] sm:max-w-[85vw] mx-auto text-left text-lux-black py-[30px] sm:py-[4.167vw]">
         <div className="grid lg:grid-cols-8 gap-6 lg:gap-[4vw] text-left mx-auto pt-[5vh] sm:pt-[8.5vh]">
         <div className="w-full text-left lg:col-span-2">
+          <div className="flex flex-col ">
+            <span className="tracking-widest font-bold text-14 text-[#7a798a]">
+              POWERED BY
+            </span>
             <img
               className="w-[157px] lg:w-[11.667vw] md:mx-0"
               src={img1}
               alt="Logo"
-            />
+              />
+          </div>
             <p className="text-[14px] lg:text-16 font-urbanist text-left md:text-left py-4 sm:py-[2vh]">
               Trust in the Lord with all your heart, And lean not on your own
               understanding; In all your ways acknowledge Him, And He shall direct
