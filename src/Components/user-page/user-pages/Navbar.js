@@ -11,6 +11,9 @@ import { API_BASE_URL } from "../../../services/baseService";
 import { showToast } from "../../../utils/Toast";
 import { ClipLoader } from "react-spinners";
 import { MdEmail } from "react-icons/md";
+import { useFunds } from "../../../context/FundsContext";
+import { calculateFundsPercentage } from "../../header/Header/calculateBiddingPower";
+import { BsLightningCharge } from "react-icons/bs";
 
 const Navbar = () => {
   const location = useLocation();
@@ -18,6 +21,20 @@ const Navbar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(false);
   const [email, setEmail] = useState("");
+
+  const { fundsData } = useFunds(); 
+
+  console.log("fundsData", fundsData)
+
+  const totalFunds = fundsData?.data?.totalDeposits  * 10 || 0;
+  const remainingFunds = fundsData?.data?.avalaibleBidAmount || 0;
+  const usedBidAmount = fundsData?.data?.usedBidAmount || 0;
+
+  const { percentageUsed, percentageRemaining } = calculateFundsPercentage(
+    totalFunds,
+    remainingFunds,
+    usedBidAmount
+  );
 
   useEffect(() => {
     const userProfile = JSON.parse(localStorage.getItem("user"));
@@ -74,24 +91,26 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="Account-image">
-        <div className="hidden lg:block">
-          <div className="w-[15.5] flex flex-col py-20">
-            <div className="text-[2.6vw] font-semibold text-white">Account</div>
-            <div className='text-white flex gap-3 justify-center text-[1vw] font-urbanist'>
+
+
+<div className="Account-image">
+      <div className='hidden lg:block'>
+        <div className='w-[15.5] flex flex-col pt-[20vh]'>
+          <div className='text-[2.6vw] font-semibold text-white'>
+            Account
+          </div>
+          <div className='text-white flex gap-3 justify-center text-[1vw] font-urbanist'>
             <Link to="/">
               <button className='hover:text-white hover:scale-110 duration-150'>Home</button>
             </Link>
             /
-              <button className="hover:text-white hover:scale-110 duration-150">
-                User Account
-              </button>
-            </div>
+            <button className='hover:text-white hover:scale-110 duration-150'>User Account</button>
           </div>
         </div>
       </div>
+   </div>
 
-      <div className="w-[90%]   lg:w-[84vw] h-auto lg:mt-[7vh] mx-auto mt-[100px] lg:h-[38vh] bg-[#f8f8f8] rounded-2xl">
+      <div className="w-[90%]  lg:w-[84vw] h-auto lg:mt-[7vh] mx-auto mt-[100px] lg:h-[38vh] bg-[#f8f8f8] rounded-2xl">
         <div className=" flex flex-col lg:flex-row justify-center lg:justify-between lg:h-[30vh]    bg-[#000000]/70 rounded-t-2xl">
           <div className="flex flex-col font-urbanist lg:flex-row mt-[4.6vh]   lg:ml-[2.2vw]     w-full lg:w-[48vw]">
             <div className="relative">
@@ -134,10 +153,15 @@ const Navbar = () => {
                 Laborum obcaecati dignissimos quae quo ad iste ipsum officiis
                 deleniti asperiores sit.
               </p>
-              <button className="flex justify-center items-center gap-2 w-[160px] lg:w-[10vw] h-[36px] lg:h-[3.6vh] text-[12px] lg:text-[0.7vw] text-[#7a798a] bg-white rounded-full lg:mt-[1vh]">
-                Bidding Power: $0/0$
-                <ImFilesEmpty />
-              </button>
+              <button
+                    className={`flex justify-between gap-x-2 items-center w-[160px] lg:w-[15vw]  focus:outline-none bg-text-white  px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full bg-white text-primary-red text-xs lg:text-18 duration-200`}
+                  >
+                    <span className="text-primary-red text-nowrap">
+                    Remaining: ${remainingFunds} ({percentageRemaining}% )
+                      </span> 
+                    <BsLightningCharge className="text-primary-red" /> 
+                  </button>
+             
             </div>
           </div>
           <div>

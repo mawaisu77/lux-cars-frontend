@@ -312,13 +312,6 @@ const Header = () => {
                     alt={`Logo`}
                   />
                 </Link>
-                {/* <Link to="/" className="">
-                  <img
-                    src={LuxCarsLogo}
-                    className="w-[80px] sm:w-[8vw] h-auto"
-                    alt={`Logo`}
-                  />
-                </Link> */}
               </div>
               <div className="w-[55%] ml-2 lg:ml-0">
                 <div className="relative w-90%" ref={dropdownRef}>
@@ -373,16 +366,16 @@ const Header = () => {
                   >
                     <span className="text-white text-nowrap">
                     Remaining: ${remainingFunds} ({percentageRemaining}% )
-                      </span> {/* Text on the left */}
-                    <BsLightningCharge className="text-white" /> {/* Icon on the right */}
+                      </span> 
+                    <BsLightningCharge className="text-white" /> 
                   </button>
                  </div>
                   <button
                     className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
                     onClick={handleLogoutModal}
                   >
-                    <span className="text-white text-nowrap">Log out</span> {/* Text on the left */}
-                    <FiLogOut className="text-white" /> {/* Icon on the right */}
+                    <span className="text-white text-nowrap">Log out</span> 
+                    <FiLogOut className="text-white" /> 
                   </button>
                 </div>
               ) : (

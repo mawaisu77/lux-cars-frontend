@@ -557,6 +557,11 @@ const Sidebar = () => {
       const today = new Date();
       const normalizedToday = normalizeDate(today);
 
+         // Calculate tomorrow's date
+      const tomorrow = new Date();
+      tomorrow.setDate(today.getDate() + 1);
+      const normalizedTomorrow = normalizeDate(tomorrow);
+
       // Get dates for comparison
       const startOfWeek = new Date(today);
       startOfWeek.setDate(today.getDate() - today.getDay());
@@ -570,7 +575,12 @@ const Sidebar = () => {
       if (fromDate === normalizedToday && toDate === normalizedToday) {
         setSelectedOption("today");
         setCustomDatesVisible(false);
-      } else if (
+      } else if (fromDate === normalizedTomorrow && toDate === normalizedTomorrow) {
+        setSelectedOption("tomorrow");
+        setCustomDatesVisible(false);
+      }
+      
+      else if (
         fromDate === normalizeDate(startOfWeek) &&
         toDate === normalizeDate(endOfWeek)
       ) {
@@ -659,6 +669,12 @@ const Sidebar = () => {
         fromDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         toDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         break;
+
+        case "tomorrow":
+          fromDate = new Date(now);
+          fromDate.setDate(now.getDate() + 1);
+          toDate = new Date(fromDate);
+          break;
 
       case "thisWeek":
         fromDate = new Date(now);
@@ -1161,6 +1177,19 @@ const Sidebar = () => {
                     />
                     <label className="ml-[0.5vw] text-[16px] text-left lg:text-[0.8vw] font-medium">
                       Today
+                    </label>
+                  </div>
+                  <div className="flex items-center mb-3">
+                    <input
+                      type="radio"
+                      name="auctionDate"
+                      className="cursor-pointer form-checkbox"
+                      checked={selectedOption === "tomorrow"}
+                      onChange={() => handleAuctionDateFilter("tomorrow")}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <label className="ml-[0.5vw] text-[16px] text-left lg:text-[0.8vw] font-medium">
+                    Tomorrow
                     </label>
                   </div>
                   <div className="flex items-center mb-3">
