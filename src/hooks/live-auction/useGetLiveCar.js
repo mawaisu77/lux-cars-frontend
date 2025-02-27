@@ -11,7 +11,6 @@ const useGetLiveCar = () => {
     setLoading(true);
     try {
         const response = await getLiveCarDetail();
-        console.log("---------", response);
         setLiveCar(response.data);
     } catch (err) {
       if (err.response) {

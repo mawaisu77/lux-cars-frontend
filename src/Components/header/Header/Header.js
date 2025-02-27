@@ -35,13 +35,12 @@ const Header = () => {
 
 
   const { fundsData, loading, error, fetchFunds } = useFunds(); 
-
-  console.log("fundsData", fundsData)
-
+  
+  
   const totalFunds = fundsData?.data?.totalDeposits  * 10 || 0;
   const remainingFunds = fundsData?.data?.avalaibleBidAmount || 0;
   const usedBidAmount = fundsData?.data?.usedBidAmount || 0;
-
+  
 
   console.log("usedBidAmount remainingFunds usedBidAmount", usedBidAmount, remainingFunds, usedBidAmount)
 
@@ -162,7 +161,6 @@ const Header = () => {
   };
 
 
-  console.log("============??>>>>>>", fundsData)
 
   return (
     <>
