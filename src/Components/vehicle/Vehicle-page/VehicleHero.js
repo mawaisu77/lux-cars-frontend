@@ -220,8 +220,8 @@ const VehicleHero = () => {
              {showSalesHistory && <SalesHistory history={history?.data} />}
 
      
-              <div className="flex flex-col md:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[10px]">
-                <div className="w-full md:w-[48%]">
+              <div className="flex flex-col lg:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
+                <div className="w-full lg:w-[48%]">
                   <SwiperGallery
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
@@ -244,8 +244,8 @@ const VehicleHero = () => {
                 </div>
 
                 {/* web view */}
-                <div className=" hidden lg:block w-[48%]   ">
-                  <div>
+                <div className="  mt-10 lg:w-[48%]   ">
+                  <div className=" ">
                     {/* Title Info */}
                     <VehicleTitleInfo
                       currentStatus={currentStatus}

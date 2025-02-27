@@ -40,7 +40,7 @@ const VehicleTitleInfo = ({ currentStatus, title, baseSite }) => {
           onClick={() => document.getElementById("copy_url_modal").showModal()}
           className=" bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg"
         >
-          <FaLink className="text-20" />
+          <FaLink className="lg:text-20" />
         </button>
       </div>
     </div>

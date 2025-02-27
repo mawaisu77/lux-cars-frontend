@@ -60,7 +60,7 @@ const SwiperGallery = ({ images, carData }) => {
   {images &&
     images.map((image, index) => (
       <SwiperSlide key={index} className="w-full">
-        <div className="relative w-full h-[300px]">
+        <div className="relative w-full h-[40vw">
           <img
             src={image}
             className="my-2 rounded-lg w-full h-full bg-green-400 object-fill shadow-img cursor-pointer"
@@ -87,7 +87,7 @@ const SwiperGallery = ({ images, carData }) => {
         {images &&
           images.map((image, index) => (
             <SwiperSlide key={index}>
-              <div className="relative w-full h-[70px]">
+              <div className="relative w-full h-[10vw]">
                 <img
                   src={image}
                   className="rounded-lg w-full h-full object-cover"
