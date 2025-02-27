@@ -146,7 +146,7 @@ const Bid = () => {
             </div>
             <div className="flex items-center lg:py-[1.2vh] py-1 lg:text-16 text-[12px] lg:px-[1.3vw] px-4 lg:gap-x-[0.5vw] gap-x-1 border border-white hover:bg-white hover:text-black duration-200 rounded-full">
               <FaRocket />
-              <Link to="/upload-car">
+              <Link to="/upload-local-car">
                 <button className="bg-transparent  duration-200 font-urbanist flex items-center ">
                   Sell Your Car
                 </button>

@@ -1,11 +1,8 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
-import {  BsFire, BsHeart, BsHeartFill } from "react-icons/bs";
+import {  BsHeart, BsHeartFill } from "react-icons/bs";
 import { RxCopy } from "react-icons/rx";
-
-import { MdNotInterested } from "react-icons/md";
-import { FaHourglassHalf } from "react-icons/fa";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -20,14 +17,13 @@ import { LuxLogoWhite } from "../../utils/constant";
 import LoginModal from "../modals/LoginModal"
 import { useAuthContext } from "../../hooks/useAuthContext";
 import "./swiperCard.css";
-
 import SwiperCore from "swiper";
 import useDeleteSaveCar from "../../hooks/useDeleteSaveCar";
 import { useSavedCars } from "../../context/SavedCarIdsContext";
 import { toast } from "react-toastify";
 import { PiTimerBold } from "react-icons/pi";
 import { statusOptions } from "../../utils/filtersData/statusOptions";
-
+import bidCaribbeansLogo from "../../assets/lux-logo/logo-tag.png"
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 const CarCard = ({ card, isBuy = false }) => {
@@ -180,18 +176,15 @@ const CarCard = ({ card, isBuy = false }) => {
               </div>
             )}
 
-         
-            {card?.base_site === "iaai" && (
-              <button className="bg-[#D91E1E] z-50 absolute top-[0.2vw] left-[0.8vw] hover:bg-[#D91E1E]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
-                IAAI
-              </button>
-            )}
-            {card?.base_site === "copart" && (
-              <button className="bg-[#0E5DB8] z-50 absolute top-[0.2vw] left-[0.8vw] hover:bg-[#0E5DB8]/90 text-white text-[10px] md:text-16 px-2 md:px-[0.5vw] py-1 md:py-[0.2vw] rounded-md">
-                Copart
-              </button>
-            )}
-
+<div className=" h-[15px] md:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
+                <img 
+                  src={bidCaribbeansLogo} 
+                  alt="bidcaribbeanslogo"
+                  className=" w-full h-full object-contain"
+                />
+              </div>
+          
+  
             <Swiper
             
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
@@ -303,7 +296,7 @@ const CarCard = ({ card, isBuy = false }) => {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidCaribbeansLogo}
       />
         {/* Login Modal */}
         <LoginModal 

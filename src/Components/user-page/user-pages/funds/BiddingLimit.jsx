@@ -24,8 +24,10 @@ function getMinBiddingForVehicles(vehicles, thresholds) {
   return threshold ? threshold.minBidding : 0;
 }
 
-export default function BiddingLimit({ fetchFunds }) {
-  const [biddingLimit, setBiddingLimit] = useState(6000);
+export default function BiddingLimit({ fetchFunds , openModalProp = false, setOpenModalProp}) {
+  const [openModal, setOpenModal] = useState(false);
+
+  const [biddingLimit, setBiddingLimit] = useState(3500);
   const [purchaseLimit, setPurchaseLimit] = useState(1);
 
   const securityDeposit = biddingLimit * biddingConfig.depositPercentage;
@@ -41,6 +43,14 @@ export default function BiddingLimit({ fetchFunds }) {
     setPurchaseLimit(newPurchaseLimit);
   }, [biddingLimit]);
 
+  useEffect(() => {
+    if (openModalProp) {
+      setOpenModal(true);
+      setOpenModalProp(false); 
+    }
+  }, [openModalProp, setOpenModalProp]);
+
+
   const handleBiddingChange = (newBiddingLimit) => {
     setBiddingLimit(newBiddingLimit);
     const newPurchaseLimit = calculatePurchaseLimit(
@@ -50,7 +60,7 @@ export default function BiddingLimit({ fetchFunds }) {
     setPurchaseLimit(newPurchaseLimit);
     setPaymentDetails((prevDetails) => ({
       ...prevDetails,
-      card_amount: biddingConfig.depositPercentage * newBiddingLimit, 
+      card_amount: biddingConfig.depositPercentage * newBiddingLimit,
     }));
   };
 
@@ -94,15 +104,14 @@ export default function BiddingLimit({ fetchFunds }) {
     }
   };
 
-  const [openModal, setOpenModal] = useState(false);
   const [paymentDetails, setPaymentDetails] = useState({
     card_name: "",
     card_number: "",
     card_cvv: "",
     card_exp: "",
-    card_amount: securityDeposit,
+    card_amount: String(securityDeposit),
     email: "",
-    deposit: 0,
+    deposit: String(securityDeposit),
     paymentPurpose: "Adding Funds",
   });
   const [errors, setErrors] = useState({});
@@ -110,16 +119,16 @@ export default function BiddingLimit({ fetchFunds }) {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => {
     setOpenModal(false);
-    setPaymentDetails({ 
-      card_name: "",
-      card_number: "",
-      card_cvv: "",
-      card_exp: "",
-      card_amount: "",
-      email: "",
-      deposit: 0,
-      paymentPurpose: "Adding Funds",
-    });
+    // setPaymentDetails({
+    //   card_name: "",
+    //   card_number: "",
+    //   card_cvv: "",
+    //   card_exp: "",
+    //   card_amount: securityDeposit,
+    //   email: "",
+    //   deposit: securityDeposit,
+    //   paymentPurpose: "Adding Funds",
+    // });
   };
 
   const handleInputChange = (e) => {
@@ -127,7 +136,7 @@ export default function BiddingLimit({ fetchFunds }) {
     setPaymentDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
-      ...(name === "card_amount" ? { deposit: parseInt(value, 10) || 0 } : {}), // Update deposit as integer when card_amount changes
+      ...(name === "card_amount" ? { deposit: value || 0 } : {}), // Update deposit as integer when card_amount changes
     }));
   };
 
@@ -150,9 +159,14 @@ export default function BiddingLimit({ fetchFunds }) {
         ...paymentDetails,
         card_number: paymentDetails.card_number.replace(/\s+/g, ""),
       };
-      console.log("-=-==-===-",paymentDetails)
-      handleAddFunds(formattedPaymentDetails);
-      fetchFunds();
+      console.log(formattedPaymentDetails);
+      try {
+        await handleAddFunds(formattedPaymentDetails);
+        await fetchFunds(); // Wait for funds to be fetched
+        handleCloseModal(); // Close the modal after successful payment
+      } catch (error) {
+        showToast("Payment failed. Please try again.", "error");
+      }
     }
   };
 
@@ -186,7 +200,7 @@ export default function BiddingLimit({ fetchFunds }) {
             <div className="mb-8 md:mb-[1.25vw]">
               <input
                 type="range"
-                min="0"
+                min="3500"
                 max={biddingConfig.maxBiddingLimit}
                 step={biddingConfig.biddingIncrement}
                 value={biddingLimit}
@@ -195,11 +209,8 @@ export default function BiddingLimit({ fetchFunds }) {
                 style={{ accentColor: "#c60000" }}
               />
               <div className="flex justify-between mt-2 md:mt-[.5vw] text-sm md:text-18 text-gray-600">
-                <span>0</span>
-                <span>$10K</span>
-                <span>$20K</span>
-                <span>$30K</span>
-                <span>$40K</span>
+                <span>$3500</span>
+                
                 <span>
                   ${(biddingConfig.maxBiddingLimit / 1000).toFixed(0)}K+
                 </span>
@@ -367,10 +378,9 @@ export default function BiddingLimit({ fetchFunds }) {
             handleInputChange={handleInputChange}
             errors={errors}
             onSubmit={handleSubmit}
-            cardAmount={securityDeposit}
             loading={addingFundsLoading}
           />
-        </div>  
+        </div>
       </Modal>
     </>
   );

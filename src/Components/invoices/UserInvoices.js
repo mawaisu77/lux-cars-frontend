@@ -22,9 +22,8 @@ export default function UserInvoices({invoices, fetchInvoices}) {
     card_number: "",
     card_cvv: "",
     card_exp: "",
-    card_amount: 0,
+    card_amount: "",
     email: "",
-    deposit: 0,
     paymentPurpose: "Invoice Payment", 
   });
 
@@ -45,12 +44,10 @@ export default function UserInvoices({invoices, fetchInvoices}) {
   const [errors, setErrors] = useState({});
 
   const handleOpenModal = (invoice) => {
-    console.log("invoice", invoice)
 
     setPaymentDetails((prevDetails) => ({
       ...prevDetails,
       card_amount: invoice.price, 
-      deposit: parseInt(invoice.price), 
       invoiceID: invoice.id
     }));
     setOpenModal(true);
@@ -67,7 +64,6 @@ export default function UserInvoices({invoices, fetchInvoices}) {
       card_exp: "",
       card_amount: "",
       email: "",
-      deposit: 0,
       paymentPurpose: "Invoice Payment",
     });
   };
@@ -203,8 +199,9 @@ export default function UserInvoices({invoices, fetchInvoices}) {
           </tbody>
         </table>
       </div>
-  
-      <Modal open={openModal}>
+
+      
+   <Modal open={openModal} onClose={handleCloseModal} >
         <div
           className="bg-white p-6 rounded-lg shadow-lg"
           style={{
@@ -255,8 +252,8 @@ export default function UserInvoices({invoices, fetchInvoices}) {
             paymentDetails={paymentDetails}
             handleInputChange={handleInputChange}
             errors={errors}
-            onSubmit={(e) => handleSubmit(e, paymentDetails.invoiceID)}
-            cardAmount={paymentDetails.deposit}
+            onSubmit={(e) => handleSubmit(e, paymentDetails.invoiceID)} 
+            cardAmount={paymentDetails.card_amount}
             loading={paymentLoading}
           />
         </div>

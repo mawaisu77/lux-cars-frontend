@@ -9,9 +9,6 @@ import {
 } from "react-icons/bs";
 import { MdNotInterested } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa6";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
-
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
 import useSaveCar from "../../../hooks/useSaveCar";
@@ -29,6 +26,7 @@ import { BsFillFuelPumpFill } from "react-icons/bs";
 import { PiCylinderFill } from "react-icons/pi";
 import { driveOptions } from "../../../utils/filtersData/driveOptions";
 import reborn from "../../../assets/lux-logo/reborn.jpeg";
+import bidCaribbeansLogo from "../../../assets/lux-logo/logo-tag.png"
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -189,6 +187,13 @@ function Card({ card }) {
             />
           </div>
         )}
+        <div className=" h-[15px] md:h-[2.3vw] z-50 absolute bottom-[0vw] -left-[1vw] ">
+                <img 
+                  src={bidCaribbeansLogo} 
+                  alt="bidcaribbeanslogo"
+                  className=" w-full h-full object-contain"
+                />
+              </div>
         <Swiper
           onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
           className="relative w-full lg:w-[14vw] h-full mx-auto rounded-md "
@@ -222,7 +227,7 @@ function Card({ card }) {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidCaribbeansLogo}
       />
       <div className="flex h-full flex-col w-full text-left md:items-center md:justify-between md:flex-row">
         <div className="text-left w-full lg:w-[70%] flex items-start justify-start gap-y-2 md:gap-y-[0.1vw] flex-col px-[1vw] h-full font-urbanist">
