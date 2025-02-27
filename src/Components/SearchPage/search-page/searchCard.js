@@ -227,7 +227,7 @@ function Card({ card }) {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidCaribbeansLogo}
       />
       <div className="flex h-full flex-col w-full text-left md:items-center md:justify-between md:flex-row">
         <div className="text-left w-full lg:w-[70%] flex items-start justify-start gap-y-2 md:gap-y-[0.1vw] flex-col px-[1vw] h-full font-urbanist">

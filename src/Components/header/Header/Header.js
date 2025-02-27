@@ -17,6 +17,8 @@ import { BsLightningCharge } from "react-icons/bs";
 import BidCaribbeanLogo from "../../../assets/lux-logo/bidcaribbean-logo.png";
 import LuxCarsLogo from "../../../assets/lux-logo/lux-logo-new.png";
 import sideBarLogo from "../../../assets/lux-logo/bidcaribbeansBlueLogo (1).jpg"
+import { useFunds } from "../../../context/FundsContext";
+import { calculateFundsPercentage } from "./calculateBiddingPower";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -30,6 +32,28 @@ const Header = () => {
   const [activeSubMenuItem, setActiveSubMenuItem] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width:1024px)");
+
+
+  const { fundsData, loading, error, fetchFunds } = useFunds(); 
+
+  console.log("fundsData", fundsData)
+
+  const totalFunds = fundsData?.data?.totalDeposits  * 10 || 0;
+  const remainingFunds = fundsData?.data?.avalaibleBidAmount || 0;
+  const usedBidAmount = fundsData?.data?.usedBidAmount || 0;
+
+
+  console.log("usedBidAmount remainingFunds usedBidAmount", usedBidAmount, remainingFunds, usedBidAmount)
+
+  // Get calculated percentage
+  const { percentageUsed, percentageRemaining } = calculateFundsPercentage(
+    totalFunds,
+    remainingFunds,
+    usedBidAmount
+  );
+
+  console.log("uhuhuhuhuhu" , totalFunds, remainingFunds)
+
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -136,6 +160,9 @@ const Header = () => {
     console.log(`Navigating to: ${url}`);
     window.location.href = url; // Use window.location.href for navigation
   };
+
+
+  console.log("============??>>>>>>", fundsData)
 
   return (
     <>
@@ -344,7 +371,9 @@ const Header = () => {
                     className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
                     onClick={handleLogoutModal}
                   >
-                    <span className="text-white text-nowrap">0%/0$</span> {/* Text on the left */}
+                    <span className="text-white text-nowrap">
+                    Remaining: ${remainingFunds} ({percentageRemaining}% )
+                      </span> {/* Text on the left */}
                     <BsLightningCharge className="text-white" /> {/* Icon on the right */}
                   </button>
                  </div>

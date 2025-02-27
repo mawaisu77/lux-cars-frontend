@@ -204,7 +204,7 @@ export default function UserInvoices({invoices, fetchInvoices}) {
       </div>
 
       
-   <Modal open={openModal} >
+   <Modal open={openModal} onClose={handleCloseModal} >
         <div
           className="bg-white p-6 rounded-lg shadow-lg"
           style={{
@@ -257,7 +257,7 @@ export default function UserInvoices({invoices, fetchInvoices}) {
             handleInputChange={handleInputChange}
             errors={errors}
             onSubmit={(e) => handleSubmit(e, paymentDetails.invoiceID)} 
-            cardAmount={paymentDetails.deposit}
+            cardAmount={paymentDetails.card_amount}
             loading={paymentLoading}
           />
         </div>  

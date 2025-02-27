@@ -38,14 +38,19 @@ const Footer = () => {
 
   return (
     <div className="relative bg-[#f8f8f8] w-[100vw] mx-auto ">
-      <div className="max-w-[85vw] sm:max-w-[73.229vw] mx-auto text-left text-lux-black py-[30px] sm:py-[4.167vw]">
-        <div className="flex flex-wrap gap-6 lg:gap-[4vw] text-left mx-auto pt-[5vh] sm:pt-[8.5vh]">
-        <div className="w-full text-left lg:w-[15vw]">
+      <div className="max-w-[85vw] sm:max-w-[85vw] mx-auto text-left text-lux-black py-[30px] sm:py-[4.167vw]">
+        <div className="grid lg:grid-cols-8 gap-6 lg:gap-[4vw] text-left mx-auto pt-[5vh] sm:pt-[8.5vh]">
+        <div className="w-full text-left lg:col-span-2">
+          <div className="flex flex-col ">
+            <span className="tracking-widest font-bold text-14 text-[#7a798a]">
+              POWERED BY
+            </span>
             <img
               className="w-[157px] lg:w-[11.667vw] md:mx-0"
               src={img1}
               alt="Logo"
-            />
+              />
+          </div>
             <p className="text-[14px] lg:text-16 font-urbanist text-left md:text-left py-4 sm:py-[2vh]">
               Trust in the Lord with all your heart, And lean not on your own
               understanding; In all your ways acknowledge Him, And He shall direct
@@ -57,9 +62,9 @@ const Footer = () => {
               <FaGoogle className="bg-[#ebebeb] lg:w-[1.5vw] w-[40px] h-[40px] lg:h-[3.4vh] p-2 lg:p-[0.1vw] rounded-lg" />
               <FaTwitch className="bg-[#ebebeb] lg:w-[1.5vw] w-[40px] h-[40px] lg:h-[3.4vh] p-2 lg:p-[0.1vw] rounded-lg" />
             </div>
-          </div>
+        </div>
 
-          <div className="grid lg:flex grid-cols-2 text-lux-black w-full md:w-[60%] lg:w-auto text-left gap-6 lg:gap-[4.6vw]">
+          <div className="grid lg:col-span-4 lg:flex grid-cols-2  text-lux-black w-full lg:w-auto text-left gap-6 lg:gap-[4.6vw]">
             {footerSections.map((section, index) => (
               <div
                 key={index}
@@ -87,7 +92,7 @@ const Footer = () => {
             ))}
           </div>
 
-          <div className="font-urbanist w-full lg:w-[20vw] flex flex-col gap-4 lg:gap-[0.8vw]">
+          <div className="font-urbanist lg:col-span-2 w-full flex flex-col gap-4 lg:gap-[0.8vw]">
             <p className="text-[22px] lg:text-18 font-bold">
               Subscribe
             </p>
