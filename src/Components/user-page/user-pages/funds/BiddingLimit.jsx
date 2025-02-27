@@ -10,6 +10,7 @@ import { BsCalendarEventFill, BsInfoCircle } from "react-icons/bs";
 import { validatePaymentDetails } from "../../../payment/validatePayment";
 import useAddFunds from "../../../../hooks/useAddFunds";
 import { showToast } from "../../../../utils/Toast";
+import { BsFillQuestionCircleFill } from "react-icons/bs";
 
 function calculatePurchaseLimit(biddingLimit, thresholds) {
   const sortedThresholds = [...thresholds].sort(
@@ -24,7 +25,11 @@ function getMinBiddingForVehicles(vehicles, thresholds) {
   return threshold ? threshold.minBidding : 0;
 }
 
-export default function BiddingLimit({ fetchFunds , openModalProp = false, setOpenModalProp}) {
+export default function BiddingLimit({
+  fetchFunds,
+  openModalProp = false,
+  setOpenModalProp,
+}) {
   const [openModal, setOpenModal] = useState(false);
 
   const [biddingLimit, setBiddingLimit] = useState(3500);
@@ -46,10 +51,9 @@ export default function BiddingLimit({ fetchFunds , openModalProp = false, setOp
   useEffect(() => {
     if (openModalProp) {
       setOpenModal(true);
-      setOpenModalProp(false); 
+      setOpenModalProp(false);
     }
   }, [openModalProp, setOpenModalProp]);
-
 
   const handleBiddingChange = (newBiddingLimit) => {
     setBiddingLimit(newBiddingLimit);
@@ -210,7 +214,7 @@ export default function BiddingLimit({ fetchFunds , openModalProp = false, setOp
               />
               <div className="flex justify-between mt-2 md:mt-[.5vw] text-sm md:text-18 text-gray-600">
                 <span>$3500</span>
-                
+
                 <span>
                   ${(biddingConfig.maxBiddingLimit / 1000).toFixed(0)}K+
                 </span>
@@ -310,7 +314,24 @@ export default function BiddingLimit({ fetchFunds , openModalProp = false, setOp
               </div>
             </div>
             <div className="flex justify-between items-center pt-4 md:pt-[1.25vw] border-t border-gray-300 text-sm md:text-18">
-              <span>Total Payment Due</span>
+              <div className="flex items-center gap-2">
+                <span>Total Payment Due</span>
+                {securityDeposit <= 350 ? (
+                  <>
+                    <BsFillQuestionCircleFill
+                      data-tooltip-id="limit_funds_tooltip"
+                      className="font-extrabold text-20 text-primary-red animate-pulse cursor-help"
+                    />
+                    <ReactTooltip
+                      id="limit_funds_tooltip"
+                      place="bottom"
+                      content="you can only place bid on local cars with $350 funds"
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
+              </div>
               <span className="font-semibold">
                 ${securityDeposit.toLocaleString()} USD
               </span>

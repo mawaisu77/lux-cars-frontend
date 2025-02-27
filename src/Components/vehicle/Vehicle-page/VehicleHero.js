@@ -36,11 +36,13 @@ import useGetCarHistory from "../../../hooks/car_history/useGetCarHistory";
 import { documentOldOption } from "../../../utils/filtersData/documentOld";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import ProtectionNote from "./ui/ProtectionNote";
+import { useFunds } from "../../../context/FundsContext";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
   const [shouldRefetch, setShouldRefetch] = useState(false);
   const { user } = useAuthContext();
+  const {  fetchFunds } = useFunds(); 
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
@@ -103,11 +105,12 @@ const VehicleHero = () => {
   };
 
   const handleBidPlace = async () => {
-    //   if (isProcessing) return;
-    // setIsProcessing(true);
-    const placeBidAmountConvert = parseInt(placeBidAmount, 10);
-    await placeBid({ lot_id: lotID, currentBid: placeBidAmountConvert });
-    // document.getElementById("my_modal_2").close();
+  
+      const placeBidAmountConvert = parseInt(placeBidAmount, 10);
+      await placeBid({ lot_id: lotID, currentBid: placeBidAmountConvert });
+      await fetchFunds()
+
+ 
   };
 
   const targetTime = useMemo(
@@ -188,7 +191,7 @@ const VehicleHero = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> 
 
       {carDetailLoading ? (
         <div className="w-[100vw] h-[100vh] flex justify-center items-center">

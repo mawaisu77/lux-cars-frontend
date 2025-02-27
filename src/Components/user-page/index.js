@@ -6,10 +6,7 @@ import AllBids from './user-pages/AllBids';
 const UserAccount = () => {
   return (
     <>
-     
      <Navbar/>
-
-    
     </>
   )
    

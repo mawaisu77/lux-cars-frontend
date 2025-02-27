@@ -21,9 +21,12 @@ import {
   getAllBidsLocalCar,
 } from "../../../hooks/useGetAllBidsOnLocalCars";
 import SimilarCars from "./similarCars";
+import { useFunds } from "../../../context/FundsContext";
 
 const LocalVehicleDetail = () => {
   const { id } = useParams();
+  const {  fetchFunds } = useFunds(); 
+
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetLocalCarDetail(`local-cars/get-car?id=${id}`);
@@ -58,6 +61,7 @@ const LocalVehicleDetail = () => {
         currentBid: bidAmount,
       });
       if (placingBidResponse.status === 201) {
+        fetchFunds();
         setBidAmount(0);
         fetchCarDetail();
         showToast("Your Bid Is Added Successfully", "success");
