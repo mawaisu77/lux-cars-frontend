@@ -295,10 +295,10 @@ const LocalCarsCard = ({ card }) => {
                 delay: 1000,
                 disableOnInteraction: false,
               }}
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-              }}
+              // pagination={{
+              //   clickable: true,
+              //   dynamicBullets: true,
+              // }}
               navigation={isHovered} 
               loop={true}
             >

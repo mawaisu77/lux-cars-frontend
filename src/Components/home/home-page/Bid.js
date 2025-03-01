@@ -154,10 +154,10 @@ const Bid = () => {
             </div>
           </div>
 
-          <div className="mx-auto p-2 lg:p-[1vw] bg-white rounded-lg shadow-lg my-10 w-[800px] max-w-[90%] lg:max-w-[70vw] lg:w-[50vw]">      
+       <div className="mx-auto p-2 lg:p-[1vw] bg-white rounded-lg shadow-lg my-10 w-[800px] max-w-[90%] lg:max-w-[70vw] lg:w-[50vw]">      
          
-       <div className="  overflow-x-scroll lg:overflow-hidden pb-2" >
-       <div className="rounded-lg grid w-[650px] lg:w-auto grid-cols-6 gap-x-2 font-semibold text-primary-red mt-4 lg:mt-[1vw] ">
+       <div className=" pb-2" >
+       <div className="rounded-lg grid lg:w-auto grid-cols-3 lg:grid-cols-6 gap-2 lg:gap-x-2 font-semibold text-primary-red mt-4 lg:mt-[1vw] ">
          
          {heroCategories.map((item,index)=>(
              <>

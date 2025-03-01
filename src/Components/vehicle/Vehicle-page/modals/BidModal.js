@@ -7,8 +7,7 @@ const BidModal = ({ isLoading, onBidPlace, onClose, placeBidAmount }) => {
       <div className="modal-box dark:bg-white">
         <h3 className="font-bold text-lg">Place Your bid here!</h3>
         <p className="py-4">
-          Once you place bid then you will be no longer to bid again on this
-          car for 24 hours,
+        Rebid allowed only if you're outbid within 24 hours. Please place your max preliminary bid to ensure winning.
         </p>
         <div className="flex gap-x-2 justify-center">
           {isLoading ? (

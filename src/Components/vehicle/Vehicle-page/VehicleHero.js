@@ -327,10 +327,13 @@ const VehicleHero = () => {
                     >
                       <>
                         <span className="text-md lg:text-[1.1vw]">
-                          BUY NOW IN
+                          BUY NOW
                         </span>
                         <span className="text-md lg:text-[1.1vw]">
-                          ${carDetailData?.data?.price_new}
+                          {carDetailData?.data?.price_new.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}
                         </span>
                       </>
                     </button>

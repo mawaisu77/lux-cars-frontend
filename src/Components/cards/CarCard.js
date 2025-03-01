@@ -193,10 +193,10 @@ const CarCard = ({ card, isBuy = false }) => {
                 delay: 1000,
                 disableOnInteraction: false,
               }}
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-              }}
+              // pagination={{
+              //   clickable: true,
+              //   dynamicBullets: true,
+              // }}
               navigation={isHovered} 
               loop={true}
             >
@@ -281,7 +281,11 @@ const CarCard = ({ card, isBuy = false }) => {
             <Link to={`/vehicle-detail/${card.lot_id}`}>
               <button className="w-full tracking-wider uppercase font-bold text-[14px] md:text-18 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] md:mt-[1vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
                 {isBuy
-                  ? `Buy Now in ${card.price_new ? `$${card.price_new}` : "Tbd"}`
+                  ? `Buy Now ${card.price_new ? `${card.price_new.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}` : "Tbd"}`
+
                   : "Bid Now"}
               </button>
             </Link>

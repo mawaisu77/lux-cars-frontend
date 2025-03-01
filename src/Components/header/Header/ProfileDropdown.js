@@ -52,7 +52,6 @@ export default function ProfileDropdown({ user }) {
           display: "flex",
           alignItems: "center",
           textAlign: "center",
-          mt: { xs: 1, lg: 0 },
         }}
       >
         <Tooltip title="My Account">

@@ -37,12 +37,12 @@ const Footer = () => {
   ];
 
   return (
-    <div className="relative bg-[#f8f8f8] w-[100vw] mx-auto ">
-      <div className="max-w-[85vw] sm:max-w-[85vw] mx-auto text-left text-lux-black py-[30px] sm:py-[4.167vw]">
+    <div className="relative bg-[#f8f8f8] w-screen mx-auto ">
+      <div className="max-w-[95vw] sm:max-w-[85vw] mx-auto text-left text-lux-black py-[30px] sm:py-[4.167vw]">
         <div className="grid lg:grid-cols-8 gap-6 lg:gap-[4vw] text-left mx-auto pt-[5vh] sm:pt-[8.5vh]">
         <div className="w-full text-left lg:col-span-2">
           <div className="flex flex-col ">
-            <span className="tracking-widest font-bold text-14 text-[#7a798a]">
+            <span className="tracking-widest font-bold text-[12px] lg:text-14 text-[#7a798a]">
               POWERED BY
             </span>
             <img

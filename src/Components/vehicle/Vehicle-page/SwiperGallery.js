@@ -12,7 +12,7 @@ import VideoModal from "./ModalVideo";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
 import { vehicleScoreColors } from "./VehicleScoreColor";
-import bidcaribbeansLogo from "../../../assets/lux-logo/logo-tag.png"
+import bidcaribbeansLogo from "../../../assets/lux-logo/bidcaribbean-logo.png"
 
 const SwiperGallery = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -135,7 +135,7 @@ const SwiperGallery = ({ images, carData }) => {
            Video
          </button>}
          <div
-           className="absolute  z-10 bottom-2 w-52 text-sm left-0 rounded-lg"
+           className="absolute  z-10 bottom-2 w-56 text-sm left-2 rounded-lg"
          >
             <img
               src={bidcaribbeansLogo}
@@ -208,10 +208,10 @@ const SwiperGallery = ({ images, carData }) => {
 
       {/* Modal for 360° View */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {carData.base_site === "iaai" && carData.iaai_360 && renderIAAIView()}
-        {carData.base_site === "copart" &&
-          (carData.copart_exterior_360.length > 0 ||
-            carData.copart_interior_360) &&
+        {carData?.base_site === "iaai" && carData?.iaai_360 && renderIAAIView()}
+        {carData?.base_site === "copart" &&
+          (carData?.copart_exterior_360?.length > 0 ||
+            carData?.copart_interior_360) &&
           renderCopartView()}
       </Modal>
 

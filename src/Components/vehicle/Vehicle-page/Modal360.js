@@ -4,7 +4,7 @@ const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null; // Do not render the modal if it's not open
 
   return (
-    <div className="fixed inset-0  z-50 flex items-center justify-center bg-black bg-opacity-75">
+    <div style={{zIndex:99999}} className="fixed inset-0  z-50 flex items-center justify-center bg-black bg-opacity-75">
       <div className="bg-white mx-20  w-full p-[1.5vw] rounded-[0.5vw] shadow-lg relative ">
         <button
           onClick={onClose}

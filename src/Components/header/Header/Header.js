@@ -15,10 +15,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FiLogOut } from "react-icons/fi";
 import { BsLightningCharge } from "react-icons/bs";
 import BidCaribbeanLogo from "../../../assets/lux-logo/bidcaribbean-logo.png";
-import LuxCarsLogo from "../../../assets/lux-logo/lux-logo-new.png";
 import sideBarLogo from "../../../assets/lux-logo/bidcaribbeansBlueLogo (1).jpg"
 import { useFunds } from "../../../context/FundsContext";
 import { calculateFundsPercentage } from "./calculateBiddingPower";
+import { HiMenu } from "react-icons/hi";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -42,7 +42,6 @@ const Header = () => {
   const usedBidAmount = fundsData?.data?.usedBidAmount || 0;
   
 
-  console.log("usedBidAmount remainingFunds usedBidAmount", usedBidAmount, remainingFunds, usedBidAmount)
 
   // Get calculated percentage
   const { percentageUsed, percentageRemaining } = calculateFundsPercentage(
@@ -50,8 +49,6 @@ const Header = () => {
     remainingFunds,
     usedBidAmount
   );
-
-  console.log("uhuhuhuhuhu" , totalFunds, remainingFunds)
 
 
   const toggleSidebar = () => {
@@ -243,27 +240,24 @@ const Header = () => {
             </Link>
           </div>
           {user ? (
-            <div className="flex items-center gap-x-4">
-              <div className="flex items-center">
-                <button
-                  className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
-                  onClick={handleLogoutModal}
-                >
-                  <span className="text-white text-nowrap">0%/0$</span>{" "}
-                  {/* Text on the left */}
-                  <BsLightningCharge className="text-white" />{" "}
-                  {/* Icon on the right */}
-                </button>
-              </div>
+       
+            <div className="flex flex-col w-[100%] items-center gap-4 lg:gap-[1.5vw] text-sm lg:text-18">
+            <Link to="/login">
               <button
-                className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
-                onClick={handleLogoutModal}
+
+                className={`w-[170px] text-nowrap font-semibold focus:outline-none bg-white hover:bg-[#ca0000e8] px-3 lg:px-[1.5vw] py-1 lg:py-[0.4vw] rounded-full text-gray-800  lg:text-18  duration-200 border border-solid border-black`}
               >
-                <span className="text-white text-nowrap">Log out</span>{" "}
-                {/* Text on the left */}
-                <FiLogOut className="text-white" /> {/* Icon on the right */}
+              ${remainingFunds} ({percentageRemaining}%)
               </button>
-            </div>
+            </Link>
+
+              <button
+               onClick={handleLogoutModal}
+                className={`w-[170px] text-nowrap font-semibold focus:outline-none bg-[#ca0000] hover:bg-[#ca0000e8] px-3 lg:px-[1.5vw] py-1 lg:py-[0.4vw] rounded-full text-white  lg:text-18  duration-200`}
+              >
+                Logout
+              </button>
+          </div>
           ) : (
             <>
               <div className="flex flex-col w-[100%] items-center gap-4 lg:gap-[1.5vw] text-sm lg:text-18">
@@ -289,19 +283,18 @@ const Header = () => {
       </Drawer>
 
       {isFocused && (
-        <div className="fixed top-0 inset-0 bg-black bg-opacity-50 z-40"></div>
+        <div className="fixed w-full top-0 inset-0 bg-black bg-opacity-50 z-40"></div>
       )}
       <div
-        className="fixed top-0 border-b border-primary-gray z-50 w-[100vw] "
+        className="fixed top-0 border-b border-primary-gray z-50 w-full "
         style={{
           transition: "background-color 0.5s ease-in-out",
           zIndex: 1000,
         }}
       >
-        <header className="bg-black/90">
-          <div className="hidden lg:block w-[100vw] mx-auto  ">
+        <header className="bg-black/90 w-full ">
+          <div className="hidden lg:block w-full mx-auto  ">
             <div className="flex max-w-[85vw] mx-auto w-full items-center justify-between h-12 lg:h-[5vw] gap-2 lg:gap-[1.5vw]">
-              {/* <div className=" w-full flex justify-between items-center gap-x-4"> */}
               <div className="flex items-center justify-start">
                 <Link to="/" className="">
                   <img
@@ -312,7 +305,7 @@ const Header = () => {
                 </Link>
               </div>
               <div className="w-[55%] ml-2 lg:ml-0">
-                <div className="relative w-90%" ref={dropdownRef}>
+                <div className="relative" ref={dropdownRef}>
                   <input
                     type="text"
                     placeholder={`${isMobile ? "Search here..." : "Search for vehicle by Make, Model, Lot or VIN..."}`}
@@ -354,7 +347,6 @@ const Header = () => {
                 </div>
               </div>
               
-              {/* </div> */}
               {user ? (
                   <div className="flex items-center gap-x-4">
                        <div className="flex items-center">
@@ -403,8 +395,7 @@ const Header = () => {
             </div>
 
             <nav className="bg-gray-950/50">
-              <div className="max-w-[85vw] mx-auto w-full relative flex items-center justify-between  lg:h-[3.2vw] text-gray-300">
-                {/* Hide links on mobile view */}
+              <div className="max-w-[85vw] mx-auto  relative flex items-center justify-between  lg:h-[3.2vw] text-gray-300">
 
                 <div className="flex items-center">
                   {!isMobile &&
@@ -525,34 +516,27 @@ const Header = () => {
              
             </nav>
           </div>
-          <div className="block lg:hidden w-[100vw] mx-auto  ">
-            <div className="flex  max-w-[85vw] mx-auto w-full items-start justify-between h-12 lg:h-[5vw] gap-2 lg:gap-[1.5vw]">
-              {/* <div className=" w-full flex justify-between items-center gap-x-4"> */}
-              <div className="flex items-center justify-start">
-                <Link to="/" className="">
+          <div className="block lg:hidden w-full mx-auto  ">
+            <div className="flex pt-1  max-w-[95vw] mx-auto  items-center justify-between">
+                <Link to="/" className="w-[180px] ">
                   <img
                     src={BidCaribbeanLogo}
-                    className="w-[200px]   h-auto"
+                    className="w-full"
                     alt={`Logo`}
                   />
                 </Link>
-                {/* <Link to="/" className="">
-                  <img
-                    src={LuxCarsLogo}
-                    className="w-[80px]   h-auto"
-                    alt={`Logo`}
-                  />
-                </Link> */}
-              </div>
-
-              {/* </div> */}
-
-              <div className=" flex items-center ">
-                <AccountMenu user={user} />
-              </div>
+                 {/* Button to open sidebar on mobile */}
+                 {isMobile && (
+                  <IconButton
+                    onClick={toggleSidebar}
+                    className="text-white z-50"
+                  >
+                    <HiMenu className="text-white" />
+                  </IconButton>
+                )}
             </div>
-            <div className="w-[85vw] mx-auto flex justify-between items-center     ">
-              <div className="relative w-[50%] md:w-[70%]" ref={dropdownRef}>
+            <div className="w-[95vw] mx-auto flex justify-between items-center ">
+              <div className="relative w-[80%] md:w-[70%]" ref={dropdownRef}>
                 <input
                   type="text"
                   placeholder={`${isMobile ? "Search here..." : "Search for vehicle by Make, Model, Lot or VIN..."}`}
@@ -691,21 +675,17 @@ const Header = () => {
                     ))}
                 </div>
 
-                {/* Button to open sidebar on mobile */}
-                {isMobile && (
-                  <IconButton
-                    onClick={toggleSidebar}
-                    className="text-white z-50"
-                  >
-                    <MenuIcon className="text-white" color="inherit" />
-                  </IconButton>
-                )}
+               {/*  */}
+               <AccountMenu user={user} />
+
               </div>
             </div>
 
-            <nav className="bg-gray-950/50"></nav>
+            {/* <nav className="bg-gray-950/50"></nav> */}
           </div>
         </header>
+
+
         <dialog id="my_logout_modal" className="modal">
           <div className="modal-box dark:bg-white">
             <h3 className="font-bold text-lg my-4">
