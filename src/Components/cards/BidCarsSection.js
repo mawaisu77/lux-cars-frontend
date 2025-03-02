@@ -73,7 +73,7 @@ const BidCarsSection = () => {
               <FaExternalLinkAlt size={13} />
             </div>
           </div>
-          <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] lg:gap-[1.094vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] gap-x-2 sm:gap-[2vw] md:gap-[1.5vw] lg:gap-[1.094vw] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 ">
             {carData &&
               carData.map((card, index) => (
                 <CarCard key={index} card={card} isBuy={false} savedIds={savedIds} />

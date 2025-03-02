@@ -278,7 +278,7 @@ const LocalCarsCard = ({ card }) => {
               </div>
             )}
 
-<div className=" h-[15px] md:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
+<div className=" h-[28px] sm:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
                 <img 
                   src={bidCaribbeansLogo} 
                   alt="bidcaribbeanslogo"
@@ -290,7 +290,7 @@ const LocalCarsCard = ({ card }) => {
             <Swiper
             
               onSwiper={(swiper) => initializeSwiper(swiper, card?.id)}
-              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[240px] sm:h-[22vw] md:h-[12vw] "
+              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[120px] md:h-[12vw] lg:h-[12vw]  "
               autoplay={{
                 delay: 1000,
                 disableOnInteraction: false,
@@ -329,7 +329,7 @@ const LocalCarsCard = ({ card }) => {
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-col gap-y-[0.2vw] ">
                   <Link to={`local-vehicle-detail/${card?.id}`}  >
-                    <div className="flex justify-between hover:text-blue-800 cursor-pointer tracking-wider hover:underline  lg:text-18 font-bold text-left">
+                    <div className="flex justify-between hover:text-blue-800 cursor-pointer tracking-wider hover:underline  text-[14px] md:text-18 lg:text-18 font-bold text-left">
                       
                     {`${card?.make} ${card?.model} ${card?.year}`.length > 24
                         ? `${card?.make} ${card?.model} ${card?.year}`.slice(
@@ -384,7 +384,7 @@ const LocalCarsCard = ({ card }) => {
               </div>
             </div>
         <Link to={`local-vehicle-detail/${card?.id}`}>
-              <button className="w-full tracking-wider uppercase font-bold text-[14px] md:text-18 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] md:mt-[1vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
+              <button className="w-full tracking-wider uppercase font-bold text-[14px] md:text-18 rounded-[10px] sm:rounded-[0.625vw] p-[4px] sm:p-[0.521vw] mt-[10px] md:mt-[1vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
                Bid Now
               </button>
             </Link>

@@ -302,7 +302,7 @@ function App() {
             <Route path="/admin/dashboard" element={<>welcome</>} />
           </Routes>
           {/* Include the Footer component so it appears on all pages */}
-          {/* <FooterSec /> */}
+          <FooterSec />
         </div>
       </Router>
     </>

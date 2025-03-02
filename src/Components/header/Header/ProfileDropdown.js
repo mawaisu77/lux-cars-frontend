@@ -65,8 +65,9 @@ export default function ProfileDropdown({ user }) {
           >
             <Avatar
               sx={{
-                width: { xs: 26, lg: 32 },
-                height: { xs: 26, lg: 32 },
+                width: { xs: 26, lg: "2vw" },
+                height: { xs: 26, lg: "2vw" },
+                fontSize: { xs: 12, lg: "0.8vw" },
                 backgroundColor: user ? "#ca0000" : "",
               }}
             >
