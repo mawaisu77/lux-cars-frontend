@@ -25,19 +25,19 @@ const Abouttest = () => {
             )}
         </div> */}
 
-      <div className="max-w-[85vw] sm:max-w-[73.292vw] mx-auto">
+      <div className="max-w-[90vw] sm:max-w-[85vw] mx-auto">
         <div className="text-[22px] lg:text-36 font-urbanist font-semibold mb-[5vh]">
           Testimonials
           <hr className='h-1 w-16 lg:w-20 mx-auto bg-red-600' />
         </div>
         <Swiper
-          slidesPerView={1}
-          spaceBetween={80}
+          slidesPerView={2}
+          spaceBetween={10}
           breakpoints={{
-            640: { slidesPerView: 1 },
-            740: { slidesPerView: 1 },
-            1024: { slidesPerView: 2 },
-            1440: { slidesPerView: 2 },
+            640: { slidesPerView: 2 },
+            740: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+            1440: { slidesPerView: 4 },
           }}
           loop={true}
           // navigation={{
@@ -54,20 +54,20 @@ const Abouttest = () => {
               <div className="flex bg-white h-[300px] lg:h-[20.938vw] flex-col justify-center items-center">
                 <div className="h-full mx-auto rounded-lg shadow-md p-[1.667vw] ">
                   <div className="flex flex-col justify-center items-center text-[#062A3F]">
-                    <p className="text-[14px] lg:text-18 font-urbanist ">
+                    <p className="text-[14px] sm:text-18 font-urbanist text-justify">
                       {testimonial.para}
                     </p>
                     <div className="flex flex-col justify-center items-center mt-[2.5vw]">
-                      <p className="text-[22px] lg:text-24 font-bold font-urbanist ">
+                      <p className="text-[20px] sm:text-24 font-bold font-urbanist ">
                         {testimonial.name}
                       </p>
-                      <p className="text-[18px] lg:text-14 font-urbanist text-primary-gray">
+                      <p className="text-[16px] sm:text-14 font-urbanist text-primary-gray">
                         {testimonial.designation}
                       </p>
                     </div>
                   </div>
 
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col justify-center w-[150px] lg:w-[10vw] items-center">
+                  <div className="lg:absolute bottom-0 lg:left-1/2 transform lg:-translate-x-1/2 mx-auto flex flex-col  justify-center w-[100px] lg:w-[vw] items-center">
                     <img
                       src={testimonial.image}
                       alt="Client"
