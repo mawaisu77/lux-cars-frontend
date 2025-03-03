@@ -307,15 +307,15 @@ const Dropdown = ({ bidAmount, data }) => {
     <div className="relative tracking-wider space-y-2 bg-white w-full mx-auto mt-[5.4vh] font-urbanist shadow-sm rounded-[0.5vw] p-[1.5vw]">
       <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
         <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
-          <BiCalculator className="w-5 h-5" />
+          <BiCalculator className="lg:w-[1.25vw] lg:h-[1.25vw]" />
           Fees and Calculations (Estimated)
         </h3>
         <div className="space-y-3 md:space-y-[1.5vw]">
           {/* 1 Final Bid */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">1</span>
+              <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">1</span>
               </div>
               <span className="text-md md:text-20 text-gray-700">
                 Your Final Bid:
@@ -323,7 +323,7 @@ const Dropdown = ({ bidAmount, data }) => {
               <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
                   <TooltipInfo content="You bid amount + Auction Fee + 5% Bank Fee">
                     <BsInfoCircle
-                      size={15}
+                      
                       className="hover:text-blue-800 duration-200"
                     />
                   </TooltipInfo>
@@ -337,16 +337,16 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*2 Admin Fee */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">2</span>
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">2</span>
               </div>
               <span className="text-sm md:text-20 text-gray-700">
                 Admin Fee:
               </span>
               <TooltipInfo content="$1,500 if final price over 30000 then it will be additional 4% of final price and the 1500">
                   <BsInfoCircle
-                    size={15}
-                    className="hover:text-blue-800 duration-200"
+                   
+                    className="hover:text-blue-800  duration-200"
                   />
                 </TooltipInfo>
             </div>
@@ -360,10 +360,11 @@ const Dropdown = ({ bidAmount, data }) => {
           <div className="flex justify-between w-full border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-between w-full items-center">
               <div className="flex items-center gap-x-1.5">
-              <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">3</span>
+              <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">3</span>
               </div>
-              <span className="text-sm md:text-20 text-left text-gray-700">
+             <div className="flex flex-col lg:flex-row">
+             <span className="text-sm md:text-20 text-left text-gray-700">
                 US Inland Transport:
               </span>
               <Select
@@ -372,8 +373,9 @@ const Dropdown = ({ bidAmount, data }) => {
                 value={selectedCategory}
                 onChange={handleCategoryChange} 
                 placeholder="Select Island"
-                className="text-sm lg:text-[0.875vw] w-[120px] text-right font-medium text-gray-800"
+                className="text-sm lg:text-[0.875vw] w-[120px] lg:w-[6.25vw]  text-right font-medium text-gray-800"
               />
+             </div>
               </div>
              
                <p className="text-sm md:text-20 text-gray-700">
@@ -385,13 +387,24 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*4 Inspection After Auction: (Optional) */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">4</span>
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">4</span>
               </div>
-              <span className="text-sm md:text-20 text-gray-700">
+              <div className="flex flex-col text-left lg:flex-row lg:items-center gap-1">
+              <span className="text-sm flex gap-1 lg:items-center md:text-20 text-gray-700">
                 Inspection After Auction: (Optional)
+                <div className="text-sm md:text-20 mr-2 lg:mr-0 mt-1 lg:mt-0 text-gray-700 flex">
+                <TooltipInfo content="Inspection report to understand the repairs needed before shipping the vehicle to the Bahamas">
+                  <BsInfoCircle
+                  
+                    className={` hover:text-blue-800  duration-200 ml-2 lg:ml-0`}
+                  />
+                </TooltipInfo>
+              </div>
               </span>
-              <Select
+             
+            
+             <Select
                 options={[
                   { label: "Yes", value: "Yes" },
                   { label: "No", value: "No" },
@@ -406,14 +419,10 @@ const Dropdown = ({ bidAmount, data }) => {
                 placeholder="Select"
                 className="text-sm md:text-20 w-[50px] text-right font-medium text-gray-800"
               />
-              <div className="text-sm md:text-20 text-gray-700 flex">
-                <TooltipInfo content="Inspection report to understand the repairs needed before shipping the vehicle to the Bahamas">
-                  <BsInfoCircle
-                    size={15}
-                    className={` hover:text-blue-800 duration-200`}
-                  />
-                </TooltipInfo>
+              
+            
               </div>
+              
             </div>
 
             <span className="text-sm md:text-20 font-medium text-gray-800">
@@ -422,18 +431,18 @@ const Dropdown = ({ bidAmount, data }) => {
           </div>
 
           {/*5 Shipping fee to the Caribbeans */}
-          <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
-            <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">5</span>
+          <div className="flex justify-between border-b   border-gray-300 pb-[.5vw]">
+            <div className="flex gap-x-1.5 lg:justify-center items-center">
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center  justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">5</span>
               </div>
-              <span className="text-sm md:text-20 text-gray-700">
+              <span className="text-sm text-left md:text-20 text-gray-700">
                 Shipping fee to the Caribbeans
               </span>
-              <div className="text-sm md:text-20 text-gray-700 flex">
+              <div className="text-sm md:text-20 text-gray-700 flex mb-5 md:mb-0 mr-2 lg:mr-0" >
                 <TooltipInfo content="Boat shipping fee to the Caribbeans">
                   <BsInfoCircle
-                    size={15}
+                   
                     className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
@@ -451,11 +460,11 @@ const Dropdown = ({ bidAmount, data }) => {
       <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
         <div className="flex justify-between items-center mb-[2.1vh]">
         <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900  flex items-center gap-x-2">
-          <RiBankFill className="w-5 h-5" />
+          <RiBankFill className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw]" />
           Customs 
         </h3>
         <div className="flex gap-x-1.5 justify-center items-center">
-              <span className="text-sm md:text-20 text-gray-700">
+              <span className="text-[10px] md:text-20 text-gray-700">
                 Select Location:
               </span>
               <Select
@@ -490,8 +499,8 @@ const Dropdown = ({ bidAmount, data }) => {
           selectedLocation === "Bahamas" && 
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">6</span>
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">6</span>
               </div>
               <span className="text-sm md:text-20 text-gray-700">
               Duty Rate:
@@ -499,7 +508,7 @@ const Dropdown = ({ bidAmount, data }) => {
               <div className="text-sm md:text-20 text-gray-700 flex">
                 <TooltipInfo content="Customs Duty 65% if gasoline / 10% if hybrid">
                   <BsInfoCircle
-                    size={15}
+                
                     className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
@@ -514,8 +523,8 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*7 Processing Fee  */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">
                   {selectedLocation === "Turks"? "6":"7"}
                 </span>
               </div>
@@ -526,14 +535,14 @@ const Dropdown = ({ bidAmount, data }) => {
                 {selectedLocation === "Turks" ? (
                   <TooltipInfo content="N/A">
                     <BsInfoCircle
-                      size={15}
+                     
                     className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
                 ) : (
                   <TooltipInfo content="1% of final bid">
                     <BsInfoCircle
-                      size={15}
+                     
                     className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
@@ -548,15 +557,17 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*8 Environmental Levy Fee */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">
                 {selectedLocation === "Turks"? "7":"8"}
                 </span>
               </div>
-              <span className="text-sm md:text-20 text-gray-700">
+             <div className="lg:flex lg:items-center lg:gap-2" >
+             <span className="text-sm md:text-20 text-gray-700">
                 Environmental Levy Fee: (flat)
               </span>
-              <div className="text-sm md:text-20 text-gray-700 flex">
+             <div className="flex items-center gap-2">
+             <div className="text-sm md:text-20 text-gray-700 flex">
                 {/* {
                   selectedLocation === "Turks" ? (    
                     <TooltipInfo content="N/A">
@@ -574,7 +585,7 @@ const Dropdown = ({ bidAmount, data }) => {
                   } `}
                 >
                   <BsInfoCircle
-                    size={15}
+                   
                     className={`${
                       showApprovalMessage ? "text-red-600 animate-pulse" : ""
                     } hover:text-blue-800 duration-200`}
@@ -585,11 +596,13 @@ const Dropdown = ({ bidAmount, data }) => {
               </div>
               {  showApprovalMessage && (
                 <div className="">
-                  <span className="text-red-600 text-[10px] px-[8px] py-[4px] bg-red-600/10 rounded-lg">
+                  <span className="text-red-600 lg:text-[0.5vw] px-[8px] py-[4px] bg-red-600/10 rounded-lg">
                     Approval needed
                   </span>
                 </div>
               )}
+             </div>
+             </div>
             </div>
             <span className="text-sm md:text-20 font-medium text-gray-800">
               ${calculateLevyFee().toFixed(2)}
@@ -625,8 +638,8 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*9 VAT  */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">9</span>
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">9</span>
               </div>
               <span className="text-sm md:text-20 text-gray-700">
                 VAT:
@@ -635,14 +648,14 @@ const Dropdown = ({ bidAmount, data }) => {
                 {selectedLocation === "Turks" ? (
                   <TooltipInfo content="VAT = 5% of (final bid + custom duty + boatship)">
                     <BsInfoCircle
-                      size={15}
+                       
                     className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
                 ) : (
                   <TooltipInfo content="VAT = 10% of (final bid +  levy fee + custom duty + boatship + processing fee)">
                     <BsInfoCircle
-                      size={15}
+                      
                     className="hover:text-blue-800 duration-200"
                   />
                 </TooltipInfo>
@@ -657,16 +670,16 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*10 Customs Clearence and Delivery Fee */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">10</span>
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">10</span>
               </div>
-              <span className="text-sm md:text-20 text-gray-700">
-                Customs Clearence and Delivery Fee
+              <span className="text-sm md:text-20 text-left text-gray-700">
+                Customs Clearence & Delivery Fee
               </span>
-              <div className="text-sm md:text-20 text-gray-700 flex">
-                <TooltipInfo content="$350 flat">
+              <div className="text-sm md:text-20 text-gray-700 ">
+                <TooltipInfo content="$350 flat mr-2 ">
                   <BsInfoCircle
-                    size={15}
+                     
                     className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
@@ -680,26 +693,26 @@ const Dropdown = ({ bidAmount, data }) => {
         </div>
     </div>
 
-    <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
+    <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm lg:leading-[1.5vw]  border border-gray-200">
         <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
-          <MdCalculate className="w-5 h-5" />
-          Total Price
+          <MdCalculate className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw]" />
+          Total Price Estimation
         </h3>
         <div className="space-y-3 md:space-y-[1.5vw]">
 
           {/*11 Total Landed Cost Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">11</span>
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">11</span>
               </div>
               <span className="text-sm md:text-20 text-left font-semibold text-gray-900">
-                Total Landed Cost:
+                Total Cost:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
                 <TooltipInfo content="service fee + inspection fee + custom clearence + bank transfer fee + transportation + boat ship ">
                   <BsInfoCircle
-                    size={15}
+                   
                     className="hover:text-blue-800 duration-200"
                   />
                 </TooltipInfo>
@@ -718,8 +731,8 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*12 Total Due to Customs Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">12</span>
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">12</span>
               </div>
               <span className="text-sm md:text-20 font-semibold text-gray-900">
                 Total Due to Custom:
@@ -742,11 +755,11 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*13 Final Price Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm">13</span>
+            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-sm lg:text-[0.75vw]">13</span>
               </div>
-              <span className="text-sm md:text-20 font-semibold text-gray-900">
-                Final Price Estimation: 
+              <span className="text-sm md:text-20 text-left font-semibold text-gray-900">
+                Final Price: 
               </span>
 
               <div className="">

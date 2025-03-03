@@ -211,8 +211,8 @@ const VehicleHero = () => {
                 <AuctionDateNotDecidedMessage />
               )}
 
-<div className="my-1 sm:my-[0.5vw] p-1 sm:p-[0.5vw] w-[90vw] sm:max-w-[85vw]  mx-auto  bg-white ">
-          <button onClick={toggleSalesHistory} className=" sm:text-16 text-[14px] py-2 px-3 sm:py-[0.5vw] sm:px-[0.7vw] border flex items-center justify-center gap-x-1 sm:gap-x-[0.5vw]">
+          <div className="m-[0.25vw] p-[0.25vw] w-full mx-auto flex mt-10 lg:mt-0 bg-white max-w-[85vw]">
+          <button onClick={toggleSalesHistory} className="py-[0.5vw] px-[0.75vw] border text-[1vw] flex items-center justify-center gap-x-1">
             <span>
             {showSalesHistory ? "Sales History" : "Sales History"}
             </span>
@@ -224,12 +224,15 @@ const VehicleHero = () => {
              {showSalesHistory && <SalesHistory history={history?.data} />}
 
      
-              <div className="flex flex-col lg:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
-                <div className="w-full lg:w-[48%]">
+              <div className="flex flex-col   lg:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
+                <div className="w-full lg:w-[48%]    ">
+                  <div className="w-full  ">
                   <SwiperGallery
+                  style={{width:"100%"}} 
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
                   />
+                  </div>
                   <AnchorLink href="#get_report">
                   <div className="flex justify-between  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1">
@@ -248,7 +251,7 @@ const VehicleHero = () => {
                 </div>
 
                 {/* web view */}
-                <div className="  mt-10 lg:w-[48%]   ">
+                <div className="    lg:w-[48%]   ">
                   <div className=" ">
                     {/* Title Info */}
                     <VehicleTitleInfo
