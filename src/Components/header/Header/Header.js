@@ -156,6 +156,7 @@ const Header = () => {
     console.log(`Navigating to: ${url}`);
     window.location.href = url; // Use window.location.href for navigation
   };
+  
 
 
 
@@ -423,8 +424,9 @@ const Header = () => {
                                 <button
                                   key={index}
                                   className="w-full px-4 py-2 text-left text-gray-300 hover:text-white hover:bg-slate-800"
+                                  onClick={() => navigate(item?.link)}
                                   onMouseEnter={() =>
-                                    handleMouseEnter(menuItem, item.name)
+                                    menuItem !== 'Live Auction' &&  handleMouseEnter(menuItem, item.name)
                                   }
                                 >
                                   {item.name}
@@ -518,6 +520,7 @@ const Header = () => {
           </div>
           <div className="block lg:hidden w-full mx-auto  ">
             <div className="flex pt-1  max-w-[95vw] mx-auto  items-center justify-between">
+              {/* <div className=" w-full flex justify-between items-center gap-x-4"> */}
                 <Link to="/" className="w-[180px] ">
                   <img
                     src={BidCaribbeanLogo}
