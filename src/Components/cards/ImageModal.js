@@ -2,6 +2,7 @@
 import React from "react";
 import { IoClose, IoArrowBack, IoArrowForward } from "react-icons/io5";
 import ReactDOM from "react-dom";
+import bidcaribbean from "../../assets/lux-logo/bidcaribbean-logo.png"
 
 const ImageModal = ({
   isOpen,
@@ -35,8 +36,8 @@ const ImageModal = ({
          <div className="absolute bottom-5  p-4 rounded-e-sm">
            {/* Logo at the bottom */}
            <img
-          src={logo}
-          className="rounded-lg z-10 shadow-img cursor-pointer  w-60"
+          src={bidcaribbean}
+          className="rounded-lg z-10 shadow-img cursor-pointer w-52 lg:w-80"
           alt="Logo"
         />
          </div>

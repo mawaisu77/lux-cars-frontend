@@ -42,7 +42,7 @@ const VehicleInfoUpperBody = ({ carDetailData, liveData, currentBidValue, days, 
             <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">{carDetailData?.data?.model || "N/A"}</p>
           </div>
           <div className="flex items-center justify-between lg:justify-start ">
-            <p className="font-urbanist tracking-wider font-semibold text-[#6a6978] text-sm lg:text-[0.85vw] ml-2">Estimated Cost:</p>
+            <p className="font-urbanist tracking-wider font-semibold text-[#6a6978] text-sm lg:text-[0.85vw] ml-2">Actual Cash Value:</p>
             <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">{`$${carDetailData?.data?.cost_priced || "N/A"}`}</p>
           </div>
         </div>

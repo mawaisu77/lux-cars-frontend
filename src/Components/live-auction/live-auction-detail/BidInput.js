@@ -20,6 +20,9 @@ const BidInput = ({
   return (
     <>
       <div className="mb-[0.625vw] flex flex-col items-center justify-between">
+         {/* {
+          activeBid < car?.minPrice ? "On reserve" : "not reserve"
+         } */}
         <div className=" w-full flex justify-center items-center">
          <CircularProgress resetTimer={resetTimer} setResetTimer={setResetTimer} bonusTime={bonusTime} setBonusTime={setBonusTime} currentBid={currentBid} activeBid={activeBid} />
         </div>

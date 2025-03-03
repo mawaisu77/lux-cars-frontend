@@ -176,7 +176,7 @@ const CarCard = ({ card, isBuy = false }) => {
               </div>
             )}
 
-<div className=" h-[15px] md:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
+<div className=" h-[28px] sm:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
                 <img 
                   src={bidCaribbeansLogo} 
                   alt="bidcaribbeanslogo"
@@ -188,15 +188,15 @@ const CarCard = ({ card, isBuy = false }) => {
             <Swiper
             
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
-              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[240px] sm:h-[22vw] md:h-[12vw] "
+              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[120px] md:h-[12vw] lg:h-[12vw]  "
               autoplay={{
                 delay: 1000,
                 disableOnInteraction: false,
               }}
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-              }}
+              // pagination={{
+              //   clickable: true,
+              //   dynamicBullets: true,
+              // }}
               navigation={isHovered} 
               loop={true}
             >
@@ -227,7 +227,7 @@ const CarCard = ({ card, isBuy = false }) => {
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-col gap-y-[0.2vw] ">
                   <Link to={`/vehicle-detail/${card.lot_id}`}  >
-                    <div className="flex justify-between hover:text-blue-800 cursor-pointer tracking-wider hover:underline  lg:text-18 font-bold text-left">
+                    <div className="flex justify-between hover:text-blue-800 cursor-pointer sm:tracking-wider hover:underline text-[14px] md:text-18 lg:text-18 font-bold text-left">
                       
                       {card.title.length > 25
                         ? `${card.title.slice(0, 25)}...`
@@ -279,9 +279,13 @@ const CarCard = ({ card, isBuy = false }) => {
               </div>
             </div>
             <Link to={`/vehicle-detail/${card.lot_id}`}>
-              <button className="w-full tracking-wider uppercase font-bold text-[14px] md:text-18 rounded-[10px] sm:rounded-[0.625vw] p-[8px] sm:p-[0.521vw] mt-[10px] md:mt-[1vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
+              <button className="w-full tracking-wider uppercase font-bold text-[14px] md:text-18 rounded-[10px] sm:rounded-[0.625vw] p-[4px] sm:p-[0.521vw] mt-[10px] md:mt-[1vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
                 {isBuy
-                  ? `Buy Now in ${card.price_new ? `$${card.price_new}` : "Tbd"}`
+                  ? `Buy Now ${card.price_new ? `${card.price_new.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}` : "Tbd"}`
+
                   : "Bid Now"}
               </button>
             </Link>

@@ -42,6 +42,20 @@ export const menuData = {
       },
     ],
   },
+  'Live Auction': {
+    items: [
+      {
+        name: 'Live Auction (Upcomings)',
+        key: 'live-auction-list',
+        link: '/live-auction-search',
+      },
+      {
+        name: 'Join Auction',
+        key: 'join-auction',
+        link: '/live-auction-portal',
+      },
+    ],
+  },
   'How it Works': { link: '/how-it-works' },
   'Sell Your Car': { link: '/upload-local-car' },
   'Apply for Loan': { link: '/apply-for-loan' },

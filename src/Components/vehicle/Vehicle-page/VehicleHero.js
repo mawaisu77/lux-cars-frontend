@@ -211,14 +211,15 @@ const VehicleHero = () => {
                 <AuctionDateNotDecidedMessage />
               )}
 
-          <div className="m-1 p-1 w-full mx-auto flex bg-white max-w-[85vw]">
-          <button onClick={toggleSalesHistory} className="py-2 px-3 border flex items-center justify-center gap-x-1">
+<div className="my-1 sm:my-[0.5vw] p-1 sm:p-[0.5vw] w-[90vw] sm:max-w-[85vw]  mx-auto  bg-white ">
+          <button onClick={toggleSalesHistory} className=" sm:text-16 text-[14px] py-2 px-3 sm:py-[0.5vw] sm:px-[0.7vw] border flex items-center justify-center gap-x-1 sm:gap-x-[0.5vw]">
             <span>
             {showSalesHistory ? "Sales History" : "Sales History"}
             </span>
             <span>{history?.data?.length}</span>
           </button>
           </div>
+          
                     
              {showSalesHistory && <SalesHistory history={history?.data} />}
 
@@ -327,10 +328,13 @@ const VehicleHero = () => {
                     >
                       <>
                         <span className="text-md lg:text-[1.1vw]">
-                          BUY NOW IN
+                          BUY NOW
                         </span>
                         <span className="text-md lg:text-[1.1vw]">
-                          ${carDetailData?.data?.price_new}
+                          {carDetailData?.data?.price_new.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}
                         </span>
                       </>
                     </button>

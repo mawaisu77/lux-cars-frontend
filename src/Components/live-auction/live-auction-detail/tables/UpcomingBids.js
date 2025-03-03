@@ -31,7 +31,7 @@ const UpcomingBids = ({upcomingBids}) => {
           return (
             <div
             key={bid.id}
-            className={`grid grid-cols-12 p-[0.625vw] border-b border-l border-r border-gray-200 gap-x-[0.625vw] w-full
+            className={`relative grid grid-cols-12 p-[0.625vw] border-b border-l border-r border-gray-200 gap-x-[0.625vw] w-full
             ${isSaved ? "bg-yellow-200" : ""}`} // Apply yellow background if saved
           >
             <div className="col-span-7 w-full">
@@ -64,7 +64,12 @@ const UpcomingBids = ({upcomingBids}) => {
               {`pending`}
             </span>
             </div>
+              <div className='absolute text-gray-500 flex gap-x-1 text-xs bottom-[1px] right-[1px]'>
+             <span className=" cursor-pointer" >Est time</span>
+             <span className=" cursor-pointer" >{bid?.timeUntilAuction || ""}</span>
+              </div>
           </div>
+
 
           )})}
       </div>
