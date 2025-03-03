@@ -1,7 +1,9 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
 import { MdRestartAlt } from "react-icons/md";
 import CircularProgress from "./ui/CircularProgress";
+import nearReserve from "../../../assets/audios/reserve.mp3";
+import reserveMet from "../../../assets/audios/pure-sale.mp3";
 
 
 const BidInput = ({
@@ -17,12 +19,61 @@ const BidInput = ({
   setBonusTime
 
 }) => {
-  return (
-    <>
+
+  const nearReserveSound = useRef(new Audio(nearReserve));
+  const reserveMetSound = useRef(new Audio(reserveMet));
+
+  const prevBidState = useRef({
+    wasNearReserve: false,
+    wasReserveMet: false
+  });
+
+  useEffect(() => {
+    if (!car?.minPrice || !activeBid) return;
+
+    const priceDifference = car.minPrice - activeBid;
+    const isNearReserve = priceDifference <= 100 && priceDifference > 0;
+    const isReserveMet = activeBid >= car.minPrice;
+
+    // Play near reserve sound only when first entering near reserve state
+    if (isNearReserve && !prevBidState.current.wasNearReserve) {
+      nearReserveSound.current.play();
+    }
+
+    // Play reserve met sound only when first exceeding reserve
+    if (isReserveMet && !prevBidState.current.wasReserveMet) {
+      reserveMetSound.current.play();
+    }
+
+    // Update previous state
+    prevBidState.current = {
+      wasNearReserve: isNearReserve,
+      wasReserveMet: isReserveMet
+    };
+  }, [activeBid, car?.minPrice]);
+
+  const getBidStatus = () => {
+    if (!car?.minPrice || !activeBid) return null;
+
+    const priceDifference = car.minPrice - activeBid;
+
+    if (activeBid < car.minPrice) {
+      if (priceDifference <= 100 && priceDifference > 0) {
+        return <span className="text-warning">Near Reserve</span>;
+      }
+      return <span className="text-danger">On Reserve</span>;
+    } else {
+      return <span className="text-success">Pure Sale</span>;
+    }
+  };
+  
+  return ( 
+    <>  
       <div className="mb-[0.625vw] flex flex-col items-center justify-between">
-         {/* {
-          activeBid < car?.minPrice ? "On reserve" : "not reserve"
-         } */}
+      {getBidStatus()}
+      {/* add space */}
+      <br />
+      {car?.minPrice}
         <div className=" w-full flex justify-center items-center">
          <CircularProgress resetTimer={resetTimer} setResetTimer={setResetTimer} bonusTime={bonusTime} setBonusTime={setBonusTime} currentBid={currentBid} activeBid={activeBid} />
         </div>
