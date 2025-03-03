@@ -113,19 +113,19 @@ const CarReportViewer = ({ vin }) => {
 
 
   return (
-    <div className=" mt-[2vh] shadow-sm rounded-[0.375vw] w-full  bg-white p-[1.5vw]">
+    <div className=" mt-[2vh] shadow-sm rounded-[0.375vw] lg:w-[41vw]   bg-white p-[1.5vw]">
       <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
          Report
        </h2>
     {loading && (
-      <div className="flex  items-center justify-center h-[54vh]">
+      <div className="flex w-full items-center justify-center  ">
         <FaSpinner className="animate-spin text-blue-500 text-[2.25vw]" />
         <p className="ml-2 text-blue-500">Loading PDF...</p>
       </div>
     )}
 
     {error && (
-      <div className="text-red-500 p-[0.5vw] flex justify-center items-center rounded-[0.5vw] h-[56vh]">
+      <div className="text-red-500 p-[0.5vw] flex justify-center items-center rounded-[0.5vw]  ">
         {error}
       </div>
     )}
@@ -133,7 +133,7 @@ const CarReportViewer = ({ vin }) => {
     {!loading && !error && carReport && (
       <div>
           <div className="relative">
-          <div className="h-[570px] overflow-hidden border border-gray-300 rounded-[0.5vw] p-[0.5vw]">
+          <div className="  overflow-hidden border border-gray-300 rounded-[0.5vw] p-[0.5vw]">
             <Document file={carReport}>
               <Page pageNumber={1}  />
             </Document>
@@ -146,7 +146,7 @@ const CarReportViewer = ({ vin }) => {
 
         <div className="mt-4">
             <button
-              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+              className="bg-blue-500 text-white lg:text-[1.2vw] py-[0.5vw] px-[1vw] rounded-lg hover:bg-blue-600"
               onClick={handleOpenModal}
             >
               View Full Report
