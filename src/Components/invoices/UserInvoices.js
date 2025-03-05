@@ -94,29 +94,29 @@ export default function UserInvoices({invoices, fetchInvoices}) {
   };
   
   return (
-    <div className="w-full lg:w-[85vw] mx-auto p-4">
-      <div className="flex items-center gap-2 mb-6">
-        <FaRegFileAlt className="w-5 h-5 text-gray-600" />
-        <h2 className="text-xl font-semibold text-gray-700">Invoices</h2>
+    <div className="w-full lg:w-[85vw] mx-auto p-4 lg:p-[1vw] lg:leading-[2vw]">
+      <div className="flex items-center gap-2 lg:gap-[0.5vw] mb-6 lg:mb-[1.5vw]">
+        <FaRegFileAlt className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] text-gray-600" />
+        <h2 className="text-xl lg:text-[1.25vw] font-semibold text-gray-700">Invoices</h2>
       </div>
   
       <div className="overflow-x-auto mx-auto ">
         <table className="min-w-[1000px] w-full border-collapse">
           <thead>
             <tr className="text-left border-b">
-              <th className="py-3 font-medium text-gray-600">Invoice ID</th>
-              <th className="py-3 font-medium text-gray-600">Type</th>
-              <th className="py-3 font-medium text-gray-600">Price</th>
-              <th className="py-3 font-medium text-gray-600">Status</th>
-              <th className="py-3 font-medium text-gray-600">Created At</th>
-              <th className="py-3 font-medium text-gray-600">Image</th>
-              <th className="py-3 font-medium text-gray-600">Payment</th>
+              <th className="py-3 lg:py-[0.75vw] lg:text-[1vw] font-medium text-gray-600">Invoice ID</th>
+              <th className="py-3 lg:py-[0.75vw] lg:text-[1vw] font-medium text-gray-600">Type</th>
+              <th className="py-3 lg:py-[0.75vw] lg:text-[1vw]  font-medium text-gray-600">Price</th>
+              <th className="py-3 lg:py-[0.75vw] lg:text-[1vw]  font-medium text-gray-600">Status</th>
+              <th className="py-3 lg:py-[0.75vw] lg:text-[1vw]  font-medium text-gray-600">Created At</th>
+              <th className="py-3 lg:py-[0.75vw] lg:text-[1vw]  font-medium text-gray-600">Image</th>
+              <th className="py-3 lg:py-[0.75vw] lg:text-[1vw]  font-medium text-gray-600">Payment</th>
             </tr>
           </thead>
           <tbody>
             {invoices?.data?.length === 0 ? (
               <tr>
-                <td colSpan="7" className="text-center py-4">
+                <td colSpan="7" className="text-center py-4 lg:py-[1vw]">
                   No invoices found.
                 </td>
               </tr>
@@ -126,7 +126,7 @@ export default function UserInvoices({invoices, fetchInvoices}) {
                   key={invoice.id}
                   className="border-b hover:bg-gray-50 transition-colors"
                 >
-                  <td className="text-left py-3">
+                  <td className="text-left py-3 lg:py-[0.75vw] lg:text-[1vw]">
                     <a
                       href={`${invoice.invoice}`}
                       target="_blank"
@@ -136,10 +136,10 @@ export default function UserInvoices({invoices, fetchInvoices}) {
                       {invoice.id}
                     </a>
                   </td>
-                  <td className="py-3 text-left text-gray-600">
+                  <td className="py-3 lg:py-[0.75vw] lg:text-[1vw] text-left text-gray-600">
                     {invoice.invoiceType}
                   </td>
-                  <td className="text-left py-3">
+                  <td className="text-left py-3 lg:py-[0.75vw] lg:text-[1vw]">
                     <span
                       className={`font-medium ${
                         invoice?.price < 0 ? "text-red-600" : "text-gray-900"
@@ -152,41 +152,41 @@ export default function UserInvoices({invoices, fetchInvoices}) {
                       })}
                     </span>
                   </td>
-                  <td className="text-left py-3">
+                  <td className="text-left py-3 lg:py-[0.75vw] lg:text-[1vw]">
                     <span
-                      className={`px-3 py-1 rounded-full text-sm ${getStatusColor(
+                      className={`py-2 lg:py-[0.25vw] lg:text-[1vw] px-3 lg:px-[0.75vw] rounded-full text-sm ${getStatusColor(
                         invoice.status
                       )}`}
                     >
                       {invoice.status}
                     </span>
                   </td>
-                  <td className="text-left py-3 text-gray-600">
+                  <td className="text-left py-3 lg:py-[0.75vw] lg:text-[1vw] text-gray-600">
                     {new Date(invoice.createdAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "short",
                       day: "numeric",
                     })}
                   </td>
-                  <td className="text-left py-3">
+                  <td className="text-left py-3 lg:py-[0.75vw] lg:text-[1vw]">
                     <div className="flex items-center gap-2">
                       <a
                         href={invoice.invoice}
-                        className="inline-flex items-center gap-1 px-3 py-1 rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors text-sm"
+                        className="inline-flex items-center gap-1 px-3 lg:px-[0.75vw] py-1 lg:py-[0.25] lg:text-[1vw] rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors text-sm"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <IoEyeOutline className="w-4 h-4" />
+                        <IoEyeOutline className="w-4 lg:w-[1vw] h-4 lg:text-[1vw] lg:h-[1vw]" />
                         View
                       </a>
                     </div>
                   </td>
-                  <td className="text-left py-3">
+                  <td className="text-left py-3 lg:py-[0.75vw] lg:text-[1vw] ">
                     <div className="flex items-center gap-2">
                       {invoice.status === "Pending" && (
                         <button
                           onClick={() => handleOpenModal(invoice)}
-                          className="inline-flex items-center gap-1 px-3 py-1 rounded-md bg-green-500 hover:bg-green-600 text-white transition-colors text-sm"
+                          className="inline-flex items-center gap-1 px-3 lg:px-[0.75vw] lg:text-[1vw] py-1 lg:py-[0.25vw] rounded-md lg:rounded-[0.375vw] bg-green-500 hover:bg-green-600 text-white transition-colors text-sm "
                         >
                           Pay
                         </button>

@@ -16,7 +16,7 @@ const LocalCars = () => {
   return (
     <>
   
-      <div className="w-full lg:w-[74vw] mx-auto  my-[60px] text-black">
+      <div className="w-full lg:w-[84vw] mx-auto  my-[60px] text-black">
       <h1 className="text-[36px] lg:text-[2.3vw] font-urbanist text-left font-bold">Local Cars</h1>
 
         {localCars && localCars?.data?.cars?.length === 0 ? (
@@ -33,22 +33,22 @@ const LocalCars = () => {
             <table className="min-w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Car Image
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Title
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     VIN
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Status
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Location
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Posted
                   </th>
                 </tr>

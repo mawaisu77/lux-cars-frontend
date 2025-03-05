@@ -209,7 +209,7 @@ export default function BiddingLimit({
                 step={biddingConfig.biddingIncrement}
                 value={biddingLimit}
                 onChange={(e) => handleBiddingChange(Number(e.target.value))}
-                className="w-full "
+                className="w-full lg:w-[100%]  "
                 style={{ accentColor: "#c60000" }}
               />
               <div className="flex justify-between mt-2 md:mt-[0.5vw] text-sm md:text-18 text-gray-600">

@@ -104,7 +104,7 @@ const Navbar = () => {
                 htmlFor="imageUpload"
                 className="absolute top-2 right-[5%] cursor-pointer bg-white p-[0.5vw] rounded-[100%]"
               >
-                <RiImageAddLine  className="w-[2vw] h-[2vw]" />
+                <RiImageAddLine  className="w-[20px] h-[20px] lg:w-[2vw] lg:h-[2vw]" />
               </label>
               <input
                 type="file"
