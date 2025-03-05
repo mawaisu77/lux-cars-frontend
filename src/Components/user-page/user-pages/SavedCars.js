@@ -57,15 +57,15 @@ const SavedCars = () => {
         <h1 className="text-[36px] lg:text-[2.3vw] font-urbanist text-left font-bold">
           Saved Cars
         </h1>
-        <div className="flex justify-center space-x-4 my-6">
+        <div className="flex justify-center space-x-4 lg:space-x-[1vw] my-6 lg:my-[1.5vw]">
           <button
-            className={`px-4 py-2 font-semibold rounded ${selectedOption === "bidding" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
+            className={`px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-semibold rounded lg:rounded-[0.5vw] ${selectedOption === "bidding" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
             onClick={() => handleOptionChange("bidding")}
           >
             Bidding Cars
           </button>
           <button
-            className={`px-4 py-2 font-semibold rounded ${selectedOption === "local" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
+            className={`px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-semibold rounded lg:rounded-[0.5vw] ${selectedOption === "local" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
             onClick={() => handleOptionChange("local")}
           >
             Local Cars
@@ -90,7 +90,7 @@ const SavedCars = () => {
               ) : (
                 <>
                   <div className="flex justify-center items-center gap-x-2 font-urbanist font-semibold">
-                    <h1 className="text-center text-3xl ">
+                    <h1 className="text-center text-3xl lg:text-[1.875vw] lg:leading-[2.25vw] ">
                       Saved Bidding Cars ({savedCars && savedCars?.data?.length}
                       )
                     </h1>
@@ -113,7 +113,7 @@ const SavedCars = () => {
               />
             </div>
           ) : (
-            <div className="w-full lg:w-[74vw]  mx-auto  mt-[50px] text-black">
+            <div className="w-full lg:w-[74vw]  mx-auto  mt-[50px] lg:mt-[2.604vw] text-black">
               {savedLocalCars && savedLocalCars?.data?.length === 0 ? (
                 <div className="flex flex-col items-center justify-center min-h-[50vh]">
                   <p className="text-2xl font-bold text-gray-500">
@@ -126,7 +126,7 @@ const SavedCars = () => {
               ) : (
                 <>
                   <div className="flex justify-center items-center gap-x-2 font-urbanist font-semibold">
-                    <h1 className="text-center text-3xl ">
+                    <h1 className="text-center text-3xl lg:text-[1.875vw] lg:leading-[2.25vw] ">
                       Saved Local Cars (
                       {savedLocalCars && savedLocalCars?.data?.length})
                     </h1>

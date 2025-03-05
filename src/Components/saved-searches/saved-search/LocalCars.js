@@ -63,13 +63,13 @@ const LocalCars = () => {
           return validFilters.length ? (
             <li
               key={index}
-              className="flex items-center justify-between p-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200 transition"
+              className="flex items-center justify-between p-2 lg:p-[0.5vw] bg-gray-100 rounded cursor-pointer hover:bg-gray-200 transition"
             >
               <span onClick={() => handleSearchClick(filter)} title={rawTitle}>
                 {formattedFilters.join(" | ")}
               </span>
               <button
-                className="text-red-500 hover:text-red-700 p-1"
+                className="text-red-500 hover:text-red-700 p-1 lg:p-[0.25vw] lg:text-[1vw]"
                 onClick={() => handleDeleteSearch(index)}
               >
                 <FaTrash />

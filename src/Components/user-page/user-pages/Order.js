@@ -19,7 +19,7 @@ const Order = () => {
 
   return (
     <>
-      <div className="w-[100vw] mt-[50px]">
+<div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
         <div className="max-w-[84vw] mx-auto flex flex-col lg:flex-row justify-center lg:justify-between  ">
         {/* <div className='flex justify-center items-center'>
             <input
@@ -31,7 +31,7 @@ const Order = () => {
               <GoSearch size={27} color="white" className="cursor-pointer" />
             </div>
           </div> */}
-          <p className="text-[28px] lg:text-[36px] text-center lg:text-left font-bold mt-4 ">
+          <p className="text-[28px] lg:text-[2.3vw] text-center lg:text-left font-bold mt-4 lg:mt-[1vw] ">
             Orders
           </p>
 

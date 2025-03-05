@@ -183,12 +183,12 @@ export default function BiddingLimit({
 
   return (
     <>
-      <div className=" w-[90%] lg:max-w-[84vw] mx-auto p-6 md:p-[1.25vw] font-sans">
+      <div className=" w-[90%] lg:max-w-[84vw] mx-auto p-6 lg:p-[1.5vw] md:p-[1.25vw] font-sans">
         <h1 className="text-2xl md:text-30 font-bold mb-4 md:mb-[0.833vw]">
           Increase My Bidding Limit
         </h1>
 
-        <div className="bg-yellow-100 border border-yellow-400 rounded p-4 md:p-[0.833vw] mb-6 md:mb-[1.25vw] ">
+        <div className="bg-yellow-100 border border-yellow-400 rounded lg:rounded-[0.25vw] p-4 md:p-[0.833vw] mb-6 md:mb-[1.25vw] ">
           <p className="text-sm md:text-18 leading-[1.5]">
             Your Available Bidding Limit is ${biddingLimit.toLocaleString()}
           </p>
@@ -199,7 +199,7 @@ export default function BiddingLimit({
           </p>
         </div>
 
-        <div className=" flex flex-wrap gap-y-2 justify-between md:gap-[1.25vw]">
+        <div className=" flex flex-wrap gap-y-2 lg:gap-y-[0.5vw] justify-between leading-[2vw] md:gap-[1.25vw]">
           <div className="border w-full lg:w-[45%] border-gray-300 rounded p-6 md:p-[1.25vw]">
             <div className="mb-8 md:mb-[1.25vw]">
               <input
@@ -209,10 +209,10 @@ export default function BiddingLimit({
                 step={biddingConfig.biddingIncrement}
                 value={biddingLimit}
                 onChange={(e) => handleBiddingChange(Number(e.target.value))}
-                className="w-full "
+                className="w-full lg:w-[100%]  "
                 style={{ accentColor: "#c60000" }}
               />
-              <div className="flex justify-between mt-2 md:mt-[.5vw] text-sm md:text-18 text-gray-600">
+              <div className="flex justify-between mt-2 md:mt-[0.5vw] text-sm md:text-18 text-gray-600">
                 <span>$3500</span>
 
                 <span>
@@ -221,9 +221,9 @@ export default function BiddingLimit({
               </div>
             </div>
 
-            <div className="mb-4 md:mb-[0.833vw]">
+            <div className="mb-4 md:mb-[0.833vw] leading-[2.5vw]">
               <div className="flex items-center gap-2 md:gap-[0.5vw] mb-2 md:mb-[0.5vw] text-sm md:text-18">
-                <span className="font-medium">Bidding Limit</span>
+                <span className="font-medium my-2 lg:my-[0.5vw]">Bidding Limit</span>
                 <span
                   className="text-gray-600 cursor-help text-sm md:text-18"
                   title="The maximum amount you can bid"
@@ -234,7 +234,7 @@ export default function BiddingLimit({
               <div className="px-2 md:px-[0.5vw] flex items-center border border-gray-300 rounded">
                 <button
                   onClick={handleBiddingDecrement}
-                  className="w-6 h-6 md:w-[1.5vw] md:h-[1.5vw] flex items-center justify-center rounded-full  border border-red-600 bg-transparent hover:bg-red-600 hover:text-white cursor-pointer text-sm md:text-18"
+                  className="w-6  h-6 md:w-[1.5vw] md:h-[1.5vw] flex items-center justify-center rounded-full  border border-red-600 bg-transparent hover:bg-red-600 hover:text-white cursor-pointer text-sm md:text-18"
                 >
                   -
                 </button>
@@ -252,7 +252,7 @@ export default function BiddingLimit({
 
             <div>
               <div className="flex items-center gap-2 mb-2 md:mb-[0.5vw] text-sm md:text-18">
-                <span className="font-medium">Purchase Limit</span>
+                <span className="font-medium my-2 lg:my-[0.5vw]">Purchase Limit</span>
                 <span
                   className="text-gray-600 cursor-help"
                   title="The number of vehicles you can purchase"
@@ -280,8 +280,8 @@ export default function BiddingLimit({
             </div>
           </div>
 
-          <div className="border w-full lg:w-[45%] border-gray-300 rounded p-6 md:p-[1.25vw]">
-            <div className="mb-4 md:mb-[0.833vw]">
+          <div className="border w-full lg:w-[45%] border-gray-300   rounded lg:rounded-[0.25vw] p-6 leading-[2.5vw]  md:p-[1.25vw]">
+            <div className="mb-4   p-2 md:p-[0.5vw] md:mb-[0.833vw]">
               <div className="flex justify-between items-center text-sm md:text-18">
                 <span>Bidding Limit:</span>
                 <span className="font-semibold">
@@ -289,7 +289,7 @@ export default function BiddingLimit({
                 </span>
               </div>
             </div>
-            <div className="mb-4 md:mb-[0.833vw]">
+            <div className="mb-4   p-2 md:p-[0.5vw] md:mb-[0.833vw]">
               <div className="flex justify-between items-center text-sm md:text-18">
                 <span>Purchase Limit:</span>
                 <span className="font-semibold">
@@ -297,7 +297,7 @@ export default function BiddingLimit({
                 </span>
               </div>
             </div>
-            <div className="mb-4 md:mb-[0.833vw]">
+            <div className="mb-4   p-2 md:p-[0.5vw] md:mb-[0.833vw]">
               <div className="flex justify-between items-center text-sm md:text-18">
                 <div className="flex items-center gap-2">
                   <span>Refundable Security Deposit</span>
@@ -314,7 +314,7 @@ export default function BiddingLimit({
               </div>
             </div>
             <div className="flex justify-between items-center pt-4 md:pt-[1.25vw] border-t border-gray-300 text-sm md:text-18">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-4   p-2 md:p-[0.5vw] md:mb-[0.833vw]">
                 <span>Total Payment Due</span>
                 {securityDeposit <= 350 ? (
                   <>
@@ -337,7 +337,7 @@ export default function BiddingLimit({
               </span>
             </div>
             <button
-              className="w-full py-1.5 md:py-[0.5vw] mt-6 md:mt-[1.25vw] bg-primary-red text-white border-none rounded text-lg md:text-20 font-semibold cursor-pointer"
+              className="w-full py-2 md:py-[0.5vw] mt-6 md:mt-[1.5vw] bg-primary-red text-white border-none rounded lg:rounded-[0.25vw] text-lg md:text-20 font-semibold cursor-pointer"
               onClick={handleOpenModal}
             >
               Increase My Bidding Limit

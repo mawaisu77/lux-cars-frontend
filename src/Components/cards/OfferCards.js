@@ -63,8 +63,8 @@ const OfferCards = ({
     <>
       <tr className="border-t">
         {/* Car Image */}
-        <td className="text-nowrap px-4 py-2">
-          <div className="w-[60px] h-[60px] rounded-md overflow-hidden bg-gray-100">
+        <td className="text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">
+          <div className="w-[60px] lg:w-[3.125vw] h-[60px] lg:h-[3.125vw] rounded-md lg:rounded-[0.375vw] overflow-hidden bg-gray-100">
             <img
               className="w-full h-full object-cover"
               src={offer.carData?.carImages[0] || ""}
@@ -74,7 +74,7 @@ const OfferCards = ({
         </td>
         {/* Car Title */}
         <td
-          className="text-nowrap px-4 py-2 hover:text-blue-800 hover:underline cursor-pointer"
+          className="text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] hover:text-blue-800 hover:underline cursor-pointer"
           onClick={handleNavigate}
         >
           {`${offer.carData?.year || "-"} ${offer.carData?.make || "-"} ${
@@ -82,16 +82,16 @@ const OfferCards = ({
           }`}
         </td>
         {/* VIN */}
-        <td className="text-nowrap px-4 py-2">{offer.carData?.vin || "-"}</td>
+        <td className="text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">{offer.carData?.vin || "-"}</td>
 
         {/* Offer Price */}
-        <td className="text-nowrap px-4 py-2 font-bold">
+        <td className="text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-bold">
           <span className={""}>${offer.offer?.offerPrice || "N/A"}</span>
         </td>
 
         {/* Status */}
         <td
-          className={`text-nowrap px-4 py-2 font-semibold ${
+          className={`text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-semibold ${
             offer.offer?.offerStatus === "OfferAccepted"
               ? "text-green-500"
               : "text-red-500"
@@ -101,7 +101,7 @@ const OfferCards = ({
         </td>
 
         {/* Posted Time Ago */}
-        <td className="text-nowrap px-4 py-2">
+        <td className="text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">
           <TimeAgo date={offer.carData?.createdAt} />
         </td>
 
@@ -110,7 +110,7 @@ const OfferCards = ({
           {(offer.offer?.offerStatus === "Pending" ||
             offer.offer?.offerStatus === "Expired") && (
             <button
-              className="bg-green-500 hover:bg-green-600 text-xs text-white font-bold py-1 px-2 rounded"
+              className="bg-green-500 hover:bg-green-600 text-xs lg:text-[1vw] text-white   p-1 lg:px-[0.5vw] lg:py-[2vh] rounded"
               onClick={() => handleOpenModal(offer?.offer?.id)}
             >
               Update Offer
@@ -168,19 +168,19 @@ const OfferCards = ({
               </p>
               <div className="flex gap-x-2 justify-center">
                 <button
-                  className="btn text-green-600 w-[100px] dark:bg-white dark:border-green-600 dark:text-green-600 hover:bg-green-600 hover:text-white"
+                  className="btn text-green-600 w-[100px] lg:w-[5.208vw] lg:text-[1vw] dark:bg-white dark:border-green-600 dark:text-green-600 hover:bg-green-600 hover:text-white"
                   onClick={() => handleAcceptOffer(offer?.offer?.id)}
                 >
                   Accept
                 </button>
                 <button
-                  className="btn text-red-600 w-[100px] dark:bg-white dark:border-red-600 dark:text-red-600 hover:bg-red-600 hover:text-white"
+                  className="btn text-red-600 w-[100px] lg:w-[5.208vw] dark:bg-white dark:border-red-600 dark:text-red-600 hover:bg-red-600 hover:text-white"
                   onClick={handleRejectOffer}
                 >
                   Reject
                 </button>
                 <button
-                  className="btn text-gray-600 w-[100px] dark:bg-white dark:border-gray-600 dark:text-gray-600 hover:bg-gray-600 hover:text-white"
+                  className="btn text-gray-600 w-[100px] lg:w-[5.208vw] dark:bg-white dark:border-gray-600 dark:text-gray-600 hover:bg-gray-600 hover:text-white"
                   onClick={handleCloseModal}
                 >
                   Cancel

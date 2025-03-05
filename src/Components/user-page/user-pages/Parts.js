@@ -122,20 +122,20 @@ const SearchPartsForm = () => {
 
   return (
     <div className="flex justify-center w-[100vw] items-center min-h-screen bg-white font-urbanist">
-      <div className="w-[90%] lg:w-[70%] mx-auto">
-        <h2 className="text-[36px] text-center lg:text-left font-bold mt-4 mb-4">
+      <div className="w-[90%] lg:w-[85vw] mx-auto   lg:leading-[2.5vw]" >
+        <h2 className="text-[36px] lg:text-[2vw] text-center lg:text-left font-bold mt-4 lg:mt-[1vw] mb-4 lg:mb-[1vw]">
           Search Parts
         </h2>
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="text-start bg-white rounded-lg mb-10 shadow-[0px_4px_5px_6px_rgba(0,_0,_0,_0.1)]  w-[100%] p-8 sm:p-10 space-y-8"
+          className="text-start bg-white rounded-lg lg:rounded-[0.5vw] mb-10 shadow-[0px_4px_5px_6px_rgba(0,_0,_0,_0.1)]  w-[100%] p-8 lg:p-[2vw] sm:p-10 space-y-8 lg:space-y-[2vw]"
         >
-          <div className="w-full">
-            <label htmlFor="company" className="block text-xl mb-4 font-bold">
+          <div className="w-full lg:w-[100%]">
+            <label htmlFor="company" className="block text-xl lg:text-[1vw] mb-4  lg:mb-[1vw] font-bold">
             Your Vehicle Make
             </label>
-            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
+            <span className="text-sm lg:text-[0.875vw] mt-2 lg:mt-[0.5vw] font-medium text-[#1F1F2C]">
               Enter Make of you Car
             </span>
             <input
@@ -144,34 +144,35 @@ const SearchPartsForm = () => {
               type="text"
               value={formData.company}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full lg:w-[100%] border border-gray-300 rounded-lg lg:rounded-[0.5vw] p-3 lg:px-[0.75vw] lg:py-[1.5vh]"
             />
             {errors.company && (
-              <p className="text-red-500 text-sm mt-1">{errors.company}</p>
+              <p className="text-red-500 text-sm lg:text-[0.875vw] mt-1 lg:mt-[0.5vw]">{errors.company}</p>
             )}
           </div>
           <div className="w-full">
-            <label className="block text-xl mb-4 font-bold">Your Vehicle Year</label>
-            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
+            <label className="block text-xl lg:text-[1vw] mb-4  lg:mb-[1vw] font-bold">Your Vehicle Year</label>
+            <span className="text-sm lg:text-[0.875vw] mt-2 lg:mt-[0.5vw] font-medium text-[#1F1F2C]">
               Select Year of you Car
             </span>
             <ReactSelect
              styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
-                padding: '6px 4px',
+                padding: '0.313vw 0.208vw',
                 '&:focus-within': {
                   boxShadow: '0 0 0 1px black',
-                  borderColor: 'black'
+                  borderColor: 'black',
+                  borderRadius: '0.5vw',
                 },
               }),
               valueContainer: (baseStyles) => ({
                 ...baseStyles,
-                padding: '0 8px',     
+                padding: '0 0.417vw',     
               }),
               option: (baseStyles) => ({
                 ...baseStyles,
-                padding: '12px 16px',  
+                padding: '0.625vw 0.833vw',  
               }),
             }}
               name="yearMade"
@@ -191,17 +192,17 @@ const SearchPartsForm = () => {
                   label: year.toString()
                 };
               })}
-              className="w-full"
+              className="w-full lg:text-[1vw]  "
               classNamePrefix="select"
               placeholder="Select Year"
             />
           </div>
 
           <div className="">
-            <label htmlFor="model" className="block text-xl mb-4 font-bold">
+            <label htmlFor="model" className="block text-xl lg:text-[1vw] mb-4  lg:mb-[1vw] font-bold">
             Your Vehicle Model
             </label>
-            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
+            <span className="text-sm lg:text-[0.875vw] mt-2 lg:mt-[0.5vw] font-medium text-[#1F1F2C]">
               Enter Model of you Car
             </span>
             <input
@@ -210,7 +211,7 @@ const SearchPartsForm = () => {
               type="text"
               value={formData.model}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full lg:w-[100%] border border-gray-300 rounded-lg lg:rounded-[0.5vw] p-3 lg:p-[0.75vw]"
             />
             {errors.model && (
               <p className="text-red-500 text-sm mt-1">{errors.model}</p>
@@ -218,10 +219,10 @@ const SearchPartsForm = () => {
           </div>
 
           <div className="">
-            <label htmlFor="variant" className="block text-xl mb-4 font-bold">
+            <label htmlFor="variant" className="block text-xl lg:text-[1vw] mb-4  lg:mb-[1vw] font-bold">
               Variant
             </label>
-            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
+            <span className="text-sm lg:text-[0.875vw] mt-2 lg:mt-[0.5vw] font-medium text-[#1F1F2C]">
               Enter Car Variant
             </span>
             <input
@@ -230,7 +231,7 @@ const SearchPartsForm = () => {
               type="text"
               value={formData.variant}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full lg:w-[100%] border border-gray-300 rounded-lg lg:rounded-[0.5vw] p-3 lg:p-[0.75vw]"
             />
             {errors.variant && (
               <p className="text-red-500 text-sm mt-1">{errors.variant}</p>
@@ -238,10 +239,10 @@ const SearchPartsForm = () => {
           </div>
 
           <div className="">
-            <label htmlFor="location" className="block text-xl mb-4 font-bold">
+            <label htmlFor="location" className="block text-xl lg:text-[1vw] mb-4  lg:mb-[1vw] font-bold">
               Location
             </label>
-            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
+            <span className="text-sm lg:text-[0.875vw] mt-2 lg:mt-[0.5vw] font-medium text-[#1F1F2C]">
               Zipcode
             </span>
             <input
@@ -250,7 +251,7 @@ const SearchPartsForm = () => {
               type="text"
               value={formData.location}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full lg:w-[100%] border border-gray-300 rounded-lg lg:rounded-[0.5vw] p-3 lg:p-[0.75vw]"
             />
             {errors.location && (
               <p className="text-red-500 text-sm mt-1">{errors.location}</p>
@@ -260,11 +261,11 @@ const SearchPartsForm = () => {
           <div className="">
             <label
               htmlFor="partsDetails"
-              className="block text-xl mb-4 font-bold"
+              className="block text-xl lg:text-[1vw] mb-4  lg:mb-[1vw] font-bold"
             >
               Part Description
             </label>
-            <span className="text-sm mt-2 font-medium text-[#1F1F2C]">
+            <span className="text-sm lg:text-[0.875vw] mt-2 lg:mt-[0.5vw] font-medium text-[#1F1F2C]">
               Tell us about the part you are looking for
             </span>
             <input
@@ -273,7 +274,7 @@ const SearchPartsForm = () => {
               type="text"
               value={formData.partsDetails}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg p-3"
+              className="w-full lg:w-[100%] border border-gray-300 rounded-lg lg:rounded-[0.5vw] p-3 lg:p-[0.75vw]"
             />
             {errors.partsDetails && (
               <p className="text-red-500 text-sm mt-1">{errors.partsDetails}</p>
@@ -281,11 +282,11 @@ const SearchPartsForm = () => {
           </div>
 
           <div className="">
-            <label className="block text-xl mb-4 font-bold">
+            <label className="block text-xl lg:text-[1vw] mb-4  lg:mb-[1vw] font-bold">
               Order By Image (Up to 6 Images)
             </label>
             <div className="border border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer flex flex-col items-center">
-              <FiUploadCloud className="w-[18.34px] h-[15px] text-[#343444] mb-4" />
+              <FiUploadCloud className="w-[18.34px] lg:w-[1vw] lg:h-[0.875vw] h-[15px] text-[#343444] mb-4" />
               <input
                 type="file"
                 onChange={handleImageUpload}
@@ -296,16 +297,16 @@ const SearchPartsForm = () => {
               />
               <label
                 htmlFor="partsImageUpload"
-                className="text-[#7A798A] cursor-pointer"
+                className="text-[#7A798A] cursor-pointer text-sm lg:text-[0.875vw]"
               >
-                <span className="text-[#F33535]">Click to upload</span> or drag
+                <span className="text-[#F33535] text-sm lg:text-[0.875vw]">Click to upload</span> or drag
                 and drop
               </label>
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm lg:text-[0.875vw] text-gray-500 mt-2 lg:mt-[0.5vw]">
                 SVG, PNG, JPG or GIF max 800x400px
               </p>
             </div>
-            <div className="mt-4 space-y-4">
+            <div className="mt-4 lg:mt-[1vw] space-y-4 lg:space-y-[1vw]">
               {uploadedFiles.map(({ name, size, preview }, index) => (
                 <div key={index} className="flex items-center space-x-4">
                   <img
@@ -334,7 +335,7 @@ const SearchPartsForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-red-500 text-white rounded-lg py-4 text-xl font-medium flex items-center justify-center"
+            className="w-full lg:w-[100%] bg-red-500 text-white rounded-lg lg:rounded-[0.5vw] py-2 lg:py-[1vw] text-xl lg:text-[1.25vw] font-medium flex items-center justify-center"
           >
             {isLoading ? (
               <ClipLoader color="#ffffff" size={24} />
