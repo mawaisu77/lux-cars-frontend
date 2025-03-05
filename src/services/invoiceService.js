@@ -8,3 +8,12 @@ export const getMyInvoices = async () => {
       throw error;
     }
  };
+
+ export const getMyTransactions = async () => {
+  try {
+    const response = await baseService.get(`payments`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

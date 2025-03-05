@@ -40,18 +40,23 @@ const BidHistory = ({data}) => {
                   <div className="flex items-center w-[44px] h-[44px]">
                     <img
                       className=" rounded-lg w-full h-full object-cover"
-                      src={item.profilePicture ? item.profilePicture  : avatar}
+                      src={item?.profilePicture ? item?.profilePicture  : avatar}
                       alt="Profile"
                     />
                   </div>
                   <div className="flex justify-between w-full ml-4">
                     <div className="text-left">
                       <div className="flex items-center gap-2">
-                        <p className="text-[1rem] font-urbanist font-bold">
-                          {item.username}
+                       <div className='text-[1rem] font-urbanist font-semibold flex items-center gap-x-2 lg:gap-x-[0.5vw]'>
+                       <span>
+                          User: 
+                        </span>
+                        <p className="">
+                          {item?.bid?.userID?.substring(0, 8)}
                         </p>
+                       </div>
                         <p className="text-[0.9rem] text-gray-500 font-urbanist">
-                          <TimeAgo date={item.bid.createdAt} />
+                          <TimeAgo date={item?.bid?.createdAt} />
                         </p>
                       </div>
                       <p

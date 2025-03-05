@@ -6916,9 +6916,9 @@ const documentOldOption = [
     color: "#FF681F",
   },
   {
-    id: "TN - CERTIFICATE OF TITLE (P)",
-    label: "TN - CERTIFICATE OF TITLE (P)",
-    color: "#FF681F",
+    id: "TN - CERTIFICATE OF TITLE",
+    label: "TN - CERTIFICATE OF TITLE",
+    color: "#008000",
   },
   { id: "Clear (Minnesota)", label: "Clear (Minnesota)", color: "#FF681F" },
   {

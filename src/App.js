@@ -51,6 +51,9 @@ import Test from "./Components/prac/Test.jsx";
 import Helpsec from "./Components/help/index.js";
 import Invoices from "./Components/invoices/index.js";
 import SavedSearchPage from "./Components/saved-searches/index.js";
+import TransactionPage from "./Components/transaction-history/index.js"
+import ProbiddingPage from "./Components/pro-bidding-tips/index.js"
+
 
 
 function App() {
@@ -152,6 +155,7 @@ function App() {
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/how-it-works" element={<HowWorks />} />
             <Route path="/fees" element={<Fees />} />
+            <Route path="/pro-bidding-tips" element={<ProbiddingPage />} />
             <Route path="/help" element={<Helpsec />} />
             <Route path="/about-us" element={<About />} />
             <Route path="/privacy-policies" element={<Privacy />} />
@@ -265,6 +269,14 @@ function App() {
                   <UserLayout>
                     <Funds />
                   </UserLayout>
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/user/account/transactions"
+              element={
+                <ProtectedRoute>
+                    <TransactionPage />
                 </ProtectedRoute>
               }
             />
