@@ -22,24 +22,33 @@ const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType, 
   };
 
 
+
+
   const documentCategory = colorCategoryMapping[documentOldType?.color] || "No Information";
   const tooltipDescription = colorDescriptions[documentOldType?.color] || '';
-  const sellerTooltipDescription = sellerTooltipDescriptions[documentCategory] || "No Information description";
+  const sellerTooltipDescription = sellerTooltipDescriptions[seller ? documentCategory : (documentOldType?.color === "#008000"?"Insurance":"Non-Insurance")] || "Non-Insurance";
+
+  // console.log("first", documentCategory, documentOldType?.color, sellerTooltipDescription)
 
   return (
     <div className="flex gap-[0.5vw] flex-col   lg:flex-row justify-between">
+
       <div className="flex flex-1 px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] rounded-[0.5vw] bg-white">
+
         <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-[0.5vw]  bg-[#CA0000]">
           <PiUsersFill color="white" className="lg:text-[1vw]" />
         </div>
         <div data-tooltip-id={`seller-tooltip`} className="text-left p-2 md:p-[0.3vw]">
-          <p className="lg:text-[0.8vw] text-[#6a6978] font-semibold tracking-wider">Owned by <span style={{color: seller ?  documentOldType?.color : '#FF681F'}}> ( {seller ?  documentCategory : "Non-Insurance"}) </span> </p>
+          <p className="lg:text-[0.8vw] text-[#6a6978] font-semibold tracking-wider">Owned by <span style={{color:  documentOldType?.color }}> ( { documentCategory }) </span> </p>
+          
           <p
           style={{ color: seller ? documentOldType?.color : '#FF681F', padding: documentOldType ? '0.2vw' : '0', borderRadius: documentOldType ? '0.2vw' : '0' }}
             className={`lg:text-[0.8vw] font-urbanist font-semibold`}
           >
-            {seller || "No Information"}
-          </p>
+            {seller || ""}
+          </p> 
+         
+
         </div>
       </div>
       <div className="flex flex-1 px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] rounded-[0.5vw] bg-white">
@@ -70,7 +79,7 @@ const VehcileSellerInfo = ({seller, documentOld, document, currentDocumentType, 
         place="top"
         content={
           <ColorDescriptionComponent
-            tooltipDescription={seller ?  sellerTooltipDescription : "The seller has not been considered trustworthy by BidCaribbean, or detailed information is missing. Please exercise caution when making a purchase decision"} 
+            tooltipDescription={sellerTooltipDescription} 
            />
           } 
         

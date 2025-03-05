@@ -233,6 +233,18 @@ export default function ProfileDropdown({ user }) {
           </ListItemIcon>
           Invoices
         </MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            navigate("/user/account/transactions");
+          }}
+        >
+          <ListItemIcon>
+            <AddCardIcon fontSize="small" />
+          </ListItemIcon>
+          Transactions
+        </MenuItem>
+
         <Divider />
 
         <MenuItem

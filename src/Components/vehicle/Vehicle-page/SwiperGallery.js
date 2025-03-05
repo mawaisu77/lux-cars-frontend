@@ -7,18 +7,18 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import Modal from "./Modal360";
 import { ClipLoader } from "react-spinners";
-import ReactPlayer from 'react-player'
+import ReactPlayer from "react-player";
 import VideoModal from "./ModalVideo";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
 import { vehicleScoreColors } from "./VehicleScoreColor";
-import bidcaribbeansLogo from "../../../assets/lux-logo/bidcaribbean-logo.png"
+import bidcaribbeansLogo from "../../../assets/lux-logo/bidcaribbean-logo.png";
 
 const SwiperGallery = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false); 
-  const [loading, setLoading] = useState(true); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -35,8 +35,8 @@ const SwiperGallery = ({ images, carData }) => {
     setIsVideoModalOpen(false);
   };
 
-   // Open modal with selected image
-   const openModalImg = (index) => {
+  // Open modal with selected image
+  const openModalImg = (index) => {
     setCurrentImageIndex(index);
     setImageModalOpen(true);
   };
@@ -68,7 +68,7 @@ const SwiperGallery = ({ images, carData }) => {
         src={carData.iaai_360}
         width="80%"
         height="600px"
-        onLoad={() => setLoading(false)} 
+        onLoad={() => setLoading(false)}
         allowFullScreen
         style={{ display: loading ? "none" : "block" }}
       />
@@ -101,55 +101,48 @@ const SwiperGallery = ({ images, carData }) => {
 
   return (
     <div>
-    
       <div className="relative">
-      
         <>
-       {
-        carData?.vehicle_score && (
-          <div
-           className={`absolute flex gap-x-1 items-center z-10 text-[14px] top-5 text-xs left-4 bg-black text-white py-2 px-4 rounded-lg ${vehicleScoreColors(carData?.vehicle_score?.split('/')[0])}`} 
-           onClick={openModal} 
- 
-         >
-           Vehicle Score: 
-           <span className="font-bold text-[15px]">
-           { carData?.vehicle_score}
-           </span>
-         </div>
-        )
-       }
+          {carData?.vehicle_score && (
+            <div
+              className={`absolute flex gap-x-1 items-center z-10 text-[14px] top-5 text-xs left-4 bg-black text-white py-2 px-4 rounded-lg ${vehicleScoreColors(carData?.vehicle_score?.split("/")[0])}`}
+              onClick={openModal}
+            >
+              Vehicle Score:
+              <span className="font-bold text-[15px]">
+                {carData?.vehicle_score}
+              </span>
+            </div>
+          )}
 
-           <button
-           className="absolute z-10 bottom-5 text-xs right-4 bg-black text-white py-1 px-2 rounded-lg"
-           onClick={openModal} 
- 
-         >
-           360° View
-         </button>
-       { carData.video && <button
-           className="absolute z-10 bottom-5 text-xs right-28 bg-black text-white py-1 px-2 rounded-lg"
-           onClick={openVideoModal} 
- 
-         >
-           Video
-         </button>}
-         <div
-           className="absolute  z-10 bottom-2 w-56 text-sm left-2 rounded-lg"
-         >
+          <button
+            className="absolute z-10 bottom-5 text-xs right-4 bg-black text-white py-1 px-2 rounded-lg"
+            onClick={openModal}
+          >
+            360° View
+          </button>
+          {carData.video && (
+            <button
+              className="absolute z-10 bottom-5 text-xs right-28 bg-black text-white py-1 px-2 rounded-lg"
+              onClick={openVideoModal}
+            >
+              Video
+            </button>
+          )}
+          <div className="absolute  z-10 bottom-2 w-56 text-sm left-2 rounded-lg">
             <img
               src={bidcaribbeansLogo}
               className="my-2 rounded-lg shadow-img cursor-pointer"
               alt={`Vehicle_Image`}
-             />
-           
-         </div>
-           </>
-    
+            />
+          </div>
+        </>
+
         <Swiper
           style={{
             "--swiper-navigation-color": "#fff",
             "--swiper-pagination-color": "#fff",
+        
           }}
           loop={true}
           autoplay={{
@@ -168,10 +161,10 @@ const SwiperGallery = ({ images, carData }) => {
           {images &&
             images.map((image, index) => (
               <SwiperSlide key={index}>
-                <div className="relative">
+                <div className="relative h-[300px] lg:h-[20vw]">
                   <img
                     src={image}
-                    className=" rounded-lg shadow-img cursor-pointer"
+                    className="w-full h-full object-cover rounded-lg shadow-img cursor-pointer"
                     alt={`Vehicle_Image ${index + 1}`}
                     onClick={() => openModalImg(index)} // Open modal on image click
                   />
@@ -204,7 +197,6 @@ const SwiperGallery = ({ images, carData }) => {
             </SwiperSlide>
           ))}
       </Swiper>
-  
 
       {/* Modal for 360° View */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
@@ -215,10 +207,15 @@ const SwiperGallery = ({ images, carData }) => {
           renderCopartView()}
       </Modal>
 
-        {/* Modal for Video View */}
+      {/* Modal for Video View */}
       <VideoModal isOpen={isVideoModalOpen} onClose={closeVideoModal}>
-       <ReactPlayer url={carData?.video} controls={true} width={'90%'} height={'100%'}  config={{ file: { attributes: { preload: 'auto' } } }} 
-       />
+        <ReactPlayer
+          url={carData?.video}
+          controls={true}
+          width={"90%"}
+          height={"100%"}
+          config={{ file: { attributes: { preload: "auto" } } }}
+        />
       </VideoModal>
 
       <ImageModal
@@ -231,7 +228,7 @@ const SwiperGallery = ({ images, carData }) => {
         logo={bidcaribbeansLogo}
       />
     </div>
-  )
+  );
 };
 
 export default SwiperGallery;
