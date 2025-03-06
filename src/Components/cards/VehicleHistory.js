@@ -23,7 +23,7 @@ const VehicleHistory = React.memo(({ carData }) => {
         </div>
       ) : (
         <div
-          className="max-w-[85vw] sm:max-w-[85vw] mx-auto pb-[3vw]"
+          className="max-w-[95vw] lg:max-w-[85vw] mx-auto pb-[3vw]"
           id="startBidding"
         >
           <div className="flex justify-center items-center ">
@@ -42,7 +42,7 @@ const VehicleHistory = React.memo(({ carData }) => {
               <hr className="h-[2px] mx-auto sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[4vw] " />
             </div>
           </div>
-          <div className="relative mt-[2vw] mx-auto gap-y-[20px] sm:gap-[1.094vw] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          <div className="relative mt-[2.2625vh] mx-auto gap-y-[20px] gap-x-2 sm:gap-[2vw] md:gap-[1.5vw] lg:gap-[1.094vw] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 ">
             {cars?.data &&
               cars?.data.map((card, index) => (
                 <HistoryCard key={index} card={card} />
