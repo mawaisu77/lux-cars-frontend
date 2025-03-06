@@ -242,12 +242,15 @@ const VehicleHero = () => {
                     <BsDownload className="cursor-pointer" />
                   </div>
                   </AnchorLink>
-                  <VehicleDetailInfo
-                    data={carDetailData?.data} 
-                    currentStatus={currentStatus}
-                    currentDocumentOldType={currentDocumentOldType}
-                    salesHistoryCount={history?.data?.length}
-                  />
+                 <div className="hidden lg:block">
+                 <VehicleDetailInfo
+                  
+                  data={carDetailData?.data} 
+                  currentStatus={currentStatus}
+                  currentDocumentOldType={currentDocumentOldType}
+                  salesHistoryCount={history?.data?.length}
+                />
+                 </div>
                 </div>
 
                 {/* web view */}
@@ -350,7 +353,19 @@ const VehicleHero = () => {
                     />
                   </div>
 
-                  <div  id="get_report" className="flex flex-col justify-center max-w-[700px] gap-y-4">
+                  <div  id="get_report" className="hidden lg:block flex-col justify-center max-w-[700px] gap-y-4">
+                    <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
+                  </div>
+                  <div className="lg:hidden block">
+                 <VehicleDetailInfo
+                  
+                  data={carDetailData?.data} 
+                  currentStatus={currentStatus}
+                  currentDocumentOldType={currentDocumentOldType}
+                  salesHistoryCount={history?.data?.length}
+                />
+                 </div>
+                 <div  id="get_report" className="flex lg:hidden  flex-col justify-center max-w-[700px] gap-y-4">
                     <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
                   </div>
                 </div>
