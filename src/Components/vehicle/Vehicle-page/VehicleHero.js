@@ -37,6 +37,7 @@ import { documentOldOption } from "../../../utils/filtersData/documentOld";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import ProtectionNote from "./ui/ProtectionNote";
 import { useFunds } from "../../../context/FundsContext";
+import { Height } from "@mui/icons-material";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -224,18 +225,18 @@ const VehicleHero = () => {
              {showSalesHistory && <SalesHistory history={history?.data} />}
 
      
-              <div className="flex flex-col   lg:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
-                <div className="w-full lg:w-[48%]    ">
-                  <div className="w-full  ">
+              <div className="flex flex-col lg:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
+                <div className="w-full lg:w-[48%]">
+                  <div className="w-full lg:h-[40vw] ">
                   <SwiperGallery
-                  style={{width:"100%"}} 
+                  
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
                   />
                   </div>
                   <AnchorLink href="#get_report">
                   <div className="flex justify-between  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
-                    <div className="flex justify-center items-center gap-1">
+                    <div className="flex justify-center items-center gap-1 lg:gap-[0.25vw]">
                       <IoDocumentTextOutline />
                       <p>Get Report</p>
                     </div>
