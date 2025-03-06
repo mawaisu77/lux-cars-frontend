@@ -38,7 +38,7 @@ const Offers = () => {
 
   return (
     <>
-      <div className="w-full lg:w-[84vw]  mx-auto  mt-[50px] text-black">
+      <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
       <h1 className="text-[28px] lg:text-[2.3vw] font-urbanist lg:text-left font-bold">My Offers</h1>
 
         {offers && offers?.data?.length === 0 ? (
@@ -55,29 +55,29 @@ const Offers = () => {
             <table className="min-w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Car Image
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Title
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     VIN
                   </th>
     
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Offer Price
                   </th>
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Status
                   </th>
                            
-                  <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                  <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                     Posted
                   </th>
                   
                  {offers?.data?.some(offer => offer.offer?.offerStatus === "Pending" || offer.offer?.offerStatus === "Expired") && (
-                   <th className="px-4 py-2 font-medium text-gray-700 text-nowrap">
+                   <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
                      Edit
                    </th>
                  )}

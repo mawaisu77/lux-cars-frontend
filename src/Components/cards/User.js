@@ -25,7 +25,7 @@ const User = ({ bid }) => {
     <tr className="border-t">
       {/*1 Car Image */}
       <td className=" text-nowrap px-4 py-2">
-        <div className="w-[60px] h-[60px] rounded-md overflow-hidden bg-gray-100">
+        <div className="w-[60px] lg:w-[3.125vw] h-[60px] lg:h-[3.125vw] rounded-md overflow-hidden bg-gray-100">
           <img
             className="w-full h-full object-cover"
             src={Array.isArray(bid?.carDetails?.image) ? bid?.carDetails?.image[0] : bid?.carDetails?.image || ""}
@@ -35,32 +35,32 @@ const User = ({ bid }) => {
       </td>
       {/*2 Title */}
       <td
-        className=" text-nowrap px-4 py-2 hover:text-blue-800 hover:underline cursor-pointer"
+        className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] hover:text-blue-800 hover:underline cursor-pointer"
         onClick={hanldeNavigate}
       >
         {bid?.carDetails?.title || "-"}
       </td>
       {/*3 Location */}
-      <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.location || "-"}</td>
+      <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">{bid?.carDetails?.location || "-"}</td>
       {/*4 Posted Time Ago */}
       {/* <td className=" text-nowrap px-4 py-2">
         <TimeAgo date={bid.createdAt} />
       </td> */}
 
       {/*7 Lot ID */}
-      <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.vin || "-"}</td>
+      <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">{bid?.carDetails?.vin || "-"}</td>
 
       {/*4 No of bids*/}
-      <td className=" text-nowrap px-4 py-2">{bid?.carDetails?.noOfBids}</td>
+      <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">{bid?.carDetails?.noOfBids}</td>
 
       {/*5 Bid Price */}
-      <td className=" text-nowrap px-4 py-2 font-bold">
+      <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-bold">
         <span className={bid?.isValid ? "text-green-600" : "text-red-500"}>
           ${bid?.bidPrice || "-"}
         </span>
       </td>
       {/*6 Time Left */}
-      <td className=" text-nowrap px-4 py-2">
+      <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">
         {bid?.auction_date
           ? ValidDate
             ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
@@ -69,10 +69,10 @@ const User = ({ bid }) => {
       </td>
 
       {/*8 Current Bid */}
-      <td className=" text-nowrap px-4 py-2">${bid?.carDetails?.currentBid}</td>
+      <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">${bid?.carDetails?.currentBid}</td>
       {/*9 Status */}
       <td
-        className={` text-nowrap px-4 py-2 font-semibold ${
+        className={` text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-semibold ${
           bid.isValid ? "text-green-500" : "text-red-500"
         }`}
       >

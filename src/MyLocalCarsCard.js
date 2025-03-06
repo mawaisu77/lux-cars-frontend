@@ -17,8 +17,8 @@ const MyLocalCarsCard = ({
     <>
       <tr className="border-t">
         {/* Car Image */}
-        <td className="text-nowrap px-4 py-2">
-          <div className="w-[60px] h-[60px] rounded-md overflow-hidden bg-gray-100">
+        <td className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
+          <div className="w-[60px] lg:w-[3.125vw] h-[60px] lg:h-[3.125vw] rounded-md lg:rounded-[0.375vw] overflow-hidden bg-gray-100">
             <img
               className="w-full h-full object-cover"
               src={localCar?.carImages[0] || ""}
@@ -28,7 +28,7 @@ const MyLocalCarsCard = ({
         </td>
         {/* Car Title */}
         <td
-          className="text-nowrap px-4 py-2 hover:text-blue-800 hover:underline cursor-pointer"
+          className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap hover:text-blue-800 hover:underline cursor-pointer"
           onClick={handleNavigate}
         >
           {`${localCar?.year || "-"} ${localCar?.make || "-"} ${
@@ -36,16 +36,16 @@ const MyLocalCarsCard = ({
           }`}
         </td>
         {/* VIN */}
-        <td className="text-nowrap px-4 py-2">{localCar?.vin || "-"}</td>
-        <td className="text-nowrap px-4 py-2">{localCar?.status || "-"}</td>
+        <td className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">{localCar?.vin || "-"}</td>
+        <td className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">{localCar?.status || "-"}</td>
         {/* Location */}
-        <td className="text-nowrap px-4 py-2">
+        <td className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
           {`${localCar?.carLocation || "-"}, ${
             localCar?.carState || "-"
           }`}
         </td>
         {/* Posted Time Ago */}
-        <td className="text-nowrap px-4 py-2">
+        <td className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">
           <TimeAgo date={localCar?.createdAt} />
         </td>
  

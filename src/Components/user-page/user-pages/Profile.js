@@ -101,7 +101,7 @@ const Profile = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Full Name"
-                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh] rounded-lg p-2 border"
+                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh] lg:text-[0.875vw] rounded-lg lg:rounded-[0.5vw] p-2 border"
                   />
 
                   <input
@@ -110,7 +110,7 @@ const Profile = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border text-gray-400 cursor-not-allowed"
+                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh] lg:text-[0.875vw] rounded-lg lg:rounded-[0.5vw] p-2 border text-gray-400 cursor-not-allowed"
                   />
 
                   <div className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]">
@@ -133,24 +133,24 @@ const Profile = () => {
                   <input
                     name="address"
                     placeholder="Address"
-                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  rounded-lg p-2 border"
+                    className="w-[90%] md:w-[650px] lg:w-[26vw] h-[46px] lg:h-[4.7vh]  lg:text-[0.875vw] rounded-lg lg:rounded-[0.5vw] p-2 border"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
 
-                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] mt-[140px]  lg:mt-0  border rounded-lg p-5 ">
+                <div className="w-[313px] md:w-[600px] lg:w-[30vw] h-[192px] lg:h-[10vw] mt-[140px]  lg:mt-0  border rounded-lg lg:rounded-[0.5vw] p-5 lg:p-[1.25vw] ">
                   <div className="flex gap-3 my-2">
                     <div className="flex relative justify-center items-center bg-red-600 w-[60px] lg:w-[3vw] h-[60px] lg:h-[6vh] rounded-full">
-                      <img src={image1} alt="image1" />
+                      <img src={image1} className="w-[40px] lg:w-[1.5vw] h-[40px] lg:h-[1.5vw]" alt="image1" />
                       {documentVerification ? (
-                        <MdVerifiedUser className="absolute text-green-600 bg-white rounded-tl-lg bottom-0 right-0" />
+                        <MdVerifiedUser className="absolute text-green-600 lg:w-[1vw] lg:h-[1vw] bg-white rounded-tl-lg bottom-0 right-0" />
                       ) : (
                         <div className="absolute -bottom-2 -right-2">
                           <TooltipInfo content="Your document status is pending, if you uploaded the docuemnt then please wait for update">
                             <BsInfoCircle
-                              size={20}
-                              className="hover:text-blue-800 bg-white rounded-full text-red-600 duration-200"
+                               size={20}
+                              className="hover:text-blue-800 bg-white lg:w-[2vw] rounded-full text-red-600 duration-200"
                             />
                           </TooltipInfo>
                         </div>
@@ -167,9 +167,9 @@ const Profile = () => {
                   </div>
 
                   <div className="">
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                    <div className="w-full lg:w-[100%] bg-gray-200 rounded-full h-2.5 lg:h-[0.625vw] mb-4 lg:mb-[1vw]">
                       <div
-                        className={`bg-red-600 h-2.5 rounded-full ${
+                        className={`bg-red-600 h-2.5 lg:h-[0.625vw] rounded-full ${
                           documents.length === 0 || null
                             ? "w-0"
                             : documents.length === 1
@@ -181,9 +181,9 @@ const Profile = () => {
                   </div>
 
                   <div className="flex justify-between items-end">
-                    <div className="flex gap-x-2">
-                      <img src={bars} alt="bars" />
-                      <p className="text-red-500 ">
+                    <div className="flex gap-x-2 lg:gap-x-[0.5vw]">
+                      <img src={bars} alt="bars" className="lg:w-[2vw]" />
+                      <p className="text-red-500 lg:text-[1vw] ">
                         {documents.length === 0 || null
                           ? "0%"
                           : documents.length === 1
@@ -192,7 +192,7 @@ const Profile = () => {
                       </p>
                     </div>
                     <div>
-                      <img src={icon7} alt="icon7" />
+                      <img src={icon7} alt="icon7" className="lg:w-[1vw]" />
                     </div>
                   </div>
                 </div>
