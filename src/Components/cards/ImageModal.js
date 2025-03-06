@@ -2,7 +2,7 @@
 import React from "react";
 import { IoClose, IoArrowBack, IoArrowForward } from "react-icons/io5";
 import ReactDOM from "react-dom";
-import bidcaribbean from "../../assets/lux-logo/bidcaribbean-logo.png"
+import bidcaribbean from "../../assets/lux-logo/logo-tag.png"
 
 const ImageModal = ({
   isOpen,

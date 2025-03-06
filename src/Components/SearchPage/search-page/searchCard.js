@@ -187,7 +187,7 @@ function Card({ card }) {
             />
           </div>
         )}
-        <div className=" h-[15px] md:h-[2.3vw] z-50 absolute bottom-[0vw] -left-[1vw] ">
+        <div className=" h-[50px] lg:h-[2.3vw] z-50 absolute bottom-[0vw] -left-[1vw] ">
                 <img 
                   src={bidCaribbeansLogo} 
                   alt="bidcaribbeanslogo"
