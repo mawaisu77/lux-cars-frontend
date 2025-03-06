@@ -67,7 +67,7 @@ const Abouttest = () => {
                     </div>
                   </div>
 
-                  <div className="lg:absolute bottom-0 lg:left-1/2 transform lg:-translate-x-1/2 mx-auto flex flex-col  justify-center w-[100px] lg:w-[vw] items-center">
+                  <div className="lg:absolute bottom-0 lg:left-1/2 transform lg:-translate-x-1/2 mx-auto flex flex-col  justify-center w-[100px] lg:w-[7vw] items-center">
                     <img
                       src={testimonial.image}
                       alt="Client"
