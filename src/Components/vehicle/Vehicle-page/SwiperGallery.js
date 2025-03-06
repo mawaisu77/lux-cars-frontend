@@ -12,7 +12,7 @@ import VideoModal from "./ModalVideo";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
 import { vehicleScoreColors } from "./VehicleScoreColor";
-import bidcaribbeansLogo from "../../../assets/lux-logo/bidcaribbean-logo.png";
+import bidcaribbeansLogo from "../../../assets/lux-logo/logo-tag.png";
 
 const SwiperGallery = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -116,20 +116,20 @@ const SwiperGallery = ({ images, carData }) => {
           )}
 
           <button
-            className="absolute z-10 bottom-5 text-xs right-4 bg-black text-white py-1 px-2 rounded-lg"
+            className="absolute z-10 bottom-5 lg:bottom-[1.25vw] text-xs right-4 lg:right-[1vw] lg:leading-[1.5vw] bg-black text-white lg:text-[1vw] py-1 lg:py-[0.25vw] lg:px-[0.5vw] px-2 rounded-lg lg:rounded-[0.5vw]"
             onClick={openModal}
           >
             360° View
           </button>
           {carData.video && (
             <button
-              className="absolute z-10 bottom-5 text-xs right-28 bg-black text-white py-1 px-2 rounded-lg"
+              className="absolute z-10 bottom-5 lg:bottom-[1.25vw] text-xs right-28 lg:right-[7vw] bg-black text-white lg:text-[1vw] lg:leading-[1.5vw] py-1 lg:py-[0.25vw] lg:px-[0.5vw] px-2 rounded-lg lg:rounded-[0.5vw]"
               onClick={openVideoModal}
             >
               Video
             </button>
           )}
-          <div className="absolute  z-10 bottom-2 w-56 text-sm left-2 rounded-lg">
+          <div className="absolute  z-10 bottom-2 w-56 lg:w-[15vw] rounded-lg">
             <img
               src={bidcaribbeansLogo}
               className="my-2 rounded-lg shadow-img cursor-pointer"
@@ -161,10 +161,10 @@ const SwiperGallery = ({ images, carData }) => {
           {images &&
             images.map((image, index) => (
               <SwiperSlide key={index}>
-                <div className="relative h-[300px] lg:h-[20vw]">
+                <div className="relative h-[300px] lg:h-full">
                   <img
                     src={image}
-                    className="w-full h-full object-cover rounded-lg shadow-img cursor-pointer"
+                    className="w-full h-full  object-cover rounded-lg shadow-img cursor-pointer"
                     alt={`Vehicle_Image ${index + 1}`}
                     onClick={() => openModalImg(index)} // Open modal on image click
                   />
@@ -184,14 +184,14 @@ const SwiperGallery = ({ images, carData }) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
+        className="mySwiper lg:mt-[1vw]"
       >
         {images &&
           images.map((image, index) => (
             <SwiperSlide key={index}>
               <img
                 src={image}
-                className="rounded-lg"
+                className="rounded-lg lg:rounded-[0.5vw] "
                 alt={`Thumbnail ${index + 1}`}
               />
             </SwiperSlide>
