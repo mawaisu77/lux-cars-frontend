@@ -88,6 +88,9 @@ function SearchMainPage({
   const loadMore = () => {
     setPage((prevPage) => prevPage + 1);
   };
+
+
+  console.log("render...")
   return (
     <div className="w-full">
       <div className=" w-full mx-auto  font-urbanist flex flex-col">

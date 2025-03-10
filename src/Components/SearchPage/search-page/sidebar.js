@@ -1435,11 +1435,7 @@ const Sidebar = () => {
                   ]}
                   onChange={(e, newValue) => {
                     // Update local state immediately for smooth UI
-                    setSelectedFilters(prev => ({
-                      ...prev,
-                      odometer_min: newValue[0].toString(),
-                      odometer_max: newValue[1].toString()
-                    }));
+                   
                     // Debounce the URL update and API call
                     debouncedUpdateOdometer(newValue[0], newValue[1]);
                   }}
