@@ -27,20 +27,6 @@ const AllBids = () => {
   const hasError = selectedOption === "bidding" ? error : localError;
   const data = selectedOption === "bidding" ? bids?.data : localBids?.data;
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex justify-center items-center min-h-screen">
-  //       <ClipLoader size={50} color={"#D0021B"} loading={loading} />
-  //     </div>
-  //   );
-  // }
-
-  // if (hasError) {
-  //   return <p className="text-center text-red-500">Error: {error}</p>;
-  // }
-
-  console.log(data);
-
   return (
     <>
  <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
@@ -90,7 +76,6 @@ const AllBids = () => {
               <tr className="bg-gray-100">
                 <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">Car Image</th>
                 <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">Title</th>
-                <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">Location</th>
                 <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">VIN</th>
 
                 <th className="px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-medium text-gray-700 text-nowrap">No Of Bids</th>

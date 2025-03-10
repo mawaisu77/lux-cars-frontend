@@ -77,6 +77,8 @@ import {
   transmissionOptions,
 } from "../../../utils/filtersData/transmissionOptions";
 import Select from "react-select";
+import { useCallback } from 'react';
+
 
 const Sidebar = () => {
   const location = useLocation();
@@ -256,6 +258,33 @@ const Sidebar = () => {
       window.scrollTo(0, currentScroll);
     });
   };
+
+
+  const debounce = (func, wait) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), wait);
+    };
+  };
+
+  // Create debounced update function using useCallback
+  const debouncedUpdateOdometer = useCallback(
+    debounce((newMin, newMax) => {
+      setSelectedFilters(prev => ({
+        ...prev,
+        odometer_min: newMin.toString(),
+        odometer_max: newMax.toString()
+      }));
+      
+      updateURL({
+        ...selectedFilters,
+        odometer_min: newMin.toString(),
+        odometer_max: newMax.toString()
+      });
+    }, 500), // 500ms delay
+    [selectedFilters, updateURL]
+  );
 
   // Add useEffect to handle scroll restoration
   useEffect(() => {
@@ -1405,19 +1434,14 @@ const Sidebar = () => {
                     parseInt(selectedFilters.odometer_max) || 100000, // Ensure this is a number
                   ]}
                   onChange={(e, newValue) => {
-                    console.log("newValue", newValue); // Debugging output
-                    // Update the state for odometer_from and odometer_to
-                    setSelectedFilters((prev) => ({
+                    // Update local state immediately for smooth UI
+                    setSelectedFilters(prev => ({
                       ...prev,
-                      odometer_min: newValue[0].toString(), // Update odometer_from
-                      odometer_max: newValue[1].toString(), // Update odometer_to
-                    }));
-                    // Call updateURL to reflect changes in the URL
-                    updateURL({
-                      ...selectedFilters,
                       odometer_min: newValue[0].toString(),
-                      odometer_max: newValue[1].toString(),
-                    });
+                      odometer_max: newValue[1].toString()
+                    }));
+                    // Debounce the URL update and API call
+                    debouncedUpdateOdometer(newValue[0], newValue[1]);
                   }}
                   min={0}
                   max={100000}

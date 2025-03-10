@@ -1,15 +1,15 @@
 import React, { useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import TimeAgo from "react-timeago";
+import {  useNavigate } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
 
 const User = ({ bid }) => {
+
   const navigate = useNavigate(); // Initialize navigate hook
 
   // Memoize the targetTime to prevent unnecessary recalculations
   const targetTime = useMemo(
-    () => (bid?.auction_date ? new Date(bid?.auction_date) : null),
-    [bid?.auction_date]
+    () => (bid?.carDetails?.auction_date ? new Date(bid?.carDetails?.auction_date) : null),
+    [bid?.carDetails?.auction_date]
   );
   const { days, hours, minutes, seconds } = useTimer(targetTime);
 
@@ -41,12 +41,7 @@ const User = ({ bid }) => {
         {bid?.carDetails?.title || "-"}
       </td>
       {/*3 Location */}
-      <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">{bid?.carDetails?.location || "-"}</td>
-      {/*4 Posted Time Ago */}
-      {/* <td className=" text-nowrap px-4 py-2">
-        <TimeAgo date={bid.createdAt} />
-      </td> */}
-
+    
       {/*7 Lot ID */}
       <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">{bid?.carDetails?.vin || "-"}</td>
 
@@ -61,11 +56,11 @@ const User = ({ bid }) => {
       </td>
       {/*6 Time Left */}
       <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">
-        {bid?.auction_date
+        {bid?.carDetails?.auction_date
           ? ValidDate
             ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
             : "Bidding Over"
-          : "Future"}
+          : "Future Auction"}
       </td>
 
       {/*8 Current Bid */}

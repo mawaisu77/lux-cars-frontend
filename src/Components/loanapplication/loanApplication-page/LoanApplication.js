@@ -723,15 +723,18 @@ function LoanApplication() {
                           onChange={handleInputChange}
                           className="text-[15px] text-[#1F1F2C] outline-none font-[400] bg-transparent rounded-[8px] w-[100%]"
                         >
-                          <option value="Chase Bank">Chase Bank</option>
-                          <option value="Wells Fargo Bank">
-                            Wells Fargo Bank
+                          <option value=" bank of the bahamas (BOB)">
+                          bank of the bahamas (BOB)
                           </option>
-                          <option value="Bank of America">
-                            Bank of America
+                          <option value="(RBC) ROYAL BANK OF THE BAHAMAS">
+                          (RBC) ROYAL BANK OF THE BAHAMAS
                           </option>
-                          <option value="Citigroup">Citigroup</option>
-                          <option value="PNC Bank">PNC Bank</option>
+                          <option value="Commonwealth bank">
+                          Commonwealth bank
+                          </option>
+                          <option value="Fidelity">Fidelity</option>
+                          <option value="SCOTIA BANK">SCOTIA BANK</option>
+                          <option value="SIMPLIFIED LENDING">SIMPLIFIED LENDING</option>
                         </select>
                       </div>
                       {errors.bankName && (
