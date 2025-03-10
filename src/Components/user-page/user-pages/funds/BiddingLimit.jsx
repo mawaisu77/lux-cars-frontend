@@ -134,7 +134,6 @@ export default function BiddingLimit({
     //   paymentPurpose: "Adding Funds",
     // });
   };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPaymentDetails((prevDetails) => ({

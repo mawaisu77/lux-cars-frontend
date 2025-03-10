@@ -10,6 +10,7 @@ const useSimilarCars = (year, make, model) => {
     const fetchData = async () => {
       try {
         setLoading(true);
+        console.log("year, make, model", year, make, model)
         const response = await baseService.get(
           `cars/get-all-cars?year=${year}&make=${make}&model=${model}`
         );

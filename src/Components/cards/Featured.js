@@ -10,7 +10,7 @@ const BuyNow = () => {
   const navigate = useNavigate();
   
   const { carData, carLoading, carError } = useGetAllBidsCar(
-    `${process.env.REACT_APP_API_CARS_LIVE}?document=clean&buy_now=true`
+    `${process.env.REACT_APP_API_CARS_LIVE}?document=clean&buy_now=true&status=Run & Drive`
   );
   if (carLoading) {
     return <Shimmer />;

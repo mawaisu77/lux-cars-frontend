@@ -365,14 +365,14 @@ const Dropdown = ({ bidAmount, data }) => {
               </div>
              <div className="flex flex-col lg:flex-row">
              <span className="text-sm md:text-20 text-left text-gray-700">
-                US Inland Transport:
+                US Domestic Transport:
               </span>
               <Select
                 styles={customCalculatorDropdownStyles}
                 options={categoryOptions}
                 value={selectedCategory}
                 onChange={handleCategoryChange} 
-                placeholder="Select Island"
+                placeholder="Select type"
                 className="text-sm lg:text-[0.875vw] w-[120px] lg:w-[6.25vw]  text-right font-medium text-gray-800"
               />
              </div>

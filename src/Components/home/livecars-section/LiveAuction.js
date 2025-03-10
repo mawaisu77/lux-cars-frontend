@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 
 const LiveCars = () => {
   const navigate = useNavigate();
-  const { localCars, carLoading, carError } = useGetAllLocalCars(
-    "local-cars/get-all-local-cars"
-  );
   
+  const { localCars, carLoading, carError } = useGetAllLocalCars(
+    "local-cars/get-all-local-cars?size=8&status=Approved&type=buffer"
+  );
+
   if (carLoading) {
     return <Shimmer />;
   }

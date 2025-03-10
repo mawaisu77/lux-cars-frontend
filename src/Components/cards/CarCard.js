@@ -1,19 +1,15 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
-import {  BsHeart, BsHeartFill } from "react-icons/bs";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { RxCopy } from "react-icons/rx";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import {
-  Navigation,
-  Autoplay,
-  Pagination,
-} from "swiper/modules";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import useSaveCar from "../../hooks/useSaveCar";
 import ImageModal from "./ImageModal";
-import LoginModal from "../modals/LoginModal"
+import LoginModal from "../modals/LoginModal";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import "./swiperCard.css";
 import SwiperCore from "swiper";
@@ -22,11 +18,13 @@ import { useSavedCars } from "../../context/SavedCarIdsContext";
 import { toast } from "react-toastify";
 import { PiTimerBold } from "react-icons/pi";
 import { statusOptions } from "../../utils/filtersData/statusOptions";
-import bidCaribbeansLogo from "../../assets/lux-logo/logo-tag.png"
+import bidCaribbeansLogo from "../../assets/lux-logo/logo-tag.png";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 const CarCard = ({ card, isBuy = false }) => {
-  const [isHovered, setIsHovered] = useState(false); 
+  const [isHovered, setIsHovered] = useState(false);
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -37,19 +35,20 @@ const CarCard = ({ card, isBuy = false }) => {
   const { deleteSavedCar } = useDeleteSaveCar();
   const { savedIds, loading, error, refetchSavedIds } = useSavedCars();
 
-
   const [isCarSaved, setIsCarSaved] = useState(false);
 
   // Set initial saved state on mount or when savedIds change
   useEffect(() => {
-    setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(card?.lot_id)));
+    setIsCarSaved(
+      savedIds?.data && savedIds?.data.includes(String(card?.lot_id))
+    );
   }, [savedIds, card?.lot_id]);
 
   const swiperRefs = useRef([]);
 
   const initializeSwiper = (swiper, index) => {
     swiperRefs.current[index] = swiper;
-    swiper.autoplay.stop(); 
+    swiper.autoplay.stop();
   };
 
   const handleMouseEnter = (index) => {
@@ -75,45 +74,43 @@ const CarCard = ({ card, isBuy = false }) => {
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
+  const handleSaveClick = (lot_id) => {
+    // Convert lot_id to string
+    const stringLotId = String(lot_id);
 
-    const handleSaveClick = (lot_id) => {
-      // Convert lot_id to string
-      const stringLotId = String(lot_id);
+    if (!user) {
+      setLoginModalOpen(true);
+      return;
+    }
 
-      if (!user) {  
-        setLoginModalOpen(true);
-        return;
-      }
-    
-      if (isCarSaved) {
-        // Optimistically update UI to unsave
-        setIsCarSaved(false);
-    
-        // Perform the unsave operation in the background with string lot_id
-        deleteSavedCar(stringLotId)
-          .then(() => {
-            refetchSavedIds(); 
-            alert("Car unsaved successfully");
-          })
-          .catch(() => {
-            setIsCarSaved(true);
-            alert("Failed to unsave car. Please try again.");
-          });
-      } else {
-        setIsCarSaved(true);
+    if (isCarSaved) {
+      // Optimistically update UI to unsave
+      setIsCarSaved(false);
 
-        handleSaveCar(stringLotId)
-          .then(() => {
-            refetchSavedIds(); 
-            alert("Car saved successfully");
-          })
-          .catch(() => {
-            setIsCarSaved(false);
-            alert("Failed to save car. Please try again.");
-          });
-      }
-    };
-    
+      // Perform the unsave operation in the background with string lot_id
+      deleteSavedCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          alert("Car unsaved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(true);
+          alert("Failed to unsave car. Please try again.");
+        });
+    } else {
+      setIsCarSaved(true);
+
+      handleSaveCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          alert("Car saved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(false);
+          alert("Failed to save car. Please try again.");
+        });
+    }
+  };
 
   // Open modal with selected image
   const openModal = (index) => {
@@ -141,20 +138,23 @@ const CarCard = ({ card, isBuy = false }) => {
     setLoginModalOpen(false);
   };
 
-  const currentStatus = statusOptions.find(option => option.id === card?.status);
+  const currentStatus = statusOptions.find(
+    (option) => option.id === card?.status
+  );
 
+  console.log("<<<<====|====>>>>",currentStatus)
 
   return (
     <>
       <div
-      onMouseEnter={() => {
-        handleMouseEnter(card.id);
-        setIsHovered(true); // Set hover state to true
-      }}
-      onMouseLeave={() => {
-        handleMouseLeave(card.id);
-        setIsHovered(false); // Set hover state to false
-      }}
+        onMouseEnter={() => {
+          handleMouseEnter(card.id);
+          setIsHovered(true); // Set hover state to true
+        }}
+        onMouseLeave={() => {
+          handleMouseLeave(card.id);
+          setIsHovered(false); // Set hover state to false
+        }}
         className="swiper-card shadow-md  rounded-[10px]  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
       >
         <div className=" relative w-full ">
@@ -175,17 +175,15 @@ const CarCard = ({ card, isBuy = false }) => {
               </div>
             )}
 
-<div className=" h-[28px] sm:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
-                <img 
-                  src={bidCaribbeansLogo} 
-                  alt="bidcaribbeanslogo"
-                  className=" w-full h-full object-contain"
-                />
-              </div>
-          
-  
+            <div className=" h-[28px] sm:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
+              <img
+                src={bidCaribbeansLogo}
+                alt="bidcaribbeanslogo"
+                className=" w-full h-full object-contain"
+              />
+            </div>
+
             <Swiper
-            
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
               className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[120px] md:h-[12vw] lg:h-[12vw]  "
               autoplay={{
@@ -196,10 +194,10 @@ const CarCard = ({ card, isBuy = false }) => {
               //   clickable: true,
               //   dynamicBullets: true,
               // }}
-              navigation={isHovered} 
+              navigation={isHovered}
               loop={true}
             >
-                 {/* <div style={{zIndex:999}} className="absolute bottom-0 w-full h-1 bg-white z-50 rounded-[10px]  sm:rounded-[0.1vw]">
+              {/* <div style={{zIndex:999}} className="absolute bottom-0 w-full h-1 bg-white z-50 rounded-[10px]  sm:rounded-[0.1vw]">
 
 </div> */}
               {card.images &&
@@ -217,7 +215,6 @@ const CarCard = ({ card, isBuy = false }) => {
                 ))}
             </Swiper>
           </div>
-        
         </div>
 
         <div>
@@ -225,52 +222,66 @@ const CarCard = ({ card, isBuy = false }) => {
             <div className="flex">
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-col gap-y-[0.2vw] ">
-                  <Link to={`/vehicle-detail/${card.lot_id}`}  >
+                  <Link to={`/vehicle-detail/${card.lot_id}`}>
                     <div className="flex justify-between hover:text-blue-800 cursor-pointer sm:tracking-wider hover:underline text-[14px] md:text-18 lg:text-18 font-bold text-left">
-                      
                       {card.title.length > 25
                         ? `${card.title.slice(0, 25)}...`
                         : card.title}
-                      
                     </div>
                   </Link>
                   <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] md:text-18 items-center">
                     <div className="flex gap-x-[0.4vw] items-center">
-                    <p className="tracking-wider" title="Lot ID">{card.lot_id}</p>
-                    <RxCopy
-                        className="cursor-pointer text-[14px] text-gray-600 hover:text-blue-600" 
+                      <p className="tracking-wider" title="Lot ID">
+                        {card.lot_id}
+                      </p>
+                      <RxCopy
+                        className="cursor-pointer text-[14px] text-gray-600 hover:text-blue-600"
                         onClick={() => {
                           navigator.clipboard.writeText(card.lot_id);
                           toast.success("Copied to clipboard!");
-                        }} 
+                        }}
                       />
-                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-x-[0.4vw] text-[12px] md:text-18 w-full" title="Status Code">
-                    <p  className={`${currentStatus?.bgHex} text-white md:text-16 font-bold rounded-full w-[1.2vw] h-[1.2vw] flex items-center justify-center`}>{currentStatus?.letter}</p>
-                    <p className={`${currentStatus?.hex} tracking-wider font-bold rounded-md `}>{currentStatus?.label}</p>
+                  <div
+                   data-tooltip-id={`status-code-${card?.lot_id}`}
+                    className="flex items-center gap-x-[0.4vw] text-[12px] md:text-18 w-full"
+                    title="Status Code"
+                  >
+                    <p
+                      className={`${currentStatus?.bgHex} text-white md:text-16 font-bold rounded-full w-[1.2vw] h-[1.2vw] flex items-center justify-center`}
+                    >
+                      {currentStatus?.letter}
+                    </p>
+                    <p
+                      className={`${currentStatus?.hex} tracking-wider font-bold rounded-md `}
+                    >
+                      {currentStatus?.label}
+                    </p>
                   </div>
                   <div className="flex items-center gap-x-[0.4vw] text-[12px] md:text-16 ">
-                      <PiTimerBold className="text-[14px] md:text-22 " />
+                    <PiTimerBold className="text-[14px] md:text-22 " />
                     <p className="tracking-wider text-nowrap text-[14px] md:text-18 ">
-                        {card.auction_date
-                          ? ValidDate
+                      {card.auction_date
+                        ? ValidDate
                           ? `${days}d : ${hours}h : ${minutes}m : ${seconds}s`
                           : "Bidding Over"
-                          : "Future"}
-                     </p>
+                        : "Future"}
+                    </p>
                   </div>
 
-                  {card.currentBid && (
+                  {card?.currentBid >=0 && (
                     <div className="flex gap-x-[0.8vw] mt-[0.2vw] text-[12px] lg:text-16">
-                      <p className="py-[0.1vh] tracking-wider font-semibold">Current Bid:</p>
+                      <p className="py-[0.1vh] tracking-wider font-semibold">
+                        Current Bid:
+                      </p>
                       <p className="py-[0.1vh] bg-green-500/20 font-bold text-green-600 rounded-md px-[0.4vw]">
-                        {card.currentBid
-                          ? card.currentBid.toLocaleString("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          })
-                          : null}
+                        {card?.currentBid
+                          ? card?.currentBid?.toLocaleString("en-US", {
+                              style: "currency",
+                              currency: "USD",
+                            })
+                          : "$0"}
                       </p>
                     </div>
                   )}
@@ -280,11 +291,14 @@ const CarCard = ({ card, isBuy = false }) => {
             <Link to={`/vehicle-detail/${card.lot_id}`}>
               <button className="w-full tracking-wider uppercase font-bold text-[14px] md:text-18 rounded-[10px] sm:rounded-[0.625vw] p-[4px] sm:p-[0.521vw] mt-[10px] md:mt-[1vw] bg-primary-red text-white font-urbanist hover:bg-primary-red/80 duration-200">
                 {isBuy
-                  ? `Buy Now ${card.price_new ? `${card.price_new.toLocaleString("en-US", {
+                  ? `Buy Now ${
+                      card.price_new
+                        ? `${card.price_new.toLocaleString("en-US", {
                             style: "currency",
                             currency: "USD",
-                          })}` : "Tbd"}`
-
+                          })}`
+                        : "Tbd"
+                    }`
                   : "Bid Now"}
               </button>
             </Link>
@@ -301,11 +315,17 @@ const CarCard = ({ card, isBuy = false }) => {
         goToNextImage={goToNextImage}
         logo={bidCaribbeansLogo}
       />
-        {/* Login Modal */}
-        <LoginModal 
-        isOpen={isLoginModalOpen && !user} 
-        onClose={closeLoginModal} 
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen && !user}
+        onClose={closeLoginModal}
       />
+       <ReactTooltip
+                className="text-16 z-50"
+                id={`status-code-${card?.lot_id}`}
+                content={currentStatus?.description}
+                style={{ maxWidth: '300px', fontWeight:400 }}
+              />
     </>
   );
 };

@@ -313,8 +313,6 @@ const VehicleHero = () => {
                 <div className="    lg:w-[48%]   ">
                   <div className=" ">
 
-       
-   
                     {/* Title Info */}
                     <VehicleTitleInfo
                      lotID={lotID}
@@ -377,7 +375,7 @@ const VehicleHero = () => {
                       <>
                         <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
                         <span className="text-md lg:text-[1.1vw]">
-                          PlACE MAX BID
+                          PLACE MAX BID
                         </span>
                       </>
                     )}
