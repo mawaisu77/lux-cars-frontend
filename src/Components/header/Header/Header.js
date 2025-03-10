@@ -63,7 +63,11 @@ const Header = () => {
     logout();
     navigate("/");
     document.getElementById("my_logout_modal").close();
-  };
+  }; 
+
+  const handleBidPower = () => {
+    navigate("/user/account/funds");
+  }; 
 
   const fetchSearchResults = (query) => {
     if (query) {
@@ -353,7 +357,7 @@ const Header = () => {
                        <div className="flex items-center">
                   <button
                     className={`flex justify-between gap-x-2 items-center w-full focus:outline-none bg-[#CA0000] hover:bg-[#ca0000e8] px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-full text-white text-xs lg:text-18 duration-200`}
-                    onClick={handleLogoutModal}
+                    onClick={handleBidPower}
                   >
                     <span className="text-white text-nowrap">
                     Remaining: ${remainingFunds} ({percentageRemaining}% )
