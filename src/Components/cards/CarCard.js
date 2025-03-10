@@ -13,7 +13,6 @@ import {
 } from "swiper/modules";
 import useSaveCar from "../../hooks/useSaveCar";
 import ImageModal from "./ImageModal";
-import { LuxLogoWhite } from "../../utils/constant";
 import LoginModal from "../modals/LoginModal"
 import { useAuthContext } from "../../hooks/useAuthContext";
 import "./swiperCard.css";

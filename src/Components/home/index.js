@@ -21,6 +21,7 @@ import { ErrorBoundary } from '@sentry/react'
 import Registration from './home-page/Registration.js'
 import Notifications from '../../utils/Notifications.js'
 import NotificationDropdown from '../ui/dropdowns/NotificationDropdown.jsx'
+import LiveCars from './livecars-section/LiveAuction.js'
 
 const Home = () => {
   
@@ -38,6 +39,7 @@ const Home = () => {
     {/* <LocalOfferz/> */}
     <BidNow/>
     <LocalCars />
+    <LiveCars />/
     {/* <MotorCycleSection />
     <BoatSection />
     <ATVSection /> */}

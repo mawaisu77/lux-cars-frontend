@@ -78,7 +78,7 @@ const PaymentForm = ({
       {/* Deposit Amount */}
       <div className="mb-4">
         <label className="block font-semibold" title="US Dollar">
-          Deposit Amount (usd)
+          Deposit Amount (BSD)
         </label>
         <input
           type="text"

@@ -48,6 +48,25 @@ const LocalVehicleDetail = () => {
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
+
+    const getTimeDifference = () => {
+      if (!carDetailData?.data?.car?.auction_date) return null;
+    
+      const auctionDate = new Date(carDetailData.data.car.auction_date);
+      const currentDate = new Date();
+    
+      if (currentDate > auctionDate) return null;
+    
+      const diffInMilliseconds = auctionDate - currentDate;
+      const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
+      
+      // Return only if the time difference is within one hour (60 minutes)
+      if (diffInMinutes > 60) return null;
+    
+      return `Live in ${diffInMinutes} ${diffInMinutes === 1 ? 'minute' : 'minutes'}`;
+    };
+    
+
   const [bidAmount, setBidAmount] = useState(0);
 
   let placingBidResponse = null;
@@ -94,24 +113,26 @@ const LocalVehicleDetail = () => {
 
   return (
     <>
-      <div className="lg:block hidden bg-vehicle">
-        <div className="w-[15.5] flex items-center justify-center flex-col pt-[12.5vh]">
+       <div className="Account-image">
+        <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
-            Local Vehicle Detail
+            Local Vehicle 
           </div>
-          <div className=" text-white flex gap-3 justify-center text-[1vw] font-urbanist">
+          <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
-              <button className="hover:text-white hover:text-[1.1vw]">
+              <button className="hover:text-white hover:scale-110 duration-150">
                 Home
               </button>
             </Link>
             /
-            <button className="hover:text-white hover:text-[1.1vw]">
-              Local Vehicle Detail
+            <button className="hover:text-white hover:scale-110 duration-150">
+            Local Vehicle
             </button>
           </div>
         </div>
       </div>
+
+
 
       {carDetailData?.data?.car?.auction_date ? (
         ValidDate ? (
@@ -141,7 +162,7 @@ const LocalVehicleDetail = () => {
               ) : null}
               <section className="bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
                 <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
-                  Vehicle Info
+                  Vehicle Info 
                 </h2>
                 <div className="space-y-[2vh] text-sm lg:text-[0.875vw]">
                   <InfoRow
@@ -364,50 +385,63 @@ const LocalVehicleDetail = () => {
                       />
                     </>
                   ) : (
-                    ""
+                   ""
                   )
                 ) : (
                   ""
                 )}
-                <div>
-                  <div className="mt-6">
-                    <label className="block text-[20px] font-bold  lg:text-[0.875vw]   text-gray-900 mb-[1vh]">
-                      Enter Your Final Bid
-                    </label>
-                    <CurrencyInput
-                      id="input-example"
-                      name="minPrice"
-                      placeholder="enter your bid ammount in usd"
-                      prefix="$"
-                      className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh] bg-white`}
-                      defaultValue={0}
-                      decimalsLimit={2}
-                      value={bidAmount}
-                      onValueChange={(value) => setBidAmount(value)}
-                      disabled={!ValidDate}
-                    />
-                  </div>
-                  <button
-                    disabled={!ValidDate}
-                    className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
-                    onClick={handlePlaceMaxBid}
-                  >
-                    <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
-                    <span className="text-md lg:text-[1.1vw]">
-                      PlACE MAX BID
-                    </span>
-                  </button>
-                  <button
+
+                {
+                   getTimeDifference() ?
+                   <div className="flex justify-center my-[2vh] py-[0.5vw] items-center gap-x-[0.5vw] text-lg animate-pulse rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full">
                     
-                    className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full"
-                   
-                  >
+{ getTimeDifference()}
+                   </div>
+                    : 
+
+                   <div>
+                   <div className="mt-6">
+                     <label className="block text-[20px] font-bold  lg:text-[0.875vw]   text-gray-900 mb-[1vh]">
+                       Enter Your Final Bid
+                     </label>
+                     <CurrencyInput
+                       id="input-example"
+                       name="minPrice"
+                       placeholder="enter your bid ammount in USD"
+                       prefix="$"
+                       className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh] bg-white`}
+                       defaultValue={0}
+                       decimalsLimit={2}
+                       value={bidAmount}
+                       onValueChange={(value) => setBidAmount(value)}
+                       disabled={!ValidDate}
+                     />
+                   </div>
+                   <button
+                     disabled={!ValidDate}
+                     className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
+                     onClick={handlePlaceMaxBid}
+                   >
+                     <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
+                     <span className="text-md lg:text-[1.1vw]">
+                       PlACE MAX BID
+                     </span>
+                   </button>
+                   <button
                      
-                    <span className="text-md lg:text-[1.1vw]">
-                      Buy Now
-                    </span>
-                  </button>
-                </div>
+                     className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full"
+                    
+                   >
+                      
+                     <span className="text-md lg:text-[1.1vw]">
+                       Buy Now
+                     </span>
+                   </button>
+                 </div>
+                    
+                   
+                }
+               
                 <div>
                   <div>
                     <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">

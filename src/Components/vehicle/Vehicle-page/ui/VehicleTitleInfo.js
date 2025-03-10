@@ -1,22 +1,21 @@
 import React from "react";
 import { FaLink } from "react-icons/fa6";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 
-const VehicleTitleInfo = ({ currentStatus, title, baseSite }) => {
+const VehicleTitleInfo = ({ currentStatus, title, baseSite, handleSaveClick, user, isCarSaved, lotID }) => {
   return (
     <div className="flex justify-between items-center bg-white rounded-[0.5vw]  my-[0.5vw] lg:my-0 p-[0.5vw] lg:mb-[2vh]">
       
       <div className="flex justify-center items-center gap-1">
         
         {currentStatus && (
-          <div
-          
+          <div  
             className={`px-2 p-1 lg:w-[1.5vw] lg:h-[1.5vw]  rounded-full  ${currentStatus.bgHex} `}
           >
-
             <span
               title={currentStatus.id}
               className={
-                " text-white w-full h-full lg:text-[0.8vw] font-bold flex items-center justify-center"
+                "text-white w-full h-full lg:text-[0.8vw] font-bold flex items-center justify-center"
               }
             >
               {currentStatus.letter}
@@ -43,6 +42,20 @@ const VehicleTitleInfo = ({ currentStatus, title, baseSite }) => {
        
       </div>
       <div>
+
+        <div className="flex items-center gap-x-1 lg:gap-x-[0.5vw]">
+
+        <button
+              onClick={() => handleSaveClick(lotID)}
+              className="text-[16px] lg:text-18 font-semibold flex border items-center gap-2 lg:gap-[0.5vw] px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] rounded-lg transition bg-gray-100 hover:bg-gray-200 text-gray-800"
+              >
+              {isCarSaved && user ? (
+                <BsHeartFill className=" text-red-500" />
+              ) : (
+                <BsHeart className=" text-gray-500" />
+              )}
+          </button>
+
         {/* New Copy Button */}
         <button
           title="Copy URL"
@@ -51,6 +64,10 @@ const VehicleTitleInfo = ({ currentStatus, title, baseSite }) => {
         >
           <FaLink className="lg:text-[1vw]" />
         </button>
+
+        </div>
+
+     
       </div>
       
     </div>

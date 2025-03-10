@@ -903,10 +903,13 @@ function LoanApplication() {
                           all that apply)
                         </p>
                         {[
-                          "Scotland",
-                          "RBC Royal Bank",
-                          "Commonwealth Bank",
-                          "CIBC First Carribean Bank",
+                          "bank of the bahamas (BOB)",
+                          "(RBC) ROYAL BANK OF THE BAHAMAS",
+                          "Commonwealth bank",
+                          "Fidelity",
+                          "CIBC",
+                          "SCOTIA BANK",
+                          "SIMPLIFIED LENDING"
                         ].map((bank) => (
                           <div
                             key={bank}

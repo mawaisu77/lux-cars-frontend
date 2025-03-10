@@ -35,15 +35,26 @@ import SalesHistory from "./SalesHistory";
 import useGetCarHistory from "../../../hooks/car_history/useGetCarHistory";
 import { documentOldOption } from "../../../utils/filtersData/documentOld";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import ProtectionNote from "./ui/ProtectionNote";
 import { useFunds } from "../../../context/FundsContext";
-import { Height } from "@mui/icons-material";
+import { useSavedCars } from "../../../context/SavedCarIdsContext";
+import useSaveCar from "../../../hooks/useSaveCar";
+import useDeleteSaveCar from "../../../hooks/useDeleteSaveCar";
+
+
+
 
 const VehicleHero = () => {
   const { lotID } = useParams();
   const [shouldRefetch, setShouldRefetch] = useState(false);
   const { user } = useAuthContext();
   const {  fetchFunds } = useFunds(); 
+
+  const [isCarSaved, setIsCarSaved] = useState(false);
+  const { handleSaveCar } = useSaveCar();
+  const { deleteSavedCar } = useDeleteSaveCar();
+  const { savedIds, refetchSavedIds } = useSavedCars();
+
+
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetCarDetail(`cars/get-car-by-lot-id?lot_id=${lotID}`);
@@ -159,6 +170,49 @@ const VehicleHero = () => {
     }
   }, [placebidLoading, placeBidSuccess, placeBiderror]);
 
+  useEffect(() => {
+    setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(lotID)));
+  }, [savedIds, lotID]);
+
+
+  useEffect(() => {
+    setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(lotID)));
+  }, [savedIds, lotID]);
+
+  const handleSaveClick = (lot_id) => {
+    const stringLotId = String(lot_id);
+
+    if (!user) {
+      document.getElementById("sign_in_modal").showModal();
+      return;
+    }
+
+    if (isCarSaved) {
+      setIsCarSaved(false);
+      deleteSavedCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          toast.success("Car unsaved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(true);
+          toast.error("Failed to unsave car. Please try again.");
+        });
+    } else {
+      setIsCarSaved(true);
+      handleSaveCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          toast.success("Car saved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(false);
+          toast.error("Failed to save car. Please try again.");
+        });
+    }
+  };
+
+
   const currentStatus = statusOptions.find(
     (option) => option.id === carDetailData?.data?.status
   );
@@ -225,6 +279,7 @@ const VehicleHero = () => {
              {showSalesHistory && <SalesHistory history={history?.data} />}
 
      
+            
               <div className="flex flex-col lg:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
                 <div className="w-full lg:w-[48%]">
                   <div className="w-full lg:h-[40vw] ">
@@ -257,8 +312,15 @@ const VehicleHero = () => {
                 {/* web view */}
                 <div className="    lg:w-[48%]   ">
                   <div className=" ">
+
+       
+   
                     {/* Title Info */}
                     <VehicleTitleInfo
+                     lotID={lotID}
+                      user={user}
+                      isCarSaved={isCarSaved}
+                      handleSaveClick={handleSaveClick}
                       currentStatus={currentStatus}
                       title={carDetailData?.data?.title}
                       baseSite={carDetailData?.data?.base_site}

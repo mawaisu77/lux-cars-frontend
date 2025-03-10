@@ -54,16 +54,42 @@ const BidInput = ({
 
   const getBidStatus = () => {
     if (!car?.minPrice || !activeBid) return null;
-
+  
     const priceDifference = car.minPrice - activeBid;
-
+    const baseStyles = "font-bold text-xl uppercase animate-pulse border-2 px-3 py-1 rounded-md";
+    const strokeTextStyle = {
+      WebkitTextStroke: '1px currentColor',
+      WebkitTextFillColor: 'transparent',
+    };
+  
     if (activeBid < car.minPrice) {
       if (priceDifference <= 100 && priceDifference > 0) {
-        return <span className="text-warning">Near Reserve</span>;
+        return (
+          <span 
+            className={`${baseStyles} border-yellow-500 text-yellow-500`}
+            style={strokeTextStyle}
+          >
+            Near Reserve
+          </span>
+        );
       }
-      return <span className="text-danger">On Reserve</span>;
+      return (
+        <span 
+          className={`${baseStyles} border-red-500 text-red-500`}
+          style={strokeTextStyle}
+        >
+          On Reserve
+        </span>
+      );
     } else {
-      return <span className="text-success">Pure Sale</span>;
+      return (
+        <span 
+          className={`${baseStyles} border-green-500 text-green-500`}
+          style={strokeTextStyle}
+        >
+          Pure Sale
+        </span>
+      );
     }
   };
   
