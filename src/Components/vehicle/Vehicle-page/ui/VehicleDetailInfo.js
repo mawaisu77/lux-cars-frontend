@@ -14,6 +14,10 @@ const VehicleDetailInfo = ({data, currentStatus, currentDocumentOldType, salesHi
 
   return (
     <div className="grid  gap-[1vw]">
+
+<ProtectionNote currentDocumentOldType={currentDocumentOldType} damageColorCode={damageColorCode} damageType={data?.damage_pr} salesHistoryCount={salesHistoryCount} />
+
+
     {/* Vehicle Info */}
     <section className="   bg-white w-full p-[1.5vw] rounded-lg shadow-sm mt-5">
       <h2 className="text-sm lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
@@ -145,7 +149,6 @@ const VehicleDetailInfo = ({data, currentStatus, currentDocumentOldType, salesHi
       </section>
     </div>
 
-    <ProtectionNote currentDocumentOldType={currentDocumentOldType} damageColorCode={damageColorCode} damageType={data?.damage_pr} salesHistoryCount={salesHistoryCount} />
 
     {/* Bid history */}
     <div className="">

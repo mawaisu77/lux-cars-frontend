@@ -113,7 +113,7 @@ const CarReportViewer = ({ vin }) => {
 
 
   return (
-    <div className=" mt-[2vh] shadow-sm rounded-[0.375vw] lg:w-[41vw]   bg-white p-[1.5vw]">
+    <div className=" mt-[2vh] shadow-sm rounded-[0.375vw] lg:w-[41vw]  bg-white p-[1.5vw]">
       <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
          Recommended Report
        </h2>
@@ -139,7 +139,7 @@ const CarReportViewer = ({ vin }) => {
             </Document>
           </div>
 
-          <div  onClick={handleOpenModal} className="absolute cursor-pointer inset-0 bg-white hover:bg-opacity-50 bg-opacity-70  duration-100 rounded-lg p-2 flex items-center justify-center">
+          <div  onClick={handleOpenModal} className="absolute cursor-pointer inset-0 backdrop-blur-sm hover:backdrop-blur-md transition-all duration-100 rounded-lg p-2 flex items-center justify-center">
             {/* <p className="text-lg font-semibold">Get report</p> */}
           </div>
         </div>

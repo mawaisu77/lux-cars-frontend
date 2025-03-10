@@ -17,3 +17,12 @@ export const getMyInvoices = async () => {
     throw error;
   }
 };
+
+export const refundRequestService = async () => {
+  try {
+    const response = await baseService.put(`funds/refund-funds`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

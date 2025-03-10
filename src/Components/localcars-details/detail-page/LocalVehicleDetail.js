@@ -424,7 +424,7 @@ const LocalVehicleDetail = () => {
                    >
                      <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
                      <span className="text-md lg:text-[1.1vw]">
-                       PlACE MAX BID
+                       PLACE MAX BID
                      </span>
                    </button>
                    <button

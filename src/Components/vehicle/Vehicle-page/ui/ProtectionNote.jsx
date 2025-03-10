@@ -37,7 +37,6 @@ const ProtectionNote = ({
   return (
     <div className="max-w-[600px] rounded-3xl bg-blue-50 p-6 shadow-sm">
       <div className="mb-4 text-left">
-        <h3 className="text-24 font-medium">Joshua Paul</h3>
         <h3 className="text-24 font-medium">BidCaribbean Founder</h3>
       </div>
 

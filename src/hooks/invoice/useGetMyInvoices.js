@@ -9,7 +9,6 @@ const useGetMyInvoices = () => {
     setLoading(true);
     try {
       const data = await getMyInvoices();
-      console.log("jhshjsgdg\sghsgdjs", data)
       setInvoices(data);
     } catch (err) {
       if (err.response) {

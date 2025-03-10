@@ -26,13 +26,21 @@ const SalesHistory = ({history}) => {
         <tbody>
           {history && history.map((sale, index) => (
             <tr key={`${sale.date}-${index}`} className="text-left border-b bg-gray-50 transition-colors">
-              <td className="text-left py-[1vw] px-[1vw]">
-                <span className="bg-red-600 text-white px-[1vw] py-[0.5vw] text-[1vw] rounded-full ">{sale.base_site}</span>
+            <td className="text-left py-[1vw] px-[1vw]">
+                <span className={`${
+                  sale.base_site === 'iaai' 
+                    ? 'bg-primary-red' 
+                    : sale.base_site === 'copart' 
+                      ? 'bg-blue-500' 
+                      : 'bg-gray-600'
+                } text-white px-[1vw] py-[0.5vw] text-[1vw] rounded-full`}>
+                  {sale.base_site}
+                </span>
               </td>
               <td className="text-left lg:text-[1vw] py-[1vw] px-[1vw] text-gray-600">
             
               {sale?.sale_date ? moment(sale.sale_date).format('YYYY-MM-DD') : 'Not specified'} 
-              </td>
+              </td> 
 
               <td className="text-left lg:text-[1vw] py-[1vw] px-[0.5vw]">
                 <span  className="text-blue-500 hover:underline">
