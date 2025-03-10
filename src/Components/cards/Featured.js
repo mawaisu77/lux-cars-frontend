@@ -2,7 +2,6 @@ import React from "react";
 import useGetAllBidsCar from "../../hooks/useGetAllBidsCar";
 import Shimmer from "../../utils/loaders/Shimmer";
 import CarCard from "./CarCard";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 
@@ -17,18 +16,23 @@ const BuyNow = () => {
   }
 
 
-  if (carError) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh]">
-        <p className="text-2xl font-bold text-gray-500">
-          {carError}
-        </p>
-        <p className="text-gray-400 mt-2">
-          Please try again later
-        </p>
-      </div>
-    );
+  // if (carError) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center min-h-[50vh]">
+  //       <p className="text-2xl font-bold text-gray-500">
+  //         {carError}
+  //       </p>
+  //       <p className="text-gray-400 mt-2">
+  //         Please try again later
+  //       </p>
+  //     </div>
+  //   );
+  // }
+
+   if (carError) {
+    return null
   }
+
 
   const handleViewAllClick = () => {
     localStorage.setItem("apiEndpoint", `${process.env.REACT_APP_API_CARS_LIVE}?buy_now=true`);
