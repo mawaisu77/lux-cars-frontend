@@ -1,8 +1,21 @@
 import React from "react";
 import { FaLink } from "react-icons/fa6";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 const VehicleTitleInfo = ({ currentStatus, title, baseSite, handleSaveClick, user, isCarSaved, lotID }) => {
+
+  const handleCopy = () => {
+    const currentURL = window.location.href;
+      navigator.clipboard.writeText(currentURL)
+      .then(() => {
+        toast.success("URL copied to clipboard!");
+      })
+      .catch((err) => {
+        toast.error("Failed to copy URL");
+        console.error('Failed to copy URL:', err);
+      });
+  };
   return (
     <div className="flex justify-between items-center bg-white rounded-[0.5vw]  my-[0.5vw] lg:my-0 p-[0.5vw] lg:mb-[2vh]">
       
@@ -59,7 +72,7 @@ const VehicleTitleInfo = ({ currentStatus, title, baseSite, handleSaveClick, use
         {/* New Copy Button */}
         <button
           title="Copy URL"
-          onClick={() => document.getElementById("copy_url_modal").showModal()}
+          onClick={handleCopy}
           className=" bg-blue-500 hover:bg-blue-600 text-white px-[1.25vw] py-[0.5vw] rounded-[0.5vw]"
         >
           <FaLink className="lg:text-[1vw]" />

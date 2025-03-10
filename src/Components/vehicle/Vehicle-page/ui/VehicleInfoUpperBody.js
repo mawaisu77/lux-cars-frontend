@@ -43,14 +43,23 @@ const VehicleInfoUpperBody = ({ carDetailData, liveData, currentBidValue, days, 
           </div>
           <div className="flex items-center justify-between lg:justify-start ">
             <p className="font-urbanist tracking-wider font-semibold text-[#6a6978] text-sm lg:text-[0.85vw] ml-[0.5vw]">Actual Cash Value:</p>
-            <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">{`$${carDetailData?.data?.cost_priced || "N/A"}`}</p>
+            <p className="font-urbanist font-bold lg:text-[0.97vw] ml-2">{`${carDetailData?.data?.cost_priced.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          }) || "N/A"}`}</p>
           </div>
         </div>
         <div className="flex flex-col md:flex-row lg:flex-col justify-between    lg:leading-[4.33vh] lg:w-[50%] rounded-[0.5vw] ">
           <div className="flex flex-col bg-white px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
             <div className="flex items-center">
               <p className="font-urbanist tracking-wider font-semibold  text-[#6a6978] text-md lg:text-[1vw] ml-[0.5vw]">Current Bid:</p>
-              <p className="font-urbanist font-bold lg:text-[1vw] ml-[0.5vw]">${liveData.currentBid ? liveData.currentBid : currentBidValue}</p>
+              <p className="font-urbanist font-bold lg:text-[1vw] ml-[0.5vw]">{liveData.currentBid ? liveData.currentBid.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          }) : currentBidValue.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}</p>
             </div>
             <div className="flex items-center">
               <p className="font-urbanist tracking-wider font-semibold  text-[#6a6978] text-md lg:text-[1vw] ml-[0.5vw]">No of Bids :</p>
