@@ -8,7 +8,7 @@ const quickBids = [100, 200, 300, 400, 500, 1000];
 
 const QuickBids = ({ manualBid, setManualBid }) => {
   return (
-    <div className="flex flex-col justify-start h-full items-center w-[55%] ">
+    <div className="flex flex-col bg-blue-400 justify-start h-full items-center w-[55%] ">
 
       <div className="flex items-center justify-center gap-[0.425vw]">
         <h1 className="text-18 font-medium">Quick Bid Increase:</h1>

@@ -187,43 +187,47 @@ const BidDetails = ({
       <div
         className={`${isCarSaved ? "bg-yellow-200" : ""} px-2 md:px-[0.6vw] max-w-[100%] mx-auto`}
       >
-        <div className="flex justify-between bg-white p-2 items-center mb-3 md:mb-[0.2vw] rounded-md md:rounded-[0.5vw]">
+        <div className="flex  justify-between bg-white p-2 items-center mb-3 md:mb-[0.2vw] rounded-md lg:rounded-[0.5vw]">
           <span
-            className="text-30 font-medium text-nowrap"
+            className="text-[14px] lg:text-30 font-medium text-nowrap"
             title={`${car?.make} ${car?.model} ${car?.year}`}
           >
             {`${car?.make} ${car?.model} ${car?.year}`}
           </span>
 
-          <div className="flex items-center gap-x-1 py-1 px-2 rounded-md md:rounded-[0.5vw] bg-yellow-400/30  justify-center">
-            <CiLocationOn />
-            <span className="tracking-wide">
+          <div className="flex lg:w-[18vw] justify-between flex-col items-end gap-1  lg:items-center lg:flex-row">
+          <div className="flex items-center gap-x-1 py-1 lg:py-[0.25vw] lg:px-[0.5vw] px-2 rounded-md md:rounded-[0.5vw] bg-yellow-400/30  justify-center">
+            <CiLocationOn className="text-[14px] lg:text-[1vw]" />
+            <span className="tracking-wide text-[14px] lg:text-[1vw]">
               {car?.carState} {car?.carLocation}
             </span>
+           
           </div>
-
-
-          <div className="flex gap-4 ">
+          <div className="flex  gap-4 text-right ">
             <div
               className="flex items-center px-2 py-1 md:px-[0.625vw] md:py-[0.417vw] gap-1 md:gap-[0.425vw] bg-secondary-gray rounded-md md:rounded-[0.5vw]"
               title={`${memberCount || 0} people have joined the live auction`}
             >
-              <MdPeopleAlt className="text-20" />
-              <span className="text-18">{memberCount || 0}</span>
+              <MdPeopleAlt className="lg:text-20" />
+              <span className="lg:text-18">{memberCount || 0}</span>
             </div>
           </div>
+          </div>
+
+
+          
         </div>
 
-        <div className="flex gap-x-4 md:gap-[0.6vw] ">
+        <div className="lg:flex  gap-x-4 md:gap-[0.6vw] ">
           {/* Left side - Image gallery */}
           {car?.carImages && (
-            <div className="w-[25%]">
+            <div className="lg:w-[25%]  w-full">
               <VerticleSwiper images={car?.carImages} />
             </div>
           )}
 
           {/* Right side - Bidding interface */}
-          <div className="w-[75%]">
+          <div className="lg:w-[75%] w-full">
             <div className="relative mb-[0.625vw] grid grid-cols-12 p-[0.625vw] rounded-md md:rounded-[0.5vw] shadow-sm bg-white">
               <div className="col-span-5">
                 <BidInput

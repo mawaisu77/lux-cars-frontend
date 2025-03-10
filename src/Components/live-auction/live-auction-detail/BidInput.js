@@ -69,7 +69,7 @@ const BidInput = ({
   
   return ( 
     <>  
-      <div className="mb-[0.625vw] flex flex-col items-center justify-between">
+      <div className="mb-[0.625vw] flex bg-pink-200 flex-col items-center justify-between">
       {getBidStatus()}
       {/* add space */}
       <br />
@@ -90,7 +90,7 @@ const BidInput = ({
               onClick={() => {
                 // handleReset();
               }}
-              className="cursor-pointer flex justify-center items-center text-gray-500 hover:text-gray-700"
+              className="cursor-pointer  flex justify-center items-center text-gray-500 hover:text-gray-700"
             >
               <MdRestartAlt className="text-20 md:text-[1.25vw]" />
             </span>

@@ -47,7 +47,7 @@ const CircularProgress = ({
   };
 
   return (
-    <div className="relative ">
+    <div className="relative bg-red-300">
       <CountdownCircleTimer
         key={key}
         isPlaying={isTimerActive} // Start timer only when active

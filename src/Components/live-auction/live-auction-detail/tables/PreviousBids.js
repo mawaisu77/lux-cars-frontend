@@ -11,11 +11,11 @@ export default function PreviousBids({id, liveData, members, memberCount}) {
 
 
   return (
-    <div className="p-[1vw] bg-white rounded-lg shadow-sm h-[21.615vw] mt-[0.625vw]">
+    <div className="p-[10px] lg:p-[1vw] bg-blue-200 rounded-lg shadow-sm h-[250px] lg:h-[21.615vw] mt-[20px] lg:mt-[0.625vw]">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-[0.625vw]">
-        <h2 className="text-16 font-semibold">Previous Bids</h2>
-        <button className="text-16 text-gray-500 hover:text-blue-600"> <strong>Total Bids: {allBids?.length || 0}</strong></button>
+        <h2 className="text-sm lg:text-16 font-semibold">Previous Bids</h2>
+        <button className="text-sm lg:text-16   text-gray-500 hover:text-blue-600"> <strong>Total Bids: {allBids?.length || 0}</strong></button>
       </div>
 
       {/* Table Container */}
@@ -24,9 +24,9 @@ export default function PreviousBids({id, liveData, members, memberCount}) {
           {/* Table Header */}
           <thead className="sticky  top-0 bg-white">
             <tr>
-              <th className="px-[0.729vw] py-[0.625vw] text-left text-15 font-medium text-gray-500 uppercase border-b">USERNAME</th>
-              <th className="px-[0.729vw] py-[0.625vw] text-left text-15 font-medium text-gray-500 uppercase border-b">PRICE</th>
-              <th className="px-[0.729vw] py-[0.625vw] text-right text-15 font-medium text-gray-500 uppercase border-b">STATUS</th>
+              <th className="px-[0.729vw] py-[0.625vw] text-left text-[12px] lg:text-15 font-medium text-gray-500 uppercase border-b">USERNAME</th>
+              <th className="px-[0.729vw] py-[0.625vw] text-left text-[12px] lg:text-15 font-medium text-gray-500 uppercase border-b">PRICE</th>
+              <th className="px-[0.729vw] py-[0.625vw] text-right text-[12px] lg:text-15 font-medium text-gray-500 uppercase border-b">STATUS</th>
             </tr>
           </thead>
           {/* Table Body */}
@@ -58,11 +58,11 @@ export default function PreviousBids({id, liveData, members, memberCount}) {
         ) : (
           allBids?.map((bid) => (
             <tr key={bid.id} className="hover:bg-gray-50 w-full">
-            <td className="px-[0.729vw] py-[0.625vw] text-left text-15 text-blue-600 font-semibold border-b">{bid?.userDetails?.username}</td>
-            <td className="px-[0.729vw] py-[0.625vw] text-left text-15 text-gray-700 border-b">${bid?.bid?.bidPrice || 0}</td>
-            <td className="px-[0.729vw] py-[0.625vw] text-right text-15 border-b">
+            <td className="px-[0.729vw] py-[0.625vw] text-left text-[12px] lg:text-15 text-blue-600 font-semibold border-b">{bid?.userDetails?.username}</td>
+            <td className="px-[0.729vw] py-[0.625vw] text-left text-[12px] lg:text-15 text-gray-700 border-b">${bid?.bid?.bidPrice || 0}</td>
+            <td className="px-[0.729vw] py-[0.625vw] text-righttext-[12px] lg:text-15  border-b">
               <span
-                className={`inline-block px-[0.729vw] py-[0.26vw] text-15 text-right rounded-lg ${
+                className={`inline-block px-[0.729vw] py-[0.26vw] text-[12px] lg:text-15 text-right rounded-lg ${
                   bid?.bid?.isValid ? ' bg-blue-100 text-blue-500 border border-blue-500' : 'bg-red-100 text-red-500 border border-red-500'
                 }`}
               >

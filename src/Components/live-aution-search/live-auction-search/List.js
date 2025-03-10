@@ -78,9 +78,9 @@ const List = () => {
         </div>
       </div>
 
-      <div className="max-w-[85vw] mx-auto px-4 py-8 md:mt-0 mt-6">
+      <div className="max-w-[85vw] mx-auto px-4 py-8 md:mt-0 mt-6 ">
         <h1 className="text-36 font-bold my-2 ">Live Auction</h1>
-        <div className="hidden md:grid grid-cols-6 gap-4 py-2 px-4 md:px-[1.625vw] md:py-[0.625vw] font-semibold text-sm md:text-[1vw] text-left uppercase bg-gray-100">
+        <div className="hidden md:grid grid-cols-6 gap-4 py-2 px-4 md:px-[1.625vw] md:py-[0.625vw] font-semibold text-sm lg:leading-[1.25vw] md:text-[1vw] text-left uppercase bg-gray-100">
           <div>Image</div>
           <div>Lot Info</div>
           <div>Vehicle Info</div>
@@ -101,12 +101,12 @@ const List = () => {
           </div>
         ) : upcomingBids.length > 0 ? (
           upcomingBids.map((car, index) => (
-            <div key={index} className="my-4">
+            <div key={index} className="my-4 lg:my-[1vw]">
               <Item car={car} isToday={true} />
             </div>
           ))
         ) : (
-          <div className="text-center py-8 md:py-[2.625vw]">
+          <div className="text-center lg:text-[1vw] py-8 md:py-[2.625vw]">
             <p className="text-gray-500">No cars available at this time.</p>
           </div>
         )}
@@ -114,7 +114,7 @@ const List = () => {
 
       <div className="max-w-[85vw] mx-auto px-4 py-8 md:mt-0 mt-6">
         <h1 className="text-36 font-bold my-2 ">Upcomming Auctions</h1>
-        <div className="hidden md:grid grid-cols-6 gap-4 py-2 px-4 md:px-[1.625vw] md:py-[0.625vw] font-semibold text-sm md:text-[1vw] text-left uppercase bg-gray-100">
+        <div className="hidden md:grid grid-cols-6 gap-4 py-2 px-4 md:px-[1.625vw] md:py-[0.625vw] font-semibold text-sm lg:leading-[1.25vw] md:text-[1vw] text-left uppercase bg-gray-100">
           <div>Image</div>
           <div>Lot Info</div>
           <div>Vehicle Info</div>
@@ -147,7 +147,7 @@ const List = () => {
             </div>
           ))
         ) : (
-          <div className="text-center py-8 md:py-[2.625vw]">
+          <div className="text-center py-8 md:py-[2.625vw] lg:text-[1vw]">
             <p className="text-gray-500">No cars available at this time.</p>
           </div>
         )}
