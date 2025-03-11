@@ -184,7 +184,7 @@ const SwiperGallery = ({ images, carData }) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper lg:mt-[1vw]"
+        className="mySwiper mt-2 lg:mt-[1vw]"
       >
         {images &&
           images.map((image, index) => (

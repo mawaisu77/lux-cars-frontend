@@ -290,7 +290,7 @@ const VehicleHero = () => {
                   />
                   </div>
                   <AnchorLink href="#get_report">
-                  <div className="flex justify-between  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
+                  <div className="flex justify-between my-2 lg:my-0  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1 lg:gap-[0.25vw]">
                       <IoDocumentTextOutline />
                       <p>Get Report</p>

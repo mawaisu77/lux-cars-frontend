@@ -3,8 +3,8 @@ import { BsInfoCircle } from 'react-icons/bs';
 import TooltipInfo from '../../common/TooltipInfo';
 
 const TimeLeftCounter = ({ days, hours, minutes, seconds }) => (
-  <div className="bg-white p-[0.5vw] mt-[0.5vw] rounded-[0.5vw]">
-    <div className='flex gap-x-[0.5vw] justify-center items-center '>
+  <div className="bg-white p-[0.5vw] mt-[0.5vw] rounded-md lg:rounded-[0.5vw]">
+    <div className='flex gap-x-2 lg:gap-x-[0.5vw] justify-center items-center '>
       <span className="text-md lg:text-[1vw] text-center font-bold">
       Time Left
       </span>
@@ -14,10 +14,10 @@ const TimeLeftCounter = ({ days, hours, minutes, seconds }) => (
     </div>       
    
 
-    <div className="flex justify-center gap-2 lg:gap-[0.75vw] items-center">
+    <div className="flex justify-center gap-3 lg:gap-[0.75vw] items-center">
       {[{ label: "Days", value: days }, { label: "Hours", value: hours }, { label: "Min", value: minutes }, { label: "Sec", value: seconds }].map((time, index) => (
-        <div key={index}>
-          <div className="shadow lg:text-[1vw]   lg::w-[3vw] lg:h-[6vh] px-[0.5vw] py-[0.5vw] text-white font-bold bg-[#CA0000] border flex justify-center items-center rounded-[0.375vw]">
+        <div key={index} className='w-[34px] lg:w-[3vw]'>
+          <div className="shadow text-[18px] lg:text-[1vw]  lg::w-[3vw] lg:h-[6vh] px-[0.5vw] py-[0.5vw] text-white font-bold bg-[#CA0000] border flex justify-center items-center rounded-[0.375vw]">
             {time.value}
           </div>
           <div className="text-black text-sm lg:text-[0.8vw] text-center  py-[0.25vw]">
