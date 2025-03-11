@@ -101,10 +101,8 @@ function SearchMainPage({
           </div>
           }
          
-          <div className="flex flex-col lg:flex-row   relative text-left text-sm lg:text-base">
-            
+          <div className="flex flex-col lg:flex-row  lg:mb-0 mb-2 relative text-left text-sm lg:text-base">  
             <div className="flex justify-between items-center">
-       
               <div>
                 {showFilterMob ? (
                   <button
@@ -132,6 +130,7 @@ function SearchMainPage({
               </div>
             </div>
           </div>
+
         </div>
 
         </div>

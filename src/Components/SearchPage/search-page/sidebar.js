@@ -78,6 +78,7 @@ import {
 } from "../../../utils/filtersData/transmissionOptions";
 import Select from "react-select";
 import { useCallback } from 'react';
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 
 const Sidebar = () => {
@@ -978,10 +979,33 @@ const Sidebar = () => {
           </div>
         )}
       </div>
-      <div className="mb-0 sm:mb-20 sm:pb-10 pb-0 flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[95vw] sm:w-[80vw]  mt-5 px-5 mx-auto font-urbanist rounded-[0.5vw ] ">
-        <h2 className="lg:hidden sm:text-[42px] text-[20px] font-bold mt-5 sm:mt-[100px]">
-          Fliters
-        </h2>
+
+      <div>
+                {showFilterMob ? (
+                  <button
+                    className="lg:hidden px-4 py-2  mt-[2vh]  flex justify-center items-center mx-auto border transition-all rounded-lg duration-300"
+                    onClick={handleFilters} 
+                  >
+                    Hide Filters
+                    <RiArrowDropDownLine
+                      size={20}
+                      className="ml-1 cursor-pointer rotate-180"
+                    />
+                  </button>
+                ) : (
+                  <button
+                    className="lg:hidden flex justify-center items-center mt-[2vh] px-4 py-2   border w-[150px] mx-auto rounded-lg hover:w-[160px] transition-all duration-300"
+                    onClick={handleFilters} // Correctly showing the filters
+                  >
+                    Show Filters
+                    <RiArrowDropDownLine
+                      size={20}
+                      className="ml-1 cursor-pointer"
+                    />
+                  </button>
+                )}
+              </div>
+      <div className="mb-0 sm:mb-20 sm:pb-10 pb-0 flex lg:flex-row flex-col bg-gray-100 justify-between gap-[1vw] w-[95vw] sm:w-[80vw]  mt-5 lg:px-5 px-1 mx-auto font-urbanist rounded-[0.5vw ] ">
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-40 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
             <div className="border-b-black  p-1 border-b flex justify-center items-center gap-x-2">

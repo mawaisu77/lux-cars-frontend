@@ -27,7 +27,7 @@ const ImageModal = ({
         </button>
 
         {/* Image to display */}
-        <div className="relative w-[80%] h-full mt-5 overflow-hidden">
+        <div className="relative w-[90%] lg:w-[80%] lg:h-full mt-5 overflow-hidden">
         <img
             src={images[currentImageIndex]}
             alt={`image_${currentImageIndex + 1}`}

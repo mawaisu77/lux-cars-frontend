@@ -124,7 +124,11 @@ const Funds = () => {
                 </button>
 
                 <button
-                  onClick={refundRequest}
+                    onClick={() => {
+                      refundRequest().then(() => {
+                        fetchFunds();
+                      });
+                    }}
                   disabled={refundLoading}
                   className="px-4 py-2 bg-primary-red text-white rounded-lg hover:bg-primary-red/90 transition flex items-center"
                 >

@@ -24,17 +24,21 @@ const BidCarsSection = () => {
     return <Shimmer />;
   }
 
+  // if (carError) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center min-h-[50vh]">
+  //       <p className="text-2xl font-bold text-gray-500">
+  //         {carError}
+  //       </p>
+  //       <p className="text-gray-400 mt-2">
+  //         Please try again later
+  //       </p>
+  //     </div>
+  //   );
+  // }
+
   if (carError) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh]">
-        <p className="text-2xl font-bold text-gray-500">
-          {carError}
-        </p>
-        <p className="text-gray-400 mt-2">
-          Please try again later
-        </p>
-      </div>
-    );
+    return null;
   }
 
   // Return null if there are no cars to display

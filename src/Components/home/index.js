@@ -39,7 +39,7 @@ const Home = () => {
     {/* <LocalOfferz/> */}
     <BidNow/>
     <LocalCars />
-    <LiveCars />/
+    <LiveCars />
     {/* <MotorCycleSection />
     <BoatSection />
     <ATVSection /> */}
