@@ -173,7 +173,7 @@ function Card({ card }) {
         className="h-full flex justify-center items-center relative w-full ml-[0.55vw] lg:w-[14vw] py-0 sm:py-[1vh]  "
       >
         {isCarSaved ? (
-          <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
+          <div className="bg-black/70 rounded-[0.417vw] px-[6px] py-[3px]  lg:px-[0.8vw]  lg:py-[0.4vw] absolute z-50 top-1 right-1  lg:right-[0.4vw] lg:top-[0.8vw]">
             <BsHeartFill
               onClick={() => handleSaveClick(card.lot_id)}
               className=" cursor-pointer text-red-600"
@@ -220,16 +220,8 @@ function Card({ card }) {
             ))}
         </Swiper>
       </div>
-      <ImageModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        images={card?.images}
-        currentImageIndex={currentImageIndex}
-        goToPrevImage={goToPrevImage}
-        goToNextImage={goToNextImage}
-        logo={bidCaribbeansLogo}
-      />
-      <div className="flex h-full flex-col w-full text-left md:items-center md:justify-between md:flex-row">
+    
+      <div className="flex h-full p-1 lg:p-0 flex-col w-full text-left md:items-center md:justify-between md:flex-row">
         <div className="text-left w-full lg:w-[70%] flex items-start justify-start gap-y-2 md:gap-y-[0.1vw] flex-col px-[1vw] h-full font-urbanist">
           <div className="flex justify-start items-end gap-x-2 md:gap-x-[0.5vw]">
             <Link to={`/vehicle-detail/${card?.lot_id}`}>
@@ -339,14 +331,17 @@ function Card({ card }) {
               </p>
             </div>
           </div>
-          <div className="flex w-full leading-[3vh] md:leading-[2vh] py-2 md:py-[0.3vw] bg-gray-100">
+
+          <div className="flex w-full leading-[3vh] md:leading-[2vh] py-2 md:py-[0.3vw]">
             <div className="flex flex-1 gap-x-2 md:gap-x-[0.5vw] items-center">
+              {/* keys */}
               <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                 {card?.keys === "Yes" ? (
                   <>
                     <IoKeySharp
                       data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`}
-                      className="text-18 text-yellow-600 size={15}"
+                      className="text-18 text-yellow-600 "
+                      size={15}
                     />
                     <ReactTooltip
                       id={`vehicle-keys-tooltip-${card?.lot_id}`}
@@ -371,6 +366,9 @@ function Card({ card }) {
                   </>
                 )}
               </span>
+
+
+              {/* Fuel */}
               <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                 <BsFillFuelPumpFill
                   data-tooltip-id={`vehicle-fuel-tooltip-${card?.lot_id}`}
@@ -384,6 +382,8 @@ function Card({ card }) {
                   style={{ zIndex: 9999 }}
                 />
               </span>
+
+             {/* cyclinders */}
               {card?.cylinders ? (
                 <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                   <PiCylinderFill
@@ -414,10 +414,11 @@ function Card({ card }) {
                 </span>
               )}
 
+{/* drive */}
               <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                 <span
                   data-tooltip-id={`vehicle-drive-tooltip-${card?.lot_id}`}
-                  className={`text-18 ${currentDrive?.id ? "tracking-wide font-semibold" : "text-red-600"}`}
+                  className={`text-[15px] lg:text-18 ${currentDrive?.id ? "tracking-wide font-semibold" : "text-red-600"}`}
                 >
                   {currentDrive?.letter}
                 </span>
@@ -435,7 +436,7 @@ function Card({ card }) {
                 className="text-gray-600 text-18   "
                 size={15}
               />
-              <span className="text-gray-600 lg:text-18">
+              <span className="text-gray-600 text-[12px] lg:text-18">
                 {card?.auction_date
                   ? moment(card.auction_date)
                       .tz("America/New_York")
@@ -451,7 +452,7 @@ function Card({ card }) {
           </div>
         </div>
 
-        <div className="flex w-full lg:w-[30%] h-full justify-center items-center mx-auto py-1  px-2">
+        <div className="flex w-full lg:w-[30%] h-full justify-center items-center mx-auto py-1 lg:px-2">
           <div className=" bg-gray-100 shadow-sm rounded-[0.5vw] w-full text-center sm:text-left">
             <div className="flex flex-col-reverse w-full gap-3 lg:gap-[0.2vw] p-[0.5vw] rounded-lg ">
               {/* BID NOW Button Section */}
@@ -514,6 +515,15 @@ function Card({ card }) {
       <LoginModal
         isOpen={isLoginModalOpen && !user}
         onClose={closeLoginModal}
+      />
+        <ImageModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        images={card?.images}
+        currentImageIndex={currentImageIndex}
+        goToPrevImage={goToPrevImage}
+        goToNextImage={goToNextImage}
+        logo={bidCaribbeansLogo}
       />
     </div>
   );

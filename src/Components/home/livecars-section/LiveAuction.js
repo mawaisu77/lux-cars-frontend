@@ -46,7 +46,6 @@ const LiveCars = () => {
               </div>
               <hr className="h-[2px] lg:h-[0.26vw] bg-primary-red w-[30px] lg:w-[4vw] " />
             </div>
-
             <div className="flex justify-center text-white px-2 py-1 lg:px-[0.52vw] lg:py-[0.26vw] rounded-full bg-primary-red hover:bg-primary-red/90 text-[16px] lg:text-20 items-center gap-x-[10px] lg:gap-x-[0.2vw]">
               <button onClick={handleViewAllClick} className="">
                 See All
