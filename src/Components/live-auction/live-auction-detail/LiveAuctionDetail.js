@@ -143,7 +143,7 @@ const LiveAuctionDetail = () => {
 
       {error && (
         <div>
-          <div className="flex justify-center items-center h-[80vh]">
+          <div className="flex justify-center  items-center h-[80vh]">
             <div className="flex flex-col w-[80vw] items-center justify-center p-8 bg-gray-50  rounded-lg text-center space-y-6">
               {/* Error Icon and Title */}
               <div className="flex items-center gap-3 text-gray-600">
@@ -190,8 +190,8 @@ const LiveAuctionDetail = () => {
         </div>
       )}
 
-      <div className="md:block hidden w-[100vw] py-[40px] md:py-[1.25vw] bg-gray-100">
-        <div className="max-w-[85vw] grid grid-cols-12 mx-auto">
+      <div className=" bg-gray-100 w-[100vw] py-[40px] md:py-[1.25vw] bg-gray-10">
+        <div className="w-[90%] lg:max-w-[85vw]   flex flex-col gap-5 lg:grid lg:grid-cols-12 mx-auto">
           {!error && liveCar && !loading && (
             <>
               <div className="col-span-7">
@@ -208,7 +208,7 @@ const LiveAuctionDetail = () => {
               </div>
 
               {!upcomingLoading && !upcommingError && upcomingBids && (
-                <div className="flex flex-col col-span-5 w-full">
+                <div className="flex flex-col   col-span-5 w-full">
                   <VehicleDetails vehicle={liveCar?.car} />
                   <UpcomingBids upcomingBids={upcomingBids} />
                 </div>

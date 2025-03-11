@@ -2,11 +2,11 @@ export default function VehicleDetails({vehicle}) {
 
     return (
       <div className="w-full mx-auto ">
-        <h1 className="text-2xl md:text-30 bg-white p-2 rounded-md md:rounded-[0.5vw] font-bold text-center md:mb-[0.2vw]">Vehicle Details</h1>
+        <h1 className="lg:text-[1.5vw] leading-[1.5vw]   text-2xl md:text-30 bg-white  p-2 lg:p-[0.5vw] rounded-md md:rounded-[0.5vw] font-bold text-center md:mb-[0.2vw]">Vehicle Details</h1>
           {/* Grid Section */}
-        <div className="grid w-full grid-cols-12 gap-[0.2vw]">
-            <div className="bg-white col-span-12 rounded-md md:rounded-[0.5vw] shadow-sm p-6 md:p-[1.25vw]">
-              <div className="space-y-3 md:space-y-[0.925vw]">
+        <div className="grid w-full   grid-cols-12 gap-[10px] lg:gap-[0.2vw]">
+            <div className="bg-white    col-span-12 rounded-md md:rounded-[0.5vw] shadow-sm p-2 lg:p-[1.25vw] text-[12px] lg:text-15">
+              <div className="space-y-[10px] lg::space-y-[0.925vw]">
                 <DetailRow label="VIN" value={vehicle?.vin || "N/A"} />
                 <DetailRow label="Make/Model/Year" value={vehicle?.make + " " + vehicle?.model + " " + vehicle?.year} />
                 <DetailRow label="Odometer" value={vehicle?.mileage + " miles" || "N/A"} />
@@ -17,8 +17,8 @@ export default function VehicleDetails({vehicle}) {
                 <DetailRow label="Status Code" value={vehicle?.titlesStatus || "N/A"} />
               </div>
             </div>
-            <div className="bg-white col-span-12 rounded-md md:rounded-[0.5vw] shadow-sm p-6 md:p-[1.25vw]">
-              <div className="space-y-3 md:space-y-[0.925vw]">
+            <div className="bg-white    col-span-12 rounded-md md:rounded-[0.5vw] shadow-sm p-2 lg:p-[1.25vw] text-[12px] lg:text-15">
+              <div className="space-y-[10px] lg:space-y-[0.925vw]">
                 <DetailRow label="Car Location" value={vehicle?.carLocation || "N/A"} />
                 <DetailRow label="Car State" value={vehicle?.carState || "N/A"} />
                 <DetailRow label="Car Titled At" value={vehicle?.carTitledAt || "N/A"} />
@@ -50,7 +50,7 @@ export default function VehicleDetails({vehicle}) {
   
   function DetailRow({ label, value }) {
     return (
-      <div className="flex justify-between items-center text-sm md:text-18">
+      <div className="flex justify-between leading-5 lg:leading-[1.5vw] items-center text-sm md:text-18">
         <span className="text-gray-600">{label}</span>
         <span className="font-medium">{value}</span>
       </div>

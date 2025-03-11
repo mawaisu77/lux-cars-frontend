@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+ 
 
 // Import Swiper styles
 import 'swiper/css';
@@ -31,7 +32,7 @@ export default function VerticleSwiper({images}) {
         slidesPerView={4}
         spaceBetween={20}
         loop={true}
-        direction='vertical'
+        direction= 'vertical'
         pagination={{
           clickable: true,
         }}
