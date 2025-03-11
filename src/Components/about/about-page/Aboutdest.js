@@ -9,9 +9,6 @@ const Aboutdest = () => {
   const locations = Object.keys(islandImages);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [backgroundImage, setBackgroundImage] = useState(
-    islandImages["North Abaco"]
-  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,6 +72,7 @@ const Aboutdest = () => {
                   {locations.map((location, index) => (
                     <button
                       key={index}
+                      onClick={() => handleButtonClick(location)}
                       className="flex items-center text-[14px] lg:text-[0.8vw] bg-white hover:bg-[#CA0000] hover:text-white text-red-600 font-bold py-1.5 px-3 duration-200 rounded-xl m-1"
                       
                     >
