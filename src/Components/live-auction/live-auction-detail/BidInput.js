@@ -69,12 +69,12 @@ const BidInput = ({
   
   return ( 
     <>  
-      <div className="mb-[0.625vw] flex bg-pink-200 flex-col items-center justify-between">
+      <div className="mb-[0.625vw] w-[150px] lg:w-[100%] flex     flex-col items-center justify-between">
       {getBidStatus()}
       {/* add space */}
       <br />
       {car?.minPrice}
-        <div className=" w-full flex justify-center items-center">
+        <div className="   lg:h-full lg:w-full flex justify-center items-center">
          <CircularProgress resetTimer={resetTimer} setResetTimer={setResetTimer} bonusTime={bonusTime} setBonusTime={setBonusTime} currentBid={currentBid} activeBid={activeBid} />
         </div>
 
@@ -83,7 +83,7 @@ const BidInput = ({
             <input
               value={manualBid || currentBid}
               onChange={(e) => setManualBid(Number(e.target.value))}
-              className="max-w-[6.215vw] border text-16 border-gray-300 rounded-[0.625vw] py-[0.417vw] text-center"
+              className="w-[70px] lg:max-w-[6.215vw] border text-[14px] lg:text-16 border-gray-300 rounded-sm lg:rounded-[0.625vw] px-1 py-1 lg:py-[0.417vw] text-center"
             />  
           </div>
           <span
@@ -92,18 +92,18 @@ const BidInput = ({
               }}
               className="cursor-pointer  flex justify-center items-center text-gray-500 hover:text-gray-700"
             >
-              <MdRestartAlt className="text-20 md:text-[1.25vw]" />
+              <MdRestartAlt className="lg:text-20 md:text-[1.25vw]" />
             </span>
           <div className="flex items-center gap-1">
             <span
               onClick={() => setManualBid((prev) => prev - 100)}
-              className="text-20 text-red-600 rounded-[0.417vw] border border-red-600 p-[0.317vw] cursor-pointer hover:bg-red-600/10"
+              className="lg:text-20 text-red-600 rounded-[0.417vw] border border-red-600 p-[0.317vw] cursor-pointer hover:bg-red-600/10"
             >
               <IoIosRemove />
             </span>
             <span
               onClick={() => setManualBid((prev) => prev + 100)}
-              className="text-20 text-red-600 rounded-[0.417vw] border border-red-600 p-[0.317vw] cursor-pointer hover:bg-red-600/10"
+              className="lg:text-20 text-red-600 rounded-[0.417vw] border border-red-600 p-[0.317vw] cursor-pointer hover:bg-red-600/10"
             >
               <IoIosAdd />
             </span>

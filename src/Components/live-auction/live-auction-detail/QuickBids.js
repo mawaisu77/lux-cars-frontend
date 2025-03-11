@@ -8,17 +8,17 @@ const quickBids = [100, 200, 300, 400, 500, 1000];
 
 const QuickBids = ({ manualBid, setManualBid }) => {
   return (
-    <div className="flex flex-col bg-blue-400 justify-start h-full items-center w-[55%] ">
+    <div className="flex flex-col gap-3   justify-start h-full items-center w-[150px] lg:w-[55%] ">
 
       <div className="flex items-center justify-center gap-[0.425vw]">
-        <h1 className="text-18 font-medium">Quick Bid Increase:</h1>
+        <h1 className="text-[12px] lg:text-18 font-medium">Quick Bid Increase:</h1>
         <TooltipGlobal
           title="Quick Bid Increase"
 
           description="Quickly increase your bid by selecting an amount from the list."
           placement="top"
           hoverComponent={
-            <span className="cursor-pointer text-20">
+            <span className="cursor-pointer text-[12px] lg:text-20">
               <IoInformationCircleOutline />
             </span>
           }
@@ -30,7 +30,7 @@ const QuickBids = ({ manualBid, setManualBid }) => {
           <div
             key={index}
             onClick={() => setManualBid(manualBid + amount)}
-            className="w-full text-16 flex items-center gap-1 justify-center px-2 py-1 md:px-[0.625vw] md:py-[0.417vw] bg-[#E8F9F9] text-[#15CAB8] hover:bg-[#D1F4F4] border border-[#15CAB8] rounded-[0.625vw] cursor-pointer"
+            className="w-full text-[12px] lg:text-16 flex items-center gap-1 justify-center px-2 py-1 md:px-[0.625vw] md:py-[0.417vw] bg-[#E8F9F9] text-[#15CAB8] hover:bg-[#D1F4F4] border border-[#15CAB8] rounded-[0.625vw] cursor-pointer"
           >
             <span className="">
               <FaArrowTrendUp />

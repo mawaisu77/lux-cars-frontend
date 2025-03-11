@@ -6,23 +6,23 @@ const UpcomingBids = ({upcomingBids}) => {
   const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
 
   return (
-    <div className="bg-white h-[300px] lg:h-[21.615vw] shadow-sm rounded-lg p-[1vw] w-full  mt-[0.4vw]">
+    <div className="bg-white h-[300px] lg:h-[21.615vw] shadow-sm rounded-lg mt-[10px] p-[1vw] w-full  lg:mt-[0.4vw]">
       <div className="flex justify-between items-center mb-[0.625vw]">
         <h2 className="text-[12px] lg:text-16 font-semibold">Upcoming Lots</h2>
         <button className="text-[12px] lg:text-16 text-gray-500 hover:text-blue-600"> <strong>Total Remaining Lots: {upcomingBids?.length || 0}</strong></button>
       </div>
 
       <div className="grid grid-cols-12 border p-[0.625vw] border-gray-200 gap-x-[10px] mb-[0.625vw] text-14 text-left text-gray-500 w-full">
-       <div className='grid grid-cols-12 w-[400px]  '>
+       
          <div className="col-span-7 text-[12px] lg:text-15 font-medium text-gray-500 uppercase">VEHICLE INFO</div>
         <div className="col-span-2 text-left text-[12px] lg:text-15 font-medium text-gray-500 uppercase">Current</div>
         <div className="col-span-3 text-right text-[12px] lg:text-15 font-medium text-gray-500 uppercase">Status</div>
-       </div>
+     
       </div>
 
       {/* Scrollable Section */}
-     <div className='w-full'>
-     <div className="h-[75%]    no-scrollbar overflow-x-scroll  overflow-y-scroll ">
+     <div className='w-full h-[75%] no-scrollbar  overflow-x-scroll   overflow-y-scroll'>
+     <div className=" md:w-full  no-scrollbar  overflow-x-scroll w-[500px] overflow-y-scroll ">
       
       { upcomingBids?.length === 0 && (
         <div className="text-center text-gray-500 py-4">No upcoming bids available.</div>
@@ -34,7 +34,7 @@ const UpcomingBids = ({upcomingBids}) => {
         return (
           <div
           key={bid.id}
-          className={`relative grid grid-cols-12 p-[0.625vw] border-b border-l border-r border-gray-200 gap-x-[0.625vw] w-[400px]
+          className={`relative grid grid-cols-12 p-[0.625vw] border-b border-l border-r border-gray-200 gap-x-[0.625vw] 
           ${isSaved ? "bg-yellow-200" : ""}`} // Apply yellow background if saved
         >
           <div className="col-span-7 w-full">
@@ -45,7 +45,7 @@ const UpcomingBids = ({upcomingBids}) => {
                   alt={`${bid.year}`}
                   className="w-full h-full object-cover rounded"
                 />
-                <div className="absolute -bottom-1 -right-1 w-[1vw] h-[1vw] bg-green-500 rounded-full" />
+                <div className="absolute bottom-1 -right-1 w-[1vw] h-[1vw] bg-green-500 rounded-full" />
               </div>
               <div className="w-full">
                 <div className="font-medium  text-[12px] lg:text-15 w-full flex justify-between items-center">

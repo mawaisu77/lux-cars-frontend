@@ -190,8 +190,8 @@ const LiveAuctionDetail = () => {
         </div>
       )}
 
-      <div className="bg-yellow-200  w-[100vw] py-[40px] md:py-[1.25vw] bg-gray-10">
-        <div className="w-[90%] lg:max-w-[85vw] bg-purple-300 flex flex-col gap-5 lg:grid lg:grid-cols-12 mx-auto">
+      <div className=" bg-gray-100 w-[100vw] py-[40px] md:py-[1.25vw] bg-gray-10">
+        <div className="w-[90%] lg:max-w-[85vw]   flex flex-col gap-5 lg:grid lg:grid-cols-12 mx-auto">
           {!error && liveCar && !loading && (
             <>
               <div className="col-span-7">
@@ -208,7 +208,7 @@ const LiveAuctionDetail = () => {
               </div>
 
               {!upcomingLoading && !upcommingError && upcomingBids && (
-                <div className="flex flex-col bg-black col-span-5 w-full">
+                <div className="flex flex-col   col-span-5 w-full">
                   <VehicleDetails vehicle={liveCar?.car} />
                   <UpcomingBids upcomingBids={upcomingBids} />
                 </div>

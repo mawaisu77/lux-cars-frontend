@@ -189,16 +189,16 @@ const BidDetails = ({
       >
         <div className="flex  justify-between bg-white p-2 items-center mb-3 md:mb-[0.2vw] rounded-md lg:rounded-[0.5vw]">
           <span
-            className="text-[14px] lg:text-30 font-medium text-nowrap"
+            className="text-[12px] lg:text-30 font-medium text-nowrap"
             title={`${car?.make} ${car?.model} ${car?.year}`}
           >
             {`${car?.make} ${car?.model} ${car?.year}`}
           </span>
 
-          <div className="flex lg:w-[18vw] justify-between flex-col items-end gap-1  lg:items-center lg:flex-row">
+          <div className="flex w-[150px] lg:w-[18vw] justify-between flex-col items-end gap-1  lg:items-center lg:flex-row">
           <div className="flex items-center gap-x-1 py-1 lg:py-[0.25vw] lg:px-[0.5vw] px-2 rounded-md md:rounded-[0.5vw] bg-yellow-400/30  justify-center">
             <CiLocationOn className="text-[14px] lg:text-[1vw]" />
-            <span className="tracking-wide text-[14px] lg:text-[1vw]">
+            <span className="tracking-wide text-[10px] lg:text-[1vw]">
               {car?.carState} {car?.carLocation}
             </span>
            
@@ -249,14 +249,14 @@ const BidDetails = ({
             </div>
             <div
               onClick={() => handleConfirmBid(car?.id, manualBid)}
-              className="w-full text-18 flex items-center justify-center gap-2 py-[0.677vw] bg-[#DC2626] text-white hover:bg-[#B91C1C] border border-[#DC2626] rounded-md md:rounded-[0.5vw] cursor-pointer"
+              className="w-full text-[12px] lg:text-18 flex items-center justify-center gap-2 py-[0.677vw] bg-[#DC2626] text-white hover:bg-[#B91C1C] border border-[#DC2626] rounded-md md:rounded-[0.5vw] cursor-pointer"
             >
               <FaBagShopping />
               <span>Place Bid</span>
             </div>
 
             <div className="w-full mt-[0.4vw] text-left">
-              <span className=" text-18 font-medium">Auto Bid For Me</span>
+              <span className="text-[12px] lg:text-18 font-medium">Auto Bid For Me</span>
               <div className="flex items-center border rounded-md md:rounded-[0.5vw] px-3 py-2 bg-white w-full">
                 {/* Dollar Prefix */}
                 {isAutoBidEnabled && (
@@ -270,7 +270,7 @@ const BidDetails = ({
                   placeholder="Enter maximum amount"
                   value={tempAutoBidAmount} // Changed from autoBidAmount
                   onChange={(e) => setTempAutoBidAmount(e.target.value)} // Changed from handleAutoBidSetup
-                  className="focus:outline-none text-16 py-[0.317vw] text-gray-700 w-full"
+                  className="focus:outline-none text-[12px] lg:text-16 py-1 lg:py-[0.317vw] text-gray-700 w-full"
                 />
                 <TooltipGlobal
                   title="Dynamic Bidding Guide"
@@ -293,18 +293,18 @@ const BidDetails = ({
                   }}
                   placement="left"
                   hoverComponent={
-                    <span className="cursor-pointer text-20">
+                    <span className="cursor-pointer text-[14px] lg:text-20">
                       <IoInformationCircleOutline />
                     </span>
                   }
                 />
               </div>
-              <div className="flex gap-2 mt-2">
+              <div className="flex gap-2 lg:gap-[0.25vw] lg:mt-[0.25vw] mt-2">
                 {/* Enable Auto-Bid Button */}
                 <button
                   onClick={handleAutoBidSetup}
                   disabled={!tempAutoBidAmount || isAutoBidEnabled}
-                  className={`px-2 py-1 rounded-md md:rounded-[0.5vw] text-14  ${
+                  className={`px-2 lg:px-[0.5vw] py-1 lg:py-[0.25vw] rounded-md md:rounded-[0.5vw] text-[12px]  lg:text-14  ${
                     !tempAutoBidAmount || isAutoBidEnabled
                       ? "bg-gray-300 cursor-not-allowed"
                       : "bg-[#DC2626] text-white hover:bg-[#B91C1C]"
@@ -317,7 +317,7 @@ const BidDetails = ({
                 {isAutoBidEnabled && (
                   <button
                     onClick={handleDisableAutoBid}
-                    className="px-2 py-1 rounded-md md:rounded-[0.5vw] text-14 bg-gray-600 text-white hover:bg-gray-700"
+                    className="px-2 lg:px-[0.5vw] py-1 lg:py-[0.25vw] rounded-md md:rounded-[0.5vw] text-[12px]  lg:text-14 bg-gray-600 text-white hover:bg-gray-700"
                   >
                     Disable Auto-Bid
                   </button>
