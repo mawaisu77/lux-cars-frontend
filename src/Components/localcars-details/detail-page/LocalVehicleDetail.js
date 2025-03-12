@@ -714,6 +714,19 @@ const LocalVehicleDetail = () => {
                       {carDetailData?.data?.car?.make}{" "}
                       {carDetailData?.data?.car?.model}
                     </p>
+
+                    <div className="flex gap-x-[0.5vw] items-center">
+
+                    <button
+                      onClick={() => handleSaveClick(id)}
+                      className="text-[12px] lg:text-18 font-semibold flex border items-center gap-2 lg:gap-[0.5vw] px-2 lg:px-[1vw] py-1 lg:py-[0.5vw] rounded-lg transition bg-gray-100 hover:bg-gray-200 text-gray-800"
+                      >
+                      {isCarSaved && user ? (
+                        <BsHeartFill className=" text-red-500" />
+                      ) : (
+                        <BsHeart className=" text-gray-500" />
+                      )}
+                  </button>
                     <button
                       title="Copy URL"
                       onClick={() =>
@@ -723,6 +736,8 @@ const LocalVehicleDetail = () => {
                     >
                       <FaLink className="lg:text-20" />
                     </button>
+                    </div>
+
                   </div>
                 </div>
                 {/* <div className="flex justify-between bg-black rounded-[0.5vw] p-2 lg:mb-[2vh]">
