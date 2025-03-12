@@ -314,10 +314,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/* 1 Final Bid */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-              <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">1</span>
+              <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">1</span>
               </div>
-              <span className="text-md md:text-20 text-gray-700">
+              <span className="text-xs sm:text-sm md:text-20 text-left text-gray-700">
                 Your Final Bid:
               </span>
               <div className="text-sm lg:text-[0.875vw] text-gray-700 flex">
@@ -337,10 +337,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*2 Admin Fee */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">2</span>
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">2</span>
               </div>
-              <span className="text-sm md:text-20 text-gray-700">
+              <span className="text-xs sm:text-sm md:text-20 text-left text-gray-700">
                 Admin Fee:
               </span>
               <TooltipInfo content="$1,500 if final price over 30000 then it will be additional 4% of final price and the 1500">
@@ -360,11 +360,11 @@ const Dropdown = ({ bidAmount, data }) => {
           <div className="flex justify-between w-full border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-between w-full items-center">
               <div className="flex items-center gap-x-1.5">
-              <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">3</span>
+              <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className=" text-xs sm:text-sm lg:text-[0.75vw]">3</span>
               </div>
              <div className="flex flex-col lg:flex-row">
-             <span className="text-sm md:text-20 text-left text-gray-700">
+             <span className="text-xs sm:text-sm md:text-20 text-left text-gray-700">
                 US Domestic Transport:
               </span>
               <Select
@@ -387,11 +387,11 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*4 Inspection After Auction: (Optional) */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">4</span>
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">4</span>
               </div>
-              <div className="flex flex-col text-left lg:flex-row lg:items-center gap-1">
-              <span className="text-sm flex gap-1 lg:items-center md:text-20 text-gray-700">
+              <div className="flex    flex-col text-left lg:flex-row lg:items-center gap-1">
+              <span className="text-xs flex items-center sm:text-sm md:text-20 text-left text-gray-700">
                 Inspection After Auction: (Optional)
                 <div className="text-sm md:text-20 mr-2 lg:mr-0 mt-1 lg:mt-0 text-gray-700 flex">
                 <TooltipInfo content="Inspection report to understand the repairs needed before shipping the vehicle to the Bahamas">
@@ -431,15 +431,15 @@ const Dropdown = ({ bidAmount, data }) => {
           </div>
 
           {/*5 Shipping fee to the Caribbeans */}
-          <div className="flex justify-between border-b   border-gray-300 pb-[.5vw]">
+          <div className="flex justify-between border-b   border-gray-300 pb-[1vw]">
             <div className="flex gap-x-1.5 lg:justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center  justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">5</span>
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center  justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">5</span>
               </div>
-              <span className="text-sm text-left md:text-20 text-gray-700">
+              <span className="text-xs sm:text-sm md:text-20 text-left text-gray-700">
                 Shipping fee to the Caribbeans
               </span>
-              <div className="text-sm md:text-20 text-gray-700 flex mb-5 md:mb-0 mr-2 lg:mr-0" >
+              <div className="text-sm md:text-20 text-gray-700 flex  md:mb-0 mr-2 lg:mr-0" >
                 <TooltipInfo content="Boat shipping fee to the Caribbeans">
                   <BsInfoCircle
                    
@@ -459,8 +459,8 @@ const Dropdown = ({ bidAmount, data }) => {
 
       <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
         <div className="flex justify-between items-center mb-[2.1vh]">
-        <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900  flex items-center gap-x-2">
-          <RiBankFill className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw]" />
+        <h3 className="text-md sm:text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
+          <RiBankFill className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw]" />
           Customs 
         </h3>
         <div className="flex gap-x-1.5 justify-center items-center">
@@ -499,10 +499,10 @@ const Dropdown = ({ bidAmount, data }) => {
           selectedLocation === "Bahamas" && 
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">6</span>
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">6</span>
               </div>
-              <span className="text-sm md:text-20 text-gray-700">
+              <span className="text-xs sm:text-sm md:text-20 text-gray-700">
               Duty Rate:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
@@ -523,12 +523,12 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*7 Processing Fee  */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">
                   {selectedLocation === "Turks"? "6":"7"}
                 </span>
               </div>
-              <span className="text-sm md:text-20 text-gray-700">
+              <span className="text-xs sm:text-sm md:text-20 text-gray-700">
                 Processing Fee:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
@@ -557,13 +557,13 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*8 Environmental Levy Fee */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">
                 {selectedLocation === "Turks"? "7":"8"}
                 </span>
               </div>
-             <div className="lg:flex lg:items-center lg:gap-2" >
-             <span className="text-sm md:text-20 text-gray-700">
+             <div className="flex lg:items-center gap-2" >
+             <span className="text-xs sm:text-sm md:text-20 text-gray-700">
                 Environmental Levy Fee: (flat)
               </span>
              <div className="flex items-center gap-2">
@@ -638,10 +638,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*9 VAT  */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">9</span>
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">9</span>
               </div>
-              <span className="text-sm md:text-20 text-gray-700">
+              <span className="text-xs sm:text-sm md:text-20 text-gray-700">
                 VAT:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
@@ -670,8 +670,8 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*10 Customs Clearence and Delivery Fee */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">10</span>
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">10</span>
               </div>
               <span className="text-sm md:text-20 text-left text-gray-700">
                 Customs Clearence & Delivery Fee
@@ -693,9 +693,9 @@ const Dropdown = ({ bidAmount, data }) => {
         </div>
     </div>
 
-    <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm lg:leading-[1.5vw]  border border-gray-200">
-        <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
-          <MdCalculate className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw]" />
+    <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm lg:leading-[1.5vw]   border border-gray-200">
+        <h3 className="text-lg sm:text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
+          <MdCalculate className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw]" />
           Total Price Estimation
         </h3>
         <div className="space-y-3 md:space-y-[1.5vw]">
@@ -703,10 +703,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*11 Total Landed Cost Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">11</span>
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">11</span>
               </div>
-              <span className="text-sm md:text-20 text-left font-semibold text-gray-900">
+              <span className="text-xs sm:text-sm md:text-20 text-left font-semibold text-gray-900">
                 Total Cost:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
@@ -731,10 +731,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*12 Total Due to Customs Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
                 <span className="text-sm lg:text-[0.75vw]">12</span>
               </div>
-              <span className="text-sm md:text-20 font-semibold text-gray-900">
+              <span className="text-xs sm:text-sm md:text-20 font-semibold text-gray-900">
                 Total Due to Custom:
               </span>
               <div className="text-sm md:text-20 text-gray-700 flex">
@@ -755,10 +755,10 @@ const Dropdown = ({ bidAmount, data }) => {
           {/*13 Final Price Calculation */}
           <div className="flex justify-between border-t border-gray-300 pt-3">
             <div className="flex gap-x-1.5 justify-center items-center">
-            <div className="w-6 lg:w-[1.25vw] h-6 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm lg:text-[0.75vw]">13</span>
+            <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
+                <span className="text-xs sm:text-sm lg:text-[0.75vw]">13</span>
               </div>
-              <span className="text-sm md:text-20 text-left font-semibold text-gray-900">
+              <span className="text-xs sm:text-sm md:text-20 text-left font-semibold text-gray-900">
                 Final Price: 
               </span>
 
