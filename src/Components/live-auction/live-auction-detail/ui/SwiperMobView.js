@@ -11,8 +11,7 @@ const SwiperMobView = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <div>
- 
+    <div className="mb-2">
       <div className="relative">
         <Swiper
           style={{
