@@ -34,13 +34,13 @@ import usePlaceLocalCarBid from "../../../hooks/usePlaceLocalCarBid";
 
 const LocalVehicleDetail = () => {
   const { id } = useParams();
-  const {  fetchFunds } = useFunds(); 
+  const { fetchFunds } = useFunds();
   const { handleSaveLocalCar } = useSaveLocalCar();
   const { deleteSavedLocalCar } = useDeleteSaveLocalCar();
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isBidModalOpen, setIsBidModalOpen] = useState(false);
   const [isCarSaved, setIsCarSaved] = useState(false);
- 
+
   const [allBids, setAllBids] = useState(null);
   const [shouldRefetch, setShouldRefetch] = useState(false);
 
@@ -49,20 +49,18 @@ const LocalVehicleDetail = () => {
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetLocalCarDetail(`local-cars/get-car?id=${id}`);
 
-    const [bidAmount, setBidAmount] = useState(() => {
-      const currentBid = carDetailData?.data?.car?.currentBid || 0;
-      return currentBid + 500;
-    });
-    const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
+  const [bidAmount, setBidAmount] = useState(() => {
+    const currentBid = carDetailData?.data?.car?.currentBid || 0;
+    return currentBid + 500;
+  });
+  const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
 
-    const { placeBid, placebidLoading, placeBiderror, placeBidSuccess } =
+  const { placeBid, placebidLoading, placeBiderror, placeBidSuccess } =
     usePlaceLocalCarBid();
 
-
-  
-    useEffect(() => {
-      setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(id)));
-    }, [savedIds, id]);
+  useEffect(() => {
+    setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(id)));
+  }, [savedIds, id]);
 
   useEffect(() => {
     fetchCarDetail();
@@ -81,24 +79,23 @@ const LocalVehicleDetail = () => {
   const ValidDate =
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
-
   const getTimeDifference = () => {
-      if (!carDetailData?.data?.car?.auction_date) return null;
-    
-      const auctionDate = new Date(carDetailData.data.car.auction_date);
-      const currentDate = new Date();
-    
-      if (currentDate > auctionDate) return null;
-    
-      const diffInMilliseconds = auctionDate - currentDate;
-      const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
-      
-      // Return only if the time difference is within one hour (60 minutes)
-      if (diffInMinutes > 60) return null;
-    
-      return `Live in ${diffInMinutes} ${diffInMinutes === 1 ? 'minute' : 'minutes'}`;
+    if (!carDetailData?.data?.car?.auction_date) return null;
+
+    const auctionDate = new Date(carDetailData.data.car.auction_date);
+    const currentDate = new Date();
+
+    if (currentDate > auctionDate) return null;
+
+    const diffInMilliseconds = auctionDate - currentDate;
+    const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
+
+    // Return only if the time difference is within one hour (60 minutes)
+    if (diffInMinutes > 60) return null;
+
+    return `Live in ${diffInMinutes} ${diffInMinutes === 1 ? "minute" : "minutes"}`;
   };
-    
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -114,7 +111,6 @@ const LocalVehicleDetail = () => {
     fetchData();
   }, [carDetailData]);
 
-
   useEffect(() => {
     if (shouldRefetch) {
       fetchCarDetail();
@@ -122,7 +118,7 @@ const LocalVehicleDetail = () => {
     }
   }, [shouldRefetch, fetchCarDetail]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (placeBidSuccess) {
       setShouldRefetch(true);
       toast.success("Bid has been placed successfully");
@@ -140,7 +136,7 @@ const LocalVehicleDetail = () => {
     }
   }, [carDetailData?.data?.car?.currentBid]);
 
- const handleSaveClick = (id) => {
+  const handleSaveClick = (id) => {
     const stringLotId = String(id);
 
     if (!user) {
@@ -174,11 +170,9 @@ const LocalVehicleDetail = () => {
     }
   };
 
-
   const currentStatus = statusOptions.find(
     (option) => option.id === carDetailData?.data?.car?.titlesStatus
   );
-
 
   // const handlePlaceMaxBid = async () => {
   //   if (bidAmount <= carDetailData?.data?.car?.currentBid) {
@@ -190,13 +184,12 @@ const LocalVehicleDetail = () => {
 
   const handleBidPlace = async () => {
     await placeBid({ id: carDetailData?.data?.car?.id, currentBid: bidAmount });
-    await fetchFunds()
+    await fetchFunds();
   };
-
 
   const handlePlaceBid = () => {
     if (!user) {
-      document.getElementById("sign_in_modal").showModal(); 
+      document.getElementById("sign_in_modal").showModal();
     } else {
       document.getElementById("local_bid_modal").showModal();
     }
@@ -212,10 +205,10 @@ const LocalVehicleDetail = () => {
 
   return (
     <>
-       <div className="Account-image">
+      <div className="Account-image">
         <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
-            Local Vehicle 
+            Local Vehicle
           </div>
           <div className="text-white flex gap-3 justify-center text-[1vw] font-urbanist">
             <Link to="/">
@@ -225,13 +218,11 @@ const LocalVehicleDetail = () => {
             </Link>
             /
             <button className="hover:text-white hover:scale-110 duration-150">
-            Local Vehicle
+              Local Vehicle
             </button>
           </div>
         </div>
       </div>
-
-
 
       {carDetailData?.data?.car?.auction_date ? (
         ValidDate ? (
@@ -481,7 +472,7 @@ const LocalVehicleDetail = () => {
             
               <section className="bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
                 <h2 className="text-xl lg:leading-[1.75vw] lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
-                  Vehicle Info 
+                  Vehicle Info
                 </h2>
                 <div className="space-y-[2vh] lg:leading-[1vw] text-sm lg:text-[0.875vw]">
                   <InfoRow
@@ -641,7 +632,6 @@ const LocalVehicleDetail = () => {
                         >
                           {currentStatus.letter}
                         </span>
-                        
                       </div>
                     )}
                     <p className="lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
@@ -650,10 +640,9 @@ const LocalVehicleDetail = () => {
                     </p>
 
                     <div className="flex gap-x-[0.5vw] items-center">
-
-                    <button
-                      onClick={() => handleSaveClick(id)}
-                      className="text-[12px] lg:text-18 font-semibold flex border items-center gap-2 lg:gap-[0.5vw] px-2 lg:px-[1vw] py-1 lg:py-[0.5vw] rounded-lg transition bg-gray-100 hover:bg-gray-200 text-gray-800"
+                      <button
+                        onClick={() => handleSaveClick(id)}
+                        className="text-[12px] lg:text-18 font-semibold flex border items-center gap-2 lg:gap-[0.5vw] px-2 lg:px-[1vw] py-1 lg:py-[0.5vw] rounded-lg transition bg-gray-100 hover:bg-gray-200 text-gray-800"
                       >
                       {isCarSaved && user ? (
                         <BsHeartFill className=" text-red-500" />
@@ -671,7 +660,6 @@ const LocalVehicleDetail = () => {
                       <FaLink className="lg:text-20" />
                     </button>
                     </div>
-
                   </div>
                 </div>
                 {/* <div className="flex justify-between bg-black rounded-[0.5vw] p-2 lg:mb-[2vh]">
@@ -792,7 +780,7 @@ const LocalVehicleDetail = () => {
                       />
                     </>
                   ) : (
-                   ""
+                    ""
                   )
                 ) : (
                   ""
@@ -935,19 +923,18 @@ const LocalVehicleDetail = () => {
           />
         </div>
       )}
-     <LoginModal
+      <LoginModal
         isOpen={isLoginModalOpen && !user}
         onClose={closeLoginModal}
       />
-       <SignInModal
+      <SignInModal
         closeModal={() => document.getElementById("sign_in_modal").close()}
       />
-      <BidConfirmationModal 
+      <BidConfirmationModal
         isLoading={placebidLoading}
         onBidPlace={handleBidPlace}
         onClose={handleCloseBidModal}
         bidAmount={bidAmount}
-     
       />
     </>
   );
