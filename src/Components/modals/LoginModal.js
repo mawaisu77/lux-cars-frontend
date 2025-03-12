@@ -5,8 +5,8 @@ import Fade from '@mui/material/Fade'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { LuxLogoWhite } from "../../utils/constant"
 import { useNavigate } from "react-router-dom"
+import bidcaribbean from "../../assets/lux-logo/logo-tag.png"
 
 const style = {
   position: 'absolute',
@@ -41,10 +41,10 @@ export default function LoginModal({ isOpen, onClose }) {
       }}
     >
       <Fade in={isOpen}>
-        <Box sx={style}>
-          <div className="flex justify-center mb-6">
-            <img src={LuxLogoWhite} alt="Lux Logo" className="w-24" />
-          </div>
+        <Box sx={style} className="space-y-2">
+          {/* <div className="flex justify-center w-full bg-blue-500">
+            <img src={bidcaribbean} alt="Lux Logo" className="w-full" />
+          </div> */}
           <Typography id="login-modal-title" variant="h6" component="h2" className="text-center font-bold mb-4">
             Login Required
           </Typography>

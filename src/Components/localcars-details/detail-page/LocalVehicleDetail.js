@@ -22,14 +22,33 @@ import {
 } from "../../../hooks/useGetAllBidsOnLocalCars";
 import SimilarCars from "./similarCars";
 import { useFunds } from "../../../context/FundsContext";
+import useSaveLocalCar from "../../../hooks/useSaveLocalCar";
+import useDeleteSaveLocalCar from "../../../hooks/useDeleteSaveLocalCar";
+import { useSavedLocalCars } from "../../../context/SavedLocalCarsIdscontext";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
+import SignInModal from "../../vehicle/Vehicle-page/modals/SignInModal";
+import LoginModal from "../../modals/LoginModal";
 
 const LocalVehicleDetail = () => {
   const { id } = useParams();
   const {  fetchFunds } = useFunds(); 
+  const { handleSaveLocalCar } = useSaveLocalCar();
+  const { deleteSavedLocalCar } = useDeleteSaveLocalCar();
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
+
+  const { user } = useAuthContext();
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetLocalCarDetail(`local-cars/get-car?id=${id}`);
+
+    const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
+    const [isCarSaved, setIsCarSaved] = useState(false);
+  
+    useEffect(() => {
+      setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(id)));
+    }, [savedIds, id]);
 
   useEffect(() => {
     fetchCarDetail();
@@ -111,6 +130,43 @@ const LocalVehicleDetail = () => {
     (option) => option.id === carDetailData?.data?.car?.titlesStatus
   );
 
+  const handleSaveClick = (id) => {
+    const stringLotId = String(id);
+
+    if (!user) {
+      setLoginModalOpen(true);
+      return;
+    }
+
+    if (isCarSaved) {
+      setIsCarSaved(false);
+
+      deleteSavedLocalCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          alert("Car unsaved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(true);
+          alert("Failed to unsave car. Please try again.");
+        });
+    } else {
+      setIsCarSaved(true);
+      handleSaveLocalCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          toast.success("Car saved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(false);
+          toast.error("Failed to save car. Please try again.");
+        });
+    }
+  };
+  const closeLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+
   return (
     <>
        <div className="Account-image">
@@ -163,7 +219,7 @@ const LocalVehicleDetail = () => {
               <section className="bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
                 <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                   Vehicle Info 
-                </h2>
+                </h2>  
                 <div className="space-y-[2vh] text-sm lg:text-[0.875vw]">
                   <InfoRow
                     label="Title"
@@ -253,9 +309,21 @@ const LocalVehicleDetail = () => {
                       </div>
                     )}
                     <p className="lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
-                      {carDetailData?.data?.car?.make}{" "}
+                      {carDetailData?.data?.car?.make}
                       {carDetailData?.data?.car?.model}
                     </p>
+                    <div className="flex items-center gap-x-2 lg:gap-x-[0.5vw]">
+
+                    <button
+                      onClick={() => handleSaveClick(id)}
+                      className="text-[12px] lg:text-18 font-semibold flex border items-center gap-2 lg:gap-[0.5vw] px-2 lg:px-[1vw] py-1 lg:py-[0.5vw] rounded-lg transition bg-gray-100 hover:bg-gray-200 text-gray-800"
+                      >
+                      {isCarSaved && user ? (
+                        <BsHeartFill className=" text-red-500" />
+                      ) : (
+                        <BsHeart className=" text-gray-500" />
+                      )}
+                  </button>
                     <button
                       title="Copy URL"
                       onClick={() =>
@@ -265,21 +333,11 @@ const LocalVehicleDetail = () => {
                     >
                       <FaLink className="lg:text-20" />
                     </button>
+                    </div>
+
                   </div>
                 </div>
-                {/* <div className="flex justify-between bg-black rounded-[0.5vw] p-2 lg:mb-[2vh]">
-                  <div className="flex justify-between w-full  items-center ">
-                    <div className="font-urbanist bg-yellow-500/30 px-[1vw] py-[0.2vw] rounded-[0.5vw] font-semibold flex gap-x-2">
-                      <span className=" text-black">Buy now price</span>
-                      <span className="text-green-600 font-semibold">
-                        {carDetailData?.data?.car?.buyNowPrice
-                          ? `$${carDetailData?.data?.car?.buyNowPrice}`
-                          : "Not Available"}
-                      </span>
-                    </div>
-                    
-                  </div>
-                </div> */}
+
                 <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
                   <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
@@ -528,6 +586,10 @@ const LocalVehicleDetail = () => {
           />
         </div>
       )}
+     <LoginModal
+        isOpen={isLoginModalOpen && !user}
+        onClose={closeLoginModal}
+      />
     </>
   );
 };
