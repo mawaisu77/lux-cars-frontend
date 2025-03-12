@@ -308,7 +308,7 @@ const LocalVehicleDetail = () => {
                 </div>
 
                 <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
-                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
+                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[20vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
                       <PiUsersFill
                         color="white"
@@ -322,7 +322,7 @@ const LocalVehicleDetail = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
+                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[20vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center p-2  rounded-lg lg:rounded-[0.5vw] lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
                       <CgFileDocument
                         color="white"
@@ -341,7 +341,7 @@ const LocalVehicleDetail = () => {
                 </div>
 
                 <div className="flex   flex-col lg:flex-row gap-2 justify-between">
-                  <div className="bg-white flex flex-col justify-evenly w-full lg:w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
+                  <div className="bg-white flex flex-col justify-evenly w-full lg:w-[20vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
                     <div className="flex justify-between items-center">
                       <p className="font-urbanist text-[#7a798a] text-[14px] lg:text-[0.85vw] ml-2">
                         VIN :
@@ -382,7 +382,7 @@ const LocalVehicleDetail = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col  lg:w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
+                  <div className="flex flex-col  lg:w-[20vw]  leading-[4.33vh] rounded-[0.5vw] ">
                     <div className="flex flex-col bg-white px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
                       <div className="flex justify-between items-center">
                         <p className="font-urbanist text-[#7a798a] text-md  text-[14px] lg:text-[0.85vw] ml-[0.5vw]">
@@ -626,7 +626,7 @@ const LocalVehicleDetail = () => {
             </div>
             
 
-            <div className=" hidden lg:block w-full lg:w-[48%]">
+            <div className=" hidden   lg:block w-full lg:w-[48%]">
               <div>
                 <div className="flex  justify-between mt-[50px] lg:mt-2 lg:mb-[3vh]">
                   <div className="flex w-full justify-between px-[0.5vw] items-center gap-2 rounded-[0.5vw] bg-white">
@@ -666,7 +666,7 @@ const LocalVehicleDetail = () => {
                       onClick={() =>
                         document.getElementById("copy_url_modal").showModal()
                       }
-                      className=" bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg"
+                      className=" bg-blue-500 hover:bg-blue-600 text-white px-5 lg:px-[1.25vw] py-2 lg:py-[0.5vw] rounded-lg"
                     >
                       <FaLink className="lg:text-20" />
                     </button>
@@ -688,21 +688,21 @@ const LocalVehicleDetail = () => {
                   </div>
                 </div> */}
                 <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
-                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
+                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[20vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
                       <PiUsersFill
                         color="white"
                         className="lg:w-[1.2vw] lg:h-[2.5vh]"
                       />
                     </div>
-                    <div className="text-left">
+                    <div className="text-left  ">
                       <p className="lg:text-[0.7vw] text-[#7a798a]">Owned by</p>
                       <p className="lg:text-[0.9vw] font-urbanist font-semibold text-green-600   py-[0.1vw] px-[0.2vw] rounded-[0.2vw]">
                         {carDetailData?.data?.user?.username}
                       </p>
                     </div>
                   </div>
-                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
+                  <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw]   items-center lg:w-[20vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center p-2 rounded-[0.5vw] lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
                       <CgFileDocument
                         color="white"
@@ -721,7 +721,7 @@ const LocalVehicleDetail = () => {
                 </div>
 
                 <div className="flex   flex-col lg:flex-row gap-2 justify-between">
-                  <div className="bg-white flex flex-col justify-evenly w-full lg:w-[16vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
+                  <div className="bg-white flex flex-col justify-evenly w-full lg:w-[20vw] px-[0.5vw] py-[1.08] leading-[4.33vh] rounded-lg ">
                     <div className="flex items-center">
                       <p className="font-urbanist text-[#7a798a] lg:text-[0.85vw] ml-2">
                         VIN :
@@ -759,7 +759,7 @@ const LocalVehicleDetail = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col  lg:w-[16vw]  leading-[4.33vh] rounded-[0.5vw] ">
+                  <div className="flex flex-col  lg:w-[20vw]  leading-[4.33vh] rounded-[0.5vw] ">
                     <div className="flex flex-col bg-white px-[0.5vw] py-[1.08vh] justify-between rounded-[0.5vw]">
                       <div className="flex items-center">
                         <p className="font-urbanist text-[#7a798a] text-md lg:text-[0.85vw] ml-[0.5vw]">
