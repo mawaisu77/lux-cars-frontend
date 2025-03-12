@@ -306,8 +306,8 @@ const Dropdown = ({ bidAmount, data }) => {
   return (
     <div className="relative tracking-wider space-y-2 bg-white w-full mx-auto mt-[5.4vh] font-urbanist shadow-sm rounded-[0.5vw] p-[1.5vw]">
       <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
-        <h3 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
-          <BiCalculator className="lg:w-[1.25vw] lg:h-[1.25vw]" />
+        <h3 className="text-lg lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
+          <BiCalculator className="w-8 lg:w-[1.25vw] h-8 lg:h-[1.25vw]" />
           Fees and Calculations (Estimated)
         </h3>
         <div className="space-y-3 md:space-y-[1.5vw]">

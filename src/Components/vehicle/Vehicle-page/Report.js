@@ -111,7 +111,6 @@ const CarReportViewer = ({ vin }) => {
   };
 
 
-
   return (
     <div className=" mt-[2vh] shadow-sm rounded-[0.375vw] lg:w-[41vw]  bg-white p-[1.5vw]">
       <h2 className="text-md lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.375vw]">
@@ -133,7 +132,7 @@ const CarReportViewer = ({ vin }) => {
     {!loading && !error && carReport && (
       <div>
           <div className="relative">
-          <div className="  overflow-hidden border border-gray-300 rounded-[0.5vw] p-[0.5vw]">
+          <div className="h-[400px]  overflow-hidden border border-gray-300 rounded-[0.5vw] p-[0.5vw]">
             <Document file={carReport}>
               <Page pageNumber={1}  />
             </Document>

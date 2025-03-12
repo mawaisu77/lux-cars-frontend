@@ -129,7 +129,7 @@ const SwiperGallery = ({ images, carData }) => {
               Video
             </button>
           )}
-          <div className="absolute  z-10 bottom-2 w-56 lg:w-[15vw] rounded-lg">
+          <div className="absolute  z-10 bottom-2 w-36 lg:w-[15vw] rounded-lg">
             <img
               src={bidcaribbeansLogo}
               className="my-2 rounded-lg shadow-img cursor-pointer"
@@ -161,7 +161,7 @@ const SwiperGallery = ({ images, carData }) => {
           {images &&
             images.map((image, index) => (
               <SwiperSlide key={index}>
-                <div className="relative h-[300px] lg:h-full">
+                <div className="relative h-[300px] lg:h-[30vw]">
                   <img
                     src={image}
                     className="w-full h-full  object-cover rounded-lg shadow-img cursor-pointer"
@@ -184,14 +184,23 @@ const SwiperGallery = ({ images, carData }) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper lg:mt-[1vw]"
+        className="mySwiper mt-2 lg:mt-[1vw]"
       >
         {images &&
           images.map((image, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} className="relative">
+
+           <div className="absolute z-10 bottom-[2px] lg:bottom-[0.2vw] w-16 lg:w-[5vw] rounded-lg">
+            <img
+              src={bidcaribbeansLogo}
+              className=""
+              alt={`Vehicle_Image`}
+            />
+
+          </div>
               <img
                 src={image}
-                className="rounded-lg lg:rounded-[0.5vw] "
+                className="rounded-lg lg:rounded-[0.5vw] h-[80px] sm:h-[100px] lg:h-[7vw] "
                 alt={`Thumbnail ${index + 1}`}
               />
             </SwiperSlide>

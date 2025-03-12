@@ -17,25 +17,24 @@ const VehicleTitleInfo = ({ currentStatus, title, baseSite, handleSaveClick, use
       });
   };
   return (
-    <div className="flex justify-between items-center bg-white rounded-[0.5vw]  my-[0.5vw] lg:my-0 p-[0.5vw] lg:mb-[2vh]">
+    <div className="flex flex-col lg:flex-row justify-between items-center gap-y-2 lg:gap-y-0 bg-white rounded-[0.5vw]  my-[0.5vw] lg:my-0 p-[0.5vw] lg:mb-[2vh]">
       
       <div className="flex justify-center items-center gap-1">
-        
         {currentStatus && (
           <div  
-            className={`px-2 p-1 lg:w-[1.5vw] lg:h-[1.5vw]  rounded-full  ${currentStatus.bgHex} `}
+            className={`w-[22px] h-[22px] lg:w-[1.5vw] lg:h-[1.5vw] flex items-center justify-center rounded-full  ${currentStatus.bgHex} `}
           >
             <span
               title={currentStatus.id}
               className={
-                "text-white w-full h-full lg:text-[0.8vw] font-bold flex items-center justify-center"
+                "text-white text-[12px] lg:text-[0.8vw] font-bold "
               }
             >
               {currentStatus.letter}
             </span>
           </div>
         )}
-        <p className="lg:text-[1.3vw] text-left font-urbanist font-semibold ">{title}</p>
+        <p className="lg:text-[1.3vw] text-left font-urbanist font-semibold ">{title}</p>   
        <div className="flex flex-col lg:flex-row justify-between gap-[0.5vw]" >
        <div className="flex justify-center items-center">
           {baseSite === "iaai" && (
@@ -51,16 +50,15 @@ const VehicleTitleInfo = ({ currentStatus, title, baseSite, handleSaveClick, use
         </div>
        
        
-       </div>
-       
+       </div>   
       </div>
-      <div>
 
-        <div className="flex items-center gap-x-1 lg:gap-x-[0.5vw]">
+      <div className="w-full lg:w-auto">
+        <div className="flex w-full lg:w-auto items-center justify-between lg:justify-start gap-x-1 lg:gap-x-[0.5vw]">
 
         <button
               onClick={() => handleSaveClick(lotID)}
-              className="text-[16px] lg:text-18 font-semibold flex border items-center gap-2 lg:gap-[0.5vw] px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] rounded-lg transition bg-gray-100 hover:bg-gray-200 text-gray-800"
+              className="text-[12px] lg:text-18 font-semibold flex border items-center gap-2 lg:gap-[0.5vw] px-2 lg:px-[1vw] py-1 lg:py-[0.5vw] rounded-lg transition bg-gray-100 hover:bg-gray-200 text-gray-800"
               >
               {isCarSaved && user ? (
                 <BsHeartFill className=" text-red-500" />
@@ -73,14 +71,12 @@ const VehicleTitleInfo = ({ currentStatus, title, baseSite, handleSaveClick, use
         <button
           title="Copy URL"
           onClick={handleCopy}
-          className=" bg-blue-500 hover:bg-blue-600 text-white px-[1.25vw] py-[0.5vw] rounded-[0.5vw]"
+          className=" text-[12px] lg:text-18 bg-blue-500 hover:bg-blue-600 text-white gap-2 lg:gap-[0.5vw] px-2 lg:px-[1vw] py-1 lg:py-[0.5vw] rounded-[0.5vw]"
         >
           <FaLink className="lg:text-[1vw]" />
         </button>
 
-        </div>
-
-     
+        </div>  
       </div>
       
     </div>
