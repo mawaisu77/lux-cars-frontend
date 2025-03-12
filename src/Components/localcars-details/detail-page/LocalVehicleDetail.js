@@ -22,14 +22,47 @@ import {
 } from "../../../hooks/useGetAllBidsOnLocalCars";
 import SimilarCars from "./similarCars";
 import { useFunds } from "../../../context/FundsContext";
+import useSaveLocalCar from "../../../hooks/useSaveLocalCar";
+import useDeleteSaveLocalCar from "../../../hooks/useDeleteSaveLocalCar";
+import { useSavedLocalCars } from "../../../context/SavedLocalCarsIdscontext";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
+import SignInModal from "../../vehicle/Vehicle-page/modals/SignInModal";
+import LoginModal from "../../modals/LoginModal";
+import BidConfirmationModal from "./BidConfirmationModal";
+import usePlaceLocalCarBid from "../../../hooks/usePlaceLocalCarBid";
 
 const LocalVehicleDetail = () => {
   const { id } = useParams();
   const {  fetchFunds } = useFunds(); 
+  const { handleSaveLocalCar } = useSaveLocalCar();
+  const { deleteSavedLocalCar } = useDeleteSaveLocalCar();
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isBidModalOpen, setIsBidModalOpen] = useState(false);
+  const [isCarSaved, setIsCarSaved] = useState(false);
+ 
+  const [allBids, setAllBids] = useState(null);
+  const [shouldRefetch, setShouldRefetch] = useState(false);
 
+  const { user } = useAuthContext();
 
   const { carDetailData, carDetailLoading, carDetailError, fetchCarDetail } =
     useGetLocalCarDetail(`local-cars/get-car?id=${id}`);
+
+    const [bidAmount, setBidAmount] = useState(() => {
+      const currentBid = carDetailData?.data?.car?.currentBid || 0;
+      return currentBid + 500;
+    });
+    const { savedIds, loading, error, refetchSavedIds } = useSavedLocalCars();
+
+    const { placeBid, placebidLoading, placeBiderror, placeBidSuccess } =
+    usePlaceLocalCarBid();
+
+
+  
+    useEffect(() => {
+      setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(id)));
+    }, [savedIds, id]);
 
   useEffect(() => {
     fetchCarDetail();
@@ -49,7 +82,7 @@ const LocalVehicleDetail = () => {
     targetTime && (days > 0 || hours > 0 || minutes > 0 || seconds > 0);
 
 
-    const getTimeDifference = () => {
+  const getTimeDifference = () => {
       if (!carDetailData?.data?.car?.auction_date) return null;
     
       const auctionDate = new Date(carDetailData.data.car.auction_date);
@@ -64,34 +97,8 @@ const LocalVehicleDetail = () => {
       if (diffInMinutes > 60) return null;
     
       return `Live in ${diffInMinutes} ${diffInMinutes === 1 ? 'minute' : 'minutes'}`;
-    };
-    
-
-  const [bidAmount, setBidAmount] = useState(0);
-
-  let placingBidResponse = null;
-
-  const handlePlaceMaxBid = async () => {
-    if (bidAmount <= carDetailData?.data?.car?.currentBid) {
-      showToast("Your Bidding Amount Is Less Than Current Bid", "error");
-    } else {
-      placingBidResponse = await placeBidOnLocalCar({
-        localCarID: carDetailData?.data?.car?.id,
-        currentBid: bidAmount,
-      });
-      if (placingBidResponse.status === 201) {
-        fetchFunds();
-        setBidAmount(0);
-        fetchCarDetail();
-        showToast("Your Bid Is Added Successfully", "success");
-      } else {
-        setBidAmount(0);
-        showToast("Sorry, There is a error in adding you bid", "error");
-      }
-    }
   };
-
-  const [allBids, setAllBids] = useState(null);
+    
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -107,9 +114,101 @@ const LocalVehicleDetail = () => {
     fetchData();
   }, [carDetailData]);
 
+
+  useEffect(() => {
+    if (shouldRefetch) {
+      fetchCarDetail();
+      setShouldRefetch(false);
+    }
+  }, [shouldRefetch, fetchCarDetail]);
+
+    useEffect(() => {
+    if (placeBidSuccess) {
+      setShouldRefetch(true);
+      toast.success("Bid has been placed successfully");
+      document.getElementById("local_bid_modal").close();
+    }
+
+    if (placeBiderror) {
+      toast.error(placeBiderror);
+    }
+  }, [placebidLoading, placeBidSuccess, placeBiderror]);
+
+  useEffect(() => {
+    if (carDetailData?.data?.car?.currentBid) {
+      setBidAmount(carDetailData?.data?.car?.currentBid + 500);
+    }
+  }, [carDetailData?.data?.car?.currentBid]);
+
+ const handleSaveClick = (id) => {
+    const stringLotId = String(id);
+
+    if (!user) {
+      setLoginModalOpen(true);
+      return;
+    }
+
+    if (isCarSaved) {
+      setIsCarSaved(false);
+
+      deleteSavedLocalCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          alert("Car unsaved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(true);
+          alert("Failed to unsave car. Please try again.");
+        });
+    } else {
+      setIsCarSaved(true);
+      handleSaveLocalCar(stringLotId)
+        .then(() => {
+          refetchSavedIds();
+          toast.success("Car saved successfully");
+        })
+        .catch(() => {
+          setIsCarSaved(false);
+          toast.error("Failed to save car. Please try again.");
+        });
+    }
+  };
+
+
   const currentStatus = statusOptions.find(
     (option) => option.id === carDetailData?.data?.car?.titlesStatus
   );
+
+
+  // const handlePlaceMaxBid = async () => {
+  //   if (bidAmount <= carDetailData?.data?.car?.currentBid) {
+  //     showToast("Your Bidding Amount Is Less Than Current Bid", "error");
+  //   } else {
+  //     setIsBidModalOpen(true);
+  //   }
+  // };
+
+  const handleBidPlace = async () => {
+    await placeBid({ id: carDetailData?.data?.car?.id, currentBid: bidAmount });
+    await fetchFunds()
+  };
+
+
+  const handlePlaceBid = () => {
+    if (!user) {
+      document.getElementById("sign_in_modal").showModal(); 
+    } else {
+      document.getElementById("local_bid_modal").showModal();
+    }
+  };
+
+  const closeLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+
+  const handleCloseBidModal = () => {
+    document.getElementById("local_bid_modal").close();
+  };
 
   return (
     <>
@@ -163,7 +262,7 @@ const LocalVehicleDetail = () => {
               <section className="bg-white p-[1.5vw] my-4 rounded-lg shadow-md">
                 <h2 className="text-xl lg:text-[1.2vw] font-semibold bg-gray-300 mb-[2.1vh] border-b-2 border-gray-200 p-[0.5vw] rounded-[0.4vw]">
                   Vehicle Info 
-                </h2>
+                </h2>  
                 <div className="space-y-[2vh] text-sm lg:text-[0.875vw]">
                   <InfoRow
                     label="Title"
@@ -253,9 +352,21 @@ const LocalVehicleDetail = () => {
                       </div>
                     )}
                     <p className="lg:text-[1.7vw] mt-[10] font-urbanist font-semibold ">
-                      {carDetailData?.data?.car?.make}{" "}
+                      {carDetailData?.data?.car?.make}
                       {carDetailData?.data?.car?.model}
                     </p>
+                    <div className="flex items-center gap-x-2 lg:gap-x-[0.5vw]">
+
+                    <button
+                      onClick={() => handleSaveClick(id)}
+                      className="text-[12px] lg:text-18 font-semibold flex border items-center gap-2 lg:gap-[0.5vw] px-2 lg:px-[1vw] py-1 lg:py-[0.5vw] rounded-lg transition bg-gray-100 hover:bg-gray-200 text-gray-800"
+                      >
+                      {isCarSaved && user ? (
+                        <BsHeartFill className=" text-red-500" />
+                      ) : (
+                        <BsHeart className=" text-gray-500" />
+                      )}
+                  </button>
                     <button
                       title="Copy URL"
                       onClick={() =>
@@ -265,21 +376,11 @@ const LocalVehicleDetail = () => {
                     >
                       <FaLink className="lg:text-20" />
                     </button>
+                    </div>
+
                   </div>
                 </div>
-                {/* <div className="flex justify-between bg-black rounded-[0.5vw] p-2 lg:mb-[2vh]">
-                  <div className="flex justify-between w-full  items-center ">
-                    <div className="font-urbanist bg-yellow-500/30 px-[1vw] py-[0.2vw] rounded-[0.5vw] font-semibold flex gap-x-2">
-                      <span className=" text-black">Buy now price</span>
-                      <span className="text-green-600 font-semibold">
-                        {carDetailData?.data?.car?.buyNowPrice
-                          ? `$${carDetailData?.data?.car?.buyNowPrice}`
-                          : "Not Available"}
-                      </span>
-                    </div>
-                    
-                  </div>
-                </div> */}
+
                 <div className="flex gap-2 flex-col lg:flex-row justify-between   mb-[3vh]">
                   <div className="flex px-[0.5vw] gap-2 lg:gap-[0.5vw] items-center lg:w-[16vw] lg:h-[6.7vh] rounded-[0.5vw] bg-white">
                     <div className="flex justify-center items-center rounded-lg lg:rounded-[0.5vw] p-2 lg:w-[2.5vw] lg:h-[5vh] bg-[#CA0000]">
@@ -410,17 +511,18 @@ const LocalVehicleDetail = () => {
                        placeholder="enter your bid ammount in USD"
                        prefix="$"
                        className={`border lg:text-[1vw] py-[0.9vh] px-[1vw] rounded-[0.5vw] w-full mt-[1.5vh] bg-white`}
-                       defaultValue={0}
+                       defaultValue={carDetailData?.data?.car?.currentBid ? carDetailData?.data?.car?.currentBid + 500 : 500}
                        decimalsLimit={2}
                        value={bidAmount}
                        onValueChange={(value) => setBidAmount(value)}
-                       disabled={!ValidDate}
+                       allowNegativeValue={false}
+                       maxLength={12}
                      />
                    </div>
                    <button
                      disabled={!ValidDate}
                      className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-red-600 hover:bg-red-700 w-full"
-                     onClick={handlePlaceMaxBid}
+                     onClick={handlePlaceBid}
                    >
                      <TiLockClosed className="lg:w-[1.3vw] lg:h-[2.8vh]" />
                      <span className="text-md lg:text-[1.1vw]">
@@ -528,6 +630,20 @@ const LocalVehicleDetail = () => {
           />
         </div>
       )}
+     <LoginModal
+        isOpen={isLoginModalOpen && !user}
+        onClose={closeLoginModal}
+      />
+       <SignInModal
+        closeModal={() => document.getElementById("sign_in_modal").close()}
+      />
+      <BidConfirmationModal 
+        isLoading={placebidLoading}
+        onBidPlace={handleBidPlace}
+        onClose={handleCloseBidModal}
+        bidAmount={bidAmount || 10}
+     
+      />
     </>
   );
 };

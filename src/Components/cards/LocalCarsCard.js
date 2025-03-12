@@ -4,21 +4,14 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import "swiper/css";
-import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import ImageModal from "./ImageModal";
-import { LuxLogoWhite } from "../../utils/constant";
 import useTimer from "../../hooks/useTimer";
-import { BsFire } from "react-icons/bs";
-import { MdNotInterested } from "react-icons/md";
-import { FaHourglassHalf } from "react-icons/fa";
 import { useSavedLocalCars } from "../../context/SavedLocalCarsIdscontext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import useSaveLocalCar from "../../hooks/useSaveLocalCar";
 import useDeleteSaveLocalCar from "../../hooks/useDeleteSaveLocalCar";
 import LoginModal from "../modals/LoginModal";
 import bidCaribbeansLogo from "../../assets/lux-logo/logo-tag.png"
-import { RxCopy } from "react-icons/rx";
-import { toast } from "react-toastify";
 import { statusOptions } from "../../utils/filtersData/statusOptions";
 import { PiTimerBold } from "react-icons/pi";
 import bidcaribbeansLogo from  "../../assets/lux-logo/logo-tag.png" 
