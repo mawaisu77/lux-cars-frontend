@@ -14,6 +14,7 @@ import { useSavedLocalCars } from "../../../context/SavedLocalCarsIdscontext";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { CiLocationOn } from "react-icons/ci";
 import PreviousBids from "./tables/PreviousBids";
+import SwiperMobView from "./ui/SwiperMobView";
 
 const BidDetails = ({
   liveCar,
@@ -221,9 +222,16 @@ const BidDetails = ({
         <div className="lg:flex  gap-x-4 md:gap-[0.6vw] ">
           {/* Left side - Image gallery */}
           {car?.carImages && (
-            <div className="lg:w-[25%]  w-full">
+            <>
+            <div className="lg:w-[25%] lg:block hidden w-full">
               <VerticleSwiper images={car?.carImages} />
             </div>
+            <div className="lg:w-[25%] lg:hidden w-full">
+              {/* <VerticleSwiper images={car?.carImages} /> */}
+              <SwiperMobView images={car?.carImages} />
+            </div>
+            </>
+
           )}
 
           {/* Right side - Bidding interface */}
