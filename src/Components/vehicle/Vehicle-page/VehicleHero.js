@@ -107,7 +107,7 @@ const VehicleHero = () => {
 
   const handlePlaceBid = () => {
     if (!user) {
-      document.getElementById("sign_in_modal").showModal(); // Show sign-in modal if not authenticated
+      document.getElementById("sign_in_modal").showModal(); 
     } else {
       document.getElementById("my_modal_2").showModal();
     }
@@ -115,7 +115,7 @@ const VehicleHero = () => {
 
   const handlePlaceBuyNow = () => {
     if (!user) {
-      document.getElementById("sign_in_modal").showModal(); // Show sign-in modal if not authenticated
+      document.getElementById("sign_in_modal").showModal(); 
     } else {
       document.getElementById("buy_now_modal").showModal();
     }
@@ -228,7 +228,6 @@ const VehicleHero = () => {
     }
   };
 
-
   const currentStatus = statusOptions.find(
     (option) => option.id === carDetailData?.data?.status
   );
@@ -245,8 +244,6 @@ const VehicleHero = () => {
   const closeLoginModal = () => {
     setLoginModalOpen(false);
   };
-
-
 
   return (
     <div className="bg-gray-100">
@@ -493,12 +490,14 @@ const VehicleHero = () => {
       <CopyURLModal
         closeModal={() => document.getElementById("copy_url_modal").close()}
       />
+
       <BidModal
         isLoading={placebidLoading}
         onBidPlace={handleBidPlace}
         onClose={handleCloseModal2}
         placeBidAmount={placeBidAmount}
       />
+
       <BuyNowModal
        isLoading={placebidLoading}
        onBidPlace={() => handleBuyNowBid(carDetailData?.data?.price_new)}
