@@ -80,11 +80,11 @@ const HistoryCard = ({ card, isBuy = false }) => {
       <div
         onMouseEnter={() => handleMouseEnter(card.id)}
         onMouseLeave={() => handleMouseLeave(card.id)}
-        className="swiper-card rounded-[10px] shadow-sm  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
+        className="swiper-card shadow-md  rounded-[10px]  sm:rounded-[1.042vw] p-[8px] sm:p-[1.042vw] w-full hover:shadow-inner-lg duration-300 bg-white"
       >
         <div className=" relative w-full ">
           <div className="w-full relative sm:text-24 md:text-16 z-10">
-          <div className=" h-[15px] md:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw] ">
+          <div className=" h-[28px] sm:h-[2.5vw] z-50 absolute bottom-[0vw] left-[0vw]">
                 <img 
                   src={bidCaribbeansLogo} 
                   alt="bidcaribbeanslogo"
@@ -94,7 +94,7 @@ const HistoryCard = ({ card, isBuy = false }) => {
           
             <Swiper
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
-              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[240px] sm:h-[22vw] md:h-[12vw] "
+              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[120px] md:h-[12vw] lg:h-[12vw] "
               autoplay={{
                 delay: 1000,
                 disableOnInteraction: false,

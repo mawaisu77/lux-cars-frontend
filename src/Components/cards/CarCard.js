@@ -21,7 +21,7 @@ import { statusOptions } from "../../utils/filtersData/statusOptions";
 import bidCaribbeansLogo from "../../assets/lux-logo/logo-tag.png";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
-
+ 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 const CarCard = ({ card, isBuy = false }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -142,8 +142,6 @@ const CarCard = ({ card, isBuy = false }) => {
     (option) => option.id === card?.status
   );
 
-  console.log("<<<<====|====>>>>",currentStatus)
-
   return (
     <>
       <div
@@ -185,7 +183,7 @@ const CarCard = ({ card, isBuy = false }) => {
 
             <Swiper
               onSwiper={(swiper) => initializeSwiper(swiper, card.id)}
-              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[120px] md:h-[12vw] lg:h-[12vw]  "
+              className="relative rounded-[10px] sm:rounded-[1.2625vw] h-[120px] md:h-[12vw] lg:h-[12vw] "
               autoplay={{
                 delay: 1000,
                 disableOnInteraction: false,

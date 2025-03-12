@@ -5,11 +5,13 @@ import Select from "react-select";
 import { RegionDropdown } from "react-country-region-selector";
 import { showToast } from "../../../utils/Toast";
 import Slider from "@mui/material/Slider";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LocalSearchSidebar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
-  const location = useLocation(); // Get the current location
   const { carLocationState, carLocationCountry } = location.state || {}; // Extract carLocation from state
 console.log("carLocasdsdsbdsvdnvsdnsbduntry", carLocationState, carLocationCountry)
   const option = useMemo(() => [
@@ -26,20 +28,24 @@ console.log("carLocasdsdsbdsvdnvsdnsbduntry", carLocationState, carLocationCount
   const [showLocation, setShowLocation] = useState(carLocationState !== null);
   const [vehicles, setVehicles] = useState(null);
   const [showtitlesStatus, setShowtitlesStatus] = useState(null);
-  const [selectedFilters, setSelectedFilters] = useState({
-    make: "",
-    model: "",
-    yearFrom: null,
-    yearTo: null,
-    milageFrom: "",
-    milageTo: "",
-    transmission: [],
-    titlesStatus:[],
-    carLocation: carLocationCountry,
-    carState: carLocationState,
-    buyNowPrice: false, 
-    minPrice: false,  
-  });
+
+  // Initialize filters from URL parameters
+  const initialFilters = {
+    make: queryParams.get("make") || "",
+    model: queryParams.get("model") || "",
+    yearFrom: queryParams.get("yearFrom") || null,
+    yearTo: queryParams.get("yearTo") || null,
+    milageFrom: queryParams.get("milageFrom") || "",
+    milageTo: queryParams.get("milageTo") || "",
+    transmission: queryParams.getAll("transmission") || [],
+    titlesStatus: queryParams.getAll("titlesStatus") || [],
+    carLocation: queryParams.get("carLocation") || carLocationCountry,
+    carState: queryParams.get("carState") || carLocationState,
+    buyNowPrice: queryParams.get("buyNowPrice") === "true",
+    minPrice: queryParams.get("minPrice") === "true",
+  };
+
+  const [selectedFilters, setSelectedFilters] = useState(initialFilters);
 
   const [pageNo, setPageNo] = useState(1);
   const [totalCars, setTotalCars] = useState(0);
@@ -94,26 +100,39 @@ console.log("carLocasdsdsbdsvdnvsdnsbduntry", carLocationState, carLocationCount
     fetchData();
   }, [pageNo]);
 
+  const updateURL = (filters) => {
+    const params = new URLSearchParams();
+    Object.keys(filters).forEach((key) => {
+      if (Array.isArray(filters[key])) {
+        filters[key].forEach((value) => params.append(key, value));
+      } else if (filters[key] !== "" && filters[key] !== null) {
+        params.append(key, filters[key]);
+      }
+    });
+    navigate({ search: params.toString() });
+  };
+
   const handleFilterChange = (filterName, value) => {
     setSelectedFilters((prev) => {
-      if (Array.isArray(prev[filterName])) {
-        return {
-          ...prev,
-          [filterName]: prev[filterName].includes(value)
-            ? prev[filterName].filter((item) => item !== value)
-            : [...prev[filterName], value],
-        };
-      } else {
-        return { ...prev, [filterName]: value };
-      }
+      const updatedFilters = Array.isArray(prev[filterName])
+        ? {
+            ...prev,
+            [filterName]: prev[filterName].includes(value)
+              ? prev[filterName].filter((item) => item !== value)
+              : [...prev[filterName], value],
+          }
+        : { ...prev, [filterName]: value };
+      updateURL(updatedFilters);
+      return updatedFilters;
     });
   };
 
   const handleCheckboxChange = (filterName) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [filterName]: !prev[filterName],
-    }));
+    setSelectedFilters((prev) => {
+      const updatedFilters = { ...prev, [filterName]: !prev[filterName] };
+      updateURL(updatedFilters);
+      return updatedFilters;
+    });
   };
 
   const [milageError, setMilageError] = useState("");

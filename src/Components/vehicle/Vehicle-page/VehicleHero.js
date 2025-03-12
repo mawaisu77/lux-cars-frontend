@@ -39,9 +39,8 @@ import { useFunds } from "../../../context/FundsContext";
 import { useSavedCars } from "../../../context/SavedCarIdsContext";
 import useSaveCar from "../../../hooks/useSaveCar";
 import useDeleteSaveCar from "../../../hooks/useDeleteSaveCar";
-
-
-
+import BuyNowModal from "./modals/BuyNowModal";
+import LoginModal from "../../modals/LoginModal";
 
 const VehicleHero = () => {
   const { lotID } = useParams();
@@ -53,6 +52,8 @@ const VehicleHero = () => {
   const { handleSaveCar } = useSaveCar();
   const { deleteSavedCar } = useDeleteSaveCar();
   const { savedIds, refetchSavedIds } = useSavedCars();
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+
 
 
 
@@ -106,9 +107,17 @@ const VehicleHero = () => {
 
   const handlePlaceBid = () => {
     if (!user) {
-      document.getElementById("sign_in_modal").showModal(); // Show sign-in modal if not authenticated
+      document.getElementById("sign_in_modal").showModal(); 
     } else {
       document.getElementById("my_modal_2").showModal();
+    }
+  };
+
+  const handlePlaceBuyNow = () => {
+    if (!user) {
+      document.getElementById("sign_in_modal").showModal(); 
+    } else {
+      document.getElementById("buy_now_modal").showModal();
     }
   };
 
@@ -116,14 +125,21 @@ const VehicleHero = () => {
     document.getElementById("my_modal_2").close();
   };
 
+  const handleCloseModal3 = () => {
+    document.getElementById("buy_now_modal").close();
+  };
+
   const handleBidPlace = async () => {
-  
       const placeBidAmountConvert = parseInt(placeBidAmount, 10);
       await placeBid({ lot_id: lotID, currentBid: placeBidAmountConvert });
       await fetchFunds()
-
- 
   };
+
+  const handleBuyNowBid = async (buynowprice) => {
+    await placeBid({ lot_id: lotID, currentBid: buynowprice });
+    await fetchFunds()
+};
+
 
   const targetTime = useMemo(
     () =>
@@ -183,7 +199,7 @@ const VehicleHero = () => {
     const stringLotId = String(lot_id);
 
     if (!user) {
-      document.getElementById("sign_in_modal").showModal();
+      setLoginModalOpen(true);
       return;
     }
 
@@ -212,7 +228,6 @@ const VehicleHero = () => {
     }
   };
 
-
   const currentStatus = statusOptions.find(
     (option) => option.id === carDetailData?.data?.status
   );
@@ -226,6 +241,9 @@ const VehicleHero = () => {
       option.id.toLowerCase() === carDetailData?.data?.document_old?.toLowerCase()
   );
 
+  const closeLoginModal = () => {
+    setLoginModalOpen(false);
+  };
 
   return (
     <div className="bg-gray-100">
@@ -274,23 +292,19 @@ const VehicleHero = () => {
             <span>{history?.data?.length}</span>
           </button>
           </div>
-          
-                    
+                         
              {showSalesHistory && <SalesHistory history={history?.data} />}
 
-     
-            
-              <div className="flex flex-col lg:flex-row justify-between mx-auto max-w-[95%] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
+              <div className="flex flex-col lg:flex-row justify-between mx-auto w-[95%] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
                 <div className="w-full lg:w-[48%]">
-                  <div className="w-full lg:h-[40vw] ">
+                  <div className="w-full ">
                   <SwiperGallery
-                  
                     images={carDetailData?.data?.link_img_hd}
                     carData={carDetailData?.data}
                   />
                   </div>
-                  <AnchorLink href="#get_report">
-                  <div className="flex justify-between  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
+                  <AnchorLink href="#get_report-mobile" className="block lg:hidden">
+                  <div className="flex justify-between my-2 lg:my-0  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
                     <div className="flex justify-center items-center gap-1 lg:gap-[0.25vw]">
                       <IoDocumentTextOutline />
                       <p>Get Report</p>
@@ -298,6 +312,17 @@ const VehicleHero = () => {
                     <BsDownload className="cursor-pointer" />
                   </div>
                   </AnchorLink>
+
+                  <AnchorLink href="#get_report-web" className="hidden lg:block my-2">
+                  <div className="flex justify-between my-2 lg:my-0  px-2 items-center w-full border text-primary-red border-primary-red md:text-[1.04vw] h-[4.7vh] rounded-lg">
+                    <div className="flex justify-center items-center gap-1 lg:gap-[0.25vw]">
+                      <IoDocumentTextOutline />
+                      <p>Get Report</p>
+                    </div>
+                    <BsDownload className="cursor-pointer" />
+                  </div>
+                  </AnchorLink>
+
                  <div className="hidden lg:block">
                  <VehicleDetailInfo
                   
@@ -391,6 +416,7 @@ const VehicleHero = () => {
 
                   {carDetailData?.data?.is_buynow && (
                     <button
+                    onClick={handlePlaceBuyNow}
                       className={`flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full`}
                     >
                       <>
@@ -414,7 +440,7 @@ const VehicleHero = () => {
                     />
                   </div>
 
-                  <div  id="get_report" className="hidden lg:block flex-col justify-center max-w-[700px] gap-y-4">
+                  <div  id="get_report-web" className="hidden lg:block flex-col justify-center max-w-[700px] gap-y-4">
                     <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
                   </div>
                   <div className="lg:hidden block">
@@ -426,7 +452,7 @@ const VehicleHero = () => {
                   salesHistoryCount={history?.data?.length}
                 />
                  </div>
-                 <div  id="get_report" className="flex lg:hidden  flex-col justify-center max-w-[700px] gap-y-4">
+                 <div  id="get_report-mobile" className="flex lg:hidden  flex-col justify-center max-w-[700px] gap-y-4">
                     <CarReportViewer vin={carDetailData?.data.vin || "N/A"} />
                   </div>
                 </div>
@@ -454,17 +480,29 @@ const VehicleHero = () => {
         </div>
       )}
 
+     <LoginModal
+        isOpen={isLoginModalOpen && !user}
+        onClose={closeLoginModal}
+      />
       <SignInModal
         closeModal={() => document.getElementById("sign_in_modal").close()}
       />
       <CopyURLModal
         closeModal={() => document.getElementById("copy_url_modal").close()}
       />
+
       <BidModal
         isLoading={placebidLoading}
         onBidPlace={handleBidPlace}
         onClose={handleCloseModal2}
         placeBidAmount={placeBidAmount}
+      />
+
+      <BuyNowModal
+       isLoading={placebidLoading}
+       onBidPlace={() => handleBuyNowBid(carDetailData?.data?.price_new)}
+       onClose={handleCloseModal3}
+       placeBuyAmount={carDetailData?.data?.price_new}
       />
     </div>
   );

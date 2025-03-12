@@ -306,8 +306,8 @@ const Dropdown = ({ bidAmount, data }) => {
   return (
     <div className="relative tracking-wider space-y-2 bg-white w-full mx-auto mt-[5.4vh] font-urbanist shadow-sm rounded-[0.5vw] p-[1.5vw]">
       <div className=" p-[1.5vw] rounded-[0.5vw] shadow-sm  border border-gray-200">
-        <h3 className="text-md sm:text-xl lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
-          <BiCalculator className="lg:w-[1.25vw] lg:h-[1.25vw]" />
+        <h3 className="text-lg lg:text-[1.25vw] font-semibold text-gray-900 mb-[2.1vh] flex items-center gap-x-2">
+          <BiCalculator className="w-8 lg:w-[1.25vw] h-8 lg:h-[1.25vw]" />
           Fees and Calculations (Estimated)
         </h3>
         <div className="space-y-3 md:space-y-[1.5vw]">
@@ -390,8 +390,8 @@ const Dropdown = ({ bidAmount, data }) => {
             <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
                 <span className="text-xs sm:text-sm lg:text-[0.75vw]">4</span>
               </div>
-              <div className="flex flex-col text-left lg:flex-row lg:items-center gap-1">
-              <span className="text-xs sm:text-sm md:text-20 text-left text-gray-700">
+              <div className="flex    flex-col text-left lg:flex-row lg:items-center gap-1">
+              <span className="text-xs flex items-center sm:text-sm md:text-20 text-left text-gray-700">
                 Inspection After Auction: (Optional)
                 <div className="text-sm md:text-20 mr-2 lg:mr-0 mt-1 lg:mt-0 text-gray-700 flex">
                 <TooltipInfo content="Inspection report to understand the repairs needed before shipping the vehicle to the Bahamas">
@@ -562,7 +562,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 {selectedLocation === "Turks"? "7":"8"}
                 </span>
               </div>
-             <div className="lg:flex lg:items-center lg:gap-2" >
+             <div className="flex lg:items-center gap-2" >
              <span className="text-xs sm:text-sm md:text-20 text-gray-700">
                 Environmental Levy Fee: (flat)
               </span>
