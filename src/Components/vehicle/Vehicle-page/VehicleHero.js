@@ -280,7 +280,7 @@ const VehicleHero = () => {
 
      
             
-              <div className="flex flex-col lg:flex-row justify-between mx-auto max-w-[90vw] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
+              <div className="flex flex-col lg:flex-row justify-between mx-auto max-w-[95%] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
                 <div className="w-full lg:w-[48%]">
                   <div className="w-full lg:h-[40vw] ">
                   <SwiperGallery
