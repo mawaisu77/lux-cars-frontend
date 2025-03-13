@@ -7,7 +7,7 @@ const SalesHistory = ({history}) => {
  
     
   return (
-    <div className="w-full mx-auto max-w-[85vw]">
+    <div className="w-full mx-auto ">
     <div className="flex items-center  gap-2 p-[0.5vw] bg-white">
       <BiTrendingUp className="  text-gray-600 lg:w-[1vw] lg:h-[1vw]" />
       <h2 className="lg:text-[1vw] font-semibold text-gray-700">Sales History</h2>

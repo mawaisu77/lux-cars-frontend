@@ -158,7 +158,7 @@ const Navbar = () => {
                 </p>
               </div>
               <button
-                    className={`flex  justify-between gap-x-2 items-center  focus:outline-none bg-text-white  px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-md lg:rounded-full bg-white text-primary-red text-xs lg:text-18 duration-200`}
+                    className={`flex  justify-between gap-x-2 items-center  focus:outline-none bg-text-white  px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-md lg:rounded-full bg-white/80 text-primary-red text-xs lg:text-18 duration-200`}
                   >
                     <span className="text-primary-red text-nowrap">
                     Remaining: ${remainingFunds} ({percentageRemaining}% )
@@ -168,12 +168,12 @@ const Navbar = () => {
                <div className=" lg:w-[20%]  lg:hidden">
               <div className=" flex gap-x-2 justify-start  items-start  ">
                 <Link to={'/user/account/saved-cars'} className="">
-                  <button className="text-[12px]  text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[6px]  py-[3px]  border border-white rounded-full">
+                  <button className="text-[12px]  text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[6px]  py-[4px]  border border-white rounded-lg">
                     My Favourites 
                   </button>
                 </Link>
                 <Link to={'/user/account/local-cars'} className="">
-                  <button className="text-[12px]  text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[6px]  py-[3px]  border border-white rounded-full">
+                  <button className="text-[12px]  text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[6px]  py-[4px]  border border-white rounded-lg">
                     My Local Cars 
                   </button>
                 </Link>

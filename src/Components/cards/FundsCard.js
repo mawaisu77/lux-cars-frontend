@@ -63,12 +63,12 @@ const FundsCard = ({fund}) => {
             >
               {item.icon}
             </div>
-            <p className='text-[21px] overflow-hidden text-ellipsis lg:text-[1.3vw] font-urbanist text-nowrap font-semibold'>
+            <p className='text-[16px] overflow-hidden text-ellipsis lg:text-[1.3vw] font-urbanist text-nowrap font-semibold'>
               {item.States}
             </p>
           </div>
           <div className='text-left px-4'>
-            <p className='text-[21px] lg:text-[1.2vw] font-urbanist font-semibold'>
+            <p className='text-[16px] lg:text-[1.2vw] font-urbanist font-semibold'>
               {item.Amount}
             </p>
           </div>

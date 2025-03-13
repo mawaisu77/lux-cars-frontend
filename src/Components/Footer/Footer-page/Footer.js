@@ -34,7 +34,7 @@ const Footer = () => {
     {
       heading: "Companies",
       items: [
-        { text: "About us", link: "/about" },
+        { text: "About us", link: "/about-us" },
         { text: "Contact us", link: "/contact-us" },
         { text: "Our blogs", link: "/" },
         { text: "Discover", link: "/" },

@@ -63,9 +63,9 @@ const VehicleHero = () => {
   const {history, loading, error, fetchHistory} = useGetCarHistory(lotID);
 
   const [placeBidAmount, setPlaceBidAmount] = useState(0);
-  const [showSalesHistory, setShowSalesHistory] = useState(false); // State to manage sales history visibility
+  const [showSalesHistory, setShowSalesHistory] = useState(false); 
   const toggleSalesHistory = () => {
-    setShowSalesHistory((prev) => !prev); // Toggle sales history visibility
+    setShowSalesHistory((prev) => !prev); 
   };
 
   const { placeBid, placebidLoading, placeBiderror, placeBidSuccess } =
@@ -246,7 +246,7 @@ const VehicleHero = () => {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 ">
       <div className="lg:block hidden bg-vehicle">
         <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
@@ -284,8 +284,8 @@ const VehicleHero = () => {
                 <AuctionDateNotDecidedMessage />
               )}
 
-          <div className="m-[0.25vw] p-[0.25vw] w-full mx-auto flex mt-10 lg:mt-0 bg-white max-w-[85vw]">
-          <button onClick={toggleSalesHistory} className="py-[0.5vw] px-[0.75vw] border text-[1vw] flex items-center justify-center gap-x-1">
+          <div className="lg:m-[0.25vw] lg:p-[0.25vw] mx-auto mt-[60px] bg-white w-[90vw] lg:w-[85vw]">
+          <button onClick={toggleSalesHistory} className="lg:py-[0.5vw] py-2 px-4 lg:px-[0.75vw] border text-[14px] lg:text-[1vw] flex items-center justify-center gap-x-1">
             <span>
             {showSalesHistory ? "Sales History" : "Sales History"}
             </span>
@@ -293,9 +293,11 @@ const VehicleHero = () => {
           </button>
           </div>
                          
+          <div className="mx-auto w-[90vw] lg:w-[85vw] mb-4">
              {showSalesHistory && <SalesHistory history={history?.data} />}
+           </div>
 
-              <div className="flex flex-col lg:flex-row justify-between mx-auto w-[95%] sm:max-w-[85vw] mt-[100px] lg:mt-[10px]">
+              <div className="flex flex-col lg:flex-row justify-between mx-auto w-[95%] sm:max-w-[85vw]">
                 <div className="w-full lg:w-[48%]">
                   <div className="w-full ">
                   <SwiperGallery

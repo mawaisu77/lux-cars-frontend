@@ -26,9 +26,9 @@ const Funds = () => {
           <p className="text-[24px] md:text-[36px] lg:text-[2.3vw] text-left lg:text-left font-urbanist font-bold">
             My Funds
           </p>
-          <div className="flex justify-end lg:justify-center gap-3 relative">
+          <div className="flex justify-end lg:justify-center gap-x-1 md:gap-x-2 lg:gap-3 relative">
           <button
-              className="w-[110px] lg:w-[11vw] h-[36px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[13px] lg:text-[1vw] font-urbanist"
+              className="w-[90px] md:w-[110px] lg:w-[11vw] h-[36px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[13px] lg:text-[1vw] font-urbanist"
               onClick={() => setOpenModalRefund(true)}
 
             >
@@ -36,7 +36,7 @@ const Funds = () => {
             </button>
             <button
               onClick={() => setOpenModal(true)}
-              className="w-[110px] lg:w-[11vw] h-[36px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[13px] lg:text-[1vw] font-urbanist"
+              className="w-[90px] md:w-[110px] lg:w-[11vw] h-[36px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[13px] lg:text-[1vw] font-urbanist"
             >
               Add Deposite
             </button>
