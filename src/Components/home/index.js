@@ -35,7 +35,7 @@ const Home = () => {
     <Top/>
     <BidCarsSection />
     <Makes/>
-     <BuyNow/>
+    <BuyNow/>
     {/* <LocalOfferz/> */}
     <BidNow/>
     <LocalCars />

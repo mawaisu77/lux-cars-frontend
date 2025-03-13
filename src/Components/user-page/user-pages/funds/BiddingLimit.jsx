@@ -182,7 +182,7 @@ export default function BiddingLimit({
 
   return (
     <>
-      <div className=" w-full lg:max-w-[84vw] mx-auto p-6 lg:p-[1.5vw] md:p-[1.25vw] font-sans">
+      <div className=" w-full lg:max-w-[84vw] mx-auto p-3 lg:p-[1.5vw] md:p-[1.25vw] font-sans">
         <h1 className="text-xl md:text-30 font-bold mb-4 md:mb-[0.833vw]">
           Increase My Bidding Limit
         </h1>

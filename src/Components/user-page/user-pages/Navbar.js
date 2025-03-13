@@ -92,7 +92,7 @@ const Navbar = () => {
   };
   return (
     <>
-     <div className="Account-image">
+     <div className="hidden lg:block Account-image">
         <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
             Account 
@@ -111,9 +111,7 @@ const Navbar = () => {
         </div>
       </div>
 
-
-
-      <div className="w-[90%] lg:w-[84vw] h-auto lg:mt-[7vh] mx-auto  bg-[#f8f8f8] rounded-2xl">
+      <div className="w-[90vw] lg:w-[85vw] h-auto mt-[100px] lg:mt-[7vh] mx-auto bg-[#f8f8f8] rounded-2xl">
         <div className=" flex p-1 sm:p-2 md:p-4 lg:p-[1vw] flex-col lg:flex-row justify-center lg:justify-between  bg-[#000000]/70 rounded-t-2xl">
           <div className="flex flex-col items-start lg:items-center font-urbanist lg:flex-row lg:ml-[2.2vw]  lg:w-[80%] ">
             <div className="flex gap-x-2">   

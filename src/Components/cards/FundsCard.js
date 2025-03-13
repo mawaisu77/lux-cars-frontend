@@ -53,7 +53,7 @@ const FundsCard = ({fund}) => {
   ];
 
   return (
-    <div className='w-full  max-w-[90vw] justify-center lg:max-w-[85vw] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-[1vw] mt-[30px] lg:px-[1vw]'>
+    <div className='w-full  justify-center lg:max-w-[85vw] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-[1vw] mt-[30px] lg:px-[1vw]'>
       {FundsC.map((item, index) => (
         <div key={index} className='w-full h-[180px]  md:h-[220px] lg:[270px] lg:h-[27vh] relative border shadow-md rounded-xl lg:rounded-[0.75vw] flex-shrink-0'>
           <div className='flex items-center gap-2 lg:gap-[0.5vw] p-2'>

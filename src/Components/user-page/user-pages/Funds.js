@@ -21,8 +21,8 @@ const Funds = () => {
 
   return (
     <>
-      <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-6 lg:mt-[1.5vw]  text-black ">
-        <div className="flex text-left flex-col lg:flex-row lg:justify-between">
+      <div className="w-[90vw] lg:w-[85vw] mx-auto mt-6 lg:mt-[1.5vw]  text-black ">
+        <div className="flex text-left item-center justify-between">
           <p className="text-[24px] md:text-[36px] lg:text-[2.3vw] text-left lg:text-left font-urbanist font-bold">
             My Funds
           </p>
@@ -83,16 +83,7 @@ const Funds = () => {
 
       <Modal open={openModalRefund} onClose={() => setOpenModalRefund(false)}>
       <div
-        className="bg-white p-6 rounded-lg shadow-lg"
-        style={{
-          width: "800px",
-          maxHeight: "90vh",
-          overflowY: "auto",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
+        className="bg-white p-6 lg:m-0 m-1 rounded-lg shadow-lg w-full lg:w-[800px] max-h-[90vh] overflow-y-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
         <div className="bg-[#008b98] rounded-lg w-full">
           <img src={logo} alt="Company Logo" className="w-[25%] h-auto mx-auto" />
