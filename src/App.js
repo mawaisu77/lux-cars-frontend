@@ -276,7 +276,9 @@ function App() {
               path="/user/account/transactions"
               element={
                 <ProtectedRoute>
+                  <UserLayout>
                     <TransactionPage />
+                    </UserLayout>
                 </ProtectedRoute>
               }
             />

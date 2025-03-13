@@ -58,7 +58,7 @@ const TransactionDetailTable = () => {
 
   return (
     <>
-      <div className="bg-vehicle">
+      {/* <div className="bg-vehicle">
         <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
             My Transactions
@@ -75,7 +75,7 @@ const TransactionDetailTable = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="w-full lg:w-[85vw] px-4 mx-auto sm:px-6 lg:px-[2vw] my-4 lg:my-[1vw]">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="">

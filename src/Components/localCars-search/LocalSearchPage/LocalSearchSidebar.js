@@ -105,7 +105,7 @@ console.log("carLocasdsdsbdsvdnvsdnsbduntry", carLocationState, carLocationCount
     Object.keys(filters).forEach((key) => {
       if (Array.isArray(filters[key])) {
         filters[key].forEach((value) => params.append(key, value));
-      } else if (filters[key] !== "" && filters[key] !== null) {
+      } else if (filters[key] !== "" && filters[key] !== null && filters[key] !== false && filters[key] !== undefined) { // Updated condition
         params.append(key, filters[key]);
       }
     });

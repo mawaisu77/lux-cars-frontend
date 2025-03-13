@@ -160,7 +160,7 @@ const SwiperGallery = ({ images, carData }) => {
         >
           {images &&
             images.map((image, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index}  className="w-full">
                 <div className="relative h-[300px] lg:h-[30vw]">
                   <img
                     src={image}

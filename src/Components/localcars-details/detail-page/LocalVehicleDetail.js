@@ -241,9 +241,9 @@ const LocalVehicleDetail = () => {
       {carDetailData && (
         <div className="bg-gray-100">
           <div className="flex flex-col lg:flex-row  justify-between mx-auto w-[95%] lg:w-[84vw] lg:pt-[50px] pb-[20px]">
-            <div className="w-[100%]   lg:w-[48%] ">
+            <div className="w-[100%]  lg:w-[48%] ">
               {carDetailData?.data?.car?.carImages ? (
-                <div>
+                <div className="w-full">
                   <SwiperGallery
                     images={carDetailData?.data?.car?.carImages}
                     carData={carDetailData?.data?.car}
@@ -554,8 +554,8 @@ const LocalVehicleDetail = () => {
                         allBids?.data?.data
                           .sort(
                             (a, b) =>
-                              new Date(b.bid.createdAt) -
-                              new Date(a.bid.createdAt)
+                              new Date(b.bid?.createdAt) -
+                              new Date(a.bid?.createdAt)
                           )
                           .map((item, index) => (
                             <div
@@ -565,7 +565,7 @@ const LocalVehicleDetail = () => {
                               <div className="flex  items-center">
                                 <img
                                   className="w-[44px] lg:w-[2.29vw] lg:h-[2.29vw] h-[44px] rounded-lg"
-                                  src={item.userDetails.profilePicture}
+                                  src={item?.userDetails?.profilePicture}
                                   alt="Profile"
                                 />
                               </div>
@@ -573,31 +573,31 @@ const LocalVehicleDetail = () => {
                                 <div className="text-left">
                                   <div className="flex items-center gap-2">
                                     <p className="text-[1rem] font-urbanist font-bold">
-                                      {item.userDetails.username}
+                                      {item?.bid?.userID?.substring(0, 8)}
                                     </p>
                                     <p className="text-[0.9rem] text-gray-500 font-urbanist">
-                                      <TimeAgo date={item.bid.createdAt} />
+                                      <TimeAgo date={item?.bid?.createdAt} />
                                     </p>
                                   </div>
                                   <p
                                     className={`text-[0.9rem] ${
-                                      item.bid.isValid
+                                      item?.bid?.isValid
                                         ? "text-green-600"
                                         : "text-red-600"
                                     } font-urbanist`}
                                   >
-                                    {item.bid.isValid ? "Active" : "Expired"}
+                                    {item?.bid?.isValid ? "Active" : "Expired"}
                                   </p>
                                 </div>
                                 <div className="flex items-center">
                                   <p
                                     className={`text-[1rem] font-urbanist font-bold ${
-                                      item.bid.isValid
+                                      item?.bid?.isValid
                                         ? "text-black"
                                         : "text-gray-500"
                                     }`}
                                   >
-                                    ${item.bid.bidPrice}
+                                    ${item?.bid?.bidPrice}
                                   </p>
                                 </div>
                               </div>
@@ -860,7 +860,7 @@ const LocalVehicleDetail = () => {
                               <div className="flex  items-center">
                                 <img
                                   className="w-[44px] lg:w-[2.29vw] lg:h-[2.29vw] h-[44px] rounded-lg"
-                                  src={item.userDetails.profilePicture}
+                                  src={item?.userDetails?.profilePicture}
                                   alt="Profile"
                                 />
                               </div>
@@ -868,31 +868,31 @@ const LocalVehicleDetail = () => {
                                 <div className="text-left">
                                   <div className="flex items-center gap-2">
                                     <p className="text-[1vw] font-urbanist font-bold">
-                                      {item.userDetails.username}
+                                    {item?.bid?.userID?.substring(0, 8)}
                                     </p>
                                     <p className="text-[1vw] text-gray-500 font-urbanist">
-                                      <TimeAgo date={item.bid.createdAt} />
+                                      <TimeAgo date={item?.bid?.createdAt} />
                                     </p>
                                   </div>
                                   <p
                                     className={`text-[1vw] ${
-                                      item.bid.isValid
+                                      item?.bid?.isValid
                                         ? "text-green-600"
                                         : "text-red-600"
                                     } font-urbanist`}
                                   >
-                                    {item.bid.isValid ? "Active" : "Expired"}
+                                    {item?.bid?.isValid ? "Active" : "Expired"}
                                   </p>
                                 </div>
                                 <div className="flex items-center">
                                   <p
                                     className={`text-[1vw] font-urbanist font-bold ${
-                                      item.bid.isValid
+                                      item?.bid?.isValid
                                         ? "text-black"
                                         : "text-gray-500"
                                     }`}
                                   >
-                                    ${item.bid.bidPrice}
+                                    ${item?.bid?.bidPrice}
                                   </p>
                                 </div>
                               </div>
