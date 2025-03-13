@@ -346,7 +346,7 @@ const Dropdown = ({ bidAmount, data }) => {
               <TooltipInfo content="$1,500 if final price over 30000 then it will be additional 4% of final price and the 1500">
                   <BsInfoCircle
                    
-                    className="hover:text-blue-800  duration-200"
+                    className="hover:text-blue-800 text-gray-700  text-sm md:text-20 duration-200"
                   />
                 </TooltipInfo>
             </div>
@@ -368,6 +368,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 US Domestic Transport:
               </span>
               <Select
+                autoFocus={false}
                 styles={customCalculatorDropdownStyles}
                 options={categoryOptions}
                 value={selectedCategory}
@@ -567,40 +568,29 @@ const Dropdown = ({ bidAmount, data }) => {
                 Environmental Levy Fee: (flat)
               </span>
              <div className="flex items-center gap-2">
-             <div className="text-sm md:text-20 text-gray-700 flex">
-                {/* {
-                  selectedLocation === "Turks" ? (    
-                    <TooltipInfo content="N/A">
-                      <BsInfoCircle
-                        size={15}
-                      className={` hover:text-blue-800 duration-200`}
+              <div className="text-sm md:text-20 text-gray-700 flex">
+                <TooltipInfo
+                    content={` ${
+                      showApprovalMessage
+                        ? "Approval is needed from the Ministry for cars older than 10 years."
+                        : "flat $250"
+                    } `}
+                  >
+                    <BsInfoCircle
+                    
+                      className={`${
+                        showApprovalMessage ? "text-red-600 animate-pulse" : ""
+                      } hover:text-blue-800 duration-200`}
                     />
                   </TooltipInfo>
-                ) : ( */}
-                  <TooltipInfo
-                  content={` ${
-                    showApprovalMessage
-                      ? "Approval is needed from the Ministry for cars older than 10 years."
-                      : "flat $250"
-                  } `}
-                >
-                  <BsInfoCircle
-                   
-                    className={`${
-                      showApprovalMessage ? "text-red-600 animate-pulse" : ""
-                    } hover:text-blue-800 duration-200`}
-                  />
-                </TooltipInfo>
-
-                {/* )} */}
-              </div>
-              {  showApprovalMessage && (
-                <div className="">
-                  <span className="text-red-600 lg:text-[0.5vw] px-[8px] py-[4px] bg-red-600/10 rounded-lg">
-                    Approval needed
-                  </span>
                 </div>
-              )}
+                { showApprovalMessage && (
+                  <div className="lg:block hidden">
+                    <span className="text-red-600 text-[10px] md:text-[12px] lg:text-[0.7vw] px-[2px] md:px-[4px] lg:px-[8px] py-[4px] bg-red-600/10 rounded-lg">
+                      Approval needed
+                    </span>
+                  </div>
+                )}
              </div>
              </div>
             </div>
@@ -669,20 +659,22 @@ const Dropdown = ({ bidAmount, data }) => {
           
           {/*10 Customs Clearence and Delivery Fee */}
           <div className="flex justify-between border-b border-gray-300 pb-[.5vw]">
-            <div className="flex gap-x-1.5 justify-center items-center">
+            <div className="flex gap-x-1.5 justify-center lg:items-center">
             <div className="w-5 lg:w-[1.25vw] h-5 lg:h-[1.25vw] flex items-center justify-center rounded-full bg-gray-200">
                 <span className="text-xs sm:text-sm lg:text-[0.75vw]">10</span>
-              </div>
+             </div>
+             <div className="flex flex-wrap items-center gap-x-2 lg:gap-x-[0.7vw]">
               <span className="text-sm md:text-20 text-left text-gray-700">
-                Customs Clearence & Delivery Fee
+                Customs Clearence & Delivery Fee:
               </span>
               <div className="text-sm md:text-20 text-gray-700 ">
-                <TooltipInfo content="$350 flat mr-2 ">
+                <TooltipInfo content="$350 flat ">
                   <BsInfoCircle
                      
                     className={` hover:text-blue-800 duration-200`}
                   />
                 </TooltipInfo>
+              </div>
               </div>
             </div>
             <span className="text-sm md:text-20 font-medium text-gray-800">
