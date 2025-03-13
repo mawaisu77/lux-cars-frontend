@@ -53,10 +53,10 @@ const FundsCard = ({fund}) => {
   ];
 
   return (
-    <div className='w-full   max-w-[1370px]  justify-center lg:max-w-[84vw] mx-auto  flex flex-wrap gap-4 lg:gap-[1vw] mt-[30px] px-4 lg:px-[1vw]'>
+    <div className='w-full  max-w-[90vw] justify-center lg:max-w-[85vw] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-[1vw] mt-[30px] lg:px-[1vw]'>
       {FundsC.map((item, index) => (
-        <div key={index} className=' relative w-full lg:w-[15.25vw] h-[270px] lg:h-[27vh] border shadow-md rounded-xl lg:rounded-[0.75vw] flex-shrink-0'>
-          <div className='flex items-center gap-2 lg:gap-[0.5vw] p-4'>
+        <div key={index} className='w-full h-[180px]  md:h-[220px] lg:[270px] lg:h-[27vh] relative border shadow-md rounded-xl lg:rounded-[0.75vw] flex-shrink-0'>
+          <div className='flex items-center gap-2 lg:gap-[0.5vw] p-2'>
             <div
               className='flex justify-center items-center p-2 lg:p-[0.5vw] rounded-full lg:rounded-[100%]'
               style={{ backgroundColor: item.bgColor }}

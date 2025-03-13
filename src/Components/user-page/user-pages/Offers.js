@@ -38,8 +38,8 @@ const Offers = () => {
 
   return (
     <>
-      <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
-      <h1 className="text-[28px] lg:text-[2.3vw] font-urbanist lg:text-left font-bold">My Offers</h1>
+      <div className="w-[90%] lg:w-[85vw] mx-auto mt-6 lg:mt-[1.5vw] text-black ">
+      <h1 className="text-[24px] md:text-[36px] lg:text-[2.3vw] text-left font-urbanist lg:text-left font-bold">My Offers</h1>
 
         {offers && offers?.data?.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[50vh]">
@@ -51,7 +51,7 @@ const Offers = () => {
             </p>
           </div>
         ) : (
-          <div className=" w-[90%] lg:w-[84vw] mx-auto overflow-x-auto">
+          <div className=" w-full lg:w-[85vw] mx-auto overflow-x-auto">
             <table className="min-w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-100">

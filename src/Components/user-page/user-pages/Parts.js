@@ -122,8 +122,8 @@ const SearchPartsForm = () => {
 
   return (
     <div className="flex justify-center w-[100vw] items-center min-h-screen bg-white font-urbanist">
-      <div className="w-[90%] lg:w-[85vw] mx-auto   lg:leading-[2.5vw]" >
-        <h2 className="text-[36px] lg:text-[2vw] text-center lg:text-left font-bold mt-4 lg:mt-[1vw] mb-4 lg:mb-[1vw]">
+      <div className="w-[90%] lg:w-[85vw] mx-auto  lg:leading-[2.5vw]" >
+        <h2 className=" text-left text-[24px] md:text-[36px] lg:text-[2.3vw] lg:text-left font-bold mt-6 lg:mt-[1.5vw] mb-4 lg:mb-[1vw]">
           Search Parts
         </h2>
         <form

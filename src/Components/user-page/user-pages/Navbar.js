@@ -230,7 +230,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="relative w-full lg:w-[80%]   p-1 lg:p-[0.5vw] text-black text-[20px] lg:text-[1.25vw] font-urbanist font-semibold mx-auto overflow-x-auto no-scrollbar">
+        <div className="relative w-full lg:w-[80%] p-1 lg:p-[0.5vw] text-black text-[14px] lg:text-[1.25vw] font-urbanist font-semibold mx-auto overflow-x-auto no-scrollbar">
           <div className="flex justify-between items-center w-[530px] lg:w-full mx-auto">
             <Link to="/user/account/all-bids">
               <p

@@ -12,8 +12,6 @@ const LocalSearchSidebar = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-  const { carLocationState, carLocationCountry } = location.state || {}; // Extract carLocation from state
-console.log("carLocasdsdsbdsvdnvsdnsbduntry", carLocationState, carLocationCountry)
   const option = useMemo(() => [
     { value: 'US', label: 'United States' },
     { value: 'BS', label: 'Bahamas' }
@@ -25,7 +23,7 @@ console.log("carLocasdsdsbdsvdnvsdnsbduntry", carLocationState, carLocationCount
   const [showYear, setShowYear] = useState(false);
   const [showMilage, setShowMilage] = useState(false);
   const [showTransmission, setShowTransmission] = useState(true);
-  const [showLocation, setShowLocation] = useState(carLocationState !== null);
+  const [showLocation, setShowLocation] = useState(false);
   const [vehicles, setVehicles] = useState(null);
   const [showtitlesStatus, setShowtitlesStatus] = useState(null);
 
@@ -39,8 +37,8 @@ console.log("carLocasdsdsbdsvdnvsdnsbduntry", carLocationState, carLocationCount
     milageTo: queryParams.get("milageTo") || "",
     transmission: queryParams.getAll("transmission") || [],
     titlesStatus: queryParams.getAll("titlesStatus") || [],
-    carLocation: queryParams.get("carLocation") || carLocationCountry,
-    carState: queryParams.get("carState") || carLocationState,
+    carLocation: queryParams.get("carLocation") || "",
+    carState: queryParams.get("carState") || "",
     buyNowPrice: queryParams.get("buyNowPrice") === "true",
     minPrice: queryParams.get("minPrice") === "true",
   };

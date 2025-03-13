@@ -29,25 +29,25 @@ const AllBids = () => {
 
   return (
     <>
- <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
-      <h1 className="text-[28px] lg:text-[2.3vw] font-urbanist left-[10%] lg:text-left font-bold">My Bids</h1>
+ <div className="w-[90%] md:w-[650px]  lg:w-[85vw] mx-auto mt-6 lg:mt-[1.5vw]  text-black ">
+  <div className="flex justify-between items-center">
+      <h1 className="text-[24px] md:text-[36px] lg:text-[2.3vw] font-urbanist  text-left font-bold">My Bids</h1>
 
-              {/* Header with toggle buttons */}
-      <div className="flex justify-center space-x-4 mb-6 lg:mb-[1.5vw]">
+      <div className="flex justify-end lg:justify-start space-x-4 mb-3  lg:mb-[1.5vw]">
         <button
-          className={`px-[1vw] py-[0.5vw] lg:text-[1vw] font-semibold rounded-[0.25vw] ${selectedOption === "bidding" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
+          className={`px-[1vw] py-[0.5vw] lg:text-[1vw] font-semibold rounded-md lg:rounded-[0.25vw] ${selectedOption === "bidding" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
           onClick={() => handleOptionChange("bidding")}
         >
           Bidding Cars
         </button>
         <button
-          className={`px-[1vw] py-[0.5vw] lg:text-[1vw] font-semibold rounded-[0.25vw] ${selectedOption === "local" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
+          className={`px-[1vw] py-[0.5vw] lg:text-[1vw] font-semibold rounded-md lg:rounded-[0.25vw] ${selectedOption === "local" ? "bg-primary-red text-white" : "bg-gray-200 text-gray-600"}`}
           onClick={() => handleOptionChange("local")}
         >
           Local Cars
         </button>
       </div>
-
+      </div>
         {/* Loading and Error Messages */}
         {isLoading && (
           <div className="flex justify-center items-center mb-4">
@@ -70,7 +70,7 @@ const AllBids = () => {
             </p>
           </div>
         ) : (
-          <div className=" w-[90%] lg:w-[84vw] mx-auto overflow-x-auto">
+          <div className=" w-full lg:w-[85vw] mx-auto overflow-x-auto">
           <table className="min-w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-100">

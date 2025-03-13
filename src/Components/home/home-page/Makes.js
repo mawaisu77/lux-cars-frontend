@@ -93,7 +93,7 @@ const Makes = () => {
         </div>
         <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[5vw] mx-auto mt-[6px] sm:mt-[0.781vw]" />
         {/* For desktop */}
-        <div className="hidden lg:grid grid-cols-3 sm:flex max-w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] sm:justify-center">
+        <div className="hidden lg:grid grid-cols-10 sm:flex max-w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] sm:justify-center">
           {carData && carData.map((item, index) => (
             <button
               key={index}
@@ -108,10 +108,10 @@ const Makes = () => {
               ) : (
                 <div className="flex flex-col justify-center items-center">
                 {/* Only display icon if it exists in iconMapping */}
-                <span className="text-[20px] sm:text-20">
+                <span className="text-[14px] sm:text-24">
                 {iconMapping[item.make] && iconMapping[item.make]}
                 </span>
-                <span className="text-[14px] sm:text-14"> {item.make}</span>
+                <span className="text-[14px] sm:text-16"> {item.make}</span>
                 </div>
               )}
             </button>

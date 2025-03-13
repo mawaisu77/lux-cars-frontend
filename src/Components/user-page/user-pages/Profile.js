@@ -87,8 +87,8 @@ const Profile = () => {
 
   return (
     <>
-      <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
-        <div className="text-left text-[36px] lg:text-[2.3vw] font-urbanist font-bold">
+      <div className="w-[90%] md:w-[650px] lg:w-[84vw] mx-auto mt-6 lg:mt-[1.5vw] text-black">
+        <div className="text-left text-[24px] md:text-[36px] lg:text-[2.3vw] font-urbanist font-bold">
           Profile Info
         </div>
         <div className="flex flex-col">

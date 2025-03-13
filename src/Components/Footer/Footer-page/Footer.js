@@ -1,19 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img1 from "../../../assets/Logo/Horizontal0 1.png";
 import { PiFacebookLogoFill } from "react-icons/pi";
 import { FaTwitter, FaGoogle, FaTwitch } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleDestinationClick = (island) => {
+    navigate(`/search-local-cars?carLocation=Bahamas&carState=${island}`);
+  };
+
   const footerSections = [
     {
       heading: "Shipping destinations",
       items: [
-        { text: "Bremerhaven, DE", link: "/" },
-        { text: "Gdynia, PL", link: "/" },
-        { text: "Rotterdam, NL", link: "/" },
-        { text: "Klaipeda, LT", link: "/" },
+        { text: "Acklins Island", location: "Acklins Island" },
+        { text: "Central Abaco", location: "Central Abaco" },
+        { text: "Bimimi", location: "Bimimi" },
+        { text: "Free Port", location: "Free Port" },
       ],
     },
     {
@@ -73,19 +79,31 @@ const Footer = () => {
                 <p className="text-[22px] lg:text-18 font-bold">
                   {section.heading}
                 </p>
-                {section.items.map((item, idx) =>
-                  typeof item === "string" ? (
-                    <p key={idx} className="text-[14px] lg:text-16">
-                      {item}
-                    </p>
-                  ) : (
-                    <Link
+                {section.heading === "Shipping destinations" ? (
+                  section.items.map((item, idx) => (
+                    <button
                       key={idx}
-                      to={item.link}
-                      className="text-[14px] lg:text-16"
+                      onClick={() => handleDestinationClick(item.location)}
+                      className="text-[14px] lg:text-16 text-left hover:text-red-600 transition-colors"
                     >
                       {item.text}
-                    </Link>
+                    </button>
+                  ))
+                ) : (
+                  section.items.map((item, idx) =>
+                    typeof item === "string" ? (
+                      <p key={idx} className="text-[14px] lg:text-16">
+                        {item}
+                      </p>
+                    ) : (
+                      <Link
+                        key={idx}
+                        to={item.link}
+                        className="text-[14px] lg:text-16"
+                      >
+                        {item.text}
+                      </Link>
+                    )
                   )
                 )}
               </div>

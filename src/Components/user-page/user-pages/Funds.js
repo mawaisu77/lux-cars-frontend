@@ -21,14 +21,14 @@ const Funds = () => {
 
   return (
     <>
-      <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
+      <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-6 lg:mt-[1.5vw]  text-black ">
         <div className="flex text-left flex-col lg:flex-row lg:justify-between">
-          <p className="text-[28px] lg:text-[2.3vw] text-center lg:text-left font-urbanist font-bold">
+          <p className="text-[24px] md:text-[36px] lg:text-[2.3vw] text-left lg:text-left font-urbanist font-bold">
             My Funds
           </p>
-          <div className="flex justify-center gap-3 relative">
+          <div className="flex justify-end lg:justify-center gap-3 relative">
           <button
-              className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[15px] lg:text-[1vw] font-urbanist"
+              className="w-[110px] lg:w-[11vw] h-[36px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[13px] lg:text-[1vw] font-urbanist"
               onClick={() => setOpenModalRefund(true)}
 
             >
@@ -36,7 +36,7 @@ const Funds = () => {
             </button>
             <button
               onClick={() => setOpenModal(true)}
-              className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[15px] lg:text-[1vw] font-urbanist"
+              className="w-[110px] lg:w-[11vw] h-[36px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[13px] lg:text-[1vw] font-urbanist"
             >
               Add Deposite
             </button>
