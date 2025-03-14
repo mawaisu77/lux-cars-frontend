@@ -68,15 +68,15 @@ const Signup = () => {
       </div>
     </div>
       <div className=" py-[100px] lg:py-[9.3vh] w-full lg:w-[36.1] mx-auto">
-        <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">
-          Register To LUX CARS
+        <div className="mt-[8.6vh] text-[24px] lg:text-[2vw] font-bold font-urbanist">
+          Register To BidCaribbean
         </div>
         <form className="flex flex-col items-center gap-[2.5vh] mt-[6vh] mx-auto justify-center" onSubmit={signupFormik.handleSubmit}>
           <input
             type="text"
             id="username"
             name="username"
-            className={`w-[343px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
+            className={`w-[300px] sm:w-[342px]  lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
               signupFormik.touched.username && signupFormik.errors.username
                 ? "border-red-600 placeholder-red-500"
                 : "border-gray-300"
@@ -94,7 +94,7 @@ const Signup = () => {
             type="email"
             id="email"
             name="email"
-            className={`w-[343px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw]  ${
+            className={`w-[300px] sm:w-[342px]  lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw]  ${
               signupFormik.touched.email && signupFormik.errors.email
                 ? "border-red-600 placeholder-red-500"
                 : "border-gray-300"
@@ -113,7 +113,7 @@ const Signup = () => {
              type={showPassword ? "text" : "password"} 
             id="password"
             name="password"
-            className={`w-[343px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
+            className={`w-[300px] sm:w-[342px]  lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
               signupFormik.touched.password && signupFormik.errors.password
                 ? "border-red-600 placeholder-red-500"
                 : "border-gray-300"
@@ -132,7 +132,7 @@ const Signup = () => {
              type={showPassword ? "text" : "password"} 
             id="confirmPassword"
             name="confirmPassword"
-            className={`w-[343px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
+            className={`w-[300px] sm:w-[342px]  lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
               signupFormik.touched.confirmPassword &&
               signupFormik.errors.confirmPassword
                 ? "border-red-600 placeholder-red-500"
@@ -154,7 +154,7 @@ const Signup = () => {
               <p className="text-[14px] text-red-700 text-left">Password did not match</p>
             ) : null}
           </div>
-          <div className="w-[343px] lg:w-[34vw] flex justify-between">
+          <div className="w-[300px] sm:w-[342px]  lg:w-[34vw] flex justify-between">
             <div className="flex justify-between items-center gap-[0.5vw] text-[14px] lg:text-[0.8vw]">
               <input
                 type="checkbox"
@@ -168,7 +168,7 @@ const Signup = () => {
               Forget password?
             </div> */}
           </div>
-          <button className="w-[343px] lg:w-[36vw] h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
+          <button className="w-[300px] sm:w-[342px]  lg:w-[36vw] h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
           {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Register"}
           </button>
         </form>

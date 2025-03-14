@@ -7,14 +7,14 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import ImageModal from "../../cards/ImageModal";
 import { LuxLogoWhite } from "../../../utils/constant";
-
+import bidcaribbeanLogo from "../../../assets/lux-logo/logo-tag.png";
 const SwiperGallery = ({ images, carData }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-   // Open modal with selected image
-   const openModalImg = (index) => {
+  // Open modal with selected image
+  const openModalImg = (index) => {
     setCurrentImageIndex(index);
     setImageModalOpen(true);
   };
@@ -35,43 +35,49 @@ const SwiperGallery = ({ images, carData }) => {
     );
   };
 
-
   return (
-    <div className="">    
-      <div className="relative ">    
-      <Swiper
-  style={{
-    "--swiper-navigation-color": "#fff",
-    "--swiper-pagination-color": "#fff",
-  }}
-  loop={true}
-  autoplay={{
-    delay: 2000,
-    disableOnInteraction: false,
-  }}
-  spaceBetween={10}
-  navigation={true}
-  thumbs={{
-    swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-  }}
-  modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-  className="mySwiper2 w-full h-full"
->
-  {images &&
-    images.map((image, index) => (
-      <SwiperSlide key={index} className="w-full">
-        <div className="relative w-full h-[40vw">
+    <div className="">
+      <div className="relative ">
+        <div className="absolute  z-10 bottom-0 w-36 lg:w-[15vw] rounded-lg">
           <img
-            src={image}
-            className="my-2 rounded-lg w-full h-full bg-green-400 object-fill shadow-img cursor-pointer"
-            alt={`Vehicle_Image ${index + 1}`}
-            onClick={() => openModalImg(index)} // Open modal on image click
+            src={bidcaribbeanLogo}
+            className="my-2 rounded-lg shadow-img cursor-pointer"
+            alt={`Vehicle_Image`}
           />
         </div>
-      </SwiperSlide>
-    ))}
-</Swiper>
-
+        <Swiper
+          style={{
+            "--swiper-navigation-color": "#fff",
+            "--swiper-pagination-color": "#fff",
+          }}
+          loop={true}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false,
+          }}
+          spaceBetween={10}
+          navigation={true}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          }}
+          modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+          className="mySwiper2 "
+        >
+          {images &&
+            images.map((image, index) => (
+              <SwiperSlide key={index} className="w-full">
+                <div className="relative h-[300px] lg:h-[30vw]">
+                  <img
+                    src={image}
+                    className="w-full h-full  object-cover rounded-lg shadow-img cursor-pointer"
+                    alt={`Vehicle_Image ${index + 1}`}
+                    onClick={() => openModalImg(index)} // Open modal on image click
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+        </Swiper>
       </div>
 
       <Swiper
@@ -86,21 +92,22 @@ const SwiperGallery = ({ images, carData }) => {
       >
         {images &&
           images.map((image, index) => (
-            <SwiperSlide key={index}>
-              <div className="relative w-full h-[10vw]">
+            <SwiperSlide key={index} className="relative">
+              <div className="absolute z-10 bottom-[2px] lg:bottom-[0.2vw] w-16 lg:w-[5vw] rounded-lg">
                 <img
-                  src={image}
-                  className="rounded-lg w-full h-full object-cover"
-                  alt={`Thumbnail ${index + 1}`}
+                  src={bidcaribbeanLogo}
+                  className=""
+                  alt={`Vehicle_Image`}
                 />
               </div>
-
-        
+              <img
+                src={image}
+                className="rounded-lg lg:rounded-[0.5vw] h-[80px] sm:h-[100px] lg:h-[7vw] "
+                alt={`Thumbnail ${index + 1}`}
+              />
             </SwiperSlide>
           ))}
       </Swiper>
-
-
 
       <ImageModal
         isOpen={isImageModalOpen}
@@ -109,10 +116,10 @@ const SwiperGallery = ({ images, carData }) => {
         currentImageIndex={currentImageIndex}
         goToPrevImage={goToPrevImage}
         goToNextImage={goToNextImage}
-        logo={LuxLogoWhite}
+        logo={bidcaribbeanLogo}
       />
     </div>
-  )
+  );
 };
 
 export default SwiperGallery;

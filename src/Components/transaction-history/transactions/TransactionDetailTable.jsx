@@ -58,7 +58,7 @@ const TransactionDetailTable = () => {
 
   return (
     <>
-      <div className="bg-vehicle">
+      {/* <div className="bg-vehicle">
         <div className="w-[15.5] flex flex-col pt-[20vh]">
           <div className="text-[2.6vw] font-semibold text-white">
             My Transactions
@@ -75,11 +75,11 @@ const TransactionDetailTable = () => {
             </button>
           </div>
         </div>
-      </div>
-      <div className="w-full lg:w-[85vw] px-4 mx-auto sm:px-6 lg:px-[2vw] my-4 lg:my-[1vw]">
+      </div> */}
+      <div className="w-[90vw] lg:w-[85vw] px-4 mx-auto sm:px-6 lg:px-[2vw] my-4 lg:my-[1vw]">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="">
-            <h1 className="text-xl lg:text-[1.25vw] font-semibold text-gray-900">
+            <h1 className="text-[24px] md:text-[36px] lg:text-[2.3vw] text-left font-semibold text-gray-900">
               Transaction History
             </h1>
           </div>
@@ -135,32 +135,32 @@ const TransactionDetailTable = () => {
                     <tr>
                       <th
                         scope="col"
-                        className="py-3.5 lg:py-[0.875vw] pl-4 lg:pl-[1vw] pr-3 lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
+                        className="py-3.5 text-nowrap lg:py-[0.875vw] pl-2  lg:pl-[1vw] pr-3  lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
                       >
                         TRANSACTION ID
                       </th>
 
                       <th
                         scope="col"
-                        className="py-3.5 lg:py-[0.875vw] pl-4 lg:pl-[1vw] pr-3 lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
+                        className="py-3.5 text-nowrap lg:py-[0.875vw] pl-2  lg:pl-[1vw] pr-3  lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
                       >
                         DATE
                       </th>
                       <th
                         scope="col"
-                        className="py-3.5 lg:py-[0.875vw] pl-4 lg:pl-[1vw] pr-3 lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
+                        className="py-3.5 text-nowrap lg:py-[0.875vw] pl-2  lg:pl-[1vw] pr-3  lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
                       >
                         PAYMENT PURPOSE
                       </th>
                       <th
                         scope="col"
-                        className="py-3.5 lg:py-[0.875vw] pl-4 lg:pl-[1vw] pr-3 lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
+                        className="py-3.5 text-nowrap lg:py-[0.875vw] pl-2  lg:pl-[1vw] pr-3  lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
                       >
                         AMOUNT (USD)
                       </th>
                       <th
                         scope="col"
-                        className="py-3.5 lg:py-[0.875vw] pl-4 lg:pl-[1vw] pr-3 lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
+                        className="py-3.5 text-nowrap lg:py-[0.875vw] pl-2   lg:pl-[1vw] pr-3 lg:pr-[0.75vw] text-left text-sm lg:text-[0.875vw] leading-[1.25vw] font-medium text-gray-500 sm:pl-6"
                       >
                         STATUS
                       </th>

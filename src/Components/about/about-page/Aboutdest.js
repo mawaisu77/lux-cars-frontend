@@ -8,7 +8,27 @@ const Aboutdest = () => {
   const navigate = useNavigate();
   const locations = Object.keys(islandImages);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState({});
 
+  // Function to preload images and cache them
+  const preloadImages = () => {
+    const cachedImages = JSON.parse(sessionStorage.getItem("preloadedImages")) || {};
+    locations.forEach((location) => {
+      if (!cachedImages[location]) {
+        const img = new Image();
+        img.src = islandImages[location];
+        img.onload = () => {
+          setLoadedImages((prev) => ({ ...prev, [location]: true }));
+          cachedImages[location] = true;
+          sessionStorage.setItem("preloadedImages", JSON.stringify(cachedImages));
+        };
+      }
+    });
+  };
+
+  useEffect(() => {
+    preloadImages();
+  }, [locations]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,8 +39,7 @@ const Aboutdest = () => {
   }, [locations.length]);
 
   const handleButtonClick = (island) => {
-    navigate('/search-local-cars', { state: { carLocationState: island, carLocationCountry: "Bahamas" } }); // Navigate to search page with selected location
-
+    navigate('/search-local-cars', { state: { carLocationState: island, carLocationCountry: "Bahamas" } });
   };
 
   return (
@@ -47,8 +66,11 @@ const Aboutdest = () => {
         <div className="w-full h-[400px] lg:h-[25vw] rounded-[1.042vw] shadow-lg mx-auto mt-[30px] sm:mt-[8vh] relative">
           <div className="sm:p-[1.042vw] w-full h-[400px] lg:h-full">
             <div
-              className="relative w-full h-[400px] lg:h-full rounded-[1.042vw] bg-cover bg-center transition-all duration-1000 ease-in-out"
-              style={{ backgroundImage: `url(${islandImages[locations[currentIndex]]})` }}
+              className="relative w-full h-[400px] lg:h-full rounded-[1.042vw] bg-cover bg-center transition-all duration-500 ease-in-out"
+              style={{
+                backgroundImage: `url(${islandImages[locations[currentIndex]]})`,
+                willChange: "background-image",
+              }}
             >
               {/* Marquee Buttons */}
               <div className="absolute bottom-0 rounded-[1.042vw] w-full hidden lg:block">
@@ -58,7 +80,6 @@ const Aboutdest = () => {
                       key={index}
                       className="flex items-center text-[14px] lg:text-14 bg-white hover:bg-[#CA0000] hover:text-white text-red-600 font-bold py-[1vh] px-[1vw] duration-200 rounded-[0.521vw] m-[1vw]"
                       onClick={() => handleButtonClick(location)}
-
                     >
                       <FaLocationDot size={17} className="transition-colors duration-100" />
                       {location}

@@ -182,8 +182,8 @@ export default function BiddingLimit({
 
   return (
     <>
-      <div className=" w-[90%] lg:max-w-[84vw] mx-auto p-6 lg:p-[1.5vw] md:p-[1.25vw] font-sans">
-        <h1 className="text-2xl md:text-30 font-bold mb-4 md:mb-[0.833vw]">
+      <div className=" w-full lg:max-w-[84vw] mx-auto p-3 lg:p-[1.5vw] md:p-[1.25vw] font-sans">
+        <h1 className="text-xl md:text-30 font-bold mb-4 md:mb-[0.833vw]">
           Increase My Bidding Limit
         </h1>
 
@@ -313,13 +313,13 @@ export default function BiddingLimit({
               </div>
             </div>
             <div className="flex justify-between items-center pt-4 md:pt-[1.25vw] border-t border-gray-300 text-sm md:text-18">
-              <div className="flex items-center gap-2 mb-4   p-2 md:p-[0.5vw] md:mb-[0.833vw]">
+              <div className="flex items-center gap-2   p-2 md:p-[0.5vw] md:mb-[0.833vw]">
                 <span>Total Payment Due</span>
                 {securityDeposit <= 350 ? (
                   <>
                     <BsFillQuestionCircleFill
                       data-tooltip-id="limit_funds_tooltip"
-                      className="font-extrabold text-20 text-primary-red animate-pulse cursor-help"
+                      className="font-extrabold lg:text-20 text-primary-red animate-pulse cursor-help"
                     />
                     <ReactTooltip
                       id="limit_funds_tooltip"
@@ -345,18 +345,18 @@ export default function BiddingLimit({
         </div>
       </div>
 
-      <Modal open={openModal} onClose={handleCloseModal}>
+      <Modal open={openModal} onClose={handleCloseModal}> 
         <div
-          className="bg-white p-6 rounded-lg shadow-lg"
-          style={{
-            width: "800px",
-            maxHeight: "90vh",
-            overflowY: "auto",
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
+          className="bg-white p-6 rounded-lg shadow-lg w-full lg:w-[800px] max-h-[90vh] overflow-y-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          // style={{
+          //   width: "800px",
+          //   maxHeight: "90vh",
+          //   overflowY: "auto",
+          //   position: "absolute",
+          //   top: "50%",
+          //   left: "50%",
+          //   transform: "translate(-50%, -50%)",
+          // }}
         >
           <div className="bg-[#008b98] rounded-lg w-full">
             <img

@@ -77,8 +77,7 @@ const OfferCards = ({
           className="text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] hover:text-blue-800 hover:underline cursor-pointer"
           onClick={handleNavigate}
         >
-          {`${offer.carData?.year || "-"} ${offer.carData?.make || "-"} ${
-            offer.carData?.model || "-"
+          {`${offer.carData?.titile
           }`}
         </td>
         {/* VIN */}

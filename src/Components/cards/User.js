@@ -1,6 +1,8 @@
 import React, { useMemo } from "react";
 import {  useNavigate } from "react-router-dom";
 import useTimer from "../../hooks/useTimer";
+import moment from "moment-timezone";
+
 
 const User = ({ bid }) => {
 
@@ -65,6 +67,9 @@ const User = ({ bid }) => {
 
       {/*8 Current Bid */}
       <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">${bid?.carDetails?.currentBid}</td>
+      <td className=" text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw]">
+      {moment(bid?.createdAt).format( "MMM DD, YYYY HH:mm" )}
+        </td>
       {/*9 Status */}
       <td
         className={` text-nowrap px-4 lg:px-[1vw] py-2 lg:py-[0.5vw] lg:text-[1vw] font-semibold ${

@@ -247,7 +247,7 @@ const Header = () => {
           {user ? (
        
             <div className="flex flex-col w-[100%] items-center gap-4 lg:gap-[1.5vw] text-sm lg:text-18">
-            <Link to="/login">
+            <Link to="/user/account/funds">
               <button
 
                 className={`w-[170px] text-nowrap font-semibold focus:outline-none bg-white hover:bg-[#ca0000e8] px-3 lg:px-[1.5vw] py-1 lg:py-[0.4vw] rounded-full text-gray-800  lg:text-18  duration-200 border border-solid border-black`}

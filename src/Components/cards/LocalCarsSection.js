@@ -39,6 +39,10 @@ const LocalCars = () => {
     return null
   }
 
+  if(localCars?.length === 0) {
+    return null
+  }
+
     // Handler for "View All" button
     const handleViewAllClick = () => {
       // localStorage.setItem('apiEndpoint', process.env.REACT_APP_API_CARS_LIVE);

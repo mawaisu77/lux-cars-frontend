@@ -21,14 +21,14 @@ const Funds = () => {
 
   return (
     <>
-      <div className="w-[90%] md:w-[650px]  lg:w-[84vw] mx-auto mt-10 sm:mt-[50px]  text-black ">
-        <div className="flex text-left flex-col lg:flex-row lg:justify-between">
-          <p className="text-[28px] lg:text-[2.3vw] text-center lg:text-left font-urbanist font-bold">
+      <div className="w-[90vw] lg:w-[85vw] mx-auto mt-6 lg:mt-[1.5vw]  text-black ">
+        <div className="flex text-left item-center justify-between">
+          <p className="text-[24px] md:text-[36px] lg:text-[2.3vw] text-left lg:text-left font-urbanist font-bold">
             My Funds
           </p>
-          <div className="flex justify-center gap-3 relative">
+          <div className="flex justify-end lg:justify-center gap-x-1 md:gap-x-2 lg:gap-3 relative">
           <button
-              className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[15px] lg:text-[1vw] font-urbanist"
+              className="w-[90px] md:w-[110px] lg:w-[11vw] h-[36px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[13px] lg:text-[1vw] font-urbanist"
               onClick={() => setOpenModalRefund(true)}
 
             >
@@ -36,7 +36,7 @@ const Funds = () => {
             </button>
             <button
               onClick={() => setOpenModal(true)}
-              className="w-[132px] lg:w-[11vw] h-[46px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[15px] lg:text-[1vw] font-urbanist"
+              className="w-[90px] md:w-[110px] lg:w-[11vw] h-[36px] lg:h-[6vh] flex justify-center font-semibold rounded-lg items-center bg-primary-red hover:bg-primary-red/90 text-white text-[13px] lg:text-[1vw] font-urbanist"
             >
               Add Deposite
             </button>
@@ -83,16 +83,7 @@ const Funds = () => {
 
       <Modal open={openModalRefund} onClose={() => setOpenModalRefund(false)}>
       <div
-        className="bg-white p-6 rounded-lg shadow-lg"
-        style={{
-          width: "800px",
-          maxHeight: "90vh",
-          overflowY: "auto",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
+        className="bg-white p-6 lg:m-0 m-1 rounded-lg shadow-lg w-full lg:w-[800px] max-h-[90vh] overflow-y-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
         <div className="bg-[#008b98] rounded-lg w-full">
           <img src={logo} alt="Company Logo" className="w-[25%] h-auto mx-auto" />

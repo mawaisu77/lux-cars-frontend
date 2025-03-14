@@ -84,7 +84,7 @@ const Help = () => {
 
               <div className="flex items-center gap-[1vw] mb-[1.25vw]">
                 <h2 className="text-[28px] text-left sm:text-38 font-semibold  ">
-                  Bidding At LUX
+                  Bidding At BidCaribbean
                 </h2>
                 <span className=" text-white text-nowrap bg-transparent border-2 sm:border-[0.052vw] border-white px-[10px] py-[5px] sm:px-[0.521vw] sm:py-[0.26vw] rounded-[8px] sm:rounded-[0.417vw] text-[16px] sm:text-18">
                   Best Choice

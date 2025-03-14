@@ -60,6 +60,7 @@ export const menuData = {
   'Sell Your Car': { link: '/upload-local-car' },
   'Apply for Loan': { link: '/apply-for-loan' },
   'About Us': { link: '/about-us' },
+  'Pro Bidding Tips': { link: '/pro-bidding-tips' },
 };
 
 

@@ -93,7 +93,7 @@ const Makes = () => {
         </div>
         <hr className="h-[2px] sm:h-[0.26vw] bg-primary-red w-[30px] sm:w-[5vw] mx-auto mt-[6px] sm:mt-[0.781vw]" />
         {/* For desktop */}
-        <div className="grid grid-cols-3 sm:flex max-w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] sm:justify-center">
+        <div className="hidden lg:grid grid-cols-10 sm:flex max-w-[78vw] mx-auto flex-wrap gap-[0.5vw] gap-y-6 my-[4vh] sm:justify-center">
           {carData && carData.map((item, index) => (
             <button
               key={index}
@@ -108,17 +108,45 @@ const Makes = () => {
               ) : (
                 <div className="flex flex-col justify-center items-center">
                 {/* Only display icon if it exists in iconMapping */}
-                <span className="text-[20px] sm:text-20">
+                <span className="text-[14px] sm:text-24">
                 {iconMapping[item.make] && iconMapping[item.make]}
                 </span>
-                <span className="text-[14px] sm:text-14"> {item.make}</span>
+                <span className="text-[14px] sm:text-16"> {item.make}</span>
                 </div>
               )}
             </button>
           ))}
         </div>
         {/* For mobile */}
-      
+        <div className="lg:hidden w-[85vw] mx-auto overflow-x-auto">
+          <div
+            className="grid grid-rows-4 gap-y-5 gap-x-4 lg:gap-[0.5vw]  auto-cols-max mt-6"
+            style={{ gridAutoFlow: "column" }}
+          >
+            {carData.map((item, index) => (
+              <button
+                key={index}
+                className="font-urbanist bg-[#ebebeb]  py-[1.5vh] px-[1.1vw] rounded-lg text-[15px] flex justify-center items-center"
+                onClick={() => handleMakeClick(item.make)}
+
+              >
+                {loading ? (
+                  <>
+                    <ClipLoader />
+                  </>
+                ) : (
+                  <div className="flex flex-col justify-center items-center">
+                  {/* Only display icon if it exists in iconMapping */}
+                  <span className="text-[20px] sm:text-20">
+                  {iconMapping[item.make] && iconMapping[item.make]}
+                  </span>
+                  <span className="text-[14px] sm:text-14"> {item.make}</span>
+                  </div>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
     </div>
