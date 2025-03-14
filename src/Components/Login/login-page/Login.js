@@ -75,8 +75,8 @@ const Login = () => {
         </div>
       </div>
       <div className=" py-[80px] lg:py-[4.3vh] w-full lg:w-[36.1] mx-auto">
-        <div className="mt-[8.6vh] text-[36px] lg:text-[2vw] font-bold font-urbanist">
-          Login To LUX CARS
+        <div className="mt-[8.6vh] text-[24px] lg:text-[2vw] font-bold font-urbanist">
+          Login To BidCaribbean
         </div>
         <form
           className=" flex flex-col items-center gap-[3vh] mt-[6vh] mx-auto justify-center"
@@ -86,7 +86,7 @@ const Login = () => {
             type="email"
             id="email"
             name="email"
-            className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
+            className={`w-[300px] sm:w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
               loginFormik.touched.email && loginFormik.errors.email
                 ? "border-red-600 placeholder-red-500"
                 : "border-gray-300"
@@ -104,7 +104,7 @@ const Login = () => {
             type={showPassword ? "text" : "password"}
             id="password"
             name="password"
-            className={`w-[342px] lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
+            className={`w-[300px] sm:w-[342px]  lg:w-[35vw] h-[48px] lg:h-[5.23vh] rounded-lg pl-2 border text-[14px] lg:text-[0.8vw] ${
               loginFormik.touched.password && loginFormik.errors.password
                 ? "border-red-600 placeholder-red-500"
                 : "border-gray-300"
@@ -118,7 +118,7 @@ const Login = () => {
             onBlur={loginFormik.handleBlur}
             value={loginFormik.values.password}
           />
-          <div className="w-[342px] lg:w-[34vw]  flex justify-between">
+          <div className="w-[300px] sm:w-[342px]  lg:w-[34vw]  flex justify-between">
             <div className="flex justify-between items-center gap-[0.5vw] text-[14px] lg:text-[0.8vw]">
               <input
                 type="checkbox"
@@ -134,7 +134,7 @@ const Login = () => {
               </div>
             </Link>
           </div>
-          <button className="w-[342px] lg:w-[36vw] h-[48px] lg:h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
+          <button className="w-[300px] sm:w-[342px] lg:w-[36vw] h-[48px] lg:h-[5.23vh] text-[#ca0000] text-[14px] lg:text-[0.9vw] rounded-full mt-[2vh] bg-[#f3f3f6]">
             {isLoading ? <ClipLoader size={20} color={"#ca0000"} /> : "Login"}
           </button>
         </form>

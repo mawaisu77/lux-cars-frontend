@@ -84,7 +84,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [showFilterMob, setShowFiltersMob] = useState(true);
+  const [showFilterMob, setShowFiltersMob] = useState(false);
   const [searchFilterDropdowns, setSearchFilterDropdowns] = useState({});
   const [showAllFilters, setShowAllFilters] = useState({});
   const [auctionDateFrom, setAuctionDateFrom] = useState("");

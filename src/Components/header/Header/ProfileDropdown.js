@@ -161,6 +161,20 @@ export default function ProfileDropdown({ user }) {
           </ListItemIcon>
           Apply For Loan
         </MenuItem>
+
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            navigate("/fees");
+          }}
+        >
+          <ListItemIcon>
+            <PaymentsIcon fontSize="small" />
+          </ListItemIcon>
+          Fee Overview
+        </MenuItem>
+
+
         <Divider />
 
         <MenuItem

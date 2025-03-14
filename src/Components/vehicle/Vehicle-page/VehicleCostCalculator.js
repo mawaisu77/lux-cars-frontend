@@ -368,7 +368,7 @@ const Dropdown = ({ bidAmount, data }) => {
                 US Domestic Transport:
               </span>
               <Select
-                autoFocus={false}
+               isSearchable={false}
                 styles={customCalculatorDropdownStyles}
                 options={categoryOptions}
                 value={selectedCategory}
@@ -406,6 +406,7 @@ const Dropdown = ({ bidAmount, data }) => {
              
             
              <Select
+             isSearchable={false}
                 options={[
                   { label: "Yes", value: "Yes" },
                   { label: "No", value: "No" },

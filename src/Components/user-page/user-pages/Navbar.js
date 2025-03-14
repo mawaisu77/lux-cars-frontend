@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import image1 from "../../../assets/avatar1.png";
 import { ImFilesEmpty } from "react-icons/im";
-import { FaFacebook, FaGoogle, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebook, FaGoogle, FaLinkedinIn, FaMapMarkerAlt, FaRegHeart } from "react-icons/fa";
 import { RiImageAddLine, RiTwitterXLine } from "react-icons/ri";
 import Header from "../../header/Header/Header";
 import axios from "axios";
@@ -111,8 +111,8 @@ const Navbar = () => {
 
       <div className="w-[90vw] lg:w-[85vw] h-auto mt-[100px] lg:mt-[7vh] mx-auto bg-[#f8f8f8] rounded-2xl">
         <div className=" flex p-1 sm:p-2 md:p-4 lg:p-[1vw] flex-col lg:flex-row justify-center lg:justify-between  bg-[#000000]/70 rounded-t-2xl">
-          <div className="flex flex-col items-start lg:items-center font-urbanist lg:flex-row lg:ml-[2.2vw]  lg:w-[80%] ">
-            <div className="flex gap-x-2">
+          <div className="flex flex-col items-start lg:items-center  lg:flex-row lg:ml-[2.2vw]  lg:w-[80%] ">
+            <div className="flex gap-x-2 sm:gap-x-4">
               <div className="relative  lg:ml-0  w-[120px] h-[120px] sm:w-[100px] sm:h-[100px] md:w-[16vw] md:h-[16vw]   lg:w-[15vw] lg:h-[14vw] xl:w-[12vw] xl:h-[12vw]">
                 <img
                   alt="profile"
@@ -156,22 +156,24 @@ const Navbar = () => {
                   </p>
                 </div>
                 <button
-                  className={`flex  justify-between gap-x-2 items-center  focus:outline-none bg-text-white  px-3 lg:px-[1vw] py-1 lg:py-[0.4vw] rounded-md lg:rounded-full bg-white/80 text-primary-red text-xs lg:text-18 duration-200`}
+                  className={`flex  justify-between gap-x-2 items-center  focus:outline-none bg-text-white   py-1  rounded-md  bg-transparent   text-xs duration-200`}
                 >
-                  <span className="text-primary-red text-nowrap">
-                    Remaining: ${remainingFunds} ({percentageRemaining}% )
+                  <BsLightningCharge className="text-white" />
+                  <span className="text-white text-nowrap">
+                    Remaining: ${remainingFunds} ({percentageRemaining}%)
                   </span>
-                  <BsLightningCharge className="text-primary-red" />
                 </button>
                 <div className=" lg:w-[20%]  lg:hidden">
-                  <div className=" flex gap-x-2 justify-start  items-start  ">
+                  <div className=" flex flex-col gap-x-2 justify-start  items-start  ">
                     <Link to={"/user/account/saved-cars"} className="">
-                      <button className="text-[12px]  text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[6px]  py-[4px]  border border-white rounded-lg">
+                      <button className="text-[12px]  text-white cursor-pointer flex items-center  px-[6px]  py-[2px]  rounded-lg">
+                        <FaRegHeart className="mr-1" />
                         My Favourites
                       </button>
                     </Link>
                     <Link to={"/user/account/local-cars"} className="">
-                      <button className="text-[12px]  text-white cursor-pointer hover:bg-white hover:text-[#000000]/70 hover:border-[#000000]/70 duration-300 px-[6px]  py-[4px]  border border-white rounded-lg">
+                      <button className="text-[12px]  text-white cursor-pointer flex items-center    px-[6px]  py-[2px]  rounded-lg">
+                        <FaMapMarkerAlt className="mr-1" />
                         My Local Cars
                       </button>
                     </Link>
@@ -180,8 +182,8 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="text-left text-white lg:leading-[2vw]   lg:mx-auto font-urbanist lg:ml-[2.2vw]">
-              <h1 className="font-bold hidden lg:block font-urbanist text-[20px]  lg:text-[2.3vw]  text-white">
+            <div className="text-left text-white lg:leading-[2vw]   lg:mx-auto  lg:ml-[2.2vw]">
+              <h1 className="font-bold hidden lg:block  text-[20px]  lg:text-[2.3vw]  text-white">
                 {user}
               </h1>
               <div className=" gap-x-1 hidden lg:flex lg:gap-x-[0.25vw] justify-start lg:leading-[1vw] items-center">

@@ -284,7 +284,7 @@ const VehicleHero = () => {
                 <AuctionDateNotDecidedMessage />
               )}
 
-          <div className="lg:m-[0.25vw] lg:p-[0.25vw] mx-auto mt-[60px] bg-white w-[90vw] lg:w-[85vw]">
+          <div className=" lg:p-[0.25vw] mx-auto mt-[100px] lg:mt-[0.5vw] bg-white w-[90vw] lg:w-[85vw]">
           <button onClick={toggleSalesHistory} className="lg:py-[0.5vw] py-2 px-4 lg:px-[0.75vw] border text-[14px] lg:text-[1vw] flex items-center justify-center gap-x-1">
             <span>
             {showSalesHistory ? "Sales History" : "Sales History"}
@@ -337,7 +337,7 @@ const VehicleHero = () => {
                 </div>
 
                 {/* web view */}
-                <div className="    lg:w-[48%]   ">
+                <div className="  lg:w-[48%]   ">
                   <div className=" ">
 
                     {/* Title Info */}

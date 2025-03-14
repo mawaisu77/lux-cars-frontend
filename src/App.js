@@ -303,7 +303,7 @@ function App() {
               }
             />
             <Route path="/search-page" element={<SearchPage />} />
-            <Route path="/saved-searches" element={<SavedSearchPage />} />
+            <Route path="/saved-searches" element={ <ProtectedRoute><SavedSearchPage /></ProtectedRoute>} />
             <Route path="/Successfull-login" element={<Successfull_Login />} />
             <Route path="/vehicle-detail/:lotID" element={<Vehicle />} />
             <Route path="/local-vehicle-detail/:id" element={<LocalVehicle />} />

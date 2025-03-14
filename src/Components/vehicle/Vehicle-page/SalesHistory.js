@@ -26,18 +26,18 @@ const SalesHistory = ({history}) => {
         <tbody>
           {history && history.map((sale, index) => (
             <tr key={`${sale.date}-${index}`} className="text-left border-b bg-gray-50 transition-colors">
-            <td className="text-left py-[1vw] px-[1vw]">
+            <td className="text-left py-1 lg:py-[1vw] px-1 lg:px-[1vw]">
                 <span className={`${
                   sale.base_site === 'iaai' 
                     ? 'bg-primary-red' 
                     : sale.base_site === 'copart' 
                       ? 'bg-blue-500' 
                       : 'bg-gray-600'
-                } text-white px-[1vw] py-[0.5vw] text-[1vw] rounded-full`}>
+                } text-white lg:px-[1vw] px-2 py-1 lg:py-[0.5vw] lg:text-[1vw] rounded-full`}>
                   {sale.base_site}
                 </span>
               </td>
-              <td className="text-left lg:text-[1vw] py-[1vw] px-[1vw] text-gray-600">
+              <td className="text-left lg:text-[1vw] py-1 lg:py-[1vw] px-1 lg:px-[1vw] text-gray-600">
             
               {sale?.sale_date ? moment(sale.sale_date).format('YYYY-MM-DD') : 'Not specified'} 
               </td> 
@@ -47,12 +47,12 @@ const SalesHistory = ({history}) => {
                   {sale.lot_id}
                 </span>
               </td>
-              <td className="text-left lg:text-[1vw] py-[1vw] px-[1vw]">
+              <td className="text-left lg:text-[1vw] py-1 lg:py-[1vw] px-1 lg:px-[1vw]">
                 <span className="bg-blue-500 text-white px-3 py-1 rounded-lg  ">
                   ${sale.purchase_price}
                 </span>
               </td>
-              <td className="text-left lg:text-[1vw] py-[1vw] px-[1vw]">
+              <td className="text-left lg:text-[1vw] py-1 lg:py-[1vw] px-1 lg:px-[1vw]">
                 <span className={`px-[0.75vw] py-[0.5vw] rounded-full   ${sale.sale_status === 'Sold' ? 'bg-green-100 text-green-800' : sale.sale_status === 'Not sold' ? 'bg-red-100 text-red-800' : sale.sale_status === 'ON APPROVAL' ? 'bg-yellow-100 text-yellow-800' : ''}`}>
                   {sale.sale_status}
                 </span>

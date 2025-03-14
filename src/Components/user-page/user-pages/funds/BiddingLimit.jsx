@@ -345,18 +345,18 @@ export default function BiddingLimit({
         </div>
       </div>
 
-      <Modal open={openModal} onClose={handleCloseModal}>
+      <Modal open={openModal} onClose={handleCloseModal}> 
         <div
-          className="bg-white p-6 rounded-lg shadow-lg"
-          style={{
-            width: "800px",
-            maxHeight: "90vh",
-            overflowY: "auto",
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
+          className="bg-white p-6 rounded-lg shadow-lg w-full lg:w-[800px] max-h-[90vh] overflow-y-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          // style={{
+          //   width: "800px",
+          //   maxHeight: "90vh",
+          //   overflowY: "auto",
+          //   position: "absolute",
+          //   top: "50%",
+          //   left: "50%",
+          //   transform: "translate(-50%, -50%)",
+          // }}
         >
           <div className="bg-[#008b98] rounded-lg w-full">
             <img

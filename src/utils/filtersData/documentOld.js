@@ -5911,7 +5911,7 @@ const documentOldOption = [
   {
     id: "FL - CERT OF TTL-REBUILT&SLVG RBLD",
     label: "FL - CERT OF TTL-REBUILT&SLVG RBLD",
-    color: "#FF681F",
+    color: "#008000",
   },
   {
     id: "CA - CERTIFICATE OF TITLE",
