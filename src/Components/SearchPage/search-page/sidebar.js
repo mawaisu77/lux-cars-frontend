@@ -79,6 +79,7 @@ import {
 import Select from "react-select";
 import { useCallback } from 'react';
 import { RiArrowDropDownLine } from "react-icons/ri";
+import moment from 'moment-timezone';
 
 
 const Sidebar = () => {
@@ -914,24 +915,33 @@ const Sidebar = () => {
 
 
  const saveFiltersToLocalStorage = () => {
-    const params = new URLSearchParams(selectedFilters).toString(); // Create query string from selectedFilters
-    const savedFilters = JSON.parse(localStorage.getItem("savedFilters")) || []; // Retrieve existing saved filters
-
-    // Check if the current query string already exists
-    if (!savedFilters.includes(params)) {
-      // Add the new query string to the array
-      savedFilters.push(params);
-
-      // Limit to a maximum of 10 saved filters
+    const params = new URLSearchParams(selectedFilters).toString();
+    const savedFilters = JSON.parse(localStorage.getItem("savedFilters")) || [];
+    
+    // Create object with timestamp using moment
+    const filterObject = {
+      params: params,
+      timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      timezone: moment.tz.guess()
+    };
+    
+    console.log("Saving filter with timestamp:", filterObject); // Debug log
+    
+    // Check if filter already exists (checking the params property)
+    if (!savedFilters.some(filter => 
+      (typeof filter === 'object' && filter.params === params) || 
+      filter === params
+    )) {
+      savedFilters.push(filterObject);
+      
       if (savedFilters.length > 10) {
-        savedFilters.shift(); // Remove the oldest filter if over the limit
+        savedFilters.shift();
       }
-
-      // Save the updated array back to local storage
+      
       localStorage.setItem("savedFilters", JSON.stringify(savedFilters));
-      alert("Filters saved successfully!"); // Notify the user
+      alert("Filters saved successfully!");
     } else {
-      alert("This filter is already saved!"); // Notify if the filter already exists
+      alert("This filter is already saved!");
     }
   };
 
