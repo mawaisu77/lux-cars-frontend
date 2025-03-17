@@ -46,8 +46,6 @@ import LocalCars from "./Components/user-page/user-pages/LocalCars.js";
 import FooterSec from "./Components/Footer/index.js";
 import LiveAuction from "./Components/live-auction/index.js";
 import List from "./Components/live-aution-search/live-auction-search/List.js";
-import DynamicForm from "./Components/prac/DyanmicForm.jsx";
-import Test from "./Components/prac/Test.jsx";
 import Helpsec from "./Components/help/index.js";
 import Invoices from "./Components/invoices/index.js";
 import SavedSearchPage from "./Components/saved-searches/index.js";
@@ -307,7 +305,6 @@ function App() {
             <Route path="/Successfull-login" element={<Successfull_Login />} />
             <Route path="/vehicle-detail/:lotID" element={<Vehicle />} />
             <Route path="/local-vehicle-detail/:id" element={<LocalVehicle />} />
-            <Route path="/test" element={<Test />} />
             <Route
               path="/search-local-cars"
               element={<LocalCarsSearchPage />}
