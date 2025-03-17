@@ -26,7 +26,7 @@ const List = () => {
     fetchUpcomingBids();
 
     // Pusher setup
-    const pusher = new Pusher("6d700b541b1d83879b18", {
+    const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_ID, {
       cluster: "ap2",
     });
 
