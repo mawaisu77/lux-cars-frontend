@@ -48,7 +48,7 @@ const LiveAuctionDetail = () => {
   }, []);
 
   useEffect(() => {
-    const pusher = new Pusher("6d700b541b1d83879b18", {
+    const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_ID, {
       cluster: "ap2",
       authEndpoint: `${process.env.REACT_APP_API_BASE_URL}pusher/auth/live-bidding`,
       auth: {
