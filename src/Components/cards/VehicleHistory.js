@@ -7,9 +7,9 @@ import { BsInfoCircle } from "react-icons/bs";
 
 const VehicleHistory = React.memo(({ carData }) => {
   const { cars, loading, error } = useVehicleHistory(
-    carData.year,
-    carData.make,
-    carData.model
+    carData?.year,
+    carData?.make,
+    carData?.model
   );
   return (
     <>
