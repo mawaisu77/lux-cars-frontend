@@ -93,6 +93,8 @@ const Sidebar = () => {
   const [customDatesVisible, setCustomDatesVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const [isSaveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [saveSearchTitle, setSaveSearchTitle] = useState("");
 
   const queryParams = useMemo(
     () => new URLSearchParams(location.search),
@@ -915,19 +917,27 @@ const Sidebar = () => {
 
 
  const saveFiltersToLocalStorage = () => {
+    // Open the save dialog instead of immediately saving
+    setSaveDialogOpen(true);
+    setSaveSearchTitle(""); // Reset the title input
+  };
+  
+  const handleSaveConfirm = () => {
     const params = new URLSearchParams(selectedFilters).toString();
     const savedFilters = JSON.parse(localStorage.getItem("savedFilters")) || [];
     
-    // Create object with timestamp using moment
+    // Get the title (use a default if empty)
+    const title = saveSearchTitle.trim() || `Search ${savedFilters.length + 1}`;
+    
+    // Create object with title, timestamp and parameters
     const filterObject = {
+      title: title,
       params: params,
       timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
       timezone: moment.tz.guess()
     };
     
-    console.log("Saving filter with timestamp:", filterObject); // Debug log
-    
-    // Check if filter already exists (checking the params property)
+    // Check if filter already exists
     if (!savedFilters.some(filter => 
       (typeof filter === 'object' && filter.params === params) || 
       filter === params
@@ -943,11 +953,14 @@ const Sidebar = () => {
     } else {
       alert("This filter is already saved!");
     }
+    
+    // Close the save dialog
+    setSaveDialogOpen(false);
   };
-
+ 
   return (
     <>
-      <div className="flex mt-20 sm:mt-5 gap-2 bg-gray-100  w-[95vw] sm:w-[80vw] p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
+      <div className="flex mt-20 sm:mt-5 gap-2 bg-gray-100  w-[95vw] sm:w-[80vw] lg:p-[0.75vw] p-5 mx-auto font-urbanist scrollbar-red-h overflow-x-auto">
         {Object.entries(selectedFilters).some(([, values]) =>
           Array.isArray(values) ? values.length > 0 : values
         ) && (
@@ -956,9 +969,9 @@ const Sidebar = () => {
               values && (Array.isArray(values) ? values.length > 0 : true) ? (
                 <div
                   key={key}
-                  className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 rounded-lg whitespace-nowrap"
+                  className="flex items-center bg-gray-200 text-gray-700 px-2 py-1 lg:py-[0.25vw] lg:rouned-[0.5vw] lg:px-[0.5vw] rounded-lg whitespace-nowrap"
                 >
-                  <span className="text-sm font-medium">
+                  <span className="text-sm lg:text-18 font-medium">
                     {key}:{" "}
                     {key === "auction_date_from" || key === "auction_date_to"
                       ? `${
@@ -981,7 +994,7 @@ const Sidebar = () => {
 
                   <IoClose
                     onClick={() => clearFilter(key)}
-                    className="ml-1 text-red-500 cursor-pointer"
+                    className="ml-1 lg:ml-[0.25vw] text-red-500 cursor-pointer lg:text-18"
                   />
                 </div>
               ) : null
@@ -1019,11 +1032,10 @@ const Sidebar = () => {
         {showFilterMob && (
           <div className=" lg:relative lg:mt-[2.604vw] h-fit mx-auto px-3 bg-white lg:bg-white z-40 lg:z-0 w-[100%] lg:w-[17vw]  rounded-lg">
             <div className="border-b-black  p-1 border-b flex justify-center items-center gap-x-2">
-              <h4 className="font-semibold">Filters</h4>
+              <h4 className="font-semibold lg:text-24 text-[24px]">Filters</h4>
               <TooltipInfo content="Please choose your preferred filters, then click the 'Apply Filters' button at the bottom. If you wish to clear the filters, you can also use the 'Reset' button next to the 'Apply Filters' option.">
                 <BsInfoCircle
-                  size={15}
-                  className={` hover:text-blue-800 duration-200`}
+                  className={` hover:text-blue-800 duration-200 text-[24px] lg:text-20`}
                 />
               </TooltipInfo>
             </div>
@@ -1077,14 +1089,14 @@ const Sidebar = () => {
                     <input
                       type="text"
                       placeholder={`Search ${dropdownKey}`}
-                      className="form-input flex justify-start mb-3 px-2 py-1 text-xs border border-gray-600 rounded-md w-[90%]"
+                      className="form-input flex justify-start mb-3 px-2 lg:px-[0.5vw] py-1 lg:py-[0.25vw] text-xs lg:text-18 border border-gray-600 rounded-md w-[90%]"
                       value={searchFilterDropdowns[dropdownKey] || ""}
                       onChange={(e) =>
                         handleSearch(dropdownKey, e.target.value)
                       }
                     />
                     <div
-                      className={` max-h-52 scrollbar-red ${
+                      className={` max-h-52 lg:max-h-[12vw] scrollbar-red ${
                         dropdownData[dropdownKey].length > 5
                           ? "overflow-y-scroll"
                           : ""
@@ -1160,7 +1172,7 @@ const Sidebar = () => {
                           dropdownData[dropdownKey].length > 5 && (
                             <button
                               onClick={() => toggleSeeAll(dropdownKey)}
-                              className="text-red-600 mt-2 flex w-full text-left text-xs "
+                              className="text-red-600 mt-2 flex w-full text-left text-xs lg:text-18"
                             >
                               See All
                             </button>
@@ -1180,7 +1192,7 @@ const Sidebar = () => {
               </div>
             ))}
 
-            <div className="w-full bg-white  p-3 border-b-[2px] border-grey-200">
+            <div className="w-full bg-white  p-3 lg:p-[0.5vw] border-b-[2px] border-grey-200">
               {/* Dropdown Header */}
               <div
                 className="flex justify-between items-center cursor-pointer py-2"
@@ -1189,11 +1201,13 @@ const Sidebar = () => {
                 <span className="text-[18px] lg:text-[1.1vw] text-left font-bold ">
                   Auction Date
                 </span>
-                {/* Close Icon */}
+
+                <div className="flex gap-x-2 lg:gap-x-[0.25vw]">
+                   {/* Close Icon */}
                 {isOpen && (
                   <svg
                     onClick={handleAuctionDateFilter}
-                    className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
+                    className="w-4 h-4 cursor-pointer rounded-full bg-red-600/20 text-red-500 hover:text-gray-800 transition-colors"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -1224,6 +1238,8 @@ const Sidebar = () => {
                     d="M19 9l-7 7-7-7"
                   ></path>
                 </svg>
+                </div>
+               
               </div>
 
               {/* Dropdown Content */}
@@ -1440,13 +1456,13 @@ const Sidebar = () => {
 
                 <h1 className="text-[18px] space-x-2 lg:text-[1.1vw] text-left font-bold ">
                   Odometer 
-                  <span className="text-[10px] text-gray-500"> (miles)</span>
+                  <span className="text-[10px] lg:text-14 text-gray-500"> (miles)</span>
                 </h1>
                 {
                   (selectedFilters.odometer_min || selectedFilters.odometer_max) && (
                     <svg
                     onClick={handleCloseOdometerFilter}
-                    className="w-4 h-4 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
+                    className="w-4 h-4 lg:h-[0.5vw] lg:w-[0.5vw] cursor-pointer text-gray-500 hover:text-gray-800 transition-colors"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -1498,7 +1514,7 @@ const Sidebar = () => {
                         odometer_max: selectedFilters.odometer_max,
                       });
                     }}
-                    className="border w-1/2 border-gray-300 rounded-md p-1 text-sm focus:border-red-500 focus:outline-none"
+                    className="border w-1/2 border-gray-300 rounded-md p-1 lg:p-[0.25vw] text-sm lg:text-14 focus:border-red-500 focus:outline-none"
                     placeholder="From"
                   />
                   <input
@@ -1517,22 +1533,22 @@ const Sidebar = () => {
                         odometer_max: value,
                       });
                     }}
-                    className="border w-1/2 border-gray-300 rounded-md p-1 text-sm focus:border-red-500 focus:outline-none"
+                    className="border w-1/2 border-gray-300 rounded-md p-1 lg:p-[0.25vw] text-sm lg:text-14 focus:border-red-500 focus:outline-none"
                     placeholder="To"
                   />
                 </div>
               </div>
             </div>
-            <div className="flex text-xs flex-col lg:flex-row justify-center items-center my-5 gap-y-2 gap-x-1.5 lg:gap-y-4">
+            <div className="flex text-xs lg:text-14 flex-col lg:flex-row justify-center items-center my-5 gap-y-2 gap-x-1.5 lg:gap-y-4">
               <button
                 onClick={resetFilters}
-                className="px-2 py-2 bg-gray-500 w-full md:w-1/2 hover:bg-gray-600 text-white rounded-lg"
+                className="px-2 py-2 lg:p-[0.5vw] bg-gray-500 w-full md:w-1/2 hover:bg-gray-600 text-white rounded-lg"
               >
                 Reset Filters
               </button>
               <button
           onClick={saveFiltersToLocalStorage}
-          className="px-2 py-2 bg-blue-500 w-full md:w-1/2 hover:bg-blue-600 text-white rounded-lg"
+          className="px-2 py-2 lg:p-[0.5vw] bg-blue-500 w-full md:w-1/2 hover:bg-blue-600 text-white rounded-lg"
         >
           Save Filters
         </button>
@@ -1550,6 +1566,42 @@ const Sidebar = () => {
           />
         </div>
       </div>
+
+      {/* Save Search Dialog */}
+      {isSaveDialogOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full">
+            <div className="flex justify-between items-center p-4 border-b">
+              <h3 className="text-lg font-bold text-blue-600">Save Search</h3>
+              <button 
+                onClick={() => setSaveDialogOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <IoClose size={24} />
+              </button>
+            </div>
+            
+            <div className="p-4">
+              <input
+                type="text"
+                placeholder="Please enter a title to save your search."
+                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={saveSearchTitle}
+                onChange={(e) => setSaveSearchTitle(e.target.value)}
+              />
+            </div>
+            
+            <div className="p-4 border-t flex justify-center">
+              <button
+                onClick={handleSaveConfirm}
+                className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

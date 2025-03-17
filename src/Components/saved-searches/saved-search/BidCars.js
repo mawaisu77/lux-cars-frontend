@@ -93,15 +93,14 @@ const BidCars = () => {
     ) : (
       <ul className="space-y-2">
         {savedFilters.map((filter, index) => {
-          // Make sure we're correctly accessing the params property
+          // Get filter data with proper fallbacks
           const filterString = typeof filter === 'object' && filter.params ? filter.params : filter;
           const timestamp = typeof filter === 'object' && filter.timestamp ? filter.timestamp : null;
+          const title = typeof filter === 'object' && filter.title ? filter.title : `Search ${index + 1}`;
           
           const validFilters = extractValidFilters(filterString);
           const rawTitle = validFilters.join(" | ");
           const isVisible = visibilityState[index];
-
-          console.log("Filter:", filter, "Timestamp:", timestamp); // Add this for debugging
 
           return validFilters.length ? (
             <li
@@ -116,7 +115,7 @@ const BidCars = () => {
                 <div className="flex flex-wrap gap-2">
                   {isVisible ? (
                     validFilters.map((f, i) => {
-                      const filterKey = f.split('=')[0]; // Get only the key part
+                      const filterKey = f.split('=')[0];
                       const filterValue = f.split('=')[1];
                       return (
                         <button
@@ -129,12 +128,12 @@ const BidCars = () => {
                     })
                   ) : (
                     <div className="px-2 py-1 font-medium">
-                      Search {index + 1}
+                      {title}
                     </div>
                   )}
                 </div>
                 
-                {/* Always display timestamp section, with fallback text if missing */}
+                {/* Always display timestamp section */}
                 <div className="text-xs text-gray-500 mt-1 flex items-center">
                   <FaClock className="mr-1" /> 
                   {timestamp ? timestamp : "Saved search (no timestamp)"}

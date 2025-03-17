@@ -8,10 +8,15 @@ import Slider from "@mui/material/Slider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
+import moment from 'moment-timezone';
+
 
 const LocalSearchSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isSaveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [saveSearchTitle, setSaveSearchTitle] = useState("");
   const queryParams = new URLSearchParams(location.search);
 
   const option = useMemo(
@@ -218,30 +223,75 @@ const LocalSearchSidebar = () => {
 
   console.log("=====>", selectedFilters);
 
+
   const saveFiltersToLocalStorage = () => {
-    const params = new URLSearchParams(selectedFilters).toString(); // Create query string from selectedFilters
-    const savedFilters =
-      JSON.parse(localStorage.getItem("savedFiltersLocalCars")) || []; // Retrieve existing saved filters
+    // Open the save dialog instead of immediately saving
+    setSaveDialogOpen(true);
+    setSaveSearchTitle(""); // Reset the title input
+  };
 
-    // Check if the current query string already exists
-    if (!savedFilters.includes(params)) {
-      // Add the new query string to the array
-      savedFilters.push(params);
+  const handleSaveConfirm = () => {
 
-      // Limit to a maximum of 10 saved filters
-      if (savedFilters.length > 10) {
-        savedFilters.shift(); // Remove the oldest filter if over the limit
+      // Create a clean version of selectedFilters without null/undefined values
+  const cleanFilters = {};
+  
+  // Iterate through all filters and only keep valid values
+  Object.entries(selectedFilters).forEach(([key, value]) => {
+    // Skip null or undefined values
+    if (value === null || value === undefined) return;
+    
+    // For arrays, filter out null/undefined and only add if there are remaining items
+    if (Array.isArray(value)) {
+      const cleanArray = value.filter(item => item !== null && item !== undefined);
+      if (cleanArray.length > 0) {
+        cleanFilters[key] = cleanArray;
       }
-
-      // Save the updated array back to local storage
-      localStorage.setItem(
-        "savedFiltersLocalCars",
-        JSON.stringify(savedFilters)
-      );
-      alert("Filters saved successfully!"); // Notify the user
-    } else {
-      alert("This filter is already saved!"); // Notify if the filter already exists
+    } 
+    // For strings, only add if the value is not empty
+    else if (typeof value === 'string') {
+      if (value.trim() !== '') {
+        cleanFilters[key] = value;
+      }
     }
+    // For other types (numbers, booleans, etc.), include them
+    else {
+      cleanFilters[key] = value;
+    }
+  });
+
+    const params = new URLSearchParams(cleanFilters).toString();
+    const savedFilters = JSON.parse(localStorage.getItem("savedFiltersLocalCars")) || [];
+    
+    // Get the title (use a default if empty)
+    const title = saveSearchTitle.trim() || `Search ${savedFilters.length + 1}`;
+    
+    // Create object with title, timestamp and parameters
+    const filterObject = {
+      title: title,
+      params: params,
+      timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      timezone: moment.tz.guess()
+    };
+    
+    // Check if filter already exists
+    if (!savedFilters.some(filter => 
+      (typeof filter === 'object' && filter.params === params) || 
+      filter === params
+    )) {
+      savedFilters.push(filterObject);
+      
+      if (savedFilters.length > 10) {
+        savedFilters.shift();
+      }
+      
+      localStorage.setItem("savedFiltersLocalCars", JSON.stringify(savedFilters));
+      alert("Filters saved successfully!");
+    } else {
+      alert("This filter is already saved!");
+    }
+    
+    // Close the save dialog
+    setSaveDialogOpen(false);
   };
 
   return (
@@ -691,6 +741,42 @@ const LocalSearchSidebar = () => {
           />
         </section>
       </div>
+
+         {/* Save Search Dialog */}
+         {isSaveDialogOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full">
+            <div className="flex justify-between items-center p-4 border-b">
+              <h3 className="text-lg font-bold text-blue-600">Save Search</h3>
+              <button 
+                onClick={() => setSaveDialogOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <IoClose size={24} />
+              </button>
+            </div>
+            
+            <div className="p-4">
+              <input
+                type="text"
+                placeholder="Please enter a title to save your search."
+                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={saveSearchTitle}
+                onChange={(e) => setSaveSearchTitle(e.target.value)}
+              />
+            </div>
+            
+            <div className="p-4 border-t flex justify-center">
+              <button
+                onClick={handleSaveConfirm}
+                className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
