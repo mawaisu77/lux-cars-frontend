@@ -284,7 +284,7 @@ const VehicleHero = () => {
                 <AuctionDateNotDecidedMessage />
               )}
 
-          <div className=" lg:p-[0.25vw] mx-auto mt-[100px] lg:mt-[0.5vw] bg-white w-[90vw] lg:w-[85vw]">
+          <div className=" lg:p-[0.25vw] mx-auto mt-[50px] lg:mt-[0.5vw] bg-white w-[90vw] lg:w-[85vw]">
           <button onClick={toggleSalesHistory} className="lg:py-[0.5vw] py-2 px-4 lg:px-[0.75vw] border text-[14px] lg:text-[1vw] flex items-center justify-center gap-x-1">
             <span>
             {showSalesHistory ? "Sales History" : "Sales History"}
@@ -372,6 +372,15 @@ const VehicleHero = () => {
                       seconds={seconds}
                       ValidDate={ValidDate}
                     />
+
+                <div className="flex font-urbanist lg:text-18 p-2 lg:p-[0.6vw] bg-white w-full mt-2 lg:mt-[0.5vw] lg:rounded-[0.5vw] gap-x-2 lg:gap-x-[0.5vw] rounded-md items-center "> 
+                  <span className=" text-left font-semibold ">
+                    {"Estimation Cost"}
+                  </span>     
+                  <span>
+                  {carDetailData?.data?.estimatedPricesRange}
+                  </span> 
+                </div>
                   </div>
 
                   <div className="mt-6">

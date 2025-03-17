@@ -31,6 +31,7 @@ import SignInModal from "../../vehicle/Vehicle-page/modals/SignInModal";
 import LoginModal from "../../modals/LoginModal";
 import BidConfirmationModal from "./BidConfirmationModal";
 import usePlaceLocalCarBid from "../../../hooks/usePlaceLocalCarBid";
+import { ClipLoader } from "react-spinners";
 
 const LocalVehicleDetail = () => {
   const { id } = useParams();
@@ -202,6 +203,23 @@ const LocalVehicleDetail = () => {
   const handleCloseBidModal = () => {
     document.getElementById("local_bid_modal").close();
   };
+
+
+  
+  const handleBuyNowClick = () => {
+    if (!user) {
+      document.getElementById("sign_in_modal").showModal();
+    } else {
+      document.getElementById("buy_now_modal").showModal();
+    }
+  };
+  
+  const handleBuyNow = async () => {
+    await placeBid({ id: carDetailData?.data?.car?.id, currentBid: carDetailData?.data?.car?.buyNowPrice, isBuyNow: true });
+    await fetchFunds();
+  };
+  
+
 
   return (
     <>
@@ -790,7 +808,7 @@ const LocalVehicleDetail = () => {
                    getTimeDifference() ?
                    <div className="flex justify-center my-[2vh] py-[0.5vw] items-center gap-x-[0.5vw] text-lg animate-pulse rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full">
                     
-{ getTimeDifference()}
+                    { getTimeDifference()}
                    </div>
                     : 
 
@@ -822,16 +840,20 @@ const LocalVehicleDetail = () => {
                        PLACE MAX BID
                      </span>
                    </button>
-                   <button
-                     
-                     className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full"
-                    
-                   >
-                      
-                     <span className="text-md lg:text-[1.1vw]">
-                       Buy Now
-                     </span>
-                   </button>
+
+                   {
+                    carDetailData?.data?.car?.buyNowPrice &&
+                      <button
+                         className="flex justify-center mt-[2.167vh] items-center gap-x-[0.5vw] h-[5.4vh] text-lg mb-[2.167vh] rounded-[0.7vw] text-white font-semibold bg-gradient-to-l from-green-700 to-green-600 hover:opacity-90 duration-300 shadow-md transform w-full" 
+                         onClick={handleBuyNowClick}
+                       >
+                          
+                         <span className="text-md lg:text-[1.1vw]">
+                           BUY NOW ${carDetailData?.data?.car?.buyNowPrice}
+                         </span>
+                       </button>
+                   }
+                
                  </div>
                     
                    
@@ -936,6 +958,67 @@ const LocalVehicleDetail = () => {
         onClose={handleCloseBidModal}
         bidAmount={bidAmount}
       />
+
+  {/* <dialog id="buy_now_modal" className="modal">
+  <div className="modal-box bg-white p-6 rounded-lg max-w-md">
+    <h3 className="font-bold text-lg mb-4">Buy Now Confirmation</h3>
+    <p className="mb-4">Are you sure you want to buy this vehicle for the Buy Now price?</p>
+    <div className="bg-gray-100 p-4 rounded-lg mb-4">
+      <p className="text-lg font-bold text-center text-green-700">
+        ${carDetailData?.data?.car?.buyNowPrice}
+      </p>
+    </div>
+    <div className="flex justify-between">
+      <button 
+        onClick={() => document.getElementById("buy_now_modal").close()}
+        className="btn bg-gray-200 text-black hover:bg-gray-300"
+      >
+        Cancel
+      </button>
+      <button 
+        onClick={handleBuyNow}
+        className="btn bg-green-600 text-white hover:bg-green-700"
+        disabled={placebidLoading}
+      >
+        {placebidLoading ? "Processing..." : "Confirm Purchase"}
+      </button>
+    </div>
+  </div>
+</dialog> */}
+
+
+{/* need modification */}
+<dialog id="buy_now_modal" className="modal">
+      <div className="modal-box dark:bg-white">
+        <h3 className="font-bold text-lg">Buy Now Confirmation</h3>
+        <p className="py-4">
+         You bid will be placing at top, do you want to place max bid as buy now in ${carDetailData?.data?.car?.buyNowPrice}? 
+        </p>
+        <div className="flex gap-x-2 justify-center">
+          {placebidLoading ? (
+            <button
+              className="btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600"
+              onClick={handleBuyNow}
+            >
+              <ClipLoader color="#CA0000" size={20} />
+            </button>
+          ) : (
+            <button
+              className={`btn text-green-600 w-[100px] dark:bg-white hover:bg-gray-200 border-green-600 `}
+              onClick={handleBuyNow}
+            >
+              Proceed
+            </button>
+          )}
+          <button
+            className="btn text-red-600 w-[100px] dark:bg-white hover:bg-gray-200 border-red-600"
+            onClick={() => document.getElementById("buy_now_modal").close()}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </dialog>
     </>
   );
 };
