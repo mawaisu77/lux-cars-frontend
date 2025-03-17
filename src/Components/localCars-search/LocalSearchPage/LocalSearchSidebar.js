@@ -6,16 +6,26 @@ import { RegionDropdown } from "react-country-region-selector";
 import { showToast } from "../../../utils/Toast";
 import Slider from "@mui/material/Slider";
 import { useLocation, useNavigate } from "react-router-dom";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
+import moment from 'moment-timezone';
+
 
 const LocalSearchSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isSaveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [saveSearchTitle, setSaveSearchTitle] = useState("");
   const queryParams = new URLSearchParams(location.search);
 
-  const option = useMemo(() => [
-    { value: 'US', label: 'United States' },
-    { value: 'BS', label: 'Bahamas' }
-  ], []);
+  const option = useMemo(
+    () => [
+      { value: "US", label: "United States" },
+      { value: "BS", label: "Bahamas" },
+    ],
+    []
+  );
 
   const [showFilters, setShowFilters] = useState(true);
   const [showMake, setShowMake] = useState(false);
@@ -63,7 +73,7 @@ const LocalSearchSidebar = () => {
       if (selectedFilters.milageTo)
         params.append("milageTo", selectedFilters.milageTo);
       if (selectedFilters.transmission.length > 0) {
-        selectedFilters.transmission.forEach(transmission => {
+        selectedFilters.transmission.forEach((transmission) => {
           params.append("transmission", transmission); // Append each transmission type separately
         });
       }
@@ -71,10 +81,12 @@ const LocalSearchSidebar = () => {
         params.append("carLocation", selectedFilters.carLocation);
       if (selectedFilters.carState)
         params.append("carState", selectedFilters.carState);
-      if (selectedFilters.buyNowPrice) params.append("buyNowPrice", selectedFilters.buyNowPrice);
-      if (selectedFilters.minPrice) params.append("minPrice", selectedFilters.minPrice);
+      if (selectedFilters.buyNowPrice)
+        params.append("buyNowPrice", selectedFilters.buyNowPrice);
+      if (selectedFilters.minPrice)
+        params.append("minPrice", selectedFilters.minPrice);
       if (selectedFilters.titlesStatus.length > 0) {
-        selectedFilters.titlesStatus.forEach(titlesStatus => {
+        selectedFilters.titlesStatus.forEach((titlesStatus) => {
           params.append("titlesStatus", titlesStatus);
         });
       }
@@ -103,7 +115,13 @@ const LocalSearchSidebar = () => {
     Object.keys(filters).forEach((key) => {
       if (Array.isArray(filters[key])) {
         filters[key].forEach((value) => params.append(key, value));
-      } else if (filters[key] !== "" && filters[key] !== null && filters[key] !== false && filters[key] !== undefined) { // Updated condition
+      } else if (
+        filters[key] !== "" &&
+        filters[key] !== null &&
+        filters[key] !== false &&
+        filters[key] !== undefined
+      ) {
+        // Updated condition
         params.append(key, filters[key]);
       }
     });
@@ -160,16 +178,16 @@ const LocalSearchSidebar = () => {
       } else {
         setMilageError("");
       }
-  
+
       setPageNo(1); // Reset page before fetching
-  
+
       const data = await fetchVehiclesData(filters);
       setVehicles(data?.cars);
       setTotalCars(data?.totalLength);
     }, 500),
     []
   );
-  
+
   useEffect(() => {
     debouncedHandleApplyFilters(selectedFilters);
   }, [selectedFilters]);
@@ -186,11 +204,11 @@ const LocalSearchSidebar = () => {
       milageFrom: "",
       milageTo: "",
       transmission: [],
-      titlesStatus:[],
+      titlesStatus: [],
       carLocation: "",
       carState: "",
       buyNowPrice: false,
-      minPrice: false
+      minPrice: false,
     });
     setShowLocation(false);
     setShowMake(false);
@@ -203,35 +221,84 @@ const LocalSearchSidebar = () => {
     setPageNo(1);
   };
 
-  console.log("=====>", selectedFilters)
+  console.log("=====>", selectedFilters);
+
 
   const saveFiltersToLocalStorage = () => {
-    const params = new URLSearchParams(selectedFilters).toString(); // Create query string from selectedFilters
-    const savedFilters = JSON.parse(localStorage.getItem("savedFiltersLocalCars")) || []; // Retrieve existing saved filters
+    // Open the save dialog instead of immediately saving
+    setSaveDialogOpen(true);
+    setSaveSearchTitle(""); // Reset the title input
+  };
 
-    // Check if the current query string already exists
-    if (!savedFilters.includes(params)) {
-      // Add the new query string to the array
-      savedFilters.push(params);
+  const handleSaveConfirm = () => {
 
-      // Limit to a maximum of 10 saved filters
-      if (savedFilters.length > 10) {
-        savedFilters.shift(); // Remove the oldest filter if over the limit
+      // Create a clean version of selectedFilters without null/undefined values
+  const cleanFilters = {};
+  
+  // Iterate through all filters and only keep valid values
+  Object.entries(selectedFilters).forEach(([key, value]) => {
+    // Skip null or undefined values
+    if (value === null || value === undefined) return;
+    
+    // For arrays, filter out null/undefined and only add if there are remaining items
+    if (Array.isArray(value)) {
+      const cleanArray = value.filter(item => item !== null && item !== undefined);
+      if (cleanArray.length > 0) {
+        cleanFilters[key] = cleanArray;
       }
-
-      // Save the updated array back to local storage
-      localStorage.setItem("savedFiltersLocalCars", JSON.stringify(savedFilters));
-      alert("Filters saved successfully!"); // Notify the user
-    } else {
-      alert("This filter is already saved!"); // Notify if the filter already exists
+    } 
+    // For strings, only add if the value is not empty
+    else if (typeof value === 'string') {
+      if (value.trim() !== '') {
+        cleanFilters[key] = value;
+      }
     }
+    // For other types (numbers, booleans, etc.), include them
+    else {
+      cleanFilters[key] = value;
+    }
+  });
+
+    const params = new URLSearchParams(cleanFilters).toString();
+    const savedFilters = JSON.parse(localStorage.getItem("savedFiltersLocalCars")) || [];
+    
+    // Get the title (use a default if empty)
+    const title = saveSearchTitle.trim() || `Search ${savedFilters.length + 1}`;
+    
+    // Create object with title, timestamp and parameters
+    const filterObject = {
+      title: title,
+      params: params,
+      timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      timezone: moment.tz.guess()
+    };
+    
+    // Check if filter already exists
+    if (!savedFilters.some(filter => 
+      (typeof filter === 'object' && filter.params === params) || 
+      filter === params
+    )) {
+      savedFilters.push(filterObject);
+      
+      if (savedFilters.length > 10) {
+        savedFilters.shift();
+      }
+      
+      localStorage.setItem("savedFiltersLocalCars", JSON.stringify(savedFilters));
+      alert("Filters saved successfully!");
+    } else {
+      alert("This filter is already saved!");
+    }
+    
+    // Close the save dialog
+    setSaveDialogOpen(false);
   };
 
   return (
-    <div className="bg-gray-200 p-4 rounded-lg">
+    <div className="bg-gray-100 lg:p-[1vw] rounded-lg">
       <div className="flex flex-col lg:flex-row gap-5">
-        <aside className="w-full bg-white lg:w-1/4 shadow-lg rounded-lg p-[1vw] transition-all duration-300">
-          <h2 className="font-semibold text-xl mb-4 bg-gray-100 w-full rounded p-3">
+        <aside className="w-full bg-white lg:w-1/4 shadow-lg rounded-lg p-1 lg:p-[0.8vw] transition-all duration-300">
+          <h2 className="font-semibold text-xl lg:text-24 mb-4 lg:mb-[1vw] bg-gray-100 w-full rounded p-2 lg:p-[0.7vw]">
             Filters
           </h2>
           <button
@@ -241,20 +308,27 @@ const LocalSearchSidebar = () => {
             {showFilters ? "Hide Filters" : "Show Filters"}
           </button>
           <div className={`${showFilters ? "block" : "hidden lg:block"}`}>
-            <div className="mb-4 border-b border-black">
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
               <div
-                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
+                className="flex justify-between items-center font-medium cursor-pointer text-[13px] lg:text-18  text-left"
                 onClick={() => setShowMake(!showMake)}
               >
                 <h3>Make</h3>
-                <span>{showMake ? "-" : "+"}</span>
+                <MdKeyboardArrowDown
+                  className="text-[16px] lg:text-22"
+                  hidden={showMake}
+                />
+                <MdKeyboardArrowUp
+                  className="text-[16px] lg:text-22"
+                  hidden={!showMake}
+                />
               </div>
               {showMake && (
-                <div className="mt-2 pb-[1vw]">
+                <div className="">
                   <input
                     type="text"
                     placeholder="Search Make"
-                    className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
+                    className=" w-full bg-white p-2 lg:p-[0.5vw] text-[12px] lg:text-16"
                     value={selectedFilters.make}
                     onChange={(e) => handleFilterChange("make", e.target.value)}
                   />
@@ -262,20 +336,27 @@ const LocalSearchSidebar = () => {
               )}
             </div>
 
-            <div className="mb-4 border-b border-black">
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
               <div
-                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-18  text-left"
                 onClick={() => setShowModel(!showModel)}
               >
                 <h3>Model</h3>
-                <span>{showModel ? "-" : "+"}</span>
+                <MdKeyboardArrowDown
+                  className="text-[16px] lg:text-22"
+                  hidden={showModel}
+                />
+                <MdKeyboardArrowUp
+                  className="text-[16px] lg:text-22"
+                  hidden={!showModel}
+                />
               </div>
               {showModel && (
                 <div className="mt-2 pb-[0.5vw]">
                   <input
                     type="text"
                     placeholder="Search Model"
-                   className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
+                    className="w-full bg-white p-2 lg:p-[0.5vw] text-[12px] lg:text-16"
                     value={selectedFilters.model}
                     onChange={(e) =>
                       handleFilterChange("model", e.target.value)
@@ -285,21 +366,27 @@ const LocalSearchSidebar = () => {
               )}
             </div>
 
-
-            <div className="mb-4 border-b border-black">
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
               <div
-                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-18  text-left"
                 onClick={() => setShowYear(!showYear)}
               >
                 <h3>Year</h3>
-                <span>{showYear ? "-" : "+"}</span>
+                <MdKeyboardArrowDown
+                  className="text-[16px] lg:text-22"
+                  hidden={showYear}
+                />
+                <MdKeyboardArrowUp
+                  className="text-[16px] lg:text-22"
+                  hidden={!showYear}
+                />
               </div>
               {showYear && (
                 <div className="flex gap-x-2 items-center">
                   <div className="flex-1 ">
                     {/* <label className="text-lg text-left py-1">Year From</label> */}
                     <select
-                     className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
+                      className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
                       value={selectedFilters.yearFrom}
                       onChange={(e) =>
                         handleFilterChange("yearFrom", e.target.value)
@@ -319,7 +406,7 @@ const LocalSearchSidebar = () => {
                   <div className="flex-1">
                     {/* <label className="text-lg text-left py-1">Year To</label> */}
                     <select
-                    className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
+                      className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
                       value={selectedFilters.yearTo}
                       onChange={(e) =>
                         handleFilterChange("yearTo", e.target.value)
@@ -350,43 +437,58 @@ const LocalSearchSidebar = () => {
               )}
             </div>
 
-            <div className="mb-4 border-b border-black">
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
               <div
-                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-18  text-left"
                 onClick={() => setShowMilage(!showMilage)}
               >
                 <h3>Milage</h3>
-                <span>{showMilage ? "-" : "+"}</span>
+                <MdKeyboardArrowDown
+                  className="text-[16px] lg:text-22"
+                  hidden={showMilage}
+                />
+                <MdKeyboardArrowUp
+                  className="text-[16px] lg:text-22"
+                  hidden={!showMilage}
+                />
               </div>
 
               {showMilage && (
                 <>
-                <div className="flex gap-x-2">    
-                  <div className="flex-1">
-                    <input
-                      type="number"
-                      placeholder="0"
-                     className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
-                      value={selectedFilters.milageFrom}
-                      onChange={(e) => handleFilterChange("milageFrom", e.target.value)}
-                    />
+                  <div className="flex gap-x-2">
+                    <div className="flex-1">
+                      <input
+                        type="number"
+                        placeholder="0"
+                        className="w-full bg-white p-2 lg:p-[0.5vw] text-[12px] lg:text-16"
+                        value={selectedFilters.milageFrom}
+                        onChange={(e) =>
+                          handleFilterChange("milageFrom", e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <input
+                        type="number"
+                        placeholder="100000"
+                        className="w-full bg-white p-2 lg:p-[0.5vw] text-[12px] lg:text-16"
+                        value={selectedFilters.milageTo}
+                        onChange={(e) =>
+                          handleFilterChange("milageTo", e.target.value)
+                        }
+                      />
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <input
-                      type="number"
-                      placeholder="100000"
-                      className="input input-bordered w-full mb-[0.5vw] bg-white   text-[12px] lg:text-[0.8vw]"
-                      value={selectedFilters.milageTo}
-                      onChange={(e) => handleFilterChange("milageTo", e.target.value)}
-                    />
-                  </div>
-                </div>
-
 
                   <div className="mt-2 pb-[1vw]">
-                    <label className="text-[0.8vw] text-left py-1">Milage Range</label>
+                    <label className="text-[0.8vw] text-left py-1">
+                      Milage Range
+                    </label>
                     <Slider
-                      value={[selectedFilters.milageFrom || 0, selectedFilters.milageTo || 100000]}
+                      value={[
+                        selectedFilters.milageFrom || 0,
+                        selectedFilters.milageTo || 100000,
+                      ]}
                       onChange={(e, newValue) => {
                         handleFilterChange("milageFrom", newValue[0]);
                         handleFilterChange("milageTo", newValue[1]);
@@ -397,19 +499,28 @@ const LocalSearchSidebar = () => {
                     />
                   </div>
                   {milageError ? (
-                    <div className="text-red-500 text-[12px] lg:text-[0.8vw]">{milageError}</div>
+                    <div className="text-red-500 text-[12px] lg:text-[0.8vw]">
+                      {milageError}
+                    </div>
                   ) : null}
                 </>
               )}
             </div>
 
-            <div className="mb-4 border-b border-black">
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
               <div
-                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-18  text-left"
                 onClick={() => setShowTransmission(!showTransmission)}
               >
                 <h3>Transmission</h3>
-                <span>{showTransmission ? "-" : "+"}</span>
+                <MdKeyboardArrowDown
+                  className="text-[16px] lg:text-22"
+                  hidden={showTransmission}
+                />
+                <MdKeyboardArrowUp
+                  className="text-[16px] lg:text-22"
+                  hidden={!showTransmission}
+                />
               </div>
 
               {showTransmission && (
@@ -442,14 +553,20 @@ const LocalSearchSidebar = () => {
               )}
             </div>
 
-
-            <div className="mb-4 border-b border-black">
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
               <div
-                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-18  text-left"
                 onClick={() => setShowtitlesStatus(!showtitlesStatus)}
               >
                 <h3>Status Code</h3>
-                <span>{showtitlesStatus ? "-" : "+"}</span>
+                <MdKeyboardArrowDown
+                  className="text-[16px] lg:text-22"
+                  hidden={showtitlesStatus}
+                />
+                <MdKeyboardArrowUp
+                  className="text-[16px] lg:text-22"
+                  hidden={!showtitlesStatus}
+                />
               </div>
 
               {showtitlesStatus && (
@@ -465,7 +582,9 @@ const LocalSearchSidebar = () => {
                         handleFilterChange("titlesStatus", "Stationary")
                       }
                     />
-                    <label className="ml-2 text-[12px] lg:text-[0.8vw]">Stationary</label>
+                    <label className="ml-2 text-[12px] lg:text-[0.8vw]">
+                      Stationary
+                    </label>
                   </div>
                   <div className="flex items-center mb-1">
                     <input
@@ -478,16 +597,16 @@ const LocalSearchSidebar = () => {
                         handleFilterChange("titlesStatus", "Run & Drive")
                       }
                     />
-                    <label className="ml-2 text-[12px] lg:text-[0.8vw]">Run & Drive</label>
+                    <label className="ml-2 text-[12px] lg:text-[0.8vw]">
+                      Run & Drive
+                    </label>
                   </div>
 
                   <div className="flex items-center mb-1 text-[12px] lg:text-[0.8vw]">
                     <input
                       type="checkbox"
                       className="form-checkbox text-[12px] lg:text-[0.8vw]"
-                      checked={selectedFilters.titlesStatus.includes(
-                        "Starts"
-                      )}
+                      checked={selectedFilters.titlesStatus.includes("Starts")}
                       onChange={() =>
                         handleFilterChange("titlesStatus", "Starts")
                       }
@@ -513,29 +632,31 @@ const LocalSearchSidebar = () => {
                     <input
                       type="checkbox"
                       className="form-checkbox text-[12px] lg:text-[0.8vw]"
-                      checked={selectedFilters.titlesStatus.includes(
-                        "Unknown"
-                      )}
+                      checked={selectedFilters.titlesStatus.includes("Unknown")}
                       onChange={() =>
                         handleFilterChange("titlesStatus", "Unknown")
                       }
                     />
                     <label className="ml-2">Unknown</label>
                   </div>
-                  
                 </div>
               )}
             </div>
 
-
-
-            <div className="mb-4 border-b border-black">
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
               <div
-                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-[1vw] p-2 text-left"
+                className="flex justify-between font-medium cursor-pointer text-[13px] lg:text-18  text-left"
                 onClick={() => setShowLocation(!showLocation)}
               >
                 <h3>Location</h3>
-                <span>{showLocation ? "-" : "+"}</span>
+                <MdKeyboardArrowDown
+                  className="text-[16px] lg:text-22"
+                  hidden={showLocation}
+                />
+                <MdKeyboardArrowUp
+                  className="text-[16px] lg:text-22"
+                  hidden={!showLocation}
+                />
               </div>
 
               {showLocation && (
@@ -570,43 +691,44 @@ const LocalSearchSidebar = () => {
                 </div>
               )}
             </div>
-            <div className="mb-4 border-b border-black">
-            <div className="flex items-center text-[13px] lg:text-[1vw] font-medium p-2">
-              <input
-                type="checkbox"
-                className="form-checkbox text-[12px] lg:text-[0.8vw]"
-                checked={selectedFilters.buyNowPrice}
-                onChange={() => handleCheckboxChange("buyNowPrice")}
-              />
-              <label className="ml-2">Buy Now</label>
-            </div>
-          </div>
 
-          <div className="mb-4 border-b border-black">
-          <div className="flex items-center text-[13px] lg:text-[1vw] font-medium p-2">
-              <input
-                type="checkbox"
-                className="form-checkbox"
-                checked={selectedFilters.minPrice}
-                onChange={() => handleCheckboxChange("minPrice")}
-              />
-              <label className="ml-2">Reserve Price</label>
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
+              <div className="flex items-center text-[13px] lg:text-18 font-medium ">
+                <input
+                  type="checkbox"
+                  className="form-checkbox text-[12px] lg:text-[0.8vw]"
+                  checked={selectedFilters.buyNowPrice}
+                  onChange={() => handleCheckboxChange("buyNowPrice")}
+                />
+                <label className="ml-2">Buy Now</label>
+              </div>
             </div>
-          </div>
-            <div className="w-full flex-col   gap-2  flex   justify-evenly mt-10">
+
+            <div className="mb-4 lg:mb-[0.5vw] border-b border-black p-1 lg:p-[0.5vw]">
+              <div className="flex items-center text-[13px] lg:text-18  font-medium ">
+                <input
+                  type="checkbox"
+                  className="form-checkbox"
+                  checked={selectedFilters.minPrice}
+                  onChange={() => handleCheckboxChange("minPrice")}
+                />
+                <label className="ml-2">Reserve Price</label>
+              </div>
+            </div>
+            <div className="w-full flex-col   gap-2 lg:gap-[0.5vw]  flex   justify-evenly mt-10 lg:mt-[2vw]">
               <button
                 onClick={handleResetFilters}
-                className="text-black bg-gray-200   p-[0.4rem] rounded-lg"
+                className="text-black text-[16px] lg:text-18 bg-gray-200 p-2 lg:p-[0.4vw] rounded-lg lg:rounded-[0.5vw]"
               >
                 Reset Filters
               </button>
 
               <button
-          onClick={saveFiltersToLocalStorage}
-          className="px-2 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 w-full    rounded-lg"
-        >
-          Save Filters
-        </button>
+                onClick={saveFiltersToLocalStorage}
+                className="p-2 lg:p-[0.4vw] text-[16px] lg:text-18 rounded-lg lg:rounded-[0.5vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 w-full "
+              >
+                Save Filters
+              </button>
             </div>
           </div>
         </aside>
@@ -619,6 +741,42 @@ const LocalSearchSidebar = () => {
           />
         </section>
       </div>
+
+         {/* Save Search Dialog */}
+         {isSaveDialogOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full">
+            <div className="flex justify-between items-center p-4 border-b">
+              <h3 className="text-lg font-bold text-blue-600">Save Search</h3>
+              <button 
+                onClick={() => setSaveDialogOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <IoClose size={24} />
+              </button>
+            </div>
+            
+            <div className="p-4">
+              <input
+                type="text"
+                placeholder="Please enter a title to save your search."
+                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={saveSearchTitle}
+                onChange={(e) => setSaveSearchTitle(e.target.value)}
+              />
+            </div>
+            
+            <div className="p-4 border-t flex justify-center">
+              <button
+                onClick={handleSaveConfirm}
+                className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

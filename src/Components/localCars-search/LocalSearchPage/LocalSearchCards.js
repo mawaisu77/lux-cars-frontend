@@ -16,7 +16,7 @@ import { useSavedLocalCars } from "../../../context/SavedLocalCarsIdscontext";
 import useDeleteSaveLocalCar from "../../../hooks/useDeleteSaveLocalCar";
 import useSaveLocalCar from "../../../hooks/useSaveLocalCar";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import bidCaribbeansLogo from "../../../assets/lux-logo/logo-tag.png"
+import bidCaribbeansLogo from "../../../assets/lux-logo/logo-tag.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
@@ -54,9 +54,6 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
       });
     }
   };
-
-  
-
 
   return (
     <div className="flex flex-col ">
@@ -100,9 +97,8 @@ function LocalSearchCards({ vehicles, pageNo, setPageNo, totalCars }) {
   );
 }
 
-
 function Card({ vehicle }) {
-  const [isHovered, setIsHovered] = useState(false); 
+  const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -151,9 +147,10 @@ function Card({ vehicle }) {
     (option) => option.id === vehicle?.titlesStatus
   );
 
-
   useEffect(() => {
-    setIsCarSaved(savedIds?.data && savedIds?.data.includes(String(vehicle?.id)));
+    setIsCarSaved(
+      savedIds?.data && savedIds?.data.includes(String(vehicle?.id))
+    );
   }, [savedIds, vehicle?.id]);
 
   const handleSaveClick = (id) => {
@@ -191,7 +188,6 @@ function Card({ vehicle }) {
     }
   };
 
-  
   const swiperRefs = useRef([]);
 
   const initializeSwiper = (swiper, index) => {
@@ -212,51 +208,50 @@ function Card({ vehicle }) {
   };
 
   return (
-    <div 
-    onMouseEnter={() => {
-      handleMouseEnter(vehicle.id);
-      setIsHovered(true); // Set hover state to true
-    }}
-    onMouseLeave={() => {
-      handleMouseLeave(vehicle.id);
-      setIsHovered(false); // Set hover state to false
-    }}
-    className="h-fit lg:h-auto flex flex-col lg:flex-row bg-white  shadow-md rounded-lg mb-6 p-4">
-     
-    
+    <div
+      onMouseEnter={() => {
+        handleMouseEnter(vehicle.id);
+        setIsHovered(true); // Set hover state to true
+      }}
+      onMouseLeave={() => {
+        handleMouseLeave(vehicle.id);
+        setIsHovered(false); // Set hover state to false
+      }}
+      className="h-fit lg:h-auto flex flex-col lg:flex-row bg-white  shadow-sm rounded-lg mb-6 p-4"
+    >
       <Swiper
-         onSwiper={(swiper) => initializeSwiper(swiper, vehicle.id)}
+        onSwiper={(swiper) => initializeSwiper(swiper, vehicle.id)}
         className="relative w-full lg:w-[20vw] mx-auto h-auto rounded-md "
         autoplay={{
           delay: 2000,
           disableOnInteraction: false,
         }}
         modules={[Navigation, Autoplay]}
-        navigation={isHovered} 
+        navigation={isHovered}
         loop={true}
       >
-          {isCarSaved ? (
-          <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
+        {isCarSaved ? (
+          <div className="bg-black/70 rounded-md lg:rounded-[0.417vw] px-1 lg:px-[0.8vw] py-0.5 lg:py-[0.4vw] absolute z-50 right-1 lg:right-[0.4vw] top-1 lg:top-[0.4vw]">
             <BsHeartFill
               onClick={() => handleSaveClick(vehicle.id)}
-              className=" cursor-pointer text-red-600"
+              className=" cursor-pointer text-red-600 text-[16px] lg:text-18 "
             />
           </div>
         ) : (
-          <div className="bg-black/70 rounded-[0.417vw] px-[0.8vw] py-[0.4vw] absolute z-50 right-[0.4vw] top-[0.8vw]">
+          <div className="bg-black/70 rounded-md lg:rounded-[0.417vw] px-1 lg:px-[0.8vw] py-0.5 lg:py-[0.4vw] absolute z-50 right-1 lg:right-[0.4vw] top-1 lg:top-[0.4vw]">
             <BsHeart
               onClick={() => handleSaveClick(vehicle.id)}
-              className=" cursor-pointer text-white hover:text-red-600"
+              className=" cursor-pointer text-white hover:text-red-600 text-[16px] lg:text-18 "
             />
           </div>
         )}
-         <div className=" h-[15px] md:h-[2.3vw] z-50 absolute bottom-[0vw] -left-[1vw] ">
-                <img 
-                  src={bidCaribbeansLogo} 
-                  alt="bidcaribbeanslogo"
-                  className=" w-full h-full object-contain"
-                />
-              </div>
+        <div className=" h-[15px] md:h-[2.3vw] z-50 absolute bottom-[0vw] -left-[1vw] ">
+          <img
+            src={bidCaribbeansLogo}
+            alt="bidcaribbeanslogo"
+            className=" w-full h-full object-contain"
+          />
+        </div>
         {vehicle?.carImages &&
           vehicle?.carImages?.map((image, index) => (
             <SwiperSlide
@@ -265,14 +260,13 @@ function Card({ vehicle }) {
               style={{ height: "auto" }}
             >
               <img
-                className="h-full lg:h-[150px] w-full lg:w-[15vw] rounded-[0.5vw] object-cover cursor-pointer"
+                className=" lg:h-[10vw] h-[150px] sm:h-[220px] md:h-[300px] w-full lg:w-[15vw] rounded-[0.5vw] object-cover cursor-pointer"
                 src={image}
                 alt={`Vehicle_Image ${index + 1}`}
                 onClick={() => openModal(index)}
               />
             </SwiperSlide>
           ))}
-      
       </Swiper>
       <ImageModal
         isOpen={isModalOpen}
@@ -284,20 +278,20 @@ function Card({ vehicle }) {
         logo={bidCaribbeansLogo}
       />
       <div className="flex flex-col  w-full text-left lg:items-center   lg:justify-between md:flex-row">
-        <div className="text-left px-[1vw] text-[13px] lg:text-[0.875vw]    h-full border-b lg:border-b-0 font-urbanist">
-          <button onClick={() => handleBidNow(vehicle.id)}>
-            <p className="font-semibold py-[1vh] hover:text-blue-800 lg:text-[1vw] -800 cursor-pointer hover:underline">
-              {vehicle.make} {vehicle.model}
+        <div className="text-left px-[1vw] text-[13px] lg:text-[0.875vw]    h-full  lg:border-b-0 font-urbanist">
+          <button onClick={() => handleBidNow(vehicle?.id)}>
+            <p className="font-semibold py-[1vh] hover:text-blue-800 text-[16px] md:text-[18px] lg:text-20 -800 cursor-pointer hover:underline">
+              {vehicle?.make} {vehicle?.model} {vehicle?.year}
             </p>
           </button>
 
           <div className="flex flex-col  md:flex-row   lg:w-[26.195vw] md:justify-between leading-[3vh]">
-            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap font-urbanist text-[13px] lg:text-[0.875vw] py-1">
-              <p className="w-full flex gap-x-2">
+            <div className="flex flex-1 space-y-2 lg:space-y-[0.5vw] flex-col sm:flex-row sm:flex-wrap font-urbanist text-[13px] lg:text-[0.875vw] py-1">
+              <p className="w-full flex items-center gap-x-2">
                 <span className="font-semibold">VIN: </span>
-                {vehicle.vin}
+                {vehicle?.vin}
                 <RxCopy
-                  className="cursor-pointer py-[0.1vh] text-[14px] md:text-18 text-gray-600 hover:text-gray-800"
+                  className="cursor-pointer  text-[14px] lg:text-18 text-gray-600 hover:text-gray-800"
                   onClick={() => {
                     navigator.clipboard.writeText(vehicle?.vin);
                     toast.success("Copied to clipboard!");
@@ -306,21 +300,21 @@ function Card({ vehicle }) {
               </p>
               <p className="w-full">
                 <span className="font-semibold">Year: </span>
-                {vehicle.year}
+                {vehicle?.year}
               </p>
               <p className="w-full">
                 <span className="font-semibold">Location: </span>
-                {vehicle.carLocation}
+                {vehicle?.carLocation}
               </p>
             </div>
-            <div className="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] lg:text-[0.875vw] py-1">
+            <div className="flex flex-1 space-y-2 lg:space-y-[0.5vw]  flex-col sm:flex-row sm:flex-wrap gap-x-2 text-[13px] lg:text-[0.875vw] py-1">
               <p className="w-full">
                 <span className="font-semibold">Millage: </span>
-                {vehicle.mileage || "Not specified"}
+                {vehicle?.mileage || "Not specified"}
               </p>
               <p className="w-full">
                 <span className="font-semibold">Engine Type: </span>
-                {vehicle.transmission || "Not specified"}
+                {vehicle?.transmission || "Not specified"}
               </p>
               <p className="w-full flex gap-x-2">
                 <span className="font-semibold">Status: </span>
@@ -340,16 +334,15 @@ function Card({ vehicle }) {
               </p>
             </div>
           </div>
-          <div className="w-1/2 bg-gray-100 p-1 m-1 rounded">
+          <div className="w-full  bg-gray-100 p-2 md:p-1 lg:p-[0.5vw] lg:m-1 rounded">
             <div className="flex gap-x-2 md:gap-x-[0.5vw] items-center ml-2">
               <BsCalendarEventFill
                 data-tooltip-id="auction-date-tooltip"
-                className="text-gray-600 text-18"
-                size={15}
+                className="text-gray-600 text-[14px] lg:text-18"
               />
-              <span className="text-gray-600 md:text-18">
+              <span className="text-gray-600 text-[14px] lg:text-18">
                 {vehicle?.auction_date
-                  ? moment(vehicle.auction_date)
+                  ? moment(vehicle?.auction_date)
                       .tz("America/New_York")
                       .format("ddd DD MMM, HH:mm [EST]")
                   : "Not specified"}
@@ -362,31 +355,42 @@ function Card({ vehicle }) {
             </div>
           </div>
         </div>
-        <div className="flex pb-2 sm:pb-0 lg:flex-row sm:flex-row  py-2 lg:py-0   w-full justify-center items-center   mx-auto">
-          <div className="py-1 bg-gray-100 w-[100%] md:w-full shadow-md rounded-[0.5vw]  text-center sm:text-left">
-            <div className="flex flex-col  w-full p-[1vw]  rounded-lg ">
-              <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
-                <span onClick={() => handleBidNow(vehicle?.id)} className="w-full">
-                  <button className="w-[100%] md:w-full   py-[2vh] flex justify-center items-center h-[3vh]  rounded-[8px]   text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
-                  Current Bid {`$${vehicle.currentBid ? vehicle.currentBid : "0"}`}
+        <div className="flex  lg:flex-row sm:flex-row  w-full justify-center items-center mx-auto">
+          <div className=" bg-gray-100 w-[100%] p-2 lg:p-[0.5vw] md:w-full shadow-sm rounded-md lg:rounded-[0.5vw] text-center sm:text-left">
+            <div className="flex flex-col gap-y-2 lg:gap-y-[0.1vw] w-full  rounded-lg lg:rounded-[0.5vw]">
+              <div className="flex justify-center items-center  w-full ">
+             
+                  <button
+                  
+                  onClick={() => handleBidNow(vehicle?.id)}
+                  className="w-[100%] md:w-full py-2 lg:py-[0.5vw] flex gap-x-1 lg:gap-x-[0.2vw] justify-center items-center  rounded-[8px] lg:rounded-[0.5vw]  text-sm lg:text-[0.875vw] bg-gradient-to-r from-red-600 to-red-700 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-600 text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
+                    <span>
+                     Current Bid
+                    </span>
+                    <span>
+                    {`$${vehicle.currentBid ? vehicle.currentBid : "0"}`}
+                    </span>
                   </button>
-                </span>
               </div>
 
               {vehicle?.buyNowPrice ? (
-                <div className="flex justify-center items-center   w-full lg:mt-2 sm:mt-0">
+                <div className="flex justify-center items-center w-full lg:mt-2 sm:mt-0">
                   <span
                     onClick={() => handleBidNow(vehicle?.id)}
                     className="w-full"
                   >
-                    <button className="w-[100%] md:w-full  h-auto py-1  rounded-[8px]   text-sm lg:text-[0.875vw] border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-md transform  ">
-                      Buy Now ${vehicle?.buyNowPrice ? vehicle?.buyNowPrice : "0"}
+                    <button className="w-[100%] md:w-full py-2 lg:py-[0.5vw] flex lg:gap-x-[0.2vw] justify-center items-center rounded-[8px] lg:rounded-[0.5vw] text-sm lg:text-[0.875vw]  border border-green-600 hover:bg-gradient-to-l hover:from-green-700 hover:to-green-600 text-green-700 hover:text-white font-urbanist font-semibold hover:opacity-90 duration-300 shadow-sm transform  ">
+                      Buy Now
+                      <span>
+                      ${vehicle?.buyNowPrice ? vehicle?.buyNowPrice : "0"}
+
+                      </span>
                     </button>
                   </span>
                 </div>
               ) : null}
 
-              <div className="w-100%  lg:w-full h-auto  py-1  mt-2 lg:mt-[1.5vh] bg-white rounded-lg flex justify-center items-center  shadow-sm">
+              <div className="w-[100%]  lg:w-full py-2 lg:py-[0.5vw] mt-2 lg:mt-[1.5vh] bg-white rounded-lg lg:rounded-[0.5vw] flex justify-center items-center  shadow-sm">
                 <div className="flex items-center text-nowrap gap-[0.75vw] ">
                   <div className="flex justify-center items-center">
                     {vehicle.auction_date ? (

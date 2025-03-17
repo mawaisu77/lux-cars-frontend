@@ -3,7 +3,7 @@ import LocalSearchSidebar from "./LocalSearchSidebar";
 
 function LocalSearchPage() {
   return (
-    <div className="mx-auto w-[90%] py-[100px] xl:w-[80%]">
+    <div className="mx-auto w-[95vw] lg:w-[85vw] lg:py-[1vw] ">
       <LocalSearchSidebar />
     </div>
   );

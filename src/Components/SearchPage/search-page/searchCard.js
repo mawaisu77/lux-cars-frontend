@@ -272,14 +272,14 @@ function Card({ card }) {
                   }}
                 />
               </p>
-              <p className="w-full tracking-wider flex items-center gap-x-2">
+              <p className="w-full tracking-wider flex items-center lg:gap-x-[0.5vw] gap-x-2">
                 <span className="font-semibold">Status: </span>
                 <span className={`text-nowrap font-bold ${currentStatus?.hex}`}>
                   {card?.status}
                 </span>
                 <span
                   title={currentStatus.id}
-                  className={`${currentStatus?.bgHex} text-white w-4 h-4 flex items-center justify-center  text-[14px] lg:text-20 font-bold  rounded-full`}
+                  className={`${currentStatus?.bgHex} text-white w-4 h-4  lg:w-[1.1vw] lg:h-[1.1vw] flex items-center justify-center  text-[14px] lg:text-20 font-bold  rounded-full`}
                 >
                   {currentStatus.letter}
                 </span>
@@ -340,8 +340,7 @@ function Card({ card }) {
                   <>
                     <IoKeySharp
                       data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`}
-                      className="text-18 text-yellow-600 "
-                      size={15}
+                      className="text-[12px] lg:text-18 text-yellow-600 "
                     />
                     <ReactTooltip
                       id={`vehicle-keys-tooltip-${card?.lot_id}`}
@@ -354,8 +353,7 @@ function Card({ card }) {
                   <>
                     <IoKeySharp
                       data-tooltip-id={`vehicle-keys-tooltip-${card?.lot_id}`}
-                      className="text-18 text-red-600"
-                      size={15}
+                      className="text-[12px] lg:text-18 text-red-600"
                     />
                     <ReactTooltip
                       id={`vehicle-keys-tooltip-${card?.lot_id}`}
@@ -372,8 +370,7 @@ function Card({ card }) {
               <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                 <BsFillFuelPumpFill
                   data-tooltip-id={`vehicle-fuel-tooltip-${card?.lot_id}`}
-                  className={`text-18`}
-                  size={15}
+                  className={`text-[12px] lg:text-18`}
                 />
                 <ReactTooltip
                   id={`vehicle-fuel-tooltip-${card?.lot_id}`}
@@ -388,8 +385,7 @@ function Card({ card }) {
                 <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                   <PiCylinderFill
                     data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
-                    className={`text-18`}
-                    size={15}
+                    className={`text-[12px] lg:text-18`}
                   />
                   <ReactTooltip
                     id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
@@ -402,8 +398,7 @@ function Card({ card }) {
                 <span className="hover:bg-gray-200 rounded-md p-1 md:p-[0.2vw]">
                   <PiCylinderFill
                     data-tooltip-id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
-                    className={`text-18 text-red-600`}
-                    size={15}
+                    className={`text-[12px] lg:text-18 text-red-600`}
                   />
                   <ReactTooltip
                     id={`vehicle-cylinder-tooltip-${card?.lot_id}`}
@@ -433,8 +428,7 @@ function Card({ card }) {
             <div className="flex flex-1 gap-x-2 md:gap-x-[0.5vw] items-center">
               <BsCalendarEventFill
                 data-tooltip-id="auction-date-tooltip"
-                className="text-gray-600 text-18   "
-                size={15}
+                className="text-gray-600 lg:text-18   "
               />
               <span className="text-gray-600 text-[12px] lg:text-18">
                 {card?.auction_date
